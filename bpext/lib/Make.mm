@@ -20,13 +20,14 @@ PROJ_TMPDIR = $(BLD_TMPDIR)/$(PROJECT)/$(PACKAGE)
 PROJ_CLEAN += $(PROJ_SAR) $(PROJ_DLL)
 
 PROJ_SRCS = \
+	extractor_registry.cc \
+	wrapper_registry.cc \
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # build the library
 
-#all: $(PROJ_SAR) export
-all: export
+all: $(PROJ_SAR) export
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -52,10 +53,13 @@ export:: export-headers export-libraries
 endif
 
 EXPORT_HEADERS = \
+	bpext.h \
+	extractor_registry.h \
+	wrapper_registry.h \
 	extract_ptr.h \
 	wrap_ptr.h \
 
-#EXPORT_LIBS = $(PROJ_SAR)
+EXPORT_LIBS = $(PROJ_SAR)
 EXPORT_BINS = $(PROJ_DLL)
 
 

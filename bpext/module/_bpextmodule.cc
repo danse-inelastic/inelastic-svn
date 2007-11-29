@@ -18,12 +18,7 @@
 #include "exceptions.h"
 #include "bindings.h"
 
-#include "bpext/extract_ptr.h"
-#include "extractor_registry.h"
-#include "bpext/wrap_ptr.h"
-#include "wrapper_registry.h"
-
-#include <vector>
+#include "register_converters.h"
 
 
 void **PyArray_API;
@@ -52,20 +47,7 @@ init_bpext()
     pybpext_runtimeError = PyErr_NewException("bpext.runtime", 0, 0);
     PyDict_SetItemString(d, "RuntimeException", pybpext_runtimeError);
 
-
-    using namespace bpext;
-
-    using std::vector;
-
-    // register extractors
-    extractorRegistry["vec_double"] = extract_ptr< vector<double> >;
-    extractorRegistry["double"] = extract_ptr< double >;
-
-    // register wrappers
-    wrapperRegistry["vec_double"] = wrap_ptr< vector<double> >;
-    // have not found ways to wrap non-class types, the following does not work:
-    //wrapperRegistry["double"] = wrap_ptr< double >;
-
+    wrap::register_converters();
     return;
 }
 
