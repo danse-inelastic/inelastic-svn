@@ -1,0 +1,13 @@
+This package helps developers to build interconnection codes for 
+boost python bindings with other types of bindings through PyCObject.
+
+The main usage of this package are two methods:
+
+ - extract_ptr: extract a pointer from a boost python object and return a PyCObject 
+   of that pointer.
+
+ - wrap_ptr: extract the raw pointer inside a PyCObject and wrap it in a boost python
+   object. return the boost python object.
+
+
+For developers:
