@@ -18,7 +18,7 @@ MODULE = _bpext
 include std-pythonmodule.def
 include local.def
 
-PROJ_CXX_SRCLIB = 
+PROJ_CXX_SRCLIB = -lbpext
 #-lscitbx_boost_python -L$(BOOSTPYTHON_LIBDIR)
 
 ifeq (Win32, ${findstring Win32, $(PLATFORM_ID)})
@@ -31,9 +31,8 @@ endif
 PROJ_SRCS = \
 	bindings.cc \
 	exceptions.cc \
-	extractor_registry.cc \
-	wrapper_registry.cc \
 	misc.cc \
+	register_converters.cc \
 
 
 include doxygen/default.def

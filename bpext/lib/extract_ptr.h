@@ -1,3 +1,6 @@
+#ifndef BPEXT_EXTRACT_PTR_H
+#define BPEXT_EXTRACT_PTR_H
+
 #include "boost/python/extract.hpp"
 #include <iostream>
 
@@ -24,3 +27,4 @@ void *extract_ptr( PyObject *obj )
   return ptr;
 }
   
+#endif

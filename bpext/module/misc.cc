@@ -23,8 +23,8 @@
 #include <portinfo>
 
 #include "misc.h"
-#include "extractor_registry.h"
-#include "wrapper_registry.h"
+#include "bpext/bpext.h"
+
 
 //-------------------- copyright --------------------
 

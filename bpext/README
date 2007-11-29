@@ -10,4 +10,14 @@ The main usage of this package are contained in two methods:
    object; return the boost python object.
 
 
+
 For developers:
+
+  To extend this package to support more c++ classes, you will need
+  to register new converters. Please read module/register_converters.*
+  for an example. The basic syntax is:
+
+    extractorRegistry[type_name] = extract_ptr< type >;
+    wrapperRegistry[type_name] = wrap_ptr< type >;
+
+  
