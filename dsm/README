@@ -1,8 +1,22 @@
 Data stream model helps developers to build "chains" of connected computing nodes
 and run them. A computing node has input/ouput sockets, and the "dsm runner"
-is responsible to carry "data streams" through the "chains".
+is responsible to carry "data streams" through the "chains" and feed "data streams"
+to computing nodes.
 
-Limitation:
- 1. No loops.
- 2. Currently only a trivial implementation of "runner" exists. So streams
+Notes:
+
+ 1. Developers are responsible to 
+    * build computing nodes (with i/o sockets)
+ 2  Developers or Users are responsible to
+    * specify connections of computing nodes
+
+Hints for developers:
+
+ 1. Read tests in source codes to understand how to use dsm. 
+    Start with Composite.py and Runner.py is a good idea
+
+Limitations:
+ 1. No loops are allowed.
+ 2. Currently only a trivial implementation of "runner" exists. So data streams
     are limited in one physical machine.
+
