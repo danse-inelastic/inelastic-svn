@@ -1,0 +1,209 @@
+data_MOF-74
+_audit_creation_method	'Created with Diamond (www.crystalimpact.com)'
+_audit_creation_date	07-01-16
+_audit_update_record	07-01-16
+loop_
+_publ_author_name
+'Nathaniel, L. Rosi'
+'Jaheon, Kim'
+'Mohamed, Eddaoudi'
+'Michael, O'
+'Department, of Chemistry and Biochemistry, Arizona State University, Tempe'
+'AZ,  85287-1604  USA'
+
+_publ_section_title
+;
+Rod Packings and Metal-Organic Frameworks Constructed From 
+
+Rod-Shaped
+Secondary Building Units
+;
+_chemical_formula_sum	'Zn2 O6 C8 H2 D8'
+_chemical_formula_weight	340.993
+_refine_ls_R_factor_all	0.053
+_cell_length_a	25.8823
+_cell_length_b	25.8823
+_cell_length_c	 6.8817
+_cell_angle_alpha	90.000
+_cell_angle_beta	90.000
+_cell_angle_gamma	120.000
+_cell_formula_units_Z	9
+_symmetry_int_tables_number	148
+_symmetry_space_group_name_H-M	'R -3'
+_symmetry_space_group_name_Hall	'-R_3'
+
+loop_
+_symmetry_equiv_pos_site_id
+_symmetry_equiv_pos_as_xyz
+1 'x, y, z'
+2 '-y, x-y, z'
+3 '-x+y, -x, z'
+4 '-x, -y, -z'
+5 'y, -x+y, -z'
+6 'x-y, x, -z'
+7 '0.667+x, 0.333+y, 0.333+z'
+8 '0.667-y, 0.333+x-y, 0.333+z'
+9 '0.667-x+y, 0.333-x, 0.333+z'
+10 '0.667-x, 0.333-y, 0.333-z'
+11 '0.667+y, 0.333-x+y, 0.333-z'
+12 '0.667+x-y, 0.333+x, 0.333-z'
+13 '0.333+x, 0.667+y, 0.667+z'
+14 '0.333-y, 0.667+x-y, 0.667+z'
+15 '0.333-x+y, 0.667-x, 0.667+z'
+16 '0.333-x, 0.667-y, 0.667-z'
+17 '0.333+y, 0.667-x+y, 0.667-z'
+18 '0.333+x-y, 0.667+x, 0.667-z'
+
+loop_
+_atom_type_symbol
+_atom_type_oxidation_number
+_atom_type_radius_bond
+Zn	?	1.200
+O	?	1.200
+C	?	1.200
+H	?	1.200
+D	?	1.200
+
+
+loop_
+_atom_site_label
+_atom_site_type_symbol
+_atom_site_fract_x
+_atom_site_fract_y
+_atom_site_fract_z
+_atom_site_occupancy
+_atom_site_symmetry_multiplicity
+_atom_site_Wyckoff_symbol
+_atom_site_attached_hydrogens
+_atom_site_calc_flag
+_atom_site_thermal_displace_type
+_atom_site_u_iso_or_equiv
+Zn1 Zn  0.3862  0.3562  0.1338  1.000 18 f ? d Uani  0.00839(15)
+O1 O  0.3194  0.2922  0.3613  1.000 18 f ? d Uani  0.0104(5)
+O2 O  0.2994  0.2219  0.6069  1.000 18 f ? d Uani  0.0141(5)
+O3 O  0.3536  0.2754 -0.0085  1.000 18 f ? d Uani  0.0098(5)
+C1 C  0.3144  0.2407  0.4365  1.000 18 f ? d Uani  0.0087(6)
+C2 C  0.3232  0.2062  0.2920  1.000 18 f ? d Uani  0.0097(7)
+C3 C  0.3435  0.2185  0.0814  1.000 18 f ? d Uani  0.0098(7)
+C4 C  0.3530  0.1828 -0.0269  1.000 18 f ? d Uani  0.0096(7)
+H4A H  0.3687  0.2046 -0.1684  1.000 18 f ? calc Uiso  0.01200
+H1a H  0.2010 -0.0069  0.0927384  1.000 18 f ? calc Uiso  0.01200
+H1b H  0.2010 -0.0069  -0.0149384  1.000 18 f ? calc Uiso  0.01200
+H2a H  0.4916  0.1155 0.0407384  1.000 18 f ? calc Uiso  0.01200
+H2b H  0.4916  0.1155 -0.0669384  1.000 18 f ? calc Uiso  0.01200
+H3a H  0.7507  0.2369  0.227238  1.000 18 f ? calc Uiso  0.01200
+H3b H  0.7507  0.2369  0.119562  1.000 18 f ? calc Uiso  0.01200
+H4a H  0.6211  0.2495  0.0915384  1.000 18 f ? calc Uiso  0.01200
+H4b H  0.6211  0.2495  -0.0161384  1.000 18 f ? calc Uiso  0.01200
+
+#D1 D  0.2010 -0.0069  0.0389  1.000 18 f ? calc Uiso  0.01200
+#D2 D  0.4916  0.1155 -0.0131  1.000 18 f ? calc Uiso  0.01200
+#D3 D  0.7507  0.2369  0.1734  1.000 18 f ? calc Uiso  0.01200
+#D4 D  0.6211  0.2495  0.0377  1.000 18 f ? calc Uiso  0.01200
+#to replace D's, replace Z coord with D + 0.3705 and D - 0.3705
+# and turn into H
+
+
+loop_
+_atom_site_aniso_label
+_atom_site_aniso_U_11
+_atom_site_aniso_U_22
+_atom_site_aniso_U_33
+_atom_site_aniso_U_12
+_atom_site_aniso_U_13
+_atom_site_aniso_U_23
+Zn1  0.0098(2)  0.0083(2)  0.0058(2)  0.00358(16)  0.00024(14)  0.00067(14)
+O1  0.0141(12)  0.0093(11)  0.0089(11)  0.0066(10)  0.0003(10) -0.0006(9)
+O2  0.0257(15)  0.0113(12)  0.0076(12)  0.0110(11)  0.0036(10)  0.0017(9)
+O3  0.0163(12)  0.0078(11)  0.0073(11)  0.0074(10)  0.0014(9)  0.0014(9)
+C1  0.0080(15)  0.0089(15)  0.0073(15)  0.0027(13) -0.0023(12) -0.0017(12)
+C2  0.0130(16)  0.0117(16)  0.0069(15)  0.0080(14) -0.0013(12) -0.0003(13)
+C3  0.0104(16)  0.0103(16)  0.0090(16)  0.0055(13)  0.0005(12)  0.0009(13)
+C4  0.0143(17)  0.0101(16)  0.0051(14)  0.0065(14)  0.0002(12)  0.0014(12)
+
+loop_
+_geom_bond_atom_site_symbol_1
+_geom_bond_atom_site_symbol_2
+_geom_bond_site_symmetry_1
+_geom_bond_site_symmetry_2
+_geom_bond_distance
+_geom_bond_publ_flag
+Zn1 O3 . .  2.0695 no
+Zn1 O2 . 8_554  1.9818 no
+Zn1 O3 . 8  1.8999 no
+Zn1 O1 . .  2.3073 no
+Zn1 O1 . 15_554  2.0977 no
+Zn1 Zn1 . 15_554  3.0827 no
+Zn1 Zn1 . 8  3.0827 no
+O1 C1 . .  1.3749 no
+O1 Zn1 . 8  2.0977 no
+O2 C1 . .  1.2546 no
+O2 Zn1 . 15  1.9818 no
+O3 C3 . .  1.4948 no
+O3 Zn1 . 15_554  1.8999 no
+C1 C2 . .  1.4279 no
+C2 C4 . 10  1.4143 no
+C2 C3 . .  1.5207 no
+C3 C4 . .  1.3022 no
+C4 C2 . 10  1.4143 no
+D4 D4 . 18_545  4.4829 no
+D2 D3 . 17  3.9052 no
+D1 D2 . 14_544  2.8839 no
+D1 D2 . 14_545  4.3794 no
+D2 D3 . 17_554  3.8266 no
+Zn1 D1 . 10  2.5431 no
+D1 D4 . 14_54< 52.8855 no
+D1 D4 . 14_544  4.4069 no
+D1 D4 . 14_545  5.9244 no
+D3 D4 . 18_545  3.8103 no
+D1 D2 . 14_546 11.1694 no
+D2 D3 . 17_552 17.2503 no
+D2 D3 . 17_553 10.4283 no
+
+loop_
+_geom_angle_atom_site_symbol_1
+_geom_angle_atom_site_symbol_2
+_geom_angle_atom_site_symbol_3
+_geom_angle_site_symmetry_1
+_geom_angle_site_symmetry_2
+_geom_angle_site_symmetry_3
+_geom_angle
+_geom_angle_publ_flag
+O3 Zn1 O2 . . 8_554 100.56 no
+O3 Zn1 O3 . . 8 158.29 no
+O2 Zn1 O3 8_554 . 8 100.81 no
+O3 Zn1 O1 . . . 79.30 no
+O2 Zn1 O1 8_554 . . 178.88 no
+O3 Zn1 O1 8 . . 79.41 no
+O3 Zn1 O1 . . 15_554 80.98 no
+O2 Zn1 O1 8_554 . 15_554 101.94 no
+O3 Zn1 O1 8 . 15_554 90.89 no
+O1 Zn1 O1 . . 15_554 79.15 no
+O3 Zn1 Zn1 . . 15_554 37.10 no
+O2 Zn1 Zn1 8_554 . 15_554 89.69 no
+O3 Zn1 Zn1 8 . 15_554 139.33 no
+O1 Zn1 Zn1 . . 15_554 90.84 no
+O1 Zn1 Zn1 15_554 . 15_554 48.44 no
+O3 Zn1 Zn1 . . 8 117.53 no
+O2 Zn1 Zn1 8_554 . 8 137.74 no
+O3 Zn1 Zn1 8 . 8 41.08 no
+O1 Zn1 Zn1 . . 8 42.87 no
+O1 Zn1 Zn1 15_554 . 8 69.02 no
+Zn1 Zn1 Zn1 15_554 . 8 109.30 no
+C1 O1 Zn1 . . . 128.74 no
+C1 O1 Zn1 . . 8 136.25 no
+Zn1 O1 Zn1 . . 8 88.69 no
+C1 O2 Zn1 . . 15 116.35 no
+C3 O3 Zn1 . . . 125.62 no
+C3 O3 Zn1 . . 15_554 124.46 no
+Zn1 O3 Zn1 . . 15_554 101.82 no
+O2 C1 O1 . . . 126.09 no
+O2 C1 C2 . . . 121.57 no
+O1 C1 C2 . . . 112.12 no
+C4 C2 C3 10 . . 113.26 no
+C4 C2 C1 10 . . 113.85 no
+C3 C2 C1 . . . 132.81 no
+O3 C3 C4 . . . 117.43 no
+O3 C3 C2 . . . 118.18 no
+C4 C3 C2 . . . 124.39 no
+C3 C4 C2 . . 10 122.33 no

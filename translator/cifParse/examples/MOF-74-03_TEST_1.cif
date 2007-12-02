@@ -1,0 +1,95 @@
+data_VESTA_phase_1
+_audit_creation_method	'Created with Diamond (www.crystalimpact.com)'
+_audit_creation_date	07-06-21
+_audit_update_record	07-06-21
+_chemical_formula_sum	'Zn18 O54 C72 H18 D13.68'
+_chemical_formula_weight	2951.475
+_cell_length_a	25.8731
+_cell_length_b	25.8731
+_cell_length_c	 6.8354
+_cell_angle_alpha	90.000
+_cell_angle_beta	90.000
+_cell_angle_gamma	120.000
+_cell_volume	3962.7
+_symmetry_int_tables_number	148
+_symmetry_space_group_name_H-M	'R -3'
+_symmetry_space_group_name_Hall	'-R_3'
+
+loop_
+_symmetry_equiv_pos_site_id
+_symmetry_equiv_pos_as_xyz
+1 'x, y, z'
+2 '-y, x-y, z'
+3 '-x+y, -x, z'
+4 '-x, -y, -z'
+5 'y, -x+y, -z'
+6 'x-y, x, -z'
+7 '0.667+x, 0.333+y, 0.333+z'
+8 '0.667-y, 0.333+x-y, 0.333+z'
+9 '0.667-x+y, 0.333-x, 0.333+z'
+10 '0.667-x, 0.333-y, 0.333-z'
+11 '0.667+y, 0.333-x+y, 0.333-z'
+12 '0.667+x-y, 0.333+x, 0.333-z'
+13 '0.333+x, 0.667+y, 0.667+z'
+14 '0.333-y, 0.667+x-y, 0.667+z'
+15 '0.333-x+y, 0.667-x, 0.667+z'
+16 '0.333-x, 0.667-y, 0.667-z'
+17 '0.333+y, 0.667-x+y, 0.667-z'
+18 '0.333+x-y, 0.667+x, 0.667-z'
+
+loop_
+_atom_type_symbol
+_atom_type_oxidation_number
+_atom_type_radius_bond
+Zn	?	1.200
+O	?	1.200
+C	?	1.200
+H	?	1.200
+D	?	1.200
+
+
+loop_
+_atom_site_label
+_atom_site_type_symbol
+_atom_site_fract_x
+_atom_site_fract_y
+_atom_site_fract_z
+_atom_site_occupancy
+_atom_site_symmetry_multiplicity
+_atom_site_Wyckoff_symbol
+_atom_site_attached_hydrogens
+_atom_site_calc_flag
+_atom_site_thermal_displace_type
+_atom_site_u_iso_or_equiv
+Zn1 Zn  0.3862  0.3619  0.1450  1.000 18 f ? d Biso ?
+O1 O  0.3201  0.2960  0.3420  1.000 18 f ? d Biso ?
+O2 O  0.2968  0.2265  0.6125  1.000 18 f ? d Biso ?
+O3 O  0.3593  0.2824  0.0246  1.000 18 f ? d Biso ?
+C1 C  0.3211  0.2452  0.4334  1.000 18 f ? d Biso ?
+C2 C  0.3263  0.2059  0.2878  1.000 18 f ? d Biso ?
+C3 C  0.3436  0.2229  0.0926  1.000 18 f ? d Biso ?
+C4 C  0.3523  0.1844 -0.0337  1.000 18 f ? d Biso ?
+H4A H  0.3629  0.1928 -0.1413  1.000 18 f ? d Biso ?
+D21 D  0.2005 -0.0076  0.0254  0.760 18 f ? d Biso ?
+
+
+loop_
+_geom_bond_atom_site_symbol_1
+_geom_bond_atom_site_symbol_2
+_geom_bond_site_symmetry_1
+_geom_bond_site_symmetry_2
+_geom_bond_distance
+_geom_bond_publ_flag
+Zn1 D21 . 10  2.6349 no
+Zn1 D21 . 6  4.5613 no
+Zn1 D21 . 10_554  6.1998 no
+C1 D21 . 10  3.4159 no
+O2 O3 . 10  5.1250 no
+O1 O2 . 10_556  6.2135 no
+C1 C1 . 10  5.7267 no
+C3 D21 . 10_554  6.2024 no
+C2 D21 . 6  3.6787 no
+O2 D21 . 6  4.8155 no
+O3 D21 . 10_554  5.4534 no
+O2 D21 . 6_556  3.2110 no
+O3 D21 . 10  3.0825 no
