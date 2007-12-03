@@ -1,0 +1,7 @@
+
+1 char[256] --> "E"
+1 int32 --> version 1 
+1 int32 --> Number of energy bins, N_e
+double[N_e] --> The energies go here.
+
+Es units should be in J.
