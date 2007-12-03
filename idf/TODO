@@ -1,6 +1,8 @@
 
 0) Move UNITS into README ?
 
+1) What the hell should units be for "eigenvalues".
+
 1) A possible variant on the files (Qs, for example):
 
   1 char[256] --> "Qs"
