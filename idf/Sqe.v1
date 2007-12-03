@@ -1,0 +1,10 @@
+1 char[256] --> "Sqe"
+1 int32 --> version 1 
+1 int32 --> 1 == unnormalized, 0 == normalized to one
+1 int32 --> Number of Es, N_e
+1 int32 --> Number of Qs, N_q
+double[N_e*N_q] --> The values of S(Q,E) go here.
+    S(   0,  0 )
+    S(   0,  1 )
+    ...
+    S( N_q,N_e )

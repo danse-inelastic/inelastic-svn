@@ -10,4 +10,8 @@ Currently, we have:
 
 Filename      | Contents
 --------------+---------------------------------------------------------------
-Qs.v1         | Lists of Q-Vectors, for BvK, Simulations, etc.
+Qs.v1         | List of Q-Vectors, for BvK, Simulations, etc.
+Es.v1         | List of Energies, for BvK, Simulations, etc.
+Eigs.v1       | List of Eigenvalues, from BvK, etc.
+Pols.v1       | List of Polarization vectors, from BvK, etc.
+Sqe.v1        | List of Scattering as a function of Q and E.
