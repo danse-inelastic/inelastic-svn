@@ -1,0 +1,8 @@
+* put vtk in its own little wx plotting window and see if that helps--try alternate embeddings to see if it improves vtk speed
+* fix the scripts that test vtk capabilities and use the same ones on matplotlib
+* put into histogram
+* merge vtk and matplotlib
+* fix Matplotlib Properties and PropertyTable so it uses the established API?
+* fix vtk window size
+* fix this error by chaning capstyle in line object
+* put y axis limits on axes properties (maybe just switch matplotlib over to the graphics api completely before trying this)

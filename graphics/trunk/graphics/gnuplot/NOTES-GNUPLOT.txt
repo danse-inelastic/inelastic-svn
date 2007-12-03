@@ -1,0 +1,900 @@
+NOTES on gnuplot usage and rules
+==========================================
+# general gnuplot usage and syntax
+`gnuplot` is a command-driven interactive function and data plotting program.
+It is case sensitive (commands and function names written in lowercase are not
+the same as those written in CAPS). All command names may be abbreviated as
+long as the abbreviation is not ambiguous. Any number of commands may appear
+on a line (with the exception that `load` or call must be the final command),
+separated by semicolons (;). Strings are indicated with quotes. They may be
+either single or double quotation marks.
+
+Any command-line arguments are assumed to be names of files containing
+`gnuplot` commands, with the exception of standard X11 arguments, which are
+processed first. Each file is loaded with the `load` command, in the order
+specified. `gnuplot` exits after the last file is processed. When no load
+files are named, `gnuplot` enters into an interactive mode. The special
+filename "-" is used to denote standard input.
+
+Many `gnuplot` commands have multiple options. These options must appear in
+the proper order, although unwanted ones may be omitted in most cases. Thus if
+the entire command is "command a b c", then "command a c" will probably work,
+but "command c a" will fail.
+
+Commands may extend over several input lines by ending each line but the last
+with a backslash (\). The backslash must be the _last_ character on each line.
+The effect is as if the backslash and newline were not there. That is, no
+white space is implied, nor is a comment terminated. Therefore, commenting out
+a continued line comments out the entire command (see `comments`). But note
+that if an error occurs somewhere on a multi-line command, the parser may not
+be able to locate precisely where the error is and in that case will not
+necessarily point to the correct line.
+
+For on-line help on any topic, type help followed by the name of the topic or
+just help or `?` to get a menu of available topics.
+
+# (some of what's) New in Version 4.0
+Interaction with the current plot via mouse and hotkeys is supported for the
+X11, OS/2 Presentation Manager, ggi and Windows terminals. 
+
+The `splot` command is now capable of plotting 2D maps and 3D surfaces colored
+by greyscale or color palettes.  See 'pm3d'.
+
+Input data can be filtered through several built-in routines for interpolation
+or approximation of data. See 'smooth', `frequency`, `unique`.
+
+Most gnuplot plot commands that produce text labels now accept modifiers to
+specify text color, font, size, and rotation angle. See 'label'.
+
+The new `set datafile` command can be used to specify information about the
+format of input data files, including the characters used to separate fields,
+to indicate comment lines, and to specify missing data. Gnuplot now attempts
+to recognize text fields with embedded blanks as single entities based on the
+datafile format settings. This allows input from csv (comma-separated value)
+files such as those exported by spreadsheet programs. See `set datafile`.
+  XXXXX:  This may (?) help with importing data through file objects.
+
+The preferred syntax to undo a command `set <something>` is now `unset
+<something>` rather than `set no<something>`.  Commands of the form `set
+<something> <style>` also are deprectated in favor of the more general form
+`set style <something> <options>`.
+
+The label command supports associated points, and allows you to specify point
+style and text style (font, rotation, etc). User variables can be included in
+labels via format specifiers in the label text. See 'label'.
+
+New command `set view map` to select top-view 2D projection of 3D surface
+plot.
+
+The `load` and save commands accept piped input and output, respectively. 
+
+# Batch/Interactive Operation
+Any command-line arguments are assumed to be names of files containing
+`gnuplot` commands (with the exception of standard X11 arguments, which are
+processed first). Each file is loaded with the `load` command, in the order
+specified. `gnuplot` exits after the last file is processed. When no load
+files are named, `gnuplot` enters into an interactive mode. The special
+filename "-" is used to denote standard input.
+
+Both the exit and quit commands terminate the current command file and `load`
+the next one, until all have been processed.
+
+# Command-line-editing
+Command-line editing is supported by the Unix, Atari, VMS, MS-DOS and OS/2
+versions of `gnuplot`. Also, a history mechanism allows previous commands to
+be edited and re-executed. After the command line has been edited, a newline
+or carriage return will enter the entire line without regard to where the
+cursor is positioned.
+
+The readline function in `gnuplot` is not the same as the readline used in
+GNU Bash and GNU Emacs. If the GNU version is desired, it may be selected
+instead of the `gnuplot` version at compile time. 
+  XXXXX:  Probably best to use GNU readline in python instead.
+
+# Comments
+Comments are supported as follows: a `#` may appear in most places in a line
+and `gnuplot` will ignore the rest of the line. It will not have this effect
+inside quotes, inside numbers (including complex numbers), inside command
+substitutions, etc.
+
+# Environment
+A number of shell environment variables are understood by `gnuplot`. None of
+these are required, but may be useful.
+
+On Unix, HOME is used as the name of a directory to search for a .gnuplot file
+if none is found in the current directory. On AmigaOS, AtariTOS, MS-DOS,
+Windows and OS/2, GNUPLOT is used. On Windows, the NT-specific variable
+USERPROFILE is tried, too. VMS, SYS$LOGIN: is used. Type `help start-up`.
+  XXXXX: The .gnuplot file may be needed in certain cases when the python
+  XXXXX: bindings fail to setup the enviromnent correctly.  A current example
+  XXXXX: is "set mouse" works correctly in python when also found in .gnuplot
+
+On Unix, PAGER is used as an output filter for help messages.  
+  XXXXX: This is the bugger that chops off most of the 'help' messages
+  XXXXX: from gnuplot to python.
+
+# Expressions
+The integer expression "1/0" may be used to generate an "undefined" flag,
+which causes a point to ignored.
+
+The functions in `gnuplot` are basically the same as the corresponding
+functions in the Unix math library.  Another useful function is
+'defined(X)', which returns 1 if variable X is defined, 0 otherwise.
+
+The operators in `gnuplot` are the same as the corresponding operators in the
+C programming language, except that all operators accept integer, real, and
+complex arguments, unless otherwise noted. The ** operator (exponentiation) is
+supported, as in FORTRAN.  The '$' operator (i.e. '$3') calls the named 
+arg/column when coupled with 'using'.
+
+There is a single ternary operator.  Here's an example...
+  For data in a file, plot the average of the data in columns 2 and 3 against
+  the datum in column 1, but only if the datum in column 4 is non-negative:
+     gnuplot> plot 'file' using 1:( $4<0 ? 1/0 : ($2+$3)/2 )
+
+New user-defined variables and functions of one through five variables may be
+declared and used anywhere, including on the `plot` command itself.  The
+variable `pi` is already defined, but may be redefined.
+
+Valid names are the same as in most programming languages: they must begin
+with a letter, but subsequent characters may be letters, digits, "$", or "_".
+Note, however, that the `fit` mechanism uses several variables with names that
+begin "FIT_". It is safest to avoid using such names.
+
+# Mouse and hotkey input
+The bind allows defining or redefining a hotkey, i.e. a sequence of gnuplot
+commands which will be executed when a certain key or key sequence is pressed
+while the driver's window has the input focus.
+  XXXXX: Mouse and hotkey need bidirectional input.
+  XXXXX: Hotkey binding will be initially ignored in the python bindings.
+
+When mousing is active, clicking in the active window will set several user
+variables that can be accessed from the gnuplot command line. The coordinates
+of the mouse at the time of the click are stored in MOUSE_X MOUSE_Y MOUSE_X2
+and MOUSE_Y2. The mouse button clicked, and any meta-keys active at that time,
+are stored in MOUSE_BUTTON MOUSE_SHIFT MOUSE_ALT and MOUSE_CTRL. These
+variables are set to undefined at the start of every plot, and only become
+defined in the event of a mouse click in the active plot window. To determine
+from a script if the mouse has been clicked in the active plot window, it is
+sufficient to test for any one of these variables being defined.
+     gnuplot> plot 'something'
+     gnuplot> pause mouse
+     gnuplot> if (defined(MOUSE_BUTTON)) call 'something_else'; \
+     gnuplot> else print "No mouse click."
+
+# Plotting
+There are three `gnuplot` commands which actually create a plot: `plot`,
+`splot` and replot. `plot` generates 2-d plots, `splot` generates 3-d plots
+(actually 2-d projections, of course), and replot appends its arguments to the
+previous `plot` or `splot` and executes the modified command.
+
+# Substitution
+Command-line substitution is specified by a system command enclosed in
+backquotes. This command is spawned and the output it produces replaces the
+name of the command (and backquotes) on the command line. Some implementations
+also support pipes. See 'special-filenames'.
+
+Command-line substitution can be used anywhere on the `gnuplot` command line,
+except inside strings delimited by single quotes.  For example:
+  This will run the program `leastsq` and replace `leastsq` (including
+  backquotes) on the command line with its output:
+     gnuplot> f(x) = `leastsq`
+
+# Syntax
+The general rules of syntax and punctuation in `gnuplot` are that keywords and
+options are order-dependent. Options and any accompanying parameters are
+separated by spaces whereas lists and coordinates are separated by commas.
+Ranges are separated by colons and enclosed in brackets [], text and file
+names are enclosed in quotes, and a few miscellaneous things are enclosed in
+parentheses. Braces {} are used for a few special purposes.
+
+Semicolons are used to separate commands given on a single command line.
+
+Text may be enclosed in single- or double-quotes. Backslash processing of
+sequences like \n (newline) and \345 (octal character code) is performed for
+double-quoted strings, but not for single-quoted strings.
+
+Back-quotes are used to enclose system commands for substitution.
+
+### COMMANDS ###
+In most cases unambiguous abbreviations for command names and their options
+are permissible, i.e., "`p f(x) w li`" instead of "`plot f(x) with lines`".
+
+# Cd
+The cd command changes the working directory.
+The directory name must be enclosed in quotes.  For example:
+     gnuplot> cd 'subdir'
+     gnuplot> cd ".."
+
+DOS users _must_ use single-quotes -- backslash [\] has special significance
+inside double-quotes. For example:
+     gnuplot> cd 'c:\newdata'
+
+# Call
+The call command is identical to the load command with one exception: you can
+have up to ten additional parameters to the command (delimited according to
+the standard parser rules) which can be substituted into the lines read from
+the file. As each line is read from the called input file, it is scanned for
+the sequence `$` (dollar-sign) followed by a digit (0-9). If found, the
+sequence is replaced by the corresponding parameter from the call command
+line. If the parameter was specified as a string in the call line, it is
+substituted without its enclosing quotes. `$` followed by any character other
+than a digit will be that character. E.g. use `$$` to get a single `$`.
+Providing more than ten parameters on the call command line will cause an
+error. A parameter that was not provided substitutes as nothing.
+
+Syntax:
+ call "<input-file>" <parameter-0> <parm-1> ... <parm-9>
+     
+For example:
+  If the file 'calltest.gp' contains the line:
+     print "p0=$0 p1=$1 p2=$2 p3=$3 p4=$4 p5=$5 p6=$6 p7=x$7x"
+  entering the command:
+     gnuplot> call 'calltest.gp' "abcd" 1.2 + "'quoted'" -- "$2"
+  will display:
+     p0=abcd p1=1.2 p2=+ p3='quoted' p4=- p5=- p6=$2 p7=xx
+     
+The call command _must_ be the last command on a multi-command line.
+
+NOTE: there is a clash in syntax with the datafile using callback operator.
+Use `$$n` or `column(n)` to access column n from a datafile inside a called
+datafile plot.
+
+# Clear
+The clear command erases the current screen or output device as specified by
+output. This usually generates a formfeed on hardcopy devices.
+
+# Exit
+The commands exit and quit and the END-OF-FILE character will exit the current
+`gnuplot` command file and `load` the next one.  Each of these commands will
+clear the output device (as does the clear command) before exiting. 
+
+# Fit
+The `fit` command can fit a user-defined function to a set of data points
+(x,y) or (x,y,z), using an implementation of the nonlinear least-squares
+(NLLS) Marquardt-Levenberg algorithm.
+  XXXXX: Fitting will be skipped for now.
+
+# Help
+The help command displays on-line help.
+
+Syntax:
+ help {<topic>}
+     
+If <topic> is not specified, a short message is printed about `gnuplot`. After
+help for the requested topic is given, a menu of subtopics is given; help for
+a subtopic may be requested by typing its name, extending the help request.
+After that subtopic has been printed, the request may be extended again or you
+may go back one level to the previous topic. Eventually, the `gnuplot` command
+line will return.
+  XXXXX: Having python maintain the correct sublevel of help is not handled
+  XXXXX: correctly right now (possibly correct in 'interactive mode'?).
+  XXXXX: Also, any input after the break inserted by PAGER is lost.
+
+If a question mark (?) is given as the topic, the list of topics currently
+available is printed on the screen. 
+
+# History
+`history` command lists or saves previous entries in the history of the
+command line editing, or executes an entry.  For example:
+     gnuplot> history               # show the complete history
+     gnuplot> history quiet 5       # show last 5 entries without entry numbers
+     gnuplot> history ?load         # show all entries starting with "load"
+     gnuplot> hi !reread            # execute last entry starting with "reread"
+
+# If
+The if command allows commands to be executed conditionally.
+Syntax:
+ if (<condition>) <command-line> [; else if (<condition>) ...; else ...]
+
+If <condition> is false (zero), then the entire <command-line> is ignored until
+the next occurrence of `else`. If it is true (non-zero), then the command(s) of
+the <command-line> will be executed. Note that use of `;` to allow multiple
+commands on the same line will _not_ end the conditionalized commands.
+
+# Load
+The `load` command executes each line of the specified input file as if it had
+been typed in interactively. The `load` command _must_ be the last command on
+a multi-command line. The name of the input file must be enclosed in quotes.
+Syntax:
+ load "<input-file>"
+
+The special filename "-" may be used to `load` commands from standard input.
+This allows a `gnuplot` command file to accept some commands from standard
+input. 
+
+On some systems which support a popen function (Unix), the load file can be
+read from a pipe by starting the file name with a '<'.
+
+# Pause
+The pause command displays any text associated with the command and then waits
+a specified amount of time or until the carriage return is pressed.
+Syntax:
+ pause <time> {"<string>"}
+ pause mouse {"<string>"}
+     
+<time> may be any constant or expression. Choosing -1 will wait until a
+carriage return is hit, zero (0) won't pause at all, and a positive number
+will wait the specified number of seconds. 
+
+If the current terminal supports mousing, then `pause mouse` will terminate on
+either a mouse click or on ctrl-C. For all other terminals, or if mousing is
+not active, `pause mouse` is equivalent to `pause -1`. For example:
+     gnuplot> pause 3     # Wait three seconds
+     gnuplot> pause -1  "Hit return to continue"
+     gnuplot> pause mouse "Click mouse on selected data point"
+
+# Plot
+`plot` is used to draw 2-d functions and data; `splot` draws 2-d projections
+of 3-d surfaces and data.
+  XXXXX: In python, plot will be called through gp.eval('plot ...')
+  XXXXX: and have the special call of gp.plot(...) that will serve
+  XXXXX: as a shortcut to take a python variable and push it into
+  XXXXX: gnuplot as a file object, then send it to the gnuplot plot
+  XXXXX: command.  Therefore, care has to be taken to ensure that
+  XXXXX: all of the polt options are captured correctly.
+
+Syntax:
+ plot {<ranges>}
+      {<function> | {"<datafile>" {datafile-modifiers}}}
+      {axes <axes>} {<title-spec>} {with <style>}
+      {, {definitions,} <function> ...}
+
+It is also possible to define functions and parameters on the `plot` command
+itself. This is done merely by isolating them from other items with commas.
+
+There are four possible sets of axes available; the keyword <axes> is used to
+select the axes for which a particular line should be scaled. `x1y1` refers to
+the axes on the bottom and left; `x2y2` to those on the top and right; `x1y2`
+to those on the bottom and right; and `x2y1` to those on the top and left.
+Ranges specified on the `plot` command apply only to the first set of axes
+(bottom left).
+
+### Plot/Data-file
+Discrete data contained in a file can be displayed by specifying the name of
+the data file (enclosed in single or double quotes) on the `plot` command line.
+
+Syntax:
+ plot '<file_name>' {index <index list>}
+                    {every <every list>}
+                    {thru <thru expression>}
+                    {using <using list>}
+                    {smooth <option>}
+
+In brief, index selects which data sets in a multi-data-set file are to be
+plotted, every specifies which points within a single data set are to be
+plotted, using determines how the columns within a single record are to be
+interpreted (thru is a special case of using), and smooth allows for simple
+interpolation and approximation.
+  XXXXX: These options provide filters for the data set.  Should gp.plot()
+  XXXXX: allow these calls, or just rely on manipulation in python?
+
+Data files should contain at least one data point per record (using can select
+one data point from the record). Records beginning with `#` will be treated as
+comments and ignored. Each data point represents an (x,y) pair.
+  XXXXX: Python lists or arrays will be converted to file objects in gnuplot,
+  XXXXX: and will follow this format.
+
+In all cases, the numbers of each record of a data file must be separated by
+white space (one or more blanks or tabs) unless a format specifier is provided
+by the using option. This white space divides each record into columns. However,
+whitespace inside a pair of double quotes is ignored when counting columns.
+
+Only one column (the y value) need be provided. If x is omitted, `gnuplot`
+provides integer values starting at 0.
+
+Data separated by double blank records are treated as if they were in separate
+data files.
+
+Single blank records designate discontinuities in a `plot`; no line will join
+points separated by a blank records.
+
+A special filename of `'-'` specifies that the data are inline; i.e., they
+follow the command. Only the data follow the command; `plot` options like
+filters, titles, and line styles remain on the `plot` command line.
+The data are entered as though they are being read from a file, one data point
+per record. The letter "e" at the start of the first column terminates data
+entry. If you use `'-'` with replot, you may need to enter the data more than
+once.
+
+A blank filename (' ') specifies that the previous filename should be reused.
+On some computer systems with a popen function (Unix), the datafile can be piped
+through a shell command by starting the file name with a '<'. 
+  XXXXX: Special filenames shouldn't need to be dealt with, except possibly in
+  XXXXX: the case where an interactive gnuplot prompt is used.
+
+'Using' is by far the most common datafile modifier.  If a format is specified,
+each datafile record is read using the C library's 'scanf' function, with the
+specified format string. Otherwise the record is read and broken into columns at
+spaces or tabs.  
+
+Syntax:
+ plot 'file' using {<entry> {:<entry> {:<entry> ...}}} {'format'}
+
+It should be noted that `plot 'file'`, `plot 'file' using 1:2`, and `plot 'file'
+using ($1):($2)` can be subtly different: 1) if file has some lines with one
+column and some with two, the first will invent x values when they are missing,
+the second will quietly ignore the lines with one column, and the third will
+store an undefined value for lines with one point (so that in a plot with lines,
+no line joins points across the bad point); 2) if a line contains text at the
+first column, the first will abort the plot on an error, but the second and
+third should quietly skip the garbage.
+
+### Plot/Errorbars
+Error bars are supported for 2-d data file plots by reading one to four additional columns.
+
+### Plot/Parametric
+When in parametric mode (`set parametric`) mathematical expressions must be
+given in pairs for `plot` and in triplets for `splot`.
+     gnuplot> plot sin(t),t**2
+     gnuplot> splot cos(u)*cos(v),cos(u)*sin(v),sin(u)
+
+### Plot/Ranges
+In non-parametric mode, the order in which ranges must be given is xrange and
+yrange.  In parametric mode, the order for the `plot` command is trange, xrange,
+and yrange. Once all ranges needed are specified, no further ones must be
+listed, but unneeded ones cannot be skipped--use an empty range `[]` as a
+placeholder. `*` can be used to allow autoscaling of either of min and max, and
+[:max] or [min:] can be used to limit the range in one direction.
+Syntax:
+ [{<dummy-var>=}{{<min>}:{<max>}}]
+ [{{<min>}:{<max>}}]
+     
+### Plot/Title
+A line title for each function and data set appears in the key, accompanied by
+a sample of the line and/or symbol used to represent it. 
+
+The line title and sample can be omitted from the key by using the keyword
+`notitle`. A null title (`title "`) is equivalent to `notitle`. If only the
+sample is wanted, use one or more blanks (`title ' '`).
+
+### Plot/With
+Functions and data may be displayed in one of a large number of styles. The with
+keyword provides the means of selection.
+
+Syntax:
+ with <style> { {linestyle | ls <line_style>}
+                | {{linetype  | lt <line_type>}
+                   {linewidth | lw <line_width>}
+                   {pointtype | pt <point_type>}
+                   {pointsize | ps <point_size>}
+                   {fill | fs <fillstyle>}
+                   {palette}}
+              }
+
+where <style> is either `lines`, `points`, `linespoints`, `impulses`, `dots`,
+`steps`, `fsteps`, `histeps`, errorbars, `xerrorbars`, `yerrorbars`,
+`xyerrorbars`, errorlines, `xerrorlines`, `yerrorlines`, `xyerrorlines`,
+`boxes`, `filledcurves`, `boxerrorbars`, `boxxyerrorbars`, `financebars`,
+`candlesticks`, `vectors` or pm3d. 
+
+Default styles are chosen with the `set style function` and `set style data`
+commands. By default, each function and data file will use a different line type
+and point type, up to the maximum number of available types. <line_type> and
+<point_type> may be specified, and are positive integer constants (or
+expressions). Use test to display the types available for your terminal.
+
+# Print
+The `print` command prints the value of <expression> to the screen. It is
+synonymous with `pause 0`. <expression> may be anything that `gnuplot` can
+evaluate that produces a number, or it can be a string.
+Syntax:
+ print <expression> {, <expression>, ...}
+
+# Pwd
+The pwd command prints the name of the working directory to the screen.
+
+# Quit
+The exit and quit commands and END-OF-FILE character will exit `gnuplot`. Each
+of these commands will clear the output device (as does the clear command)
+before exiting.The exit and quit commands and END-OF-FILE character will exit
+`gnuplot`. Each of these commands will clear the output device (as does the
+clear command) before exiting.
+
+# Replot
+The replot command without arguments repeats the last `plot` or `splot` command.
+This can be useful for viewing a plot with different `set` options, or when
+generating the same plot for several devices.
+
+Arguments specified after a replot command will be added onto the last `plot`
+or `splot` command (with an implied ',' separator) before it is repeated. replot
+accepts the same arguments as the `plot` and `splot` commands except that ranges
+cannot be specified. 
+
+Note that replot does not work in multiplot mode, since it reproduces only the
+last plot rather than the entire screen.
+
+# Reread
+The reread command causes the current `gnuplot` command file, as specified by a
+`load` command or on the command line, to be reset to its starting point before
+further commands are read from it. 
+  XXXXX: This should not be useful from python... so I'll ignore it.
+
+# Reset
+The reset command causes all graph-related options that can be set with the
+`set` command to take on their default values. The following `set` commands do
+not change the graph status and are thus left unchanged: the terminal set with
+`set term`, the output file set with output and directory paths set with
+loadpath and fontpath.
+
+# Save
+The save command saves user-defined functions, variables, the `set term` status,
+all `set` options, or all of these, plus the last `plot` (`splot`) command to
+the specified file.
+  XXXXX: This provides a possible way around any trouble with temporary file
+  XXXXX: objects, in that the data from a python array/list can be saved to
+  XXXXX: a similarly-named file, and then loaded correctly before replotting.
+
+Syntax:
+ save  {<option>} '<filename>'
+
+where <option> is `functions`, variables, terminal or `set`. If no option is
+used, `gnuplot` saves functions, variables, `set` options and the last `plot`
+command. saved files are written in text format and may be read by the `load`
+command. 
+
+The special filename "-" may be used to save commands to standard output. On
+systems which support a popen function (Unix), the output of save can be piped
+through an external program by starting the file name with a '|'. 
+
+# Set-show
+The `set` command can be used to set _lots_ of options. No screen is drawn,
+however, until a `plot`, `splot`, or replot command is given.  The `show`
+command shows their settings; `show all` shows all the settings.  Options
+changed using `set` can be returned to the default state by giving the
+corresponding unset command.
+  XXXXX: There are a vast wealth of options for the set and show commands.
+  XXXXX: There is no reason to have a special method in python for set or
+  XXXXX: show, since they do not directly act on variables, functions, or files.
+  XXXXX: The gp.eval(...) call should be used in all cases, thus only the most
+  XXXXX: relevant or unusual settings for set and show will be listed here.
+
+### Set-show/Contour
+contour enables contour drawing for surfaces. This option is available for
+`splot` only. The three options specify where to draw the contours: `base` draws
+the contours on the grid base where the x/ytics are placed, surface draws the
+contours on the surfaces themselves, and `both` draws the contours on both the
+base and the surface. If no option is provided, the default is `base`.
+
+### Set-show/Dummy
+The dummy command changes the default dummy variable names. By default,
+`gnuplot` assumes that the independent, or "dummy", variable for the `plot`
+command is "t" if in parametric or polar mode, or "x" otherwise. Similarly the
+independent variables for the `splot` command are "u" and "v" in parametric mode
+(`splot` cannot be used in polar mode), or "x" and "y" otherwise.
+
+### Set-show/Format
+The format of the tic-mark labels can be set with the `set format` command.
+The default format for both axes is "%g", but other formats such as "%.2f" or
+"%3.0em" are often desirable. Anything accepted by 'printf' when given a double
+precision number, and accepted by the terminal, will work.
+
+### Set-show/Functions
+The `show functions` command lists all user-defined functions and their
+definitions.
+  XXXXX: Can this be used to pipe functions back into python?
+
+### Set-show/Grid
+The `set grid` command allows grid lines to be drawn on the plot.
+
+### Set-show/Mouse
+The command `set mouse` enables mouse actions. The 2d-graph mode works for 2d
+graphs and for maps (i.e. splots with view having z-rotation 0, 90, 180, 270 or
+360 degrees) and it allows tracing the position over graph, zooming, annotating
+graph etc. For 3d graphs `splot`, the view and scaling of the graph can be
+changed with mouse buttons 1 and 2. If additionally to these buttons the
+modifier <ctrl> is hold down, the coordinate system only is rotated which is
+useful for large data sets. A vertical motion of Button 2 with the shift key
+hold down changes the ticslevel. Mousing is not available in multiplot mode.
+
+If the option `verbose` is turned on the communication commands are shown during
+execution. This option can also be toggled by hitting `6` in the driver's
+window. `verbose` is off by default.
+
+Press 'q' in the driver's window to close the window.
+
+X11 mouse support is turned on by default if standard input comes from a
+terminal (tty). Mouse support is turned off if standard input does not come from
+a tty, e.g. a pipe. If you want to use mouse support while writing to gnuplot
+from a pipe, the mouse must be turned on *before* starting the x11 driver,
+e.g. immediately after startup with the explicit command `set mouse`. 
+
+### Set-show/Multiplot
+The command multiplot places `gnuplot` in the multiplot mode, in which several
+plots are placed on the same page, window, or screen.
+
+For some terminals, no plot is displayed until the command multiplot is given,
+which causes the entire page to be drawn and then returns `gnuplot` to its
+normal single-plot mode. For other terminals, each separate `plot` command
+produces a plot, but the screen may not be cleared between plots. The commands
+origin and size must be used to correctly position each plot.
+
+### Set-show/Parametric
+The `set parametric` command changes the meaning of `plot` (`splot`) from normal
+functions to parametric functions. 
+
+The `set parametric` function implies a new range of values. Whereas the normal
+f(x) and f(x,y) style plotting assume an xrange and yrange (and zrange), the
+parametric mode additionally specifies a trange, urange, and vrange. Currently
+the default range for these parametric variables is [-5:5].
+
+### Set-show/Plot
+The `show plot` command shows the current plotting command as it results from
+the last `plot` and/or `splot` and possible subsequent replot commands.
+
+In addition, the `show plot add2history` command adds this current plot command
+into the `history`. It is useful if you have used replot to add more curves to
+the current plot and you want to edit the whole command now.
+
+### Set-show/Pm3d
+pm3d is an `splot` style for drawing palette-mapped 3d and 4d data as color/gray
+maps and surfaces. It uses a pm3d algorithm which allows plotting gridded as
+well as non-gridded data without preprocessing, even when the data scans do not
+have the same number of points.
+
+Surface coloring works with the following input data:
+  1. splot of function or of data file with one or three data columns: The
+gray/color scale is obtained by mapping the averaged (or `corners2color`)
+z-coordinate of the four corners of the above-specified quadrangle into the
+range [min_color_z,max_color_z] of zrange or cbrange providing a gray value in
+the range [0:1]. This value can be used directly as the gray for gray maps.
+The normalized gray value can be further mapped into a color--see palette for
+the complete description.
+  2. splot of data file with two or four data columns: The gray/color value is
+obtained by using the last-column coordinate instead of the z-value, thus
+allowing the color and the z-coordinate be mutually independent. This can be
+used for 4d data drawing. 
+
+To use pm3d coloring to generate a two-dimensional plot rather than a 3D
+surface, use `set view map` or `set pm3d map`.
+
+### Set-show/Polar
+The `set polar` command changes the meaning of the plot from rectangular
+coordinates to polar coordinates. In polar coordinates, the dummy variable (t)
+is an angle. The default range of t is [0:2*pi], or, if degree units have been
+selected, to [0:360].  The `set polar` command is not supported for `splot`s.
+See the mapping command for similar functionality for `splot`s.
+
+### Set-show/Print
+The `set print` command redirects the output of the `print` command to a file.
+Without "<filename>", the output file is restored to <STDERR>. The <filename>
+"-" means <STDOUT>. The `append` flag causes the file to be opened in append
+mode. A <filename> starting with "|" is opened as a pipe to the <shell_command>
+on platforms that support piping.
+
+###Set-show/Style
+Default plotting styles are chosen with the `set style data` and `set style function` commands. See with for information about how to override the default plotting style for individual functions and data sets.
+
+Syntax:
+ set style function <style>
+ set style data <style>
+ set style arrow <n> <arrowstyle>
+ set style fill <fillstyle>
+ set style line <n> <linestyle>
+
+The types used for all line and point styles (i.e., solid, dash-dot, color, etc.
+for lines; circles, squares, crosses, etc. for points) will be either those
+specified on the `plot` or `splot` command or will be chosen sequentially from
+the types available to the terminal in use. Use the command test to see what is
+available.
+
+None of the styles requiring more than two columns of information (e.g.,
+errorbars or errorlines) can be used with `splot`s or function `plot`s. Neither
+`boxes`, `filledcurves` nor any of the `steps` styles can be used with `splot`s.
+If an inappropriate style is specified, it will be changed to `points`.
+
+For 2-d data with more than two columns, `gnuplot` is picky about the allowed
+errorbars and errorlines styles. The using option on the `plot` command can be
+used to set up the correct columns for the style you want. (In this discussion,
+"column" will be used to refer both to a column in the data file and an entry in
+the using list.)
+
+For three columns, only `xerrorbars`, `yerrorbars` (or errorbars),
+`xerrorlines`, `yerrorlines` (or errorlines), `boxes` and `boxerrorbars` are
+allowed. If another plot style is used, the style will be changed to
+`yerrorbars`. The `boxerrorbars` style will calculate the boxwidth
+automatically.
+
+For four columns, only `xerrorbars`, `yerrorbars` (or errorbars), `xyerrorbars`,
+`xerrorlines`, `yerrorlines` (or errorlines), `xyerrorlines`, `boxxyerrorbars`,
+and `boxerrorbars` are allowed. An illegal style will be changed to
+`yerrorbars`.
+
+Five-column data allow only the `boxerrorbars`, `financebars`, and
+`candlesticks` styles. An illegal style will be changed to `boxerrorbars` before
+plotting.
+
+Six- and seven-column data only allow the `xyerrorbars`, `xyerrorlines`, and
+`boxxyerrorbars` styles. Illegal styles will be changed to `xyerrorbars` before
+plotting.
+
+### Set-show/Terminal
+`gnuplot` supports many different graphics devices. Use terminal to tell
+`gnuplot` what kind of output to generate. Use output to redirect that output to
+a file or device.
+
+The command `set term push` remembers the current terminal including its
+settings while `set term pop` restores it. This is equivalent to `save term` and
+`load term`, but without accessing the filesystem. Therefore they can be used to
+achieve platform independent restoring of the terminal after printing, for
+instance. After gnuplot's startup, the default terminal or that from `startup`
+file is pushed automatically. Therefore portable scripts can rely that `set term
+pop` restores the default terminal on a given platform unless another terminal
+has been pushed explicitly.
+
+##### Set-show/Terminal/Table
+Instead of producing a graph, the `table` terminal prints out the points on
+which a graph would be based, i.e., the results of processing the `plot` or
+`splot` command, in a multicolumn ASCII table of X Y {Z} R values. The character
+R takes on one of three values: "i" if the point is in the active range, "o" if
+it is out-of-range, or "u" if it is undefined. The data format is determined by
+the format of the axis labels (see `set format`), and the columns are separated
+by single spaces.
+
+For those times when you want the numbers, you can display them on the screen or
+save them to a file. This can be useful if you want to generate contours and
+then save them for further use, perhaps for plotting with `plot`; see contour
+for an example. The same method can be used to save interpolated data (see
+samples and dgrid3d)." 
+
+### Set-show/Title
+The `set title` command produces a plot title that is centered at the top of the
+plot. `set title` is a special case of label.
+
+### Set-show/Variables
+The variables command lists all user-defined variables and their values.
+
+### Set-show/Version
+The version command lists the version of gnuplot being run, its last
+modification date, the copyright holders, and email addresses for the FAQ, the
+gnuplot-info mailing list, and reporting bugs-in short, the information listed
+on the screen when the program is invoked interactively.
+
+### Set-show/View
+The view command sets the viewing angle for `splot`s. It controls how the 3-d
+coordinates of the plot are mapped into the 2-d screen space. It provides
+controls for both rotation and scaling of the plotted data, but supports
+orthographic projections only. It supports both 3D projection or orthogonal 2D
+projection into a 2D plot-like map.
+
+The first rotation applied is <rot_x> around the x axis. The second rotation
+applied is <rot_z> around the new z axis.
+
+Command `set view map` is used to represent the drawing as a map. It can be used
+for contour plots, or for color pm3d maps. In the latter, take care that you
+properly use zrange and cbrange for input data point filtering and color range
+scaling, respectively.
+
+<rot_x> is bounded to the [0:180] range with a default of 60 degrees, while
+<rot_z> is bounded to the [0:360] range with a default of 30 degrees. <scale>
+controls the scaling of the entire `splot`, while <scale_z> scales the z axis
+only. Both scales default to 1.0. 
+
+### Set-show/Xlabel
+The xlabel command sets the x axis label. Similar commands set labels on the
+other axes.
+
+### Set-show/Xrange
+The xrange command sets the horizontal range that will be displayed. A similar
+command exists for each of the other axes, as well as for the polar radius r and
+the parametric variables t, u, and v.
+
+Syntax:
+ set xrange { [{{<min>}:{<max>}}] {{no}reverse} {{no}writeback} }
+            | restore
+where <min> and <max> terms are constants, expressions or an asterisk to set
+autoscaling. The `reverse` option reverses the direction of the axis, e.g.,
+`set xrange [0:1] reverse` will produce an axis with 1 on the left and 0 on the
+right. This is identical to the axis produced by `set xrange [1:0]`, of course.
+`reverse` is intended primarily for use with autoscale.
+
+The `writeback` option essentially saves the range found by autoscale in the
+buffers that would be filled by xrange. This is useful if you wish to plot
+several functions together but have the range determined by only some of them.
+The `writeback` operation is performed during the `plot` execution, so it must
+be specified before that command. To restore, the last saved horizontal range
+use `set xrange restore`.
+
+In 2-d, xrange and yrange determine the extent of the axes, trange determines
+the range of the parametric variable in parametric mode or the range of the
+angle in polar mode. Similarly in parametric 3-d, xrange, yrange, and zrange
+govern the axes and urange and vrange govern the parametric variables.
+
+### Set-show/Zero
+The `zero` value is the default threshold for values approaching 0.0.
+`gnuplot` will not plot a point if its imaginary part is greater in magnitude
+than the `zero` threshold. This threshold is also used in various other parts of
+`gnuplot` as a (crude) numerical-error threshold. The default `zero` value is
+1e-8. 
+
+### Set-show/Zeroaxis
+The x axis may be drawn by xzeroaxis and removed by xzeroaxis. Similar commands
+behave similarly for the y, x2, and y2 axes. If no linetype is specified, any
+zero axes selected will be drawn using the axis linetype (linetype 0). zeroaxis
+is equivalent to yzeroaxis. `set nozeroaxis` is equivalent to yzeroaxis.
+
+# Shell
+The shell command spawns an interactive shell. To return to `gnuplot`, type
+exit or the EOF character if using Unix, or exit if using MS-DOS or OS/2.
+ XXXXX: This spawns a system shell that acts as a subshell to gnuplot.
+ XXXXX: This has many of the same problems that the 'help' command does, in
+ XXXXX: that it has subshells that exit with 'exit'... the replicated 'prompt'
+ XXXXX: behavior needs to change and the 'depth' of subshell might need to
+ XXXXX: be remembered.  For example, what will happen in this case:
+      gnuplot> shell
+      $ gnuplot
+
+There are two ways of spawning a shell command: using system command or via `!`.
+The former command takes a string as a parameter and thus it can be used
+anywhere among other gnuplot commands, while the latter syntax requires to be
+the only command on the line. Control will return immediately to `gnuplot` after
+this command is executed. 
+
+# Splot
+`splot` is the command for drawing 3-d plots (actually projections on a 2-d
+surface). Most features are common to the `plot` command; only differences are
+discussed in detail here. Note specifically that the binary and matrix options
+are not available for `plot`, and `plot`'s `axes` option is not available for
+`splot`.
+Syntax:
+ splot {<ranges>}
+       <function> | "<datafile>" {datafile-modifiers}}
+       {<title-spec>} {with <style>}
+       {, {definitions,} <function> ...}
+
+By default `splot` draws the xy plane completely below the plotted data. The
+offset between the lowest ztic and the xy plane can be changed by ticslevel.
+The orientation of a `splot` projection is controlled by view.
+
+The `title` option is the same as in `plot`. The operation of with is also the
+same as in `plot`, except that the plotting styles available to `splot` are
+limited to `lines`, `points`, `linespoints`, `dots`, and `impulses`; the
+error-bar capabilities of `plot` are not available for `splot`.
+
+### Splot/Data-file
+As for `plot`, discrete data contained in a file can be displayed by specifying
+the name of the data file, enclosed in quotes, on the `splot` command line.
+Syntax:
+ splot '<file_name>' {binary | matrix}
+                     {index <index list>}
+                     {every <every list>}
+                     {using <using list>}
+
+The special filenames `""` and `"-"` are permitted, as in `plot`.
+
+In brief, binary and matrix indicate that the data are in a special form, index
+selects which data sets in a multi-data-set file are to be plotted, every
+specifies which datalines (subsets) within a single data set are to be plotted,
+and using determines how the columns within a single record are to be
+interpreted.
+
+The options index and every behave the same way as with `plot`; using does so
+also, except that the using list must provide three entries instead of two.
+
+The `plot` options thru and smooth are not available for `splot`, but cntrparam
+and dgrid3d provide limited smoothing capabilities.
+
+Data file organization is essentially the same as for `plot`, except that each
+point is an (x,y,z) triple. If only a single value is provided, it will be used
+for z, the datablock number will be used for y, and the index of the data point
+in the datablock will be used for x. If two or four values are provided,
+`gnuplot` uses the last value for calculating the color in pm3d plots. Three
+values are interpreted as an (x,y,z) triple. Additional values are generally
+used as errors, which can be used by `fit`.
+
+Single blank records separate datablocks in a `splot` datafile; `splot` treats
+datablocks as the equivalent of function y-isolines. No line will join points
+separated by a blank record. If all datablocks contain the same number of
+points, `gnuplot` will draw cross-isolines between datablocks, connecting
+corresponding points. This is termed "grid data", and is required for drawing a
+surface, for contouring (contour) and hidden-line removal (hidden3d).
+
+# Test
+This command graphically tests or presents terminal and palette capabilities.
+Syntax:
+ test {terminal | palette [rgb|rbg|grb|gbr|brg|bgr]}
+
+# Unset
+Options set using the `set` command may be returned to their default state by
+issuing the corresponding unset command.Options set using the `set` command may
+be returned to their default state by issuing the corresponding unset command.

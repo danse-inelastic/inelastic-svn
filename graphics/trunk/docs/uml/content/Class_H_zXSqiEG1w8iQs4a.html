@@ -1,0 +1,4474 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<META content="----------------------------------------------------------------------
+def GetMondrianData():
+return \
+'\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00 \x00\x00\x00 \x08\x06\x00\
+\x00\x00szz\xf4\x00\x00\x00\x04sBIT\x08\x08\x08\x08|\x08d\x88\x00\x00\x00qID\
+ATX\x85\xed\xd6;\n\x800\x10E\xd1{\xc5\x8d\xb9r\x97\x16\x0b\xad$\x8a\x82:\x16\
+o\xda\x84pB2\x1f\x81Fa\x8c\x9c\x08\x04Z{\xcf\xa72\xbcv\xfa\xc5\x08 \x80r\x80\
+\xfc\xa2\x0e\x1c\xe4\xba\xfaX\x1d\xd0\xde]S\x07\x02\xd8>\xe1wa-`\x9fQ\xe9\
+\x86\x01\x04\x10\x00\\(Dk\x1b-\x04\xdc\x1d\x07\x14\x98;\x0bS\x7f\x7f\xf9\x13\
+\x04\x10@\xf9X\xbe\x00\xc9 \x14K\xc1<={\x00\x00\x00\x00IEND\xaeB`\x82'
+
+def GetMondrianBitmap():
+return wx.BitmapFromImage(GetMondrianImage())
+
+def GetMondrianImage():
+stream = cStringIO.StringIO(GetMondrianData())
+return wx.ImageFromStream(stream)
+
+def GetMondrianIcon():
+icon = wx.EmptyIcon()
+icon.CopyFromBitmap(GetMondrianBitmap())
+return icon
+" name="Description">
+<link href="../content/report.css" type="text/css" rel="stylesheet">
+<title>Class - MainPlotWindow</title>
+</head>
+<body style="margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;">
+<div class="HeaderText">graphics Documentation</div>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td class="HeaderLine1"></td>
+</tr>
+<tr>
+<td class="HeaderLine2"></td>
+</tr>
+<tr>
+<td class="HeaderLine3"></td>
+</tr>
+</table>
+<p></p>
+<p class="PageTitle">Class - MainPlotWindow</p>
+<p></p>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td class="Category">Properties</td>
+</tr>
+<tr>
+<td style="height: 5px"></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td colspan="4" class="TableHeaderLine"></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine1"></td>
+</tr>
+<tr class="TableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td></td><td><span class="TableContent">Active</span></td><td></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td></td><td><span class="TableContent">Business Model</span></td><td></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td></td><td><span class="TableContent">Visibility</span></td><td></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow2">
+<td></td><td><span class="TableContent">Abstract</span></td><td></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td></td><td><span class="TableContent">Leaf</span></td><td></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td></td><td><span class="TableContent">Root</span></td><td></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td></td><td><span class="TableContent">Documentation</span></td><td></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      ----------------------------------------------------------------------
+    </p>
+    <p>
+      def GetMondrianData():
+    </p>
+    <p>
+      return \
+    </p>
+    <p>
+      '\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00 \x00\x00\x00 
+      \x08\x06\x00\
+    </p>
+    <p>
+      \x00\x00szz\xf4\x00\x00\x00\x04sBIT\x08\x08\x08\x08|\x08d\x88\x00\x00\x00qID\
+    </p>
+    <p>
+      ATX\x85\xed\xd6;\n\x800\x10E\xd1{\xc5\x8d\xb9r\x97\x16\x0b\xad$\x8a\x82:\x16\
+    </p>
+    <p>
+      o\xda\x84pB2\x1f\x81Fa\x8c\x9c\x08\x04Z{\xcf\xa72\xbcv\xfa\xc5\x08 
+      \x80r\x80\
+    </p>
+    <p>
+      \xfc\xa2\x0e\x1c\xe4\xba\xfaX\x1d\xd0\xde]S\x07\x02\xd8&gt;\xe1wa-`\x9fQ\xe9\
+    </p>
+    <p>
+      \x86\x01\x04\x10\x00\\(Dk\x1b-\x04\xdc\x1d\x07\x14\x98;\x0bS\x7f\x7f\xf9\x13\
+    </p>
+    <p>
+      \x04\x10@\xf9X\xbe\x00\xc9 \x14K\xc1&lt;={\x00\x00\x00\x00IEND\xaeB`\x82'
+    </p>
+    <p>
+      
+    </p>
+    <p>
+      def GetMondrianBitmap():
+    </p>
+    <p>
+      return wx.BitmapFromImage(GetMondrianImage())
+    </p>
+    <p>
+      
+    </p>
+    <p>
+      def GetMondrianImage():
+    </p>
+    <p>
+      stream = cStringIO.StringIO(GetMondrianData())
+    </p>
+    <p>
+      return wx.ImageFromStream(stream)
+    </p>
+    <p>
+      
+    </p>
+    <p>
+      def GetMondrianIcon():
+    </p>
+    <p>
+      icon = wx.EmptyIcon()
+    </p>
+    <p>
+      icon.CopyFromBitmap(GetMondrianBitmap())
+    </p>
+    <p>
+      return icon
+    </p>
+  </body>
+</html>
+</span></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 1px"></td>
+</tr>
+<tr>
+<td class="TableFooter"></td>
+</tr>
+</table>
+<p></p>
+<p></p>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td class="Category">Operations Overview</td>
+</tr>
+<tr>
+<td style="height: 5px"></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td colspan="6" class="TableHeaderLine"></td>
+</tr>
+<tr>
+<td colspan="6" class="TableHeaderLine1"></td>
+</tr>
+<tr class="TableHeader">
+<td style="width: 10px"></td><td><span class="TableHeaderText">Visibility</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Return Type</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Name</span></td>
+</tr>
+<tr>
+<td colspan="6" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">public</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td><td style="width: 20px"></td><td><a target="" class="ItemLink" href="#3_zXSqiEG1w8iQs5a">__init__</a></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">public</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td><td style="width: 20px"></td><td><a target="" class="ItemLink" href="#SALXSqiEG1w8iQtZa">loadLine</a></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">public</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td><td style="width: 20px"></td><td><a target="" class="ItemLink" href="#yALXSqiEG1w8iQtqa">CreatePlotBrowser</a></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">public</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td><td style="width: 20px"></td><td><a target="" class="ItemLink" href="#KALXSqiEG1w8iQtza">CreateMatplotlib</a></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">public</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td><td style="width: 20px"></td><td><a target="" class="ItemLink" href="#KALXSqiEG1w8iQt8a">CreateGnuplot</a></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">public</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td><td style="width: 20px"></td><td><a target="" class="ItemLink" href="#KALXSqiEG1w8iQuFa">CreateVtk</a></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">public</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td><td style="width: 20px"></td><td><a target="" class="ItemLink" href="#aALXSqiEG1w8iQuOa">CreatePropertyEditor</a></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">public</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td><td style="width: 20px"></td><td><a target="" class="ItemLink" href="#aALXSqiEG1w8iQuXa">OnCreateWorkspaceBrowser</a></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">public</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td><td style="width: 20px"></td><td><a target="" class="ItemLink" href="#6ALXSqiEG1w8iQula">OnCreatePropertyEditor</a></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">public</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td><td style="width: 20px"></td><td><a target="" class="ItemLink" href="#GALXSqiEG1w8iQu0a">OnCreatePlotBrowser</a></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">public</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td><td style="width: 20px"></td><td><a target="" class="ItemLink" href="#mALXSqiEG1w8iQvEa">OnCreateMatplotlib</a></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">public</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td><td style="width: 20px"></td><td><a target="" class="ItemLink" href="#mALXSqiEG1w8iQvVa">OnCreateGnuplot</a></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">public</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td><td style="width: 20px"></td><td><a target="" class="ItemLink" href="#WALXSqiEG1w8iQvna">OnCreateVTK</a></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">public</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td><td style="width: 20px"></td><td><a target="" class="ItemLink" href="#2ALXSqiEG1w8iQv6a">OnCreateSizeReport</a></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">public</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td><td style="width: 20px"></td><td><a target="" class="ItemLink" href="#OALXSqiEG1w8iQwOa">CreateWorkspaceBrowser</a></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">public</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td><td style="width: 20px"></td><td><a target="" class="ItemLink" href="#OALXSqiEG1w8iQwea">CreateSizeReportCtrl</a></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">public</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td><td style="width: 20px"></td><td><a target="" class="ItemLink" href="#.ALXSqiEG1w8iQw4a">OnLoadColumnFile</a></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">public</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td><td style="width: 20px"></td><td><a target="" class="ItemLink" href="#BALXSqiEG1w8iQxPa">extractColumns</a></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">public</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td><td style="width: 20px"></td><td><a target="" class="ItemLink" href="#hALXSqiEG1w8iQxna">OnClose</a></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">public</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td><td style="width: 20px"></td><td><a target="" class="ItemLink" href="#hALXSqiEG1w8iQyAa">OnExit</a></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">public</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td><td style="width: 20px"></td><td><a target="" class="ItemLink" href="#RALXSqiEG1w8iQyaa">OnAbout</a></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">public</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td><td style="width: 20px"></td><td><a target="" class="ItemLink" href="#xALXSqiEG1w8iQy1a">GetDockArt</a></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">public</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td><td style="width: 20px"></td><td><a target="" class="ItemLink" href="#JALXSqiEG1w8iQzMa">DoUpdate</a></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">public</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td><td style="width: 20px"></td><td><a target="" class="ItemLink" href="#pALXSqiEG1w8iQzja">OnEraseBackground</a></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">public</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td><td style="width: 20px"></td><td><a target="" class="ItemLink" href="#ZALXSqiEG1w8iQz_a">OnSize</a></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">public</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td><td style="width: 20px"></td><td><a target="" class="ItemLink" href="#5ALXSqiEG1w8iQ0ca">OnSettings</a></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">public</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td><td style="width: 20px"></td><td><a target="" class="ItemLink" href="#lALXSqiEG1w8iQ06a">OnCreatePerspective</a></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">public</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td><td style="width: 20px"></td><td><a target="" class="ItemLink" href="#NALXSqiEG1w8iQ1Za">OnCopyPerspective</a></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">public</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td><td style="width: 20px"></td><td><a target="" class="ItemLink" href="#tALXSqiEG1w8iQ15a">OnRestorePerspective</a></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">public</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td><td style="width: 20px"></td><td><a target="" class="ItemLink" href="#dALXSqiEG1w8iQ2aa">GetStartPosition</a></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 1px"></td>
+</tr>
+<tr>
+<td class="TableFooter"></td>
+</tr>
+</table>
+<p></p>
+<p></p>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td class="Category">Relationships Summary</td>
+</tr>
+<tr>
+<td style="height: 5px"></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td colspan="6" class="TableHeaderLine"></td>
+</tr>
+<tr>
+<td colspan="6" class="TableHeaderLine1"></td>
+</tr>
+<tr class="TableHeader">
+<td style="width: 10px"></td><td><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Begin</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">End</span></td>
+</tr>
+<tr>
+<td colspan="6" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td width="25%"><span class="TableContent">
+<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Dependency.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Dependency.png');"></div>&nbsp;
+				<a target="" class="ItemLink" href="#LrX3SqiEG1w8iYUza"> : Dependency</a></span></td><td style="width: 20px"></td><td><span class="TableContent">
+<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Class.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Class.png');"></div>&nbsp;
+					<a target="" class="ItemLink" href="Class_H_zXSqiEG1w8iQs4a.html">MainPlotWindow : Class</a></span></td><td style="width: 20px"></td><td><span class="TableContent">
+<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Class.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Class.png');"></div>&nbsp;
+					<a target="" class="ItemLink" href="Class_CrX3SqiEG1w8iYTra.html">Class : Class</a></span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td width="25%"><span class="TableContent">
+<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Association.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Association.png');"></div>&nbsp;
+				<a target="" class="ItemLink" href="#EV5eGqiEG1w8iaHVa">1 : Association</a></span></td><td style="width: 20px"></td><td><span class="TableContent">
+<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Class.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Class.png');"></div>&nbsp;
+					<a target="" class="ItemLink" href="Class_H_zXSqiEG1w8iQs4a.html">MainPlotWindow : Class</a></span></td><td style="width: 20px"></td><td><span class="TableContent">
+<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Class.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Class.png');"></div>&nbsp;
+					<a target="" class="ItemLink" href="Class_x7EoqqiEG1w8iceRa.html">PropertyEditor : Class</a></span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td width="25%"><span class="TableContent">
+<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Association.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Association.png');"></div>&nbsp;
+				<a target="" class="ItemLink" href="#9FPeGqiEG1w8iSLFa">1 : Association</a></span></td><td style="width: 20px"></td><td><span class="TableContent">
+<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Class.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Class.png');"></div>&nbsp;
+					<a target="" class="ItemLink" href="Class_H_zXSqiEG1w8iQs4a.html">MainPlotWindow : Class</a></span></td><td style="width: 20px"></td><td><span class="TableContent">
+<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Class.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Class.png');"></div>&nbsp;
+					<a target="" class="ItemLink" href="Class_VHEoqqiEG1w8icgRa.html">MatplotlibWrap : Class</a></span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td width="25%"><span class="TableContent">
+<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Association.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Association.png');"></div>&nbsp;
+				<a target="" class="ItemLink" href="#K2w.GqiEG1w8iSqma">1 : Association</a></span></td><td style="width: 20px"></td><td><span class="TableContent">
+<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Class.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Class.png');"></div>&nbsp;
+					<a target="" class="ItemLink" href="Class_H_zXSqiEG1w8iQs4a.html">MainPlotWindow : Class</a></span></td><td style="width: 20px"></td><td><span class="TableContent">
+<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Class.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Class.png');"></div>&nbsp;
+					<a target="" class="ItemLink" href="Class_LgkoqqiEG1w8ic6da.html">GnuplotWrap : Class</a></span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td width="25%"><span class="TableContent">
+<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Association.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Association.png');"></div>&nbsp;
+				<a target="" class="ItemLink" href="#yRk.GqiEG1w8iTIXa">1 : Association</a></span></td><td style="width: 20px"></td><td><span class="TableContent">
+<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Class.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Class.png');"></div>&nbsp;
+					<a target="" class="ItemLink" href="Class_H_zXSqiEG1w8iQs4a.html">MainPlotWindow : Class</a></span></td><td style="width: 20px"></td><td><span class="TableContent">
+<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Class.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Class.png');"></div>&nbsp;
+					<a target="" class="ItemLink" href="Class_KHEoqqiEG1w8icfva.html">VtkWrap : Class</a></span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td width="25%"><span class="TableContent">
+<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Association.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Association.png');"></div>&nbsp;
+				<a target="" class="ItemLink" href="#rVM.GqiEG1w8iTONa">1 : Association</a></span></td><td style="width: 20px"></td><td><span class="TableContent">
+<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Class.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Class.png');"></div>&nbsp;
+					<a target="" class="ItemLink" href="Class_H_zXSqiEG1w8iQs4a.html">MainPlotWindow : Class</a></span></td><td style="width: 20px"></td><td><span class="TableContent">
+<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Class.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Class.png');"></div>&nbsp;
+					<a target="" class="ItemLink" href="Class_Y7EoqqiEG1w8icdaa.html">SizeReportCtrl : Class</a></span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td width="25%"><span class="TableContent">
+<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Association.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Association.png');"></div>&nbsp;
+				<a target="" class="ItemLink" href="#6yi.GqiEG1w8iUGea">1 : Association</a></span></td><td style="width: 20px"></td><td><span class="TableContent">
+<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Class.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Class.png');"></div>&nbsp;
+					<a target="" class="ItemLink" href="Class_H_zXSqiEG1w8iQs4a.html">MainPlotWindow : Class</a></span></td><td style="width: 20px"></td><td><span class="TableContent">
+<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Class.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Class.png');"></div>&nbsp;
+					<a target="" class="ItemLink" href="Class_L8koqqiEG1w8idhTa.html">PlotBrowser : Class</a></span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td width="25%"><span class="TableContent">
+<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Association.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Association.png');"></div>&nbsp;
+				<a target="" class="ItemLink" href="#u6K.GqiEG1w8iUeva">1 : Association</a></span></td><td style="width: 20px"></td><td><span class="TableContent">
+<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Class.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Class.png');"></div>&nbsp;
+					<a target="" class="ItemLink" href="Class_H_zXSqiEG1w8iQs4a.html">MainPlotWindow : Class</a></span></td><td style="width: 20px"></td><td><span class="TableContent">
+<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Class.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Class.png');"></div>&nbsp;
+					<a target="" class="ItemLink" href="Class_m8koqqiEG1w8idgYa.html">SettingsPanel : Class</a></span></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 1px"></td>
+</tr>
+<tr>
+<td class="TableFooter"></td>
+</tr>
+</table>
+<p></p>
+<p></p>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td class="Category">Operations Detail</td>
+</tr>
+<tr>
+<td style="height: 5px"></td>
+</tr>
+</table>
+<a name="3_zXSqiEG1w8iQs5a"></a>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 5px"></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td colspan="4" class="TableHeaderLine"></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine1"></td>
+</tr>
+<tr class="TableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td></td><td><span class="TableContent">Parameters</span></td><td></td><td>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr class="SubtableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">parent</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Multiplicity</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Direction</span></td><td style="width: 20px"></td><td><span class="TableContent">inout</span></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr class="SubtableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">id</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Multiplicity</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Direction</span></td><td style="width: 20px"></td><td><span class="TableContent">inout</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Default Value</span></td><td style="width: 20px"></td><td><span class="TableContent">-1</span></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr class="SubtableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">title</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Multiplicity</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Direction</span></td><td style="width: 20px"></td><td><span class="TableContent">inout</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Default Value</span></td><td style="width: 20px"></td><td><span class="TableContent">""</span></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr class="SubtableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">pos</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Multiplicity</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Direction</span></td><td style="width: 20px"></td><td><span class="TableContent">inout</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Default Value</span></td><td style="width: 20px"></td><td><span class="TableContent">wx.DefaultPosition</span></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr class="SubtableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">size</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Multiplicity</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Direction</span></td><td style="width: 20px"></td><td><span class="TableContent">inout</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Default Value</span></td><td style="width: 20px"></td><td><span class="TableContent">wx.DefaultSize</span></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr class="SubtableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">style</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Multiplicity</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Direction</span></td><td style="width: 20px"></td><td><span class="TableContent">inout</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Default Value</span></td><td style="width: 20px"></td><td><span class="TableContent">wx.DEFAULT_FRAME_STYLE|wx.SUNKEN_BORDER|wx.CLIP_CHILDREN</span></td>
+</tr>
+</table>
+</td>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">__init__</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Static</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Leaf</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      currentItem=None
+    </p>
+  </body>
+</html>
+&nbsp;</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visible</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Scope</span></td><td style="width: 20px"></td><td><span class="TableContent">instance</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Query</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Abstract</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 1px"></td>
+</tr>
+<tr>
+<td class="TableFooter"></td>
+</tr>
+</table>
+<p></p>
+<a name="SALXSqiEG1w8iQtZa"></a>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 5px"></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td colspan="4" class="TableHeaderLine"></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine1"></td>
+</tr>
+<tr class="TableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td></td><td><span class="TableContent">Parameters</span></td><td></td><td>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr class="SubtableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">x</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Multiplicity</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Direction</span></td><td style="width: 20px"></td><td><span class="TableContent">inout</span></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr class="SubtableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">y</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Multiplicity</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Direction</span></td><td style="width: 20px"></td><td><span class="TableContent">inout</span></td>
+</tr>
+</table>
+</td>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">loadLine</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Static</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Leaf</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      last minute testing initialization
+    </p>
+    <p>
+      self.loadPlottable()
+    </p>
+    <p>
+      import numpy as nx
+    </p>
+    <p>
+      x = nx.array([1,2,3,4,5,6])
+    </p>
+    <p>
+      y = nx.array([4,5,6,5,4,5])
+    </p>
+    <p>
+      self.loadLine(x,y)
+    </p>
+  </body>
+</html>
+&nbsp;</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visible</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Scope</span></td><td style="width: 20px"></td><td><span class="TableContent">instance</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Query</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Abstract</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 1px"></td>
+</tr>
+<tr>
+<td class="TableFooter"></td>
+</tr>
+</table>
+<p></p>
+<a name="yALXSqiEG1w8iQtqa"></a>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 5px"></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td colspan="4" class="TableHeaderLine"></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine1"></td>
+</tr>
+<tr class="TableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">CreatePlotBrowser</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Static</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Leaf</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      worry abt events happening in the subpanels
+    </p>
+    <p>
+      self.Bind(wx.EVT_MENU, self.OnCreateWorkspaceBrowser, 
+      id=ID_CreateWorkspaceBrowser)
+    </p>
+  </body>
+</html>
+&nbsp;</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Visible</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Scope</span></td><td style="width: 20px"></td><td><span class="TableContent">instance</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Query</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Abstract</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 1px"></td>
+</tr>
+<tr>
+<td class="TableFooter"></td>
+</tr>
+</table>
+<p></p>
+<a name="KALXSqiEG1w8iQtza"></a>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 5px"></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td colspan="4" class="TableHeaderLine"></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine1"></td>
+</tr>
+<tr class="TableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">CreateMatplotlib</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Static</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Leaf</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visible</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Scope</span></td><td style="width: 20px"></td><td><span class="TableContent">instance</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Query</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Abstract</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 1px"></td>
+</tr>
+<tr>
+<td class="TableFooter"></td>
+</tr>
+</table>
+<p></p>
+<a name="KALXSqiEG1w8iQt8a"></a>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 5px"></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td colspan="4" class="TableHeaderLine"></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine1"></td>
+</tr>
+<tr class="TableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">CreateGnuplot</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Static</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Leaf</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visible</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Scope</span></td><td style="width: 20px"></td><td><span class="TableContent">instance</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Query</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Abstract</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 1px"></td>
+</tr>
+<tr>
+<td class="TableFooter"></td>
+</tr>
+</table>
+<p></p>
+<a name="KALXSqiEG1w8iQuFa"></a>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 5px"></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td colspan="4" class="TableHeaderLine"></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine1"></td>
+</tr>
+<tr class="TableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">CreateVtk</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Static</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Leaf</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visible</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Scope</span></td><td style="width: 20px"></td><td><span class="TableContent">instance</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Query</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Abstract</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 1px"></td>
+</tr>
+<tr>
+<td class="TableFooter"></td>
+</tr>
+</table>
+<p></p>
+<a name="aALXSqiEG1w8iQuOa"></a>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 5px"></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td colspan="4" class="TableHeaderLine"></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine1"></td>
+</tr>
+<tr class="TableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">CreatePropertyEditor</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Static</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Leaf</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visible</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Scope</span></td><td style="width: 20px"></td><td><span class="TableContent">instance</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Query</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Abstract</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 1px"></td>
+</tr>
+<tr>
+<td class="TableFooter"></td>
+</tr>
+</table>
+<p></p>
+<a name="aALXSqiEG1w8iQuXa"></a>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 5px"></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td colspan="4" class="TableHeaderLine"></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine1"></td>
+</tr>
+<tr class="TableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td></td><td><span class="TableContent">Parameters</span></td><td></td><td>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr class="SubtableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">event</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Multiplicity</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Direction</span></td><td style="width: 20px"></td><td><span class="TableContent">inout</span></td>
+</tr>
+</table>
+</td>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">OnCreateWorkspaceBrowser</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Static</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Leaf</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      eval(editorChoices[self.focusedPlotItem])
+    </p>
+  </body>
+</html>
+&nbsp;</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visible</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Scope</span></td><td style="width: 20px"></td><td><span class="TableContent">instance</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Query</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Abstract</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 1px"></td>
+</tr>
+<tr>
+<td class="TableFooter"></td>
+</tr>
+</table>
+<p></p>
+<a name="6ALXSqiEG1w8iQula"></a>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 5px"></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td colspan="4" class="TableHeaderLine"></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine1"></td>
+</tr>
+<tr class="TableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td></td><td><span class="TableContent">Parameters</span></td><td></td><td>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr class="SubtableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">event</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Multiplicity</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Direction</span></td><td style="width: 20px"></td><td><span class="TableContent">inout</span></td>
+</tr>
+</table>
+</td>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">OnCreatePropertyEditor</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Static</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Leaf</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Visible</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Scope</span></td><td style="width: 20px"></td><td><span class="TableContent">instance</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Query</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Abstract</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 1px"></td>
+</tr>
+<tr>
+<td class="TableFooter"></td>
+</tr>
+</table>
+<p></p>
+<a name="GALXSqiEG1w8iQu0a"></a>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 5px"></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td colspan="4" class="TableHeaderLine"></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine1"></td>
+</tr>
+<tr class="TableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td></td><td><span class="TableContent">Parameters</span></td><td></td><td>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr class="SubtableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">event</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Multiplicity</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Direction</span></td><td style="width: 20px"></td><td><span class="TableContent">inout</span></td>
+</tr>
+</table>
+</td>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">OnCreatePlotBrowser</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Static</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Leaf</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Visible</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Scope</span></td><td style="width: 20px"></td><td><span class="TableContent">instance</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Query</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Abstract</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 1px"></td>
+</tr>
+<tr>
+<td class="TableFooter"></td>
+</tr>
+</table>
+<p></p>
+<a name="mALXSqiEG1w8iQvEa"></a>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 5px"></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td colspan="4" class="TableHeaderLine"></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine1"></td>
+</tr>
+<tr class="TableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td></td><td><span class="TableContent">Parameters</span></td><td></td><td>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr class="SubtableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">event</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Multiplicity</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Direction</span></td><td style="width: 20px"></td><td><span class="TableContent">inout</span></td>
+</tr>
+</table>
+</td>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">OnCreateMatplotlib</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Static</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Leaf</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Visible</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Scope</span></td><td style="width: 20px"></td><td><span class="TableContent">instance</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Query</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Abstract</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 1px"></td>
+</tr>
+<tr>
+<td class="TableFooter"></td>
+</tr>
+</table>
+<p></p>
+<a name="mALXSqiEG1w8iQvVa"></a>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 5px"></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td colspan="4" class="TableHeaderLine"></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine1"></td>
+</tr>
+<tr class="TableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td></td><td><span class="TableContent">Parameters</span></td><td></td><td>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr class="SubtableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">event</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Multiplicity</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Direction</span></td><td style="width: 20px"></td><td><span class="TableContent">inout</span></td>
+</tr>
+</table>
+</td>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">OnCreateGnuplot</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Static</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Leaf</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Visible</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Scope</span></td><td style="width: 20px"></td><td><span class="TableContent">instance</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Query</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Abstract</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 1px"></td>
+</tr>
+<tr>
+<td class="TableFooter"></td>
+</tr>
+</table>
+<p></p>
+<a name="WALXSqiEG1w8iQvna"></a>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 5px"></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td colspan="4" class="TableHeaderLine"></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine1"></td>
+</tr>
+<tr class="TableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td></td><td><span class="TableContent">Parameters</span></td><td></td><td>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr class="SubtableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">event</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Multiplicity</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Direction</span></td><td style="width: 20px"></td><td><span class="TableContent">inout</span></td>
+</tr>
+</table>
+</td>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">OnCreateVTK</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Static</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Leaf</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Visible</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Scope</span></td><td style="width: 20px"></td><td><span class="TableContent">instance</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Query</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Abstract</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 1px"></td>
+</tr>
+<tr>
+<td class="TableFooter"></td>
+</tr>
+</table>
+<p></p>
+<a name="2ALXSqiEG1w8iQv6a"></a>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 5px"></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td colspan="4" class="TableHeaderLine"></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine1"></td>
+</tr>
+<tr class="TableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td></td><td><span class="TableContent">Parameters</span></td><td></td><td>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr class="SubtableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">event</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Multiplicity</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Direction</span></td><td style="width: 20px"></td><td><span class="TableContent">inout</span></td>
+</tr>
+</table>
+</td>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">OnCreateSizeReport</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Static</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Leaf</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Visible</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Scope</span></td><td style="width: 20px"></td><td><span class="TableContent">instance</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Query</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Abstract</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 1px"></td>
+</tr>
+<tr>
+<td class="TableFooter"></td>
+</tr>
+</table>
+<p></p>
+<a name="OALXSqiEG1w8iQwOa"></a>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 5px"></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td colspan="4" class="TableHeaderLine"></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine1"></td>
+</tr>
+<tr class="TableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">CreateWorkspaceBrowser</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Static</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Leaf</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      def OnChangeContentPane(self, event):
+    </p>
+    <p>
+      self._mgr.GetPane(&quot;matplotlib_content&quot;).Show(event.GetId() == 
+      ID_MatplotlibContent)
+    </p>
+    <p>
+      self._mgr.GetPane(&quot;tree_content&quot;).Show(event.GetId() == 
+      ID_WorkspaceBrowserContent)
+    </p>
+    <p>
+      self._mgr.GetPane(&quot;sizereport_content&quot;).Show(event.GetId() == 
+      ID_SizeReportContent)
+    </p>
+    <p>
+      self._mgr.GetPane(&quot;propertyeditor_content&quot;).Show(event.GetId() == 
+      ID_PropertyEditorContent)
+    </p>
+    <p>
+      self._mgr.GetPane(&quot;plotbrowser_content&quot;).Show(event.GetId() == 
+      ID_PlotBrowserContent)
+    </p>
+    <p>
+      self._mgr.Update()
+    </p>
+  </body>
+</html>
+&nbsp;</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Visible</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Scope</span></td><td style="width: 20px"></td><td><span class="TableContent">instance</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Query</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Abstract</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 1px"></td>
+</tr>
+<tr>
+<td class="TableFooter"></td>
+</tr>
+</table>
+<p></p>
+<a name="OALXSqiEG1w8iQwea"></a>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 5px"></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td colspan="4" class="TableHeaderLine"></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine1"></td>
+</tr>
+<tr class="TableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td></td><td><span class="TableContent">Parameters</span></td><td></td><td>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr class="SubtableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">width</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Multiplicity</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Direction</span></td><td style="width: 20px"></td><td><span class="TableContent">inout</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Default Value</span></td><td style="width: 20px"></td><td><span class="TableContent">80</span></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr class="SubtableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">height</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Multiplicity</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Direction</span></td><td style="width: 20px"></td><td><span class="TableContent">inout</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Default Value</span></td><td style="width: 20px"></td><td><span class="TableContent">80</span></td>
+</tr>
+</table>
+</td>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">CreateSizeReportCtrl</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Static</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Leaf</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Visible</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Scope</span></td><td style="width: 20px"></td><td><span class="TableContent">instance</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Query</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Abstract</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 1px"></td>
+</tr>
+<tr>
+<td class="TableFooter"></td>
+</tr>
+</table>
+<p></p>
+<a name=".ALXSqiEG1w8iQw4a"></a>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 5px"></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td colspan="4" class="TableHeaderLine"></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine1"></td>
+</tr>
+<tr class="TableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td></td><td><span class="TableContent">Parameters</span></td><td></td><td>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr class="SubtableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">event</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Multiplicity</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Direction</span></td><td style="width: 20px"></td><td><span class="TableContent">inout</span></td>
+</tr>
+</table>
+</td>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">OnLoadColumnFile</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Static</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Leaf</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Visible</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Scope</span></td><td style="width: 20px"></td><td><span class="TableContent">instance</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Query</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Abstract</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 1px"></td>
+</tr>
+<tr>
+<td class="TableFooter"></td>
+</tr>
+</table>
+<p></p>
+<a name="BALXSqiEG1w8iQxPa"></a>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 5px"></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td colspan="4" class="TableHeaderLine"></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine1"></td>
+</tr>
+<tr class="TableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td></td><td><span class="TableContent">Parameters</span></td><td></td><td>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr class="SubtableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">filename</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Multiplicity</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Direction</span></td><td style="width: 20px"></td><td><span class="TableContent">inout</span></td>
+</tr>
+</table>
+</td>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">extractColumns</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Static</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Leaf</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Visible</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Scope</span></td><td style="width: 20px"></td><td><span class="TableContent">instance</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Query</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Abstract</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 1px"></td>
+</tr>
+<tr>
+<td class="TableFooter"></td>
+</tr>
+</table>
+<p></p>
+<a name="hALXSqiEG1w8iQxna"></a>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 5px"></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td colspan="4" class="TableHeaderLine"></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine1"></td>
+</tr>
+<tr class="TableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td></td><td><span class="TableContent">Parameters</span></td><td></td><td>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr class="SubtableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">event</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Multiplicity</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Direction</span></td><td style="width: 20px"></td><td><span class="TableContent">inout</span></td>
+</tr>
+</table>
+</td>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">OnClose</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Static</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Leaf</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      more stock-type controls -----------------------------------------------
+    </p>
+  </body>
+</html>
+&nbsp;</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visible</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Scope</span></td><td style="width: 20px"></td><td><span class="TableContent">instance</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Query</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Abstract</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 1px"></td>
+</tr>
+<tr>
+<td class="TableFooter"></td>
+</tr>
+</table>
+<p></p>
+<a name="hALXSqiEG1w8iQyAa"></a>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 5px"></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td colspan="4" class="TableHeaderLine"></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine1"></td>
+</tr>
+<tr class="TableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td></td><td><span class="TableContent">Parameters</span></td><td></td><td>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr class="SubtableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">event</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Multiplicity</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Direction</span></td><td style="width: 20px"></td><td><span class="TableContent">inout</span></td>
+</tr>
+</table>
+</td>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">OnExit</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Static</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Leaf</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Visible</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Scope</span></td><td style="width: 20px"></td><td><span class="TableContent">instance</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Query</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Abstract</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 1px"></td>
+</tr>
+<tr>
+<td class="TableFooter"></td>
+</tr>
+</table>
+<p></p>
+<a name="RALXSqiEG1w8iQyaa"></a>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 5px"></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td colspan="4" class="TableHeaderLine"></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine1"></td>
+</tr>
+<tr class="TableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td></td><td><span class="TableContent">Parameters</span></td><td></td><td>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr class="SubtableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">event</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Multiplicity</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Direction</span></td><td style="width: 20px"></td><td><span class="TableContent">inout</span></td>
+</tr>
+</table>
+</td>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">OnAbout</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Static</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Leaf</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Visible</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Scope</span></td><td style="width: 20px"></td><td><span class="TableContent">instance</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Query</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Abstract</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 1px"></td>
+</tr>
+<tr>
+<td class="TableFooter"></td>
+</tr>
+</table>
+<p></p>
+<a name="xALXSqiEG1w8iQy1a"></a>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 5px"></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td colspan="4" class="TableHeaderLine"></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine1"></td>
+</tr>
+<tr class="TableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">GetDockArt</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Static</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Leaf</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visible</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Scope</span></td><td style="width: 20px"></td><td><span class="TableContent">instance</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Query</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Abstract</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 1px"></td>
+</tr>
+<tr>
+<td class="TableFooter"></td>
+</tr>
+</table>
+<p></p>
+<a name="JALXSqiEG1w8iQzMa"></a>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 5px"></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td colspan="4" class="TableHeaderLine"></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine1"></td>
+</tr>
+<tr class="TableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">DoUpdate</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Static</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Leaf</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visible</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Scope</span></td><td style="width: 20px"></td><td><span class="TableContent">instance</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Query</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Abstract</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 1px"></td>
+</tr>
+<tr>
+<td class="TableFooter"></td>
+</tr>
+</table>
+<p></p>
+<a name="pALXSqiEG1w8iQzja"></a>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 5px"></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td colspan="4" class="TableHeaderLine"></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine1"></td>
+</tr>
+<tr class="TableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td></td><td><span class="TableContent">Parameters</span></td><td></td><td>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr class="SubtableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">event</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Multiplicity</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Direction</span></td><td style="width: 20px"></td><td><span class="TableContent">inout</span></td>
+</tr>
+</table>
+</td>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">OnEraseBackground</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Static</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Leaf</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Visible</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Scope</span></td><td style="width: 20px"></td><td><span class="TableContent">instance</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Query</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Abstract</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 1px"></td>
+</tr>
+<tr>
+<td class="TableFooter"></td>
+</tr>
+</table>
+<p></p>
+<a name="ZALXSqiEG1w8iQz_a"></a>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 5px"></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td colspan="4" class="TableHeaderLine"></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine1"></td>
+</tr>
+<tr class="TableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td></td><td><span class="TableContent">Parameters</span></td><td></td><td>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr class="SubtableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">event</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Multiplicity</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Direction</span></td><td style="width: 20px"></td><td><span class="TableContent">inout</span></td>
+</tr>
+</table>
+</td>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">OnSize</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Static</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Leaf</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Visible</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Scope</span></td><td style="width: 20px"></td><td><span class="TableContent">instance</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Query</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Abstract</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 1px"></td>
+</tr>
+<tr>
+<td class="TableFooter"></td>
+</tr>
+</table>
+<p></p>
+<a name="5ALXSqiEG1w8iQ0ca"></a>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 5px"></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td colspan="4" class="TableHeaderLine"></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine1"></td>
+</tr>
+<tr class="TableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td></td><td><span class="TableContent">Parameters</span></td><td></td><td>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr class="SubtableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">event</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Multiplicity</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Direction</span></td><td style="width: 20px"></td><td><span class="TableContent">inout</span></td>
+</tr>
+</table>
+</td>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">OnSettings</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Static</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Leaf</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Visible</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Scope</span></td><td style="width: 20px"></td><td><span class="TableContent">instance</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Query</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Abstract</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 1px"></td>
+</tr>
+<tr>
+<td class="TableFooter"></td>
+</tr>
+</table>
+<p></p>
+<a name="lALXSqiEG1w8iQ06a"></a>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 5px"></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td colspan="4" class="TableHeaderLine"></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine1"></td>
+</tr>
+<tr class="TableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td></td><td><span class="TableContent">Parameters</span></td><td></td><td>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr class="SubtableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">event</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Multiplicity</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Direction</span></td><td style="width: 20px"></td><td><span class="TableContent">inout</span></td>
+</tr>
+</table>
+</td>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">OnCreatePerspective</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Static</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Leaf</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Visible</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Scope</span></td><td style="width: 20px"></td><td><span class="TableContent">instance</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Query</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Abstract</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 1px"></td>
+</tr>
+<tr>
+<td class="TableFooter"></td>
+</tr>
+</table>
+<p></p>
+<a name="NALXSqiEG1w8iQ1Za"></a>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 5px"></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td colspan="4" class="TableHeaderLine"></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine1"></td>
+</tr>
+<tr class="TableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td></td><td><span class="TableContent">Parameters</span></td><td></td><td>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr class="SubtableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">event</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Multiplicity</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Direction</span></td><td style="width: 20px"></td><td><span class="TableContent">inout</span></td>
+</tr>
+</table>
+</td>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">OnCopyPerspective</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Static</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Leaf</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Visible</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Scope</span></td><td style="width: 20px"></td><td><span class="TableContent">instance</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Query</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Abstract</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 1px"></td>
+</tr>
+<tr>
+<td class="TableFooter"></td>
+</tr>
+</table>
+<p></p>
+<a name="tALXSqiEG1w8iQ15a"></a>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 5px"></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td colspan="4" class="TableHeaderLine"></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine1"></td>
+</tr>
+<tr class="TableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td></td><td><span class="TableContent">Parameters</span></td><td></td><td>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr class="SubtableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">event</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Multiplicity</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Direction</span></td><td style="width: 20px"></td><td><span class="TableContent">inout</span></td>
+</tr>
+</table>
+</td>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">OnRestorePerspective</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Static</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Leaf</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Visible</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Scope</span></td><td style="width: 20px"></td><td><span class="TableContent">instance</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Query</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Abstract</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 1px"></td>
+</tr>
+<tr>
+<td class="TableFooter"></td>
+</tr>
+</table>
+<p></p>
+<a name="dALXSqiEG1w8iQ2aa"></a>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 5px"></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td colspan="4" class="TableHeaderLine"></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine1"></td>
+</tr>
+<tr class="TableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">GetStartPosition</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Static</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Leaf</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visible</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Return Type</span></td><td style="width: 20px"></td><td><span class="TableContent">&nbsp;
+								
+									
+									</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">public</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Scope</span></td><td style="width: 20px"></td><td><span class="TableContent">instance</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Query</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Abstract</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 1px"></td>
+</tr>
+<tr>
+<td class="TableFooter"></td>
+</tr>
+</table>
+<p></p>
+<p></p>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td class="Category">Relationships Detail</td>
+</tr>
+<tr>
+<td style="height: 5px"></td>
+</tr>
+</table>
+<a name="EV5eGqiEG1w8iaHVa"></a>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 5px"></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td colspan="4" class="TableHeaderLine"></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine1"></td>
+</tr>
+<tr class="TableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">1</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Type</span></td><td style="width: 20px"></td><td><span class="TableContent">Association</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">From</span></td><td style="width: 20px"></td><td><span class="TableContent">
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr class="SubtableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Role</span></td><td style="width: 20px"></td><td><span class="TableContent"></span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Element</span></td><td style="width: 20px"></td><td>
+<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Class.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Class.png');"></div>&nbsp;
+												<a class="ItemLink" target="" href="Class_H_zXSqiEG1w8iQs4a.html">MainPlotWindow : Class</a></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Multiplicity</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Navigable</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+</table>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">To</span></td><td style="width: 20px"></td><td><span class="TableContent">
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr class="SubtableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Role</span></td><td style="width: 20px"></td><td><span class="TableContent"></span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Element</span></td><td style="width: 20px"></td><td>
+<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Class.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Class.png');"></div>&nbsp;
+												<a class="ItemLink" target="" href="Class_x7EoqqiEG1w8iceRa.html">PropertyEditor : Class</a></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Multiplicity</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Navigable</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+</table>
+</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Abstract</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Leaf</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Derived</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 1px"></td>
+</tr>
+<tr>
+<td class="TableFooter"></td>
+</tr>
+</table>
+<p></p>
+<a name="9FPeGqiEG1w8iSLFa"></a>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 5px"></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td colspan="4" class="TableHeaderLine"></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine1"></td>
+</tr>
+<tr class="TableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">1</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Type</span></td><td style="width: 20px"></td><td><span class="TableContent">Association</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">From</span></td><td style="width: 20px"></td><td><span class="TableContent">
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr class="SubtableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Role</span></td><td style="width: 20px"></td><td><span class="TableContent"></span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Element</span></td><td style="width: 20px"></td><td>
+<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Class.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Class.png');"></div>&nbsp;
+												<a class="ItemLink" target="" href="Class_H_zXSqiEG1w8iQs4a.html">MainPlotWindow : Class</a></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Multiplicity</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Navigable</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+</table>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">To</span></td><td style="width: 20px"></td><td><span class="TableContent">
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr class="SubtableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Role</span></td><td style="width: 20px"></td><td><span class="TableContent"></span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Element</span></td><td style="width: 20px"></td><td>
+<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Class.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Class.png');"></div>&nbsp;
+												<a class="ItemLink" target="" href="Class_VHEoqqiEG1w8icgRa.html">MatplotlibWrap : Class</a></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Multiplicity</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Navigable</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+</table>
+</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Abstract</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Leaf</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Derived</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 1px"></td>
+</tr>
+<tr>
+<td class="TableFooter"></td>
+</tr>
+</table>
+<p></p>
+<a name="K2w.GqiEG1w8iSqma"></a>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 5px"></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td colspan="4" class="TableHeaderLine"></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine1"></td>
+</tr>
+<tr class="TableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">1</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Type</span></td><td style="width: 20px"></td><td><span class="TableContent">Association</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">From</span></td><td style="width: 20px"></td><td><span class="TableContent">
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr class="SubtableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Role</span></td><td style="width: 20px"></td><td><span class="TableContent"></span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Element</span></td><td style="width: 20px"></td><td>
+<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Class.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Class.png');"></div>&nbsp;
+												<a class="ItemLink" target="" href="Class_H_zXSqiEG1w8iQs4a.html">MainPlotWindow : Class</a></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Multiplicity</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Navigable</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+</table>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">To</span></td><td style="width: 20px"></td><td><span class="TableContent">
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr class="SubtableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Role</span></td><td style="width: 20px"></td><td><span class="TableContent"></span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Element</span></td><td style="width: 20px"></td><td>
+<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Class.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Class.png');"></div>&nbsp;
+												<a class="ItemLink" target="" href="Class_LgkoqqiEG1w8ic6da.html">GnuplotWrap : Class</a></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Multiplicity</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Navigable</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+</table>
+</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Abstract</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Leaf</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Derived</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 1px"></td>
+</tr>
+<tr>
+<td class="TableFooter"></td>
+</tr>
+</table>
+<p></p>
+<a name="yRk.GqiEG1w8iTIXa"></a>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 5px"></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td colspan="4" class="TableHeaderLine"></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine1"></td>
+</tr>
+<tr class="TableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">1</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Type</span></td><td style="width: 20px"></td><td><span class="TableContent">Association</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">From</span></td><td style="width: 20px"></td><td><span class="TableContent">
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr class="SubtableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Role</span></td><td style="width: 20px"></td><td><span class="TableContent"></span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Element</span></td><td style="width: 20px"></td><td>
+<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Class.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Class.png');"></div>&nbsp;
+												<a class="ItemLink" target="" href="Class_H_zXSqiEG1w8iQs4a.html">MainPlotWindow : Class</a></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Multiplicity</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Navigable</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+</table>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">To</span></td><td style="width: 20px"></td><td><span class="TableContent">
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr class="SubtableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Role</span></td><td style="width: 20px"></td><td><span class="TableContent"></span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Element</span></td><td style="width: 20px"></td><td>
+<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Class.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Class.png');"></div>&nbsp;
+												<a class="ItemLink" target="" href="Class_KHEoqqiEG1w8icfva.html">VtkWrap : Class</a></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Multiplicity</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Navigable</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+</table>
+</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Abstract</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Leaf</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Derived</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 1px"></td>
+</tr>
+<tr>
+<td class="TableFooter"></td>
+</tr>
+</table>
+<p></p>
+<a name="rVM.GqiEG1w8iTONa"></a>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 5px"></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td colspan="4" class="TableHeaderLine"></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine1"></td>
+</tr>
+<tr class="TableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">1</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Type</span></td><td style="width: 20px"></td><td><span class="TableContent">Association</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">From</span></td><td style="width: 20px"></td><td><span class="TableContent">
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr class="SubtableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Role</span></td><td style="width: 20px"></td><td><span class="TableContent"></span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Element</span></td><td style="width: 20px"></td><td>
+<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Class.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Class.png');"></div>&nbsp;
+												<a class="ItemLink" target="" href="Class_H_zXSqiEG1w8iQs4a.html">MainPlotWindow : Class</a></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Multiplicity</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Navigable</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+</table>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">To</span></td><td style="width: 20px"></td><td><span class="TableContent">
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr class="SubtableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Role</span></td><td style="width: 20px"></td><td><span class="TableContent"></span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Element</span></td><td style="width: 20px"></td><td>
+<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Class.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Class.png');"></div>&nbsp;
+												<a class="ItemLink" target="" href="Class_Y7EoqqiEG1w8icdaa.html">SizeReportCtrl : Class</a></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Multiplicity</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Navigable</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+</table>
+</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Abstract</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Leaf</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Derived</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 1px"></td>
+</tr>
+<tr>
+<td class="TableFooter"></td>
+</tr>
+</table>
+<p></p>
+<a name="6yi.GqiEG1w8iUGea"></a>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 5px"></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td colspan="4" class="TableHeaderLine"></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine1"></td>
+</tr>
+<tr class="TableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">1</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Type</span></td><td style="width: 20px"></td><td><span class="TableContent">Association</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">From</span></td><td style="width: 20px"></td><td><span class="TableContent">
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr class="SubtableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Role</span></td><td style="width: 20px"></td><td><span class="TableContent"></span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Element</span></td><td style="width: 20px"></td><td>
+<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Class.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Class.png');"></div>&nbsp;
+												<a class="ItemLink" target="" href="Class_H_zXSqiEG1w8iQs4a.html">MainPlotWindow : Class</a></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Multiplicity</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Navigable</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+</table>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">To</span></td><td style="width: 20px"></td><td><span class="TableContent">
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr class="SubtableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Role</span></td><td style="width: 20px"></td><td><span class="TableContent"></span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Element</span></td><td style="width: 20px"></td><td>
+<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Class.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Class.png');"></div>&nbsp;
+												<a class="ItemLink" target="" href="Class_L8koqqiEG1w8idhTa.html">PlotBrowser : Class</a></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Multiplicity</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Navigable</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+</table>
+</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Abstract</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Leaf</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Derived</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 1px"></td>
+</tr>
+<tr>
+<td class="TableFooter"></td>
+</tr>
+</table>
+<p></p>
+<a name="u6K.GqiEG1w8iUeva"></a>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 5px"></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td colspan="4" class="TableHeaderLine"></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine1"></td>
+</tr>
+<tr class="TableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Name</span></td><td style="width: 20px"></td><td><span class="TableContent">1</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Type</span></td><td style="width: 20px"></td><td><span class="TableContent">Association</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">From</span></td><td style="width: 20px"></td><td><span class="TableContent">
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr class="SubtableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Role</span></td><td style="width: 20px"></td><td><span class="TableContent"></span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Element</span></td><td style="width: 20px"></td><td>
+<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Class.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Class.png');"></div>&nbsp;
+												<a class="ItemLink" target="" href="Class_H_zXSqiEG1w8iQs4a.html">MainPlotWindow : Class</a></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Multiplicity</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Navigable</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+</table>
+</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">To</span></td><td style="width: 20px"></td><td><span class="TableContent">
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr class="SubtableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Role</span></td><td style="width: 20px"></td><td><span class="TableContent"></span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Element</span></td><td style="width: 20px"></td><td>
+<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Class.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Class.png');"></div>&nbsp;
+												<a class="ItemLink" target="" href="Class_m8koqqiEG1w8idgYa.html">SettingsPanel : Class</a></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Multiplicity</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Navigable</span></td><td style="width: 20px"></td><td><span class="TableContent">true</span></td>
+</tr>
+</table>
+</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Abstract</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Leaf</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Derived</span></td><td style="width: 20px"></td><td><span class="TableContent">false</span></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 1px"></td>
+</tr>
+<tr>
+<td class="TableFooter"></td>
+</tr>
+</table>
+<p></p>
+<a name="LrX3SqiEG1w8iYUza"></a>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 5px"></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td colspan="4" class="TableHeaderLine"></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine1"></td>
+</tr>
+<tr class="TableHeader">
+<td style="width: 10px"></td><td width="25%"><span class="TableHeaderText">Name</span></td><td style="width: 20px"></td><td><span class="TableHeaderText">Value</span></td>
+</tr>
+<tr>
+<td colspan="4" class="TableHeaderLine2"></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Type</span></td><td style="width: 20px"></td><td><span class="TableContent">Dependency</span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">From</span></td><td style="width: 20px"></td><td><span class="TableContent">
+<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Class.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Class.png');"></div>&nbsp;
+											<a class="ItemLink" target="" href="Class_H_zXSqiEG1w8iQs4a.html">MainPlotWindow : Class</a></span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">To</span></td><td style="width: 20px"></td><td><span class="TableContent">
+<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Class.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Class.png');"></div>&nbsp;
+											<a class="ItemLink" target="" href="Class_CrX3SqiEG1w8iYTra.html">Class : Class</a></span></td>
+</tr>
+<tr class="TableRow2">
+<td style="width: 10px"></td><td><span class="TableContent">Visibility</span></td><td style="width: 20px"></td><td><span class="TableContent">Unspecified</span></td>
+</tr>
+<tr class="TableRow1">
+<td style="width: 10px"></td><td><span class="TableContent">Documentation</span></td><td style="width: 20px"></td><td><span class="TableContent"><html>
+  <head>
+    
+  </head>
+  <body>
+  </body>
+</html>
+</span></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td style="height: 1px"></td>
+</tr>
+<tr>
+<td class="TableFooter"></td>
+</tr>
+</table>
+<p></p>
+<div style="height: 20px"></div>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td class="FooterLine"></td>
+</tr>
+</table>
+<div class="HeaderText">graphics Documentation</div>
+</body>
+</html>

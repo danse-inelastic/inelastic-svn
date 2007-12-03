@@ -1,0 +1,355 @@
+Application:
+  Python bindings to gnuplot as a pyre component.
+  WBS-4.2.1.1 Standard Graphical/Plotting Environments (Gnuplot)
+
+Purpose:
+  Provide the plotting capabilities of gnuplot from within python.
+
+Functionallity:
+  Must be able to send generic commands for gnuplot to execute.
+  Must be able to mimic an interactive gnuplot session.
+  Must be able to transfer select python objects to gnuplot.
+  Must be able to retrieve select gnuplot objects and transfer them to python.
+  Must be able to query gnuplot for existing variables.
+  May be able to delete select gnuplot objects from python.
+  May be able to use gnuplot's builtin help.
+  May be able to send mouse input to and extract mouse input from gnuplot. 
+  May be able to access gnuplot's plot function directly from python.
+  May be able to access gnuplot's splot function directly from python.
+  
+Acceptance criteria:
+  Can open and hold a handle to a gnuplot instance.
+  Can terminate a gnuplot instance.
+  Meets required functionallity (i.e. 'must') listed above.
+  Optionally, provides additional functionallity (i.e. 'may') listed above.
+  Can transfer real/int from python to gnuplot.
+  Can pass string representation of function from python to an actual function
+   in gnuplot.
+  Can pass python list/array from python to gnuplot (NOTE: currently gnuplot
+   does not support lists/arrays, however this data can be piped in and created
+   as instances of gnuplot file_objects).
+  Optionally, can pass python strings to gnuplot as a string (NOTE: currently
+   gnuplot does not include a string_object with any permanence).
+  Can extract gnuplot real/int to python.
+  Can extract gnuplot 'array/list' file_objects to python as arrays/lists.
+  Can evaluate gnuplot function, given string representation of the function
+   in python, and return the value to python.
+  Optionally, can extract some form of gnuplot string to python as a string.
+  Can produce appropriate operations for the above-mentioned types in gnuplot
+   (i.e. addition of lists, multiplication of functions, etc), or at least
+   give the appearance of the operations taking place in gnuplot, and the
+   results being retained in gnuplot.
+
+Summary of basic methodology and procedures:
+  Python bindings to gnuplot currently exist in the the third-party
+  package 'gnuplot-py'.  However, gnuplot-py does not meet all of
+  the functionallity requirements.  Gnuplot-py provides a mechanism
+  for issuing generic gnuplot commands as python strings; however,
+  does not allow for transfer of functions, variables, or arrays
+  between gnuplot and python.  Gnuplot-py also does not allow for
+  a similar piping of mouse input to and from gnuplot.  The functionality
+  to transfer the above-mentioned object types between gnuplot and
+  python will be provided, and the ability to perform standard operations
+  on those object types will be provided.  Thus, for example, one could
+  create an list in python, pass it to gnuplot, alter the elements of
+  the array within a gnuplot session (addition, multiplication, substitution,
+  etc), and then pass the resulting array back into python.  This way,
+  the functionality of gnuplot is extended to have some of the nice
+  capabilities of python's manipulation of object types.  This functionality
+  will be actually implemented in gnuplot using existing gnuplot types
+  when available, and implemented in python (by pulling the terms on
+  the RHS back into python, performing the operation, then pushing the
+  result back into gnuplot to yield the LHS).  Mouse input will also
+  be added, where the python bindings will replicate the behavior of
+  gnuplot's mouse handling capabilities.  In general, the philosophy
+  for the python bindings is to not disturb the normal operation of
+  gnuplot as much as possible.  That means, do the minimal amount in
+  python to generically reproduce the behavior of gnuplot.  A good
+  example is the bindings for the interactive gnuplot shell -- the
+  minimal information needed to handle all gnuplot commands (as converted
+  from python strings) is understanding the rules for how gnuplot treats
+  line continuation ('\'), comments ('#'), strings (enclosed in single
+  or double quotes), operating system commands (both 'system' and '!'),
+  the gnuplot help shell, and any other special commands like the
+  gnuplot standard input filename ("-").  Once those rules are understood
+  by the bindings, any generic command sequence from gnuplot can be
+  reproduced in python and sent to gnuplot with the expected results.
+  Error handling should also be done in this manner as well (i.e.
+  let gnuplot handle the errors, unless it is absolutely necessary to
+  do so in python).  The bindings will also need to know the reserved
+  words and variable naming rules for gnuplot.  Convienience functions
+  for the most heavily used command sequences (i.e. plotting) will
+  be provided.  In the case that there are a large quantity of options
+  that are available for these convienence functions, the most generic
+  approach to handling all cases is to have them passed as a string.
+  Thus, for plotting, one might have this example:
+   >>> gp.plot('sin(x)','with linespoints')
+   becomes
+   gnuplot> plot sin(x) with linespoints
+  The gnuplot 'replot' command will be used liberally if needed.
+ 
+Description of components and functions to be added or modified:
+  class gnuplot:   #gnuplot-py with interactive prompt added
+    Methods:
+      prompt() --> start interactive session
+      eval(command) --> execute a gnuplot command
+      put(name,val) --> put variable into interactive session
+      get(name) --> get variable from interactive session
+      who([name]) --> return the existing gnuplot variables
+      delete(name) --> destroy selected gnuplot variables
+      restart() --> restart a gnuplot window
+      exit() --> exit a gnuplot session
+    Private methods:
+     _validate(name) --> raise NameError if is invalid python name
+     _putlocal(name,value) --> add a variable to local store
+     _getlocal(name) --> return variable value from local store
+     _poplocal(name) --> delete variable from local store, return value
+     _wholist() --> get list of strings containing gnuplot variables
+     _exists(name) --> True if is a variable in gnuplot
+    State variables:
+     self.session --> handle to gnuplot instance
+     self.whos --> dictionary of gnuplot variables
+     self.reserved --> list of reserved words in gnuplot
+     self.isverbose --> bool for verbosity of gnuplot (used for debugging)
+     self.ispersistent --> bool for persistence of gnuplot plots
+    Notes:
+      gnuplot, gnuplot-py, and Numeric must be installed
+
+  def __init__(self,isverbose=1,ispersistent=0):
+      # open and hold handle to gnuplot instance
+      # INPUT: isverbose = bool if using gnuplot debug mode
+      # INPUT: ispersistent = bool if using gnuplot persist mode
+      # RETURNS: None
+      # ERRORS: ?
+      from Gnuplot import Gnuplot as gnu_plot
+      self.session = gnu_plot(debug=isverbose,persist=ispersistent)
+      # self.session maintains handle to gnuplot.
+      # is* allows customization of gnuplot session behavior.
+      # create self.whos and self.reserved
+
+  def _validate(self,name):
+      '''_validate(name) --> raise NameError if is invalid python name'''
+      # validate that the given name string will be valid python
+      # INPUT: name = string of variable name
+      # RETURNS: None
+      # ERRORS: NameError if name is invalid python name
+      # a valid python name begins with a letter or underscore,
+      # and can include only alphanumeric symbols and the underscore.
+      # python does not allow redefinition of reserved words.
+      # is validation in gnuplot necessary, or will gnuplot handle the errors?
+      # a valid gnuplot name begins with a letter, and can be composed
+      # of alphanumeric symbols, a hyphen, and the dollar sign. 
+
+  ### interactions with local (i.e. python) storage in python dict
+  def _putlocal(self,name,value):
+      '''_putlocal(name,value) --> add a variable to local store'''
+      # if name is valid python, associate the name and value 
+      # in local storage dictionary
+      # INPUT: name = string of variable name
+      # INPUT: value = variable value
+      # RETURNS: None
+      # ERRORS: NameError if name is invalid python name
+
+  def _getlocal(self,name,skip=True):
+      '''_getlocal(name) --> return value from local store'''
+      # if name in local storage dictionary, return it's value
+      # INPUT: name = string of variable name
+      # INPUT: skip = bool to throw error or not when name not in store
+      # RETURNS: value = variable value
+      # ERRORS: NameError if name is invalid python name, and skip=False
+
+  def _poplocal(self,name):
+      '''_poplocal(name) --> delete variable from local store, return value'''
+      # if 'name' exists in whos, pop the return value
+      # INPUT: name = string of variable name
+      # RETURNS: value = variable value, if it exists
+      # ERRORS: ?
+      return self.whos.pop(name,None)
+
+  def _wholist(self):
+      '''_wholist() --> get list of strings containing gnuplot variables'''
+      # query local dictionary for names of gnuplot variables
+      # INPUT: None
+      # RETURNS: wholist = list of strings of gnuplot variable names
+      # ERRORS: ?
+      return self.whos.keys()
+
+  def _exists(self,name):
+      '''_exists(name) --> True if is a variable in gnuplot'''
+      # query local dictionary for existance of a named gnuplot variable
+      # INPUT: name = string of variable name
+      # RETURNS: exists = bool for existance of named variable in local store
+      # ERRORS: ?
+
+  ### public methods
+  def info(self):
+      # print usage instructions for gnuplot class
+      # INPUT: None
+      # RETURNS: None
+      # ERRORS: ?
+      print self.__doc__
+      return
+
+  def exit(self):
+      '''exit() --> exit a gnuplot session'''
+      # send the exit command to gnuplot
+      # if in the outer gnuplot shell (i.e. not in a subshell), kill the session
+      # INPUT: None
+      # RETURNS: None
+      # ERRORS: ?
+
+  def restart(self,clobber=False):
+      '''restart() --> destroy all gnuplot windows'''
+      # destroy all gnuplot windows
+      # if not clobber: maintain all gnuplot variables
+      # else: delete gnuplot variables
+      # INPUT: clobber = bool to destroy gnuplot variables
+      # RETURNS: None
+      # ERRORS: ?
+      # preserve variables in local storage
+      # send exit(), then __init__()
+      # if not clobber, restore gnuplot variables
+ 
+  def clear(self):
+      # clear the current gnuplot window
+      # INPUT: None
+      # RETURNS: None
+      # ERRORS: ?
+ 
+  def unset(self,name=None):
+      # reset all (or a single) gnuplot setting to default
+      # if name: then send unset command
+      # else: send the reset command
+      # INPUT: name = string of variable name
+      # RETURNS: None
+      # ERRORS: ?
+
+  def help(self,topic):
+      # get help from the gnuplot interactive help shell
+      # INPUT: topic = string of help topic
+      # RETURNS: None
+      # ERRORS: ?
+
+  def shell(self,command=None):
+      # interact with the operating system
+      # if command: send a command to the operating system
+      # else: start an interactive os shell
+      # INPUT: command = os command string
+      # RETURNS: None
+      # ERRORS: ?
+
+  def put(self,name,val):
+      '''put(name,val) --> add variable to gnuplot session'''
+      # if name refers to a list element, replace the element with val
+      # if name refers to a function, store the val string as a function
+      # if name refers to a real or int, store val as a variable
+      # if name refers to a list or array, store val as a data array
+      # add named variable to local store
+      # INPUT: name = string of variable name
+      # INPUT: val = variable value (or string representation for a function)
+      # RETURNS: None
+      # ERRORS: NameError if name is invalid python name
+
+  def get(self,name):
+      '''get(name) --> value; get value from gnuplot session'''
+      # if name is an expression, evaluate the expression & return the result
+      # if name refers to a list element, return the list element
+      # if name refers to a function, evaluate the function & return the result
+      # if name refers to a real or int, return the variable
+      # if name refers to a list or array, return the data array
+      # INPUT: name = string of variable name
+      # RETURNS: val = variable value
+      # ERRORS: NameError if name is invalid python name
+
+  def who(self,name=None):
+      '''who([name]) --> return the existing gnuplot variables'''
+      # query for gnuplot variables
+      # if name: retrieve dict with named variable value
+      # else: retrieve dict of all named variables
+      # INPUT: name = string of variable name
+      # RETURNS: whos = dict of requested variable names & values
+      # ERRORS: ? NameError if name is invalid python name ?
+
+  def delete(self,name):
+      '''delete(name) --> destroy selected gnuplot variables'''
+      # if name contains ',': then iterate over named variables
+      # else: delete the named variable
+      # INPUT: name = string of variable name(s)
+      # RETURNS: None
+      # ERRORS: ? NameError if name is invalid python name ?
+
+  def eval(self,com):
+      '''eval(command) --> execute a gnuplot command'''
+      # INPUT: com = command string
+      # RETURNS: None
+      # ERRORS: CommandError if 'unknown' command
+      # ERRORS: Errors generated by gnuplot
+      # ... <logic> ...
+      # if com is 'exit': do nothing
+      # if com is python command: interpret with python
+      ### if com is python 'del': delete the named variables
+      ### if com is python '=' & not refer to list item: create named variable
+      ### if com is python '=' & refers to list item: update list ?
+      # if com is gnuplot-py command: restructure as gnuplot-py syntax
+      # if com is gnuplot command: evaluate with gnuplot
+      ### if com contains line continuation: next eval command continues
+      ### if com contains comment: ignore portion of com following '#'
+      ### if com contains help call: ???
+      ### if com contains os call: ???
+      ### if com contains quote: ignore contained multiline and comment chars
+      ### if com uses special filename '-': ???
+      # ...
+      # update local store
+
+  def prompt(self):
+      '''an interactive gnuplot session'''
+      # INPUT: None
+      # RETURNS: None
+      # ERRORS: CommandError if 'unknown' command
+      # ERRORS: Errors generated by gnuplot
+      # ... <logic> ...
+      # print existing gnuplot variables
+      # if com is 'exit': exit interactive session
+      # if com is python command: interpret with python
+      ### if com is python 'del': delete the named variables
+      ### if com is python '=' & not refer to list item: create named variable
+      ### if com is python '=' & refers to list item: update list ?
+      # if com is gnuplot-py command: restructure as gnuplot-py syntax
+      # if com is gnuplot command: evaluate with gnuplot
+      ### if com contains line continuation: ...
+      ### if com contains comment: ...
+      ### if com contains help call: ...
+      ### if com contains os call: ...
+      ### if com contains quotes: ...
+      ### if com uses special filename '-': ...
+      # ...
+      # update local store
+
+Critical use cases and behavior tests:
+  Restart a gnuplot session, don't clobber variables.
+  Create a formatted colormap with variables passed directly from python.
+  Create a formatted lineplot with variables first 'put' into gnuplot.
+  Inspect all variables within gnuplot.
+  Fetch a variable from gnuplot to python. (variable = int, list)
+  Put a variable from python into gnuplot. (variable = int, list)
+  Fetch a list element from gnuplot to python.
+  Modify an existing gnuplot list element from python. 
+  Pass two lists into gnuplot, then add them by element, and return result.
+  Fetch mouse-clicked coordinates from a gnuplot plot and pass to python.
+  Mimic a gnuplot interactive session, but with python capabilities.
+  Multiline and comments work as expected within 'eval' and 'prompt'.
+  Subshell behavior for help and system shells behave as expected.
+
+Criteria for validation of results:
+  Retains gnuplot behavior...
+  Error handling done by gnuplot as much as possible... 
+  ...
+
+Requirements and constraints:
+  Python, gnuplot, gnuplot-py, and numeric need to be installed.
+  Mouse interaction requires specific terminal types as defined in gnuplot.
+
+* Additional notes:
+  Pyre layer generated by constructing a component that inherits this class.
+  User must know gnuplot syntax to use this program effectively.
+  An API must be layered on top of this code to abstract the commands.
