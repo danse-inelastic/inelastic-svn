@@ -7,3 +7,5 @@
 
 2) Should the BvK system file format be stored here?  Should it be modified
      somehow first?
+     
+3) Maybe put all of this in a python package --Brandon
