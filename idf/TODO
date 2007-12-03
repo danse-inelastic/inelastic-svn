@@ -1,21 +1,9 @@
+0) S(Q,E) has units, and thus has an `absolute value'.  Experimentally, we 
+     almost always determine the values of S(Q,E) only relative to some other
+     value.  (As in, S(Q,E) for Nickel at 10 K as compared to S(Q,E) for 
+     Nickel at 1275 K.)  Should this be annotated somewhere?  Somehow?
 
-0) Move UNITS into README ?
+1) We need a unit cell file format.
 
-1) What the hell should units be for "eigenvalues".
-
-1) A possible variant on the files (Qs, for example):
-
-  1 char[256] --> "Qs"
-  1 char[1024] --> Comment.  Units are really useful comments.
-  1 int32 --> version 1 
-  1 int32 --> Dimension D
-  1 int32 --> Number of Qs, N_q
-  double[D*N_q] --> The Qs go here.
-
-The idea about putting the unit in the comments is that 
-  i)  you can allow all decisions about units and coordinates to happen at the 
-      user interface for a particular application.
-  ii) If (1) is true, then the point of storing units is that one user can 
-      produce data and another can use it.  Since you can't force people to be 
-      sane, this may be a waste of time.  Comments allow people who happen to 
-      be sane to pass along useful information.
+2) Should the BvK system file format be stored here?  Should it be modified
+     somehow first?
