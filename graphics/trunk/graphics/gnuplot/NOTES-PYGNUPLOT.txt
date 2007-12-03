@@ -1,0 +1,173 @@
+NOTES on gnuplot interactions with python
+==========================================
+Functionality:
+1) open and hold a handle to a gnuplot instance
+>>> gp.open([debug,persist,...])
+
+2) terminate a gnuplot instance
+>>> gp.close()  [-OR-  gp.exit()  -OR-  gp.quit() ???]
+
+3) execute a generic gnuplot command
+>>> gp.eval(command_string)   -OR-   gp(command_string)
+* where 'command_string' can be:
+ - a standard gnuplot command (including system and help commands)
+ - a gnuplot-py command 
+ - a python command
+ - a mix of the above 
+* portions of command_string that are comments ['#'] are ignored
+* continuation (multline) character ['\'] allows next 'eval' to continue command
+* comment and multiline characters are ignored inside strings
+* command_string can refer to a gnuplot_object, specifically:
+ - a gnuplot variable (real or int) created in gnuplot or python
+ - a python string converted to a gnuplot function
+   gnuplot doesn't have user-defined string variables, but understands strings
+   as filenames and titles and so on
+ - a python array transferred to gnuplot as a gnuplot file object
+ - a gnuplot function or file object
+ - a gnuplot string
+ - ??? (see #5 below)
+
+4) mimic an interactive gnuplot session
+>>> gp.prompt(...)   -OR-   gp.interact(...)
+* here '...' might be environment settings for the session controlling
+  verbosity or printing to stdout
+* prompt should be:
+ - 'gnuplot> ' for gnuplot shell
+ - '$ '  -OR-  '> ' for system shell
+ - 'Help topic: ', 'Subtopic of XXXXX: ', or 'Press return for more: ' for help
+ - 'input data ('e' ends) > ' for standard input data shell
+* XXXXX = the selected help topic in the help shell
+* empty return '\n' exits a help shell
+* if help shell input is inappropriate, repeat prompt
+* 'exit' exits the system shell
+* 'exit'  -OR-  'quit' exit the gnuplot shell
+* 'ex', 'exi', 'q', 'qu', & 'qui' also exit the gnuplot shell
+* 'e' exits data shell
+* prompt has readline/history support
+* requirements listed in 'eval' also apply to 'prompt'
+
+5) (user-defined) gnuplot types
+* real or int --> variable_name = constant_expression
+ - real/int in python converted to real/int in gnuplot
+ - real/int math operations supported in gnuplot
+* function --> function_name(dummy1,dummy2,...) = expression
+ - function string (i.e. "sin(x)") in python converted to gnuplot function
+ - function math operations supported in gnuplot
+* data file --> filename_string
+ - array/list not supported in gnuplot
+ - python array/list converted to gnuplot file object (tmp_file or piped?)
+ - array/list math operations must be done in python, & spoofed in gnuplot 
+* string --> string_text
+ - string supported in gnuplot, but not as a named variable
+ - support string from python ???
+* undefined --> 1/0
+ - python None converted to guplot undefined ???
+* valid gnuplot names begin with a letter, but may contain digits, "$", and "-"
+
+6) alternate input methods
+* mouse input --> "set mouse"
+ - can be used to modify plots and return mouse-clicked values to gnuplot
+ - requires two-way pipe between pyton & gnuplot (i.e. popen2)
+* hotkeys --> bind <key> "<commands>"
+ - likely not to be supported from python ???
+
+7) query gnuplot for existing variables
+>>> gp.who([name])
+* name can be a named gnuplot object
+* if name not given, return all existing gnuplot variables in dictionary
+
+8) transfer named object from python to gnuplot
+>>> gp.put(name,value)
+* all transferred objects henceforth available from gnuplot command
+* conversions as stated in #5
+
+9) transfer named object from gnuplot to python
+>>> value = gp.get(name)
+* conversions as stated in #5
+
+10) delete existing named object from gnuplot
+>>> gp.delete(name)
+* return defined gnuplot named object to undefined
+* is this a current gnuplot capability ???
+
+11) ask for instructions on how to use python bindings
+>>> gp.info()    [was gp.help()]
+
+12) ask gnuplot for help (i.e. use gnuplot help shell)
+>>> gp.help(topic)
+* help as described in #4 above
+* translates to: gnuplot> help <topic>
+
+13) plot python data directly in gnuplot
+>>> gp.plot(function_string,[format])
+* translates to: gnuplot> plot <function_string> <format>
+* format are plot modifiers like "with impulses" and "title 'data'"
+>>> gp.plot(data,[format])
+* translates to: gnuplot> plot "<data file_object>" <format>
+* data or function not created in gnuplot
+
+14) splot python data directly in gnuplot
+>>> gp.splot(function_string,[format])
+* translates to: gnuplot> splot <function_string> <format>
+* format are splot modifiers like "with impulses" and "title 'data'"
+>>> gp.splot(data,[format])
+* translates to: gnuplot> splot "<data file_object>" <format>
+* data or function not created in gnuplot
+
+15) other 'shortcuts' similar to #13 & #14
+* see "NOTES-GNUPLOT.txt' for syntax:
+ - clear --> gp.clear()
+ - reset --> gp.reset()
+ - shell --> gp.shell()  (see 'system shell' in #4)
+ - call and load ?
+ - pause and print ?  (seems superfluous)
+ - replot ?  (a problem if data/function not transferred to gnuplot)
+ - unset ?
+* other gnuplot functions to be accessed only directly with 'eval' (#3)
+
+
+Description of Existing and Future Capabilities
+===============================================
+# instantiate the Gnuplot class
+>>> from gnuprompt import gnuplot
+>>> gp = gnuplot()
+gnuplot> set terminal x11
+
+* self.session = Gnuplot(debug=1) set to echo gnuplot commands
+- self.session = Gnuplot(debug=0) turns off gnuplot> command echo 
+- self.session = Gnuplot(persist=1) spawns new plots instead of replacing
+
+
+# get help
+>>> gp.help()
+* gp.help() --> show my help
+* gp('help') --> prints gnuplot's help, but only first 'page'
+  FIXME: could use gp.ghelp() = gp('help')
+  FIXME: gnuplot-py can't handle gnuplot's pager correctly because
+  XXXXX: two-way communication doesn't exist?  Besides fitting on the
+  XXXXX: page correctly, the command 'buffer' shouldn't be flushed.
+  FIXME: When queried for a 'help topic', typing the name of the help
+  XXXXX: topic should spawn a further help sub-session on that topic.
+  XXXXX: An empty carriage return at a 'help topic' prompt exits that
+  XXXXX: help sub-session.
+  FIXME: When pager prompts for 'press return', then return should
+  XXXXX: continue the printout of the help screen.
+  FIXME: The 'help' session works NEARLY correctly in a gp.interact()
+  XXXXX: session.  The only problems are... 'gnuplot>>>' overwrites the
+  XXXXX: first few characters of gnuplot's 'press return' and 'help
+  XXXXX: topic' line... If exiting gp.interact() with Ctrl-d, and the
+  XXXXX: 'help session' was not exited in gnuplot, then the next gp.interact()
+  XXXXX: session will start in that (?) existing session (thus 'help' in
+  XXXXX: the case of the 1st subsession is 'help help')
+
+# availability of mouse interaction
+>>> gp('set mouse')
+>>> gp.plot("sin(x)")
+>>> gp('unset mouse')
+>>> gp.plot("sin(x)")
+
+* gp('set mouse') ---> turn on mouse interaction
+  FIXME: set/unset mouse doesn't work, unless .gnuplot exists,
+  XXXXX: and contains "set mouse"
+  XXXXX: This does work in GnuplotBiDir.py however...
+

@@ -1,0 +1,51 @@
+Help on module Gnuplot.utils in Gnuplot:
+
+NAME
+    Gnuplot.utils - utils.py -- Utility functions used by Gnuplot.
+
+FILE
+    /usr/local/lib/python2.3/site-packages/Gnuplot/utils.py
+
+DESCRIPTION
+    This module contains utility functions used by Gnuplot.py which aren't
+    particularly gnuplot-related.
+
+FUNCTIONS
+    float_array(m)
+        Return the argument as a Numeric array of type at least 'Float32'.
+        
+        Leave 'Float64' unchanged, but upcast all other types to
+        'Float32'.  Allow also for the possibility that the argument is a
+        python native type that can be converted to a Numeric array using
+        'Numeric.asarray()', but in that case don't worry about
+        downcasting to single-precision float.
+    
+    write_array(f, set, item_sep=' ', nest_prefix='', nest_suffix='\n', nest_sep='')
+        Write an array of arbitrary dimension to a file.
+        
+            A general recursive array writer.  The last four parameters allow
+            a great deal of freedom in choosing the output format of the
+            array.  The defaults for those parameters give output that is
+            gnuplot-readable.  But using '(",", "{", "}", ",
+        ")' would output
+            an array in a format that Mathematica could read.  'item_sep'
+            should not contain '%' (or if it does, it should be escaped to
+            '%%') since it is put into a format string.
+        
+            The default 2-d file organization::
+        
+                set[0,0] set[0,1] ...
+                set[1,0] set[1,1] ...
+        
+            The 3-d format::
+        
+                set[0,0,0] set[0,0,1] ...
+                set[0,1,0] set[0,1,1] ...
+        
+                set[1,0,0] set[1,0,1] ...
+                set[1,1,0] set[1,1,1] ...
+
+DATA
+    __cvs_version__ = '$Revision: 2.4 $'
+
+

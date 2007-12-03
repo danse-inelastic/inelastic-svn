@@ -1,0 +1,10 @@
+To make a .bas file for a rutile cluster:
+
+1) type
+python cluster.py          or
+./cluster.py               if you have the env utility installed in /bin
+
+2) answer the questions (input what part of the rutile unit cell you'd like as the center of the cluster and the radius)
+
+3) output is written to cluster.bas
+

@@ -1,0 +1,15 @@
+#import wx
+
+from pylab import setp, getp
+import matplotlib
+from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigureCanvas
+from matplotlib.figure import Figure
+import matplotlib.numerix as nx
+matplotlib.use("WX")
+matplotlib.interactive(True)
+figure = Figure()
+axes   = figure.add_subplot(111)
+#canvas = FigureCanvas(None,-1,figure)
+
+p,=axes.plot([1,2,3])
+setp(p,'color','red')

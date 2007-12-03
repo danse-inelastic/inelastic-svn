@@ -1,0 +1,4 @@
+from sample.InputFile import InputFile
+
+def atomicStructure():
+	return InputFile('xyzFile')
