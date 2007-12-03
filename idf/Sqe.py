@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import numpy
+from numpy import array
 from struct import pack,unpack,calcsize
 
 version=1
