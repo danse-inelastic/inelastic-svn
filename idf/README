@@ -1,0 +1,13 @@
+
+Agreed upon binary file formats for passing data between various codes. 
+Units are briefly discussed in the file UNITS.
+
+The formats are given by:
+   A.vX
+where A is the type of file and X is the integer version number.
+
+Currently, we have:
+
+Filename      | Contents
+--------------+---------------------------------------------------------------
+Qs.v1         | Lists of Q-Vectors, for BvK, Simulations, etc.
