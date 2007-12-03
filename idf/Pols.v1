@@ -1,13 +1,15 @@
-
 1 char[256] --> "Pols"
 1 int32 --> version 1 
 1 int32 --> nonzero == `unnormalized',  0 == normalized to 1
 1 int32 --> Dimension D
 1 int32 --> Number of Basis vectors, N_b
 1 int32 --> Number of Qs, N_q
-double[2*D*N_b*D*N_b*N_q] --> The polarization vectors go here. 
-           v(  0,  0) --> Re(x) Im(x) Re(y) Im(y) Re(z) Im(z) ...
-           v(  0,  1) --> Re(x) Im(x) Re(y) Im(y) Re(z) Im(z) ...
-           ...
-           v(N_q,N_b) --> Re(x) Im(x) Re(y) Im(y) Re(z) Im(z) ...
+double[2*N_q*N_b*N_b*D*D] --> The polarization vectors go here. 
+   v(   0,   0,   0, 0) --> Re(x0) Im(x0) Re(x1) Im(x1) ... Re(xD) Im(xD)
+   v(   0,   0,   0, 1) --> Re(x0) Im(x0) Re(x1) Im(x1) ... Re(xD) Im(xD)
+   ...
+   v(   0,   0,   0, D) --> Re(x0) Im(x0) Re(x1) Im(x1) ... Re(xD) Im(xD)
+   v(   0,   0, N_b, 0) --> Re(x0) Im(x0) Re(x1) Im(x1) ... Re(xD) Im(xD)
+   ...
+   v( N_q, N_b, N_b, D) --> Re(x0) Im(x0) Re(x1) Im(x1) ... Re(xD) Im(xD)
 
