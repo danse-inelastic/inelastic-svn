@@ -1,10 +1,10 @@
-
-1 char[256] --> "Q"
+1 char[64] --> "Q"
 1 int32 --> version 1 
+1 char[1024] --> comment
 1 int32 --> nonzero == units, 0 == fractional.
 1 int32 --> Dimension D
 1 int32 --> Number of Q, N_q
-double[D*N_q] --> The Q go here.
+double[N_q*D] --> The Q go here.
 
 Qs units should be m^-1 and they should be coordinates with respect to a 
 cartesian frame.

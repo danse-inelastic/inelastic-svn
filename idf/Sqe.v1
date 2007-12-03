@@ -1,6 +1,6 @@
-1 char[256] --> "Sqe"
+1 char[64] --> "Sqe"
 1 int32 --> version 1 
-1 int32 --> 1 == unnormalized, 0 == normalized to one
+1 char[1024] --> comment
 1 int32 --> Number of E, N_e
 1 int32 --> Number of Q, N_q
 double[N_e*N_q] --> The values of S(Q,E) go here.
