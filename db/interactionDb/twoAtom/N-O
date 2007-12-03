@@ -1,0 +1,6 @@
+{'lennardGulpEx10': {'cutoff': 40.0,#Ang
+                      'A': 34106.919000,
+                      'B': 33.977000,
+                      'note': 'from Gulp examples (#10)',
+                      'potentialType':'lennardJonesABGulp'}           
+}

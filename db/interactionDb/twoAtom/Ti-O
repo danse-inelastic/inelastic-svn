@@ -1,0 +1,6 @@
+{'buckinghamEx23': {'A': 754.200,
+					  'rho': 0.3879,
+					  'C': 0.0,
+					  'cutoff': 10.0,
+                      'note': 'from Gulp example23; A is in eV, rho is in Ang, C is in ev*Ang^6, cutoff is in Ang',
+                      'potentialType':'buckinghamGulp'}}

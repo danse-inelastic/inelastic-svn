@@ -1,0 +1,7 @@
+{'buckinghamGoddard93': {'A': 1059.13,
+					  'rho': 0.281934,
+					  'C': 17.417
+					  'cutoff': 12.0,
+                      'note': 'from PRB 48, 13959; A is in eV, rho is in Ang, C is in ev*Ang^6, cutoff is in Ang',
+                      'potentialType':'buckinghamGulp'}
+}

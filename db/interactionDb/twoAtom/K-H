@@ -1,0 +1,5 @@
+{'lennardJonesMmtk': {'cutoff': 12.0,
+                      'A': 17026.9,
+                      'note': 'A is in eV*Ang^12, B is in eV*Ang^6, cutoff is in Ang',
+                      'B': 20.543,
+                      'potentialType':'lennardJonesABGulp'}}

@@ -1,0 +1,5 @@
+{'threeBodyGulpEx10': {'cutoff': [1.400,  1.600,  2.600],
+                      'k': 3.252000,
+                      'note': 'from example10 in gulp example collection',
+                      'theta0': 120.000000,
+                      'potentialType':'threeBodyGulp'}}

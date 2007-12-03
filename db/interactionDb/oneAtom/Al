@@ -1,0 +1,4 @@
+{'springEx1': {'k2': 20.53,
+               'note': 'from Gulp example1; k2 in eV/Ang^2',
+               'potentialType':'springGulp'}
+}

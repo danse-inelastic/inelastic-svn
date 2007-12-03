@@ -1,0 +1,5 @@
+{'threeBodyCosineGoddard93': {'cutoff': [1.6, 1.6, 3.0]
+                      'k': 25.226,
+                      'note': 'from PRB 48, 13959; ',
+                      'theta0': 120.0,
+                      'potentialType':'threeBodyGulp'}}
