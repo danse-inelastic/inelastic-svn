@@ -1,0 +1,96 @@
+# Olivier Delaire - June 2007
+
+__doc__ = """Converters for UnitCell."""
+
+from UnitCell import *
+from Atom import *
+
+def listOfAtom2UnitCell(loa):
+    """Utility to convert a ListOfAtom instance to a UnitCell instance."""
+    import ASE.ListOfAtoms
+    import ASE.Atom
+
+    symbols = [x.symbol for x in loa]
+    cartpos = [x.position for x in loa]
+
+    cellvectors = loa.cell
+    uc = UnitCell(cellvectors)
+    fracpos = [uc.cartesianToFractional(x) for x in cartpos]
+
+    for n in range(symbols):
+        atom = Atom(symbol=symbols[n])
+        uc.addAtom(atom, fracpos[n], '')
+
+    return uc
+
+
+def unitCell2ListOfAtom(uc):
+    """Utility to convert a UnitCell instance to a ASE ListOfAtom instance."""
+    import ASE.ListOfAtoms
+    import ASE.Atom
+
+    loa = ASE.ListOfAtoms([],periodic=True) 
+    loa.SetUnitCell(uc._cellvectors, fix=True)
+    for site in uc:
+        aseatom = ASE.Atom(site.getAtom().getSymbol(), site.getPosition().tolist())
+        loa.append(aseatom)
+        
+    return loa
+
+def p4vaspStruct2UnitCell(struct):
+    """Utility to build a UnitCell instance from a  P4VASP structure.
+    The atom types are not known from the POSCAR only (need POTCAR),
+    but they are known if the Structure isntance is built from parsing
+    the vasp.xml file properly, eg:
+    from p4vasp.SystemPM import *
+    from p4vasp.Structure import Structure
+    run=XMLSystemPM('vasprun.xml')
+    struct=run.FINAL_STRUCTURE
+    """ 
+    try:
+        #from p4vasp.SystemPM import *
+        from vasp.parsing.Structure import Structure
+        #import p4vasp.matrix as p4mat
+    except ImportError:
+        print "P4Vasp could not be imported in Python."
+
+    uc = UnitCell()
+    cellvecs = [v.data for v in struct.basis]
+    uc.setCellVectors(cellvecs)
+
+    atomindex = 0
+    for v in struct.positions:
+        vaspatomstring = struct.getRecord(atomindex)['element']
+        atomstring = vaspatomstring.split('_')[0]
+        atom = Atom(atomstring)
+        site = Site(position=v.data, atom=atom)
+        uc.addSite(site, siteId='')
+        atomindex += 1
+    return uc
+
+
+def unitCell2P4vaspStruct(uc):
+    """Create a P4VASP Structure instance from a UnitCell instance.
+    The atom types and the number of atoms of each type need to be
+    filled in from the UnitCell."""
+    try:
+        #from p4vasp.SystemPM import *
+        from vasp.parsing.Structure import Structure
+        #import p4vasp.matrix as p4mat
+    except ImportError:
+        print "P4Vasp could not be imported in Python."
+
+    struct = Structure()
+    struct.basis = [p4mat.Vector(v.tolist()) for v in uc.getCellVectors()]
+    struct.positions = [p4mat.Vector(v.tolist()) for v in uc.getPositions()]
+
+    # !!! this is incomplete:
+    # The atom types and the number of atoms of each type
+    # need to be filled in from the UnitCell
+
+    return struct
+    
+
+
+
+    
