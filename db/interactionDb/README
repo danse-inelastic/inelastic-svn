@@ -1,0 +1,4 @@
+#This is a quick sub for a database
+# the first key is a primary key
+# and its value is a dictionary of key
+# value pairs that can easily be input into a database someday.

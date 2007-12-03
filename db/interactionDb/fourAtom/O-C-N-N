@@ -1,0 +1,7 @@
+{'torsionGulpEx10': {'cutoff':[1.60, 1.60, 3.00, 0.00],
+					  'isign':'-',
+                      'k':0.434000,
+                      'n':2,
+                      'note':'from gulp example 10',
+                      'potentialType':'torsionGulp'}
+}

@@ -1,0 +1,17 @@
+{'lennardJonesGoddard93': {'cutoff': 12.0,
+                      'epsilon': 27634.5,
+                      'note': 'from PRB 48, 13959; cutoff in Ang, epsilon in eV, sigma in Ang',
+                      'sigma': 18.2118,
+                      'potentialType':'lennardJonesSigmaEpsilonGulp'},
+ 'morseGoddard93': {'cutoff': 2.0,
+                   'D': 5.76688,
+                   'note': 'from PRB 48, 13959; cutoff in Ang, D in eV, a in 1/Ang, r0 in Ang',
+                   'a': 1.64523,
+                   'r0': 1.4114,
+                   'potentialType':'morseGulp'},
+ 'lennardGulpEx10': {'cutoff': 40.0,
+                      'A': 128737.614000,
+                      'B': 57.488000,
+                      'note': 'from Gulp examples (#10); cutoff in Ang',
+                      'potentialType':'lennardJonesABGulp'}                
+}

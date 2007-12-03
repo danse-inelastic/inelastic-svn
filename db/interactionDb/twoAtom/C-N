@@ -1,0 +1,13 @@
+{'morseGulpEx10': {'cutoff': 1.6,#Ang
+                      'D': 4.206000,#eV
+                      'note': 'from Gulp examples (#10)',
+                      'a': 2.000000,#Ang^-1
+                      'r0': 1.32000,#Ang
+                      'potentialType':'morseGulp'},
+ 'lennardGulpEx10': {'cutoff': 40.0,#Ang
+                      'A': 112494.667000,
+                      'B': 55.387000,
+                      'note': 'from Gulp examples (#10)',
+                      'potentialType':'lennardJonesABGulp'},                        
+}
+

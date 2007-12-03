@@ -1,0 +1,6 @@
+{'lennardJonesMmtk': {'cutoff': 1.4999999999999998,
+                      'epsilon': 0.99773650363592514,
+                      'note': 'from MMTK database',
+                      'sigma': 0.33999999999999997,
+                      'potentialType':'lennardJonesSigmaEpsilon'}
+}

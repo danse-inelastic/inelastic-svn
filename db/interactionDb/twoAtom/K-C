@@ -1,0 +1,5 @@
+{'lennardJonesGoddard93': {'cutoff': 12.0,
+                      'A': 37573.2,
+                      'note': 'A is in eV*Ang^12, B is in eV*Ang^6, cutoff is in Ang; from PRB 48, 13959',
+                      'B': 21.297,
+                      'potentialType':'lennardJonesABGulp'}}
