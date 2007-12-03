@@ -1,9 +1,8 @@
 1 char[256] --> "Eigs"
 1 int32 --> version 1 
-1 int32 --> nonzero == units, 0 == fractional.
 1 int32 --> Dimension D
 1 int32 --> Number of basis vectors, N_b
 1 int32 --> Number of Qs, N_q
 double[D*N_b*N_q] --> The eigenvalues go here.
 
-Es units should be in Hz^2.
+Eigs units should be in Hz^2.
