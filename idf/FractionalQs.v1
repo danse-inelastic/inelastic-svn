@@ -1,0 +1,8 @@
+
+1 char[256] --> "FractionalQ"
+1 int32 --> version 1 
+1 int32 --> Dimension D
+1 int32 --> Number of Qs, N_q
+double[D*N_q] --> The fractional Q go here.
+
+FractionalQs are (shockingly) in fractional units.
