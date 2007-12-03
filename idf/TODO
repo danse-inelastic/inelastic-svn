@@ -1,7 +1,8 @@
-0) S(Q,E) has units, and thus has an `absolute value'.  Experimentally, we 
-     almost always determine the values of S(Q,E) only relative to some other
-     value.  (As in, S(Q,E) for Nickel at 10 K as compared to S(Q,E) for 
-     Nickel at 1275 K.)  Should this be annotated somewhere?  Somehow?
+0) S(Q,E) and S(Q) have units, and thus have an `absolute value'. 
+     Experimentally, we almost always determine the values of S(Q,E) only 
+     relative to some other value.  (As in, S(Q,E) for Nickel at 10 K as 
+     compared to S(Q,E) for Nickel at 1275 K.)  Should this be annotated 
+     somewhere?  Somehow?
 
 1) We need a unit cell file format.
 
