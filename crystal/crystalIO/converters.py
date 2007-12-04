@@ -32,7 +32,7 @@ def unitCell2ListOfAtom(uc):
     loa = ASE.ListOfAtoms([],periodic=True) 
     loa.SetUnitCell(uc._cellvectors, fix=True)
     for site in uc:
-        aseatom = ASE.Atom(site.getAtom().getSymbol(), site.getPosition().tolist())
+        aseatom = ASE.Atom(site.getAtom().symbol, site.getPosition().tolist())
         loa.append(aseatom)
         
     return loa
