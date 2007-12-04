@@ -28,6 +28,7 @@ Polarizations.v1 | List of Polarization vectors, from BvK, etc.  | --
                  |     made up of D polarization vectors in a    |
                  |     column. The eigenvector should be         | 
                  |     normalized to 1.0.                        |
-Sqe.v1           | List of Scattering as a function of Q and E.  | 1/J
+Sqe.v1           | List of Scattering as a function of Q and E.  | m/J
+Sq.v1            | List of Scattering as a function of Q         | m  
                  |                                               |
 

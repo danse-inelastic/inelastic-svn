@@ -3,6 +3,7 @@
      relative to some other value.  (As in, S(Q,E) for Nickel at 10 K as 
      compared to S(Q,E) for Nickel at 1275 K.)  Should this be annotated 
      somewhere?  Somehow?
+   Double check the units given in the README.
 
 1) We need a unit cell file format.
 
