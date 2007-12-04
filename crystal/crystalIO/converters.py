@@ -60,9 +60,9 @@ def p4vaspStruct2UnitCell(struct):
 
     atomindex = 0
     for v in struct.positions:
-        vaspatomstring = struct.getRecord(atomindex)['element']
+        vaspatomstring = struct.getRecordForAtom(atomindex)['element']
         atomstring = vaspatomstring.split('_')[0]
-        atom = Atom(atomstring)
+        atom = Atom(symbol=atomstring)
         site = Site(position=v.data, atom=atom)
         uc.addSite(site, siteId='')
         atomindex += 1
