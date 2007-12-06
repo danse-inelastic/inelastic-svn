@@ -181,10 +181,10 @@ class UnitCell(Component):
     def getAtomTypeDenum(self):
         """Returns a dictionary with the types of atoms (symbols) and the number of atoms of each type."""
         denum = {}
-        symbols = [s.getAtom().symbol for s in self._sites]
-        for s in symbols:
+        symbolmass = [(s.getAtom().symbol, s.getAtom().mass) for s in self._sites]
+        for s in symbolmass:
             if not denum.has_key(s):
-                denum[s] = symbols.count(s)
+                denum[s] = symbolmass.count(s)
         return denum
 
     def getAtoms(self):
