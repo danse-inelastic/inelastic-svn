@@ -178,6 +178,15 @@ class UnitCell(Component):
         """Returns the number of sites in the unit cell."""
         return self._numSites
 
+    def getAtomTypeDenum(self):
+        """Returns a dictionary with the types of atoms (symbols) and the number of atoms of each type."""
+        denum = {}
+        symbols = [s.getAtom().symbol for s in self._sites]
+        for s in symbols:
+            if not denum.has_key(s):
+                denum[s] = symbols.count(s)
+        return denum
+
     def getAtoms(self):
         """Returns a list of atoms for all sites in the unit cell.
         Sites with no atom return none."""
