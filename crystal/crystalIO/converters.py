@@ -1,4 +1,4 @@
-# Olivier Delaire - June 2007
+# Olivier Delaire 
 
 __doc__ = """Converters for UnitCell."""
 
@@ -48,9 +48,7 @@ def p4vaspStruct2UnitCell(struct):
     struct=run.FINAL_STRUCTURE
     """ 
     try:
-        #from p4vasp.SystemPM import *
         from vasp.parsing.Structure import Structure
-        #import p4vasp.matrix as p4mat
     except ImportError:
         print "P4Vasp could not be imported in Python."
 
@@ -74,20 +72,31 @@ def unitCell2P4vaspStruct(uc):
     The atom types and the number of atoms of each type need to be
     filled in from the UnitCell."""
     try:
-        #from p4vasp.SystemPM import *
+        #from vaspparsing.SystemPM import *
         from vasp.parsing.Structure import Structure
-        #import p4vasp.matrix as p4mat
+        import vasp.parsing.matrix as p4mat
     except ImportError:
         print "P4Vasp could not be imported in Python."
-
     struct = Structure()
     struct.basis = [p4mat.Vector(v.tolist()) for v in uc.getCellVectors()]
-    struct.positions = [p4mat.Vector(v.tolist()) for v in uc.getPositions()]
-
-    # !!! this is incomplete:
-    # The atom types and the number of atoms of each type
-    # need to be filled in from the UnitCell
-
+    #struct.positions = [p4mat.Vector(v.tolist()) for v in uc.getPositions()]
+    # setup a dictionary of species index
+    denum = uc.getAtomTypeDenum()
+    atomtypes = denum.keys()
+    indexdict = {}
+    comment = ''
+    for site in uc:
+        atomtype = (site.getAtom().symbol, site.getAtom().mass)
+        if atomtype not in indexdict:
+            indexdict[atomtype] = atomtypes.index(atomtype)
+            comment = comment + site.getAtom().symbol + str(denum[atomtype])
+    struct.comment = comment
+    for site in uc:
+        pos = p4mat.Vector(site.getPosition().tolist())
+        atomtype = (site.getAtom().symbol, site.getAtom().mass)
+        speciesindex = indexdict[atomtype]
+        #print atomtype, speciesindex
+        struct.appendAtom(speciesindex, pos)
     return struct
     
 
