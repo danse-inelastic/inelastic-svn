@@ -14,10 +14,11 @@ def listOfAtom2UnitCell(loa):
     cartpos = [x.position for x in loa]
 
     cellvectors = loa.cell
-    uc = UnitCell(cellvectors)
+    uc = UnitCell()
+    uc.setCellVectors(cellvectors)
     fracpos = [uc.cartesianToFractional(x) for x in cartpos]
 
-    for n in range(symbols):
+    for n in range(len(symbols)):
         atom = Atom(symbol=symbols[n])
         uc.addAtom(atom, fracpos[n], '')
 
