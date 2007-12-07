@@ -3,17 +3,17 @@ Prototype plotter for plottables based on matplotlib
 """
 
 import wx
-import vtk
 from PlotItemRegistry import PlotItemRegistry
 from graphics.utils import *
 from graphics.movie import movie
 from graphics.common import Figure #,use
 # old way of doing this import  wx.lib.vtk  as vtk
 
-from vtk.wx.wxVTKRenderWindow import wxVTKRenderWindow
-from graphics.wxVTKRenderWindowWrapper import wxVTKRenderWindowWrapper
+
+
+#from graphics.wxVTKRenderWindowWrapper import wxVTKRenderWindowWrapper  #this was created to try to fix vtk's wx problem--but I think it's hopeless now
 import wxPython.wx
-from graphics.VtkBackend import VtkBackend
+
 #---------------------------------------------------------------------------
 
 
@@ -28,12 +28,28 @@ class VtkWrap(wx.Panel):#(wxVTKRenderWindow):
         self.parent=parent
         self.plotItems=parent.plotItems
 
-        self._embedInWx()
-        self.vtkBackend = VtkBackend(self) # Create backend instance
-        #use(vtkBackend, globals()) # Export public namespace of vtkBackend to globals()
+        try:
+            import vtk
+            from vtk.wx.wxVTKRenderWindow import wxVTKRenderWindow
+            from graphics.VtkBackend import VtkBackend
+            self._embedInWx()
+            self.vtkBackend = VtkBackend(self) # Create backend instance
+            #use(vtkBackend, globals()) # Export public namespace of vtkBackend to globals()
+    
+            # Add the plot widget
+            self._add_plot_widget()
+        except:
+            self.staticText1 = wx.StaticText(id=wxID_FRAME1STATICTEXT1,
+              label=u'You do not have Vtk installed; only matplotlib functionality will work.',
+              name='staticText1', parent=self, pos=wx.Point(40, 48),
+              size=wx.Size(448, 24), style=0)
+            # Layout the window
+            sizer = wx.BoxSizer(wx.VERTICAL)
+            sizer.Add(self.staticText1)#, 1, wx.LEFT|wx.TOP|wx.GROW)
+            self.SetSizer(sizer)  
+            print 'you do not have vtk installed; only matplotlib functionality will work'
 
-        # Add the plot widget
-        self._add_plot_widget()
+
         
     def _embedInWx(self):
         self.wxRW = wxVTKRenderWindow(self, -1, size=(50,50)) # use the main frame as the parent 
