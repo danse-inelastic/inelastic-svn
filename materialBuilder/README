@@ -1,0 +1,5 @@
+This is the beginnings of a stripped-down version of nanorex's GPL'd nanoengineer, with all the copyright info replaced by Brandon Keith.
+This is being wrapped in pyre and Brandon's supercell/crystal builder are being added as pyre facilities / DANSE BSD additions (eventually 
+to be moved to a separate directory).
+This will not be released publicly until Nanorex releases their official GPL version and all additions we make to this will be brought to the attention of
+Nanorex so they can add it to their version since they have been generous enough to make this prerelease version available to us.
