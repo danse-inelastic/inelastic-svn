@@ -52,9 +52,9 @@ class MofParse_TestCase(unittest.TestCase):
         sc = Supercell(coords, cell)#, 1, 1, 1)#, coordType='cartesian')
         sc.i.m=1
         sc.i.n=1
-        sc.i.l=1
+        sc.i.l=2
         sc.create()
-        sc.writeSupCellXYZFile('MOF74_neutron_4K_a-2H.xyz')
+        sc.writeSupCellXYZFile('MOF74_neutron_4K_a-2H-112.xyz')
 #        sc = Supercell(coords, cell, 1, 1, 2)#, coordType='cartesian')
 #        sc.writeSupCellXYZFile('MOF74_neutron_4K_a-1x1x2.xyz')
 #        sc = Supercell(coords, cell, 2, 2, 2)#, coordType='cartesian')
