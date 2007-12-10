@@ -10,5 +10,5 @@ double[N_q* (N_b*D) * N_b * (D*2)] --> The polarization vectors go here.
    v( N_q, N_b*D, N_b) --> Re(x0) Im(x0) Re(x1) Im(x1) ... Re(xD) Im(xD)
 
 
-An eigenvector is made up of D polarization vectors in a column.  The 
-eigenvector should be normalized to 1.0.
+An eigenvector is made up of N_b polarization vectors (each D-dimensional) in a column. 
+The eigenvector should be normalized to 1.0.
