@@ -118,6 +118,8 @@ class UnitCell:
 
     def __iter__(self): return self._sites.__iter__()
 
+    def __getitem__(self, i): return self._sites[i]
+
     def __str__(self):
         rt = "UnitCell a=%s, b=%s, c=%s\n" % tuple(self._cellvectors)
         for siteId in self._siteIds.keys():
@@ -212,6 +214,10 @@ class UnitCell:
     def getIds(self):
         """Returns the list of Ids for sites in the unit cell."""
         return self._siteIds.keys()
+
+    def getSite(self, siteNum):
+        """Returns the Site number 'num'."""
+        return self.__getitem__(siteNum)
 
     def getSiteFromId(self, siteId):
         """Returns a Site instance from its Id in the unit cell."""
