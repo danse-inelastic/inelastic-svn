@@ -63,7 +63,7 @@ class Site:
 ##########################################################
 
 
-from pyre.components.Component import Component
+#from pyre.components.Component import Component
 
 #class UnitCellWrapper(Component):
 #    
@@ -75,23 +75,25 @@ from pyre.components.Component import Component
 
 ##########################################################
 
-class UnitCell(Component):  
+class UnitCell:  
     """Representation of a crystal unit cell."""
 #    unitCellWrapper=uniCellWrapper
-    
-    class Inventory(Component.Inventory):
-        import pyre.inventory as inv  
-        a = inv.str('a Vector', default='1.0 0.0 0.0')
-        a.meta['tip'] = 'the a unit cell vector'
-        a.meta['importance'] = 10
-        b = inv.str('b Vector', default='0.0 1.0 0.0')
-        b.meta['tip'] = 'the b unit cell vector'
-        b.meta['importance'] = 9
-        c = inv.str('c Vector', default='0.0 0.0 1.0')
-        c.meta['tip'] = 'the c unit cell vector'  
-        c.meta['importance'] = 8
-        spaceGroup = inv.str('Space Group', default='1')
-        spaceGroup.meta['tip'] = 'space group of the unit cell'
+
+# We do not want to make UnitCell a component,
+# since it represents data, rather than a process.
+##     class Inventory(Component.Inventory):
+##         import pyre.inventory as inv  
+##         a = inv.str('a Vector', default='1.0 0.0 0.0')
+##         a.meta['tip'] = 'the a unit cell vector'
+##         a.meta['importance'] = 10
+##         b = inv.str('b Vector', default='0.0 1.0 0.0')
+##         b.meta['tip'] = 'the b unit cell vector'
+##         b.meta['importance'] = 9
+##         c = inv.str('c Vector', default='0.0 0.0 1.0')
+##         c.meta['tip'] = 'the c unit cell vector'  
+##         c.meta['importance'] = 8
+##         spaceGroup = inv.str('Space Group', default='1')
+##         spaceGroup.meta['tip'] = 'space group of the unit cell'
         #atoms = multiLineStr('Atoms',default='''"H" 0.0 0.0 0.0\n"H" 1.0 0.0 0.0''')  
         #atomFile = inv.str('atom and position file',defa)
         #atomFile
@@ -102,25 +104,16 @@ class UnitCell(Component):
 #            exec line2 in locals()    
     
     def __init__(self, name='UnitCell',cellvectors=None, spaceGroup=None):
-        Component.__init__(self, name, facility='facility')
-        self.i=self.inventory
         if cellvectors is None:
             cellvectors = np.array( [ (1.0,0.0,0.0),(0.0,1.0,0.0),(0.0,0.0,1.0) ] )
-        else:
-            self.i.a,self.i.b,self.i.c=cellvectors
 
         self._cellvectors = np.array(cellvectors)
-#        self.i.spaceGroup = spaceGroup
         self._spaceGroup = spaceGroup
-
         self._sites = []  # list of sites
         self._siteIds = {}  # dictionary {siteId : site }   
         self._n = 0
         self._numAtoms = 0
         self._numSites = 0
-
-#        self._properties = []  # properties should go into Sample class
-
         return
 
     def __iter__(self): return self._sites.__iter__()
