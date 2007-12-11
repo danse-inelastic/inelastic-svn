@@ -31,7 +31,7 @@ class IntegratedWindowPanel(wx.Panel):
 
         self.backendWrap = MatplotlibWrap(self,-1, size=(600,546))
         #self.backendWrap = VtkWrap(self, size=(70,546))
-        splitter.AppendWindow(self.backendWrap, 70)
+        splitter.AppendWindow(self.backendWrap, 700)
 
         self.propertyEditor = PropertyEditor(self,size=(125,546))
         splitter.AppendWindow(self.propertyEditor, 125)
