@@ -22,8 +22,10 @@ def write(Pols,filename='Polarizations',comment=''):
   f.write(pack('<i',res.shape[3]))
   f.write(pack('<i',res.shape[2]))
   f.write(pack('<i',res.shape[0]))
+#  print res.shape
   res = tuple( res.reshape( (-1) ) )
   f.write( pack('<%id' % len(res),*res) )
+#  print 'len',len(res)
   return
 
 def read(filename='Polarizations'):
@@ -35,6 +37,7 @@ def read(filename='Polarizations'):
   version,  = unpack('<i',f[i:i+intSize])               ; i += intSize
   comment,  = unpack('<1024s',f[i:i+1024*strSize])      ; i += 1024*strSize
   D,N_b,N_q = unpack('<3i',f[i:i+3*intSize])            ; i += 3*intSize
+#  print D, N_b, N_q, N_q*N_b*D*N_b*D*2
   res       = unpack('<%id' % (N_q*N_b*D*N_b*D*2),f[i:])
   res = numpy.array(res)
   res.shape = (N_q,N_b*D,N_b,D,2)
