@@ -42,17 +42,18 @@ class Supercell(Component):
 
     def __init__(self, atoms=None, latticeVectors=None, coordType='fractional', readFilePath=None):
         Component.__init__(self, 'Supercell', facility=None)
-        self.i=self.inventory
+        self.i=self.inventory        
+        self.coordinateType=coordType
         if readFilePath!=None:
             self.readXYZFile(readFilePath)
         else:
             self.atoms=atoms
             self.lattice=latticeVectors
             
-        #get whatever facility the user has chosen and then call methods within that component to get the required data object
+        #get whatever facility the user has chosen and then 
+        # call methods within that component to get the required data object
 
         # now initialize everything
-        self.coordinateType=coordType
         self.nlattice=np.array(self.lattice)
         self.supercellLattice=[[self.i.n*component for component in self.lattice[0]],
                  [self.i.m*component for component in self.lattice[1]],
@@ -75,6 +76,12 @@ class Supercell(Component):
     def getABC(self):
         """gives the lattice parameters"""
         return [self._norm(vec) for vec in self.lattice]
+    
+    def getAtoms(self):
+        return self.atoms
+    
+    def getLatticeVectors(self):
+        return self.lattice
     
     def getSupercellABC(self):
         """gives the supercell lattice parameters"""
@@ -99,7 +106,10 @@ class Supercell(Component):
         f=file(path,'r')
         lines=f.readlines()
         numAtoms=int(lines[0]) 
-        self.lattice=eval(lines[1])
+        self.lattice=np.array([float(i) for i in lines[1].split()])
+        self.lattice=self.lattice.reshape(3,3)
+        self.lattice=self.lattice.tolist()
+        #self.lattice=eval(lines[1])        
         self.atoms=[]
         for i in range(2, numAtoms+2):
             species,x,y,z=lines[i].split()
