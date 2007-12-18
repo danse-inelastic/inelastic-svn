@@ -50,9 +50,10 @@ class FileIO:
                 from Scientific.IO.NetCDF import NetCDFFile 
                 file = NetCDFFile(file1, 'r')
                 vars = file.variables.keys()
-                sf=file.variables['sf'].getValue() #Numeric array
+                print vars
+                sf=file.variables['dsf'].getValue() #Numeric array
                 q=file.variables['q'].getValue()
-                time=file.variables['time'].getValue()
+                time=file.variables['frequency'].getValue()
                 for t in range(len(time)):
                     self.parent.backendWrap.addLine(q,sf[:,t])    
         dlg.Destroy()

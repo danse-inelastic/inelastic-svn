@@ -20,9 +20,9 @@ be placed in the inventory.'''
         atomicStructure = inv.facility('atomicStructure', default='unitCellBuilder')
         atomicStructure.meta['known_plugins'] = ['unitCellBuilder','xyzFile']
         atomicStructure.meta['tip'] = 'Input the atomic structure (simulation cell, coordinates, etc.)'
-        partialCharges = inv.str('Partial Charges', default=None)
-        partialCharges.meta['tip'] = '''a dictionary of atomic species and their 
-partial charges, i.e. {'H':-1.0, 'O':-2.0}'''
+#        partialCharges = inv.str('Partial Charges', default=None)
+#        partialCharges.meta['tip'] = '''a dictionary of atomic species and their 
+#partial charges, i.e. {'H':-1.0, 'O':-2.0}'''
 #        initialTemp = inv.str('Initial Temperature (K)', default=None)
 #        initialTemp.meta['tip'] = 'the initial temperature of the system'
         temperature = inv.str('Temperature or Initial Energy (K)', default=None)
