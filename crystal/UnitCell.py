@@ -1,7 +1,7 @@
 import numpy as np
 import numpy.linalg as la
 from Atom import Atom
-from MonkhorstPack import MonkhorstPack
+from utils2.MonkhorstPack import MonkhorstPack
 
 
 ##########################################################
