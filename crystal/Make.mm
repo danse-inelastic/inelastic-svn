@@ -16,7 +16,7 @@ PROJECT = crystal
 #--------------------------------------------------------------------------
 #
 
-BUILD_DIRS = atomic_properties ChemicalElements io symmetry 
+BUILD_DIRS = atomic_properties ChemicalElements io symmetry utils
 
 OTHER_DIRS = \
 
@@ -39,7 +39,6 @@ EXPORT_PYTHON_MODULES = \
 	__init__.py \
 	Atom.py \
 	CrystalStructure.py \
-	MonkhorstPack.py \
 	properties.py \
 	UnitCell.py \
 	UnitCellBuilder.py \
