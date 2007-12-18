@@ -9,23 +9,21 @@
 # <LicenseText>
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#
 
 PROJECT = crystal
+PACKAGE = utils
 
 #--------------------------------------------------------------------------
 #
 
-BUILD_DIRS = atomic_properties ChemicalElements io symmetry utils
-
+BUILD_DIRS = \
+	
 OTHER_DIRS = \
 
 RECURSE_DIRS = $(BUILD_DIRS) $(OTHER_DIRS)
 
-
 #--------------------------------------------------------------------------
 #
-
 
 all: export
 	BLD_ACTION="all" $(MM) recurse
@@ -36,21 +34,12 @@ all: export
 # export
 
 EXPORT_PYTHON_MODULES = \
-	__init__.py \
-	Atom.py \
-	CrystalStructure.py \
-	properties.py \
-	UnitCell.py \
-	UnitCellBuilder.py \
-	AtomLoader.py \
-
-
-EXPORT_BINS = \
+    __init__.py \
+	MonkhorstPack.py \
 
 
 
-export:: export-binaries release-binaries export-package-python-modules 
-
+export:: export-package-python-modules
 
 # version
 # $Id$
