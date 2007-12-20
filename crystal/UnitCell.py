@@ -1,7 +1,7 @@
 import numpy as np
 import numpy.linalg as la
 from Atom import Atom
-from utils2.MonkhorstPack import MonkhorstPack
+from crystalUtils.MonkhorstPack import MonkhorstPack
 
 
 ##########################################################
