@@ -37,7 +37,7 @@ class IntegratedWindowPanel(wx.Panel):
         splitter.AppendWindow(self.propertyEditor, 125)
         
         self.io=FileIO(self)
-        #self.testSqomega()
+        self.testSqomega()
 
     def testColumnInput(self):
         x,y=self.io.extractColumns('/home/jbk/DANSE/graphics/trunk/tests2/api/DOS_Al6x6x6-10.plot')
@@ -55,15 +55,16 @@ class IntegratedWindowPanel(wx.Panel):
             self.backendWrap.addLine(q,sf[:,t]) 
             
     def testSqomega(self):
-        file1='/home/jbk/gulp3.0/incom6x3sup10K100ps/ISF_graphite.nc'
+        file1='/home/jbk/gulp3.0/incom6x3sup10K100ps/ISF_SPECT_incommens6x3sup5K.nc'
         from Scientific.IO.NetCDF import NetCDFFile 
         file = NetCDFFile(file1, 'r')
         vars = file.variables.keys()
-        sf=file.variables['dsf'].getValue() #Numeric array
+        print vars
+        dsf=file.variables['dsf'].getValue() #Numeric array
         q=file.variables['q'].getValue()
-        time=file.variables['frequency'].getValue()
-        for t in range(len(time)):
-            self.backendWrap.addLine(q,sf[:,t]) 
+        frequency=file.variables['frequency'].getValue()
+        for f in range(len(frequency)):
+            self.backendWrap.addLine(q,dsf[:,f]) 
 
 ID_ColumnFile = wx.NewId()
 ID_NetcdfFile = wx.NewId()
