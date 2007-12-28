@@ -45,9 +45,12 @@ class InferredProperty( ReadOnlyProperty ):
 
     def __get__(self, obj, type=None):
         rt = ReadOnlyProperty.__get__(self, obj, type)
+        #print 'obj',obj
+        #print 'rt',rt
         
         if rt is None:
             rt = self.infer_function( obj )
+            #print 'new rt',rt
             Property.__set__(self, obj, rt)
             pass
         
