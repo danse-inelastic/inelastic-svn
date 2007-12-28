@@ -168,12 +168,14 @@ class Atom(object):
     import atomic_properties
     from utils import getModules
     modules = getModules( atomic_properties )
+    #print modules
     del getModules, atomic_properties
 
     for module in modules:
         name = module.__name__.split( '.' )[-1]
         doc = module.__doc__
         lookup = module.lookup
+        #print name, lookup
         cmd = "%s=InferredProperty( name, doc, lookup )" % name
         exec cmd
         del name, doc, lookup, module, cmd
