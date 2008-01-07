@@ -4,23 +4,19 @@
 #
 #                               Michael A.G. Aivazis
 #                        California Institute of Technology
-#                        (C) 1998-2005  All Rights Reserved
+#                        (C) 1998-2004  All Rights Reserved
 #
 # <LicenseText>
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 PROJECT = sampleassembly
-PACKAGE = sampleassembly
+PACKAGE = saxml
 
 BUILD_DIRS = \
-	elements \
-	geometers \
-	predefined \
-	saxml \
+    parser \
 
 RECURSE_DIRS = $(BUILD_DIRS)
-
 
 #--------------------------------------------------------------------------
 #
@@ -37,15 +33,15 @@ tidy::
 # export
 
 EXPORT_PYTHON_MODULES = \
-	units.py \
-	__init__.py \
+	Parser.py \
+	Renderer.py \
+	__init__.py
 
 
-export:: export-python-modules
-	BLD_ACTION="export" $(MM) recurse
+export:: export-package-python-modules 
 
 
 # version
-# $Id$
+# $Id: Make.mm 1234 2007-09-18 18:32:56Z linjiao $
 
 # End of file

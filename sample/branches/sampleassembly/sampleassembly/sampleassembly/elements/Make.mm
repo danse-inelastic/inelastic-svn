@@ -11,25 +11,12 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 PROJECT = sampleassembly
-PACKAGE = sampleassembly
-
-BUILD_DIRS = \
-	elements \
-	geometers \
-	predefined \
-	saxml \
-
-RECURSE_DIRS = $(BUILD_DIRS)
-
+PACKAGE = elements
 
 #--------------------------------------------------------------------------
 #
 
 all: export
-	BLD_ACTION="all" $(MM) recurse
-
-tidy::
-	BLD_ACTION="tidy" $(MM) recurse
 
 
 #--------------------------------------------------------------------------
@@ -37,13 +24,22 @@ tidy::
 # export
 
 EXPORT_PYTHON_MODULES = \
-	units.py \
+	AbstractAttributeContainer.py \
+	Attribute.py \
+	AttributeContainer.py \
+	Element.py \
+	ElementContainer.py \
+	IdGenerator.py \
+	PowderSample.py \
+	SampleAssembly.py \
+	Scatterer.py \
 	__init__.py \
+	_journal.py \
+	elementTypes.py \
+	units.py \
 
 
-export:: export-python-modules
-	BLD_ACTION="export" $(MM) recurse
-
+export:: export-package-python-modules
 
 # version
 # $Id$
