@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE SampleAssembly>
+
+<SampleAssembly name="Ni">
+  
+  <PowderSample name='Ni plate' type='sample'>
+    <Shape>
+      <block diagonal="6*cm,10*cm,0.1*cm" />
+    </Shape>
+  </PowderSample>
+  
+  <LocalGeometer registry-coordinate-system="InstrumentScientist">
+    <Register name="Ni plate" position="(0,0,0)" orientation="(0,0,0)"/>
+  </LocalGeometer>
+<!--
+  <environment>
+    <temperature>300*K</temperature>
+    <pressure>1.*atm</pressure>
+  </environment>
+-->
+
+</SampleAssembly>

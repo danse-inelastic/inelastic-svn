@@ -14,8 +14,10 @@ PROJECT = sampleassembly
 PACKAGE = sampleassembly
 
 BUILD_DIRS = \
+	elements \
 	geometers \
 	predefined \
+	saxml \
 
 RECURSE_DIRS = $(BUILD_DIRS)
 
@@ -24,6 +26,7 @@ RECURSE_DIRS = $(BUILD_DIRS)
 #
 
 all: export
+	BLD_ACTION="all" $(MM) recurse
 
 tidy::
 	BLD_ACTION="tidy" $(MM) recurse
@@ -34,7 +37,6 @@ tidy::
 # export
 
 EXPORT_PYTHON_MODULES = \
-	SampleAssembly.py \
 	units.py \
 	__init__.py \
 
