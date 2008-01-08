@@ -33,8 +33,8 @@ class Renderer(ShapeRenderer, XMLMill):
 
         self._preElement( sampleassembly )
         self._expandElementContainer( sampleassembly )
-        ig = sampleassembly.geometer
-        self.onGlobalGeometer( ig )
+        #ig = sampleassembly.geometer
+        #self.onGlobalGeometer( ig )
         self._postElement( sampleassembly )
         return
 
@@ -62,8 +62,7 @@ class Renderer(ShapeRenderer, XMLMill):
             element.identify(self)
             continue
         
-        sampleassembly_geometer = self.sampleassembly.geometer
-        lgeometer = sampleassembly_geometer._getLocalGeometer( elementContainer )
+        lgeometer = elementContainer.local_geometer
         self.onLocalGeometer( lgeometer )
         return
 

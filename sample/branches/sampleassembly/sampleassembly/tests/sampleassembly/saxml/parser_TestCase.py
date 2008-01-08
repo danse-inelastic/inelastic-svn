@@ -29,6 +29,7 @@ class parser_TestCase(TestCase):
         """
         from sampleassembly.saxml import parse_file
         sampleassembly = parse_file( 'Ni.xml' )
+        print sampleassembly.geometer
         return
 
 

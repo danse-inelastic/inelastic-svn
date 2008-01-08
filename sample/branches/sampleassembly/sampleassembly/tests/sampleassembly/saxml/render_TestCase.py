@@ -21,22 +21,31 @@ class renderer_TestCase(TestCase):
 
     def test(self):
         """
-        instrument.nixml.render
+        sampleassembly.saxml.render
         """
-        from instrument.nixml import render, parse_file
-        instrument = parse_file( 'test.xml' )
-        text = render( instrument )
-        print >> open('test.xml.new','w'),  '\n'.join(text) 
+        from sampleassembly.saxml import render, parse_file
+        sampleassembly = parse_file( 'Ni.xml' )
+        text = render( sampleassembly )
+        print >> open('Ni.xml.rendered','w'),  '\n'.join(text) 
         return
 
 
     def test2(self):
         """
-        instrument.nixml.weave
+        sampleassembly.saxml.weave
         """
-        from instrument.nixml import weave, parse_file
-        instrument = parse_file( 'test.xml' )
-        weave(instrument)
+        from sampleassembly.saxml import weave, parse_file
+        sampleassembly = parse_file( 'Ni.xml' )
+        weave(sampleassembly, open('Ni.xml.weaved', 'w') )
+        return
+
+
+    def test3(self):
+        """
+        parse weaved xml
+        """
+        from sampleassembly.saxml import parse_file
+        sampleassembly = parse_file( 'Ni.xml.weaved')
         return
 
 
