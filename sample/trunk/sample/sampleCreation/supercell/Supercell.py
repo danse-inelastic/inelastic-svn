@@ -105,7 +105,7 @@ class Supercell(Component):
         '''
         f=file(path,'r')
         lines=f.readlines()
-        numAtoms=int(lines[0]) 
+        numAtoms=int(lines[0])
         self.lattice=np.array([float(i) for i in lines[1].split()])
         self.lattice=self.lattice.reshape(3,3)
         self.lattice=self.lattice.tolist()
