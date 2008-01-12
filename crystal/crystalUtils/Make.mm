@@ -11,7 +11,7 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 PROJECT = crystal
-PACKAGE = utils
+PACKAGE = crystalUtils
 
 #--------------------------------------------------------------------------
 #
@@ -34,7 +34,7 @@ all: export
 # export
 
 EXPORT_PYTHON_MODULES = \
-    __init__.py \
+	__init__.py \
 	MonkhorstPack.py \
 
 
