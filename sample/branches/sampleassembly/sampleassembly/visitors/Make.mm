@@ -31,6 +31,7 @@ all: export
 EXPORT_PYTHON_MODULES =    \
 	CrossSectionCalculator.py \
 	__init__.py \
+	units.py \
 
 
 export:: export-package-python-modules

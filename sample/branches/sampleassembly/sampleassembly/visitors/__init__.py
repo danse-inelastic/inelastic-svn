@@ -16,9 +16,11 @@ def cross_sections( scatterer, calculator = None ):
     '''calculate cross sections of the given scatterer
 
     return:
-      absorption_cross_section
-      incoherent_scattering_cross_section
-      coherent_scattering_cross_section
+      absorption_cross_section * rho
+      incoherent_scattering_cross_section * rho
+      coherent_scattering_cross_section * rho
+
+      where rho is the density
     '''
     
     if calculator is None:

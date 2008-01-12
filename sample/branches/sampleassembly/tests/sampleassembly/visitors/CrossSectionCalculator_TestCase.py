@@ -29,8 +29,8 @@ class CrossSectionCalculator_TestCase(TestCase):
         """
         from sampleassembly.elements.phases import crystal
         from sampleassembly.elements import unitcell, atom
-        Fe = atom('Fe')
-        atoms = [Fe]
+        Ni = atom('Ni')
+        atoms = [Ni]
         cellvectors = [
             [1,0,0],
             [0,1,0],
@@ -48,6 +48,10 @@ class CrossSectionCalculator_TestCase(TestCase):
 
         abs, inc, coh = calculator( xtal )
 
+        import sampleassembly.units as units
+        barn = units.area.barn
+        angstrom = units.length.angstrom
+        self.assertAlmostEqual( abs/barn * angstrom**3, 4.49 )
         print abs, inc, coh
         return
 
