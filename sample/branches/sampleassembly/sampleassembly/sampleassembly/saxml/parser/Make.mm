@@ -26,15 +26,18 @@ all: export
 EXPORT_PYTHON_MODULES = \
 	AbstractNode.py \
 	Block.py \
+	ChemicalFormula.py \
 	Cylinder.py \
 	Document.py \
 	GlobalGeometer.py \
 	LocalGeometer.py \
+	Phase.py \
 	PowderSample.py \
 	Register.py \
 	SampleAssembly.py \
 	Shape.py \
 	__init__.py \
+	xyzfile.py \
 
 
 include doxygen/default.def

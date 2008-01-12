@@ -11,14 +11,10 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 PROJECT = sampleassembly
-PACKAGE = sampleassembly
+PACKAGE = crystal
 
 BUILD_DIRS = \
-	crystal \
-	elements \
-	geometers \
-	predefined \
-	saxml \
+	ioutils \
 
 RECURSE_DIRS = $(BUILD_DIRS)
 
@@ -38,11 +34,10 @@ tidy::
 # export
 
 EXPORT_PYTHON_MODULES = \
-	units.py \
 	__init__.py \
 
 
-export:: export-python-modules
+export:: export-package-python-modules
 	BLD_ACTION="export" $(MM) recurse
 
 

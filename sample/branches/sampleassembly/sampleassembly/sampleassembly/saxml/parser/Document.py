@@ -22,6 +22,10 @@ class Document(DocumentNode):
         "SampleAssembly",
         'PowderSample',
 
+        'Phase',
+        'ChemicalFormula',
+        'xyzfile',
+
         'LocalGeometer',
         'Register',
         'GlobalGeometer',

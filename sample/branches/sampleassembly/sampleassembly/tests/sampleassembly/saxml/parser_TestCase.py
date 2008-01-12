@@ -29,7 +29,12 @@ class parser_TestCase(TestCase):
         """
         from sampleassembly.saxml import parse_file
         sampleassembly = parse_file( 'Ni.xml' )
-        print sampleassembly.geometer
+        geometer = sampleassembly.local_geometer
+        Ni_powder = sampleassembly.elements()[0]
+        phase = Ni_powder.phase
+        self.assertEqual( phase.chemical_formula, 'Ni' )
+        crystal = phase.crystal
+        print crystal
         return
 
 
