@@ -1,6 +1,6 @@
 # -*- Makefile -*-
 #
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 #                               Michael A.G. Aivazis
 #                        California Institute of Technology
@@ -8,38 +8,43 @@
 #
 # <LicenseText>
 #
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 PROJECT = sampleassembly
-
-# directory structure
+PACKAGE = sampleassembly
 
 BUILD_DIRS = \
-    libsampleassembly \
-    sampleassemblymodule \
-    sampleassembly \
+	crystal \
+	elements \
+	geometers \
+	predefined \
+	saxml \
 
-OTHER_DIRS = \
-    tests \
-    examples
+RECURSE_DIRS = $(BUILD_DIRS)
 
-RECURSE_DIRS = $(BUILD_DIRS) $(OTHER_DIRS)
 
 #--------------------------------------------------------------------------
 #
 
-all:
+all: export
 	BLD_ACTION="all" $(MM) recurse
-
-distclean::
-	BLD_ACTION="distclean" $(MM) recurse
-
-clean::
-	BLD_ACTION="clean" $(MM) recurse
 
 tidy::
 	BLD_ACTION="tidy" $(MM) recurse
+
+
+#--------------------------------------------------------------------------
+#
+# export
+
+EXPORT_PYTHON_MODULES = \
+	units.py \
+	__init__.py \
+
+
+export:: export-python-modules
+	BLD_ACTION="export" $(MM) recurse
+
 
 # version
 # $Id$
