@@ -12,7 +12,7 @@
 #
 
 from pyre.units import *
-from pyre.units import length, energy, angle, pressure, time
+from pyre.units import length, energy, angle, pressure, time, area
 
 
 # version

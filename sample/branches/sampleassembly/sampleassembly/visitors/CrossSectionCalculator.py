@@ -30,15 +30,34 @@ class CrossSectionCalculator:
     def onCrystal(self, crystal):
         #unit cell
         unitcell = crystal.unitcell
+        return self.onUnitCell( unitcell )
+    
+
+    def onUnitCell(self, unitcell):
         #atoms
         atoms = unitcell.getAtoms()
         #
         abs = sum( [ atom.average_neutron_abs_xs for atom in atoms ] )
         coh = sum( [ atom.average_neutron_coh_xs for atom in atoms ] )
         inc = sum( [ atom.average_neutron_inc_xs for atom in atoms ] )
-        return abs, inc, coh
+
+        #volumn of unit cell
+        v = volume( * unitcell.getCellVectors() )
+        import units
+        barn = units.area.barn
+        A = units.length.angstrom
+
+        unit = barn / A**3
+        
+        return N.array( [abs, inc, coh] )/v * unit
 
     #end of CrossSectionCalculator
+
+
+def volume( a, b, c ):
+    return N.dot( a, N.cross(b,c) )
+
+import numpy as N
 
 
 # version
