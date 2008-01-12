@@ -30,6 +30,7 @@ EXPORT_PYTHON_MODULES = \
 	Element.py \
 	ElementContainer.py \
 	IdGenerator.py \
+	Phase.py \
 	PowderSample.py \
 	SampleAssembly.py \
 	Scatterer.py \

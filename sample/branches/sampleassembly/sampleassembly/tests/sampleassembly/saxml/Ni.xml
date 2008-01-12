@@ -8,6 +8,10 @@
     <Shape>
       <block diagonal="6*cm,10*cm,0.1*cm" />
     </Shape>
+    <Phase type="crystal">
+      <ChemicalFormula>Ni</ChemicalFormula>
+      <xyzfile>Ni.xyz</xyzfile>
+    </Phase>
   </PowderSample>
   
   <LocalGeometer registry-coordinate-system="InstrumentScientist">

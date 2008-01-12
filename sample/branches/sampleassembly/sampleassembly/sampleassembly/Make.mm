@@ -14,6 +14,7 @@ PROJECT = sampleassembly
 PACKAGE = sampleassembly
 
 BUILD_DIRS = \
+	crystal \
 	elements \
 	geometers \
 	predefined \
