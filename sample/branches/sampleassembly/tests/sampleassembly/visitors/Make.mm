@@ -4,50 +4,45 @@
 #
 #                               Michael A.G. Aivazis
 #                        California Institute of Technology
-#                        (C) 1998-2005  All Rights Reserved
+#                        (C) 1998-2004  All Rights Reserved
 #
 # <LicenseText>
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 PROJECT = sampleassembly
-PACKAGE = sampleassembly
-
-BUILD_DIRS = \
-	crystal \
-	elements \
-	geometers \
-	predefined \
-	saxml \
-	visitors \
-
-RECURSE_DIRS = $(BUILD_DIRS)
+PACKAGE = tests/sampleassembly/visitors
 
 
-#--------------------------------------------------------------------------
-#
 
-all: export
-	BLD_ACTION="all" $(MM) recurse
+PROJ_TIDY += *.log *.pyc
+PROJ_CLEAN += $(PROJ_CPPTESTS)
 
-tidy::
-	BLD_ACTION="tidy" $(MM) recurse
+PROJ_PYTESTS = alltests.py
+PROJ_CPPTESTS = 
+PROJ_TESTS = $(PROJ_PYTESTS) $(PROJ_CPPTESTS)
+PROJ_LIBRARIES = -L$(BLD_LIBDIR) 
 
 
 #--------------------------------------------------------------------------
 #
-# export
 
-EXPORT_PYTHON_MODULES = \
-	units.py \
-	__init__.py \
+all: $(PROJ_TESTS)
 
+test:
+	for test in $(PROJ_TESTS) ; do $${test}; done
 
-export:: export-python-modules
-	BLD_ACTION="export" $(MM) recurse
+release: tidy
+	cvs release .
+
+update: clean
+	cvs update .
+
+#--------------------------------------------------------------------------
+#
 
 
 # version
-# $Id$
+# $Id: Make.mm 469 2006-04-06 23:03:20Z jiao $
 
 # End of file

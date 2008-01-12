@@ -11,12 +11,13 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
-PROJECT = tests
+PROJECT = tests/sampleassembly
 
 # directory structure
 
 BUILD_DIRS = \
-    sampleassembly \
+    saxml \
+    visitors \
 
 OTHER_DIRS = \
 

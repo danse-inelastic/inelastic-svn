@@ -27,6 +27,7 @@ EXPORT_PYTHON_MODULES = \
 	AbstractAttributeContainer.py \
 	Attribute.py \
 	AttributeContainer.py \
+	Crystal.py \
 	Element.py \
 	ElementContainer.py \
 	IdGenerator.py \
@@ -37,6 +38,7 @@ EXPORT_PYTHON_MODULES = \
 	__init__.py \
 	_journal.py \
 	elementTypes.py \
+	phases.py \
 	units.py \
 
 

@@ -12,9 +12,11 @@
 #
 
 
-def xyzfile2unitcell( filename ):
-    from xyzfile import read
-    return read(filename)
+def crystal( *args, **kwds ):
+    from Crystal import Crystal
+    return Crystal( *args, **kwds )
+
+
 
 # version
 __id__ = "$Id$"

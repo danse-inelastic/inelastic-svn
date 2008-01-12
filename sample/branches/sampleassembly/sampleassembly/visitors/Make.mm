@@ -4,22 +4,16 @@
 #
 #                               Michael A.G. Aivazis
 #                        California Institute of Technology
-#                        (C) 1998-2005  All Rights Reserved
+#                        (C) 1998-2004  All Rights Reserved
 #
 # <LicenseText>
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 PROJECT = sampleassembly
-PACKAGE = sampleassembly
+PACKAGE = visitors
 
 BUILD_DIRS = \
-	crystal \
-	elements \
-	geometers \
-	predefined \
-	saxml \
-	visitors \
 
 RECURSE_DIRS = $(BUILD_DIRS)
 
@@ -28,26 +22,20 @@ RECURSE_DIRS = $(BUILD_DIRS)
 #
 
 all: export
-	BLD_ACTION="all" $(MM) recurse
-
-tidy::
-	BLD_ACTION="tidy" $(MM) recurse
 
 
 #--------------------------------------------------------------------------
 #
 # export
 
-EXPORT_PYTHON_MODULES = \
-	units.py \
+EXPORT_PYTHON_MODULES =    \
+	CrossSectionCalculator.py \
 	__init__.py \
 
 
-export:: export-python-modules
-	BLD_ACTION="export" $(MM) recurse
-
+export:: export-package-python-modules
 
 # version
-# $Id$
+# $Id: Make.mm 1274 2007-10-31 20:23:22Z linjiao $
 
 # End of file

@@ -11,9 +11,10 @@
 #  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # 
 
-def copyright():
-    return "sampleassembly pyre module: Copyright (c) 1998-2005 Michael A.G. Aivazis";
 
+from elements import sampleassembly, powdersample
+from elements import atom, unitcell
+from visitors import cross_sections
 
 # version
 __id__ = "$Id$"

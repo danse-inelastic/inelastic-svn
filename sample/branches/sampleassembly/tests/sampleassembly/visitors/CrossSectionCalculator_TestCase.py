@@ -20,33 +20,44 @@ import unittest
 
 
 from unittestX import TestCase
-class parser_TestCase(TestCase):
+class CrossSectionCalculator_TestCase(TestCase):
 
 
     def test0(self):
         """
-        sampleassembly.saxml.parser
+        sampleassembly.visitors.CrossSectionCalculator
         """
-        from sampleassembly.saxml import parse_file
-        sampleassembly = parse_file( 'Ni.xml' )
-        geometer = sampleassembly.local_geometer
-        Ni_powder = sampleassembly.elements()[0]
-        phase = Ni_powder.phase
-        self.assertEqual( phase.__class__.__name__, 'Crystal' )
-        self.assertEqual( phase.chemical_formula, 'Ni' )
-        crystal = phase
-        unitcell = crystal.unitcell
-        print unitcell
+        from sampleassembly.elements.phases import crystal
+        from sampleassembly.elements import unitcell, atom
+        Fe = atom('Fe')
+        atoms = [Fe]
+        cellvectors = [
+            [1,0,0],
+            [0,1,0],
+            [0,0,1],
+            ]
+        
+        positions = [ [0,0,0] ]
+
+        uc = unitcell( cellvectors, atoms, positions )
+
+        xtal = crystal( unitcell = uc )
+
+        from sampleassembly.visitors.CrossSectionCalculator import CrossSectionCalculator
+        calculator = CrossSectionCalculator()
+
+        abs, inc, coh = calculator( xtal )
+
+        print abs, inc, coh
         return
 
-
-    pass # end of parser_TestCase
+    pass # end of CrossSectionCalculator_TestCase
 
 
 import unittest
 
 def pysuite():
-    suite1 = unittest.makeSuite(parser_TestCase)
+    suite1 = unittest.makeSuite(CrossSectionCalculator_TestCase)
     return unittest.TestSuite( (suite1,) )
 
 
@@ -65,6 +76,6 @@ if __name__ == '__main__': main()
     
 
 # version
-__id__ = "$Id: parser_TestCase.py 1264 2007-06-04 17:56:50Z linjiao $"
+__id__ = "$Id: CrossSectionCalculator_TestCase.py 1264 2007-06-04 17:56:50Z linjiao $"
 
 # End of file 

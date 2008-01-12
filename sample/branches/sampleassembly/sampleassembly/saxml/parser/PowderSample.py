@@ -22,9 +22,9 @@ class PowderSample(AbstractNode):
 
     from sampleassembly.elements.PowderSample import PowderSample as ElementFactory
 
-    def onPhase(self, phase):
-        assert phase.type == 'crystal'
-        self.element.phase = phase
+    def onCrystal(self, crystalphase):
+        assert crystalphase.type == 'crystal'
+        self.element.phase = crystalphase
         return
 
     pass # end of PowderSample
