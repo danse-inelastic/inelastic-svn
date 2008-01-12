@@ -11,7 +11,7 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 PROJECT = crystal
-PACKAGE = crystalUtils
+PACKAGE = crystalIO
 
 #--------------------------------------------------------------------------
 #
@@ -35,8 +35,7 @@ all: export
 
 EXPORT_PYTHON_MODULES = \
 	__init__.py \
-	MonkhorstPack.py \
-
+	converters.py \
 
 
 export:: export-package-python-modules

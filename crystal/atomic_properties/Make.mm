@@ -11,7 +11,7 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 PROJECT = crystal
-PACKAGE = crystalUtils
+PACKAGE = atomic_properties
 
 #--------------------------------------------------------------------------
 #
@@ -35,8 +35,12 @@ all: export
 
 EXPORT_PYTHON_MODULES = \
 	__init__.py \
-	MonkhorstPack.py \
-
+	atomic_number.py \
+	average_mass.py \
+	average_neutron_abs_xs.py \
+	average_neutron_coh_xs.py \
+	average_neutron_inc_xs.py \
+	symbol.py \
 
 
 export:: export-package-python-modules
