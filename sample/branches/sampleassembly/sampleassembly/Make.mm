@@ -19,6 +19,7 @@ BUILD_DIRS = \
 	geometers \
 	predefined \
 	saxml \
+	visitors \
 
 RECURSE_DIRS = $(BUILD_DIRS)
 

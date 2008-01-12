@@ -37,6 +37,7 @@ EXPORT_PYTHON_MODULES = \
 	SampleAssembly.py \
 	Shape.py \
 	__init__.py \
+	phases.py \
 	xyzfile.py \
 
 

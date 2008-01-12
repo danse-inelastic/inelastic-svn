@@ -12,7 +12,7 @@
 #
 
 
-def xyzfile2crystal( filename ):
+def xyzfile2unitcell( filename ):
     from xyzfile import read
     return read(filename)
 

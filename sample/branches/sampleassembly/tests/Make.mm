@@ -1,6 +1,6 @@
 # -*- Makefile -*-
 #
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 #                               Michael A.G. Aivazis
 #                        California Institute of Technology
@@ -8,38 +8,34 @@
 #
 # <LicenseText>
 #
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
 
-PROJECT = sampleassembly
-PACKAGE = tests
+PROJECT = tests
 
-PROJ_CLEAN += $(PROJ_CPPTESTS)
+# directory structure
 
-PROJ_PYTESTS = signon.py
-PROJ_CPPTESTS = hello
-PROJ_TESTS = $(PROJ_PYTESTS) $(PROJ_CPPTESTS)
-PROJ_LIBRARIES = -L$(BLD_LIBDIR) -lsampleassembly
+BUILD_DIRS = \
+    sampleassembly \
 
+OTHER_DIRS = \
+
+RECURSE_DIRS = $(BUILD_DIRS) $(OTHER_DIRS)
 
 #--------------------------------------------------------------------------
 #
 
-all: $(PROJ_TESTS)
+all:
+	BLD_ACTION="all" $(MM) recurse
 
-test:
-	for test in $(PROJ_TESTS) ; do $${test}; done
+distclean::
+	BLD_ACTION="distclean" $(MM) recurse
 
-release: tidy
-	cvs release .
+clean::
+	BLD_ACTION="clean" $(MM) recurse
 
-update: clean
-	cvs update .
-
-#--------------------------------------------------------------------------
-#
-
-hello: hello.cc $(BLD_LIBDIR)/libsampleassembly.$(EXT_SAR)
-	$(CXX) $(CXXFLAGS) $(LCXXFLAGS) -o $@ hello.cc $(PROJ_LIBRARIES)
+tidy::
+	BLD_ACTION="tidy" $(MM) recurse
 
 # version
 # $Id$

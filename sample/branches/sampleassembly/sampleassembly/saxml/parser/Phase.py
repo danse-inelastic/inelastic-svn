@@ -26,8 +26,9 @@ class Phase(Node):
         for k,v in attributes.items(): attrs[str(k)] = v
 
         type = attrs['type']
-        from sampleassembly.elements import phase
-        self.element = phase( type )
+        from sampleassembly.elements import phases
+        factory = getattr(phases, type )
+        self.element = factory()
         return
 
 
@@ -41,8 +42,8 @@ class Phase(Node):
 
 
     def onXYZfile(self, xyzfile):
-        from sampleassembly.crystal.ioutils import xyzfile2crystal
-        self.element.crystal = xyzfile2crystal( xyzfile )
+        from sampleassembly.crystal.ioutils import xyzfile2unitcell
+        self.element.unitcell = xyzfile2unitcell( xyzfile )
         return
 
 

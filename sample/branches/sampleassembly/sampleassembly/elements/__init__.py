@@ -25,11 +25,6 @@ def powdersample( *args, **kwds ):
     return PowderSample( *args, **kwds )
 
 
-def phase( *args, **kwds ):
-    from Phase import Phase
-    return Phase( *args, **kwds )c
-
-
 def atom( *args, **kwds ):
     """create an atom
     

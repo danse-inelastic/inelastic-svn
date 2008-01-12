@@ -32,9 +32,11 @@ class parser_TestCase(TestCase):
         geometer = sampleassembly.local_geometer
         Ni_powder = sampleassembly.elements()[0]
         phase = Ni_powder.phase
+        self.assertEqual( phase.__class__.__name__, 'Crystal' )
         self.assertEqual( phase.chemical_formula, 'Ni' )
-        crystal = phase.crystal
-        print crystal
+        crystal = phase
+        unitcell = crystal.unitcell
+        print unitcell
         return
 
 

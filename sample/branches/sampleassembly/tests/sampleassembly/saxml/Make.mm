@@ -10,8 +10,8 @@
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-PROJECT = instrument
-PACKAGE = tests/instrument/nixml
+PROJECT = sampleassembly
+PACKAGE = tests/sampleassembly/saxml
 
 
 
