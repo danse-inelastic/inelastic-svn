@@ -378,7 +378,7 @@ class UnitCell:
 
 def create_unitcell( cellvectors, atomList, positionList):
     """Helper function to create a unit cell."""
-    rt = UnitCell( cellvectors )
+    rt = UnitCell( cellvectors = cellvectors )
     for a, p in zip( atomList, positionList ):
         site = Site(p,a)
         rt.addSite(site, '')
@@ -446,13 +446,16 @@ def uc_test3():
 def uc_test4():
     cellvectors = [ (1,0,0), (0,1,0), (0,0,1) ]
     uc = UnitCell(cellvectors=cellvectors)
+    assert (uc.getCellVectors() == cellvectors).all()
+    return
 
 def test():
     uc_test1()
     uc_test2()
-    uc_test3()
+    #uc_test3()
+    uc_test4()
     return
 
 
-if __name__ == "__main__": uc_test4()
+if __name__ == "__main__": test()
 
