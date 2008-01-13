@@ -22,7 +22,7 @@ class CrossSectionCalculator:
     def onPowderSample(self, powder):
         # a powder sample must have a crystal phase
         phase = powder.phase
-        assert crystal.type == 'crystal'
+        assert phase.type == 'crystal'
         crystal = phase
         return self.onCrystal(crystal)
 

@@ -12,7 +12,8 @@
 #
 
 
-from pyre.geometry.pml.parser.Block import Block
+#from pyre.geometry.pml.parser.Block import Block
+from instrument.geometry.pml.parser.Block import Block
 
 
 # version
