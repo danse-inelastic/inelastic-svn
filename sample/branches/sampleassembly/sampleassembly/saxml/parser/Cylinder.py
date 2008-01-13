@@ -12,7 +12,8 @@
 #
 
 
-from pyre.geometry.pml.parser.Cylinder import Cylinder
+#from pyre.geometry.pml.parser.Cylinder import Cylinder
+from instrument.geometry.pml.parser.Cylinder import Cylinder
 
 
 # version

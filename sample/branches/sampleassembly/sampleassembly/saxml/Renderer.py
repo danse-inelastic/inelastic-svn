@@ -13,8 +13,8 @@
 
 
 from pyre.weaver.mills.XMLMill import XMLMill
-from pyre.geometry.pml.Renderer import Renderer as ShapeRenderer
-
+#from pyre.geometry.pml.Renderer import Renderer as ShapeRenderer
+from instrument.geometry.pml.Renderer import Renderer as ShapeRenderer
 
 class Renderer(ShapeRenderer, XMLMill):
 

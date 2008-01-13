@@ -6,7 +6,7 @@
   
   <PowderSample name='Ni plate' type='sample'>
     <Shape>
-      <block diagonal="6*cm,10*cm,0.1*cm" />
+      <block width="6*cm" height="10*cm" thickness="0.1*cm" />
     </Shape>
     <Phase type="crystal">
       <ChemicalFormula>Ni</ChemicalFormula>
