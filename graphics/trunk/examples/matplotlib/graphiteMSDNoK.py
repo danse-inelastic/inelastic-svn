@@ -42,6 +42,6 @@ for t in legText:
 #pl.show()
 
 
-#pl.savefig('/home/brandon/tex/graphiteKH2/msdNoK.eps',dpi=600)
-pl.savefig('/home/brandon/tex/graphiteKH2/msdNoK.png')
+#pl.savefig('/home/jbk/tex/graphiteKH2/msdNoK.eps',dpi=600)
+pl.savefig('/home/jbk/tex/graphiteKH2/msdNoK.tiff')
 pl.savefig('msdNoK.png')
