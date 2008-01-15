@@ -34,6 +34,6 @@ setp(ylabels, fontsize=20)
 
 #show()
 
-savefig('/home/brandon/tex/graphiteKH2/diffusionConstantVsT.png',dpi=300)
+savefig('/home/jbk/tex/graphiteKH2/diffusionConstantVsT.png',dpi=300)
 #pl.savefig('/home/brandon/tex/graphiteKH2/msdNoK.png')
 #pl.savefig('msdNoK.png')
