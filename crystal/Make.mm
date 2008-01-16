@@ -16,7 +16,7 @@ PROJECT = crystal
 #--------------------------------------------------------------------------
 #
 
-BUILD_DIRS = atomic_properties ChemicalElements io symmetry crystalUtils crystalIO
+BUILD_DIRS = atomic_properties ChemicalElements crystalIO symmetry crystalUtils
 
 OTHER_DIRS = \
 
