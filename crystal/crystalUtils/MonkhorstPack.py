@@ -23,4 +23,4 @@ def MonkhorstPack(size):
         return (kpts + (0.5, 0.5, 0.5)) / size - (0.5, 0.5, 0.5)
 
 if __name__ == '__main__':
-    print MonkhorstPack((1, 2, 3))
+    print MonkhorstPack((1, 1, 1))
