@@ -105,7 +105,6 @@ def collectProperties( klass ):
 # Atom class
 class Atom(object):
 
-
     def __init__(self, Z=None, symbol=None, mass=None):
 
         if Z is None and symbol is None:
