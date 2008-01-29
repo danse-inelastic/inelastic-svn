@@ -34,8 +34,6 @@ setp(xlabels, fontsize=20)
 ylabels = getp(gca(), 'yticklabels')
 setp(ylabels, fontsize=20)
 
-show()
+savefig('/home/jbk/tex/graphiteKH2/diffusionConstantVsT.png',dpi=600)
 
-savefig('/home/jbk/tex/graphiteKH2/diffusionConstantVsT.png',dpi=300)
-#pl.savefig('/home/brandon/tex/graphiteKH2/msdNoK.png')
-#pl.savefig('msdNoK.png')
+show()

@@ -67,9 +67,9 @@ x=xlabel('E (meV)')
 x.set_fontsize(18)
 y=ylabel('S(Q,E) (arbitrary units)')
 y.set_fontsize(18)
-
+savefig(workingDirectory+sep+'vasp.jpeg')
 show()
-savefig(workingDirectory+sep+'vasp.png',dpi=300)
+
 
 
 plot(pure[:,0], pure[:,1], orthoCpmd[:,0], orthoCpmd[:,1], linewidth=2.0)
@@ -82,7 +82,7 @@ x=xlabel('E (meV)')
 x.set_fontsize(18)
 y=ylabel('S(Q,E) (arbitrary units)')
 y.set_fontsize(18)
-
+savefig(workingDirectory+sep+'cpmd.jpeg')
 show()
-savefig(workingDirectory+sep+'cpmd.png',dpi=300)
+
 
