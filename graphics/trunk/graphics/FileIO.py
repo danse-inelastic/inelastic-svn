@@ -2,6 +2,8 @@ import wx
 from NetcdfFileDialog import NetcdfFileDialog
 from VariableSelection import VariableSelection
 import wx.wizard as wiz
+from pylab import savefig
+from graphics.BackendModule import backend
         
 class FileIO:
     
@@ -99,19 +101,20 @@ class FileIO:
     def OnSavePlot(self, event):
         import os
         wildcard = "All files (*)|*"
-        dlg = wx.FileDialog(
-            self, message="Save plot as",
+        dlg = wx.FileDialog(self.parent.backendWrap, 
+            message="Save plot as",
             defaultDir=os.getcwd(), 
             defaultFile="",
             wildcard=wildcard,
-            style=wx.FD_SAVE | wx.CHANGE_DIR)
+            style=wx.SAVE)# | wx.CHANGE_DIR)
         
         # Show the dialog and retrieve the user response. If it is the OK response, 
         # process the data.
         if dlg.ShowModal() == wx.ID_OK:
             path = dlg.GetPath()
-            if self.backend=='matplotlib':
-                savefig(path)   
-            elif self.backend=='vtk':
-                hardcopy(path)
+            if backend=='matplotlib':
+                self.parent.backendWrap.figure.savefig(path)   #replace this with the common api
+            elif backend=='vtk':
+                pass
+                #hardcopy(path)  #replace this with the common api
         dlg.Destroy()

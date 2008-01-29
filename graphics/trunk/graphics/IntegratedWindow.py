@@ -30,14 +30,19 @@ class IntegratedWindowPanel(wx.Panel):
         splitter.AppendWindow(self.plotBrowser, 100)
 
         self.backendWrap = MatplotlibWrap(self,-1, size=(600,546))
-        #self.backendWrap = VtkWrap(self, size=(70,546))
+        #self.backendWrap = VtkWrap(self, size=(600,546))
         splitter.AppendWindow(self.backendWrap, 700)
 
         self.propertyEditor = PropertyEditor(self,size=(125,546))
         splitter.AppendWindow(self.propertyEditor, 125)
         
         self.io=FileIO(self)
-        self.testSqomega()
+        self.testSave()
+
+    def testSave(self):
+        x,y=self.io.extractColumns('/home/jbk/DANSE/MolDyn/molDynamics/utils/gr.out')
+        self.backendWrap.addLine(x, y)
+        self.io.OnSavePlot(None)
 
     def testColumnInput(self):
         x,y=self.io.extractColumns('/home/jbk/DANSE/graphics/trunk/tests2/api/DOS_Al6x6x6-10.plot')
@@ -59,7 +64,7 @@ class IntegratedWindowPanel(wx.Panel):
         from Scientific.IO.NetCDF import NetCDFFile 
         file = NetCDFFile(file1, 'r')
         vars = file.variables.keys()
-        print vars
+        #print vars
         dsf=file.variables['dsf'].getValue() #Numeric array
         q=file.variables['q'].getValue()
         frequency=file.variables['frequency'].getValue()
@@ -104,7 +109,7 @@ def runGraphics():
     frame = IntegratedWindowFrame(None)
     frame.Show()
     app.MainLoop()
-    frame.testColumnInput()
+    #frame.testColumnInput()
     #self.testNetcdfInput()
 
 if __name__ == "__main__":
