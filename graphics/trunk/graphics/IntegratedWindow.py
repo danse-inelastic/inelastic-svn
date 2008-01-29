@@ -37,7 +37,14 @@ class IntegratedWindowPanel(wx.Panel):
         splitter.AppendWindow(self.propertyEditor, 125)
         
         self.io=FileIO(self)
-        self.testSave()
+        self.testNiPlot()
+
+    def testNiPlot(self):
+        x,y=self.io.extractColumns('/home/jbk/DANSE/MolDyn/molDynamics/tests/utilsTests/Ni.345.gr.out')
+        self.backendWrap.addLine(x, y)
+        x,y=self.io.extractColumns('/home/jbk/DANSE/MolDyn/molDynamics/tests/utilsTests/Ni.691.gr.out')
+        self.backendWrap.addLine(x, y)
+        #self.io.OnSavePlot(None)
 
     def testSave(self):
         x,y=self.io.extractColumns('/home/jbk/DANSE/MolDyn/molDynamics/utils/gr.out')
