@@ -8,7 +8,7 @@ def double():
     sc.i.n=1
     sc.i.l=2
     sc.create()
-    sc.writeSupCellXYZFile('mof74cgDoubled.xyz')
+    sc.writeSupCellXYZFile('kc24DomainsH2OneFrameStacked.xyz')
 #        sc = Supercell(coords, cell, 1, 1, 2)#, coordType='cartesian')
 #        sc.writeSupCellXYZFile('MOF74_neutron_4K_a-1x1x2.xyz')
 #        sc = Supercell(coords, cell, 2, 2, 2)#, coordType='cartesian')
