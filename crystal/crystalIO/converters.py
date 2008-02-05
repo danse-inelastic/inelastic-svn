@@ -2,8 +2,8 @@
 
 __doc__ = """Converters for UnitCell."""
 
-from crystal.UnitCell import *
-from crystal.Atom import *
+from inelastic.crystal.UnitCell import *
+from inelastic.crystal.Atom import *
 
 def listOfAtom2UnitCell(loa):
     """Utility to convert a ListOfAtom instance to a UnitCell instance."""
@@ -49,7 +49,7 @@ def p4vaspStruct2UnitCell(struct):
     struct=run.FINAL_STRUCTURE
     """ 
     try:
-        from vasp.parsing.Structure import Structure
+        from AbInitio.vasp.parsing.Structure import Structure
     except ImportError:
         print "P4Vasp could not be imported in Python."
 
@@ -74,8 +74,8 @@ def unitCell2P4vaspStruct(uc):
     filled in from the UnitCell."""
     try:
         #from vaspparsing.SystemPM import *
-        from vasp.parsing.Structure import Structure
-        import vasp.parsing.matrix as p4mat
+        from AbInitio.vasp.parsing.Structure import Structure
+        import AbInitio.vasp.parsing.matrix as p4mat
     except ImportError:
         print "P4Vasp could not be imported in Python."
     struct = Structure()
