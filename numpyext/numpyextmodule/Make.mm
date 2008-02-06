@@ -25,6 +25,7 @@ PROJ_SRCS = \
 	exceptions.cc \
 	getdataptr.cc \
 	misc.cc \
+	wrapdataptr.cc \
 	Iterator1D_Example.cc \
 
 

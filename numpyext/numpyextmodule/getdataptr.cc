@@ -23,16 +23,11 @@
 #include "Python.h"
 #include "numpy/arrayobject.h"
 
+#include "utils.h"
 #include "getdataptr.h"
 
 
 namespace numpyextmod {
-
-  void detachFromNumpyArray( void *data, void *npyarray)
-  {
-    PyObject * obj = static_cast<PyObject *> ( npyarray );
-    Py_DECREF( obj );
-  }
 
   // getdataptr
   char getdataptr__name__[] = "getdataptr";
@@ -58,7 +53,7 @@ namespace numpyextmod {
     Py_INCREF( pyarray );
     void *ptr = PyArray_DATA( pyarray );
 
-    return PyCObject_FromVoidPtrAndDesc( ptr, pyarray, detachFromNumpyArray );
+    return PyCObject_FromVoidPtrAndDesc( ptr, pyarray, detach );
   }
 
 

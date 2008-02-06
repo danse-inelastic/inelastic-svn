@@ -19,6 +19,7 @@
 #include "misc.h"          // miscellaneous methods
 #include "Iterator1D_Example.h"
 #include "getdataptr.h"
+#include "wrapdataptr.h"
 
 // the method table
 
@@ -42,6 +43,10 @@ struct PyMethodDef pynumpyext_methods[] = {
     // print double array 2
     {numpyextmod::printdblarray2__name__, numpyextmod::printdblarray2,
      METH_VARARGS, numpyextmod::printdblarray2__doc__},
+
+    // wrapdataptr
+    {numpyextmod::wrapdataptr__name__, numpyextmod::wrapdataptr,
+     METH_VARARGS, numpyextmod::wrapdataptr__doc__},
 
 
 // Sentinel

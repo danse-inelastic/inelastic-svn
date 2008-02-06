@@ -25,14 +25,14 @@ namespace numpyextmod
   extern char getdataptr__name__[];
   extern char getdataptr__doc__[];
   extern "C"
-    PyObject * getdataptr(PyObject *, PyObject *args);
+  PyObject * getdataptr(PyObject *, PyObject *args);
 
   // examples to use void ptr
   // printdblarray2
   extern char printdblarray2__name__[];
   extern char printdblarray2__doc__[];
   extern "C"
-    PyObject * printdblarray2(PyObject *, PyObject *args);
+  PyObject * printdblarray2(PyObject *, PyObject *args);
 
 } // numpyextmod::
 
