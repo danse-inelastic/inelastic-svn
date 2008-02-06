@@ -7,4 +7,11 @@ property setting and plot item selection.
 * Inclusion / expansion of graphics capabilities developed in individual subgroups (reflectometry, etc.).
 * Include IDL in graphics api.
 
+tickets:
+* add rebinning capabilities
+* merge excitation slicer with graphics
+* merge Histogram with graphics (and include capbilities to handle higher-dimensional datasets
+* talk to Gael Varguax and look at his work
+* show graphic of metal smearing as raise temperature
+
 Bearing this in mind, run IntegratedWindow.py to start the API Tester.
