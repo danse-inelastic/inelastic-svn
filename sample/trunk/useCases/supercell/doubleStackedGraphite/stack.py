@@ -3,7 +3,7 @@
 from sample.sampleCreation.supercell.Supercell import Supercell
 
 def double():
-    sc = Supercell(readFilePath=Nonecoords, cell)#, 1, 1, 1)#, coordType='cartesian')
+    sc = Supercell(readFilePath='kc24DomainsH2OneFrame.xyz',coordType='cartesian')#, 1, 1, 1)#, coordType='cartesian')
     sc.i.m=1
     sc.i.n=1
     sc.i.l=2
