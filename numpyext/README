@@ -1,0 +1,17 @@
+
+This package provides tools to make use numpy arrays in c++ and c.
+
+1. Iterator1D template 
+Iterator1D generates iterators of numpy array so that you can use it in c++
+just as it is 1D iterator.
+
+see numpyextmodule/Iterator1D_Example.cc and tests/signon.py for an example.
+
+2. getdataptr
+getdataptr creates PyCObject of void pointer pointing to the start of the
+data array held in a numpy array.
+
+To manipulate the pointer, you must be sure that you know its layout 
+(contiguous or not), and know what you are doing with it.
+
+see numpyextmodule/getdataptr.cc and tests/signon.py for an example.
