@@ -26,6 +26,9 @@ except ImportError, msg:
     '''
 
 
+import _bpext as binding
+
+
 def extract_ptr( bpobject, typename ):
     '''Extract pointer out of a boost python object and return a PyCObject
 holding that pointer. pointer is shared.
@@ -39,7 +42,6 @@ Examples:
 
   extract_ptr( bpo, 'vec_double' )
   '''
-    import _bpext as binding
     return binding.extract_ptr( bpobject, typename )
 
 
@@ -57,7 +59,6 @@ Examples:
 
   wrap_ptr( pycobj, 'vec_double' )
   '''
-    import _bpext as binding
     return binding.wrap_ptr( pycobject, typename )
 
 
