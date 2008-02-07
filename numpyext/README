@@ -15,3 +15,12 @@ To manipulate the pointer, you must be sure that you know its layout
 (contiguous or not), and know what you are doing with it.
 
 see numpyextmodule/getdataptr.cc and tests/signon.py for an example.
+
+
+3. wrapdataptr
+wrapdataptr wrap a void * pointer to be a numpy array. The returned
+numpy array shares memory with the original data pointer. So be
+careful to keep a reference to the original python object where the
+void * pointer is derived from.
+
+See numpyextmodule/wrapdataptr.cc and tests/signon.py for an example.
