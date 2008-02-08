@@ -2,8 +2,10 @@
 
 __doc__ = """Converters for UnitCell."""
 
-from inelastic.crystal.UnitCell import *
-from inelastic.crystal.Atom import *
+#from inelastic.crystal.UnitCell import *
+#from inelastic.crystal.Atom import *
+from crystal.UnitCell import *
+from crystal.Atom import *
 
 def listOfAtom2UnitCell(loa):
     """Utility to convert a ListOfAtom instance to a UnitCell instance."""
