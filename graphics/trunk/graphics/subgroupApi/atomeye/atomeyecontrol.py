@@ -27,10 +27,11 @@ import re
 import tempfile
 from threading import Timer
 
-def plot(structure, executable):
+def plot(structure=None, executable=None):
     '''Plots the structure in AtomEye.
     
-    @param structure: (Structure class) structure to be plotted
+    @param structure: (Structure class) structure to be plotted or
+                      (UnitCell class) unit cell to be plotted
     @param executable: (string) Name of atomeye executable. If the executable is
     not on the user's PATH, then the full path to the executable is needed.
     
@@ -38,25 +39,15 @@ def plot(structure, executable):
     deletes both the file and the directory.
     Filename is given according to the structure's title.
     '''
-    # do not plot empty structure
-    if (structure != None) and (len(structure) > 0):
-        dirname = tempfile.mkdtemp()
-        filename = structure.title
-        if not filename:
-            filename = "structure"
-        else:
-            filename = re.sub('\W', '_', filename)
-
-        fullpath = os.path.join(dirname, filename)
-
-        # Remove the files after atomeye has a chance to read them. Since we
+    def runAtomeye():
+                # Remove the files after atomeye has a chance to read them. Since we
         # can't tell when this actually happens, we start at threaded timer
         # delete them later.
         def __removeFiles(dir, file):
             if os.path.exists(file): os.remove(file)
             if os.path.exists(dir): os.rmdir(dir)
             return
-        T = Timer(20, __removeFiles, args=[dirname, fullpath])
+        T = Timer(10, __removeFiles, args=[dirname, fullpath])
 
         # This should be done with try...except...finally, but this only works
         # properly in python 2.5.
@@ -74,6 +65,7 @@ def plot(structure, executable):
 
         try:
             structure.write(fullpath,"xcfg")
+            #print command
             proc = subprocess.Popen(command)
             T.start()
         except OSError:
@@ -83,7 +75,25 @@ def plot(structure, executable):
             raise ControlConfigError("Either AtomEye is not present on your system or you have not specified the path to AtomEye under Edit->Preferences.")
         except:
             T.start()
-            raise
+            raise    
+    
+    # do not plot empty structure
+    if (structure != None) and (len(structure) > 0):
+        dirname = tempfile.mkdtemp()
+        filename = structure.title
+        if not filename:
+            filename = "structure"
+        else:
+            filename = re.sub('\W', '_', filename)
+
+        fullpath = os.path.join(dirname, filename)
+        runAtomeye()
+        
+        
+
+        
+
+        
 
 
 ##### testing code ############################################################
