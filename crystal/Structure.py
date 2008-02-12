@@ -33,7 +33,7 @@ class Structure(list):
         lattice -- coordinate system (instance of Lattice)
     """
 
-    def __init__(self, unitCell=None, title="", filename=None):
+    def __init__(self, atoms=None,unitCell=None, title="", filename=None):
         """define group of atoms in a specified lattice.
 
         atoms    -- list of Atom instances to be included in this Structure.
@@ -73,7 +73,8 @@ class Structure(list):
             self.read(filename)
         # otherwise assign list of atoms to self
         else:
-            self[:] = unitCell.getAtomList()
+            self[:] = atoms
+            #self[:] = unitCell.getAtoms()
         return
 
     def __str__(self):

@@ -38,11 +38,12 @@ all: export
 EXPORT_PYTHON_MODULES = \
 	__init__.py \
 	Atom.py \
+	AtomLoader.py \
 	CrystalStructure.py \
 	properties.py \
+	Structure.py \
 	UnitCell.py \
 	UnitCellBuilder.py \
-	AtomLoader.py \
 	utils.py \
 
 
