@@ -1,4 +1,4 @@
-# Copyright (c) 2006 Brandon Keith. All rights reserved.
+# Copyright (c) 2006 Nanorex, Inc. All rights reserved.
 """
 sim.pyx
 

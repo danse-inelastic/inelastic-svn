@@ -1,18 +1,19 @@
 from graphics.common import *
 import vtk, os
+#from graphics.BackendModule import use
 
 from graphics.numpytools import ravel, zeros, array, allclose, Float
 
 #import vtk.util.colors
 
-import Tkinter
+#import Tkinter
 #from vtk.tk.vtkTkRenderWidget import vtkTkRenderWidget
-from vtk.tk import vtkTkRenderWidget
+#from vtk.tk import vtkTkRenderWidget
 
 vtkEmbedding='wx'#'tk'
 
-#from vtk.wx.wxVTKRenderWindow import wxVTKRenderWindow
-#import wxPython.wx
+from vtk.wx.wxVTKRenderWindow import wxVTKRenderWindow
+import wxPython.wx
 
 class VtkBackend(BaseClass):
     """Backend using VTK"""
@@ -21,12 +22,11 @@ class VtkBackend(BaseClass):
         BaseClass.__init__(self)
         self.parent = parent
         self.init()
-        
 
     def init(self):
         self._master = None
         self.figure(self._attrs['curfig'])
-
+        
         # convert tables for formatstrings
         self._colors = {
             '':  (0,0,1), # No color-->Blue
@@ -132,11 +132,13 @@ class VtkBackend(BaseClass):
         fig = self.gcf()
         import wx
         # first create the wx app / frame 
-        # app = wx.PySimpleApp()
-        frame = wx.Frame(None, wx.ID_ANY, "Graphics - Figure %d" % \
-                        self._attrs['curfig'], size=(590, 590))
+        if self._master is None:
+            self._master = wx.PySimpleApp()
+            self._master.MainLoop()
+        frame = wx.Frame(None, wx.ID_ANY, "Graphics - Figure %d" % self._attrs['curfig'], size=(590, 590))
         #frame.Iconize(True) # this would be the easy way to hide the frame until replot, but
         # since it doesn't seem to work we have to subclass wxVTKRenderWindow and redo the __init__ sequence so the frame never appears
+        self._master.SetTopWindow(frame)
         frame.Hide()
         fig._root = frame
 
@@ -1211,7 +1213,7 @@ class VtkBackend(BaseClass):
             fig._g
         except:# get the parent's render window if it exists
             if self.parent==None:
-                raise Exception
+#                raise Exception
                 if vtkEmbedding=='tk':
                     try:
                         fig._g = self._create_Tk_gui()
@@ -1223,15 +1225,16 @@ class VtkBackend(BaseClass):
                         fig._g.SetSize(width, height)
                         fig._g.OffScreenRenderingOn()
                 elif vtkEmbedding=='wx':
-                    try:
-                        fig._g = self._create_wx_gui()
-                    except:
-                        # can't create gui; only offscreen rendering
-                        fig._g = vtk.vtkRenderWindow()
-                        try: width, height = fig.get('size')
-                        except TypeError: width, height = (640, 480)
-                        fig._g.SetSize(width, height)
-                        fig._g.OffScreenRenderingOn()
+                    fig._g = self._create_wx_gui()
+#                    try:
+#                        fig._g = self._create_wx_gui()
+#                    except:
+#                        # can't create gui; only offscreen rendering
+#                        fig._g = vtk.vtkRenderWindow()
+#                        try: width, height = fig.get('size')
+#                        except TypeError: width, height = (640, 480)
+#                        fig._g.SetSize(width, height)
+#                        fig._g.OffScreenRenderingOn()
             else:
                 try:
                     fig._g = self.parent.renwin  #TODO this needs to be fixed
@@ -1253,7 +1256,7 @@ class VtkBackend(BaseClass):
             if self._master is not None:
                 fig._root.withdraw() # hide window
         elif vtkEmbedding=='wx':
-            fig._root.Iconize(True)
+            fig._root.Hide()
         del fig._g
         BaseClass.clf(self)
 
@@ -1448,9 +1451,38 @@ class VtkBackend(BaseClass):
         lut.Build()
         return lut
 
+from graphics.BackendModule import backend
 
-#vtkBackend = VtkBackend(None) # Create backend instance
-#use(vtkBackend, globals()) # Export public namespace of vtkBackend to globals()
+
+
+def use(plt, namespace=globals()):
+    """Export the namespace of backend instance to namespace."""
+    plt_dict = {}
+    plt_dict[backend] = plt
+    for item in plt.__dict__:
+        plt_dict[item] = eval(backend+'.'+item)                                   
+    for item in dir(plt.__class__):
+        if not '__' in item:  
+            plt_dict[item] = eval(backend+'.'+item) 
+    namespace.update(plt_dict)  # Add to global namespace 
+
+    # If this module is imported
+    try:
+        __all__
+    except:
+        __all__ = ['vtkBackend']
+    try:
+        for item in plt_dict.keys():
+            __all__.append(item)
+    except:
+        pass
+    del(__all__)
+    
+    
+# for now, uncomment this if you want to use it in scripting mode
+vtkBackend = VtkBackend(None) # Create backend instance
+use(vtkBackend, globals()) # Export public namespace of vtkBackend to globals()
+
 
 def get_backend():
     return vtkBackend._g

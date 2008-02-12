@@ -1,15 +1,15 @@
-backend='matplotlib'
-#backend='vtk'
+#backend='matplotlibBackend'
+backend='vtkBackend'
 
 def use(plt, namespace=globals()):
     """Export the namespace of backend instance to namespace."""
     plt_dict = {}
-    plt_dict['vtkBackend'] = plt
-    for item in vtkBackend.__dict__:
-        plt_dict[item] = eval('vtkBackend.'+item)                                   
-    for item in dir(vtkBackend.__class__):
+    plt_dict[backend] = plt
+    for item in plt.__dict__:
+        plt_dict[item] = eval(backend+'.'+item)                                   
+    for item in dir(plt.__class__):
         if not '__' in item:  
-            plt_dict[item] = eval('vtkBackend.'+item) 
+            plt_dict[item] = eval(backend+'.'+item) 
     namespace.update(plt_dict)  # Add to global namespace 
 
     # If this module is imported

@@ -9,7 +9,7 @@ import types
 import string
 from math import cos, sin, sqrt
 
-PROFILING = True
+PROFILING = False
 if PROFILING:
     import hotshot, hotshot.stats
 
