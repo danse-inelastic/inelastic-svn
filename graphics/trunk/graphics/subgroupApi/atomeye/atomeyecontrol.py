@@ -91,8 +91,8 @@ if __name__ == "__main__":
     from diffpy.Structure import Structure
 
     structure = Structure()
-    structure.read('../../tests/testdata/LaMnO3.pdb')
+    structure.read('LaMnO3.pdb')
     
-    plot(structure)
+    plot(structure,'/home/jbk/atomEye/A.i686')
     
 ##### end of testing code #####################################################    
