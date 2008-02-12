@@ -3,10 +3,6 @@
 __doc__ = """Averaged mass of chemical elements
 """
 
-def lookup( atom ):
-    return masses[ atom.Z ]
-
-
 masses = [
       None, # X
    1.00794, # H
@@ -112,4 +108,7 @@ masses = [
       None, # Md
       None, # No
       None] # Lw
+
+def lookup( atom ):
+    return masses[ atom.Z ]
 
