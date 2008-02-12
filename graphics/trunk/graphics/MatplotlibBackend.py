@@ -219,7 +219,33 @@ class MatplotlibBackend(BaseClass):
                             orientation='portrait'
                             )
         #print "In hardcopy matplotlib"
+       
+from graphics.BackendModule import backend
+backend='matplotlibBackend'
         
-backend='matplotlib_'
-plt = MatplotlibBackend()
-use(plt, globals()) # Export public namespace of plt to globals()
+def use(plt, namespace=globals()):
+    """Export the namespace of backend instance to namespace."""
+    plt_dict = {}
+    plt_dict[backend] = plt
+    for item in plt.__dict__:
+        plt_dict[item] = eval(backend+'.'+item)                                   
+    for item in dir(plt.__class__):
+        if not '__' in item:  
+            plt_dict[item] = eval(backend+'.'+item) 
+    namespace.update(plt_dict)  # Add to global namespace 
+
+    # If this module is imported
+    try:
+        __all__
+    except:
+        __all__ = [backend]
+    try:
+        for item in plt_dict.keys():
+            __all__.append(item)
+    except:
+        pass
+    del(__all__)
+
+
+matplotlibBackend = MatplotlibBackend()
+use(matplotlibBackend, globals()) # Export public namespace of plt to globals()

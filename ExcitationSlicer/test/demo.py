@@ -1,5 +1,5 @@
-import UnitCell as UC
-from Atom import *
+import crystal.UnitCell as UC
+from crystal.Atom import *
 from IsoSurfacePlotter import *
 from DataSlicer import *
 import phonIsoSurfaceCalcor as isocalc

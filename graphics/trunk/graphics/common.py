@@ -3686,70 +3686,76 @@ class DerivedClass(BaseClass):
 
 
 
-def use(plt, namespace=globals()):
-    """Export the namespace of backend instance to namespace."""
-    plt_dict = {}
-    plt_dict['vtkBackend'] = plt
-    for item in vtkBackend.__dict__:
-        plt_dict[item] = eval('vtkBackend.'+item)                                   
-    for item in dir(vtkBackend.__class__):
-        if not '__' in item:  
-            plt_dict[item] = eval('vtkBackend.'+item) 
-    namespace.update(plt_dict)  # Add to global namespace 
-
-    # If this module is imported
-    try:
-        __all__
-    except:
-        __all__ = ['vtkBackend']
-    try:
-        for item in plt_dict.keys():
-            __all__.append(item)
-    except:
-        pass
-    del(__all__)
+#def use(plt, namespace=globals()):
+#    """Export the namespace of backend instance to namespace."""
+#    plt_dict = {}
+#    plt_dict['vtkBackend'] = plt
+##    for item in vtkBackend.__dict__:
+##        plt_dict[item] = eval('vtkBackend.'+item)                                   
+##    for item in dir(vtkBackend.__class__):
+##        if not '__' in item:  
+##            plt_dict[item] = eval('vtkBackend.'+item) 
+#    for item in plt.__dict__:
+#        print plt.__name__
+#        plt_dict[item] = eval(plt.__name__+'.'+item)                                   
+#    for item in dir(plt.__class__):
+#        if not '__' in item:  
+#            plt_dict[item] = eval(plt.__name__+'.'+item) 
+#    namespace.update(plt_dict)  # Add to global namespace 
+#
+#    # If this module is imported
+#    try:
+#        __all__
+#    except:
+#        __all__ = ['vtkBackend']
+#    try:
+#        for item in plt_dict.keys():
+#            __all__.append(item)
+#    except:
+#        pass
+#    del(__all__)
 
         
-def debug(plt, level=10):
-
-    def print_(item, spaces=10):
-        """Indent print"""
-        pref = ' '*spaces
-        print pref+('\n'+pref).join((str(item)).split('\n'))
-        
-    print "vtkBackend:"
-    print plt
-    if level > 0:
-        for fignr in vtkBackend._figs:
-            print "\nFig %d:" % fignr
-            fig = vtkBackend._figs[fignr]
-            print fig
-
-            if level > 1:
-                axes_ = fig.get('axes')
-                for axnr in axes_.keys():
-                    print_("\nAx %d:" % axnr, 4)
-                    ax = axes_[axnr]
-                    print_(ax, 8)
-
-                    if level > 2:
-                        print_("\nCamera:", 4)
-                        print_(ax.get('camera'), 8)
-
-                        print_("\nColorbar:", 4)
-                        print_(ax.get('colorbar'), 8)
-
-                        print_("\nLights:", 4)
-                        for light_ in ax.get('lights'):
-                            print_(light_, 8)
-
-                        print_("\nPlotitems:", 4)
-                        for i, item in enumerate(ax.get('plotitems')):
-                            print_('item number %s %s:' %(i, repr(item)), 8)
-                            print_(item, 12)
-                            
-                            if level > 3:
-                                print_("Material:", 12)
-                                print_(item.get('material'), 16)
-
-                            print ''
+#def debug(plt, level=10):
+#
+#    def print_(item, spaces=10):
+#        """Indent print"""
+#        pref = ' '*spaces
+#        print pref+('\n'+pref).join((str(item)).split('\n'))
+#        
+#    print "vtkBackend:"
+#    print plt
+#    if level > 0:
+#        for fignr in vtkBackend._figs:
+#            print "\nFig %d:" % fignr
+#            fig = vtkBackend._figs[fignr]
+#            print fig
+#
+#            if level > 1:
+#                axes_ = fig.get('axes')
+#                for axnr in axes_.keys():
+#                    print_("\nAx %d:" % axnr, 4)
+#                    ax = axes_[axnr]
+#                    print_(ax, 8)
+#
+#                    if level > 2:
+#                        print_("\nCamera:", 4)
+#                        print_(ax.get('camera'), 8)
+#
+#                        print_("\nColorbar:", 4)
+#                        print_(ax.get('colorbar'), 8)
+#
+#                        print_("\nLights:", 4)
+#                        for light_ in ax.get('lights'):
+#                            print_(light_, 8)
+#
+#                        print_("\nPlotitems:", 4)
+#                        for i, item in enumerate(ax.get('plotitems')):
+#                            print_('item number %s %s:' %(i, repr(item)), 8)
+#                            print_(item, 12)
+#                            
+#                            if level > 3:
+#                                print_("Material:", 12)
+#                                print_(item.get('material'), 16)
+#
+#                            print ''

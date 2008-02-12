@@ -98,7 +98,7 @@ if __name__ == '__main__':
         # let all plots flash on the screen with 1 s pause
         clear_figure = False
         prompt = ''
-        pause = 4
+        pause = 2
     else:
         # press return for each plot on the screen
         clear_figure = False

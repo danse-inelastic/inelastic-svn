@@ -43,7 +43,7 @@ def setupUi(win):
     # Create the Build menu.
     win.buildStructuresMenu.addAction(MainWindow.toolsDepositAtomAction)
     win.buildStructuresMenu.addAction(win.buildDnaAction)
-    win.buildStructuresMenu.addAction(win.buildDnaOrigamiAction)    
+    #win.buildStructuresMenu.addAction(win.buildDnaOrigamiAction)    
     win.buildStructuresMenu.addAction(win.insertNanotubeAction)
     win.buildStructuresMenu.addAction(win.insertGrapheneAction)
     win.buildStructuresMenu.addAction(MainWindow.toolsCookieCutAction)
