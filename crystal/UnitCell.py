@@ -18,6 +18,7 @@ class Site:
         self._position = np.array( position )
         self._atom = atom
         self._occproba = occproba
+        self.xyz=self._position
 
     def __str__(self):
         rt = str(self._position) + ":" + str(self._atom)
@@ -114,6 +115,7 @@ class UnitCell:
         self._n = 0
         self._numAtoms = 0
         self._numSites = 0
+        self.base=self._cellvectors
         return
 
     def __iter__(self): return self._sites.__iter__()
@@ -128,7 +130,9 @@ class UnitCell:
             rt += "\n%s \n" % (self._siteIds[siteId].getAtom())
             continue
         return rt
-
+    
+    def __len__(self):
+        return self.getNumAtoms()
 
     def addSite(self, site, siteId=None):
         """Adds a site to the unit cell."""
