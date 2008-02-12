@@ -1,7 +1,8 @@
-from crystal.Structure import UnitCell,Site,Atom
+from crystal.Structure import Structure,UnitCell,Atom
+from crystal.UnitCell import Site
 
 def uc_test():
-    uc = UnitCell( )
+    uc = UnitCell()
 
     at1 = Atom(symbol='Fe', mass=57)
     at2 = Atom(symbol='Al')
@@ -15,13 +16,19 @@ def uc_test():
     
     uc.addSite(site1, "Fe1" )
     uc.addSite(site2, "Al1" )
-    uc.addSite(site3, "")
-    uc.addSite(site4, "")
-    uc.addSite(site5, "")
+    uc.addSite(site3, "Zr1")
+    uc.addSite(site4, "Zr2")
+    uc.addSite(site5, "Zr3")
+    
+    atoms= uc.getAtoms()
+    print atoms
+    
+    structure=Structure(atoms,uc)
+    print structure
 
     from atomeyecontrol import plot
     
-    plot(uc,'/home/jbk/atomEye/A.i686')
+    plot(structure,'/home/jbk/atomEye/A.i686')
         
 if __name__ == "__main__":
     uc_test()
