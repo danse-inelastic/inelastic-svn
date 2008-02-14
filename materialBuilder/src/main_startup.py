@@ -49,7 +49,7 @@ def startup_script( main_globals):
     # If you don't want the splashscreen, just rename the splash image.
     # mark 060131.
     from Utility import imagename_to_pixmap
-    splash_pixmap = imagename_to_pixmap( "images/splash.png" ) # rename it if you don't want it.
+    splash_pixmap = imagename_to_pixmap( "images/danse_logo.jpg")#splash.png" ) # rename it if you don't want it.
     if not splash_pixmap.isNull():
         splash = QSplashScreen(splash_pixmap) # create the splashscreen
         splash.show()
