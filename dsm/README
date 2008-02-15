@@ -1,7 +1,12 @@
-Data stream model helps developers to build "chains" of connected computing nodes
-and run them. A computing node has input/ouput sockets, and the "dsm runner"
-is responsible to carry "data streams" through the "chains" and feed "data streams"
-to computing nodes.
+Data stream model helps developers to build "chains" of connected 
+computing nodes and run them. 
+A computing node has input/ouput sockets, and the "dsm runner"
+is responsible to carry "data streams" through the "chains" 
+and feed "data streams" to computing nodes.
+
+Usage:
+
+ Please read the main function in Composite.py for an example.
 
 Notes:
 
