@@ -18,12 +18,13 @@ try:
     import boost.python
 except ImportError, msg:
     print msg
-    raise '''
+    print '''
+Warning:
     This module is an extension of boost.python.
     for example, it extracts pointer from boost.python object.
-    therefore, a module of boost.python must be loaded before this
+    Sometimes, a module of boost.python must be loaded before this
     module can be successfully loaded.
-    '''
+'''
 
 
 import _bpext as binding

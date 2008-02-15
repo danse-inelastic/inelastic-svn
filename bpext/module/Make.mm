@@ -18,7 +18,7 @@ MODULE = _bpext
 include std-pythonmodule.def
 include local.def
 
-PROJ_CXX_SRCLIB = -lbpext
+PROJ_CXX_SRCLIB = -lbpext -lboost_python  -L$(BOOSTPYTHON_LIBDIR) -ljournal
 #-lscitbx_boost_python -L$(BOOSTPYTHON_LIBDIR)
 
 ifeq (Win32, ${findstring Win32, $(PLATFORM_ID)})
