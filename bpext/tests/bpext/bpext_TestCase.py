@@ -30,6 +30,19 @@ class bpext_TestCase(TestCase):
         self.assertAlmostEqual( v[3], v1[3] )
         self.assertAlmostEqual( v[3], 88 )
         return
+
+    def test2(self):
+        "bpext: double array"
+        import journal
+        journal.debug('wrap_native_ptr').activate()
+        
+        import bpext._bpext as binding
+        arr = binding.newdblarr(10)
+
+        wrapped_ptr_bpobj = binding.wrap_native_ptr( arr )
+
+        print wrapped_ptr_bpobj
+        return
     
     pass # end of bpext_TestCase
 

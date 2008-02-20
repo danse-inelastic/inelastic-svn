@@ -58,6 +58,7 @@ EXPORT_HEADERS = \
 	wrapper_registry.h \
 	extract_ptr.h \
 	wrap_ptr.h \
+	WrappedPointer.h \
 
 EXPORT_LIBS = $(PROJ_SAR)
 EXPORT_BINS = $(PROJ_DLL)

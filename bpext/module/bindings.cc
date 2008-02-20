@@ -17,6 +17,7 @@
 #include "bindings.h"
 
 #include "misc.h"          // miscellaneous methods
+#include "dblarr.h"
 
 // the method table
 
@@ -32,6 +33,14 @@ struct PyMethodDef pybpext_methods[] = {
     {pybpext_wrap_ptr__name__, 
      pybpext_wrap_ptr,
      METH_VARARGS, pybpext_wrap_ptr__doc__},
+
+    {pybpext_wrap_native_ptr__name__, 
+     pybpext_wrap_native_ptr,
+     METH_VARARGS, pybpext_wrap_native_ptr__doc__},
+
+    {pybpext_newdblarr__name__, 
+     pybpext_newdblarr,
+     METH_VARARGS, pybpext_newdblarr__doc__},
 
 // Sentinel
     {0, 0}

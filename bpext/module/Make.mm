@@ -30,6 +30,7 @@ endif
 
 PROJ_SRCS = \
 	bindings.cc \
+	dblarr.cc \
 	exceptions.cc \
 	misc.cc \
 	register_converters.cc \

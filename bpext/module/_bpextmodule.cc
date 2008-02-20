@@ -11,6 +11,9 @@
 //  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // 
 
+
+#include <sstream>
+
 #include <portinfo>
 
 #include <Python.h>
@@ -19,6 +22,18 @@
 #include "bindings.h"
 
 #include "register_converters.h"
+
+
+#include "bpext/WrappedPointer.h"
+#include "boost/python.hpp"
+
+
+const char * WrappedPointer_str( const bpext::WrappedPointer & wp )
+{
+  std::ostringstream oss;
+  oss << wp.pointer;
+  return oss.str().c_str();
+}
 
 
 void **PyArray_API;
@@ -48,6 +63,12 @@ init_bpext()
     PyDict_SetItemString(d, "RuntimeException", pybpext_runtimeError);
 
     wrap::register_converters();
+
+    using namespace boost::python;
+    class_<bpext::WrappedPointer>
+      ("WrappedPointer", no_init)
+      .def("__str__", WrappedPointer_str)
+      ;
     return;
 }
 

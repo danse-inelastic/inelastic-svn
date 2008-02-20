@@ -35,6 +35,7 @@ namespace bpext {
       ;
 
     def( "new_vec_d", new_vec_d, return_value_policy< manage_new_object >() );
+
   }
 
 } // bpext
