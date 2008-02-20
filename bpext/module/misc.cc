@@ -13,7 +13,6 @@
 
 #include <iostream>
 #include <string>
-#include <string.h>
 #include <sstream>
 
 #include "supported_types.h"
@@ -21,6 +20,7 @@
 #include "bpext.h"
 
 #include <portinfo>
+#include "journal/debug.h"
 
 #include "misc.h"
 #include "bpext/bpext.h"
@@ -215,6 +215,82 @@ PyObject * pybpext_wrap_ptr(PyObject *, PyObject *args)
   }
   
   return bpobj;
+}
+
+
+
+
+
+#include "bpext/WrappedPointer.h"
+
+//-------------------- wrap_native_ptr --------------------
+
+char pybpext_wrap_native_ptr__doc__[] = \
+"Convert a PyCObject of a native-type pointer (double *, char *, etc)"
+" to a boost.python object of WrappedPointer type\n"
+"WrappedPointer is a simple c struct that contains only one member, "
+"a void pointer."
+"The created boost.python object shares the original pointer.\n"
+"So you must keep the original pointer around.\n"
+"\n\n"
+"  Arguments:\n"
+"\n"
+"    - pycobject: the input \n"
+"\n"
+"  Example:\n"
+"\n"
+"    wrap_native_ptr( pycobject )\n"
+"\n"
+"  Return:\n" 
+"\n"
+"    boost python object\n"
+"\n"
+"  Exceptions:\n"
+"\n"
+"    ValueError"
+;
+char pybpext_wrap_native_ptr__name__[] = "wrap_native_ptr";
+
+PyObject * pybpext_wrap_native_ptr(PyObject *, PyObject *args)
+{
+  //std::cout << "pybpext_wrap_native_ptr: ";
+
+  PyObject *obj;
+
+  int ok = PyArg_ParseTuple(args, "O", &obj);
+  if(!ok) return NULL;
+
+  using std::string;
+
+  if (!PyCObject_Check( obj )) {
+    std::ostringstream oss;
+    oss << "In " << __FILE__ << " line " << __LINE__ << ": "
+	<< "1st argument must be a PyCObject." 
+	<< std::endl;
+    PyErr_SetString(PyExc_ValueError, oss.str().c_str());
+
+    return NULL;
+  }
+  void *ptr = PyCObject_AsVoidPtr( obj );
+  using namespace bpext;
+  WrappedPointer *wp = new WrappedPointer;
+  wp->pointer = ptr;
+
+#ifdef DEBUG
+  journal::debug_t debug("wrap_native_ptr");
+  debug << journal::at(__HERE__)
+	<< "wrapped pointer: " << ptr 
+	<< journal::endl;
+#endif
+
+  using namespace boost::python;
+  PyObject * ret;
+  ret = incref
+    (converter::detail::pointer_deep_arg_to_python<WrappedPointer *>(wp).get());
+  
+  delete wp;
+  
+  return ret;
 }
 
 

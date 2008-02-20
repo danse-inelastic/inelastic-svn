@@ -9,7 +9,10 @@ The main usage of this package are contained in two methods:
  - wrap_ptr: extract the raw pointer inside a PyCObject and wrap it in a boost python
    object; return the boost python object.
 
-
+ - wrap_native_ptr: extract the void pointer inside a PyCObject and put it in
+   a simple WrappedPointer object and then wrap that object in a boost python 
+   object; return the boost python object. This is a workaround for wrap_ptr
+   not handling native pointers.
 
 For developers:
 
