@@ -7,15 +7,15 @@ import string
 
 from pyre.components.Component import Component
 import ExcitationSlicer
-from IsoSurfacePlotter import *
-from phonIsoSurfaceCalcor import *
+from ExcitationSlicer.IsoSurfacePlotter import *
+from ExcitationSlicer.phonIsoSurfaceCalcor import *
 
 
 __doc__ = """Tests for the isosurface calculator module."""
 
 def test1():
-    import UnitCell as UC
-    from Atom import Atom
+    import crystal.UnitCell as UC
+    from crystal.Atom import Atom
 
     print "This test should plot some phonon isosurfaces."
     path = ExcitationSlicer.__file__.strip('__init__.pyc')
@@ -42,8 +42,8 @@ def test1():
 
     
 def test2():
-    import UnitCell as UC
-    from Atom import Atom
+    import crystal.UnitCell as UC
+    from crystal.Atom import Atom
 
     path = ExcitationSlicer.__file__.strip('__init__.pyc')
     cellvectors=[[3.0, 0.0, 0.0], [0.0, 3.0, 0.0], [0.0, 0.0, 3.0]]
@@ -67,8 +67,8 @@ def test2():
     return
 
 def test3():
-    import UnitCell as UC
-    from Atom import Atom
+    import crystal.UnitCell as UC
+    from crystal.Atom import Atom
 
     path = ExcitationSlicer.__file__.strip('__init__.pyc')
     cellvectors=[[3.0, 0.0, 0.0], [0.0, 3.0, 0.0], [0.0, 0.0, 3.0]]
@@ -85,8 +85,8 @@ def test3():
     return
 
 def test4():
-    import UnitCell as UC
-    from Atom import Atom
+    import crystal.UnitCell as UC
+    from crystal.Atom import Atom
 
     path = ExcitationSlicer.__file__.strip('__init__.pyc')
     cellvectors=[[3.0, 0.0, 0.0], [0.0, 3.0, 0.0], [0.0, 0.0, 3.0]]
@@ -104,8 +104,8 @@ def test4():
     return
 
 def test5():
-    import UnitCell as UC
-    from Atom import Atom
+    import crystal.UnitCell as UC
+    from crystal.Atom import Atom
 
     print "This test plots a phonon isosurface with Matlab."
     path = ExcitationSlicer.__file__.strip('__init__.pyc')
