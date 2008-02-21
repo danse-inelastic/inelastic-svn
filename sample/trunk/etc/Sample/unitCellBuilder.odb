@@ -1,4 +1,0 @@
-from crystal.UnitCellBuilder import UnitCellBuilder
-
-def atomicStructure():
-	return UnitCellBuilder('unitCellBuilder')

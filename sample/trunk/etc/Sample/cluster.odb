@@ -1,4 +1,0 @@
-from sample.sampleCreation.cluster.Cluster import Cluster  
-
-def cluster():
-	return Cluster('cluster')
