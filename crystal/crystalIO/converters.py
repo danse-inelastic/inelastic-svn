@@ -2,22 +2,29 @@
 
 __doc__ = """Converters for UnitCell."""
 
+<<<<<<< .mine
+from crystal.UnitCell import *
+from crystal.Atom import *
+=======
 #from inelastic.crystal.UnitCell import *
 #from inelastic.crystal.Atom import *
 from crystal.UnitCell import *
 from crystal.Atom import *
+>>>>>>> .r111
+
 
 def listOfAtom2UnitCell(loa):
     """Utility to convert a ListOfAtom instance to a UnitCell instance."""
     import ASE.ListOfAtoms
     import ASE.Atom
-
+    
     symbols = [x.symbol for x in loa]
     cartpos = [x.position for x in loa]
 
     cellvectors = loa.cell
     uc = UnitCell()
     uc.setCellVectors(cellvectors)
+    # note: by default, loa stores cartesian coordinates
     fracpos = [uc.cartesianToFractional(x) for x in cartpos]
 
     for n in range(len(symbols)):
@@ -31,13 +38,11 @@ def unitCell2ListOfAtom(uc):
     """Utility to convert a UnitCell instance to a ASE ListOfAtom instance."""
     import ASE.ListOfAtoms
     import ASE.Atom
-
     loa = ASE.ListOfAtoms([],periodic=True) 
     loa.SetUnitCell(uc._cellvectors, fix=True)
     for site in uc:
-        aseatom = ASE.Atom(site.getAtom().symbol, site.getPosition().tolist())
+        aseatom = ASE.Atom(site.getAtom().symbol, uc.fractionalToCartesian(site.getPosition().tolist()))
         loa.append(aseatom)
-        
     return loa
 
 def p4vaspStruct2UnitCell(struct):
