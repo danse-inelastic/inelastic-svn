@@ -1,4 +1,0 @@
-from sample.sampleCreation.supercell.Supercell import Supercell  
-
-def sampleCreation():
-	return Supercell('supercell')
