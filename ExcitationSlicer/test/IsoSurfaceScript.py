@@ -5,8 +5,8 @@ import ExcitationSlicer
 from IsoSurfacePlotter import *
 from phonIsoSurfaceCalcor import *
 
-import UnitCell as UC
-from Atom import Atom
+import crystal.UnitCell as UC
+from crystal.Atom import Atom
 
 path = ExcitationSlicer.__file__.strip('__init__.pyc')
     
