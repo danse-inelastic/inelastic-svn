@@ -1,8 +1,0 @@
-# $Id: README,v 1.3 2007/05/17 18:16:14 emessick Exp $
-
- Copyright 2006-2007 Nanorex, Inc.  See LICENSE file for details. 
-Source code and a Makefile goes in this src subdirectory. 
-During the build process, some or all built objects may also be generated in this directory,
-but the ones used at runtime will be copied into ../bin.
-
-For more info see ../README.

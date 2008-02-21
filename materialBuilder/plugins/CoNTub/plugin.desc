@@ -1,7 +1,0 @@
-# $Id: plugin.desc,v 1.4 2007/05/17 18:16:10 emessick Exp $
-
-# Copyright 2006-2007 Nanorex, Inc.  See LICENSE file for details. 
-# Plugin description file.
-
-# This is not yet used and contains no meaningful data.
-# It will become the main metainfo file which describes this plugin to nE-1.
