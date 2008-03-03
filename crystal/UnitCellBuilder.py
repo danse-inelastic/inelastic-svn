@@ -94,6 +94,10 @@ O shell  1.0  0.0  0.0'''
     def getUnitCell(self):
         """Returns the unit cell from the builder."""
         return self._uc
+    
+    def gulpFormatUcNAtoms(self):
+        uc=self._uc
+        atoms=s
 
     pass # end of class UnitCellBuilder
 
