@@ -16,22 +16,20 @@ class TranslatorApp(Script):
     class Inventory(Script.Inventory):
         import pyre.inventory as inv 
         #mdPostprocessing = inv.facility('Postprocessing Type', default=CoherentScatteringFunction())
-        mdPostprocessing = inv.facility('translator', default='Trajectory')
-        mdPostprocessing.meta['tip'] = 'translate a file from one format to another'
-        mdPostprocessing.meta['known_plugins'] = ['CoherentScatteringFunction','IncoherentScatteringFunction',
-                                                  'ElasticIncoherentStructureFactor','MeanSquareDisplacement',
-                                                  'DensityOfStates']
+        translator = inv.facility('translator', default='Trajectory')
+        translator.meta['tip'] = 'translate a file from one format to another'
+        translator.meta['known_plugins'] = ['Trajectory']
 
     def __init__(self):
-        Script.__init__(self, 'ChemSpecApp')
+        Script.__init__(self, 'TranslatorApp')
         self.i=self.inventory
         
     def main(self, *args, **kwds):
         # first compute the scattering function using nmoldyn engine
-        self.i.mdPostprocessing.compute()
+        self.i.translator.translate()
 
 if __name__=='__main__':
-    app=ChemSpecApp()
+    app=TranslatorApp()
     app.run()
 
 # version
