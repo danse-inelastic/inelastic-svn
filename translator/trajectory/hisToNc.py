@@ -63,10 +63,6 @@ _elements2 = ['cl', 'as', 'in', 'tb', 'tl', 'he', 'ar', 'se', 'sn',
 'ir', 'np', 'si', 'zn', 'pd', 'sm', 'pt', 'pu', 'ga', 'ag', 'eu',
 'au', 'am', 'ge', 'cd', 'gd', 'hg', 'cm', 'cf']
 
-field_atom_line = FortranFormat('A8,2F12,3I5')
-history_timestep_line = FortranFormat('A8,4I10,F12.6')
-history_pbc_line = FortranFormat('3G12.4')
-
 class DLPOLYData:
 
     def __init__(self):
