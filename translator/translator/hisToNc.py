@@ -35,7 +35,7 @@ history_pbc_line = FortranFormat('3G12.4')
 
 class DLPOLYData:
 
-    def __init__(self):
+    def __init__(self,species,historyFile):
         #self.directory = directory
         self.history = open(historyFile)
         self.title = string.strip(self.history.readline())
@@ -196,5 +196,10 @@ blockSize--the block structure of the netCDF trajectory. The
     #        if answer == 'y':
     #            break
     
-    data = DLPOLYData()
+    data = DLPOLYData(species,historyFile)
     data.writeTrajectory(nc_file, block_size)
+    
+if __name__=='__main__':
+    speciesNumbers=[('K',36),('H',72),('C',1008)]
+    historyFile='../useCases/kc24HisToNc/kc24-70K.his'
+    hisToNc(speciesNumbers,historyFile)
