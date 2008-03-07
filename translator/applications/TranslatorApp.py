@@ -9,16 +9,17 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 from pyre.applications.Script import Script
+from translator.Trajectory import Trajectory
 
 
 class TranslatorApp(Script):
-    '''Driver for chemical spectroscopy calculations'''
+    '''Driver for file conversion'''
     class Inventory(Script.Inventory):
         import pyre.inventory as inv 
-        #mdPostprocessing = inv.facility('Postprocessing Type', default=CoherentScatteringFunction())
-        translator = inv.facility('translator', default='Trajectory')
+        translator = inv.facility('translator', default=Trajectory())
+        #translator = inv.facility('translator', default='trajectory')
         translator.meta['tip'] = 'translate a file from one format to another'
-        translator.meta['known_plugins'] = ['Trajectory']
+        translator.meta['known_plugins'] = ['trajectory']
 
     def __init__(self):
         Script.__init__(self, 'TranslatorApp')
