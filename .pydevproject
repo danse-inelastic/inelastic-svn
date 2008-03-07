@@ -7,5 +7,6 @@
 <path>/inelastic/graphics/trunk</path>
 <path>/inelastic</path>
 <path>/inelastic/ExcitationSlicer</path>
+<path>/inelastic/translator</path>
 </pydev_pathproperty>
 </pydev_project>

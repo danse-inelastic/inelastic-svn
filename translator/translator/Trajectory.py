@@ -28,8 +28,8 @@ class Trajectory(Component):
         historyFile.meta['tip'] = "the trajectory file of the MD run (NetCDF format)"
         historyFile.meta['importance'] = 9
 
-    def __init__(self, name = 'Trajectory', facility=None):
-        Component.__init__(self, name, facility)
+    def __init__(self, name = 'trajectory'):
+        Component.__init__(self, name, 'translator')
         self.i=self.inventory
         
     def translate(self):

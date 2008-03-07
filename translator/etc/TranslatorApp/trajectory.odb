@@ -1,0 +1,9 @@
+from translator.Trajectory import Trajectory
+
+def translator(): 
+    return Trajectory('trajectory')
+
+
+# Generated automatically by PythonMill on Mon Apr 16 12:44:30 2007
+
+# End of file 
