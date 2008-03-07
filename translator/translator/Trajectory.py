@@ -34,7 +34,7 @@ class Trajectory(Component):
         
     def translate(self):
         from hisToNc import hisToNc
-        hisToNc(self.i.speciesNumbers,self.i.historyFile,blockSize=1)
+        hisToNc(eval(self.i.speciesNumbers), self.i.historyFile, blockSize=1)
         
         
     
