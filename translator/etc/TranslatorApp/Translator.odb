@@ -11,10 +11,10 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
-from translator.Translator import Translator
+from translator.Trajectory import Trajectory
 
 def translator(): 
-    return CoherentScatteringFunction('CoherentScatteringFunction')
+    return Trajectory('CoherentScatteringFunction')
   
 # version
 __id__ = "$Id$"
