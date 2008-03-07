@@ -14,7 +14,7 @@
 from translator.Trajectory import Trajectory
 
 def translator(): 
-    return Trajectory('CoherentScatteringFunction')
+    return Trajectory('Trajectory')
   
 # version
 __id__ = "$Id$"
