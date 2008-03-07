@@ -10,7 +10,7 @@
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-PROJECT = MdApp
+PROJECT = TranslatorApp
 
 BUILD_DIRS = \
 
@@ -37,16 +37,7 @@ distclean::
 # export
 
 EXPORT_ETC = \
-    fit.odb \
-    gulp.odb \
-    gulpLibrary.odb \
-    manualEntry.odb \
-    md.odb \
-    mmtk.odb \
-    optimize.odb \
-    phonon.odb \
-    unitCellBuilder.odb \
-    xyzFile.odb \
+    translator.odb \
 
 
 

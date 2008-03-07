@@ -9,10 +9,10 @@
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-PROJECT = molDynamics
+PROJECT = translator
 
 BUILD_DIRS = \
-    MdApp \
+    TranslatorApp \
 
 OTHER_DIRS = \
 
