@@ -21,15 +21,22 @@ class Translator(Component):
     
     class Inventory(Component.Inventory):   
         import pyre.inventory as inv 
+        speciesNumbers = InputFile( ".his Filename", default = "")
+        speciesNumbers.meta['tip'] = "the trajectory file of the MD run (NetCDF format)"
+        speciesNumbers.meta['importance'] = 10
         historyFile = InputFile( ".his Filename", default = "")
         historyFile.meta['tip'] = "the trajectory file of the MD run (NetCDF format)"
-        historyFile.meta['importance'] = 10
+        historyFile.meta['importance'] = 9
 
     def __init__(self, name = 'Translator', facility=None):
         Component.__init__(self, name, facility)
         self.i=self.inventory
         
     def translate(self):
+        from hisToNc import hisToNc
+        hisToNc(self.i.speciesNumbers,self.i.historyFile,blockSize=1)
+        
+        
         qTuple=str((str(self.i.QValues),str(self.i.QShellWidth),str(self.i.VectorsPerShell),str(self.i.QDirection)))
         self.pyreArgs={'trajectoryFilenames':[self.i.trajectoryFilename], 
             'title':self.i.title, 'q_vector_set':qTuple, 'weights':self.i.weights, 

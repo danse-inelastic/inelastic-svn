@@ -1,0 +1,24 @@
+#!/usr/bin/env python
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                   Brandon Keith
+#                      California Institute of Technology
+#                        (C) 2005 All Rights Reserved 
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+from translator.Translator import Translator
+
+def translator(): 
+    return CoherentScatteringFunction('CoherentScatteringFunction')
+  
+# version
+__id__ = "$Id$"
+
+# Generated automatically by PythonMill on Mon Apr 16 12:44:30 2007
+
+# End of file 

@@ -5,17 +5,6 @@
 # In species set the name, the number, the atoms involved, and any constraints.  
 # If no constraints, put [].
 
-species = [['Al',864,[('al','Al')],[]]]
-historyFile = '/home/jbk/gulp3.0/phononBroadening/Al6x6x6-npt-150.his'
-
-#species = [['Al',864,[('al','Al')],[]]]
-#historyFile = '/home/jbk/gulp3.0/phononBroadening/Al6x6x6-npt-525.his'
-
-#species = [['topGraphiteLayer',504,[('c','C')],[]],['bottomGraphiteLayer',504,[('c','C')],[]],['potassiums',36,[('k','K')],[]],['hydrogens',72,[('h','H')],[]]]
-#historyFile = '/home/jbk/gulp3.0/practice/incom6x3sup10K100ps/incommens6x3sup45K.his'
-
-#species = [['Nickel',256,['Ni'],[]]]
-#historyFile = 'Ni4x4x4-500K.his'
 
 #-------------------------------------------------------
 
@@ -29,30 +18,7 @@ from MMTK.Trajectory import Trajectory, SnapshotGenerator, TrajectoryOutput
 from Scientific.IO.FortranFormat import FortranLine, FortranFormat
 import Numeric, getopt, os, string, sys
 
-nc_file = os.path.splitext(historyFile)[0] + '.nc'
 
-usage = """Usage: dlpoly_to_nc [options] dlpoly_directory nc_file
-
-dlpoly_directory must contain the files FIELD and HISTORY.
-
-Options:
-
-  --block-size=number
-     specifies the block structure of the netCDF trajectory. The
-     default value of 1 optimizes the trajectory for step-by-step access
-     to conformations. Larger values favour atom-by-atom access to
-     one-particle trajectories for all times, which is required for the
-     calculation of dynamic quantities. The highest sensible value is
-     the number of steps in the trajectory.
-
-
-To write the DLPOLY trajectory directly into a netCDF file without
-creating an intermediate ASCII file, do the following:
-
-1) Type 'mkfifo HISTORY' in dlpoly_directory.
-2) Start dlpoly_to_nc.
-3) Start DLPOLY.
-"""
 
 _elements2 = ['cl', 'as', 'in', 'tb', 'tl', 'he', 'ar', 'se', 'sn',
 'dy', 'pb', 'li', 'br', 'sb', 'ho', 'bi', 'be', 'ca', 'kr', 'te',
@@ -62,6 +28,10 @@ _elements2 = ['cl', 'as', 'in', 'tb', 'tl', 'he', 'ar', 'se', 'sn',
 're', 'pa', 'mg', 'ni', 'ru', 'nd', 'os', 'al', 'cu', 'rh', 'pm',
 'ir', 'np', 'si', 'zn', 'pd', 'sm', 'pt', 'pu', 'ga', 'ag', 'eu',
 'au', 'am', 'ge', 'cd', 'gd', 'hg', 'cm', 'cf']
+
+field_atom_line = FortranFormat('A8,2F12,3I5')
+history_timestep_line = FortranFormat('A8,4I10,F12.6')
+history_pbc_line = FortranFormat('3G12.4')
 
 class DLPOLYData:
 
@@ -163,42 +133,68 @@ class DLPOLYData:
             trajectory.close()
 
 
-try:
-    options, file_args = getopt.getopt(sys.argv[1:], '', ['block-size='])
-except getopt.GetoptError:
-    sys.stderr.write(usage)
-    raise SystemExit
-
-block_size = 1
-for option, value in options:
-    if option == '--block-size':
-        block_size = int(value)
-        if block_size < 1:
-            sys.stderr.write("Block size must be positive.")
-            raise SystemExit
-
-#if len(file_args) != 2:
-#    sys.stderr.write(usage)
-#    raise SystemExit
-#directory = file_args[0]
-#nc_file = file_args[1]
-
-#if not os.path.exists(os.path.join(directory, 'FIELD')):
-#    sys.stderr.write("No FIELD file in " + directory + ".\n")
-#    raise SystemExit
-#if not os.path.exists(os.path.join(directory, 'HISTORY')):
-#    sys.stderr.write("No HISTORY file in " + directory + ".\n")
-#    raise SystemExit
 
 
-#if os.path.exists(nc_file):
-#    sys.stderr.write('File %s already exists. ' % nc_file)
-#    while 1:
-#        answer = raw_input('Overwrite? [y/n] ')
-#        if answer == 'n':
-#            raise SystemExit
-#        if answer == 'y':
-#            break
 
-data = DLPOLYData()
-data.writeTrajectory(nc_file, block_size)
+
+def hisToNc(speciesNumbers,historyFile,blockSize=1):
+    '''convert a .his file in dlpoly history format to netcdf format
+    
+speciesNumbers--give a list of species tuples--the species itself and its 
+total number (i.e. speciesNumbers=[('C',6),('H',6)] for benzene)
+historyFile--name of .his file
+blockSize--the block structure of the netCDF trajectory. The
+         default value of 1 optimizes the trajectory for step-by-step access
+         to conformations. Larger values favour atom-by-atom access to
+         one-particle trajectories for all times, which is required for the
+         calculation of dynamic quantities. The highest sensible value is
+         the number of steps in the trajectory.
+    
+'''
+    
+
+    #convert species to internal format.  This is still experimental.  Examples follow
+    #species = [['Al',864,[('al','Al')],[]]]
+    #species = [['topGraphiteLayer',504,[('c','C')],[]],['bottomGraphiteLayer',504,[('c','C')],[]],['potassiums',36,[('k','K')],[]],['hydrogens',72,[('h','H')],[]]]
+    #species = [['Nickel',256,['Ni'],[]]]
+    species=[]
+    for specAndNum in speciesNumbers:
+        label=specAndNum[0]
+        num=specAndNum[1]
+        species.append([label,num,[(label.lower(),label)],[]])
+        
+    nc_file = os.path.splitext(historyFile)[0] + '.nc'
+
+#    try:
+#        options, file_args = getopt.getopt(sys.argv[1:], '', ['block-size='])
+#    except getopt.GetoptError:
+#        sys.stderr.write(usage)
+#        raise SystemExit
+    
+    block_size = blockSize
+        
+    #if len(file_args) != 2:
+    #    sys.stderr.write(usage)
+    #    raise SystemExit
+    #directory = file_args[0]
+    #nc_file = file_args[1]
+    
+    #if not os.path.exists(os.path.join(directory, 'FIELD')):
+    #    sys.stderr.write("No FIELD file in " + directory + ".\n")
+    #    raise SystemExit
+    #if not os.path.exists(os.path.join(directory, 'HISTORY')):
+    #    sys.stderr.write("No HISTORY file in " + directory + ".\n")
+    #    raise SystemExit
+    
+    
+    #if os.path.exists(nc_file):
+    #    sys.stderr.write('File %s already exists. ' % nc_file)
+    #    while 1:
+    #        answer = raw_input('Overwrite? [y/n] ')
+    #        if answer == 'n':
+    #            raise SystemExit
+    #        if answer == 'y':
+    #            break
+    
+    data = DLPOLYData()
+    data.writeTrajectory(nc_file, block_size)
