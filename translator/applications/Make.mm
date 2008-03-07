@@ -10,8 +10,8 @@
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-PROJECT = molDynamics
-PACKAGE = molDynamics
+PROJECT = translator
+PACKAGE = translator
 
 PROJ_TIDY += *.log *.pyc
 PROJ_CLEAN =
@@ -39,7 +39,7 @@ all: export
 #	MdApp.py \
 
 EXPORT_BINS = \
-	MdApp.py \
+	TranslatorApp.py \
 
 
 
