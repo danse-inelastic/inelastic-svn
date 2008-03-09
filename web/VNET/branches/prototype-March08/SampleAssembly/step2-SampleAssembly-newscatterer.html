@@ -13,26 +13,26 @@
     <td height="201"><form id="form1" name="form1" method="post" action="">
       <p>
         <label>Name
-        <input type="text" name="name" id="name" />
+        <input name="name" type="text" id="name" value="fcc-Ni-plate" />
 </label>
 </p>
       <p>
         <label>Shape
           <select name="shape" size="1" id="shape">
           <option value="1">Cylinder</option>
-          <option value="2">Plate</option>
-        </select>
+          <option value="2" selected="selected">Plate</option>
+          </select>
         </label>
       </p>
       <p>
         <label></label>
         <label>Position
-          <input type="text" name="position" id="position" />
+          <input name="position" type="text" id="position" value="0,0,0" />
           </label>
         </p>
       <p>
         <label>Orientation
-          <input type="text" name="orientation" id="orientation" />
+          <input name="orientation" type="text" id="orientation" value="0,0,0" />
         </label>
       </p>
       <label></label><p><label>Phase
@@ -50,7 +50,7 @@
   <tr>
     <td><form id="form2" name="form2" method="post" action="">
       <label>Chemical Formula
-        <input type="text" name="chemical_formula" id="chemical_formula" />
+        <input name="chemical_formula" type="text" id="chemical_formula" value="Ni" />
         </label>
       <p>
         <label>Crystal Structure
