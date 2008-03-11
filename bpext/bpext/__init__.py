@@ -63,6 +63,23 @@ Examples:
     return binding.wrap_ptr( pycobject, typename )
 
 
+def wrap_native_ptr( pycobject ):
+    '''Wrap a pointer of a native type (for example, double *)
+in a simple c struct which only contains one void pointer.
+Then return a boost python object of that c struct.
+pointer is shared.
+
+Parameters:
+
+  pycobject: PyCObject instance
+
+Examples:
+
+  wrap_ptr( pycobj )
+  '''
+    return binding.wrap_native_ptr( pycobject )
+
+
 # version
 __id__ = "$Id: __init__.py 17 2005-06-01 23:58:56Z linjiao $"
 
