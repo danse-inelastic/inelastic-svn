@@ -5,4 +5,4 @@
 1 double --> Bin spacing in Hz
 double[N_Bins] --> The DOS goes here.
 
-Bin spacing in Hz, DOS in 1/Hz.
+Bin spacing in TeraHz (frequency, not angular frequency. different from Omega2), DOS in 1/Hz.
