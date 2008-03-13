@@ -10,6 +10,15 @@
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+#proposed?
+
+#temporarily reset all environment variables
+
+#do normal Make.mm stuff
+
+# reset them back
+
+
 PROJECT = vnf
 PACKAGE = vnf
 
@@ -30,8 +39,6 @@ OTHERS = \
 
 all:
 	BLD_ACTION="all" $(MM) recurse
-	cp -r html/* /var/www/apache2-default
-	cp -r html/* /var/www/apache2-default
 	cp -r html/* /var/www/apache2-default
 
 tidy::
