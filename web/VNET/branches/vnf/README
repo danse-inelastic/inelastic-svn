@@ -1,0 +1,11 @@
+To deploy:
+
+create a directory "vnf" in <cgi-bin>
+copy the following to <cgi-bin>/vnf
+  - main.sh
+  - dottools
+create sym links to 
+  - config
+  - content
+  - sampleassemblies
+create sym link to "html" and call it "vnf" in html root, eg, /var/www.
