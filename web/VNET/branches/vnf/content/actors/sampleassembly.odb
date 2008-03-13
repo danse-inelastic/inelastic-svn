@@ -22,7 +22,9 @@ class SampleAssembly(GenericActor):
 
         import pyre.inventory
 
-        xmlfile = pyre.inventory.str( 'xmlfile', default = '' )
+        id = pyre.inventory.str( 'id', default = '' )
+        id.meta['tip'] = 'identifier of the sample assembly'
+        #at this moment id is filename
 
         pass # end of Inventory
 
@@ -33,11 +35,15 @@ class SampleAssembly(GenericActor):
 
 
     def perform(self, app, routine = None):
-        path = self._getpath( self.inventory.xmlfile )
+        path = self._getpath( self.inventory.id )
+        from sampleassembly.saxml import parse_file
+        sampleassembly = parse_file( path )
+        
         page = app.retrieveComponent(
             self.name,
-            factory = 'page', args = [app, path],
+            factory = 'page', args = [app, sampleassembly],
             vault = ['pages'] )
+        
         return page
 
 

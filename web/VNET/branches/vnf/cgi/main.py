@@ -12,8 +12,6 @@
 #
 
 
-import dottools
-
 def main():
 
 

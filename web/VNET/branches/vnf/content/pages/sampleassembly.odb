@@ -12,7 +12,7 @@
 #
 
 
-def page(app, xmlfile):
+def page(app, sampleassembly):
     import opaldemo.content
     page = opaldemo.content.page(name='sampleassembly', title='Sampleassembly Builder', root=app.home)
     
@@ -36,20 +36,52 @@ def page(app, xmlfile):
         )
     document.byline = 'byline?'
 
-    from sampleassembly.saxml import parse_file
-    sampleassembly = parse_file( xmlfile )
-
     if len(sampleassembly.elements()) == 0:
-        #form = document.form(
-        #    name='alert', legend='Alert', action=app.cgihome)
-        #p = form.paragraph()
-        p = document.paragraph()
-        p.text = [
-            "There is no scatterer in this sample assembly. ",
-            'Please <a href="%s?actor=addscatterer">add</a> a scatter.' % (
-            app.cgihome,)
-            ]
+        noscatterer( document, app )
+    else:
+        listscatterers( sampleassembly.elements(), document, app )
+        pass
+    
     return page
+
+
+def listscatterers( scatterers, document, app ):
+    p = document.paragraph()
+
+    n = len(scatterers)
+    p.text = [ 'There %s %s scatterer%s in this sample assembly: ' %
+               (present_be(n), n, plural(n))
+                ]
+    formatstr = '%(index)s: %(name)s (<a href="%(cgihome)s?actor=scatterer&scatterer.name=%(name)s">configure</a>)'
+
+    for i, scatterer in enumerate( scatterers ):
+        p = document.paragraph()
+        p.text += [
+            formatstr % {'name': scatterer.name,
+                         'cgihome': app.cgihome,
+                         'index': i+1}
+            ]
+        continue
+    return
+
+
+def present_be( n ):
+    if n > 1: return 'are'
+    return 'is'
+
+def plural( n ):
+    if n>1: return 's'
+    return ''
+
+
+def noscatterer( document, app ):
+    p = document.paragraph()
+    p.text = [
+        "There is no scatterer in this sample assembly. ",
+        'Please <a href="%s?actor=addscatterer">add</a> a scatter.' % (
+        app.cgihome,)
+        ]
+    return
 
 
 # version
