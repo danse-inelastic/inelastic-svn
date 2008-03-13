@@ -30,6 +30,9 @@ OTHERS = \
 
 all:
 	BLD_ACTION="all" $(MM) recurse
+	cp -r html/* /var/www/apache2-default
+	cp -r html/* /var/www/apache2-default
+	cp -r html/* /var/www/apache2-default
 
 tidy::
 	BLD_ACTION="tidy" $(MM) recurse
