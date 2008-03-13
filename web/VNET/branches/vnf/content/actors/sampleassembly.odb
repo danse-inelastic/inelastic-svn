@@ -1,0 +1,56 @@
+#!/usr/bin/env python
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                             Michael A.G. Aivazis
+#                      California Institute of Technology
+#                      (C) 1998-2005  All Rights Reserved
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+
+from opal.components.GenericActor import GenericActor
+
+
+class SampleAssembly(GenericActor):
+
+
+    class Inventory(GenericActor.Inventory):
+
+        import pyre.inventory
+
+        xmlfile = pyre.inventory.str( 'xmlfile', default = '' )
+
+        pass # end of Inventory
+
+
+    def __init__(self):
+        GenericActor.__init__(self, 'sampleassembly')
+        return
+
+
+    def perform(self, app, routine = None):
+        path = self._getpath( self.inventory.xmlfile )
+        page = app.retrieveComponent(
+            self.name,
+            factory = 'page', args = [app, path],
+            vault = ['pages'] )
+        return page
+
+
+    def _getpath(self, filename):
+        import os
+        return os.path.join( 'sampleassemblies', filename )
+
+
+def actor():
+    return SampleAssembly()
+
+
+# version
+__id__ = "$Id: Login.py,v 1.1.1.1 2006-11-27 00:09:47 aivazis Exp $"
+
+# End of file 

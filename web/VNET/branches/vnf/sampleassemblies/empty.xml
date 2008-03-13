@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE SampleAssembly>
+
+<SampleAssembly name="empty">
+  
+  <LocalGeometer registry-coordinate-system="InstrumentScientist">
+  </LocalGeometer>
+<!--
+  <environment>
+    <temperature>300*K</temperature>
+    <pressure>1.*atm</pressure>
+  </environment>
+-->
+
+</SampleAssembly>
