@@ -1,0 +1,275 @@
+
+<!doctype html public "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module PyHtmlTable</title>
+<style type="text/css"><!--
+TT { font-family: lucidatypewriter, lucida console, courier }
+--></style></head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0>
+<tr bgcolor="#7799ee">
+<td valign=bottom><small>&nbsp;<br></small
+><font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>PyHtmlTable</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/pasko/python/PyHtmlTable/PyHtmlTable.py">/home/pasko/python/PyHtmlTable/PyHtmlTable.py</a></font></td></tr></table>
+    <p><small><tt>-----------------------------------------<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Class&nbsp;<a href="#PyHtmlTable">PyHtmlTable</a><br>
+&nbsp;<br>
+What:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Html&nbsp;Table&nbsp;generation&nbsp;on&nbsp;the&nbsp;fly.<br>
+&nbsp;<br>
+Why:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Couldn't&nbsp;find&nbsp;an&nbsp;equivalent&nbsp;to&nbsp;Table.pm&nbsp;or&nbsp;Table.php<br>
+&nbsp;<br>
+Features:<br>
+&nbsp;<br>
+&nbsp;&nbsp;Allows&nbsp;setting&nbsp;of&nbsp;individual&nbsp;row&nbsp;and&nbsp;cell&nbsp;attributes&nbsp;via&nbsp;arbitrary<br>
+&nbsp;&nbsp;dictionaries<br>
+&nbsp;<br>
+&nbsp;&nbsp;Allows&nbsp;spanning&nbsp;of&nbsp;rows&nbsp;and&nbsp;columns<br>
+&nbsp;<br>
+&nbsp;&nbsp;Autogrows&nbsp;table&nbsp;if&nbsp;cells&nbsp;set&nbsp;outside&nbsp;initial<br>
+&nbsp;&nbsp;Range.<br>
+&nbsp;<br>
+&nbsp;&nbsp;Allows&nbsp;dynamic&nbsp;insertion&nbsp;of&nbsp;new&nbsp;rows&nbsp;and&nbsp;columns&nbsp;anywhere&nbsp;in&nbsp;the&nbsp;table<br>
+&nbsp;<br>
+&nbsp;&nbsp;Allows&nbsp;bulk&nbsp;population&nbsp;of&nbsp;table&nbsp;data&nbsp;via&nbsp;arrays&nbsp;to&nbsp;arbitrary&nbsp;locations<br>
+&nbsp;&nbsp;in&nbsp;the&nbsp;table.<br>
+&nbsp;<br>
+&nbsp;&nbsp;Provides&nbsp;default&nbsp;cell&nbsp;attributes&nbsp;for&nbsp;tablewide&nbsp;uniformity<br>
+&nbsp;&nbsp;and&nbsp;the&nbsp;ability&nbsp;to&nbsp;override&nbsp;these&nbsp;on&nbsp;a&nbsp;cell&nbsp;by&nbsp;cell&nbsp;basis.<br>
+&nbsp;<br>
+&nbsp;&nbsp;NOTE:&nbsp;Row&nbsp;indexes&nbsp;start&nbsp;at&nbsp;0&nbsp;like&nbsp;God&nbsp;and&nbsp;Kernighan&nbsp;demand!<br>
+&nbsp;<br>
+Influenced&nbsp;heavily&nbsp;by&nbsp;Table.pm&nbsp;and&nbsp;Table.php<br>
+&nbsp;<br>
+Example<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;"&lt;b&gt;&nbsp;2&nbsp;by&nbsp;2&nbsp;table&nbsp;&lt;/b&gt;&nbsp;"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;t&nbsp;&nbsp;=&nbsp;<a href="#PyHtmlTable">PyHtmlTable</a>(2,2,&nbsp;{'width':'400','border':2,'bgcolor':'white'})<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;t.setCellcontents(0,0,"T1&nbsp;Cell&nbsp;00")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;t.setCellcontents(0,1,"T1&nbsp;Cell&nbsp;01")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;t.setc(1,0,"T1&nbsp;Cell&nbsp;01")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;New&nbsp;shorthand:&nbsp;setc&nbsp;==&nbsp;setCellcontents<br>
+&nbsp;&nbsp;&nbsp;&nbsp;t.setc(1,1,"T1&nbsp;Cell&nbsp;11")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;Most&nbsp;of&nbsp;the&nbsp;main&nbsp;functions&nbsp;now&nbsp;have&nbsp;horthand&nbsp;equivalents<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;t.setCellattrs(0,0,{'bgcolor':'red','width':100})<br>
+&nbsp;&nbsp;&nbsp;&nbsp;t.setca(1,1,{'bgcolor':'red'})&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;New&nbsp;shorthand:&nbsp;setca&nbsp;==&nbsp;setCellattrs<br>
+&nbsp;&nbsp;&nbsp;&nbsp;t.display()<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;t.setCellcontents(2,0,"T1&nbsp;Cell&nbsp;20")&nbsp;&nbsp;#&nbsp;Grow&nbsp;outside&nbsp;initial&nbsp;bounds<br>
+&nbsp;&nbsp;&nbsp;&nbsp;t.setCellcontents(2,1,"T1&nbsp;Cell&nbsp;21")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;t.display()<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;"&lt;p&gt;&lt;b&gt;&nbsp;adding&nbsp;row&nbsp;&lt;/b&gt;"<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;t.add_row(1)&nbsp;&nbsp;&nbsp;#Add&nbsp;a&nbsp;row&nbsp;after&nbsp;row&nbsp;index&nbsp;1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;t.display()<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;"&lt;p&gt;&lt;b&gt;&nbsp;adding&nbsp;col&nbsp;&lt;/b&gt;"<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;t.add_col(1)&nbsp;&nbsp;&nbsp;#Add&nbsp;a&nbsp;col&nbsp;after&nbsp;col&nbsp;index&nbsp;1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;t.display()<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;"&lt;HR&gt;&lt;b&gt;&nbsp;AFTER&nbsp;&nbsp;row&nbsp;and&nbsp;col&nbsp;SPANNING&nbsp;&lt;/b&gt;"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;t.setCellRowSpan(1,0,2)&nbsp;#&nbsp;Span&nbsp;cell&nbsp;at&nbsp;index&nbsp;row&nbsp;1,col&nbsp;0,&nbsp;make&nbsp;2&nbsp;high<br>
+&nbsp;&nbsp;&nbsp;&nbsp;t.setCellColSpan(1,1,2)&nbsp;#&nbsp;colSpan&nbsp;cell&nbsp;at&nbsp;index&nbsp;row&nbsp;1,&nbsp;col&nbsp;1,&nbsp;make&nbsp;2&nbsp;wide<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;t.display()<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;"&lt;HR&gt;&lt;b&gt;&nbsp;Embed&nbsp;in&nbsp;new&nbsp;table&nbsp;&lt;/b&gt;"<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;htmlstr&nbsp;=&nbsp;t.return_html()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;nt&nbsp;=&nbsp;<a href="#PyHtmlTable">PyHtmlTable</a>(1,4,&nbsp;{'width':'800','border':2,'bgcolor':'green'})<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;nt.setCellcontents(0,0,"Cell&nbsp;TH....text&nbsp;left")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;nt.setCellcontents(0,1,"Text&nbsp;right")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;nt.setCellcontents(0,2,htmlstr)<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;nt.setCellattrs(0,0,{'bgcolor':'blue','width':200,'align':'left'})<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;nt.setCellattrs(0,1,{'width':200,'align':'right'})<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;nt.setCelltype(0,0,"TH")<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;nt.display()<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Current-Version:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$Revision:&nbsp;1.13&nbsp;$<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Last&nbsp;update:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$Date:&nbsp;2003/07/24&nbsp;14:21:21&nbsp;$<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Home-Page:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://pasko.net/PyHtmlTable">http://pasko.net/PyHtmlTable</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;Primary-Site:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://pasko.net/PyHtmlTable">http://pasko.net/PyHtmlTable</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;Software-requirements:&nbsp;&nbsp;&nbsp;twodarr.py<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Written&nbsp;and&nbsp;debugged&nbsp;under&nbsp;Python&nbsp;2.2.2&nbsp;by&nbsp;Joe&nbsp;Pasko</tt></small></p>
+
+<p><table width="100%" cellspacing=0 cellpadding=2 border=0>
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom><small><small>&nbsp;<br></small></small
+><font color="#fffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;&nbsp;</td>
+<td width="100%"><table width="100%"><tr><td width="25%" valign=top><a href="copy.html">copy</a><br>
+<a href="re.html">re</a><br>
+</td><td width="25%" valign=top><a href="string.html">string</a><br>
+<a href="sys.html">sys</a><br>
+</td><td width="25%" valign=top><a href="twodarr.html">twodarr</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table>
+<p><table width="100%" cellspacing=0 cellpadding=2 border=0>
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom><small><small>&nbsp;<br></small></small
+><font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><small><a href="PyHtmlTable.html#PyHtmlTable">PyHtmlTable</a>
+</small></font></dt></dl>
+ 
+<p><table width="100%" cellspacing=0 cellpadding=2 border=0>
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom><small><small>&nbsp;<br></small></small
+><font color="#000000" face="helvetica, arial"><a name="PyHtmlTable">class <strong>PyHtmlTable</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><small><small>&nbsp;</small></small></td></tr>
+<tr><td>&nbsp;&nbsp;</td>
+<td width="100%"><dl><dt><a name="PyHtmlTable-_PyHtmlTable__adjust_2d_array_cols_right"><strong>_PyHtmlTable__adjust_2d_array_cols_right</strong></a> = __adjust_2d_array_cols_right(self, inarr, add_after_this_col)</dl>
+<dl><dt><a name="PyHtmlTable-_PyHtmlTable__adjust_2d_array_rows_down"><strong>_PyHtmlTable__adjust_2d_array_rows_down</strong></a> = __adjust_2d_array_rows_down(self, inarr, add_after_this_row)</dl>
+<dl><dt><a name="PyHtmlTable-_PyHtmlTable__adjust_dbl_indx_dict_cols_right"><strong>_PyHtmlTable__adjust_dbl_indx_dict_cols_right</strong></a> = __adjust_dbl_indx_dict_cols_right(self, indict, shift_after_this_col)</dl>
+<dl><dt><a name="PyHtmlTable-_PyHtmlTable__adjust_dbl_indx_dict_rows_down"><strong>_PyHtmlTable__adjust_dbl_indx_dict_rows_down</strong></a> = __adjust_dbl_indx_dict_rows_down(self, indict, add_after_this_row)</dl>
+<dl><dt><a name="PyHtmlTable-_PyHtmlTable__adjust_dict_cols_right"><strong>_PyHtmlTable__adjust_dict_cols_right</strong></a> = __adjust_dict_cols_right(self, indict, add_after_this_col)</dl>
+<dl><dt><a name="PyHtmlTable-_PyHtmlTable__adjust_dict_rows_down"><strong>_PyHtmlTable__adjust_dict_rows_down</strong></a> = __adjust_dict_rows_down(self, indict, add_after_this_row)</dl>
+<dl><dt><a name="PyHtmlTable-_PyHtmlTable__dumpattrs"><strong>_PyHtmlTable__dumpattrs</strong></a> = __dumpattrs(self, indict)</dl>
+<dl><dt><a name="PyHtmlTable-_PyHtmlTable__end_row"><strong>_PyHtmlTable__end_row</strong></a> = __end_row(self)</dl>
+<dl><dt><a name="PyHtmlTable-_PyHtmlTable__end_table"><strong>_PyHtmlTable__end_table</strong></a> = __end_table(self)</dl>
+<dl><dt><a name="PyHtmlTable-_PyHtmlTable__getendCellattrs"><strong>_PyHtmlTable__getendCellattrs</strong></a> = __getendCellattrs(self, row, col)<dd><small><tt>Presently&nbsp;unused</tt></small></dl>
+<dl><dt><a name="PyHtmlTable-_PyHtmlTable__has_only_rowcolsp_attrs"><strong>_PyHtmlTable__has_only_rowcolsp_attrs</strong></a> = __has_only_rowcolsp_attrs(self, attrstr)</dl>
+<dl><dt><a name="PyHtmlTable-_PyHtmlTable__resCell"><strong>_PyHtmlTable__resCell</strong></a> = __resCell(self, row, col)</dl>
+<dl><dt><a name="PyHtmlTable-_PyHtmlTable__setendCellattrs"><strong>_PyHtmlTable__setendCellattrs</strong></a> = __setendCellattrs(self, row, col, indict)<dd><small><tt>Presently&nbsp;unused</tt></small></dl>
+<dl><dt><a name="PyHtmlTable-_PyHtmlTable__start_row"><strong>_PyHtmlTable__start_row</strong></a> = __start_row(self, row)</dl>
+<dl><dt><a name="PyHtmlTable-_PyHtmlTable__start_table"><strong>_PyHtmlTable__start_table</strong></a> = __start_table(self)</dl>
+<dl><dt><a name="PyHtmlTable-__init__"><strong>__init__</strong></a>(self, rows, cols, tattr<small><font color="#909090">=None</font></small>)</dl>
+<dl><dt><a name="PyHtmlTable-add_array_to_col"><strong>add_array_to_col</strong></a>(self, row, col, inarr, attrs<small><font color="#909090">=None</font></small>)<dd><small><tt>Adds&nbsp;list&nbsp;of&nbsp;data&nbsp;specified&nbsp;by&nbsp;inarr&nbsp;to&nbsp;table&nbsp;object<br>
+starting&nbsp;at&nbsp;row,col<br>
+&nbsp;<br>
+Optionally&nbsp;specify&nbsp;attributes&nbsp;to&nbsp;set&nbsp;on&nbsp;cells&nbsp;being&nbsp;added<br>
+by&nbsp;defining&nbsp;the&nbsp;attrs&nbsp;dictionary<br>
+&nbsp;<br>
+&nbsp;<br>
+Note:&nbsp;Cell&nbsp;attribute&nbsp;insertion&nbsp;can&nbsp;be&nbsp;additive&nbsp;or&nbsp;overwriting&nbsp;depending<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;on&nbsp;calls&nbsp;to&nbsp;<a href="#PyHtmlTable-setReplaceCellattrs">setReplaceCellattrs</a>()&nbsp;or&nbsp;<a href="#PyHtmlTable-setAppendCellattrs">setAppendCellattrs</a>()<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default&nbsp;is&nbsp;to&nbsp;append&nbsp;new&nbsp;attributes</tt></small></dl>
+<dl><dt><a name="PyHtmlTable-add_array_to_row"><strong>add_array_to_row</strong></a>(self, row, col, inarr, attrs<small><font color="#909090">=None</font></small>)<dd><small><tt>Adds&nbsp;list&nbsp;of&nbsp;data&nbsp;specified&nbsp;by&nbsp;inarr&nbsp;to&nbsp;table&nbsp;object<br>
+starting&nbsp;at&nbsp;row,col<br>
+&nbsp;<br>
+Optionally&nbsp;specify&nbsp;attributes&nbsp;to&nbsp;set&nbsp;on&nbsp;cells&nbsp;being&nbsp;added<br>
+by&nbsp;defining&nbsp;the&nbsp;attrs&nbsp;dictionary<br>
+&nbsp;<br>
+Note:&nbsp;Cell&nbsp;attribute&nbsp;insertion&nbsp;can&nbsp;be&nbsp;additive&nbsp;or&nbsp;overwriting&nbsp;depending<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;on&nbsp;calls&nbsp;to&nbsp;<a href="#PyHtmlTable-setReplaceCellattrs">setReplaceCellattrs</a>()&nbsp;or&nbsp;<a href="#PyHtmlTable-setAppendCellattrs">setAppendCellattrs</a>()<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default&nbsp;is&nbsp;to&nbsp;append&nbsp;new&nbsp;attributes</tt></small></dl>
+<dl><dt><a name="PyHtmlTable-add_col"><strong>add_col</strong></a>(self, col)<dd><small><tt>&nbsp;Adds&nbsp;col&nbsp;to&nbsp;table&nbsp;after&nbsp;specified&nbsp;colidx&nbsp;<br>
+Adding&nbsp;col&nbsp;at&nbsp;colidx&nbsp;-1&nbsp;adds&nbsp;col&nbsp;to&nbsp;left&nbsp;of&nbsp;table</tt></small></dl>
+<dl><dt><a name="PyHtmlTable-add_row"><strong>add_row</strong></a>(self, row)<dd><small><tt>&nbsp;Adds&nbsp;row&nbsp;to&nbsp;table&nbsp;after&nbsp;specified&nbsp;rowidx.<br>
+Adding&nbsp;row&nbsp;at&nbsp;rowidx&nbsp;-1&nbsp;adds&nbsp;row&nbsp;to&nbsp;top&nbsp;of&nbsp;table</tt></small></dl>
+<dl><dt><a name="PyHtmlTable-addar2c"><strong>addar2c</strong></a>(self, row, col, inarr, attrs<small><font color="#909090">=None</font></small>)<dd><small><tt>Calls&nbsp;add_array_to_col</tt></small></dl>
+<dl><dt><a name="PyHtmlTable-addar2r"><strong>addar2r</strong></a>(self, row, col, inarr, attrs<small><font color="#909090">=None</font></small>)<dd><small><tt>Calls&nbsp;add_array_to_row</tt></small></dl>
+<dl><dt><a name="PyHtmlTable-clearCellDefattrs"><strong>clearCellDefattrs</strong></a>(self)<dd><small><tt>Clears&nbsp;default&nbsp;cell&nbsp;attributes</tt></small></dl>
+<dl><dt><a name="PyHtmlTable-clearCellattrs"><strong>clearCellattrs</strong></a>(self, row, col)<dd><small><tt>&nbsp;Clear&nbsp;cells&nbsp;attributes</tt></small></dl>
+<dl><dt><a name="PyHtmlTable-clearRowattrs"><strong>clearRowattrs</strong></a>(self, row)<dd><small><tt>&nbsp;Clear&nbsp;row&nbsp;attributes</tt></small></dl>
+<dl><dt><a name="PyHtmlTable-clearTableattrs"><strong>clearTableattrs</strong></a>(self)<dd><small><tt>&nbsp;Clear&nbsp;Table&nbsp;attributes</tt></small></dl>
+<dl><dt><a name="PyHtmlTable-clearcda"><strong>clearcda</strong></a>(self)<dd><small><tt>Calls&nbsp;clearCellDefattrs</tt></small></dl>
+<dl><dt><a name="PyHtmlTable-display"><strong>display</strong></a>(self)<dd><small><tt>&nbsp;Prints&nbsp;html&nbsp;table</tt></small></dl>
+<dl><dt><a name="PyHtmlTable-getCellDefattrs"><strong>getCellDefattrs</strong></a>(self)<dd><small><tt>Returns&nbsp;default&nbsp;cell&nbsp;attributes</tt></small></dl>
+<dl><dt><a name="PyHtmlTable-getCellattrs"><strong>getCellattrs</strong></a>(self, row, col)<dd><small><tt>&nbsp;Returns&nbsp;attributes&nbsp;set&nbsp;for&nbsp;specific&nbsp;cell&nbsp;at&nbsp;rowidx&nbsp;colidx</tt></small></dl>
+<dl><dt><a name="PyHtmlTable-getCellcontents"><strong>getCellcontents</strong></a>(self, row, col)<dd><small><tt>&nbsp;Get&nbsp;cells&nbsp;stored&nbsp;data&nbsp;values<br>
+Return&nbsp;an&nbsp;&amp;nbsp&nbsp;if&nbsp;cell&nbsp;is&nbsp;None</tt></small></dl>
+<dl><dt><a name="PyHtmlTable-getCelltype"><strong>getCelltype</strong></a>(self, row, col)<dd><small><tt>&nbsp;Returns&nbsp;Celltypes&nbsp;which&nbsp;is&nbsp;TD&nbsp;or&nbsp;TH</tt></small></dl>
+<dl><dt><a name="PyHtmlTable-getColattrs"><strong>getColattrs</strong></a>(self, col)<dd><small><tt>Presently&nbsp;unused</tt></small></dl>
+<dl><dt><a name="PyHtmlTable-getRowattrs"><strong>getRowattrs</strong></a>(self, row)<dd><small><tt>&nbsp;Returns&nbsp;attribute&nbsp;string&nbsp;for&nbsp;given&nbsp;rowidx&nbsp;which<br>
+was&nbsp;set&nbsp;by&nbsp;setRowattrs</tt></small></dl>
+<dl><dt><a name="PyHtmlTable-getc"><strong>getc</strong></a>(self, row, col)<dd><small><tt>Calls&nbsp;getCellcontents</tt></small></dl>
+<dl><dt><a name="PyHtmlTable-getcda"><strong>getcda</strong></a>(self, indict)<dd><small><tt>Calls&nbsp;&nbsp;getCellDefattrs</tt></small></dl>
+<dl><dt><a name="PyHtmlTable-getct"><strong>getct</strong></a>(self, row, col)<dd><small><tt>Calls&nbsp;&nbsp;getCelltype</tt></small></dl>
+<dl><dt><a name="PyHtmlTable-getmaxCol"><strong>getmaxCol</strong></a>(self)<dd><small><tt>&nbsp;Returns&nbsp;index&nbsp;of&nbsp;highest&nbsp;col(&nbsp;number_of_cols&nbsp;-1&nbsp;)</tt></small></dl>
+<dl><dt><a name="PyHtmlTable-getmaxRow"><strong>getmaxRow</strong></a>(self)<dd><small><tt>&nbsp;Returns&nbsp;index&nbsp;of&nbsp;highest&nbsp;row(&nbsp;number_of_rows&nbsp;-1&nbsp;)</tt></small></dl>
+<dl><dt><a name="PyHtmlTable-return_html"><strong>return_html</strong></a>(self)<dd><small><tt>&nbsp;Returns&nbsp;html&nbsp;table&nbsp;as&nbsp;string</tt></small></dl>
+<dl><dt><a name="PyHtmlTable-setAppendCellattrs"><strong>setAppendCellattrs</strong></a>(self)<dd><small><tt>After&nbsp;calling&nbsp;this&nbsp;function&nbsp;calls&nbsp;to&nbsp;<a href="#PyHtmlTable-setCellattrs">setCellattrs</a>()&nbsp;will<br>
+append&nbsp;attribute&nbsp;information&nbsp;to&nbsp;cells<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;cell&nbsp;had&nbsp;attributes&nbsp;width="400",&nbsp;after&nbsp;calling&nbsp;this<br>
+function&nbsp;calls&nbsp;to&nbsp;<a href="#PyHtmlTable-setCellattrs">setCellattrs</a>(&nbsp;x,&nbsp;y,&nbsp;{'bgcolor':'black'})<br>
+yields&nbsp;attributes&nbsp;for&nbsp;cell&nbsp;x,y&nbsp;of:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width="400"&nbsp;bgcolor="black"<br>
+&nbsp;<br>
+Note:&nbsp;This&nbsp;is&nbsp;the&nbsp;default&nbsp;behavior</tt></small></dl>
+<dl><dt><a name="PyHtmlTable-setCellColSpan"><strong>setCellColSpan</strong></a>(self, row, col, numcells)<dd><small><tt>Sets&nbsp;COLSPAN&nbsp;starting&nbsp;at&nbsp;rowidx,&nbsp;colidx<br>
+spanning&nbsp;numcells&nbsp;<br>
+(Remember&nbsp;rows,cols&nbsp;start&nbsp;at&nbsp;0,0)</tt></small></dl>
+<dl><dt><a name="PyHtmlTable-setCellDefattrs"><strong>setCellDefattrs</strong></a>(self, indict)<dd><small><tt>Sets&nbsp;default&nbsp;attributes&nbsp;for&nbsp;cells&nbsp;in&nbsp;table<br>
+Used&nbsp;if&nbsp;cell&nbsp;does&nbsp;not&nbsp;have&nbsp;specific&nbsp;atributes</tt></small></dl>
+<dl><dt><a name="PyHtmlTable-setCellRowSpan"><strong>setCellRowSpan</strong></a>(self, row, col, numcells)<dd><small><tt>Sets&nbsp;ROWSPAN&nbsp;starting&nbsp;at&nbsp;rowidx,&nbsp;colidx<br>
+spanning&nbsp;numcells&nbsp;<br>
+(Remember&nbsp;rows,cols&nbsp;start&nbsp;at&nbsp;0,0)</tt></small></dl>
+<dl><dt><a name="PyHtmlTable-setCellattrs"><strong>setCellattrs</strong></a>(self, row, col, indict)<dd><small><tt>&nbsp;Sets&nbsp;cell&nbsp;attributes&nbsp;for&nbsp;cell&nbsp;at&nbsp;rowidx,&nbsp;colidx<br>
+&nbsp;<br>
+&nbsp;indict&nbsp;is&nbsp;a&nbsp;dictionary&nbsp;of&nbsp;key=val&nbsp;pairs<br>
+&nbsp;<br>
+{'bgcolor':'black',&nbsp;'width':200}&nbsp;yields<br>
+&nbsp;<br>
+&lt;TD&nbsp;BGCOLOR="BLACK"&nbsp;width="200"&nbsp;&gt;<br>
+on&nbsp;output</tt></small></dl>
+<dl><dt><a name="PyHtmlTable-setCellcontents"><strong>setCellcontents</strong></a>(self, row, col, data, attrs<small><font color="#909090">=None</font></small>)<dd><small><tt>&nbsp;Puts&nbsp;data&nbsp;into&nbsp;cell&nbsp;at&nbsp;rowidx,&nbsp;colidx<br>
+Takes&nbsp;optional&nbsp;attribute&nbsp;dictionary&nbsp;for&nbsp;cell</tt></small></dl>
+<dl><dt><a name="PyHtmlTable-setCelltype"><strong>setCelltype</strong></a>(self, row, col, ctype<small><font color="#909090">='TD'</font></small>)<dd><small><tt>&nbsp;Celltypes&nbsp;can&nbsp;be&nbsp;TD&nbsp;or&nbsp;TH</tt></small></dl>
+<dl><dt><a name="PyHtmlTable-setColattrs"><strong>setColattrs</strong></a>(self, col, indict)<dd><small><tt>Presently&nbsp;unused</tt></small></dl>
+<dl><dt><a name="PyHtmlTable-setReplaceCellattrs"><strong>setReplaceCellattrs</strong></a>(self)<dd><small><tt>After&nbsp;calling&nbsp;this&nbsp;function&nbsp;calls&nbsp;to&nbsp;<a href="#PyHtmlTable-setCellattrs">setCellattrs</a>()&nbsp;will<br>
+append&nbsp;attribute&nbsp;information&nbsp;to&nbsp;cells<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;cell&nbsp;had&nbsp;attributes&nbsp;width="400",&nbsp;after&nbsp;calling&nbsp;this<br>
+function&nbsp;calls&nbsp;to&nbsp;<a href="#PyHtmlTable-setCellattrs">setCellattrs</a>(&nbsp;x,&nbsp;y,&nbsp;{'bgcolor':'black'})<br>
+yields&nbsp;attributes&nbsp;for&nbsp;cell&nbsp;x,y&nbsp;of:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bgcolor="black"</tt></small></dl>
+<dl><dt><a name="PyHtmlTable-setRowattrs"><strong>setRowattrs</strong></a>(self, row, indict)<dd><small><tt>Sets&nbsp;attributes&nbsp;for&nbsp;give&nbsp;rowidx<br>
+&nbsp;<br>
+indict&nbsp;is&nbsp;a&nbsp;dictionary&nbsp;of&nbsp;key=val&nbsp;pairs<br>
+{'bgcolor':'black'}&nbsp;translates&nbsp;to&nbsp;&lt;TR&nbsp;BGCOLOR="BLACK"&gt;</tt></small></dl>
+<dl><dt><a name="PyHtmlTable-setTableattrs"><strong>setTableattrs</strong></a>(self, indict)<dd><small><tt>&nbsp;Sets&nbsp;table&nbsp;attributes&nbsp;in&nbsp;&lt;TABLE&nbsp;directive<br>
+&nbsp;<br>
+indict&nbsp;is&nbsp;a&nbsp;dictionary&nbsp;of&nbsp;key=val&nbsp;pairs<br>
+{'width':'800','border':2,'bgcolor':'green'}&nbsp;yields<br>
+&nbsp;<br>
+&lt;TABLE&nbsp;WIDTH="800"&nbsp;BORDER="2"&nbsp;BGCOLOR="GREEN"&gt;</tt></small></dl>
+<dl><dt><a name="PyHtmlTable-setc"><strong>setc</strong></a>(self, row, col, data, attrs<small><font color="#909090">=None</font></small>)<dd><small><tt>Calls&nbsp;setCellcontents</tt></small></dl>
+<dl><dt><a name="PyHtmlTable-setca"><strong>setca</strong></a>(self, row, col, indict)<dd><small><tt>Calls&nbsp;setCellattrs</tt></small></dl>
+<dl><dt><a name="PyHtmlTable-setcda"><strong>setcda</strong></a>(self, indict)<dd><small><tt>Calls&nbsp;setCellDefattrs</tt></small></dl>
+<dl><dt><a name="PyHtmlTable-setcrspan"><strong>setcrspan</strong></a>(self, row, col, numcells)<dd><small><tt>Calls&nbsp;setCellRowSpan</tt></small></dl>
+<dl><dt><a name="PyHtmlTable-setcspan"><strong>setcspan</strong></a>(self, row, col, numcells)<dd><small><tt>Calls&nbsp;setCellColSpan</tt></small></dl>
+<dl><dt><a name="PyHtmlTable-setct"><strong>setct</strong></a>(self, row, col, ctype<small><font color="#909090">='TD'</font></small>)<dd><small><tt>Calls&nbsp;setCelltype</tt></small></dl>
+<dl><dt><a name="PyHtmlTable-setta"><strong>setta</strong></a>(self, indict)<dd><small><tt>Calls&nbsp;setTableattrs</tt></small></dl>
+</td></tr></table></td></tr></table>
+<p><table width="100%" cellspacing=0 cellpadding=2 border=0>
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom><small><small>&nbsp;<br></small></small
+><font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;&nbsp;</td>
+<td width="100%"><dl><dt><a name="-main"><strong>main</strong></a>()<dd><small><tt>#-------------------------------------------------------------<br>
+#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example&nbsp;html,&nbsp;if&nbsp;run&nbsp;from&nbsp;cmd&nbsp;line<br>
+#-------------------------------------------------------------</tt></small></dl>
+</td></tr></table>
+<p><table width="100%" cellspacing=0 cellpadding=2 border=0>
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom><small><small>&nbsp;<br></small></small
+><font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;&nbsp;</td>
+<td width="100%"><strong>__file__</strong> = './PyHtmlTable.pyc'<br>
+<strong>__name__</strong> = 'PyHtmlTable'</td></tr></table>
+</body></html>

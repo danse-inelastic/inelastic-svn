@@ -1,0 +1,205 @@
+<html><head></head>
+<body bgcolor="white"> 
+ <h1> Html Table class in Python..more examples  </h1><p></p><p> 
+<b> initial table</b>
+</p><pre>
+    tabledict = {'width':'800','border':2,'bgcolor':'white'}
+
+    t  = PyHtmlTable.PyHtmlTable( 2, 2, tabledict )
+
+    t.setCellcontents(0,0,"T1 Cell 00")
+    t.setCellcontents(0,1,"T1 Cell 01")
+    t.setCellcontents(1,0,"T1 Cell 01")
+    t.setCellcontents(1,1,"T1 Cell 11")
+
+    t.display()
+
+    </pre>
+<table width="800" border="2" bgcolor="white">
+<tbody><tr>
+<td>T1 Cell 00</td>
+<td>T1 Cell 01</td>
+</tr> 
+
+<tr>
+<td>T1 Cell 01</td>
+<td>T1 Cell 11</td>
+</tr> 
+
+</tbody></table>
+<p></p><hr><b> Adding a column in bulk, passing in attributes
+             Note: The table auto expands as the array being passed
+             in is bigger</b>
+<pre>    a = ["one", "two", "three" ]
+
+    t.add_array_to_col( 0, 0, a, {'bgcolor':'green'} )
+    t.display()
+    </pre>
+<table width="800" border="2" bgcolor="white">
+<tbody><tr>
+<td bgcolor="green">one</td>
+<td>T1 Cell 01</td>
+</tr> 
+
+<tr>
+<td bgcolor="green">two</td>
+<td>T1 Cell 11</td>
+</tr> 
+
+<tr>
+<td bgcolor="green">three</td>
+<td> </td>
+</tr> 
+
+</tbody></table>
+<p></p><hr><b> Adding a row in bulk is similar...adding
+             to last row of table</b>
+<pre>    b = ["rone", "rtwo", "rthree" ]
+
+    t.add_array_to_row( t.getmaxRow()+1, 0, b, {'bgcolor':'grey'} )
+    t.display()
+    </pre>
+<table width="800" border="2" bgcolor="white">
+<tbody><tr>
+<td bgcolor="green">one</td>
+<td>T1 Cell 01</td>
+<td> </td>
+</tr> 
+
+<tr>
+<td bgcolor="green">two</td>
+<td>T1 Cell 11</td>
+<td> </td>
+</tr> 
+
+<tr>
+<td bgcolor="green">three</td>
+<td> </td>
+<td> </td>
+</tr> 
+
+<tr>
+<td bgcolor="grey">rone</td>
+<td bgcolor="grey">rtwo</td>
+<td bgcolor="grey">rthree</td>
+</tr> 
+
+</tbody></table>
+<p></p><hr><b>Set default attributes for cells in table...setting
+                    bgcolor to red <br>
+                    Note: these will be overridden by explict attribute
+                    settings for a given cell, hence the green and grey cells </b>
+<pre>    
+    t.setCellDefattrs({'bgcolor':'red'})
+
+    t.display()
+
+
+    </pre>
+<table width="800" border="2" bgcolor="white">
+<tbody><tr>
+<td bgcolor="green">one</td>
+<td bgcolor="red">T1 Cell 01</td>
+<td bgcolor="red"> </td>
+</tr> 
+
+<tr>
+<td bgcolor="green">two</td>
+<td bgcolor="red">T1 Cell 11</td>
+<td bgcolor="red"> </td>
+</tr> 
+
+<tr>
+<td bgcolor="green">three</td>
+<td bgcolor="red"> </td>
+<td bgcolor="red"> </td>
+</tr> 
+
+<tr>
+<td bgcolor="grey">rone</td>
+<td bgcolor="grey">rtwo</td>
+<td bgcolor="grey">rthree</td>
+</tr> 
+
+</tbody></table>
+<p></p><hr><b>Updating Cell attributes are additive by default
+                    but can be overridden by setting a toggle with the <br>
+                    <font color="red"> t.setReplaceCellattrs()</font> <br>
+                    and reset to the default append mode with with the:<br>
+
+                   <font color="red">t.setAppendCellattrs()</font>
+                    method<br>
+
+                    You can also explicitly clear cells/row/table
+                    attributes with calls to<br>
+
+                    <font color="red">
+                    
+                    clearCellattrs( row, col) <br>
+                    clearRowattrs( row )<br>
+                    clearTableattrs()<br>
+
+                    </font>
+                    
+
+                    </b>
+<pre>
+        t.setCellattrs( 0,0, {'bgcolor':'red'})
+
+    yields a cell that looks like
+
+        TD bcolor="RED"
+
+    Subsequent calls to t.setCellattrs(0,0, {'width':100})
+    
+     yields a cell that looks like
+
+        TD bcolor="RED" WIDTH="100"
+
+    You can use clearCellattrs( row, col ) to explicitly delete a
+    cell's attributes
+
+    OR
+
+    Set the global toggle
+
+       t.setReplaceCellattrs()
+
+    The second call to
+         t.setCellattrs(0,0, {'width':100})
+    above yieds a cell that looks like
+
+         TD WIDTH="100"
+         </pre>
+<hr> <b> Clear tables attributes, set 0 border and redisplay</b>
+    <pre>    t.clearTableattrs()
+    t.setTableattrs({'border':0})
+    t.display()
+     </pre>
+<table border="0">
+<tbody><tr>
+<td bgcolor="green">one</td>
+<td bgcolor="red">T1 Cell 01</td>
+<td bgcolor="red"> </td>
+</tr> 
+
+<tr>
+<td bgcolor="green">two</td>
+<td bgcolor="red">T1 Cell 11</td>
+<td bgcolor="red"> </td>
+</tr> 
+
+<tr>
+<td bgcolor="green">three</td>
+<td bgcolor="red"> </td>
+<td bgcolor="red"> </td>
+</tr> 
+
+<tr>
+<td bgcolor="grey">rone</td>
+<td bgcolor="grey">rtwo</td>
+<td bgcolor="grey">rthree</td>
+</tr> 
+
+</tbody></table>
+</body></html>

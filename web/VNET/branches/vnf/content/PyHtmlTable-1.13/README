@@ -1,0 +1,21 @@
+PyHtmlTable Readme
+
+
+You should only need to copy 2 files into your /cgi-bin
+directory to use this.
+
+	PyHtmlTable.py 
+	twodarr.py
+
+The PyHtmlTable module has a __main__ function, so you can
+invoke it directly.
+
+
+	cp PyHtmlTable.py /cgi-bin/PyHtmlTable.cgi
+	cp twodarr.py /cgi-bin
+
+
+OR run pydoc against PyHtmlTable.py to get an example:
+	
+	pydoc ./PyHtmlTable.py
+
