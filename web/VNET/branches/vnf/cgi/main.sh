@@ -1,2 +1,3 @@
 #!/usr/bin/env sh
-. dottools && _repo_/cgi/main.py $@
+#. dottools && _repo_/cgi/main.py $@
+. dottools && main.py $@
