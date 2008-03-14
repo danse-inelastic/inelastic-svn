@@ -1,0 +1,90 @@
+
+<!doctype html public "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module twodarr</title>
+<style type="text/css"><!--
+TT { font-family: lucidatypewriter, lucida console, courier }
+--></style></head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0>
+<tr bgcolor="#7799ee">
+<td valign=bottom><small>&nbsp;<br></small
+><font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>twodarr</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/pasko/python/PyHtmlTable/twodarr.py">/home/pasko/python/PyHtmlTable/twodarr.py</a></font></td></tr></table>
+    <p><small><tt>-------------------------------------------<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Class&nbsp;<a href="#twodarr">twodarr</a><br>
+&nbsp;<br>
+What:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#twodarr">twodarr</a>&nbsp;class&nbsp;written&nbsp;specifically&nbsp;for&nbsp;use&nbsp;with&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;PyHtmlTable&nbsp;class<br>
+&nbsp;<br>
+Why:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;I&nbsp;needed&nbsp;something&nbsp;that&nbsp;could&nbsp;store&nbsp;data&nbsp;in&nbsp;an&nbsp;NxN&nbsp;array<br>
+&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;dynamically&nbsp;grow&nbsp;the&nbsp;array<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Current-Version:&nbsp;$Revision:&nbsp;1.3&nbsp;$<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Last&nbsp;update:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$Date:&nbsp;2003/02/27&nbsp;22:37:20&nbsp;$<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Home-Page:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://pasko.net/PyHtmlTable">http://pasko.net/PyHtmlTable</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;Primary-Site:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://pasko.net/PyHtmlTable">http://pasko.net/PyHtmlTable</a><br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Written&nbsp;and&nbsp;debugged&nbsp;under&nbsp;Python&nbsp;2.2.2&nbsp;by&nbsp;Joe&nbsp;Pasko</tt></small></p>
+
+<p><table width="100%" cellspacing=0 cellpadding=2 border=0>
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom><small><small>&nbsp;<br></small></small
+><font color="#fffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;&nbsp;</td>
+<td width="100%"><table width="100%"><tr><td width="25%" valign=top><a href="copy.html">copy</a><br>
+</td><td width="25%" valign=top><a href="string.html">string</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table>
+<p><table width="100%" cellspacing=0 cellpadding=2 border=0>
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom><small><small>&nbsp;<br></small></small
+><font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><small><a href="twodarr.html#twodarr">twodarr</a>
+</small></font></dt></dl>
+ 
+<p><table width="100%" cellspacing=0 cellpadding=2 border=0>
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom><small><small>&nbsp;<br></small></small
+><font color="#000000" face="helvetica, arial"><a name="twodarr">class <strong>twodarr</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><small><small>&nbsp;</small></small></td></tr>
+<tr><td>&nbsp;&nbsp;</td>
+<td width="100%"><dl><dt><a name="twodarr-__init__"><strong>__init__</strong></a>(self, x<small><font color="#909090">=1</font></small>, y<small><font color="#909090">=1</font></small>, fill<small><font color="#909090">=None</font></small>)</dl>
+<dl><dt><a name="twodarr-add_col"><strong>add_col</strong></a>(self)</dl>
+<dl><dt><a name="twodarr-add_row"><strong>add_row</strong></a>(self)</dl>
+<dl><dt><a name="twodarr-get_arr"><strong>get_arr</strong></a>(self)</dl>
+<dl><dt><a name="twodarr-get_cell"><strong>get_cell</strong></a>(self, x, y)</dl>
+<dl><dt><a name="twodarr-get_max_col"><strong>get_max_col</strong></a>(self)</dl>
+<dl><dt><a name="twodarr-get_max_row"><strong>get_max_row</strong></a>(self)</dl>
+<dl><dt><a name="twodarr-get_num_cols"><strong>get_num_cols</strong></a>(self)</dl>
+<dl><dt><a name="twodarr-get_num_rows"><strong>get_num_rows</strong></a>(self)</dl>
+<dl><dt><a name="twodarr-set_cell"><strong>set_cell</strong></a>(self, x, y, data)</dl>
+</td></tr></table></td></tr></table>
+<p><table width="100%" cellspacing=0 cellpadding=2 border=0>
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom><small><small>&nbsp;<br></small></small
+><font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;&nbsp;</td>
+<td width="100%"><dl><dt><a name="-main"><strong>main</strong></a>()</dl>
+</td></tr></table>
+<p><table width="100%" cellspacing=0 cellpadding=2 border=0>
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom><small><small>&nbsp;<br></small></small
+><font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;&nbsp;</td>
+<td width="100%"><strong>__file__</strong> = './twodarr.pyc'<br>
+<strong>__name__</strong> = 'twodarr'</td></tr></table>
+</body></html>
