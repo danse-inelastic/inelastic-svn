@@ -14,6 +14,13 @@ PROJECT = vnf
 PACKAGE = content
 
 
+
+BUILD_DIRS = \
+
+OTHER_DIRS = \
+
+RECURSE_DIRS = $(BUILD_DIRS) $(OTHER_DIRS)
+
 #--------------------------------------------------------------------------
 #
 
@@ -28,6 +35,7 @@ EXPORT_PYTHON_MODULES = \
 
 
 export:: export-package-python-modules
+	BLD_ACTION="export" $(MM) recurse
 
 # version
 # $Id: Make.mm,v 1.1.1.1 2006-11-27 00:09:19 aivazis Exp $

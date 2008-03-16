@@ -12,48 +12,12 @@
 #
 
 
-from opal.components.GenericActor import GenericActor
 
-
-class SampleAssembly(GenericActor):
-
-
-    class Inventory(GenericActor.Inventory):
-
-        import pyre.inventory
-
-        id = pyre.inventory.str( 'id', default = '' )
-        id.meta['tip'] = 'identifier of the sample assembly'
-        #at this moment id is filename
-
-        pass # end of Inventory
-
-
-    def __init__(self):
-        GenericActor.__init__(self, 'sampleassembly')
-        return
-
-
-    def perform(self, app, routine = None):
-        path = self._getpath( self.inventory.id )
-        from sampleassembly.saxml import parse_file
-        sampleassembly = parse_file( path )
-        
-        page = app.retrieveComponent(
-            self.name,
-            factory = 'page', args = [app, sampleassembly],
-            vault = ['pages'] )
-        
-        return page
-
-
-    def _getpath(self, filename):
-        import os
-        return os.path.join( 'sampleassemblies', filename )
-
+from vnf.components.SampleAssemblyBuilder import SampleAssemblyBuilder
 
 def actor():
-    return SampleAssembly()
+    return SampleAssemblyBuilder()
+
 
 
 # version

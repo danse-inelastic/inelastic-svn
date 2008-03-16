@@ -18,6 +18,7 @@
 <inventory>
 
   <component name='main'>
+    <property name='debug'>1</property>
     <property name='home'>http://trueblue.caltech.edu/vnf/</property>
     <property name='cgi-home'>http://trueblue.caltech.edu/cgi-bin/vnf/main.sh</property>
   </component>
