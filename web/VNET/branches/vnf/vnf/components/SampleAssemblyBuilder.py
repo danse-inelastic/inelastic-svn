@@ -38,7 +38,7 @@ class SampleAssemblyBuilder(Actor):
         document = main.document(title='Sample Assembly Builder')
         document.description = (
             'Sample assembly is a collection of neutron scatterers. For example, '\
-            'it can consists of a main sample, a sample container, and a furnace.\n'\
+            'it can consist of a main sample, a sample container, and a furnace.\n'\
             )
         document.byline = 'byline?'
 
