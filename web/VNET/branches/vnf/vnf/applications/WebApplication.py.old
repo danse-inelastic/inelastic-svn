@@ -12,15 +12,23 @@
 #
 
 
+from opal.applications.WebApplication import WebApplication as Base
 
-from vnf.components.SampleAssemblyBuilder import SampleAssemblyBuilder
 
-def actor():
-    return SampleAssemblyBuilder()
+class WebApplication(Base):
 
+
+    def main(self, *args, **kwds):
+        Base.main(self, *args, **kwds)
+        return
+
+
+    def _getPrivateDepositoryLocations(self):
+        return ['content', 'config']
+        #return ['../content', '../config']
 
 
 # version
-__id__ = "$Id: Login.py,v 1.1.1.1 2006-11-27 00:09:47 aivazis Exp $"
+__id__ = "$Id: WebApplication.py,v 1.1.1.1 2006-11-27 00:09:19 aivazis Exp $"
 
 # End of file 

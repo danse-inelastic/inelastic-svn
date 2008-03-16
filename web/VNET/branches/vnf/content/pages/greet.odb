@@ -17,7 +17,7 @@ def page(app):
     import opaldemo.content
 
     # create the page
-    page = opaldemo.content.page(name='greet', title="Hello", root=app.home)
+    page = opaldemo.content.page(name='greet', title="Virtual Neutron Facility", root=app.home)
     
     # build the body
     body = page.body()
@@ -38,10 +38,13 @@ def page(app):
     document = main.document(title='Welcome')
     p = document.paragraph()
     p.text = [
-        "sentry.username: %s<br/>" % sentry.username,
-        "sentry.password: %s<br/>" % sentry.passwd,
-        "sentry.attempts: %s<br/>" % sentry.attempts,
-        "sentry.ticket: %s<br/>" % sentry.ticket,
+        '<a href="%s?actor=sampleassembly&sentry.username=%s&sentry.ticket=%s">Sample Assembly Builder</a><br/>' % (
+        app.cgihome, app.sentry.username, app.sentry.ticket),
+        '<a href="%s/sample/Samples.html">Samples</a><br/>' % app.home,
+        '<a href="%s/InstrumentSimulation.html">Instrument Simulation</a><br/>' % app.home,
+        '<a href="jobMonitoring.html">Job Monitoring</a><br/>',
+        '<a href="manageServers.html">Manage Servers</a><br/>',
+        '<a href="MaterialSimulation.html">Supporting Calculations</a><br/>',
         ]
 
     # build the footer
