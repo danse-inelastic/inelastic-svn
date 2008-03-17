@@ -8,5 +8,6 @@
 <path>/inelastic</path>
 <path>/inelastic/ExcitationSlicer</path>
 <path>/inelastic/translator</path>
+<path>/inelastic/web/VNET/branches/vnf</path>
 </pydev_pathproperty>
 </pydev_project>
