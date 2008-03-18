@@ -13,10 +13,10 @@
 
 
 
-from vnf.components.SampleAssemblyBuilder import SampleAssemblyBuilder
+from vnf.components.Samples import Samples
 
 def actor():
-    return SampleAssemblyBuilder()
+    return Samples()
 
 
 
