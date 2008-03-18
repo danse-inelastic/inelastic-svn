@@ -2,7 +2,6 @@
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
-#                                  Jiao Lin
 #                     California Institute of Technology
 #                       (C) 2007  All Rights Reserved
 #
@@ -46,12 +45,12 @@ class Samples(Actor):
         id = self.inventory.id
         if id is None: id = 'empty'
 
-        sampleassembly = self._getsampleassembly( id )
+        samples = self._getsamples( id )
 
-        if len(sampleassembly.elements()) == 0:
+        if len(samples.elements()) == 0:
             noscatterer( document, director )
         else:
-            listscatterers( sampleassembly.elements(), document, director )
+            listscatterers( samples.elements(), document, director )
             pass
     
         return page    
@@ -70,11 +69,11 @@ class Samples(Actor):
         return
 
 
-    def _getsampleassembly(self, id):
+    def _getsamples(self, id):
         path = self._getpath( id )
         from sampleassembly.saxml import parse_file
-        sampleassembly = parse_file( path )
-        return sampleassembly
+        samples = parse_file( path )
+        return samples
 
 
     def _getpath(self, id):
@@ -89,8 +88,7 @@ def listscatterers( scatterers, document, director ):
     p = document.paragraph()
 
     n = len(scatterers)
-    p.text = [ 'There %s %s scatterer%s in this sample assembly: ' %
-               (present_be(n), n, plural(n))
+    p.text = [ 'There are no samples yet.')
                 ]
     formatstr = '%(index)s: %(name)s (<a href="%(cgihome)s?actor=scatterer&scatterer.name=%(name)s">configure</a>)'
 
