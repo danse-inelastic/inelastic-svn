@@ -25,7 +25,9 @@ all: export
 EXPORT_PYTHON_MODULES = \
     Actor.py \
     Clerk.py \
+    Purser.py \
     SampleAssemblyBuilder.py \
+    Scribe.py \
     __init__.py \
 
 
