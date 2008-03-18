@@ -14,10 +14,10 @@
 
 def page(app):
     import os
-    import opaldemo.content
+    import vnf.content
 
     # create the page
-    page = opaldemo.content.page(name='error', title="Error", root=app.home)
+    page = vnf.content.page(name='error', title="Error", root=app.home)
     
     # build the body
     body = page.body()

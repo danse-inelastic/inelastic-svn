@@ -37,7 +37,7 @@ class Samples(Actor):
         # populate the main column
         document = main.document(title='Samples')
         document.description = (
-            'Samples page displays a list of samples.
+            'Samples page displays a list of samples.'
             )
         document.byline = 'byline?'
 
