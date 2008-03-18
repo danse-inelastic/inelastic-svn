@@ -28,7 +28,7 @@ class Samples(Actor):
         pass # end of Inventory
 
 
-    def perform(self, director,routine=None):
+    def default(self, director):
         page = director.retrievePage( 'samples' )
         if not page:
             return director.retrievePage("authentication-error")
@@ -100,7 +100,6 @@ def listscatterers( scatterers, document, director ):
             ]
         continue
     return
-
 
 def present_be( n ):
     if n > 1: return 'are'
