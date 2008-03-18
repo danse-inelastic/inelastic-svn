@@ -78,7 +78,7 @@ class Samples(Actor):
 
     def _getpath(self, id):
         import os
-        return os.path.join( 'sampleassemblies', '%s.xml' % id )
+        return os.path.join('db', 'samples', '%s.xml' % id )
 
 
     pass # end of Samples
@@ -88,8 +88,7 @@ def listscatterers( scatterers, document, director ):
     p = document.paragraph()
 
     n = len(scatterers)
-    p.text = [ 'There are no samples yet.')
-                ]
+    p.text = [ 'There are no samples yet.']
     formatstr = '%(index)s: %(name)s (<a href="%(cgihome)s?actor=scatterer&scatterer.name=%(name)s">configure</a>)'
 
     for i, scatterer in enumerate( scatterers ):
