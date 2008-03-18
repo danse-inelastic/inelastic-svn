@@ -13,8 +13,8 @@
 
 
 def page(app):
-    import opaldemo.content
-    page = opaldemo.content.page(name='samples', title='Sample Store', root=app.home)
+    import vnf.content
+    page = vnf.content.page(name='samples', title='Sample Store', root=app.home)
     
     # build the body
     body = page.body()
