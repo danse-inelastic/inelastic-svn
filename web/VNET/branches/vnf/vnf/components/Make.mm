@@ -27,6 +27,7 @@ EXPORT_PYTHON_MODULES = \
     Clerk.py \
     Purser.py \
     SampleAssemblyBuilder.py \
+    Samples.py \
     Scribe.py \
     __init__.py \
 
