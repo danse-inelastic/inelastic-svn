@@ -23,12 +23,14 @@ class Samples(Actor):
 
         id = pyre.inventory.str("id", default=None)
         id.meta['tip'] = "the unique identifier for a given search"
+        
+        page = pyre.inventory.str('page', default='empty')
 
         pass # end of Inventory
 
 
-    def default(self, director):
-        page = director.retrieveSecurePage( 'samples' )
+    def perform(self, director,routine=None):
+        page = director.retrievePage( 'samples' )
         if not page:
             return director.retrievePage("authentication-error")
         
@@ -53,6 +55,12 @@ class Samples(Actor):
             pass
     
         return page    
+    
+    
+    
+#    def perform(self, app, routine=None):
+#        page = app.retrievePage(self.inventory.page)
+#        return page
 
 
     def __init__(self, name=None):
