@@ -23,6 +23,8 @@ class SampleAssemblyBuilder(Actor):
 
         id = pyre.inventory.str("id", default=None)
         id.meta['tip'] = "the unique identifier for a given search"
+        
+        page = pyre.inventory.str('page', default='empty')
 
         pass # end of Inventory
 
