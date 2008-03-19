@@ -17,6 +17,7 @@ BUILD_DIRS = \
     components \
     applications \
     content \
+    dom \
 
 OTHER_DIRS = \
 
