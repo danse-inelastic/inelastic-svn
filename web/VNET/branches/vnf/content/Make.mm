@@ -10,11 +10,12 @@
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-PROJECT = opaldemo
+PROJECT = vnf
 PACKAGE = content
 
 RECURSE_DIRS = \
     actors \
+    forms \
     pages \
     portlets \
 
