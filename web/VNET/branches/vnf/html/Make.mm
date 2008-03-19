@@ -11,7 +11,7 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-PROJECT = opaldemo
+PROJECT = vnf
 PACKAGE = html
 
 RECURSE_DIRS = \

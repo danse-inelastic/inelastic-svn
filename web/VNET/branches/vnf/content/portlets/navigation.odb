@@ -17,12 +17,12 @@ def portlet(app):
     portlet = opal.content.portlet(title="navigation", id="portlet-navigation-tree")
 
     home = portlet.item(description="Home")
-    home.target = "http://orthologue.com/cgi-bin/opaldemo/demo.py?actor=logout"
+    home.target = "http://orthologue.com/cgi-bin/vnf/demo.py?actor=logout"
     home.icon = "images/link_icon.gif"
     home.type = "navItem"
     
     logout = portlet.item(description="Logout")
-    logout.target = "http://orthologue.com/cgi-bin/opaldemo/demo.py?actor=logout"
+    logout.target = "http://orthologue.com/cgi-bin/vnf/demo.py?actor=logout"
     logout.icon = "images/link_icon.gif"
     logout.type = "navItem"
     

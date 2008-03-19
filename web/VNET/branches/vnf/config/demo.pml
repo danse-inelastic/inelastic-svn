@@ -18,8 +18,8 @@
 <inventory>
 
   <component name='demo'>
-    <property name='home'>http://localhost/opaldemo/</property>
-    <property name='cgi-home'>http://localhost/cgi-bin/opaldemo/demo.py</property>
+    <property name='home'>http://localhost/vnf/</property>
+    <property name='cgi-home'>http://localhost/cgi-bin/vnf/demo.py</property>
   </component>
 
 </inventory>
