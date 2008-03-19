@@ -11,13 +11,11 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 PROJECT = vnf
-PACKAGE = content
+PACKAGE = db
 
 RECURSE_DIRS = \
-    actors \
-    forms \
-    pages \
-    portlets \
+    sampleassemblies \
+    samples \
 
 #--------------------------------------------------------------------------
 #
