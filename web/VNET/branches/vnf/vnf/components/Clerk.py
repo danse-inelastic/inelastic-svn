@@ -16,8 +16,24 @@
 from pyre.components.Component import Component
 class Clerk(Component):
 
+
+    def indexUsers(self, where=None):
+        """create an index of all users that meet the specified criteria"""
+    
+        from vnf.dom.User import User
+        index = {}
+        users = self.db.fetchall(User, where=where)
+        for user in users:
+            index[user.username] = user
+
+        return index
+
+
     def indexActiveUsers(self):
-        return [ 'demo' ]
+        """create an index of all active users"""
+        return self.indexUsers()
+        return self.indexUsers(where="status='a'")
+
 
 
 # version

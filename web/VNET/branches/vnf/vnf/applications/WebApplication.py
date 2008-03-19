@@ -111,7 +111,7 @@ class WebApplication(Base):
 
         # connect to the database
         import pyre.db
-        #self.db = pyre.db.connect(database=self.inventory.db, wrapper=self.inventory.dbwrapper)
+        self.db = pyre.db.connect(database=self.inventory.db, wrapper=self.inventory.dbwrapper)
 
         # initialize the accessors
         #self.clerk.db = self.db
