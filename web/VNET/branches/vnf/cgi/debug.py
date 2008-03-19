@@ -15,7 +15,7 @@
 def main():
 
 
-    from opaldemo.applications.WebApplication import WebApplication
+    from vnf.applications.WebApplication import WebApplication
 
 
     class DemoApp(WebApplication):

@@ -33,7 +33,7 @@ function formMode(resolver, value) {
 
 
 <!-- body -->
-<body class="opaldemo">
+<body class="vnf">
 <table class="page" width="100%">
   <tr class="page_header">
     <td colspan="2">
@@ -41,7 +41,7 @@ function formMode(resolver, value) {
 <table border="0" width="100%" cols="2" cellspacing="0">
   <tr>
     <td colspan="2" height="2" bgcolor="white">
-      <img src="/opaldemo/images/pyre_logo_64.png">
+      <img src="/vnf/images/pyre_logo_64.png">
     </td>
   </tr>
 </table>
@@ -73,7 +73,7 @@ function formMode(resolver, value) {
     <font face="Arial" size=5 color="#cc6600">Welcome!</font>
   </td></tr>
   <tr><td>
-<form name="login" method="post" action="/cgi-bin/opaldemo/register.py">
+<form name="login" method="post" action="/cgi-bin/vnf/register.py">
   <input name="attempts" type="hidden" value="0">
   <input name="request" type="hidden" value="interview">
   <table border="0" cellspacing="10">
@@ -88,7 +88,7 @@ function formMode(resolver, value) {
   </table>
 </form>  </td></tr>
   <tr><td>
-<form name="login" method="post" action="/cgi-bin/opaldemo/login.py">
+<form name="login" method="post" action="/cgi-bin/vnf/login.py">
   <input name="journal.info.login" type="hidden" value="on">
   <table border="0" cols="2" cellspacing="10">
     <tr>

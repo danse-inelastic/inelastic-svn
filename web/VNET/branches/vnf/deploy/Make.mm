@@ -29,7 +29,7 @@ RECURSE_DIRS = \
     content \
     html \
     log \
-    opaldemo \
+    vnf \
 
 
 OTHERS = \

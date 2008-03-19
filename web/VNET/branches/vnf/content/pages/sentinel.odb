@@ -35,7 +35,7 @@ def page(app):
     document = main.document(title='WARNING')
     p = document.paragraph()
     p.text = [
-        "Welcome to <strong>opaldemo</strong>, a web built entirely out of pyre componets.",
+        "Welcome to <strong>vnf</strong>, a web built entirely out of pyre componets.",
         ]
 
     # build the footer
