@@ -40,20 +40,21 @@ class Clerk(Component):
         that meet the specified criteria"""
     
         from vnf.dom.SampleAssembly import SampleAssembly
-        index = {}
-        all = self.db.fetchall(SampleAssembly, where=where)
-        for item in all:
-            index[item.id] = item
-            continue
-        
-        return index
+        return self._index( SampleAssembly, where )
+
+
+    def indexScatterers(self, where = None):
+        '''create and index of all scatterers
+        that meet the specified criteria'''
+
+        from vnf.dom.Scatterer import Scatterer
+        return self._index( Scatterer, where )
 
 
     def getSampleAssembly(self, id):
         '''retrieve sample assembly of given id'''
         from vnf.dom.SampleAssembly import SampleAssembly
-        all = self.db.fetchall( SampleAssembly, where = "id='%s'" % id )
-        return all[0]
+        return self._getRecordByID( SampleAssembly, id )
 
 
     def getScattererIDs(self, id):
@@ -74,21 +75,57 @@ class Clerk(Component):
         ret = []
         
         for id in ids:
-            record = self.db.fetchall(
-                Scatterer, where = "id='%s'" % id )[0]
-            
-            type = record.type
-            id1 = record.reference
-
-            exec "from vnf.dom.%s import %s as Table" % (type, type)
-            scatterer = self.db.fetchall(
-                Table, where = "id='%s'" % id1 )[0]
-
-            ret.append( scatterer )
-
+            record = self._getRecordByID( Scatterer, id )
+            ret.append( record )
             continue
             
         return ret
+
+
+    def getRealScatterer(self, id):
+        '''given id in the scatter table, retrieve the real
+        scatterer's record.
+        The scatter table contains type and reference_id
+        info of the scatterer.
+        To look up the real scatterer, we have to
+        go to the table of the given scatterer type
+        and find the record of given id.
+        '''
+        from vnf.dom.Scatterer import Scatterer
+        record = self.getScatterer( id )
+        
+        type = record.type
+        id1 = record.reference
+        
+        exec "from vnf.dom.%s import %s as Table" % (type, type)
+        scatterer = self._getRecordByID( Table, id1 )
+        
+        return 
+
+
+    def getScatterer(self, id):
+        '''retrieve scatterer of given id'''
+        from vnf.dom.Scatterer import Scatterer
+        return self._getRecordByID( Scatterer, id )
+
+
+    def _index(self, table, where = None):
+        index = {}
+        all = self.db.fetchall(table, where=where)
+        for item in all:
+            index[item.id] = item
+            continue
+        
+        return index
+
+
+    def _getRecordByID(self, table, id ):
+        all = self.db.fetchall( table, where = "id='%s'" % id )
+        return all[0]
+
+
+    pass # end of Clerk
+
 
 
 # version

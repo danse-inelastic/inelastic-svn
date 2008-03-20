@@ -53,7 +53,7 @@ class WebApplication(Base):
             return page
 
         if self.debug:
-            print "*** could not locate page %r" % name
+            self._debug.log( "*** could not locate page %r" % name )
             return
         
         page = super(WebApplication, self).retrievePage("error")
@@ -64,7 +64,7 @@ class WebApplication(Base):
         # check that the username is allowed
         activeUsers = self.clerk.indexActiveUsers()
         if self.sentry.username not in activeUsers:
-            return None
+            return self.retrievePage( "invalid-user" )
         
         # check that the password is valid
         ticket = self.sentry.authenticate()

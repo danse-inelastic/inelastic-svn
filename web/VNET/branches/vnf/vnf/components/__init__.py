@@ -24,6 +24,4 @@ def scribe():
 # version
 __id__ = "$Id$"
 
-# Generated automatically by PythonMill on Sat Mar 15 08:11:12 2008
-
 # End of file 
