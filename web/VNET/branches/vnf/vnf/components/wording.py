@@ -11,14 +11,25 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
-def clerk():
-    from Clerk import Clerk
-    return Clerk( 'clerk', 'clerk' )
+
+def present_be( n ):
+    if n > 1: return 'are'
+    return 'is'
 
 
-def scribe():
-    from pyre.components.Component import Component
-    return Component( 'scribe', 'scribe' )
+def plural1( n ):
+    if n>1: return 's'
+    return ''
+
+def plural2( n ):
+    if n>1: return 'ies'
+    return 'y'
+
+def plural( n, ending = '' ):
+    f = { '': plural1,
+          'y': plural2,
+        }
+    return f[ending](n)
 
 
 # version

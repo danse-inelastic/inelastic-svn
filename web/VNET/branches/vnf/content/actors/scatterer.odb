@@ -13,10 +13,10 @@
 
 
 
-from vnf.components.SampleAssembly import SampleAssembly
+from vnf.components.Scatterer import Scatterer
 
 def actor():
-    return SampleAssembly()
+    return Scatterer()
 
 
 

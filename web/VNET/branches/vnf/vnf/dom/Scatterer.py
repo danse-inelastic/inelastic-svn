@@ -29,6 +29,9 @@ class Scatterer(Table):
     date = pyre.db.date( name='date' )
     date.meta['tip'] = 'date of creation'
 
+    short_description = pyre.db.varchar(name='short_description', length = 128)
+    short_description.meta['tip'] = 'short description of scatterer'
+
     type = pyre.db.varchar( name = 'type', length = 10 )
     type.meta['tip'] = 'type of the scatterer'
     

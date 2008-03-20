@@ -11,14 +11,21 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
-def clerk():
-    from Clerk import Clerk
-    return Clerk( 'clerk', 'clerk' )
 
+from Action import Action
 
-def scribe():
-    from pyre.components.Component import Component
-    return Component( 'scribe', 'scribe' )
+class ActionRequireAuthentication( Action ):
+
+    def __init__(self, actor, sentry, label = '', routine = None, **arguments ):
+        Action.__init__(self, actor, label, routine, **arguments )
+        self.sentry = sentry
+        return
+
+    def identify(self, visitor):
+        return visitor.onActionRequireAuthentication(self)
+
+    pass # end of ActionRequireAuthentication
+
 
 
 # version

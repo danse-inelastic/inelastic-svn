@@ -10,10 +10,11 @@
 #
 
 
-from Actor import Actor
+from Actor import Actor, action_link, action, actionRequireAuthentication
+from wording import plural, present_be
 
 
-class SampleAssemblyBuilder(Actor):
+class SampleAssembly(Actor):
 
 
     class Inventory(Actor.Inventory):
@@ -61,19 +62,19 @@ class SampleAssemblyBuilder(Actor):
             return director.retrievePage("authentication-error")
         
         main = page._body._content._main
-        
+
+        # the record we are working on
+        id = self.inventory.id
+        sampleassembly = self._getsampleassembly( id, director )
+
         # populate the main column
-        document = main.document(title='Sample Assembly Builder')
+        document = main.document(title='Sample Assembly: %s' % sampleassembly.short_description )
         document.description = (
             'Sample assembly is a collection of neutron scatterers. For example, '\
             'it can consist of a main sample, a sample container, and a furnace.\n'\
             )
         document.byline = 'byline?'
 
-        id = self.inventory.id
-        if id is None: id = 'empty'
-
-        sampleassembly = self._getsampleassembly( id, director )
         scatterers = self._getscatterers( id, director )
 
         if len(scatterers) == 0:
@@ -88,7 +89,7 @@ class SampleAssemblyBuilder(Actor):
     def __init__(self, name=None):
         if name is None:
             name = "sampleassembly"
-        super(SampleAssemblyBuilder, self).__init__(name)
+        super(SampleAssembly, self).__init__(name)
         return
 
 
@@ -102,16 +103,10 @@ class SampleAssemblyBuilder(Actor):
         return clerk.getScatterers( id )
 
 
-    pass # end of SampleAssemblyBuilder
+    pass # end of SampleAssembly
 
 
 
-def action_link( director, text, kwds):
-    return '<a href="%s?%s">%s</a>' % (
-        director.cgihome,
-        '&'.join( ['%s=%s' % (k,v) for k,v in kwds.iteritems() ] ),
-        text )
-    
 
 def listscatterers( scatterers, document, director ):
     p = document.paragraph()
@@ -120,25 +115,9 @@ def listscatterers( scatterers, document, director ):
     p.text = [ 'There %s %s scatterer%s in this sample assembly: ' %
                (present_be(n), n, plural(n))
                 ]
-    formatstr = '%(index)s: %(name)s (%(link)s)'
 
-    for i, scatterer in enumerate( scatterers ):
-        p = document.paragraph()
-        # link of callback
-        link = action_link(
-            director, 'configure',
-            { 'actor': 'scatterer',
-              'scatterer.id': scatterer.id,
-              'sentry.username': director.sentry.username,
-              'sentry.ticket': director.sentry.ticket,
-              }
-            )
-        p.text += [
-            formatstr % {'name': scatterer.short_description,
-                         'link': link,
-                         'index': i+1}
-            ]
-        continue
+    from inventorylist import list
+    list( scatterers, document, 'scatterer', director )
     return
 
 
@@ -146,61 +125,33 @@ def listsampleassemblies( sampleassemblies, document, director ):
     p = document.paragraph()
 
     n = len(sampleassemblies)
+
     p.text = [ 'There %s %s sampleassembl%s: ' %
                (present_be(n), n, plural(n, 'y'))
                 ]
-    formatstr = '%(index)s: %(name)s (%(link)s)'
 
-    for i, sampleassembly in enumerate( sampleassemblies ):
-        
-        p = document.paragraph()
-        
-        # link of callback
-        link = action_link(
-            director, 'configure',
-            { 'actor': 'sampleassembly',
-              'routine': 'edit',
-              'sampleassembly.id': sampleassembly.id,
-              'sentry.username': director.sentry.username,
-              'sentry.ticket': director.sentry.ticket,
-              }
-            )
-        p.text += [
-            formatstr % {'name': sampleassembly.short_description,
-                         'link': link,
-                         'index': i+1}
-            ]
-        continue
+    from inventorylist import list
+    list( sampleassemblies, document, 'sampleassembly', director )
     return
 
 
 
-def present_be( n ):
-    if n > 1: return 'are'
-    return 'is'
-
-
-def plural1( n ):
-    if n>1: return 's'
-    return ''
-
-def plural2( n ):
-    if n>1: return 'ies'
-    return 'y'
-
-def plural( n, ending = '' ):
-    f = { '': plural1,
-          'y': plural2,
-        }
-    return f[ending](n)
-
-
 def noscatterer( document, director ):
     p = document.paragraph()
+
+    link = action_link(
+        actionRequireAuthentication(
+        'scatterer',
+        director.sentry,
+        label = 'add',
+        routine = 'new',
+        ),  director.cgihome
+        )
+    
     p.text = [
         "There is no scatterer in this sample assembly. ",
-        'Please <a href="%s?actor=addscatterer">add</a> a scatter.' % (
-        director.cgihome,)
+        'Please %s a scatter.' % (
+        director.cgihome, link)
         ]
     return
 

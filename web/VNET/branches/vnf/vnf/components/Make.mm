@@ -23,13 +23,19 @@ all: export
 # export
 
 EXPORT_PYTHON_MODULES = \
-    Actor.py \
-    Clerk.py \
-    Purser.py \
-    SampleAssemblyBuilder.py \
-    Samples.py \
-    Scribe.py \
-    __init__.py \
+	Action.py \
+	ActionLinkRenderer.py \
+	ActionRequireAuthentication.py \
+	Actor.py \
+	Clerk.py \
+	Purser.py \
+	SampleAssembly.py \
+	Scatterer.py \
+	Samples.py \
+	Scribe.py \
+	__init__.py \
+	inventorylist.py \
+	wording.py \
 
 
 export:: export-package-python-modules
