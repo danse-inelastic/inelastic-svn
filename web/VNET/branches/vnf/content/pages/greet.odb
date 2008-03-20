@@ -40,6 +40,8 @@ def page(app):
     p.text = [
         '<a href="%s?actor=sampleassembly&sentry.username=%s&sentry.ticket=%s">Sample Assemblies</a><br/>' % (
         app.cgihome, app.sentry.username, app.sentry.ticket),
+        '<a href="%s?actor=sampleConstruction&sentry.username=%s&sentry.ticket=%s">Sample Construction</a><br/>' % (
+        app.cgihome, app.sentry.username, app.sentry.ticket),
         '<a href="%s/sample/Samples.html">Samples</a><br/>' % app.home,
         '<a href="%s/InstrumentSimulation.html">Instrument Simulation</a><br/>' % app.home,
         '<a href="jobMonitoring.html">Job Monitoring</a><br/>',
