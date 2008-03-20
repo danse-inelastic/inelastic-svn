@@ -31,8 +31,15 @@ all: export
 
 EXPORT_PYTHON_MODULES = \
 	Table.py \
+	ReferenceSet.py \
+	SampleAssembly.py \
+	Scatterer.py \
+	Shape.py \
+	Crystal.py \
 	User.py \
-	__init__.py
+	PolyXtalScatterer.py \
+	Block.py \
+	__init__.py \
 
 
 export:: export-package-python-modules

@@ -16,6 +16,7 @@ method = 'md5'
 
 users = {
     'demo':    'fe01ce2a7fbac8fafaed7c982a04e229',
+    'jbk': '',
     'linjiao': '202cb962ac59075b964b07152d234b70',
     'aivazis': '074d0b5d4f8421cd7c09ad94f72a3fe2',
     }
