@@ -28,7 +28,7 @@ class WebApplication(Base):
         dbwrapper.meta['tip'] = "the python package that provides access to the database back end"
 
         # components
-        actor = opal.inventory.actor(default="receptionist")
+        actor = opal.inventory.actor(default="greet")
         actor.meta['tip'] = "the component that defines the application behavior"
 
         import pyre.idd
