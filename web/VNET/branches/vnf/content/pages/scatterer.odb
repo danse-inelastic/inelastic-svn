@@ -21,7 +21,7 @@ def page(app):
 
     # build the header
     header = body.pageHeader()
-    header.logo(href="%s?actor=scatterer" % app.cgihome)
+    header.logo(href="%s?actor=login" % app.cgihome)
     header.personalTools()
 
     # build the client area

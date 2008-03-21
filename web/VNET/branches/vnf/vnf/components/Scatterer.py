@@ -10,7 +10,7 @@
 #
 
 
-from Actor import Actor
+from Actor import Actor, action_link, actionRequireAuthentication, AuthenticationError
 
 
 class Scatterer(Actor):
@@ -33,9 +33,10 @@ class Scatterer(Actor):
 
 
     def listall(self, director):
-        page = director.retrieveSecurePage( 'scatterer' )
-        if not page:
-            return director.retrievePage("authentication-error")
+        try:
+            page = director.retrieveSecurePage( 'scatterer' )
+        except AuthenticationError, error:
+            return error.page
         
         main = page._body._content._main
         
@@ -54,9 +55,10 @@ class Scatterer(Actor):
 
 
     def edit(self, director):
-        page = director.retrieveSecurePage( 'scatterer' )
-        if not page:
-            return director.retrievePage("authentication-error")
+        try:
+            page = director.retrieveSecurePage( 'scatterer' )
+        except AuthenticationError, error:
+            return error.page
         
         main = page._body._content._main
 
@@ -70,7 +72,9 @@ class Scatterer(Actor):
         document.byline = 'byline?'
 
         type = scatterer.type
-        editors[ type ]( scatterer, document, director )
+        editors[ type ](
+            director.clerk.getRealScatterer( id ),
+            document, director )
     
         return page    
 
@@ -128,11 +132,49 @@ def noscatterer( document, director ):
 
 def edit_polyxtalscatterer( scatterer, document, director ):
     p = document.paragraph()
+    shape = scatterer.shape
+    shape_ctrl = object_description_sentence( shape, 'Shape', director )
+    p.text = ["Shape: %s" % shape_ctrl,]
 
-    p.text = [
-        scatterer.short_description,
-        ]
+    p = document.paragraph()
+    crystal = scatterer.crystal
+    crystal_ctrl = object_description_sentence( crystal, 'Crystal', director )
+    p.text = ["Crystal: %s" % crystal_ctrl,]
     return
+
+
+def object_description_sentence( objid, type, director):
+    """given an object's id, return a sentence describing
+    the object.
+    
+    In case the id is empty, return a sentence saying
+    the object is not yet created, please create it.
+    
+    In case the id is valid, return a sentence describing
+    the object, and a link to configure the object.
+    """
+    if objid == '':
+        link = action_link(
+            actionRequireAuthentication(
+            type.lower(), director.sentry,
+            label = 'create', routine = 'new',
+            ), director.cgihome)
+        obj_ctrl = "%s has not been defined. Please %s a %s" % (
+            type, link, type.lower())
+    else:
+        link = action_link(
+            actionRequireAuthentication(
+            type.lower(), director.sentry,
+            label = 'configure', routine = 'new',
+            ), director.cgihome)
+        method = 'get%s' % type
+        method = getattr( director.clerk, method )
+        obj_record = method( objid )
+        obj_ctrl = "%s (%s)" % (
+            obj_record.short_description, link)
+        pass
+    return obj_ctrl
+
 
 
 editors = {}

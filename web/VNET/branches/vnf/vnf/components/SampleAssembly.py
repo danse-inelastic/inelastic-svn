@@ -36,9 +36,10 @@ class SampleAssembly(Actor):
 
 
     def listall(self, director):
-        page = director.retrieveSecurePage( 'sampleassembly' )
-        if not page:
-            return director.retrievePage("authentication-error")
+        try:
+            page = director.retrieveSecurePage( 'sampleassembly' )
+        except AuthenticationError, err:
+            return err.page
         
         main = page._body._content._main
         
@@ -57,9 +58,10 @@ class SampleAssembly(Actor):
 
 
     def edit(self, director):
-        page = director.retrieveSecurePage( 'sampleassembly' )
-        if not page:
-            return director.retrievePage("authentication-error")
+        try:
+            page = director.retrieveSecurePage( 'sampleassembly' )
+        except AuthenticationError, error:
+            return error.page
         
         main = page._body._content._main
 

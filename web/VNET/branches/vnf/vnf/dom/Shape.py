@@ -12,23 +12,13 @@
 #
 
 
-from Table import Table
-class Shape(Table):
+from Object import Object
+class Shape(Object):
 
     name = 'shapes'
 
     import pyre.db
     
-    id = pyre.db.varchar(name="id", length=100)
-    id.constraints = 'PRIMARY KEY'
-    id.meta['tip'] = "the unique id"
-
-    creater = pyre.db.varchar(name='creater', length = 32)
-    creater.meta['tip'] = 'creater of shape'
-
-    date = pyre.db.date( name='date' )
-    date.meta['tip'] = 'date of creation'
-
     type = pyre.db.varchar( name = 'type', length = 10 )
     type.meta['tip'] = 'type of the shape'
     
