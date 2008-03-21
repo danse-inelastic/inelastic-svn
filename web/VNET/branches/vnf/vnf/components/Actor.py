@@ -14,6 +14,9 @@
 
 from opal.components.Actor import Actor
 
+from vnf.applications.WebApplication import AuthenticationError
+
+
 
 from Action import Action
 def action( *args, **kwds ): return Action( *args, **kwds )

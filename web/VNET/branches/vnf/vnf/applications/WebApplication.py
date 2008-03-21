@@ -9,6 +9,16 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
+
+class AuthenticationError(Exception):
+
+    def __init__(self, page):
+        self.page = page
+        Exception.__init__(self, page)
+        return
+    pass
+    
+
 from opal.applications.WebApplication import WebApplication as Base
 
 
@@ -64,12 +74,12 @@ class WebApplication(Base):
         # check that the username is allowed
         activeUsers = self.clerk.indexActiveUsers()
         if self.sentry.username not in activeUsers:
-            return self.retrievePage( "invalid-user" )
+            raise AuthenticationError, self.retrievePage( "invalid-user" )
         
         # check that the password is valid
         ticket = self.sentry.authenticate()
         if ticket is None:
-            return None
+            raise AuthenticationError, self.retrievePage( 'authentication-error' )
 
         # all good; grab the page
         return self.retrievePage(name)

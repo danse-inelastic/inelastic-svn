@@ -33,6 +33,7 @@ def page(app):
     document.description = "User %r is not found" % app.sentry.username
 
     p = document.paragraph(cls='error')
+    attempts = app.sentry.attempts
     p.text = [
         'There seems to be a problem granting you access to this web site.',
         'Please check your username and password and',

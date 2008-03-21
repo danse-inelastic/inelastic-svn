@@ -100,13 +100,25 @@ class Clerk(Component):
         exec "from vnf.dom.%s import %s as Table" % (type, type)
         scatterer = self._getRecordByID( Table, id1 )
         
-        return 
+        return scatterer
 
 
     def getScatterer(self, id):
         '''retrieve scatterer of given id'''
         from vnf.dom.Scatterer import Scatterer
         return self._getRecordByID( Scatterer, id )
+
+
+    def getShape(self, id):
+        '''retrieve shape of given id'''
+        from vnf.dom.Shape import Shape
+        return self._getRecordByID( Shape, id )
+
+
+    def getCrystal(self, id):
+        '''retrieve crystal of given id'''
+        from vnf.dom.Crystal import Crystal
+        return self._getRecordByID( Crystal, id )
 
 
     def _index(self, table, where = None):

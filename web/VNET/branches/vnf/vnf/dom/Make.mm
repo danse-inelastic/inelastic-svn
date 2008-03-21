@@ -31,6 +31,7 @@ all: export
 
 EXPORT_PYTHON_MODULES = \
 	Table.py \
+	Object.py \
 	ReferenceSet.py \
 	SampleAssembly.py \
 	Scatterer.py \
