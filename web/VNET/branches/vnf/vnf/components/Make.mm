@@ -23,18 +23,21 @@ all: export
 # export
 
 EXPORT_PYTHON_MODULES = \
+	__init__.py \
 	Action.py \
 	ActionLinkRenderer.py \
 	ActionRequireAuthentication.py \
 	Actor.py \
 	Clerk.py \
-	Purser.py \
-	SampleAssembly.py \
-	Scatterer.py \
-	Samples.py \
-	Scribe.py \
-	__init__.py \
 	inventorylist.py \
+	Purser.py \
+	PyHtmlTable.py \
+	SampleAssembly.py \
+	SamplePreparation.py \
+	Samples.py \
+	Scatterer.py \
+	Scribe.py \
+	twodarr.py \
 	wording.py \
 
 

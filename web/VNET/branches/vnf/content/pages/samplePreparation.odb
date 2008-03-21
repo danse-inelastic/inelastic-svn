@@ -17,7 +17,7 @@ def page(app):
     import vnf.content
 
     # create the page
-    page = vnf.content.page(name='sampleConstruction', title="Sample Preparation", root=app.home)
+    page = vnf.content.page(name='samplePreparation', title="Sample Preparation", root=app.home)
     
     # build the body
     body = page.body()

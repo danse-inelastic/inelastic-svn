@@ -32,7 +32,7 @@ def page(app):
     main = content.main()
 
     # populate the main column
-    document = main.document(title='WARNING')
+    document = main.document(title='')
     p = document.paragraph()
     p.text = [
         "Welcome to <strong>vnf</strong>, a web built entirely out of pyre componets.",

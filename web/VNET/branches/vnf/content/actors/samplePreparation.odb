@@ -13,10 +13,10 @@
 
 
 
-from vnf.components.SampleConstruction import SampleConstruction
+from vnf.components.SamplePreparation import SamplePreparation
 
 def actor():
-    return SampleConstruction()
+    return SamplePreparation()
 
 
 
