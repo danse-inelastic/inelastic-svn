@@ -34,11 +34,18 @@ def page(app):
 
     # populate the main column
     document = main.document(title='Sample Preparation')
+
     p = document.paragraph()
     p.text = [
         '''<script type="text/javascript"> 
-        jmolInitialize("jmol-11.4.RC10"); 
-        jmolApplet(600, "load orthoGraphKH212x12x1.xyz");</script>'''
+jmolInitialize("jmol-11.4.RC10"); 
+jmolApplet(600, "load orthoGraphKH212x12x1.xyz");</script>'''
+        ]
+    p = document.paragraph()
+    p.text = [
+        '''<strong>Note</strong>: would like to modify material and/or construct overall sample shape here.  
+It may be advisable to reuse DANSE Python code by Python/Jython 
+Web Start (http://personalpages.tds.net/~kent37/Python/JythonWebStart.html)'''
         ]
 
     # build the footer
