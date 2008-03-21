@@ -17,7 +17,7 @@ def page(app):
     import vnf.content
 
     # create the page
-    page = vnf.content.page(name='sampleConstruction', title="Virtual Neutron Facility", root=app.home)
+    page = vnf.content.page(name='sampleConstruction', title="Sample Preparation", root=app.home)
     
     # build the body
     body = page.body()
@@ -30,21 +30,15 @@ def page(app):
     # build the client area
     content = body.pageContent()
     main = content.main()
-
     sentry = app.sentry
-    ticket = sentry.authenticate()
 
     # populate the main column
-    document = main.document(title='Welcome')
+    document = main.document(title='Sample Preparation')
     p = document.paragraph()
     p.text = [
-        '<a href="%s?actor=sampleassembly&sentry.username=%s&sentry.ticket=%s">Sample Assemblies</a><br/>' % (
-        app.cgihome, app.sentry.username, app.sentry.ticket),
-        '<a href="%s/sample/Samples.html">Samples</a><br/>' % app.home,
-        '<a href="%s/InstrumentSimulation.html">Instrument Simulation</a><br/>' % app.home,
-        '<a href="jobMonitoring.html">Job Monitoring</a><br/>',
-        '<a href="manageServers.html">Manage Servers</a><br/>',
-        '<a href="MaterialSimulation.html">Supporting Calculations</a><br/>',
+        '''<script type="text/javascript"> 
+        jmolInitialize("jmol-11.4.RC10"); 
+        jmolApplet(600, "load orthoGraphKH212x12x1.xyz");</script>'''
         ]
 
     # build the footer
