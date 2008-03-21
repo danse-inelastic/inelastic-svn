@@ -34,7 +34,6 @@ def page(app):
         'Please provide your username and password. '
         'If you do not have an account, please '
         '<a href="%s?actor=register">register</a>.' % app.cgihome)
-    document.byline = 'also spracht <a href="">michael</a>'
 
     # build the login form
     login = document.form(

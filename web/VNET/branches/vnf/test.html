@@ -1,0 +1,104 @@
+Content-type: text/html
+
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<!--
+ ! ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ !
+ !                             Michael A.G. Aivazis
+ !                      California Institute of Technology
+ !                      (C) 1998-2005  All Rights Reserved
+ !
+ ! {LicenseText}
+ !
+ ! ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-->
+<html>
+<head>
+<base href='http://trueblue.caltech.edu/vnf/'/>
+<title>Please login</title>
+<style media='all' rel='stylesheet'>@import url(css/visual.css);</style>
+<style media='all' rel='stylesheet'>@import url(css/visual-color.css);</style>
+<style media='all' rel='stylesheet'>@import url(css/structural.css);</style>
+<style media='all' rel='stylesheet'>@import url(css/structural-color.css);</style>
+<style media='all' rel='stylesheet'>@import url(css/classes.css);</style>
+<style media='all' rel='stylesheet'>@import url(css/classes-color.css);</style>
+<style media='all' rel='stylesheet'>@import url(css/reports.css);</style>
+<style media='all' rel='stylesheet'>@import url(css/reports-color.css);</style>
+</head>
+<body>
+<div id="body-wrapper">
+<!-- ** section page-header ** -->
+<div id='page-header'>
+<div id="page-logo"><a href="http://trueblue.caltech.edu/cgi-bin/vnf/main.sh?actor=login">Home</a></div>
+<p id="page-personaltools">&nbsp;</p>
+</div>
+<!-- ** end of section page-header ** -->
+<div class="visualClear"></div>
+<table id="page-content">
+  <tbody>
+    <tr>
+      <td id="page-main">
+        <div class="visualPadding">
+<!-- ** section  ** -->
+<div class='document-main'>
+<div>
+<h1>Please login</h1>
+<div class="documentDescription">
+Please provide your username and password. If you do not have an account, please <a href="http://trueblue.caltech.edu/cgi-bin/vnf/main.sh?actor=register">register</a>.
+</div>
+<form action='http://trueblue.caltech.edu/cgi-bin/vnf/main.sh' method='post' name='login'>
+<fieldset><legend>Account details</legend>
+<input type='hidden' name='actor' value='greet'/>
+<input type='hidden' name='sentry.attempts' value='0'/>
+<div class='formfield'>
+<div>
+<label for="username">Username</label>
+</div>
+<div class="formfieldHelp">Usernames are case sensitive; make sure your caps lock key is not enabled.</div>
+<input type='text' name='sentry.username' id='username'/>
+</div>
+<div class='formfield'>
+<div>
+<label for="password">Password</label>
+</div>
+<div class="formfieldHelp">Passwords are also case sensitive. If you have forgotten your password, you may be able to <a href="http://trueblue.caltech.edu/cgi-bin/vnf/main.sh?actor=retrieve-password">retrieve</a> it.</div>
+<input type='password' name='sentry.passwd' id='password'/>
+</div>
+<div class='formControls'>
+<input class="context" name="submit" type="submit" value="login"/>
+</div>
+<p>
+When you are done, please logout or exit your browser
+</p>
+</fieldset>
+</form>
+<div class="documentByline">
+also spracht <a href="">michael</a>
+</div>
+</div>
+</div>
+<!-- ** end of section  ** -->
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- ** section page-footer ** -->
+<div id='page-footer'>
+</div>
+<!-- ** end of section page-footer ** -->
+<!-- ** section page-credits ** -->
+<div id='page-credits'>
+<p class='discreet'>
+powered by opal
+</p>
+</div>
+<!-- ** end of section page-credits ** -->
+</div>
+</body>
+</html>
+
+<!-- version-->
+<!-- $Id$-->
+
+<!-- End of file -->

@@ -50,6 +50,12 @@ class Clerk(Component):
         from vnf.dom.Scatterer import Scatterer
         return self._index( Scatterer, where )
 
+    def indexServers(self, where = None):
+        '''create and index of all servers
+        that meet the specified criteria'''
+
+        from vnf.dom.Scatterer import Scatterer
+        return self._index( Scatterer, where )
 
     def getSampleAssembly(self, id):
         '''retrieve sample assembly of given id'''
@@ -102,23 +108,25 @@ class Clerk(Component):
         
         return scatterer
 
-
     def getScatterer(self, id):
         '''retrieve scatterer of given id'''
         from vnf.dom.Scatterer import Scatterer
         return self._getRecordByID( Scatterer, id )
-
 
     def getShape(self, id):
         '''retrieve shape of given id'''
         from vnf.dom.Shape import Shape
         return self._getRecordByID( Shape, id )
 
-
     def getCrystal(self, id):
         '''retrieve crystal of given id'''
         from vnf.dom.Crystal import Crystal
         return self._getRecordByID( Crystal, id )
+    
+    def getServer(self, id):
+        '''retrieve server of given id'''
+        from vnf.dom.Server import Server
+        return self._getRecordByID( Server, id )
 
 
     def _index(self, table, where = None):

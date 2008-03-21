@@ -12,8 +12,7 @@
 from Actor import Actor, action_link, action, actionRequireAuthentication
 
 
-class SampleConstruction(Actor):
-
+class SamplePreparation(Actor):
 
     class Inventory(Actor.Inventory):
 
@@ -25,24 +24,13 @@ class SampleConstruction(Actor):
         
         page = pyre.inventory.str('page', default='empty')
 
-
-
-
     def default(self, director):
-        return self.listall( director )
-
-
-    def listall(self, director):
-        page = director.retrieveSecurePage( 'sampleassembly' )
-        if not page:
-            return director.retrievePage("authentication-error")
+        page = director.retrievePage( 'samplePreparation' )
         
         main = page._body._content._main
         
         # populate the main column
         document = main.document(title='List of sample assemblies')
-        document.description = ''
-        document.byline = 'byline?'
 
         # retrieve id:record dictionary from db
         clerk = director.clerk
@@ -50,43 +38,13 @@ class SampleConstruction(Actor):
         
         listsampleassemblies( sampleassemblies.values(), document, director )
         
-        return page
-
-
-    def edit(self, director):
-        page = director.retrieveSecurePage( 'sampleassembly' )
-        if not page:
-            return director.retrievePage("authentication-error")
-        
-        main = page._body._content._main
-
-        # the record we are working on
-        id = self.inventory.id
-        sampleassembly = self._getsampleassembly( id, director )
-
-        # populate the main column
-        document = main.document(title='Sample Assembly: %s' % sampleassembly.short_description )
-        document.description = (
-            'Sample assembly is a collection of neutron scatterers. For example, '\
-            'it can consist of a main sample, a sample container, and a furnace.\n'\
-            )
-        document.byline = 'byline?'
-
-        scatterers = self._getscatterers( id, director )
-
-        if len(scatterers) == 0:
-            noscatterer( document, director )
-        else:
-            listscatterers( scatterers, document, director )
-            pass
-    
-        return page    
+        return page 
 
 
     def __init__(self, name=None):
         if name is None:
-            name = "sampleassembly"
-        super(SampleAssembly, self).__init__(name)
+            name = "samplePreparation"
+        super(SamplePreparation, self).__init__(name)
         return
 
 
