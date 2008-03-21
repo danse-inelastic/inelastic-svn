@@ -1,0 +1,128 @@
+Content-Type: text/html
+
+
+<HTML><HEAD></HEAD><BODY bgcolor="white"> 
+<b> 2 by 2 table</b> 
+<TABLE   width="400"   border="2"   bgcolor="white" >
+<TR>
+<TD bgcolor="red" , width="100" >T1 Cell 00</TD>
+<TD>T1 Cell 01</TD>
+</TR> 
+
+<TR>
+<TD>T1 Cell 01</TD>
+<TD bgcolor="red" >T1 Cell 11</TD>
+</TR> 
+
+</TABLE>
+<b>Dynamically grow outside initial table boundaries by setting
+                cells outside current boundaries </b>
+<TABLE   width="400"   border="2"   bgcolor="white" >
+<TR>
+<TD bgcolor="red" , width="100" >T1 Cell 00</TD>
+<TD>T1 Cell 01</TD>
+</TR> 
+
+<TR>
+<TD>T1 Cell 01</TD>
+<TD bgcolor="red" >T1 Cell 11</TD>
+</TR> 
+
+<TR>
+<TD>T1 Cell 20</TD>
+<TD>T1 Cell 21</TD>
+</TR> 
+
+</TABLE>
+<p><b> Explicitly add row after row index 1 </b>
+<TABLE   width="400"   border="2"   bgcolor="white" >
+<TR>
+<TD bgcolor="red" , width="100" >T1 Cell 00</TD>
+<TD>T1 Cell 01</TD>
+</TR> 
+
+<TR>
+<TD>T1 Cell 01</TD>
+<TD bgcolor="red" >T1 Cell 11</TD>
+</TR> 
+
+<TR>
+<TD>&nbsp;</TD>
+<TD>&nbsp;</TD>
+</TR> 
+
+<TR>
+<TD>T1 Cell 20</TD>
+<TD>T1 Cell 21</TD>
+</TR> 
+
+</TABLE>
+<p><b> Explicitly adding col after column index 1 </b>
+<TABLE   width="400"   border="2"   bgcolor="white" >
+<TR>
+<TD bgcolor="red" , width="100" >T1 Cell 00</TD>
+<TD>T1 Cell 01</TD>
+<TD>&nbsp;</TD>
+</TR> 
+
+<TR>
+<TD>T1 Cell 01</TD>
+<TD bgcolor="red" >T1 Cell 11</TD>
+<TD>&nbsp;</TD>
+</TR> 
+
+<TR>
+<TD>&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD>&nbsp;</TD>
+</TR> 
+
+<TR>
+<TD>T1 Cell 20</TD>
+<TD>T1 Cell 21</TD>
+<TD>&nbsp;</TD>
+</TR> 
+
+</TABLE>
+<HR><b> AFTER  row and col SPANNING </b>
+<TABLE   width="400"   border="2"   bgcolor="white" >
+<TR>
+<TD bgcolor="red" , width="100" >T1 Cell 00</TD>
+<TD>T1 Cell 01</TD>
+<TD>&nbsp;</TD>
+</TR> 
+
+<TR>
+<TD ROWSPAN="2" >T1 Cell 01</TD>
+<TD bgcolor="red" , COLSPAN="2" >T1 Cell 11</TD>
+</TR> 
+
+<TR>
+<TD>&nbsp;</TD>
+<TD>&nbsp;</TD>
+</TR> 
+
+<TR>
+<TD>T1 Cell 20</TD>
+<TD>T1 Cell 21</TD>
+<TD>&nbsp;</TD>
+</TR> 
+
+</TABLE>
+<HR><b> Embed in new table </b>
+<TABLE   width="800"   border="2"   bgcolor="green" >
+<TR>
+<TH bgcolor="blue" , align="left" , width="200" >Cell TH....text left</TH>
+<TD width="200" , align="right" >Text right</TD>
+<TD><TABLE   width="400"   border="2"   bgcolor="white" ><TR><TD bgcolor="red" , width="100" >T1 Cell 00</TD><TD>T1 Cell 01</TD><TD>&nbsp;</TD></TR>
+<TR><TD ROWSPAN="2" >T1 Cell 01</TD><TD bgcolor="red" , COLSPAN="2" >T1 Cell 11</TD></TR>
+<TR><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>T1 Cell 20</TD><TD>T1 Cell 21</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+
+</TD>
+<TD>&nbsp;</TD>
+</TR> 
+
+</TABLE>
+</BODY></HTML>
