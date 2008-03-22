@@ -35,8 +35,7 @@ def page(app):
     document = main.document(title='Virtual lab for sample preparation')
 
     # build the sample input form
-    atoms = document.form(
-        name='login', legend='Upload xyz file', action=app.cgihome)
+    atoms = document.form(name='login', legend='Upload xyz file', action=app.cgihome)
     atomFile = atoms.file(id='atomFile', name='atomFile', label='Xyz file containing atoms')
     #atomFile.help = 'Usernames are case sensitive; make sure your caps lock key is not enabled.'
     
