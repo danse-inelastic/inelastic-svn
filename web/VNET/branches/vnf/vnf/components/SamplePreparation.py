@@ -37,15 +37,6 @@ class SamplePreparation(Actor):
         return
 
 
-    def _getsampleassembly(self, id, director):
-        clerk = director.clerk
-        return clerk.getSampleAssembly( id )
-
-
-    def _getscatterers(self, id, director):
-        clerk = director.clerk
-        return clerk.getScatterers( id )
-
 
 
 
