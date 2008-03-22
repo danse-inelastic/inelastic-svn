@@ -18,6 +18,7 @@ BUILD_DIRS = \
     applications \
     content \
     dom \
+    weaver \
 
 OTHER_DIRS = \
 
