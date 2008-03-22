@@ -25,19 +25,8 @@ class SamplePreparation(Actor):
         page = pyre.inventory.str('page', default='empty')
 
     def default(self, director):
-        page = director.retrievePage( 'samplePreparation' )
-        
+        page = director.retrievePage('samplePreparation')
         main = page._body._content._main
-        
-        # populate the main column
-        document = main.document(title='List of sample assemblies')
-
-        # retrieve id:record dictionary from db
-        clerk = director.clerk
-        sampleassemblies = clerk.indexSampleAssemblies()
-        
-        listsampleassemblies( sampleassemblies.values(), document, director )
-        
         return page 
 
 
