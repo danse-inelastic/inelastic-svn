@@ -34,36 +34,18 @@ def page(app):
     # populate the main column
     document = main.document(title='Virtual lab for sample preparation')
 
-
-    
-    
     # build the sample input form
     atoms = document.form(
         name='login', legend='Upload xyz file', action=app.cgihome)
-
-    username = atoms.text(id='atomFile', name='atomFile', label='Username')
-    username.help = 'Usernames are case sensitive; make sure your caps lock key is not enabled.'
-    
-    password = login.password(id='password', name='sentry.passwd', label='Password')
-    password.help = (
-        'Passwords are also case sensitive. If you have forgotten your password, you may '
-        'be able to <a href="%s?actor=retrieve-password">retrieve</a> it.' % app.cgihome)
-
-    submit = login.control(name="submit", type="submit", value="login")
-
-    p = login.paragraph()
-    p.text = [
-        'When you are done, please logout or exit your browser'
-        ]
+    atomFile = atoms.file(id='atomFile', name='atomFile', label='Xyz file containing atoms')
+    #atomFile.help = 'Usernames are case sensitive; make sure your caps lock key is not enabled.'
     
     # view the sample (maybe put this on another page after clicking
     # to submit the sample
     p = document.paragraph()
-    p.text = [
-        '''<script type="text/javascript"> 
+    p.text = ['''<script type="text/javascript"> 
 jmolInitialize("jmol-11.4.RC10"); 
-jmolApplet(600, "load orthoGraphKH212x12x1.xyz");</script>'''
-        ]
+jmolApplet(600, "load orthoGraphKH212x12x1.xyz");</script>''']
     p = document.paragraph()
     p.text = [
         '''<strong>Note</strong>: would like to modify material and/or construct overall sample shape here.  
