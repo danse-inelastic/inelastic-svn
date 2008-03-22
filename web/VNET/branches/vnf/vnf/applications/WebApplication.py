@@ -56,6 +56,11 @@ class WebApplication(Base):
         debug = pyre.inventory.bool(name="debug", default=False)
         debug.meta['tip'] = "suppress some html output for debugging purposes"
 
+        imagepath = pyre.inventory.str(
+            name='imagepath', default = '/vnf/images' )
+        javascriptpath = pyre.inventory.str(
+            name='javascriptpath', default = '/vnf/javascripts' )
+
 
     def retrievePage(self, name):
         page = super(WebApplication, self).retrievePage(name)
@@ -113,6 +118,14 @@ class WebApplication(Base):
         self.clerk = self.inventory.clerk
         self.scribe = self.inventory.scribe
         self.debug = self.inventory.debug
+        
+        import vnf.weaver
+        configurations = {
+            'cgihome': self.cgihome,
+            'imagepath':self.inventory.imagepath,
+            'javascriptpath': self.inventory.javascriptpath,
+            }
+        self.pageMill = vnf.weaver.pageMill( configurations )
         return
 
 

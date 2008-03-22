@@ -14,17 +14,14 @@
 
 def page(app):
     import vnf.content
-    page = vnf.content.page(name='scatterer', title='Scatterer Builder', root=app.home)
+    page = vnf.content.page(name='shape', title='Shape Builder', root=app.home)
     
     # build the body
     body = page.body()
 
     # build the header
     header = body.pageHeader()
-    header.logo(
-        href="%s?actor=greet&sentry.username=%s&sentry.ticket=%s" % (
-        app.cgihome, app.sentry.username, app.sentry.ticket )
-        )
+    header.logo(href="%s?actor=login" % app.cgihome)
     header.personalTools()
 
     # build the client area
@@ -34,6 +31,6 @@ def page(app):
     return page
 
 # version
-__id__ = "$Id: scatterer.odb,v 1.1.1.1 2006-11-27 00:09:19 aivazis Exp $"
+__id__ = "$Id: shape.odb,v 1.1.1.1 2006-11-27 00:09:19 aivazis Exp $"
 
 # End of file 

@@ -30,8 +30,12 @@ all: export
 # export
 
 EXPORT_PYTHON_MODULES = \
-    Page.py \
-    __init__.py
+	Action.py \
+	ActionRequireAuthentication.py \
+	Make.mm \
+	Page.py \
+	TreeView.py \
+	__init__.py
 
 
 export:: export-package-python-modules

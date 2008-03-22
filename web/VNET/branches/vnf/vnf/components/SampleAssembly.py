@@ -10,8 +10,7 @@
 #
 
 
-from Actor import Actor, action_link, action, actionRequireAuthentication
-from wording import plural, present_be
+from Actor import Actor, action_link, action, actionRequireAuthentication, AuthenticationError
 
 
 class SampleAssembly(Actor):
@@ -42,7 +41,7 @@ class SampleAssembly(Actor):
             return err.page
         
         main = page._body._content._main
-        
+
         # populate the main column
         document = main.document(title='List of sample assemblies')
         document.description = ''
@@ -109,6 +108,7 @@ class SampleAssembly(Actor):
 
 
 
+from wording import plural, present_be
 
 def listscatterers( scatterers, document, director ):
     p = document.paragraph()
