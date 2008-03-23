@@ -1,2 +1,2 @@
 #!/usr/bin/env sh
-dottools && cgi/main.py $@
+. dottools && cgi/main.py $@
