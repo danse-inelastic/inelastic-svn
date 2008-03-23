@@ -10,15 +10,24 @@
 #
 
 
-# configurations:
-#{
-# 'cgihome': cgihome,
-# 'treeview': { 'iconpath': iconpath },
-# }
 
 def pageMill( configurations ):
+    '''
+    configurations example:
+    {
+    'cgihome': 'http://localhost/cgi-bin',
+    'imagepath': '/vnf/images',
+    'javascriptpath': '/vnf/javascripts',
+    }
+    '''
     from PageMill import PageMill
     return PageMill( configurations )
+
+
+def action_link(action, cgihome):
+    from ActionLinkRenderer import ActionLinkRenderer
+    renderer = ActionLinkRenderer( cgihome )
+    return renderer.render( action )
 
 
 # version
