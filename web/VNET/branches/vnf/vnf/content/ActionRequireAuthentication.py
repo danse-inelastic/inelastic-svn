@@ -16,8 +16,9 @@ from Action import Action
 
 class ActionRequireAuthentication( Action ):
 
-    def __init__(self, actor, sentry, label = '', routine = None, **arguments ):
-        Action.__init__(self, actor, label, routine, **arguments )
+    def __init__(self, actor, sentry, label = '', routine = None,
+                 arguments = {}, **kwds ):
+        Action.__init__(self, actor, label, routine, arguments, **kwds )
         self.sentry = sentry
         return
 

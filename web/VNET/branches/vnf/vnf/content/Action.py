@@ -14,11 +14,13 @@
 
 class Action:
 
-    def __init__(self, actor, label = '', routine = None, **arguments ):
+    def __init__(self, actor,
+                 label = '', routine = None, arguments = {}, **kwds ):
         self.actor = actor
         self.label = label
         self.routine = routine
-        self.arguments = arguments
+        kwds.update( arguments )
+        self.arguments = kwds
         return
 
     def identify(self, visitor):

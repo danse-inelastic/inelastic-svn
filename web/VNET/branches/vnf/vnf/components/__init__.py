@@ -17,8 +17,8 @@ def clerk():
 
 
 def scribe():
-    from pyre.components.Component import Component
-    return Component( 'scribe', 'scribe' )
+    from Scribe import Scribe
+    return Scribe( 'scribe', 'scribe' )
 
 
 # version

@@ -15,37 +15,57 @@ from pyre.components.Component import Component
 
 class Scribe(Component):
 
-
-    def objectEditForm(self, document, obj, properties, actor, director):
+    
+    def objectEditForm(self, document, obj, properties,
+                       toplevel_container, actor, director):
         '''a form to edit the given object inside the
         given actor.
 
         document: the UI document where the form will be inserted
         obj: the object db record to be edited
         properties: the properties of the object
+        toplevel_container: the top level container db object that
+            the actor is working on
         actor: the actor
         director: the director
         '''
+        objtype = obj.__class__
+        objtypename = objtype.__name__
+        
         form = document.form(
-            name=obj.__class__.__name__,
+            name=objtypename,
             legend=obj.short_description,
-            action=app.cgihome)
+            action=director.cgihome)
 
         actor_field = form.hidden(name='actor', value=actor)
+        routine_field = form.hidden(name='routine', value='set')
+        id_field = form.hidden(
+            name = '%s.id' % actor, value = toplevel_container.id)
+        
         username_filed = form.hidden(
             name='sentry.username', value = director.sentry.username)
         ticket_filed = form.hidden(
             name='sentry.ticket', value = director.sentry.ticket)
+        
+        dataobject_filed = form.hidden(
+            name = '%s.dataobject' % actor, value = objtypename.lower() )
+        id_field1 = form.hidden(
+            name = '%s.dataobject.id' % actor, value = obj.id)
+        dbtable_field = form.hidden(
+            name = '%s.table' % actor, value = objtypename)
+
+        prefix = '%s.%s' % (actor, objtypename.lower() )
 
         for property in properties:
+            
             value = getattr( obj, property )
-            field = form.field(
+            field = form.text(
                 id = property,
-                name='%s.%s.%s' % (actor, obj, property),
+                name='%s.%s' % (prefix, property),
                 label=property,
                 value = value)
             
-            descriptor = getattr(obj.__class__, property)
+            descriptor = getattr(objtype, property)
             tip = descriptor.meta.get('tip')
             if tip: field.help = tip
 
@@ -55,7 +75,6 @@ class Scribe(Component):
             
         p = form.paragraph()
         p.text = [
-            "some texts here",
             ]
         
         return
