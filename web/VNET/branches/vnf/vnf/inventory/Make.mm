@@ -11,8 +11,15 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 PROJECT = vnf
-PACKAGE = components
+PACKAGE = inventory
 
+
+
+BUILD_DIRS = \
+
+OTHER_DIRS = \
+
+RECURSE_DIRS = $(BUILD_DIRS) $(OTHER_DIRS)
 
 #--------------------------------------------------------------------------
 #
@@ -24,22 +31,10 @@ all: export
 
 EXPORT_PYTHON_MODULES = \
 	__init__.py \
-	Actor.py \
-	Clerk.py \
-	inventorylist.py \
-	Purser.py \
-	PyHtmlTable.py \
-	SampleAssembly.py \
-	SamplePreparation.py \
-	Samples.py \
-	Scatterer.py \
-	Scribe.py \
-	Job.py \
-	twodarr.py \
-	wording.py \
 
 
 export:: export-package-python-modules
+	BLD_ACTION="export" $(MM) recurse
 
 # version
 # $Id: Make.mm,v 1.1.1.1 2006-11-27 00:09:19 aivazis Exp $

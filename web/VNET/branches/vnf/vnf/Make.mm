@@ -19,6 +19,7 @@ BUILD_DIRS = \
     content \
     dom \
     weaver \
+    inventory \
 
 OTHER_DIRS = \
 

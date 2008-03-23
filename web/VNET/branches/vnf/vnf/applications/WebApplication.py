@@ -146,6 +146,9 @@ class WebApplication(Base):
         return ['content', 'config', 'db']
 
 
+import journal
+journal.debug('curator').activate()
+
 # version
 __id__ = "$Id: WebApplication.py,v 1.3 2007-08-30 16:46:08 aivazis Exp $"
 
