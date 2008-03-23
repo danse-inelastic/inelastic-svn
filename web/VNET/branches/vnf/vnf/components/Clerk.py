@@ -14,24 +14,15 @@
 from pyre.components.Component import Component
 class Clerk(Component):
 
-    def indexJobs(self, where = None):
-        '''create and index of all jobs'''
-        from vnf.dom.Job import Job
-        return self._index( Job, where )
-
-    def indexUsers(self, where=None):
-        """create an index of all users that meet the specified criteria"""
-        from vnf.dom.User import User
-        index = {}
-        users = self.db.fetchall(User, where=where)
-        for user in users:
-            index[user.username] = user
-        return index
-
     def indexActiveUsers(self):
         """create an index of all active users"""
         return self.indexUsers()
         return self.indexUsers(where="status='a'")
+
+    def indexJobs(self, where = None):
+        '''create and index of all jobs'''
+        from vnf.dom.Job import Job
+        return self._index( Job, where )
 
     def indexSampleAssemblies(self, where = None):
         """create an index of all sample assemblies
@@ -51,6 +42,15 @@ class Clerk(Component):
 
         from vnf.dom.Scatterer import Scatterer
         return self._index( Scatterer, where )
+
+    def indexUsers(self, where=None):
+        """create an index of all users that meet the specified criteria"""
+        from vnf.dom.User import User
+        index = {}
+        users = self.db.fetchall(User, where=where)
+        for user in users:
+            index[user.username] = user
+        return index
 
     def getCrystal(self, id):
         '''retrieve crystal of given id'''
@@ -78,6 +78,11 @@ class Clerk(Component):
         exec "from vnf.dom.%s import %s as Table" % (type, type)
         scatterer = self._getRecordByID( Table, id1 )
         return scatterer
+
+    def getSample(self, id):
+        '''retrieve sample of given id'''
+        from vnf.dom.Sample import Sample
+        return self._getRecordByID( Sample, id )
 
     def getSampleAssembly(self, id):
         '''retrieve sample assembly of given id'''
