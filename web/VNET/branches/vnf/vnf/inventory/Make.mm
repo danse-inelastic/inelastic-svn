@@ -30,6 +30,7 @@ all: export
 # export
 
 EXPORT_PYTHON_MODULES = \
+	DataObject.py \
 	__init__.py \
 
 

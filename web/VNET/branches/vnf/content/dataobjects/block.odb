@@ -1,0 +1,47 @@
+# -*- Python -*-
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                   Jiao Lin
+#                      California Institute of Technology
+#                        (C) 2007  All Rights Reserved
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+
+
+from vnf.components.DataObject import DataObject as base
+
+
+class Block(base):
+
+
+    class Inventory(base.Inventory):
+
+        import pyre.inventory
+        x = pyre.inventory.str( 'x' )
+        y = pyre.inventory.str( 'y' )
+        z = pyre.inventory.str( 'z' )
+
+        pass # end of Inventory
+
+
+    def __init__(self, name = None):
+        if name is None:
+            name = 'block'
+
+        base.__init__(self, name)
+
+        return
+
+
+
+def dataobject(): return Block()
+
+# version
+__id__ = "$Id$"
+
+# End of file 

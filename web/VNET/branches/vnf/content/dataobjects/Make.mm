@@ -11,32 +11,16 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 PROJECT = vnf
-PACKAGE = content
+PACKAGE = content/dataobjects
 
-RECURSE_DIRS = \
-    actors \
-    forms \
-    pages \
-    portlets \
-    dataobjects \
 
 #--------------------------------------------------------------------------
 #
 
-all:
-	BLD_ACTION="all" $(MM) recurse
-
-clean::
-	BLD_ACTION="clean" $(MM) recurse
-
-distclean::
-	BLD_ACTION="clean" $(MM) recurse
-
-tidy::
-	BLD_ACTION="tidy" $(MM) recurse
+all: tidy
 
 
 # version
-# $Id: Make.mm,v 1.1.1.1 2006-11-27 00:09:15 aivazis Exp $
+# $Id: Make.mm,v 1.1.1.1 2006-11-27 00:09:19 aivazis Exp $
 
 # End of file

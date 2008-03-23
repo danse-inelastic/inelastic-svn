@@ -22,13 +22,13 @@ class Object(Table):
     id.meta['tip'] = "the unique id"
 
     creater = pyre.db.varchar(name='creater', length = 32)
-    creater.meta['tip'] = 'creater of shape'
+    creater.meta['tip'] = 'creater name'
 
     date = pyre.db.date( name='date' )
     date.meta['tip'] = 'date of creation'
 
     short_description = pyre.db.varchar(name='short_description', length = 128)
-    short_description.meta['tip'] = 'short description of scatterer'
+    short_description.meta['tip'] = 'short description'
 
     pass # end of Shape
 

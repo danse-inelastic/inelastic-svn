@@ -22,10 +22,17 @@ class SampleAssembly(Actor):
         import pyre.inventory
 
         id = pyre.inventory.str("id", default=None)
-        id.meta['tip'] = "the unique identifier for a given search"
-        
-        objtype = pyre.inventory.str('objtype', default='SampleAssembly')
-        objtype.meta['tip'] = 'the object type'
+        id.meta['tip'] = "the unique identifier of the sample assembly"
+
+
+        import vnf.inventory
+        dataobject = vnf.inventory.dataobject(
+            'dataobject', default='sampleassembly' )
+        dataobject.meta['tip'] = 'the data object to be edited'
+
+        table = pyre.inventory.str(
+            'table', default = 'SampleAssembly' )
+        table.meta['tip'] = 'The table to be worked on'
 
         pass # end of Inventory
 
@@ -58,37 +65,49 @@ class SampleAssembly(Actor):
 
 
     def edit(self, director):
-        try:
-            page = director.retrieveSecurePage( 'sampleassembly' )
-        except AuthenticationError, error:
-            return error.page
+        page, document = self._head( director )
         
-        main = page._body._content._main
+        scribe = director.scribe
 
-        # the record we are working on
-        id = self.inventory.id
-        sampleassembly = self._getsampleassembly( id, director )
+        # the record
+        obj = self._getDataObjectRecord( director )
 
-        treeview = create_treeview(
-            director.clerk.getHierarchy(sampleassembly) )
-        main.contents.append(  treeview )
+        # properties of the data object
+        properties = _get_properties( obj )
         
-        # populate the main column
-        document = main.document(title='Sample Assembly: %s' % sampleassembly.short_description )
-        document.description = (
-            'Sample assembly is a collection of neutron scatterers. For example, '\
-            'it can consist of a main sample, a sample container, and a furnace.\n'\
-            )
-        document.byline = 'byline?'
+        # create form
+        sampleassembly = self.sampleassembly_record
+        scribe.objectEditForm(
+            document, obj, properties,
+            sampleassembly, 'sampleassembly',
+            director)
 
-        scatterers = self._getscatterers( id, director )
-
-        if len(scatterers) == 0:
-            noscatterer( document, director )
-        else:
-            listscatterers( scatterers, document, director )
-            pass
+        #scatterers = self._getscatterers( id, director )
+        #
+        #if len(scatterers) == 0:
+        #    noscatterer( document, director )
+        #else:
+        #    listscatterers( scatterers, document, director )
+        #    pass
     
+        return page    
+
+
+    def set(self, director):
+        page, document = self._head( director )
+        
+        obj = self._getDataObjectRecord( director )
+
+        dataobject = self.inventory.dataobject
+
+        for prop in _get_properties( obj ):
+            setattr(
+                obj, prop,
+                dataobject.inventory.getTraitValue( prop ) )
+            continue
+
+        director.clerk.updateRecord( obj )
+        
         return page    
 
 
@@ -99,6 +118,45 @@ class SampleAssembly(Actor):
         return
 
 
+    def _head(self, director):
+        try:
+            page = director.retrieveSecurePage( 'sampleassembly' )
+        except AuthenticationError, error:
+            return error.page
+        
+        main = page._body._content._main
+
+        # the record we are working on
+        id = self.inventory.id
+        self.sampleassembly_record = sampleassembly = self._getsampleassembly( id, director )
+
+        # populate the main column
+        document = main.document(title='Sample Assembly: %s' % sampleassembly.short_description )
+        document.description = (
+            'Sample assembly is a collection of neutron scatterers. For example, '\
+            'it can consist of a main sample, a sample container, and a furnace.\n'\
+            )
+        document.byline = '<a href="http://danse.us">DANSE</a>'
+
+        treeview = create_treeview(
+            director.clerk.getHierarchy(sampleassembly),
+            director)
+        document.contents.append(  treeview )
+        return page, document
+    
+
+    def _getDataObjectRecord(self, director):
+        # the data object component containg info of data object
+        # to be edited
+        dataobject = self.inventory.dataobject
+        # the id in its db table
+        objID = dataobject.inventory.id
+        # table name
+        table = self.inventory.table
+        # retrieve record from db
+        return director.clerk.getRecordByID( table, objID )
+
+
     def _getsampleassembly(self, id, director):
         clerk = director.clerk
         return clerk.getSampleAssembly( id )
@@ -107,6 +165,17 @@ class SampleAssembly(Actor):
     def _getscatterers(self, id, director):
         clerk = director.clerk
         return clerk.getScatterers( id )
+
+
+    def _configure(self):
+        Actor._configure(self)
+        self.id = self.inventory.id
+        table = self.table = self.inventory.table
+        dataobject = self.dataobject = self.inventory.dataobject
+        if table == 'SampleAssembly':
+            dataobject.inventory.id = self.id
+            pass
+        return
 
 
     pass # end of SampleAssembly
@@ -166,7 +235,7 @@ def noscatterer( document, director ):
 
     
 
-def create_treeview( sampleassembly ):
+def create_treeview( sampleassembly, director ):
     '''given the db hierarchy of sampleassembly, render a teeview
     '''
     import vnf.content as factory
@@ -234,20 +303,35 @@ def create_treeview( sampleassembly ):
         
         
         def _node(self, record, nodefactory):
+            type = record.__class__.__name__
             node = nodefactory(
-                record.short_description,
-                factory.action(
+                '%s (%s)' % (record.short_description, type),
+                factory.actionRequireAuthentication(
                 'sampleassembly',
+                director.sentry,
                 routine='edit',
-                objtype=record.__class__.__name__,
-                id=record.id)
+                table = type,
+                dataobject = type.lower(),
+                id = sampleassembly.id,
+                arguments = { '%s.id' % type.lower(): record.id },
+                )
                 )
             return node
         
         pass # end of _
 
     return _().render( sampleassembly )
-    
+
+
+
+def _get_properties( record ):
+    # properties of the data object (columns in the table)
+    properties = record.getColumnNames()
+    # remove id from list. we don't want users to edit that.
+    del properties[ properties.index('id') ]
+    # remove any thing ends with 'id'
+    properties = filter( lambda a: not a.endswith( 'id' ), properties )
+    return properties
             
 
 # version

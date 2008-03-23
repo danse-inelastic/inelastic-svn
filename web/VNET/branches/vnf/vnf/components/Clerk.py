@@ -65,6 +65,27 @@ class Clerk(Component):
         return self._index( Scatterer, where )
 
 
+    def updateRecord(self, record):
+        id = record.id
+        where = "id='%s'" % id
+        
+        assignments = []
+        
+        for column in record.getColumnNames():
+            value = getattr( record, column )
+            assignments.append( (column, value) )
+            continue
+        
+        self.db.updateRow(record, assignments, where)
+        return
+
+
+    def getRecordByID(self, tablename, id):
+        exec 'from vnf.dom.%s import %s as Table' % (tablename, tablename) \
+             in locals()
+        return self._getRecordByID( Table, id )
+        
+
     def getCrystal(self, id):
         '''retrieve crystal of given id'''
         from vnf.dom.Crystal import Crystal
