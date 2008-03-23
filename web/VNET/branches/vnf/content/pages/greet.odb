@@ -38,13 +38,24 @@ def page(app):
     document = main.document(title='Welcome')
     p = document.paragraph()
     p.text = [
-        '<a href="%s?actor=sampleassembly&sentry.username=%s&sentry.ticket=%s">Sample Assemblies</a><br/>' % (
-        app.cgihome, app.sentry.username, app.sentry.ticket),
-        '<a href="%s?actor=samplePreparation">Sample Preparation</a><br/>' % ( #&sentry.username=%s&sentry.ticket=%s
-        app.cgihome, app.sentry.username, app.sentry.ticket),
+        action_link(
+        actionRequireAuthentication(
+        'sampleassembly', app.sentry, 'Sample Assemblies'),
+        app.cgihome) + "<br/>",
+        
+        action_link(
+        actionRequireAuthentication(
+        'samplePreparation', app.sentry, 'Sample Preparation'),
+        app.cgihome) + "<br/>",
+
         '<a href="%s/sample/Samples.html">Samples</a><br/>' % app.home,
         '<a href="%s/InstrumentSimulation.html">Instrument Simulation</a><br/>' % app.home,
-        '<a href="%s?actor=samplePreparation">Job Monitoring</a><br/>',
+
+        action_link(
+        actionRequireAuthentication(
+        'jobMonitoring', app.sentry, 'Job Monitoring'),
+        app.cgihome) + "<br/>",
+
         '<a href="manageServers.html">Manage Servers</a><br/>',
         '<a href="MaterialSimulation.html">Supporting Calculations</a><br/>',
         ]
@@ -58,9 +69,12 @@ def page(app):
     p.text = [
         "powered by opal"
         ]
-
+    
     return page
 
+
+from vnf.weaver import action_link
+from vnf.content import actionRequireAuthentication
 
 # version
 __id__ = "$Id: greet.odb,v 1.1.1.1 2006-11-27 00:09:19 aivazis Exp $"

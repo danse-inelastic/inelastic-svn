@@ -31,6 +31,17 @@ def treeview(*args, **kwds ):
     from TreeView import TreeView
     return TreeView(*args, **kwds )
 
+def branch(*args, **kwds):
+    from TreeView import Branch
+    return Branch( *args, **kwds )
+
+def leaf(*args, **kwds):
+    from TreeView import Leaf
+    return Leaf( *args, **kwds )
+
+treeview.branch = branch
+treeview.leaf = leaf
+del branch, leaf
 
 # version
 __id__ = "$Id: __init__.py,v 1.1.1.1 2006-11-27 00:09:19 aivazis Exp $"
