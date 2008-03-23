@@ -47,48 +47,17 @@ class Job(Actor):
 
         # retrieve id:record dictionary from db
         clerk = director.clerk
-        sampleassemblies = clerk.indexSampleAssemblies()
+        jobs = clerk.indexJobs()
         
-        listsampleassemblies( sampleassemblies.values(), document, director )
+        listjobs( jobs.values(), document, director )
         
-        return page
-
-
-    def edit(self, director):
-        try:
-            page = director.retrieveSecurePage( 'sampleassembly' )
-        except AuthenticationError, error:
-            return error.page
-        
-        main = page._body._content._main
-
-        # the record we are working on
-        id = self.inventory.id
-        sampleassembly = self._getsampleassembly( id, director )
-
-        # populate the main column
-        document = main.document(title='Sample Assembly: %s' % sampleassembly.short_description )
-        document.description = (
-            'Sample assembly is a collection of neutron scatterers. For example, '\
-            'it can consist of a main sample, a sample container, and a furnace.\n'\
-            )
-        document.byline = 'byline?'
-
-        scatterers = self._getscatterers( id, director )
-
-        if len(scatterers) == 0:
-            noscatterer( document, director )
-        else:
-            listscatterers( scatterers, document, director )
-            pass
-    
-        return page    
+        return page  
 
 
     def __init__(self, name=None):
         if name is None:
-            name = "sampleassembly"
-        super(SampleAssembly, self).__init__(name)
+            name = "job"
+        super(Job, self).__init__(name)
         return
 
 
@@ -102,21 +71,16 @@ class Job(Actor):
         return clerk.getScatterers( id )
 
 
-    pass # end of SampleAssembly
-
-
-
-
-def listscatterers( scatterers, document, director ):
+def listjobs( jobs, document, director ):
     p = document.paragraph()
 
-    n = len(scatterers)
+    n = len(jobs)
     p.text = [ 'There %s %s scatterer%s in this sample assembly: ' %
                (present_be(n), n, plural(n))
                 ]
 
     from inventorylist import list
-    list( scatterers, document, 'scatterer', director )
+    list( jobs, document, 'scatterer', director )
     return
 
 
