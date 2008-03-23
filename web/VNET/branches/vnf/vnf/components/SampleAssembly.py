@@ -24,7 +24,8 @@ class SampleAssembly(Actor):
         id = pyre.inventory.str("id", default=None)
         id.meta['tip'] = "the unique identifier for a given search"
         
-        page = pyre.inventory.str('page', default='empty')
+        objtype = pyre.inventory.str('objtype', default='SampleAssembly')
+        objtype.meta['tip'] = 'the object type'
 
         pass # end of Inventory
 
@@ -68,6 +69,10 @@ class SampleAssembly(Actor):
         id = self.inventory.id
         sampleassembly = self._getsampleassembly( id, director )
 
+        treeview = create_treeview(
+            director.clerk.getHierarchy(sampleassembly) )
+        main.contents.append(  treeview )
+        
         # populate the main column
         document = main.document(title='Sample Assembly: %s' % sampleassembly.short_description )
         document.description = (
@@ -157,6 +162,93 @@ def noscatterer( document, director ):
         ]
     return
 
+
+
+    
+
+def create_treeview( sampleassembly ):
+    '''given the db hierarchy of sampleassembly, render a teeview
+    '''
+    import vnf.content as factory
+    class _:
+
+        def render(self, sampleassembly):
+            self._parent = None
+            return self.onSampleAssembly( sampleassembly )
+
+
+        def __call__(self, node):
+            klass = node.__class__
+            method = getattr(self, 'on%s' % klass.__name__)
+            return method(node)
+
+        def onSampleAssembly(self, sampleassembly):
+            node = self._node( sampleassembly, factory.treeview )
+            for scatterer in sampleassembly.scatterers:
+                self._parent = node
+                self( scatterer )
+                continue
+            return node
+        
+        
+        def onScatterer(self, scatterer):
+            realscatterer = scatterer.realscatterer
+            self(realscatterer)
+            return
+
+
+        def branchNode(self, container):
+            return self._node( container, factory.treeview.branch )
+        
+        
+        def leafNode(self, record):
+            return self._node( record, factory.treeview.leaf )
+        
+        
+        def onPolyXtalScatterer(self, scatterer):
+            parent = self._parent
+            node = self.branchNode( scatterer )
+            parent.addChild(node)
+            
+            self._parent = node; self(scatterer.crystal)
+            self._parent = node; self(scatterer.shape)
+            return
+        
+        def onCrystal(self, crystal):
+            parent = self._parent
+            node = self.leafNode( crystal )
+            parent.addChild( node )
+            return
+        
+        def onShape(self, shape):
+            realshape = shape.realshape
+            self(realshape)
+            return
+        
+        
+        def onBlock(self, block):
+            parent = self._parent
+            node = self.leafNode( block )
+            parent.addChild( node )
+            return
+        
+        
+        def _node(self, record, nodefactory):
+            node = nodefactory(
+                record.short_description,
+                factory.action(
+                'sampleassembly',
+                routine='edit',
+                objtype=record.__class__.__name__,
+                id=record.id)
+                )
+            return node
+        
+        pass # end of _
+
+    return _().render( sampleassembly )
+    
+            
 
 # version
 __id__ = "$Id$"

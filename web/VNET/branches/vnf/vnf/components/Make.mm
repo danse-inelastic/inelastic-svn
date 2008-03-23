@@ -24,9 +24,6 @@ all: export
 
 EXPORT_PYTHON_MODULES = \
 	__init__.py \
-	Action.py \
-	ActionLinkRenderer.py \
-	ActionRequireAuthentication.py \
 	Actor.py \
 	Clerk.py \
 	inventorylist.py \
@@ -37,6 +34,7 @@ EXPORT_PYTHON_MODULES = \
 	Samples.py \
 	Scatterer.py \
 	Scribe.py \
+	Job.py \
 	twodarr.py \
 	wording.py \
 

@@ -17,18 +17,8 @@ from opal.components.Actor import Actor
 from vnf.applications.WebApplication import AuthenticationError
 
 
-
-from Action import Action
-def action( *args, **kwds ): return Action( *args, **kwds )
-
-from ActionRequireAuthentication import ActionRequireAuthentication
-def actionRequireAuthentication(*args, **kwds): return ActionRequireAuthentication( *args, **kwds )
-
-
-def action_link(action, cgihome):
-    from ActionLinkRenderer import ActionLinkRenderer
-    renderer = ActionLinkRenderer( cgihome )
-    return renderer.render( action )
+from vnf.content import action, actionRequireAuthentication
+from vnf.weaver import action_link
 
 
 # version

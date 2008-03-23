@@ -132,13 +132,13 @@ def noscatterer( document, director ):
 
 def edit_polyxtalscatterer( scatterer, document, director ):
     p = document.paragraph()
-    shape = scatterer.shape
-    shape_ctrl = object_description_sentence( shape, 'Shape', director )
+    shape_id = scatterer.shape_id
+    shape_ctrl = object_description_sentence( shape_id, 'Shape', director )
     p.text = ["Shape: %s" % shape_ctrl,]
 
     p = document.paragraph()
-    crystal = scatterer.crystal
-    crystal_ctrl = object_description_sentence( crystal, 'Crystal', director )
+    crystal_id = scatterer.crystal_id
+    crystal_ctrl = object_description_sentence( crystal_id, 'Crystal', director )
     p.text = ["Crystal: %s" % crystal_ctrl,]
     return
 
