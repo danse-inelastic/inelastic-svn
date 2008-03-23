@@ -14,7 +14,7 @@ from Actor import Actor, action_link, action, actionRequireAuthentication
 from wording import plural, present_be
 
 
-class Job(Actor):
+class Server(Actor):
 
 
     class Inventory(Actor.Inventory):
@@ -49,7 +49,7 @@ class Job(Actor):
         clerk = director.clerk
         jobs = clerk.indexJobs()
         
-        listjobs( jobs.values(), document, director )
+        listservers( jobs.values(), document, director )
         
         return page  
 
@@ -57,12 +57,12 @@ class Job(Actor):
     def __init__(self, name=None):
         if name is None:
             name = "job"
-        super(Job, self).__init__(name)
+        super(Server, self).__init__(name)
         return
 
 
 
-def listjobs( jobs, document, director ):
+def listservers( jobs, document, director ):
     
     p = document.paragraph()
 
@@ -75,41 +75,6 @@ def listjobs( jobs, document, director ):
 
     from inventorylist import list
     list( jobs, document, 'scatterer', director )
-    return
-
-
-def listsampleassemblies( sampleassemblies, document, director ):
-    p = document.paragraph()
-
-    n = len(sampleassemblies)
-
-    p.text = [ 'There %s %s sampleassembl%s: ' %
-               (present_be(n), n, plural(n, 'y'))
-                ]
-
-    from inventorylist import list
-    list( sampleassemblies, document, 'sampleassembly', director )
-    return
-
-
-
-def noscatterer( document, director ):
-    p = document.paragraph()
-
-    link = action_link(
-        actionRequireAuthentication(
-        'scatterer',
-        director.sentry,
-        label = 'add',
-        routine = 'new',
-        ),  director.cgihome
-        )
-    
-    p.text = [
-        "There is no scatterer in this sample assembly. ",
-        'Please %s a scatter.' % (
-        director.cgihome, link)
-        ]
     return
 
 

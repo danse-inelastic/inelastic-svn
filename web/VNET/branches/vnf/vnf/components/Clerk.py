@@ -38,7 +38,7 @@ class Clerk(Component):
 
 
     def indexJobs(self, where = None):
-        '''create and index of all jobs'''
+        '''create and index all jobs'''
         from vnf.dom.Job import Job
         return self._index( Job, where )
 

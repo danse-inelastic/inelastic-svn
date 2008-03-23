@@ -23,14 +23,14 @@ class Server(Table):
     id.constraints = 'PRIMARY KEY'
     id.meta['tip'] = "the unique id"
 
-    server = pyre.db.varchar(name='server', length = 32)
-    server.meta['tip'] = 'server for computational work'
+    server = pyre.db.varchar(name='server', length = 128)
+    server.meta['tip'] = 'name of server'
 
     location = pyre.db.varchar( name='location', length = 128)
     location.meta['tip'] = 'location of server'
 
-    accessibility = pyre.db.varchar(name='accesibility', length = 128)
-    accessibility.meta['tip'] = 'which group of users have access'
+    groupAccess = pyre.db.varchar(name='groupAccess', length = 128)
+    groupAccess.meta['tip'] = 'which group of users has access to the server'
     
     reference = pyre.db.varchar(name='reference', length = 100 )
     reference.meta['tip'] = 'reference id in the table of the given type'

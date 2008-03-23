@@ -27,6 +27,7 @@ EXPORT_PYTHON_MODULES = \
 	Actor.py \
 	Clerk.py \
 	inventorylist.py \
+	Job.py \
 	Purser.py \
 	PyHtmlTable.py \
 	SampleAssembly.py \
