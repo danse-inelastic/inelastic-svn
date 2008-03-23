@@ -23,19 +23,19 @@ class Job(Table):
     id.constraints = 'PRIMARY KEY'
     id.meta['tip'] = "the unique id"
 
-    job = pyre.db.varchar(name='job', length = 32)
+    job = pyre.db.varchar(name='job', length = 128)
     job.meta['tip'] = 'computational job'
 
     server = pyre.db.varchar( name='server', length = 128)
     server.meta['tip'] = 'which server job is running on'
 
-    timeCompletion = pyre.db.varchar(name='timeComletion', length = 128)
+    timeCompletion = pyre.db.timestamp(name='timeComletion', length = 56)
     timeCompletion.meta['tip'] = 'time left to completion'
     
-    timeRun = pyre.db.varchar(name='timeRun', length = 128)
-    timeRun.meta['tip'] = 'the amount of time the job has run'
+    timeStart = pyre.db.timestamp(name='timeStart', length = 56)
+    timeStart.meta['tip'] = 'the time the job started'
     
-    numProcessors = pyre.db.varchar(name='numProcessors', length = 128)
+    numProcessors = pyre.db.bigint(name='numProcessors')
     numProcessors.meta['tip'] = 'the number of processors the jobs is using'
     
     reference = pyre.db.varchar(name='reference', length = 100 )

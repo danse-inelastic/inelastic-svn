@@ -61,23 +61,17 @@ class Job(Actor):
         return
 
 
-    def _getsampleassembly(self, id, director):
-        clerk = director.clerk
-        return clerk.getSampleAssembly( id )
-
-
-    def _getscatterers(self, id, director):
-        clerk = director.clerk
-        return clerk.getScatterers( id )
-
 
 def listjobs( jobs, document, director ):
+    
     p = document.paragraph()
 
-    n = len(jobs)
-    p.text = [ 'There %s %s scatterer%s in this sample assembly: ' %
-               (present_be(n), n, plural(n))
-                ]
+    from PyHtmlTable import PyHtmlTable
+    t=PyHtmlTable(2,2, {'width':'400','border':2,'bgcolor':'white'})
+    t.setc(0,0,"T1 Cell 00");   t.setc(0,1,"T1 Cell 01")
+    t.setc(1,0,"T1 Cell 01");   t.setc(1,1,"T1 Cell 11")
+    
+    p.text = [t.display()]
 
     from inventorylist import list
     list( jobs, document, 'scatterer', director )

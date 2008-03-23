@@ -17,7 +17,6 @@ class Block(Object):
 
     name = 'blocks'
 
-
     import pyre.db
 
     x = pyre.db.real( name = 'x' )
