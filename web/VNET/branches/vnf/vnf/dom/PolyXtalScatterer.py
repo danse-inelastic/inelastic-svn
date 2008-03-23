@@ -32,11 +32,11 @@ class PolyXtalScatterer(Table):
     short_description = pyre.db.varchar(name='short_description', length = 128)
     short_description.meta['tip'] = 'short description of scatterer'
 
-    shape = pyre.db.varchar( name = 'shape', length = 100 )
-    shape.meta['tip'] = 'reference id in the shape table. geometric shape of the scatterer'
+    shape_id = pyre.db.varchar( name = 'shape_id', length = 100 )
+    shape_id.meta['tip'] = 'reference id in the shape table. geometric shape of the scatterer'
 
-    crystal = pyre.db.varchar( name = 'crystal', length = 100 )
-    crystal.meta['tip'] = 'reference id in the crystal table. a single crystal of the scatterer'
+    crystal_id = pyre.db.varchar( name = 'crystal_id', length = 100 )
+    crystal_id.meta['tip'] = 'reference id in the crystal table. a single crystal of the scatterer'
 
     pass # end of PolyXtalScatterer
 
