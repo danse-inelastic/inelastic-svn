@@ -22,7 +22,7 @@
     <property name='home'>http://trueblue.caltech.edu/vnf/</property>
     <property name='cgi-home'>http://trueblue.caltech.edu/cgi-bin/vnf/main.sh</property>
     <property name='imagepath'>/vnf/images</property>
-    <property name='javascriptpath'>/vnf/javascript</property>
+    <property name='javascriptpath'>/vnf/javascripts</property>
   </component>
 
 </inventory>
