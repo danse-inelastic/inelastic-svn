@@ -51,8 +51,6 @@ class Scribe(Component):
             name = '%s.dataobject' % actor, value = objtypename.lower() )
         id_field1 = form.hidden(
             name = '%s.dataobject.id' % actor, value = obj.id)
-        dbtable_field = form.hidden(
-            name = '%s.table' % actor, value = objtypename)
 
         prefix = '%s.%s' % (actor, objtypename.lower() )
 
