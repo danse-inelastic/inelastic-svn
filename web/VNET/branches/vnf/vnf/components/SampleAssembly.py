@@ -30,10 +30,6 @@ class SampleAssembly(Actor):
             'dataobject', default='sampleassembly' )
         dataobject.meta['tip'] = 'the data object to be edited'
 
-        table = pyre.inventory.str(
-            'table', default = 'SampleAssembly' )
-        table.meta['tip'] = 'The table to be worked on'
-
         pass # end of Inventory
 
 
@@ -73,7 +69,7 @@ class SampleAssembly(Actor):
         obj = self._getDataObjectRecord( director )
 
         # properties of the data object
-        properties = _get_properties( obj )
+        properties = self.inventory.dataobject.propertyNames( director )
         
         # create form
         sampleassembly = self.sampleassembly_record
@@ -100,7 +96,7 @@ class SampleAssembly(Actor):
 
         dataobject = self.inventory.dataobject
 
-        for prop in _get_properties( obj ):
+        for prop in dataobject.propertyNames( director ):
             setattr(
                 obj, prop,
                 dataobject.inventory.getTraitValue( prop ) )
@@ -143,19 +139,11 @@ class SampleAssembly(Actor):
             director)
         document.contents.append(  treeview )
         return page, document
-    
+
 
     def _getDataObjectRecord(self, director):
-        # the data object component containg info of data object
-        # to be edited
-        dataobject = self.inventory.dataobject
-        # the id in its db table
-        objID = dataobject.inventory.id
-        # table name
-        table = self.inventory.table
-        # retrieve record from db
-        return director.clerk.getRecordByID( table, objID )
-
+        return self.inventory.dataobject.getRecord( director )
+    
 
     def _getsampleassembly(self, id, director):
         clerk = director.clerk
@@ -170,9 +158,8 @@ class SampleAssembly(Actor):
     def _configure(self):
         Actor._configure(self)
         self.id = self.inventory.id
-        table = self.table = self.inventory.table
         dataobject = self.dataobject = self.inventory.dataobject
-        if table == 'SampleAssembly':
+        if dataobject.name == 'sampleassembly':
             dataobject.inventory.id = self.id
             pass
         return
@@ -310,7 +297,6 @@ def create_treeview( sampleassembly, director ):
                 'sampleassembly',
                 director.sentry,
                 routine='edit',
-                table = type,
                 dataobject = type.lower(),
                 id = sampleassembly.id,
                 arguments = { '%s.id' % type.lower(): record.id },
@@ -324,14 +310,6 @@ def create_treeview( sampleassembly, director ):
 
 
 
-def _get_properties( record ):
-    # properties of the data object (columns in the table)
-    properties = record.getColumnNames()
-    # remove id from list. we don't want users to edit that.
-    del properties[ properties.index('id') ]
-    # remove any thing ends with 'id'
-    properties = filter( lambda a: not a.endswith( 'id' ), properties )
-    return properties
             
 
 # version
