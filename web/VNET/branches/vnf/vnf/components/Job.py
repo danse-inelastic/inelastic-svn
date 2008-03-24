@@ -48,6 +48,8 @@ class Job(Actor):
         # retrieve id:record dictionary from db
         clerk = director.clerk
         jobs = clerk.indexJobs()
+        print jobs
+        print jobs.values()
         
         listjobs( jobs.values(), document, director )
         
@@ -65,10 +67,13 @@ class Job(Actor):
 def listjobs( jobs, document, director ):
     
     p = document.paragraph()
+    numJobs = len(jobs)
 
     from PyHtmlTable import PyHtmlTable
-    t=PyHtmlTable(2,2, {'width':'400','border':2,'bgcolor':'white'})
-    t.setc(0,0,"T1 Cell 00");   t.setc(0,1,"T1 Cell 01")
+    t=PyHtmlTable(numJobs,5)#, {'width':'400','border':2,'bgcolor':'white'})
+    for row in range(numJobs):
+        for col in range(5):
+            t.setc(row,col,"T1 Cell 00");   t.setc(0,1,"T1 Cell 01")
     t.setc(1,0,"T1 Cell 01");   t.setc(1,1,"T1 Cell 11")
     
     p.text = [t.display()]

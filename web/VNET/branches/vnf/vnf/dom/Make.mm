@@ -30,17 +30,22 @@ all: export
 # export
 
 EXPORT_PYTHON_MODULES = \
-	Table.py \
+	__init__.py \
+	Block.py \
+	Crystal.py \
+	Job.py \
 	Object.py \
+	PolyXtalScatterer.py \
 	ReferenceSet.py \
 	SampleAssembly.py \
 	Scatterer.py \
+	Server.py \
 	Shape.py \
-	Crystal.py \
+	Table.py \
 	User.py \
-	PolyXtalScatterer.py \
-	Block.py \
-	__init__.py \
+
+
+
 
 
 export:: export-package-python-modules
