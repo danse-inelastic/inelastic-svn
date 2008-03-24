@@ -33,6 +33,7 @@ EXPORT_PYTHON_MODULES = \
 	SampleAssembly.py \
 	SamplePreparation.py \
 	Samples.py \
+	Server.py \
 	Scatterer.py \
 	Scribe.py \
 	Job.py \
