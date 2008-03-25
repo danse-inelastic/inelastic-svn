@@ -11,7 +11,6 @@
 <path>/inelastic/web/VNET/branches/vnf</path>
 </pydev_pathproperty>
 <pydev_pathproperty name="org.python.pydev.PROJECT_EXTERNAL_SOURCE_PATH">
-<path>/home/jbk/dv/tools/pythia-0.8/modules/opal</path>
-<path>/home/jbk/dv/tools/pythia-0.8/modules/pyre</path>
+<path/>
 </pydev_pathproperty>
 </pydev_project>

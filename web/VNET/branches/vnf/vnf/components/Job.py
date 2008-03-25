@@ -68,13 +68,15 @@ def listjobs( jobs, document, director ):
     
     p = document.paragraph()
     numJobs = len(jobs)
+    print jobs
 
     from PyHtmlTable import PyHtmlTable
     t=PyHtmlTable(numJobs,5)#, {'width':'400','border':2,'bgcolor':'white'})
-    for row in range(numJobs):
-        for col in range(5):
-            t.setc(row,col,"T1 Cell 00");   t.setc(0,1,"T1 Cell 01")
-    t.setc(1,0,"T1 Cell 01");   t.setc(1,1,"T1 Cell 11")
+    for job in jobs:
+        print job
+#    for row in range(numJobs):
+#        for col in range(5):
+#            t.setc(row,col,"T1 Cell 00")
     
     p.text = [t.display()]
 
