@@ -3,6 +3,7 @@
 	<name>inelastic</name>
 	<comment></comment>
 	<projects>
+		<project>pyreDv</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

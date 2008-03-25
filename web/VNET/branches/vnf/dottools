@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+. /home/vnf/dv/danse/buildInelast/web-vnf/EXPORT/bin/envs.sh
