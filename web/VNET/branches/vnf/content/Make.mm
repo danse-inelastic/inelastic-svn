@@ -4,37 +4,30 @@
 #
 #                               Michael A.G. Aivazis
 #                        California Institute of Technology
-#                        (C) 1998-2005 All Rights Reserved
+#                        (C) 1998-2005  All Rights Reserved
 #
 # <LicenseText>
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 PROJECT = vnf
-PACKAGE = content
+PACKAGE = config
 
-RECURSE_DIRS = \
-    actors \
-    forms \
-    pages \
-    portlets \
-    dataobjects \
+PROJ_TESTS = \
+
+PROJ_CLEAN += \
+    idd-config.pml \
+    idd-session.pml \
+    ipa-session.pml \
+    remote.pml \
+
+
+PROJ_LIBRARIES = 
 
 #--------------------------------------------------------------------------
 #
 
-all:
-	BLD_ACTION="all" $(MM) recurse
-
-clean::
-	BLD_ACTION="clean" $(MM) recurse
-
-distclean::
-	BLD_ACTION="clean" $(MM) recurse
-
-tidy::
-	BLD_ACTION="tidy" $(MM) recurse
-
+all: tidy
 
 # version
 # $Id: Make.mm,v 1.1.1.1 2006-11-27 00:09:15 aivazis Exp $
