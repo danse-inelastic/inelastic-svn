@@ -38,6 +38,10 @@ struct PyMethodDef pybpext_methods[] = {
      pybpext_wrap_native_ptr,
      METH_VARARGS, pybpext_wrap_native_ptr__doc__},
 
+    {pybpext_extract_native_ptr__name__, 
+     pybpext_extract_native_ptr,
+     METH_VARARGS, pybpext_extract_native_ptr__doc__},
+
     {pybpext_newdblarr__name__, 
      pybpext_newdblarr,
      METH_VARARGS, pybpext_newdblarr__doc__},

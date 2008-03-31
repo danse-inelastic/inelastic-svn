@@ -38,6 +38,12 @@ extern char pybpext_wrap_native_ptr__doc__[];
 extern "C"
 PyObject * pybpext_wrap_native_ptr(PyObject *, PyObject *);
 
+// extract_native_ptr
+extern char pybpext_extract_native_ptr__name__[];
+extern char pybpext_extract_native_ptr__doc__[];
+extern "C"
+PyObject * pybpext_extract_native_ptr(PyObject *, PyObject *);
+
 
 #endif
 

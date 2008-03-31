@@ -295,6 +295,98 @@ PyObject * pybpext_wrap_native_ptr(PyObject *, PyObject *args)
 
 
 
+//-------------------- extract_native_ptr --------------------
+
+char pybpext_extract_native_ptr__doc__[] = 
+"Convert a  boost.python object containing a wrapped native pointer"
+"to a pointer in a PyCObject."
+" The void pointer is the pointer inside the WrappedPointer object"
+" carried in the boost.python object."
+" The extracted pointer then can be used by hand-binded"
+" codes."
+"\n\n"
+"  Arguments:\n"
+"\n"
+"    - boost_object: the input \n"
+"\n"
+"  Example:\n"
+"\n"
+"    extract_native_ptr( an_object )\n"
+"\n"
+"  Return:\n" 
+"\n"
+"    PyCObject of a pointer of a native type\n"
+"\n"
+"  Exceptions:\n"
+"\n"
+"    ValueError"
+;
+char pybpext_extract_native_ptr__name__[] = "extract_native_ptr";
+
+PyObject * pybpext_extract_native_ptr(PyObject *, PyObject *args)
+{
+  //std::cout << "pybpext_extract_native_ptr: ";
+
+  PyObject *obj;
+
+  int ok = PyArg_ParseTuple(args, "O", &obj);
+  if(!ok) return NULL;
+
+  using std::string;
+
+  void *ptr;
+
+  using namespace bpext;
+  char * desc = "WrappedPointer";
+  const Extractor & extractor = extractorRegistry[ desc ];
+  
+  if (extractor != 0) {
+    
+    ptr = extractor(obj);
+    
+  } else {
+  
+    std::ostringstream oss;
+    
+    oss << "In " << __FILE__ << " line " << __LINE__ << ": "
+	<< "extractor of boost.python object type \"" << desc 
+	<< "\" has not been registered."
+	<< std::endl;
+    
+    PyErr_SetString(PyExc_ValueError, oss.str().c_str());
+
+    return NULL;
+  }
+
+  if (ptr==NULL) {
+    
+    std::ostringstream oss;
+    
+    oss << "In " << __FILE__ << " line " << __LINE__ << ": "
+	<< "not a boost.python object or contains NULL pointer!"
+	<< std::endl;
+    
+    PyErr_SetString(PyExc_ValueError, oss.str().c_str());
+
+    return NULL;
+  }
+
+  WrappedPointer *wptr = (WrappedPointer *)ptr;
+
+  void *nptr = wptr->pointer;
+
+#ifdef DEBUG
+  journal::debug_t debug("extract_native_ptr");
+  debug << journal::at(__HERE__)
+	<< "extracted pointer: " << nptr 
+	<< journal::endl;
+#endif
+
+  return PyCObject_FromVoidPtr( nptr, NULL );
+}
+
+
+
 // version
 // $Id: misc.cc 18 2005-07-18 23:03:29Z linjiao $
 
