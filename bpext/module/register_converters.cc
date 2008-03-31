@@ -27,6 +27,7 @@ namespace wrap{
     // register extractors
     extractorRegistry["vec_double"] = extract_ptr< vector<double> >;
     extractorRegistry["double"] = extract_ptr< double >;
+    extractorRegistry["WrappedPointer"] = extract_ptr< WrappedPointer >;
 
     // register wrappers
     wrapperRegistry["vec_double"] = wrap_ptr< vector<double> >;

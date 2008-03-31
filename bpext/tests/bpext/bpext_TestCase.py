@@ -35,13 +35,18 @@ class bpext_TestCase(TestCase):
         "bpext: double array"
         import journal
         journal.debug('wrap_native_ptr').activate()
+        journal.debug('extract_native_ptr').activate()
         
         import bpext._bpext as binding
         arr = binding.newdblarr(10)
+        print arr
 
         wrapped_ptr_bpobj = binding.wrap_native_ptr( arr )
 
         print wrapped_ptr_bpobj
+
+        extracted = binding.extract_native_ptr( wrapped_ptr_bpobj )
+        print extracted
         return
     
     pass # end of bpext_TestCase
