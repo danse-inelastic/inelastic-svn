@@ -197,17 +197,16 @@ class Clerk(Component):
 
     def _index(self, table, where = None):
         index = {}
+        print 'table',table,'<br>'
         all = self.db.fetchall(table, where=where)
+        print 'all',all,'<br>'
         for item in all:
             index[item.id] = item
-            continue
         return index
 
     def _getRecordByID(self, table, id ):
         all = self.db.fetchall( table, where = "id='%s'" % id )
         return all[0]
-
-    pass # end of Clerk
 
 
 
