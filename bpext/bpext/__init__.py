@@ -75,9 +75,33 @@ Parameters:
 
 Examples:
 
-  wrap_ptr( pycobj )
+  wrap_native_ptr( pycobj )
   '''
     return binding.wrap_native_ptr( pycobject )
+
+
+
+def extract_native_ptr( bpobj ):
+    '''Extract a pointer of a native type (for example, double *)
+from a boost python object of WrappedPointer type.
+WrappedPointer is a simple struct that a member "pointer"
+that contains the pointer of a native type.
+Pointer is shared.
+
+Parameters:
+
+  bpobj: boost python object of WrappedPointer type
+
+Output:
+
+  PyCObject instance
+
+Examples:
+
+  extract_native_ptr( bpobj )
+  '''
+    return binding.extract_native_ptr( bpobj )
+
 
 
 # version
