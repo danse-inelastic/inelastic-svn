@@ -35,7 +35,7 @@ class Job(Table):
     timeStart = pyre.db.timestamp(name='timeStart')
     timeStart.meta['tip'] = 'the time the job started'
     
-    numProcessors = pyre.db.bigint(name='numProcessors')
+    numProcessors = pyre.db.integer(name='numProcessors')
     numProcessors.meta['tip'] = 'the number of processors the jobs are using'
     
 #    reference = pyre.db.varchar(name='reference', length = 100 )
