@@ -96,6 +96,12 @@ class Clerk(Component):
         '''retrieve job of given id'''
         from vnf.dom.Job import Job
         return self._getRecordByID( Job, id )
+    
+    
+    def getJobs(self, where = None):
+        '''retrieve all jobs'''
+        from vnf.dom.Job import Job
+        return self._getAll( Job, where )
 
 
     def getRealScatterer(self, id):
@@ -203,6 +209,12 @@ class Clerk(Component):
         for item in all:
             index[item.id] = item
         return index
+    
+    def _getAll(self, table, where = None):
+        index = {}
+        print 'table',table,'<br>'
+        all = self.db.fetchall(table, where=where)
+        return all
 
     def _getRecordByID(self, table, id ):
         all = self.db.fetchall( table, where = "id='%s'" % id )

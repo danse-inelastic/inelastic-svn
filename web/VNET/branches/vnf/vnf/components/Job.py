@@ -47,11 +47,14 @@ class Job(Actor):
 
         # retrieve id:record dictionary from db
         clerk = director.clerk
-        jobs = clerk.indexJobs()
+        jobs = clerk.getJobs()
         print 'jobs',jobs,'<br>'
-        print 'job values',jobs.values(),'<br>'
+        jobValues=[]
+        for job in jobs:
+            print 'job value',job.values(),'<br>'
+            jobValues.append(job.values())
         
-        listjobs( jobs.values(), document, director )
+        listjobs( jobValues, document, director )
         
         return page  
 
