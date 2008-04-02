@@ -143,7 +143,7 @@ class WebApplication(Base):
 
 
     def _getPrivateDepositoryLocations(self):
-        return ['content', 'config', 'db']
+        return ['content', 'config']
 
 
 import journal
