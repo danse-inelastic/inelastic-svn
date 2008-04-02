@@ -203,16 +203,13 @@ class Clerk(Component):
 
     def _index(self, table, where = None):
         index = {}
-        print 'table',table,'<br>'
         all = self.db.fetchall(table, where=where)
-        print 'all',all,'<br>'
         for item in all:
             index[item.id] = item
         return index
     
     def _getAll(self, table, where = None):
         index = {}
-        print 'table',table,'<br>'
         all = self.db.fetchall(table, where=where)
         return all
 

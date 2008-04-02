@@ -16,7 +16,6 @@ from wording import plural, present_be
 
 class Job(Actor):
 
-
     class Inventory(Actor.Inventory):
 
         import time
@@ -27,13 +26,8 @@ class Job(Actor):
         
         page = pyre.inventory.str('page', default='empty')
 
-        pass # end of Inventory
-
-
-
     def default(self, director):
         return self.listall( director )
-
 
     def listall(self, director):
         page = director.retrievePage( 'job' )
@@ -48,11 +42,9 @@ class Job(Actor):
         # retrieve id:record dictionary from db
         clerk = director.clerk
         jobs = clerk.getJobs()
-        print 'jobs',jobs,'<br>'
         jobValues=[]
         for job in jobs:
-            print 'job value',job.values(),'<br>'
-            jobValues.append(job.values())
+            jobValues.append(job.getValues())
         
         listjobs( jobValues, document, director )
         
@@ -74,12 +66,9 @@ def listjobs( jobs, document, director ):
 
     from PyHtmlTable import PyHtmlTable
     t=PyHtmlTable(numJobs,5)#, {'width':'400','border':2,'bgcolor':'white'})
-    for job in jobs:
-        print 'job part',job,'<br>'
 #    for row in range(numJobs):
 #        for col in range(5):
 #            t.setc(row,col,"T1 Cell 00")
-    print 'display',t.display(),'<br>'
     p.text = [t.display()]
 
     #from inventorylist import list
