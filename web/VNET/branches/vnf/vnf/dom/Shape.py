@@ -12,19 +12,13 @@
 #
 
 
-from Object import Object
-class Shape(Object):
+from VirtualObject import VirtualObject
+class Shape(VirtualObject):
 
     name = 'shapes'
 
     import pyre.db
     
-    type = pyre.db.varchar( name = 'type', length = 10 )
-    type.meta['tip'] = 'type of the shape'
-    
-    reference = pyre.db.varchar(name='reference', length = 100 )
-    reference.meta['tip'] = 'reference id in the table of the given type'
-
     pass # end of Shape
 
 
