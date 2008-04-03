@@ -1,0 +1,44 @@
+# -*- Python -*-
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                   Jiao Lin
+#                      California Institute of Technology
+#                        (C) 2007  All Rights Reserved
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+
+
+from vnf.components.DataObject import DataObject as base
+
+
+class Instrument(base):
+
+
+    class Inventory(base.Inventory):
+
+        import pyre.inventory
+
+        pass # end of Inventory
+
+
+    def __init__(self, name = None):
+        if name is None:
+            name = 'instrument'
+
+        base.__init__(self, name)
+
+        return
+
+
+
+def dataobject(): return Instrument()
+
+# version
+__id__ = "$Id$"
+
+# End of file 

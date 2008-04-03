@@ -26,7 +26,7 @@ EXPORT_PYTHON_MODULES = \
 	__init__.py \
 	Actor.py \
 	Clerk.py \
-	inventorylist.py \
+	Instrument.py \
 	Job.py \
 	Purser.py \
 	PyHtmlTable.py \
@@ -38,6 +38,7 @@ EXPORT_PYTHON_MODULES = \
 	Scribe.py \
 	TreeViewCreator.py \
 	DataObject.py \
+	inventorylist.py \
 	twodarr.py \
 	wording.py \
 

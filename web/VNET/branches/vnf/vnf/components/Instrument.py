@@ -126,8 +126,10 @@ class Instrument(Actor):
             )
         document.byline = '<a href="http://danse.us">DANSE</a>'
 
+        from TreeViewCreator import create as create_treeview
         treeview = create_treeview(
             director.clerk.getHierarchy(instrument),
+            'instrument',
             director)
         document.contents.append(  treeview )
         return page, document
@@ -172,97 +174,6 @@ def listinstruments( instruments, document, director ):
     return
 
 
-
-
-def create_treeview( instrument, director ):
-    '''given the db hierarchy of instrument, render a teeview
-    '''
-    import vnf.content as factory
-    class _:
-
-        def render(self, instrument):
-            self._parent = None
-            return self.onInstrument( instrument )
-
-
-        def __call__(self, node):
-            klass = node.__class__
-            method = getattr(self, 'on%s' % klass.__name__)
-            return method(node)
-
-        def onInstrument(self, instrument):
-            node = self._node( instrument, factory.treeview )
-            for scatterer in instrument.components:
-                self._parent = node
-                self( scatterer )
-                continue
-            return node
-        
-        
-        def onScatterer(self, scatterer):
-            realscatterer = scatterer.realscatterer
-            self(realscatterer)
-            return
-
-
-        def branchNode(self, container):
-            return self._node( container, factory.treeview.branch )
-        
-        
-        def leafNode(self, record):
-            return self._node( record, factory.treeview.leaf )
-        
-        
-        def onPolyXtalScatterer(self, scatterer):
-            parent = self._parent
-            node = self.branchNode( scatterer )
-            parent.addChild(node)
-            
-            self._parent = node; self(scatterer.crystal)
-            self._parent = node; self(scatterer.shape)
-            return
-        
-        def onCrystal(self, crystal):
-            parent = self._parent
-            node = self.leafNode( crystal )
-            parent.addChild( node )
-            return
-        
-        def onShape(self, shape):
-            realshape = shape.realshape
-            self(realshape)
-            return
-        
-        
-        def onBlock(self, block):
-            parent = self._parent
-            node = self.leafNode( block )
-            parent.addChild( node )
-            return
-        
-        
-        def _node(self, record, nodefactory):
-            type = record.__class__.__name__
-            node = nodefactory(
-                '%s (%s)' % (record.short_description, type),
-                factory.actionRequireAuthentication(
-                'instrument',
-                director.sentry,
-                routine='edit',
-                dataobject = type.lower(),
-                id = instrument.id,
-                arguments = { '%s.id' % type.lower(): record.id },
-                )
-                )
-            return node
-        
-        pass # end of _
-
-    return _().render( instrument )
-
-
-
-            
 
 # version
 __id__ = "$Id$"

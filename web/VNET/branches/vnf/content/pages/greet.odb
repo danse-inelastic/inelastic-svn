@@ -48,6 +48,11 @@ def page(app):
         'samplePreparation', app.sentry, 'Sample Preparation'),
         app.cgihome) + "<br/>",
 
+        action_link(
+        actionRequireAuthentication(
+        'instrument', app.sentry, 'Instruments'),
+        app.cgihome) + "<br/>",
+        
         '<a href="%s/sample/Samples.html">Samples</a><br/>' % app.home,
         '<a href="%s/InstrumentSimulation.html">Instrument Simulation</a><br/>' % app.home,
 

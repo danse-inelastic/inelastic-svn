@@ -48,6 +48,26 @@ class TreeViewCreator:
         return node
 
 
+    def onComponent(self, component):
+        realcomponent = component.realcomponent
+        self(realcomponent)
+        return
+
+
+    def onMonochromaticSource(self, source):
+        parent = self._parent
+        node = self.leafNode( source )
+        parent.addChild( node )
+        return
+
+    
+    def onIQEMonitor(self, iqem):
+        parent = self._parent
+        node = self.leafNode( iqem )
+        parent.addChild( node )
+        return
+
+    
     def onSampleAssembly(self, sampleassembly):
         node = self._node( sampleassembly, factory.treeview )
         for scatterer in sampleassembly.scatterers:
