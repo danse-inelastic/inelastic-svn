@@ -78,14 +78,6 @@ class SampleAssembly(Actor):
             sampleassembly, 'sampleassembly',
             director)
 
-        #scatterers = self._getscatterers( id, director )
-        #
-        #if len(scatterers) == 0:
-        #    noscatterer( document, director )
-        #else:
-        #    listscatterers( scatterers, document, director )
-        #    pass
-    
         return page    
 
 
@@ -150,11 +142,6 @@ class SampleAssembly(Actor):
         return clerk.getSampleAssembly( id )
 
 
-    def _getscatterers(self, id, director):
-        clerk = director.clerk
-        return clerk.getScatterers( id )
-
-
     def _configure(self):
         Actor._configure(self)
         self.id = self.inventory.id
@@ -170,19 +157,6 @@ class SampleAssembly(Actor):
 
 
 from wording import plural, present_be
-
-def listscatterers( scatterers, document, director ):
-    p = document.paragraph()
-
-    n = len(scatterers)
-    p.text = [ 'There %s %s scatterer%s in this sample assembly: ' %
-               (present_be(n), n, plural(n))
-                ]
-
-    from inventorylist import list
-    list( scatterers, document, 'scatterer', director )
-    return
-
 
 def listsampleassemblies( sampleassemblies, document, director ):
     p = document.paragraph()
@@ -225,91 +199,8 @@ def noscatterer( document, director ):
 def create_treeview( sampleassembly, director ):
     '''given the db hierarchy of sampleassembly, render a teeview
     '''
-    import vnf.content as factory
-    class _:
-
-        def render(self, sampleassembly):
-            self._parent = None
-            return self.onSampleAssembly( sampleassembly )
-
-
-        def __call__(self, node):
-            klass = node.__class__
-            method = getattr(self, 'on%s' % klass.__name__)
-            return method(node)
-
-        def onSampleAssembly(self, sampleassembly):
-            node = self._node( sampleassembly, factory.treeview )
-            for scatterer in sampleassembly.scatterers:
-                self._parent = node
-                self( scatterer )
-                continue
-            return node
-        
-        
-        def onScatterer(self, scatterer):
-            realscatterer = scatterer.realscatterer
-            self(realscatterer)
-            return
-
-
-        def branchNode(self, container):
-            return self._node( container, factory.treeview.branch )
-        
-        
-        def leafNode(self, record):
-            return self._node( record, factory.treeview.leaf )
-        
-        
-        def onPolyXtalScatterer(self, scatterer):
-            parent = self._parent
-            node = self.branchNode( scatterer )
-            parent.addChild(node)
-            
-            self._parent = node; self(scatterer.crystal)
-            self._parent = node; self(scatterer.shape)
-            return
-        
-        def onCrystal(self, crystal):
-            parent = self._parent
-            node = self.leafNode( crystal )
-            parent.addChild( node )
-            return
-        
-        def onShape(self, shape):
-            realshape = shape.realshape
-            self(realshape)
-            return
-        
-        
-        def onBlock(self, block):
-            parent = self._parent
-            node = self.leafNode( block )
-            parent.addChild( node )
-            return
-        
-        
-        def _node(self, record, nodefactory):
-            type = record.__class__.__name__
-            node = nodefactory(
-                '%s (%s)' % (record.short_description, type),
-                factory.actionRequireAuthentication(
-                'sampleassembly',
-                director.sentry,
-                routine='edit',
-                dataobject = type.lower(),
-                id = sampleassembly.id,
-                arguments = { '%s.id' % type.lower(): record.id },
-                )
-                )
-            return node
-        
-        pass # end of _
-
-    return _().render( sampleassembly )
-
-
-
+    from TreeViewCreator import create
+    return create(sampleassembly, 'sampleassembly', director )
             
 
 # version
