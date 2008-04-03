@@ -34,12 +34,16 @@
 if __name__ == '__main__':
     from vnf.applications.WebApplication import WebApplication
     app=WebApplication(name='main')
-    app.actor='greet'
+    import opal.inventory
+    app.actor='job'
+    #app.inventory.actor=opal.inventory.actor(default="job")
     #from os import environ
     #root='/home/jbk/dv/tools/pythia-0.8'
     #environ['PYTHONPATH']='/home/jbk:'environ['PYTHONPATH']
+    #app.inventory.stream=file('test.html','w')
     app.run()
-
+    import os
+    os.system('firefox ~/test.html')
 
 # version
 __id__ = "$Id: main.py,v 1.1.1.1 2006-11-27 00:09:14 aivazis Exp $"

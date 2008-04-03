@@ -1,6 +1,3 @@
-Content-type: text/html
-
-<vnf.components.Job.Job object at 0x2b6736636ed0>
 <!doctype html public "-//w3c//dtd html 4.0 transitional//en">
 <!--
  ! ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -15,8 +12,8 @@ Content-type: text/html
 -->
 <html>
 <head>
-<base href='http://trueblue.caltech.edu/vnf/'/>
-<title>Error</title>
+<base href='http://trueblue.caltech.edu/vnfLJ/'/>
+<title>Simulation Jobs</title>
 <style media='all' rel='stylesheet'>@import url(css/visual.css);</style>
 <style media='all' rel='stylesheet'>@import url(css/visual-color.css);</style>
 <style media='all' rel='stylesheet'>@import url(css/structural.css);</style>
@@ -30,7 +27,7 @@ Content-type: text/html
 <div id="body-wrapper">
 <!-- ** section page-header ** -->
 <div id='page-header'>
-<div id="page-logo"><a href="http://trueblue.caltech.edu/vnf/sentinel.html">Home</a></div>
+<div id="page-logo"><a href="http://trueblue.caltech.edu/cgi-bin/vnfLJ/main.sh?actor=login">Home</a></div>
 <p id="page-personaltools">&nbsp;</p>
 </div>
 <!-- ** end of section page-header ** -->
@@ -43,15 +40,19 @@ Content-type: text/html
 <!-- ** section  ** -->
 <div class='document-main'>
 <div>
-<h1>Error</h1>
+<h1>List of computational jobs</h1>
 <div class="documentDescription">
 
 </div>
-<p class='error'>
-An unknown error has occurred.
+<p>
+<TABLE><TR><TD>my server</TD><TD>2008-03-28 00:00:00-07:00</TD><TD>8</TD><TD>my job</TD><TD>job1</TD><TD>2008-03-30 00:00:00-07:00</TD></TR>
+<TR><TD>my server</TD><TD>2008-03-29 00:00:00-07:00</TD><TD>2</TD><TD>my job</TD><TD>job2</TD><TD>2008-03-31 00:00:00-07:00</TD></TR>
+</TABLE>
+
+
 </p>
 <div class="documentByline">
-
+byline?
 </div>
 </div>
 </div>
@@ -61,17 +62,6 @@ An unknown error has occurred.
     </tr>
   </tbody>
 </table>
-<!-- ** section page-footer ** -->
-<div id='page-footer'>
-</div>
-<!-- ** end of section page-footer ** -->
-<!-- ** section page-credits ** -->
-<div id='page-credits'>
-<p class='discreet'>
-powered by opal
-</p>
-</div>
-<!-- ** end of section page-credits ** -->
 </div>
 </body>
 </html>
