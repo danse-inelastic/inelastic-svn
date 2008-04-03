@@ -27,10 +27,9 @@ class TreeViewCreator:
         return
     
 
-    def render(self, rootnode):
-        self._parent = None
-        self._rootnode = rootnode
-        return self(rootnode)
+    def render(self, rootcontainer):
+        self._rootcontainer = rootcontainer
+        return self(rootcontainer)
 
 
     def __call__(self, node):
@@ -40,77 +39,49 @@ class TreeViewCreator:
 
 
     def onInstrument(self, instrument):
-        node = self._node( instrument, factory.treeview )
-        for component in instrument.components:
-            self._parent = node
-            self( component )
-            continue
-        return node
-
-
-    def onComponent(self, component):
-        realcomponent = component.realcomponent
-        self(realcomponent)
-        return
-
-
-    def onMonochromaticSource(self, source):
-        parent = self._parent
-        node = self.leafNode( source )
-        parent.addChild( node )
-        return
-
+        return self.onContainer(instrument, instrument.components )
     
-    def onIQEMonitor(self, iqem):
-        parent = self._parent
-        node = self.leafNode( iqem )
-        parent.addChild( node )
-        return
 
-    
     def onSampleAssembly(self, sampleassembly):
-        node = self._node( sampleassembly, factory.treeview )
-        for scatterer in sampleassembly.scatterers:
-            self._parent = node
-            self( scatterer )
-            continue
-        return node
+        return self.onContainer(sampleassembly, sampleassembly.scatterers)
         
         
-    def onScatterer(self, scatterer):
-        realscatterer = scatterer.realscatterer
-        self(realscatterer)
-        return
-
-
     def onPolyXtalScatterer(self, scatterer):
-        parent = self._parent
-        node = self.branchNode( scatterer )
-        parent.addChild(node)
-        
-        self._parent = node; self(scatterer.crystal)
-        self._parent = node; self(scatterer.shape)
-        return
+        elements = [ scatterer.crystal, scatterer.shape ]
+        return self.onContainer( scatterer, elements )
 
     
-    def onCrystal(self, crystal):
-        parent = self._parent
-        node = self.leafNode( crystal )
-        parent.addChild( node )
-        return
+    def onContainer(self, container, elements):
+        if container == self._rootcontainer:
+            node = self.rootNode( container )
+        else:
+            node = self.branchNode( container )
+            pass
 
-    
-    def onShape(self, shape):
-        realshape = shape.realshape
-        self(realshape)
-        return
+        for element in elements:
+            childnode = self( element )
+            node.addChild( childnode )
+            continue
         
-        
-    def onBlock(self, block):
-        parent = self._parent
-        node = self.leafNode( block )
-        parent.addChild( node )
-        return
+        return node
+
+
+    def onElement(self, element):
+        node =  self.leafNode( element )
+        return node
+
+
+    def onAbstractElement(self, element):
+        realelement = getattr( element, 'real%s' % element.__class__.__name__.lower() )
+        return self(realelement)
+
+
+    onMonochromaticSource = onIQEMonitor = onCrystal = onBlock = onElement
+    onComponent = onScatterer = onShape = onAbstractElement
+
+
+    def rootNode(self, container):
+        return self._node( container, factory.treeview )
     
         
     def branchNode(self, container):
@@ -134,7 +105,7 @@ class TreeViewCreator:
             director.sentry,
             routine='edit',
             dataobject = type.lower(),
-            id = self._rootnode.id,
+            id = self._rootcontainer.id,
             arguments = { '%s.id' % type.lower(): record.id },
             )
             )
