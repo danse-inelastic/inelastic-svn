@@ -45,8 +45,21 @@ class Job(Actor):
         jobValues=[]
         for job in jobs:
             jobValues.append(job.getValues())
-        
-        listjobs( jobValues, document, director )
+        #get the number of columns of info about a representative job
+        numColumns=jobs[0].getNumColumns() 
+            
+        p = document.paragraph()
+        numJobs = len(jobs)
+        numColumns=jobs[0].getNumColumns()
+
+        from PyHtmlTable import PyHtmlTable
+        t=PyHtmlTable(numJobs,numColumns)#, {'width':'400','border':2,'bgcolor':'white'})
+        for row in range(numJobs):
+            colNum=0
+            for name in jobs[row].getColumnNames():
+                t.setc(row,colNum,jobs[row].getColumnValue(name))
+                colNum+=1
+        p.text = [t.return_html()]
         
         return page  
 
@@ -56,60 +69,6 @@ class Job(Actor):
             name = "job"
         super(Job, self).__init__(name)
         return
-
-
-
-def listjobs( jobs, document, director ):
-    
-    p = document.paragraph()
-    numJobs = len(jobs)
-
-    from PyHtmlTable import PyHtmlTable
-    t=PyHtmlTable(numJobs,5)#, {'width':'400','border':2,'bgcolor':'white'})
-#    for row in range(numJobs):
-#        for col in range(5):
-#            t.setc(row,col,"T1 Cell 00")
-    p.text = [t.display()]
-
-    #from inventorylist import list
-    #list( jobs, document, 'scatterer', director )
-    return
-
-
-def listsampleassemblies( sampleassemblies, document, director ):
-    p = document.paragraph()
-
-    n = len(sampleassemblies)
-
-    p.text = [ 'There %s %s sampleassembl%s: ' %
-               (present_be(n), n, plural(n, 'y'))
-                ]
-
-    from inventorylist import list
-    list( sampleassemblies, document, 'sampleassembly', director )
-    return
-
-
-
-def noscatterer( document, director ):
-    p = document.paragraph()
-
-    link = action_link(
-        actionRequireAuthentication(
-        'scatterer',
-        director.sentry,
-        label = 'add',
-        routine = 'new',
-        ),  director.cgihome
-        )
-    
-    p.text = [
-        "There is no scatterer in this sample assembly. ",
-        'Please %s a scatter.' % (
-        director.cgihome, link)
-        ]
-    return
-
 
 # version
 __id__ = "$Id$"
