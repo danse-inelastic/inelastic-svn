@@ -1,0 +1,45 @@
+# -*- Python -*-
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                   Jiao Lin
+#                      California Institute of Technology
+#                        (C) 2007  All Rights Reserved
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+
+
+from vnf.components.DataObject import DataObject as base
+
+
+class IQEMonitor(base):
+
+
+    class Inventory(base.Inventory):
+
+        import pyre.inventory
+        Emin = pyre.inventory.str( 'Emin')
+
+        pass # end of Inventory
+
+
+    def __init__(self, name = None):
+        if name is None:
+            name = 'iqemonitor'
+
+        base.__init__(self, name)
+
+        return
+
+
+
+def dataobject(): return IQEMonitor()
+
+# version
+__id__ = "$Id$"
+
+# End of file 

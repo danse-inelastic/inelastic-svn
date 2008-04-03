@@ -43,6 +43,13 @@ class Clerk(Component):
         return self._index( Job, where )
 
 
+    def indexInstruments(self, where = None):
+        """create an index of all instruments
+        that meet the specified criteria"""
+        from vnf.dom.Instrument import Instrument
+        return self._index( Instrument, where )
+
+
     def indexSampleAssemblies(self, where = None):
         """create an index of all sample assemblies
         that meet the specified criteria"""
@@ -122,6 +129,24 @@ class Clerk(Component):
         return scatterer
 
 
+    def getRealComponent(self, id):
+        '''given id in the component table, retrieve the real
+        component's record.
+        The component table contains type and reference_id
+        info of the component.
+        To look up the real component, we have to
+        go to the table of the given component type
+        and find the record of given id.
+        '''
+        from vnf.dom.Component import Component
+        record = self.getComponent( id )
+        type = record.type
+        id1 = record.reference
+        exec "from vnf.dom.%s import %s as Table" % (type, type)
+        component = self._getRecordByID( Table, id1 )
+        return component
+
+
     def getSample(self, id):
         '''retrieve sample of given id'''
         from vnf.dom.Sample import Sample
@@ -134,6 +159,18 @@ class Clerk(Component):
         return self._getRecordByID( SampleAssembly, id )
 
 
+    def getInstrument(self, id):
+        '''retrieve instrument of given id'''
+        from vnf.dom.Instrument import Instrument
+        return self._getRecordByID( Instrument, id )
+
+
+    def getComponent(self, id):
+        '''retrieve component of given id'''
+        from vnf.dom.Component import Component
+        return self._getRecordByID( Component, id )
+
+    
     def getScatterer(self, id):
         '''retrieve scatterer of given id'''
         from vnf.dom.Scatterer import Scatterer
@@ -157,6 +194,28 @@ class Clerk(Component):
         ret = []
         for id in ids:
             record = self._getRecordByID( Scatterer, id )
+            ret.append( record )
+            continue
+        return ret    
+
+
+    def getComponentIDs(self, id):
+        '''retrieve ids of components in the instrument of given id'''
+        from vnf.dom.Instrument import Instrument
+        records = self.db.fetchall(
+            Instrument.Components, where = "localkey='%s'" % id )
+        componentIDs = [
+            record.remotekey for record in records]
+        return componentIDs
+
+    
+    def getComponents(self, id):
+        '''retrieve components in the instrument of given id'''
+        ids = self.getComponentIDs( id )
+        from vnf.dom.Component import Component
+        ret = []
+        for id in ids:
+            record = self._getRecordByID( Component, id )
             ret.append( record )
             continue
         return ret    
@@ -238,6 +297,20 @@ class HierarchyRetriever:
         components = [ self( component ) for component in components ]
         instrument.components = components
         return instrument
+
+
+    def onComponent(self, component):
+        realcomponent = self.clerk.getRealComponent( component.id )
+        component.realcomponent = self(realcomponent)
+        return component
+
+
+    def onMonochromaticSource(self, source):
+        return source
+
+
+    def onIQEMonitor(self, iqem):
+        return iqem
 
 
     def onSampleAssembly(self, sampleassembly):
