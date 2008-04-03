@@ -13,9 +13,9 @@
 
 
 from VirtualObject import VirtualObject
-class Scatterer(VirtualObject):
+class Component(VirtualObject):
 
-    name = 'scatterers'
+    name = 'components'
 
     import pyre.db
     

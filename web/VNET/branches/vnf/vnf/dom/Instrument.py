@@ -12,14 +12,21 @@
 #
 
 
-from VirtualObject import VirtualObject
-class Scatterer(VirtualObject):
+from Object import Object
 
-    name = 'scatterers'
 
+class Instrument(Object):
+
+    name = "instruments"
+    
     import pyre.db
     
-    pass # end of Scatterer
+    from ReferenceSet import ReferenceSet
+    class Components( ReferenceSet ):
+        name = 'componentsininstrument'
+        pass
+
+    pass # end of Instrument
 
 
 # version

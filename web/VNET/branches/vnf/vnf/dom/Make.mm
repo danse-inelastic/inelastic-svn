@@ -33,8 +33,13 @@ EXPORT_PYTHON_MODULES = \
 	__init__.py \
 	Block.py \
 	Crystal.py \
+	Instrument.py \
+	Component.py \
+	IQEMonitor.py \
 	Job.py \
+	MonochromaticSource.py \
 	Object.py \
+	VirtualObject.py \
 	PolyXtalScatterer.py \
 	ReferenceSet.py \
 	SampleAssembly.py \
@@ -43,8 +48,6 @@ EXPORT_PYTHON_MODULES = \
 	Shape.py \
 	Table.py \
 	User.py \
-
-
 
 
 

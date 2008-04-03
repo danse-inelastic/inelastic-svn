@@ -12,14 +12,17 @@
 #
 
 
-from VirtualObject import VirtualObject
-class Scatterer(VirtualObject):
+from Object import Object
+class MonochromaticSource(Object):
 
-    name = 'scatterers'
+    name = 'monochromaticsources'
 
     import pyre.db
+
+    energy = pyre.db.real( name = 'energy' )
+    energy.meta['tip'] = 'neutron energy. unit: meV'
     
-    pass # end of Scatterer
+    pass # end of MonochromaticSource
 
 
 # version
