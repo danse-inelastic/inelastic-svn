@@ -36,7 +36,6 @@ EXPORT_PYTHON_MODULES = \
 	Server.py \
 	Scatterer.py \
 	Scribe.py \
-	Job.py \
 	DataObject.py \
 	twodarr.py \
 	wording.py \
