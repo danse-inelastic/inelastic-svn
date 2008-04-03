@@ -233,6 +233,13 @@ class HierarchyRetriever:
         return method(node)
 
 
+    def onInstrument(self, instrument):
+        components = self.clerk.getComponents( instrument.id )
+        components = [ self( component ) for component in components ]
+        instrument.components = components
+        return instrument
+
+
     def onSampleAssembly(self, sampleassembly):
         scatterers = self.clerk.getScatterers( sampleassembly.id )
         scatterers = [ self( scatterer ) for scatterer in scatterers ]
