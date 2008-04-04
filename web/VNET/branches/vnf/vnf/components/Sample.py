@@ -11,10 +11,9 @@
 
 
 from Actor import Actor, action_link, action, actionRequireAuthentication
-from wording import plural, present_be
 
 
-class Server(Actor):
+class Sample(Actor):
 
     class Inventory(Actor.Inventory):
 
@@ -30,32 +29,32 @@ class Server(Actor):
         return self.listall( director )
 
     def listall(self, director):
-        page = director.retrievePage( 'job' )
+        page = director.retrievePage( 'sample' )
         
         main = page._body._content._main
         
         # populate the main column
-        document = main.document(title='List of servers')
+        document = main.document(title='List of samples')
         document.description = ''
         document.byline = 'byline?'
 
         # retrieve id:record dictionary from db
         clerk = director.clerk
-        servers = clerk.getServers()
-        serverValues=[]
-        for server in servers:
-            serverValues.append(server.getValues())
+        samples = clerk.getSamples()
+        sampleValues=[]
+        for sample in samples:
+            sampleValues.append(sample.getValues())
             
         p = document.paragraph()
-        numServers = len(servers)
-        numColumns=servers[0].getNumColumns()
+        numSamples = len(samples)
+        numColumns=samples[0].getNumColumns()
 
         from PyHtmlTable import PyHtmlTable
-        t=PyHtmlTable(numServers,numColumns)#, {'width':'400','border':2,'bgcolor':'white'})
-        for row in range(numServers):
+        t=PyHtmlTable(numSamples,numColumns)#, {'width':'400','border':2,'bgcolor':'white'})
+        for row in range(numSamples):
             colNum=0
-            for name in servers[row].getColumnNames():
-                t.setc(row,colNum,servers[row].getColumnValue(name))
+            for name in samples[row].getColumnNames():
+                t.setc(row,colNum,samples[row].getColumnValue(name))
                 colNum+=1
         p.text = [t.return_html()]
         
@@ -64,8 +63,8 @@ class Server(Actor):
 
     def __init__(self, name=None):
         if name is None:
-            name = "server"
-        super(Server, self).__init__(name)
+            name = "sample"
+        super(Sample, self).__init__(name)
         return
 
 # version

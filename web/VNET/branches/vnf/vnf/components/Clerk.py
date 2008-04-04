@@ -19,7 +19,6 @@ class Clerk(Component):
         self.getHierarchy = HierarchyRetriever(self)
         return
     
-
     def indexUsers(self, where=None):
         """create an index of all users that meet the specified criteria"""
         from vnf.dom.User import User
@@ -29,19 +28,16 @@ class Clerk(Component):
             index[user.username] = user
             continue
         return index
-    
 
     def indexActiveUsers(self):
         """create an index of all active users"""
         return self.indexUsers()
         return self.indexUsers(where="status='a'")
 
-
     def indexJobs(self, where = None):
         '''create and index all jobs'''
         from vnf.dom.Job import Job
         return self._index( Job, where )
-
 
     def indexInstruments(self, where = None):
         """create an index of all instruments
@@ -49,13 +45,11 @@ class Clerk(Component):
         from vnf.dom.Instrument import Instrument
         return self._index( Instrument, where )
 
-
     def indexSampleAssemblies(self, where = None):
         """create an index of all sample assemblies
         that meet the specified criteria"""
         from vnf.dom.SampleAssembly import SampleAssembly
         return self._index( SampleAssembly, where )
-
 
     def indexScatterers(self, where = None):
         '''create and index of all scatterers
@@ -157,6 +151,12 @@ class Clerk(Component):
         '''retrieve sample assembly of given id'''
         from vnf.dom.SampleAssembly import SampleAssembly
         return self._getRecordByID( SampleAssembly, id )
+
+
+    def getServers(self, where = None):
+        '''retrieve all servers'''
+        from vnf.dom.Server import Server
+        return self._getAll( Server, where )
 
 
     def getInstrument(self, id):

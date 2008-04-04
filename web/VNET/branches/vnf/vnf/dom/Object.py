@@ -21,8 +21,8 @@ class Object(Table):
     id.constraints = 'PRIMARY KEY'
     id.meta['tip'] = "the unique id"
 
-    creater = pyre.db.varchar(name='creater', length = 32)
-    creater.meta['tip'] = 'creater name'
+    creator = pyre.db.varchar(name='creator', length = 32)
+    creator.meta['tip'] = 'creator name'
 
     date = pyre.db.date( name='date' )
     date.meta['tip'] = 'date of creation'

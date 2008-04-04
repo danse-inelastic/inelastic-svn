@@ -53,7 +53,17 @@ def page(app):
         'instrument', app.sentry, 'Instruments'),
         app.cgihome) + "<br/>",
         
-        '<a href="%s/sample/Samples.html">Samples</a><br/>' % app.home,
+        action_link(
+        actionRequireAuthentication(
+        'sample', app.sentry, 'Samples'),
+        app.cgihome) + "<br/>",
+        
+        action_link(
+        actionRequireAuthentication(
+        'equipment', app.sentry, 'Furnaces and other scatterers'),
+        app.cgihome) + "<br/>",
+        
+#        '<a href="%s/sample/Samples.html">Samples</a><br/>' % app.home,
         '<a href="%s/InstrumentSimulation.html">Instrument Simulation</a><br/>' % app.home,
 
         action_link(
@@ -61,7 +71,12 @@ def page(app):
         'job', app.sentry, 'Job Monitoring'),
         app.cgihome) + "<br/>",
 
-        '<a href="manageServers.html">Manage Servers</a><br/>',
+        action_link(
+        actionRequireAuthentication(
+        'server', app.sentry, 'Manage Servers'),
+        app.cgihome) + "<br/>",
+        
+#        '<a href="manageServers.html">Manage Servers</a><br/>',
         '<a href="MaterialSimulation.html">Supporting Calculations</a><br/>',
         ]
 

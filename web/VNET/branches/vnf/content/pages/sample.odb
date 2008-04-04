@@ -14,7 +14,7 @@
 
 def page(app):
     import vnf.content
-    page = vnf.content.page(name='samples', title='Sample Store', root=app.home)
+    page = vnf.content.page(name='sample', title='Sample List', root=app.home)
     
     # build the body
     body = page.body()
