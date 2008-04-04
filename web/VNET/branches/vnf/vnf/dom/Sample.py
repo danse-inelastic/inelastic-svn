@@ -27,6 +27,9 @@ class Sample(Object):
     
     fractionalCoordinates = pyre.db.doubleArray( name = 'fractional_coordinates')
     fractionalCoordinates.meta['tip'] = 'array positions as fractional values of unit cell'
+    
+    atomNames = pyre.db.varcharArray( name = 'fracti')
+    fractionalCoordinates.meta['tip'] = 'array positions as fractional values of unit cell'
 
     pass # end of PolyXtalScatterer
 
