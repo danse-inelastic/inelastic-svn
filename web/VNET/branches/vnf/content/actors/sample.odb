@@ -13,10 +13,10 @@
 
 
 
-from vnf.components.Samples import Samples
+from vnf.components.Sample import Sample
 
 def actor():
-    return Samples()
+    return Sample()
 
 
 

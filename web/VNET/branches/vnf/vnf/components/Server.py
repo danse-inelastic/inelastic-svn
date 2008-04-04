@@ -16,7 +16,6 @@ from wording import plural, present_be
 
 class Server(Actor):
 
-
     class Inventory(Actor.Inventory):
 
         import time
@@ -27,13 +26,8 @@ class Server(Actor):
         
         page = pyre.inventory.str('page', default='empty')
 
-        pass # end of Inventory
-
-
-
     def default(self, director):
         return self.listall( director )
-
 
     def listall(self, director):
         page = director.retrievePage( 'job' )
@@ -41,42 +35,38 @@ class Server(Actor):
         main = page._body._content._main
         
         # populate the main column
-        document = main.document(title='List of computational jobs')
+        document = main.document(title='List of servers')
         document.description = ''
         document.byline = 'byline?'
 
         # retrieve id:record dictionary from db
         clerk = director.clerk
-        jobs = clerk.indexJobs()
-        
-        listservers( jobs.values(), document, director )
+        servers = clerk.getServers()
+        serverValues=[]
+        for server in servers:
+            serverValues.append(server.getValues())
+            
+        p = document.paragraph()
+        numServers = len(servers)
+        numColumns=servers[0].getNumColumns()
+
+        from PyHtmlTable import PyHtmlTable
+        t=PyHtmlTable(numServers,numColumns)#, {'width':'400','border':2,'bgcolor':'white'})
+        for row in range(numServers):
+            colNum=0
+            for name in servers[row].getColumnNames():
+                t.setc(row,colNum,servers[row].getColumnValue(name))
+                colNum+=1
+        p.text = [t.return_html()]
         
         return page  
 
 
     def __init__(self, name=None):
         if name is None:
-            name = "job"
+            name = "server"
         super(Server, self).__init__(name)
         return
-
-
-
-def listservers( jobs, document, director ):
-    
-    p = document.paragraph()
-
-    from PyHtmlTable import PyHtmlTable
-    t=PyHtmlTable(2,2, {'width':'400','border':2,'bgcolor':'white'})
-    t.setc(0,0,"T1 Cell 00");   t.setc(0,1,"T1 Cell 01")
-    t.setc(1,0,"T1 Cell 01");   t.setc(1,1,"T1 Cell 11")
-    
-    p.text = [t.display()]
-
-    from inventorylist import list
-    list( jobs, document, 'scatterer', director )
-    return
-
 
 # version
 __id__ = "$Id$"
