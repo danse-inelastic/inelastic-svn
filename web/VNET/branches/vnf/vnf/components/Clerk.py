@@ -11,8 +11,11 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
+
 from pyre.components.Component import Component
+
 class Clerk(Component):
+    
 
     def __init__(self, *args, **kwds):
         Component.__init__(self, *args, **kwds)
@@ -115,12 +118,7 @@ class Clerk(Component):
         and find the record of given id.
         '''
         from vnf.dom.Scatterer import Scatterer
-        record = self.getScatterer( id )
-        type = record.type
-        id1 = record.reference
-        exec "from vnf.dom.%s import %s as Table" % (type, type)
-        scatterer = self._getRecordByID( Table, id1 )
-        return scatterer
+        return self._getRealObject( id, Scatterer )
 
 
     def getRealComponent(self, id):
@@ -133,12 +131,7 @@ class Clerk(Component):
         and find the record of given id.
         '''
         from vnf.dom.Component import Component
-        record = self.getComponent( id )
-        type = record.type
-        id1 = record.reference
-        exec "from vnf.dom.%s import %s as Table" % (type, type)
-        component = self._getRecordByID( Table, id1 )
-        return component
+        return self._getRealObject( id, Component )
 
 
     def getSample(self, id):
@@ -177,48 +170,28 @@ class Clerk(Component):
         return self._getRecordByID( Scatterer, id )
 
     
-    def getScattererIDs(self, id):
-        '''retrieve ids of scatterers in the sample assembly of given id'''
-        from vnf.dom.SampleAssembly import SampleAssembly
-        records = self.db.fetchall(
-            SampleAssembly.Scatterers, where = "localkey='%s'" % id )
-        scattererIDs = [
-            record.remotekey for record in records]
-        return scattererIDs
-
-    
     def getScatterers(self, id):
         '''retrieve scatterers in the sample assembly of given id'''
-        ids = self.getScattererIDs( id )
+        from vnf.dom.SampleAssembly import SampleAssembly
         from vnf.dom.Scatterer import Scatterer
-        ret = []
-        for id in ids:
-            record = self._getRecordByID( Scatterer, id )
-            ret.append( record )
-            continue
-        return ret    
+        return self._getElements(
+            id, SampleAssembly.Scatterers, Scatterer)
 
 
-    def getComponentIDs(self, id):
-        '''retrieve ids of components in the instrument of given id'''
-        from vnf.dom.Instrument import Instrument
-        records = self.db.fetchall(
-            Instrument.Components, where = "localkey='%s'" % id )
-        componentIDs = [
-            record.remotekey for record in records]
-        return componentIDs
-
-    
     def getComponents(self, id):
         '''retrieve components in the instrument of given id'''
-        ids = self.getComponentIDs( id )
+        from vnf.dom.Instrument import Instrument
         from vnf.dom.Component import Component
-        ret = []
-        for id in ids:
-            record = self._getRecordByID( Component, id )
-            ret.append( record )
-            continue
-        return ret    
+        return self._getElements(
+            id, Instrument.Components, Component)
+
+
+    def getPolyXtalKernels(self, id):
+        '''retrieve kernels in the scatterer of given id'''
+        from vnf.dom.PolyXtalScatterer import PolyXtalScatterer
+        from vnf.dom.ScatteringKernel import ScatteringKernel
+        return self._getElements(
+            id, PolyXtalScatterer.Kernels, ScatteringKernel)
 
 
     def getServer(self, id):
@@ -243,21 +216,63 @@ class Clerk(Component):
         and find the record of given id.
         '''
         from vnf.dom.Shape import Shape
-        record = self.getShape( id )
-        
-        type = record.type
-        id1 = record.reference
-        
-        exec "from vnf.dom.%s import %s as Table" % (type, type)
-        shape = self._getRecordByID( Table, id1 )
-        
-        return shape
+        return self._getRealObject( id, Shape )
 
 
+    def getRealScatteringKernel(self, id):
+        from vnf.dom.ScatteringKernel import ScatteringKernel
+        return self._getRealObject( id, ScatteringKernel)
+
+    
     def getCrystal(self, id):
         '''retrieve crystal of given id'''
         from vnf.dom.Crystal import Crystal
         return self._getRecordByID( Crystal, id )
+
+
+    def getPhononDispersion(self, id):
+        from vnf.dom.PhononDispersion import PhononDispersion
+        return self._getRecordByID( PhononDispersion, id )
+
+
+    def getRealPhononDispersion(self, id):
+        from vnf.dom.PhononDispersion import PhononDispersion
+        return self._getRealObject( id, PhononDispersion )
+
+
+    def _getElementIDs(self, id, referencetable):
+        '''retrieve ids of elements in the container of the given id'''
+        records = self.db.fetchall(
+            referencetable, where = "localkey='%s'" % id )
+        elementIDs = [
+            record.remotekey for record in records]
+        return elementIDs
+
+    
+    def _getElements(self, id, referencetable, elementtable):
+        '''retrieve elements in the container of given id'''
+        ids = self._getElementIDs( id, referencetable )
+        records = [
+            self._getRecordByID( elementtable, id )
+            for id in ids]
+        return records
+
+
+    def _getRealObject(self, id, table):
+        '''given id in a virtual table, retrieve the real
+        object's record.
+        A virtual table contains type and reference_id
+        info of the real object.
+        To look up the real object, we have to
+        go to the table of the given object type
+        and find the record of given id.
+        '''
+        record = self._getRecordByID( table, id )
+        type = record.type
+        id1 = record.reference
+        exec "from vnf.dom.%s import %s as RealObj" % (type, type)
+        obj = self._getRecordByID( RealObj, id1 )
+        return obj
 
 
     def _index(self, table, where = None):
@@ -274,7 +289,10 @@ class Clerk(Component):
 
     def _getRecordByID(self, table, id ):
         all = self.db.fetchall( table, where = "id='%s'" % id )
-        return all[0]
+        if len(all) == 1:
+            return all[0]
+        raise RuntimeError, "Cannot find record of id=%s in table %s" % (
+            id, table.__name__)
 
 
 
@@ -324,20 +342,48 @@ class HierarchyRetriever:
         realscatterer = self.clerk.getRealScatterer( scatterer.id )
         scatterer.realscatterer = self(realscatterer)
         return scatterer
-
-
+    
+    
     def onPolyXtalScatterer(self, scatterer):
         shape_id = scatterer.shape_id
         shape = self.clerk.getShape( shape_id )
         shape = self(shape)
         scatterer.shape = shape
-
+        
         crystal_id = scatterer.crystal_id
         crystal = self.clerk.getCrystal( crystal_id )
         crystal = self(crystal)
         scatterer.crystal = crystal
-        
+
+        kernels = self.clerk.getPolyXtalKernels( scatterer.id )
+        kernels = [ self(kernel) for kernel in kernels ]
+        scatterer.kernels = kernels
+
         return scatterer
+
+
+    def onScatteringKernel(self, kernel):
+        realkernel = self.clerk.getRealScatteringKernel( kernel.id )
+        kernel.realscatteringkernel = self(realkernel)
+        return kernel
+    
+
+    def onPolyXtalCoherentPhononScatteringKernel(self, kernel):
+        dispersion_id = kernel.dispersion_id
+        dispersion = self.clerk.getPhononDispersion( dispersion_id )
+        dispersion = self(dispersion)
+        kernel.dispersion = dispersion
+        return kernel
+
+
+    def onPhononDispersion(self, dispersion):
+        realdispersion = self.clerk.getRealPhononDispersion( dispersion.id )
+        dispersion.realdispersion = realdispersion
+        return dispersion
+
+
+    def onIDFPhononDispersion(self, dispersion):
+        return dispersion
 
 
     def onCrystal(self, crystal):
@@ -352,6 +398,8 @@ class HierarchyRetriever:
 
     def onBlock(self, block):
         return block
+
+    pass # end of Clerk
         
 
 # version

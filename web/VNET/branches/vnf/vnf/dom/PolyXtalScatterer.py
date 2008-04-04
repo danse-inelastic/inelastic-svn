@@ -12,8 +12,8 @@
 #
 
 
-from Object import Object
-class PolyXtalScatterer(Object):
+from ScattererBase import ScattererBase
+class PolyXtalScatterer(ScattererBase):
 
     name = 'polyxtalscatterers'
 
@@ -24,6 +24,11 @@ class PolyXtalScatterer(Object):
 
     crystal_id = pyre.db.varchar( name = 'crystal_id', length = 100 )
     crystal_id.meta['tip'] = 'reference id in the crystal table. a single crystal of the scatterer'
+
+    from ReferenceSet import ReferenceSet
+    class Kernels( ReferenceSet ):
+        name = 'kernelsforpolyxtalscatterer'
+        pass
 
     pass # end of PolyXtalScatterer
 

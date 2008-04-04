@@ -12,18 +12,14 @@
 #
 
 
-from Object import Object
-class VirtualObject(Object):
+from VirtualObject import VirtualObject
+class PhononDispersion(VirtualObject):
+
+    name = 'phonondispersions'
 
     import pyre.db
     
-    type = pyre.db.varchar( name = 'type', length = 128 )
-    type.meta['tip'] = 'type of the real object'
-    
-    reference = pyre.db.varchar(name='reference', length = 128 )
-    reference.meta['tip'] = 'reference id in the table of the given type'
-
-    pass # end of VirtualObject
+    pass # end of Dispersion
 
 
 # version

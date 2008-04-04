@@ -33,6 +33,7 @@ EXPORT_PYTHON_MODULES = \
 	__init__.py \
 	Block.py \
 	Crystal.py \
+	IDFPhononDispersion.py \
 	Instrument.py \
 	Component.py \
 	IQEMonitor.py \
@@ -40,10 +41,13 @@ EXPORT_PYTHON_MODULES = \
 	MonochromaticSource.py \
 	Object.py \
 	VirtualObject.py \
+	PhononDispersion.py \
 	PolyXtalScatterer.py \
+	PolyXtalCoherentPhononScatteringKernel.py \
 	ReferenceSet.py \
 	SampleAssembly.py \
 	Scatterer.py \
+	ScatteringKernel.py \
 	Server.py \
 	Shape.py \
 	Table.py \

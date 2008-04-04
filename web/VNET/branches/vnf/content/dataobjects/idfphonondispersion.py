@@ -16,20 +16,19 @@
 from vnf.components.DataObject import DataObject as base
 
 
-class MonochromaticSource(base):
+class IDFPhononDispersion(base):
 
 
     class Inventory(base.Inventory):
 
         import pyre.inventory
-        energy = pyre.inventory.float('energy')
 
         pass # end of Inventory
 
 
     def __init__(self, name = None):
         if name is None:
-            name = 'monochromaticsource'
+            name = 'idfphonondispersion'
 
         base.__init__(self, name)
 
@@ -37,7 +36,7 @@ class MonochromaticSource(base):
 
 
 
-def dataobject(): return MonochromaticSource()
+def dataobject(): return IDFPhononDispersion()
 
 # version
 __id__ = "$Id$"

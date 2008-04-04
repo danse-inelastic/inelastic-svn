@@ -47,7 +47,7 @@ class TreeViewCreator:
         
         
     def onPolyXtalScatterer(self, scatterer):
-        elements = [ scatterer.crystal, scatterer.shape ]
+        elements = [ scatterer.crystal, scatterer.shape ] + scatterer.kernels
         return self.onContainer( scatterer, elements )
 
     
@@ -76,8 +76,8 @@ class TreeViewCreator:
         return self(realelement)
 
 
-    onMonochromaticSource = onIQEMonitor = onCrystal = onBlock = onElement
-    onComponent = onScatterer = onShape = onAbstractElement
+    onPolyXtalCoherentPhononScatteringKernel = onMonochromaticSource = onIQEMonitor = onCrystal = onBlock = onElement
+    onScatteringKernel = onComponent = onScatterer = onShape = onAbstractElement
 
 
     def rootNode(self, container):

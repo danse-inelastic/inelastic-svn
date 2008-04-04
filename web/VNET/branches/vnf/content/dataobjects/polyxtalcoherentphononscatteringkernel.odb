@@ -16,20 +16,23 @@
 from vnf.components.DataObject import DataObject as base
 
 
-class MonochromaticSource(base):
+class PolyXtalCoherentPhononScatteringKernel(base):
 
 
     class Inventory(base.Inventory):
 
         import pyre.inventory
-        energy = pyre.inventory.float('energy')
+        
+        max_energy_transfer = pyre.inventory.float( name = 'max_energy_transfer' )
+
+        max_momentum_transfer = pyre.inventory.float( name = 'max_momentum_transfer' )
 
         pass # end of Inventory
 
 
     def __init__(self, name = None):
         if name is None:
-            name = 'monochromaticsource'
+            name = 'polyxtalcoherentphononscatteringkernel'
 
         base.__init__(self, name)
 
@@ -37,7 +40,7 @@ class MonochromaticSource(base):
 
 
 
-def dataobject(): return MonochromaticSource()
+def dataobject(): return PolyXtalCoherentPhononScatteringKernel()
 
 # version
 __id__ = "$Id$"
