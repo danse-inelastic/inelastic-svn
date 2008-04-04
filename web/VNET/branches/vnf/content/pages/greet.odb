@@ -58,7 +58,7 @@ def page(app):
 
         action_link(
         actionRequireAuthentication(
-        'jobMonitoring', app.sentry, 'Job Monitoring'),
+        'job', app.sentry, 'Job Monitoring'),
         app.cgihome) + "<br/>",
 
         '<a href="manageServers.html">Manage Servers</a><br/>',
