@@ -22,7 +22,18 @@ class IQEMonitor(base):
     class Inventory(base.Inventory):
 
         import pyre.inventory
-        Emin = pyre.inventory.str( 'Emin')
+        Emin = pyre.inventory.float( name = 'Emin' )
+        Emax = pyre.inventory.float( name = 'Emax' )
+        nE = pyre.inventory.int( name = 'nE' )
+
+        Qmin = pyre.inventory.float( name = 'Qmin' )
+        Qmax = pyre.inventory.float( name = 'Qmax' )
+        nQ = pyre.inventory.int( name = 'nQ' )
+    
+        max_angle_in_plane = pyre.inventory.float( name = 'max_angle_in_plane' )
+        min_angle_in_plane = pyre.inventory.float( name = 'min_angle_in_plane' )
+        max_angle_out_of_plane = pyre.inventory.float( name = 'max_angle_out_of_plane' )
+        min_angle_out_of_plane = pyre.inventory.float( name = 'min_angle_out_of_plane' )
 
         pass # end of Inventory
 

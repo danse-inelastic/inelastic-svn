@@ -22,8 +22,7 @@ class MonochromaticSource(base):
     class Inventory(base.Inventory):
 
         import pyre.inventory
-        energy = pyre.inventory.str(
-            'energy')
+        energy = pyre.inventory.float('energy')
 
         pass # end of Inventory
 

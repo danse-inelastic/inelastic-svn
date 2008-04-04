@@ -15,11 +15,9 @@
 from Object import Object
 class VirtualObject(Object):
 
-    name = 'scatterers'
-
     import pyre.db
     
-    type = pyre.db.varchar( name = 'type', length = 32 )
+    type = pyre.db.varchar( name = 'type', length = 128 )
     type.meta['tip'] = 'type of the real object'
     
     reference = pyre.db.varchar(name='reference', length = 128 )
