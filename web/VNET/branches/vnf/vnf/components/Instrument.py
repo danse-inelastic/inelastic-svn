@@ -96,7 +96,12 @@ class Instrument(Actor):
 
         director.clerk.updateRecord( obj )
         
-        return page    
+        return page
+
+
+    def run(self, director):
+        page, document = self._head( director )
+        return page
 
 
     def __init__(self, name=None):
