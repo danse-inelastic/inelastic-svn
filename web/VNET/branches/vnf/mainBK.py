@@ -34,9 +34,9 @@
 if __name__ == '__main__':
     from vnf.applications.WebApplication import WebApplication
     app=WebApplication(name='main')
-    import opal.inventory
-    #app.actor='greet'#'job'
-    app.actor=opal.inventory.actor(default="greet")
+    #import opal.inventory
+    #app.actor='job'#'job'
+    #app.actor=opal.inventory.actor(default="greet")
     #from os import environ
     #root='/home/jbk/dv/tools/pythia-0.8'
     #environ['PYTHONPATH']='/home/jbk:'environ['PYTHONPATH']
