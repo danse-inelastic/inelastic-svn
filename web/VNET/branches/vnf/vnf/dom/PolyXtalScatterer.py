@@ -12,8 +12,8 @@
 #
 
 
-from ScattererBase import ScattererBase
-class PolyXtalScatterer(ScattererBase):
+from Object import Object as base
+class PolyXtalScatterer(base):
 
     name = 'polyxtalscatterers'
 
