@@ -26,9 +26,12 @@ EXPORT_PYTHON_MODULES = \
 	__init__.py \
 	Actor.py \
 	Clerk.py \
+	Greeter.py \
 	Instrument.py \
+	InstrumentSimulationAppBuilder.py \
 	Job.py \
-	Purser.py \
+	NeutronExperiment.py \
+	NeutronExperimentSimulationRunBuilder.py \
 	PyHtmlTable.py \
 	SampleAssembly.py \
 	SamplePreparation.py \

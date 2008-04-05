@@ -69,6 +69,11 @@ class Clerk(Component):
         return self._index( Scatterer, where )
 
 
+    def indexNeutronExperiments(self, where = None):
+        from vnf.dom.NeutronExperiment import NeutronExperiment
+        return self._index( NeutronExperiment, where )
+
+
     def updateRecord(self, record):
         id = record.id
         where = "id='%s'" % id
@@ -77,6 +82,7 @@ class Clerk(Component):
         
         for column in record.getColumnNames():
             value = getattr( record, column )
+            value = '%s' % value
             assignments.append( (column, value) )
             continue
         
@@ -240,6 +246,11 @@ class Clerk(Component):
         return self._getRealObject( id, PhononDispersion )
 
 
+    def getNeutronExperiment(self, id):
+        from vnf.dom.NeutronExperiment import NeutronExperiment
+        return self._getRecordByID( NeutronExperiment, id )
+
+
     def _getElementIDs(self, id, referencetable):
         '''retrieve ids of elements in the container of the given id'''
         records = self.db.fetchall(
@@ -308,6 +319,19 @@ class HierarchyRetriever:
         klass = node.__class__
         method = getattr(self, 'on%s' % klass.__name__)
         return method(node)
+
+
+    def onNeutronExperiment(self, experiment):
+        instrument_id = experiment.instrument_id
+        instrument = self.clerk.getInstrument( instrument_id )
+        instrument = self(instrument)
+        experiment.instrument = instrument
+
+        sampleassembly_id = experiment.sampleassembly_id
+        sampleassembly = self.clerk.getSampleAssembly( sampleassembly_id )
+        sampleassembly = self(sampleassembly)
+        experiment.sampleassembly = sampleassembly
+        return experiment
 
 
     def onInstrument(self, instrument):

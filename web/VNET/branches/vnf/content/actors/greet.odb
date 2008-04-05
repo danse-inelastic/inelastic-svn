@@ -12,9 +12,10 @@
 #
 
 
+from vnf.components.Greeter import Greeter
+
 def actor():
-    import opal.components
-    return opal.components.authenticatingActor('greet')
+    return Greeter()
 
 
 # version
