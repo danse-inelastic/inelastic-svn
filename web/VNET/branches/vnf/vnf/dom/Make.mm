@@ -39,6 +39,7 @@ EXPORT_PYTHON_MODULES = \
 	IQEMonitor.py \
 	Job.py \
 	MonochromaticSource.py \
+	NeutronExperiment.py \
 	Object.py \
 	VirtualObject.py \
 	PhononDispersion.py \

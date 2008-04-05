@@ -12,13 +12,15 @@
 #
 
 
-from vnf.components.Greeter import Greeter
+
+from vnf.components.NeutronExperiment import NeutronExperiment
 
 def actor():
-    return Greeter()
+    return NeutronExperiment()
+
 
 
 # version
-__id__ = "$Id: greet.odb,v 1.1.1.1 2006-11-27 00:09:15 aivazis Exp $"
+__id__ = "$Id: Login.py,v 1.1.1.1 2006-11-27 00:09:47 aivazis Exp $"
 
 # End of file 

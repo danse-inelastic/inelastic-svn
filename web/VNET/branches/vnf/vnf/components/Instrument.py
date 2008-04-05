@@ -101,6 +101,17 @@ class Instrument(Actor):
 
     def run(self, director):
         page, document = self._head( director )
+        
+        id = self.inventory.id
+        instrument = self._getinstrument( id, director )
+
+        instrument = self.clerk.getHierarchy( instrument )
+
+        appscript = build_run( instrument )
+
+        apppath = 'InstrSim.py'
+        open( apppath, 'w' ).write( '\n'.join( appscript ) )
+        
         return page
 
 
@@ -178,6 +189,11 @@ def listinstruments( instruments, document, director ):
     list( instruments, document, 'instrument', director )
     return
 
+
+
+def build_run( instrument ):
+    from InstrumentSimulationRunBuilder import Builder
+    return Builder().render(instrument)
 
 
 # version

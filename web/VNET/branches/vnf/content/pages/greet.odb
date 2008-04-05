@@ -24,61 +24,18 @@ def page(app):
 
     # build the header
     header = body.pageHeader()
-    header.logo(href=os.path.join(app.home, 'sentinel.html'))
+
+    sentry = app.sentry
+    ticket = sentry.authenticate()
+
+    href = '%s?actor=greet&sentry.username=%s&sentry.ticket=%s' % (
+        app.cgihome, app.sentry.username, app.sentry.ticket)
+    header.logo(href=href)
     header.personalTools()
 
     # build the client area
     content = body.pageContent()
     main = content.main()
-
-    sentry = app.sentry
-    ticket = sentry.authenticate()
-
-    # populate the main column
-    document = main.document(title='Welcome')
-    p = document.paragraph()
-    p.text = [
-        action_link(
-        actionRequireAuthentication(
-        'sampleassembly', app.sentry, 'Sample Assemblies'),
-        app.cgihome) + "<br/>",
-        
-        action_link(
-        actionRequireAuthentication(
-        'samplePreparation', app.sentry, 'Sample Preparation'),
-        app.cgihome) + "<br/>",
-
-        action_link(
-        actionRequireAuthentication(
-        'instrument', app.sentry, 'Instruments'),
-        app.cgihome) + "<br/>",
-        
-        action_link(
-        actionRequireAuthentication(
-        'sample', app.sentry, 'Samples'),
-        app.cgihome) + "<br/>",
-        
-        action_link(
-        actionRequireAuthentication(
-        'equipment', app.sentry, 'Furnaces and other scatterers'),
-        app.cgihome) + "<br/>",
-        
-#        '<a href="%s/sample/Samples.html">Samples</a><br/>' % app.home,
-        '<a href="%s/InstrumentSimulation.html">Instrument Simulation</a><br/>' % app.home,
-
-        action_link(
-        actionRequireAuthentication(
-        'job', app.sentry, 'Job Monitoring'),
-        app.cgihome) + "<br/>",
-
-        action_link(
-        actionRequireAuthentication(
-        'server', app.sentry, 'Manage Servers'),
-        app.cgihome) + "<br/>",
-        
-#        '<a href="manageServers.html">Manage Servers</a><br/>',
-        '<a href="MaterialSimulation.html">Supporting Calculations</a><br/>',
-        ]
 
     # build the footer
     footer = body.pageFooter()
