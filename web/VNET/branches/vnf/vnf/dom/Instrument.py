@@ -16,16 +16,31 @@ from Object import Object
 
 
 class Instrument(Object):
-
+    
     name = "instruments"
     
     import pyre.db
     
     from ReferenceSet import ReferenceSet
     class Components( ReferenceSet ):
+        
         name = 'componentsininstrument'
-        pass
 
+        import pyre.db
+        label = pyre.db.varchar( name = 'label', length = 128 )
+        
+        pass
+    
+    componentsequence = pyre.db.varcharArray(
+        name = 'componentsequence', length = 128 )
+
+    from PositionOrientationRegistry import PositionOrientationRegistry
+    class Geometer( PositionOrientationRegistry ):
+
+        name = 'instrumentgeometer'
+
+        pass # end of Geometer
+    
     pass # end of Instrument
 
 

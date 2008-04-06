@@ -38,7 +38,7 @@ class Greeter(Actor):
             ]
 
         # my experiments
-        document = main.document(title='My experiments')
+        document = main.document(title='Experiments')
         clerk = director.clerk
         username = director.sentry.username
         experiments = clerk.indexNeutronExperiments(

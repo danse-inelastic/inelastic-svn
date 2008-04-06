@@ -23,6 +23,8 @@ class Instrument(base):
 
         import pyre.inventory
 
+        componentsequence = pyre.inventory.list( 'componentsequence' )
+
         pass # end of Inventory
 
 

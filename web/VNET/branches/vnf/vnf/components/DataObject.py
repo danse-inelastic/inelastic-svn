@@ -23,10 +23,10 @@ class DataObject(Component):
         import pyre.inventory
 
         id = pyre.inventory.str( 'id', default = '' )
+        
+        creator = pyre.inventory.str(name='creator', default = 'demo')
 
-        creater = pyre.inventory.str(name='creater', default = '')
-
-        date = pyre.inventory.str( name='date', default = '' )
+        date = pyre.inventory.str( name='date', default = '04/01/2008' )
 
         short_description = pyre.inventory.str(name='short_description')
         pass # end of Inventory
