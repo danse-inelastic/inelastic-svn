@@ -12,8 +12,8 @@
 #
 
 
-from Object import Object
-class Crystal(Object):
+from DbObject import DbObject
+class Crystal(DbObject):
 
     name = 'crystals'
 

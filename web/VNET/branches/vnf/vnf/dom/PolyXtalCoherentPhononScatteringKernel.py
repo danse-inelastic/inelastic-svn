@@ -12,8 +12,8 @@
 #
 
 
-from Object import Object
-class PolyXtalCoherentPhononScatteringKernel(Object):
+from DbObject import DbObject
+class PolyXtalCoherentPhononScatteringKernel(DbObject):
 
     name = 'polyxtalcoherentphononscatteringkernels'
     

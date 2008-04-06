@@ -12,8 +12,8 @@
 #
 
 
-from Object import Object
-class IDFPhononDispersion(Object):
+from DbObject import DbObject
+class IDFPhononDispersion(DbObject):
 
     name = 'idfphonondispersions'
 

@@ -13,7 +13,7 @@
 
 
 from Table import Table
-class Object(Table):
+class DbObject(Table):
 
     import pyre.db
     

@@ -12,8 +12,8 @@
 #
 
 
-from Object import Object
-class MonochromaticSource(Object):
+from DbObject import DbObject
+class MonochromaticSource(DbObject):
 
     name = 'monochromaticsources'
 
