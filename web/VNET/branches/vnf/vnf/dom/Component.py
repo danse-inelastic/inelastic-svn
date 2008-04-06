@@ -18,7 +18,7 @@ class Component(VirtualObject):
     name = 'components'
 
     import pyre.db
-    
+
     pass # end of Scatterer
 
 

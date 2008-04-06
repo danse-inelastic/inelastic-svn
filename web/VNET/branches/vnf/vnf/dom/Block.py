@@ -19,9 +19,9 @@ class Block(DbObject):
 
     import pyre.db
 
-    x = pyre.db.real( name = 'x' )
-    y = pyre.db.real( name = 'y' )
-    z = pyre.db.real( name = 'z' )
+    width = pyre.db.real( name = 'width' )
+    height = pyre.db.real( name = 'height' )
+    thickness = pyre.db.real( name = 'thickness' )
     
     pass # end of Block
 

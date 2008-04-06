@@ -12,6 +12,11 @@
 
 class Builder:
 
+
+    pyscriptname = 'simapp.py'
+    shscriptname = 'run.sh'
+    
+
     def render(self, experiment):
         return self.dispatch(experiment)
 
@@ -23,20 +28,29 @@ class Builder:
 
 
     def onNeutronExperiment(self, experiment):
-        self.commandline_arguments = {}
-        parameters = [ 'ncount' ]
-        for parameter in parameter:
-            self.commandline_arguments[ parameter ] = getattr(
-                experiment, parameter )
-            continue
-        
         instrument = experiment.instrument
-        simuapp = self.dispatch( instrument )
+        pyscriptconents, options = self.dispatch( instrument )
 
         sampleassembly = experiment.sampleassembly
-        sampleassembly = self.dispatch( sampleassembly )
+        if sampleassembly:
+            sampleassembly_files = self.dispatch( sampleassembly )
+            pass
         
-        return simuapp, commandline_arguments, sampleassembly
+        parameters = [ 'ncount' ]
+        for parameter in parameters:
+            options[ parameter ] = getattr(experiment, parameter )
+            continue
+
+        pyscriptname = self.pyscriptname
+        command = '%s %s' % (pyscriptname, ' '.join(
+            ['--%s=%r' % (item, options.get(item))
+             for item in options ] ) )
+
+        shscriptname = self.shscriptname
+        files = [ (pyscriptname, pyscriptconents),
+                  (shscriptname, [command] ),
+                  ]
+        return files + sampleassembly_files
 
     
     def onInstrument(self, instrument):
@@ -45,7 +59,12 @@ class Builder:
 
 
     def onSampleAssembly(self, sampleassembly):
-        return
+        if sampleassembly.__class__.__name__ == 'SampleAssembly':
+            from McvineSampleAssemblyBuilder import Builder
+        else:
+            from McstasSampleBuilder import Builder
+            pass
+        return Builder().render( sampleassembly )
 
 
     pass # end of Builder

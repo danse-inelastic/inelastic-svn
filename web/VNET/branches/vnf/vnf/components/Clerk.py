@@ -187,9 +187,22 @@ class Clerk(Component):
     def getComponents(self, id):
         '''retrieve components in the instrument of given id'''
         from vnf.dom.Instrument import Instrument
+        referencetable = Instrument.Components
+        
+        records = self.db.fetchall(
+            referencetable, where = "localkey='%s'" % id )
+
         from vnf.dom.Component import Component
-        return self._getElements(
-            id, Instrument.Components, Component)
+        ret = []
+        
+        for record in records:
+            componentID = record.remotekey
+            componentrecord = self._getRecordByID( Component, componentID )
+            componentrecord.label = record.label
+            ret.append( componentrecord )
+            continue
+
+        return ret
 
 
     def getInstrumentGeometer(self, instrument):
@@ -340,6 +353,10 @@ class HierarchyRetriever:
         experiment.instrument = instrument
 
         sampleassembly_id = experiment.sampleassembly_id
+        if sampleassembly_id == '' or sampleassembly_id == 'None':
+            experiment.sampleassembly = None
+            return
+        
         sampleassembly = self.clerk.getSampleAssembly( sampleassembly_id )
         sampleassembly = self(sampleassembly)
         experiment.sampleassembly = sampleassembly
