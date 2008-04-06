@@ -32,11 +32,15 @@ EXPORT_PYTHON_MODULES = \
 	Instrument.py \
 	InstrumentSimulationAppBuilder.py \
 	Job.py \
+	McstasSampleBuilder.py \
+	McvineSampleAssemblyBuilder.py \
 	NeutronExperiment.py \
 	NeutronExperimentSimulationRunBuilder.py \
 	ObjectEditFormCreater.py \
 	PyHtmlTable.py \
+	Run.py \
 	SampleAssembly.py \
+	SampleAssemblyXMLBuilder.py \
 	SamplePreparation.py \
 	Samples.py \
 	Server.py \

@@ -133,22 +133,6 @@ class Instrument(Actor):
         return page
 
 
-    def run(self, director):
-        page, document = self._head( director )
-        
-        id = self.inventory.id
-        instrument = self._getinstrument( id, director )
-
-        instrument = self.clerk.getHierarchy( instrument )
-
-        appscript = build_run( instrument )
-
-        apppath = 'InstrSim.py'
-        open( apppath, 'w' ).write( '\n'.join( appscript ) )
-        
-        return page
-
-
     def __init__(self, name=None):
         if name is None:
             name = "instrument"

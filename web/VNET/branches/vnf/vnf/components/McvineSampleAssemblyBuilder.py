@@ -12,14 +12,17 @@
 #
 
 
-from VirtualObject import VirtualObject
-class Component(VirtualObject):
+class Builder:
 
-    name = 'components'
+    sampleassemblyxmlfilename = 'sampleassembly.xml'
 
-    import pyre.db
+    def render(self, sampleassembly):
+        from SampleAssemblyXMLBuilder import Builder
+        contents = Builder().render(sampleassembly)
+        return [ (self.sampleassemblyxmlfilename, contents) ]
 
-    pass # end of Scatterer
+
+    pass # Builder
 
 
 # version

@@ -14,9 +14,11 @@ class Builder:
 
     def render(self, instrument):
         self.appscript = []
+        self.cmdline_opts = {}
         self.indent_level = 0
         self.dispatch( instrument )
-        return self.appscript
+        
+        return self.appscript, self.cmdline_opts
 
 
     def dispatch(self, something):
@@ -43,47 +45,100 @@ class Builder:
             self.dispatch( component )
             continue
 
-        self._outdent()
+        sequence = instrument.componentsequence
         
+        if 'sample' in sequence:
+            self.onSample( )
+            pass # end if
+
         self._outdent()
+
+        self.cmdline_opts[ 'sequence' ] = sequence
+
+        geometer = instrument.geometer
+        for component in sequence:
+            
+            record = geometer[ component ]
+            
+            reference = record.reference_label
+            if reference is not None and reference != '':
+                raise NotImplementedError
+            
+            position = record.position
+            orientation = record.orientation
+
+            value = '%s,%s' % (position, orientation)
+            
+            self.cmdline_opts[ 'geometer.%s' % component ] = value
+
+            continue
+
+        self._outdent()
+        self._write('')
+
+        self._write( 'if __name__ == "__main__":' )
+        self._indent()
+        self._write( 'app = Instrument( %r )' % instrument.short_description )
+        self._write( 'app.run()' )
+        self._outdent()
+        self._write( '' )
         return
 
 
     def onMonochromaticSource(self, source):
         kwds = {
-            'name': 'source',
+            'name': source.label,
             'category': 'sources',
             'type': 'MonochromaticSource',
             'supplier': 'mcni',
             }
         self.onNeutronComponent( **kwds )
+
+        from mcni.utils import e2v
+        v = e2v( source.energy )
+        self.Ei = source.energy
+        self.cmdline_opts[ '%s.velocity' % source.label ] = (0,0,v) 
         return
 
 
-    def onSampleAssembly(self, sa):
-        kwds = {
-            'name': 'sample',
-            'category': 'samples',
-            'type': 'SampleAssemblyFromXML',
-            'supplier': 'mcni',
-            }
-        self.onNeutronComponent( **kwds )
+    def onSample(self):
+        self._write(
+            "sample = pyre.inventory.facility( 'sample', default = 'sample' )"
+            )
         return
 
 
     def onIQEMonitor(self, m):
         kwds = {
-            'name': 'monitor',
+            'name': m.label,
             'category': 'monitors',
             'type': 'IQEMonitor',
             'supplier': 'mcstas',
             }
         self.onNeutronComponent( **kwds )
+
+        opts = {
+            '%s.Ei': self.Ei,
+            }
+
+        parameters = [
+            'Qmin', 'Qmax', 'nQ',
+            'Emin', 'Emax', 'nE',
+            'max_angle_out_of_plane', 'min_angle_out_of_plane',
+            'max_angle_in_plane', 'min_angle_in_plane',
+            ]
+
+        for param in parameters:
+            opts[ '%s.%s' %  (m.label,param) ] = getattr(m, param)
+            continue
+        
+        self.cmdline_opts.update( opts )
         return
 
 
     def onComponent(self, component):
         realcomponent = component.realcomponent
+        realcomponent.label = component.label
         return self.dispatch( realcomponent )
     
 

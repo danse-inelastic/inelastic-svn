@@ -136,11 +136,19 @@ class NeutronExperiment(Actor):
 
         experiment = director.clerk.getHierarchy( experiment )
 
-        appscript = build_run( experiment )
+        files = build_run( experiment )
 
-        apppath = 'InstrSim.py'
-        open( apppath, 'w' ).write( '\n'.join( appscript ) )
-        
+        #make new run directory
+        from Run import new_rundir
+        rundir = new_rundir( director )
+
+        #write files to the new run directory
+        import os
+        for filename, filecontents in files:
+            path = os.path.join( rundir, filename )
+            open( path, 'w' ).write( '\n'.join( filecontents ) )
+            continue
+
         return page
 
 
