@@ -12,14 +12,11 @@
 
 
 from DbObject import DbObject
-class Sample(DbObject):
+class Matter(DbObject):
 
-    name = 'samples'
+    name = 'matter'
 
     import pyre.db
-
-    sampleName = pyre.db.varchar( name = 'sampleName', length = 128 )
-    sampleName.meta['tip'] = 'name of sample'
 
     cartesianLattice = pyre.db.doubleArray( name = 'cartesianLattice')
     cartesianLattice.meta['tip'] = 'array of cartesian lattice vectors'
