@@ -21,6 +21,11 @@ def portlet(app):
     home.icon = "images/link_icon.gif"
     home.type = "navItem"
     
+    samples = portlet.item(description="Samples")
+    samples.target = "http://trueblue.caltech.edu/cgi-bin/vnfBK/mainBK.py?actor=samples"
+    samples.icon = "images/link_icon.gif"
+    samples.type = "navItem"
+    
     logout = portlet.item(description="Logout")
     logout.target = "http://orthologue.com/cgi-bin/vnf/demo.py?actor=logout"
     logout.icon = "images/link_icon.gif"

@@ -34,7 +34,7 @@ class Greeter(Actor):
         document = main.document(title='Welcome')
         p = document.paragraph()
         p.text = [
-            'Welcome to Virtual Neutron Facility!',
+            'Welcome to the Virtual Neutron Facility!',
             ]
 
         # my experiments
@@ -48,7 +48,7 @@ class Greeter(Actor):
         listexperiments( experiments, document, director )
 
         # misc links
-        document = main.document(title='Misc links')
+        document = main.document(title='Samples and Equipment')
         p = document.paragraph()
         p.text = [
             action_link(
