@@ -12,8 +12,8 @@
 #
 
 
-from Object import Object
-class Block(Object):
+from DbObject import DbObject
+class Block(DbObject):
 
     name = 'blocks'
 

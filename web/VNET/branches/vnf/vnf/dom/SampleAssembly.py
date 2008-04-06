@@ -12,10 +12,10 @@
 #
 
 
-from Object import Object
+from DbObject import DbObject
 
 
-class SampleAssembly(Object):
+class SampleAssembly(DbObject):
 
     name = "sampleassemblies"
     

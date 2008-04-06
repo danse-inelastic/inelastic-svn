@@ -2,7 +2,6 @@
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
-#                                   Jiao Lin
 #                      California Institute of Technology
 #                        (C) 2007  All Rights Reserved
 #
@@ -12,8 +11,8 @@
 #
 
 
-from Object import Object
-class Sample(Object):
+from DbObject import DbObject
+class Sample(DbObject):
 
     name = 'samples'
 
@@ -28,8 +27,8 @@ class Sample(Object):
     fractionalCoordinates = pyre.db.doubleArray( name = 'fractional_coordinates')
     fractionalCoordinates.meta['tip'] = 'array positions as fractional values of unit cell'
     
-    atomNames = pyre.db.varcharArray( name = 'fracti')
-    fractionalCoordinates.meta['tip'] = 'array positions as fractional values of unit cell'
+    atomSymbols = pyre.db.varcharArray( name = 'atom_symbols', length = 2 )
+    atomSymbols.meta['tip'] = 'atom symbols for each position in the unit cell'
 
     pass # end of PolyXtalScatterer
 

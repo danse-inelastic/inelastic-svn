@@ -12,10 +12,10 @@
 #
 
 
-from Object import Object
+from DbObject import DbObject
 
 
-class Instrument(Object):
+class Instrument(DbObject):
     
     name = "instruments"
     

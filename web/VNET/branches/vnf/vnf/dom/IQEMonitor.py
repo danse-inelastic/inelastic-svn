@@ -12,8 +12,8 @@
 #
 
 
-from Object import Object
-class IQEMonitor(Object):
+from DbObject import DbObject
+class IQEMonitor(DbObject):
 
     name = 'iqemonitors'
 

@@ -12,8 +12,8 @@
 #
 
 
-from Object import Object
-class VirtualObject(Object):
+from DbObject import DbObject
+class VirtualObject(DbObject):
 
     import pyre.db
     
