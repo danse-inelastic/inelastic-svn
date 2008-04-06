@@ -79,7 +79,7 @@ class NeutronExperiment(Actor):
         actor = self.name
         form = document.form(
             name=actor,
-            legend='Experiment parameters',
+            legend='Run neutron experiment:',
             action=director.cgihome)
 
         actor_field = form.hidden(name='actor', value=actor)

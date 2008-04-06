@@ -30,6 +30,9 @@ class Instrument(Actor):
             'dataobject', default='instrument' )
         dataobject.meta['tip'] = 'the data object to be edited'
 
+        from GeometerFacility import GeometerFacility
+        geometer = GeometerFacility( 'geometer' )
+
         pass # end of Inventory
 
 
@@ -95,6 +98,37 @@ class Instrument(Actor):
             continue
 
         director.clerk.updateRecord( obj )
+
+        from vnf.dom.Instrument import Instrument
+        if not isinstance(obj, Instrument): return page
+
+        # when edit instrument, we need to update geometer in
+        # addition to normal properties
+        
+        geometer = self.inventory.geometer
+        registry = geometer.registry
+
+        geometer_records = director.clerk.getInstrumentGeometer( obj )
+        for component, value in registry:
+
+            value = eval(value)
+
+            if len(value) == 3:
+                position, orientation, reference = value
+            elif len(value) == 2:
+                position, orientation = value
+                reference = ''
+            else:
+                raise ValueError, value
+            
+            record = geometer_records[ component ]
+            record.position = position
+            record.orientation = orientation
+            record.reference_label = reference
+
+            director.clerk.updateRecord( record )
+
+            continue
         
         return page
 

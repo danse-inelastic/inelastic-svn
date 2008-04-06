@@ -82,7 +82,7 @@ class Clerk(Component):
         
         for column in record.getColumnNames():
             value = getattr( record, column )
-            value = '%s' % value
+            value = _tostr( value )
             assignments.append( (column, value) )
             continue
         
@@ -190,6 +190,18 @@ class Clerk(Component):
         from vnf.dom.Component import Component
         return self._getElements(
             id, Instrument.Components, Component)
+
+
+    def getInstrumentGeometer(self, instrument):
+        id = instrument.id
+        from vnf.dom.Instrument import Instrument
+        records = self.db.fetchall(
+            Instrument.Geometer, where = 'container_id=%r' % id )
+        geometer = {}
+        for record in records:
+            geometer[ record.element_label ] = record
+            continue
+        return geometer
 
 
     def getPolyXtalKernels(self, id):
@@ -338,6 +350,8 @@ class HierarchyRetriever:
         components = self.clerk.getComponents( instrument.id )
         components = [ self( component ) for component in components ]
         instrument.components = components
+        geometer = self.clerk.getInstrumentGeometer( instrument )
+        instrument.geometer = geometer
         return instrument
 
 
@@ -424,6 +438,14 @@ class HierarchyRetriever:
         return block
 
     pass # end of Clerk
+
+
+
+def _tostr( value ):
+    if isinstance( value, list ) or isinstance(value, tuple):
+        ret =  '{%s}' % ','.join( [ str(item) for item in value ] )
+        return ret
+    return str(value)
         
 
 # version

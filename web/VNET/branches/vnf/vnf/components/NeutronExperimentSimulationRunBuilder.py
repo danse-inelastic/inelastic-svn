@@ -23,13 +23,29 @@ class Builder:
 
 
     def onNeutronExperiment(self, experiment):
+        self.commandline_arguments = {}
+        parameters = [ 'ncount' ]
+        for parameter in parameter:
+            self.commandline_arguments[ parameter ] = getattr(
+                experiment, parameter )
+            continue
+        
         instrument = experiment.instrument
-        return self.dispatch( instrument )
+        simuapp = self.dispatch( instrument )
 
+        sampleassembly = experiment.sampleassembly
+        sampleassembly = self.dispatch( sampleassembly )
+        
+        return simuapp, commandline_arguments, sampleassembly
 
+    
     def onInstrument(self, instrument):
         from InstrumentSimulationAppBuilder import Builder
         return Builder().render( instrument )
+
+
+    def onSampleAssembly(self, sampleassembly):
+        return
 
 
     pass # end of Builder
