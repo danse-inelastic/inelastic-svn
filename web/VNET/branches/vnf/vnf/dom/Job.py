@@ -35,8 +35,8 @@ class Job(Table):
     timeStart = pyre.db.timestamp(name='timeStart')
     timeStart.meta['tip'] = 'the time the job started'
     
-    numProcessors = pyre.db.integer(name='numProcessors')
-    numProcessors.meta['tip'] = 'the number of processors this job uses'
+    numprocessors = pyre.db.integer(name='numprocessors', default = 1)
+    numprocessors.meta['tip'] = 'the number of processors this job uses'
 
     owner = pyre.db.varchar( name = 'owner', length = 30 )
     owner.meta['tip'] = 'the owner of this job'

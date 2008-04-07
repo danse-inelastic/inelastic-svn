@@ -10,7 +10,7 @@
 #
 
 
-from Actor import Actor
+from Actor import Actor, actionRequireAuthentication, action_link, AuthenticationError
 
 
 class NeutronExperiment(Actor):
@@ -56,7 +56,10 @@ class NeutronExperiment(Actor):
 
 
     def edit(self, director):
-        page, document = self._head( director )
+        try:
+            page, document = self._head( director )
+        except AuthenticationError, error:
+            return error.page
 
         experiment = director.clerk.getNeutronExperiment( self.inventory.id )
         
@@ -120,7 +123,10 @@ class NeutronExperiment(Actor):
 
 
     def run(self, director):
-        page, document = self._head( director )
+        try:
+            page, document = self._head( director )
+        except AuthenticationError, error:
+            return error.page
         
         id = self.inventory.id
         experiment = director.clerk.getNeutronExperiment( id )
@@ -139,9 +145,25 @@ class NeutronExperiment(Actor):
         #create a new job
         from Job import new_job, jobpath
         job = new_job( director )
+        job.jobName = experiment.short_description
+        director.clerk.updateRecord( job )
+        
         jobdir = jobpath( job.id )
         
         build_run( experiment, path = jobdir )
+
+        #
+        p = document.paragraph()
+        edit_job = action_link(
+            actionRequireAuthentication(
+            actor = 'job', sentry = director.sentry,
+            label = 'this job', routine = 'edit',
+            id = job.id ), director.cgihome
+            )
+            
+        p.text = [
+            'A job has been created. Please edit %s and submit it.' % edit_job,
+            ]
 
         return page
 
@@ -158,10 +180,7 @@ class NeutronExperiment(Actor):
 
 
     def _head(self, director):
-        try:
-            page = director.retrieveSecurePage( 'neutronexperiment' )
-        except AuthenticationError, error:
-            return error.page
+        page = director.retrieveSecurePage( 'neutronexperiment' )
         
         main = page._body._content._main
 

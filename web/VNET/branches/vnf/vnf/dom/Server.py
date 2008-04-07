@@ -32,8 +32,6 @@ class Server(Table):
     groupAccess = pyre.db.varchar(name='groupAccess', length = 128)
     groupAccess.meta['tip'] = 'which group of users has access to the server'
     
-    reference = pyre.db.varchar(name='reference', length = 100 )
-    reference.meta['tip'] = 'reference id in the table of the given type'
 
 
 # version
