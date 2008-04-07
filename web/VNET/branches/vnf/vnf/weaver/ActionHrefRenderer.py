@@ -14,15 +14,12 @@
 
 class ActionHrefRenderer:
 
-
     def __init__(self, cgihome):
         self.cgihome = cgihome
         return
 
-
     def render(self, action):
         return action.identify(self)
-
 
     def onAction(self, action):
         cgihome = self.cgihome
@@ -37,7 +34,6 @@ class ActionHrefRenderer:
         if routine: arguments['routine'] = routine
         
         return _address( cgihome, arguments )
-
 
     def onActionRequireAuthentication(self, action):
         cgihome = self.cgihome
@@ -58,8 +54,6 @@ class ActionHrefRenderer:
         arguments['sentry.ticket'] = ticket
         
         return _address( cgihome, arguments ) 
-
-
 
 def _address( cgihome, arguments ):
     return '%s?%s' % (

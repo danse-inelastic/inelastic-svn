@@ -11,6 +11,7 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
+from vnf.components.Actor import Actor, action_link, actionRequireAuthentication, AuthenticationError
 
 def portlet(app):
     import opal.content
@@ -22,9 +23,42 @@ def portlet(app):
     home.type = "navItem"
     
     samples = portlet.item(description="Samples")
-    samples.target = "http://trueblue.caltech.edu/cgi-bin/vnfBK/mainBK.py?actor=samples"
+    samples.target = action_href(
+            actionRequireAuthentication(
+            'sample', app.sentry, 'Samples'),
+            app.cgihome)
     samples.icon = "images/link_icon.gif"
     samples.type = "navItem"
+    
+#        document = main.document(title='Samples and Equipment')
+#        p = document.paragraph()
+#        p.text = [
+#            action_link(
+#            actionRequireAuthentication(
+#            'sampleassembly', director.sentry, 'Sample Assemblies'),
+#            director.cgihome) + "<br/>",
+#            
+#            action_link(
+#            actionRequireAuthentication(
+#            'samplePreparation', director.sentry, 'Sample Preparation'),
+#            director.cgihome) + "<br/>",
+#            
+#            action_link(
+#            actionRequireAuthentication(
+#            'instrument', director.sentry, 'Instruments'),
+#            director.cgihome) + "<br/>",
+#            
+#            '<a href="%s/sample/Samples.html">Samples</a><br/>' % director.home,
+#            '<a href="%s/InstrumentSimulation.html">Instrument Simulation</a><br/>' % director.home,
+#            
+#            action_link(
+#            actionRequireAuthentication(
+#            'jobMonitoring', director.sentry, 'Job Monitoring'),
+#            director.cgihome) + "<br/>",
+#            
+#            '<a href="manageServers.html">Manage Servers</a><br/>',
+#            '<a href="MaterialSimulation.html">Supporting Calculations</a><br/>',
+    
     
     logout = portlet.item(description="Logout")
     logout.target = "http://orthologue.com/cgi-bin/vnf/demo.py?actor=logout"
