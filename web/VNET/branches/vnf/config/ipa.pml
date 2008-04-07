@@ -19,6 +19,7 @@
   <component name='ipa'>
 
     <property name='port'>50001</property>
+    <property name='ticketOnce'>no</property>
 
     <component name='userManager'>
       <property name='passwd'>userdb.md5</property>
