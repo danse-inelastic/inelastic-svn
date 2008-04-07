@@ -118,7 +118,7 @@ class Builder:
         self.onNeutronComponent( **kwds )
 
         opts = {
-            '%s.Ei': self.Ei,
+            '%s.Ei' % m.label: self.Ei,
             }
 
         parameters = [

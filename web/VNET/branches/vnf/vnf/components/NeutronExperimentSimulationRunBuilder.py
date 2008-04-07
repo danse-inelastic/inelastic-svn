@@ -15,6 +15,11 @@ class Builder:
 
     pyscriptname = 'simapp.py'
     shscriptname = 'run.sh'
+
+
+    def __init__(self, path):
+        self.path = path
+        return
     
 
     def render(self, experiment):
@@ -33,7 +38,8 @@ class Builder:
 
         sampleassembly = experiment.sampleassembly
         if sampleassembly:
-            sampleassembly_files = self.dispatch( sampleassembly )
+            options1 = self.dispatch( sampleassembly )
+            options.update( options1 )
             pass
         
         parameters = [ 'ncount' ]
@@ -43,16 +49,17 @@ class Builder:
 
         pyscriptname = self.pyscriptname
         command = '%s %s' % (pyscriptname, ' '.join(
-            ['--%s=%r' % (item, options.get(item))
+            ['--%s="%s"' % (item, options.get(item))
              for item in options ] ) )
 
         shscriptname = self.shscriptname
         files = [ (pyscriptname, pyscriptconents),
                   (shscriptname, [command] ),
                   ]
-        return files + sampleassembly_files
+        self._createfiles( files )
+        return
 
-    
+
     def onInstrument(self, instrument):
         from InstrumentSimulationAppBuilder import Builder
         return Builder().render( instrument )
@@ -64,9 +71,20 @@ class Builder:
         else:
             from McstasSampleBuilder import Builder
             pass
-        return Builder().render( sampleassembly )
+        return Builder(self.path).render( sampleassembly )
 
 
+    def _createfiles( self, files):
+        path = self.path
+
+        import os
+        for filename, filecontents in files:
+            filepath = os.path.join( path, filename )
+            open( filepath, 'w' ).write( '\n'.join( filecontents ) )
+            continue
+        return
+
+    
     pass # end of Builder
 
 

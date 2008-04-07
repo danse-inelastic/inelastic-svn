@@ -70,6 +70,35 @@ class Job(Actor):
         super(Job, self).__init__(name)
         return
 
+
+
+def new_job( director ):
+    id = new_jobid( director )
+    from vnf.dom.Job import Job
+    job = Job()
+    job.id = id
+    job.owner = director.sentry.username
+    director.clerk.newJob( job )
+    return job
+
+
+def new_jobid( director ):
+    #new token
+    token = director.idd.token()
+    uniquename = '%s-%s-%s' % (token.locator, token.tid, token.date)
+    return uniquename
+
+
+def jobpath( jobid ):
+    #make new run directory
+    import os
+    jobdir = os.path.join( basepath, jobid )
+    os.makedirs( jobdir )
+
+    return jobdir
+basepath = 'content/jobs'
+
+
 # version
 __id__ = "$Id$"
 

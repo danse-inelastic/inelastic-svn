@@ -33,6 +33,7 @@ EXPORT_PYTHON_MODULES = \
 	__init__.py \
 	Block.py \
 	Crystal.py \
+	DbObject.py \
 	IDFPhononDispersion.py \
 	Instrument.py \
 	Component.py \

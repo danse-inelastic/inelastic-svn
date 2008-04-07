@@ -17,9 +17,17 @@ from instrument.geometry.pml.Renderer import Renderer as ShapeRenderer
 class Builder(ShapeRenderer, XMLMill):
     
 
+    def __init__(self, filepath):
+        self.filepath = filepath
+        XMLMill.__init__(self)
+        return
+
+
     def render(self, sampleassembly):
         self.dispatch(sampleassembly)
-        return self._rep
+        contents = self._rep
+        open(self.filepath, 'w').write( '\n'.join( contents ) )
+        return
 
 
     def dispatch(self, something):

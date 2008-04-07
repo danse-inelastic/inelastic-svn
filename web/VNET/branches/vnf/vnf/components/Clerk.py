@@ -276,6 +276,11 @@ class Clerk(Component):
         return self._getRecordByID( NeutronExperiment, id )
 
 
+    def newJob(self, job):
+        self.db.insertRow(job)
+        return
+
+
     def _getElementIDs(self, id, referencetable):
         '''retrieve ids of elements in the container of the given id'''
         records = self.db.fetchall(
