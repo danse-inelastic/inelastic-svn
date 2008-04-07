@@ -8,9 +8,9 @@ def getModules( package ):
     for entry in os.listdir( path ):
         f = os.path.join( path, entry )
         if os.path.isdir( f ): continue
-        if entry == "__init__.py": continue
+        if entry.find( "__init__.py" ) != -1: continue
         modulename, ext = os.path.splitext( entry )
-        if ext != ".py" : continue
+        if ext not in [".py", '.pyc'] : continue
         exec "import %s.%s as m" % (packagename, modulename)
         rt.append( m )
         continue

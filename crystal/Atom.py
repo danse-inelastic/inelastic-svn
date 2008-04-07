@@ -167,7 +167,6 @@ class Atom(object):
     import atomic_properties
     from utils import getModules
     modules = getModules( atomic_properties )
-    #print modules
     del getModules, atomic_properties
 
     for module in modules:
