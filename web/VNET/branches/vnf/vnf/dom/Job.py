@@ -36,7 +36,10 @@ class Job(Table):
     timeStart.meta['tip'] = 'the time the job started'
     
     numProcessors = pyre.db.integer(name='numProcessors')
-    numProcessors.meta['tip'] = 'the number of processors the jobs are using'
+    numProcessors.meta['tip'] = 'the number of processors this job uses'
+
+    owner = pyre.db.varchar( name = 'owner', length = 30 )
+    owner.meta['tip'] = 'the owner of this job'
     
 #    reference = pyre.db.varchar(name='reference', length = 100 )
 #    reference.meta['tip'] = 'reference id in the table of the given type'

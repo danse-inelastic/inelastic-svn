@@ -136,18 +136,12 @@ class NeutronExperiment(Actor):
 
         experiment = director.clerk.getHierarchy( experiment )
 
-        files = build_run( experiment )
-
-        #make new run directory
-        from Run import new_rundir
-        rundir = new_rundir( director )
-
-        #write files to the new run directory
-        import os
-        for filename, filecontents in files:
-            path = os.path.join( rundir, filename )
-            open( path, 'w' ).write( '\n'.join( filecontents ) )
-            continue
+        #create a new job
+        from Job import new_job, jobpath
+        job = new_job( director )
+        jobdir = jobpath( job.id )
+        
+        build_run( experiment, path = jobdir )
 
         return page
 
@@ -222,9 +216,9 @@ def instrument_selector( document, instruments ):
 
 
 
-def build_run( experiment ):
+def build_run( experiment, path ):
     from NeutronExperimentSimulationRunBuilder import Builder
-    return Builder().render(experiment)
+    return Builder(path).render(experiment)
 
 
 # version
