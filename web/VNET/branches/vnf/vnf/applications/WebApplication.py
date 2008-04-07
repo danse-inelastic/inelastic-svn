@@ -125,9 +125,9 @@ class WebApplication(Base):
         
         import vnf.weaver
         configurations = {
-            'cgihome': self.cgihome,
+            'cgihome':self.cgihome,
             'imagepath':self.inventory.imagepath,
-            'javascriptpath': self.inventory.javascriptpath,
+            'javascriptpath':self.inventory.javascriptpath,
             }
         self.pageMill = vnf.weaver.pageMill( configurations )
         return

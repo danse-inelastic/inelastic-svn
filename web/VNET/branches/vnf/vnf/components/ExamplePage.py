@@ -19,7 +19,7 @@ class ExamplePage(Actor):
 
     def default(self, director):
         try:
-            page = director.retrieveSecurePage( 'examplePage' )
+            page = director.retrievePage( 'examplePage' )
         except AuthenticationError, error:
             return error.page
 

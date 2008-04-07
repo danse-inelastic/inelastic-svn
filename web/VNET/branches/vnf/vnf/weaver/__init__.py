@@ -29,6 +29,11 @@ def action_link(action, cgihome):
     renderer = ActionLinkRenderer( cgihome )
     return renderer.render( action )
 
+def action_href(action, cgihome):
+    from ActionHrefRenderer import ActionHrefRenderer
+    renderer = ActionHrefRenderer( cgihome )
+    return renderer.render( action )
+
 
 # version
 __id__ = "$Id$"
