@@ -21,6 +21,11 @@ def scribe():
     return Scribe( 'scribe', 'scribe' )
 
 
+def ssher():
+    from SSHer import SSHer
+    return SSHer( 'ssher', 'ssher' )
+
+
 # version
 __id__ = "$Id$"
 
