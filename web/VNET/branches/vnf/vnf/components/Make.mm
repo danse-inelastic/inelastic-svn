@@ -26,6 +26,7 @@ EXPORT_PYTHON_MODULES = \
 	__init__.py \
 	Actor.py \
 	Clerk.py \
+	CSAccessor.py \
 	Geometer.py \
 	GeometerFacility.py \
 	Greeter.py \
@@ -44,12 +45,15 @@ EXPORT_PYTHON_MODULES = \
 	SampleAssemblyXMLBuilder.py \
 	SamplePreparation.py \
 	Samples.py \
+	Scheduler.py \
 	Server.py \
 	Scatterer.py \
 	Scribe.py \
+	SSHer.py \
 	TreeViewCreator.py \
 	DataObject.py \
 	inventorylist.py \
+	spawn.py \
 	twodarr.py \
 	wording.py \
 

@@ -11,19 +11,25 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
-def clerk():
-    from Clerk import Clerk
-    return Clerk( 'clerk', 'clerk' )
 
 
-def scribe():
-    from Scribe import Scribe
-    return Scribe( 'scribe', 'scribe' )
+import journal
+info = journal.info( 'scheduler' )
 
 
-def ssher():
-    from SSHer import SSHer
-    return SSHer( 'ssher', 'ssher' )
+def schedule( job, director ):
+    from Job import jobpath
+    path = jobpath( job.id )
+
+    server_id = job.server
+    server = director.clerk.getServer( server_id )
+    
+    director.csaccessor.push( path, server )
+    
+    return
+
+
+from CSAccessor import RemoteAccessError
 
 
 # version

@@ -11,19 +11,22 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
-def clerk():
-    from Clerk import Clerk
-    return Clerk( 'clerk', 'clerk' )
+
+from pyre.components.Component import Component
+
+class CSAccessor(Component):
+
+    class Inventory(Component.Inventory):
+
+        pass # end of Inventory
+    
+
+    def push( self, path, server ):
+        'push a local directory to remote server'
+        raise NotImplementedError 
 
 
-def scribe():
-    from Scribe import Scribe
-    return Scribe( 'scribe', 'scribe' )
-
-
-def ssher():
-    from SSHer import SSHer
-    return SSHer( 'ssher', 'ssher' )
+class RemoteAccessError(Exception): pass
 
 
 # version

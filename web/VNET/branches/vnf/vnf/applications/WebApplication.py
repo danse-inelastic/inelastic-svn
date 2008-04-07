@@ -53,6 +53,9 @@ class WebApplication(Base):
         scribe = pyre.inventory.facility(name="scribe", factory=vnf.components.scribe)
         scribe.meta['tip'] = "the component responsible for rendering the generated reports"
 
+        csaccessor = pyre.inventory.facility( name='csaccessor', factory = vnf.components.ssher)
+        csaccessor.meta['tip'] = 'computing server accessor'
+
         debug = pyre.inventory.bool(name="debug", default=False)
         debug.meta['tip'] = "suppress some html output for debugging purposes"
 
@@ -118,6 +121,7 @@ class WebApplication(Base):
         self.clerk = self.inventory.clerk
         self.scribe = self.inventory.scribe
         self.debug = self.inventory.debug
+        self.csaccessor = self.inventory.csaccessor
         
         import vnf.weaver
         configurations = {

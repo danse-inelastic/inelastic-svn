@@ -160,13 +160,22 @@ class Job(Actor):
 
         director.clerk.updateRecord( job )
         
-        schedule(job)
+        server_record = director.clerk.getServer( server )        
+
+        try:
+            schedule(job, director)
+        except RemoteAccessError, err:
+            document = main.document( title = 'Job not submitted' )
+            p = document.paragraph()
+            p.text = [
+                'Failed to submit job %s to %s' % (
+                job.id, server_record.server, ),
+                ]
+            return page
 
         document = main.document( title = 'Job submitted' )
         p = document.paragraph()
 
-        server_record = director.clerk.getServer( server )
-        
         p.text = [
             'Job #%s has been submitted to %s' % (
             job.id, server_record.server, ),
@@ -182,8 +191,7 @@ class Job(Actor):
         return
 
 
-def schedule( job ):
-    return
+from Scheduler import schedule, RemoteAccessError
 
 
 def new_job( director ):
@@ -217,7 +225,9 @@ def jobpath( jobid ):
     #make new run directory
     import os
     jobdir = os.path.join( basepath, jobid )
-    os.makedirs( jobdir )
+
+    if not os.path.exists( jobdir ):
+        os.makedirs( jobdir )
 
     return jobdir
 basepath = 'content/jobs'
