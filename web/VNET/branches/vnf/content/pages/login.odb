@@ -21,7 +21,7 @@ def page(app):
 
     # build the header
     header = body.pageHeader()
-    header.logo(href="%s?actor=login" % app.cgihome)
+    header.logo(href="%s?actor=logout" % app.cgihome)
     header.personalTools()
 
     # build the client area
@@ -29,11 +29,8 @@ def page(app):
     main = content.main()
 
     # populate the main column
-    document = main.document(title='Please login')
-    document.description = (
-        'Please provide your username and password. '
-        'If you do not have an account, please '
-        '<a href="%s?actor=register">register</a>.' % app.cgihome)
+    document = main.document()
+    document.description = ('You have successfully logged out.')
 
     # build the login form
     login = document.form(
