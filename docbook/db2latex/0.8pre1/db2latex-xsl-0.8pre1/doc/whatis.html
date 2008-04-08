@@ -1,0 +1,164 @@
+<html lang="en" lang="en">
+<head>
+<meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type">
+<meta name="generator" content="Website XSL Stylesheet V2.4.1">
+<link rel="home" href="index.html" title="Welcome to the DB2LaTeX XSL Stylesheets">
+<link rel="up" href="index.html" title="Welcome to the DB2LaTeX XSL Stylesheets">
+<link rel="previous" href="index.html" title="Welcome to the DB2LaTeX XSL Stylesheets">
+<link rel="next" href="install.html" title="Installing the Stylesheets">
+<link rel="last" href="" title="Reference">
+<link rel="icon" href="graphics/rarrow.gif" type="image/gif">
+<link rel="stylesheet" href="db2latex-web.css" type="text/css">
+    <title>What is DB2LaTeX?</title>
+    
+  </head>
+<body class="website" bgcolor="#ffffcc" text="black" link="#ac0204" vlink="#dc720c" alink="red">
+<div class="top">
+<ul class="top_left"><li>
+<a href="#top"><img align="top" border="0" src="./graphics/db2latex_new_banner.png" width="133" height="22" alt="What is DB2LaTeX?"></a> </li></ul>
+<ul class="top_right">
+<li><a href="http://sourceforge.net/projects/db2latex/">SourceForge</a></li>
+<li><a href="./reference/index.html">Reference</a></li>
+<li><a href="./sample/">Samples</a></li>
+</ul>
+<ul class="bottom_left">
+<li>
+<a href="./index.html">Welcome &amp; News</a> | </li>
+<li>
+<a href="./install.html">Download &amp; Install</a> | </li>
+<li>
+<a href="./guides.html">User Guides</a> | </li>
+<li>
+<a href="./notes.html">Notes, E-mail &amp; Bugs</a> | </li>
+<li><a href="./qanda.html">Q&amp;A</a></li>
+</ul>
+</div>
+<div class="left">
+<table class="panel" width="100%" cellspacing="0" cellpadding="0" border="0">
+<tr><th>Suggestions</th></tr>
+<tr><td>
+<span class="minihead">Search:</span><br><form method="get" action="http://www.google.com/search">
+<input type="text" maxlength="255" name="q" class="q"> <input type="submit" value="Go" class="submit"><input type="hidden" name="domains" value="db2latex.sourceforge.net"><input type="hidden" name="sitesearch" value="db2latex.sourceforge.net">
+</form>
+</td></tr>
+</table>
+<div class="sidebar">
+<h2>On this page:</h2>(What is DB2LaTeX?) <a href="#id46719699">Motivation</a>; <a href="#id46719727">Description</a>; <a href="#id46719776">Rationale</a>; <a href="#id46719844">Disclaimer</a>.</div>
+</div>
+<a name="top"></a><h1>What is DB2LaTeX?</h1>
+<div class="sect1" lang="en">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="id46719699"></a>Motivation</h2></div></div>
+<div></div>
+</div>
+<p>Around 1997-1998, I happened to find the &quot;LinuxDOC SGML DTD&quot;. &quot;See,
+    You work on a single source and you are able to flawlessly generate
+    LaTeX, HTML, txt, rtf, and so on...&quot; a friend said. The idea attracted me
+    very much, but I could not include my pretty figures in my &quot;hello world&quot;
+    SGML documents. After that &quot;first contact&quot;, I found the DocBook
+    framework. I must admit that at that time, even the &quot;best of the best&quot;
+    DTD would not have been enough: the DSSSL stylesheets that were
+    distributed and their ease of use is what really allowed me to see the
+    results from the very beginning...</p>
+<p>There were some issues that I did not like (I think that my
+    complete ignorance of DSSSL and LISP derivatives had much to do with it),
+    and it took me several days to just tweak the stylesheets to personalize
+    the output. On the other hand, at that time XSL tools were not mature
+    enough. Time has passed, and in order to contribute back some effort, I
+    created DB2LaTeX, in the hope that it may be useful.</p>
+</div>
+<div class="sect1" lang="en">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="id46719727"></a>Description</h2></div></div>
+<div></div>
+</div>
+<p>DB2LaTeX are a set of XSLT stylesheets which generate high level
+    LaTeX2e from your docbook document. They do not perform any FO
+    transformation, the only thing they do is to map DocBook tags into more
+    or less standard LaTeX (a recent installation of LaTeX 2e is required,
+    with most common packages. However, in more stable releases, package
+    dependencies will be completely managed with xsl parameters, making it
+    virtually compatible with basic LaTeX 2e installations). All the
+    &quot;styling&quot; has to be done by modifying available xsl:params, overriding
+    and customizing templates, and in the last, by adding your &quot;sty&quot;
+    files.</p>
+<p>More or less, they translate a 
+    <tt class="sgmltag-starttag">&lt;command&gt;</tt>
+    <tt class="sgmltag-endtag">&lt;/command&gt;</tt> into \begin{command}. Of course,
+    there are a lot of other things to do, like tables, bibliography and so
+    on... but this is the main idea.</p>
+<p>They are heavily based (that is, I started from a local copy and
+    then start changing things here and there) on Norman Walsh XSL docbook
+    stylesheets. These stylesheets are published here with Norman Walsh
+    permission. Copyright and due credit is for Norman Walsh. Bugs are mine.
+    However, bear in mind the fact that these stylesheets are NOT the XSL
+    Docbook stylesheets. Thank you.</p>
+<p>They are &quot;alpha&quot;. That means : it may work, it may not work. Your
+    favourite feature may / may not be implemented. I will be glad to accept
+    patches in form of XSL code or anything :). Many thanks to those who have
+    already sent me patches and pointed out some bugs.</p>
+</div>
+<div class="sect1" lang="en">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="id46719776"></a>Rationale</h2></div></div>
+<div></div>
+</div>
+<p>Why? The reason is easy. I wanted to have an easy/robust way to print
+    docbook files. I have been thinking about this for several months and
+    followed a lot of mail/news threads about this. I know about jadetex,
+    passivetex, fop, jade/openjade, xt, xalan, MathML, and so on.</p>
+<div class="itemizedlist"><ul type="disc">
+<li><p>A Short term solution until better solutions (passiveTeX,
+        jadeTeX) become more mature.</p></li>
+<li><p>An easy way to include LaTeX Math support.</p></li>
+<li><p>Allows a way to print in more or less &quot;out-of-the-box&quot; LaTeX
+        installations in current Linux/Unix - like distributions (although
+        you may still need to install software like the JDK)</p></li>
+<li><p>Why not? They allow a migration towards docbook. the docbook
+        source can be reused, and for today print releases, just translate
+        into LaTeX, and change whatever you may want.</p></li>
+</ul></div>
+<p>The basic comment here is: I do not want to discuss if this is a
+    right approach or not. You may have your reasons to consider using these
+    sylesheets. I use them, because MathML is difficult! to type, there are
+    not good renderers that meet all my requirements, etc., and because I
+    needed to be able to distribute LaTeX files. I think that FOP/PassiveTeX
+    is the way to go, but unfortunately these tools are not mature enough...
+    Consider these stylesheets as another available tool that may/may not
+    help you. USE THEM AT YOUR OWN RISK.</p>
+</div>
+<div class="sect1" lang="en">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="id46719844"></a>Disclaimer</h2></div></div>
+<div></div>
+</div>
+<p>IMPORTANT: These stylesheets ARE NOT the official DocBook XSL
+    stylesheets. These stylesheets ARE NOT maintained by Norman Walsh.
+    Please, DO NOT e-mail Norman about any question regarding these
+    stylesheets (he has been kind enough to allow me to use a great part of
+    his work). These file ARE NOT part of the XSL DocBook Stylesheet
+    distribution.</p>
+<p>IMPORTANT: These stylesheets are ALPHA. That (among other things)
+    means that the documentation IS missing. I have added here some basic
+    instructions about how to install and use these stylesheets. Hopefully,
+    you will be able to install and use the stylesheets using these
+	instructions.
+    </p>
+</div>
+<div class="navfoot">
+<hr>
+<table width="100%" border="0" summary="Footer navigation">
+<tr>
+<td width="33%" align="left"><span class="footdate">$Date: 2004/01/31 09:51:12 $</span></td>
+<td width="34%" align="center"><span class="foothome"><a href="index.html">Home</a></span></td>
+<td width="33%" align="right"> <a href="http://sourceforge.net/projects/db2latex"><img src="http://sourceforge.net/sflogo.php?group_id=22450&amp;type=1" border="0" width="88" height="31" alt="Hosted at SourceForge." /></a> <a href="http://docbook.sourceforge.net/projects/website/"><img src="http://docbook.sourceforge.net/graphics/buttons/website-1.png" border="0" width="128" height="40" alt="Created with Website: a DocBook document type." /></a></td>
+</tr>
+<tr><td colspan="3" align="right"><span class="footcopy"><span class="copyright">Copyright © 2000, 2001, 2002, 2003, 2004 Ramon Casellas and James Devenish. </span></span></td></tr>
+</table>
+</div>
+</body>
+</html>

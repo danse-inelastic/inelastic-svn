@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>section|simplesect</title>
+    <link rel="stylesheet" href="../db2latex-web.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.64.1" />
+    <link rel="home" href="index.html" title="DB2LaTeX API Documentation" />
+    <link rel="up" href="rn43.html" title="Sections sections.mod.xsl" />
+    <link rel="previous" href="rn43re486.html" title="sect1|sect2|sect3|sect4|sect5" />
+    <link rel="next" href="rn44.html" title="SGML Tags sgmltag.mod.xsl" />
+    <link rel="icon" href="../graphics/rarrow.gif" type="image/gif" />
+  </head>
+  <body bgcolor="#ffffcc" text="black" link="#ac0204" vlink="#dc720c" alink="red">
+    <div class="top">
+      <ul class="top_left">
+        <li><a href="#top"><img align="top" border="0" src="../graphics/db2latex_new_banner.png" width="133" height="22" alt="section|simplesect" /></a> </li>
+      </ul>
+      <ul class="top_right">
+        <li>
+          <a href="http://sourceforge.net/projects/db2latex/">SourceForge</a>
+        </li>
+        <li>
+          <a href="../index.html">Home Page</a>
+        </li>
+        <li>
+          <a href="../sample/">Samples</a>
+        </li>
+      </ul>
+      <ul class="bottom_left">
+        <li><a href="./index.html">Reference Contents</a> | </li>
+        <li><a href="../install.html">Download &amp; Install</a> | </li>
+        <li><a href="../guides.html">User Guides</a> | </li>
+        <li><a href="../notes.html">Notes, E-mail &amp; Bugs</a> | </li>
+        <li>
+          <a href="../qanda.html">Q&amp;A</a>
+        </li>
+      </ul>
+    </div>
+    <div class="left">
+      <table class="panel" width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <th>Suggestions</th>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Search:</span>
+            <br />
+            <form method="get" action="http://www.google.com/search"><input type="text" maxlength="255" name="q" class="q" /> <input type="submit" value="Go" class="submit" /><input type="hidden" name="domains" value="db2latex.sourceforge.net" /><input type="hidden" name="sitesearch" value="db2latex.sourceforge.net" /></form>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Next:</span>
+            <br />
+            <a accesskey="n" href="rn44.html">SGML Tags sgmltag.mod.xsl</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Previous:</span>
+            <br />
+            <a accesskey="p" href="rn43re486.html">sect1 sect2 sect3 sect4 sect5</a>
+            <br />
+            <span class="minihead">Up:</span>
+            <br />
+            <a accesskey="u" href="rn43.html">Sections sections.mod.xsl</a>
+          </td>
+        </tr>
+      </table>
+      <div class="sidebar"><h2>On this page:</h2>(section simplesect) <a href="rn43re487.html#id40634309">A. Description</a>; <a href="rn43re487.html#id40634350">C. Template Parameters</a>; <a href="rn43re487.html#id40634454">B. Pertinent Variables</a>; <a href="rn43re487.html#id40634467">D. DocBook Compliance and LaTeX Notes</a>; <a href="rn43re487.html#id40634694">E. Samples and Tests</a>; <a href="rn43re487.html#id40634737">F. Further Reading</a>.</div>
+    </div>
+    <div class="note" style="margin-top:2px; color: #804020; text-align: center; font-weight: bold">
+      <a name="top" id="top">Reference Section</a>
+    </div>
+    <div class="refentry" lang="en" xml:lang="en">
+      <a id="template.section|simplesect"></a>
+      <div class="titlepage">
+        
+        
+      </div>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>section|simplesect — Process recursive and leaf sections</p>
+      </div>
+      <div class="refsynopsisdiv">
+        <h2>Synopsis</h2>
+        <a id="template.section"></a>
+        <a id="template.simplesect"></a>
+        <pre class="synopsis">&lt;xsl:template match="section|simplesect"&gt;
+&lt;xsl:param name="bridgehead" select="ancestor::preface|ancestor::colophon|ancestor::dedication"/&gt;
+&lt;xsl:param name="level" select="count(ancestor::section)+1"/&gt;
+&lt;xsl:variable name="template"&gt;
+			&lt;xsl:choose&gt;
+				&lt;xsl:when test="$level&lt;6"&gt;
+					&lt;xsl:text&gt;sect&lt;/xsl:text&gt;
+					&lt;xsl:value-of select="$level"/&gt;
+				&lt;/xsl:when&gt;
+				&lt;xsl:otherwise&gt;
+					&lt;xsl:message&gt;DB2LaTeX: recursive section|simplesect &gt; 5 not well supported.&lt;/xsl:message&gt;
+					&lt;xsl:text&gt;sect6&lt;/xsl:text&gt;
+				&lt;/xsl:otherwise&gt;
+			&lt;/xsl:choose&gt;
+			&lt;xsl:if test="$bridgehead"&gt;&lt;xsl:text&gt;*&lt;/xsl:text&gt;&lt;/xsl:if&gt;
+		&lt;/xsl:variable&gt;
+  ...
+&lt;/xsl:template&gt;</pre>
+      </div>
+      <div class="description">
+        <a name="id40634309" id="id40634309"></a>
+        <h2>A. Description</h2>
+        <p>
+				Formats a section's title (including numbering, if applicable)
+				then allows all child elements to be processed. The title
+				is formatted the using <span class="productname">LaTeX</span> mapping identified by the
+				equivalent explicit element (e.g. <a href="http://www.oasis-open.org/docbook/documentation/reference/html/sect1.html"><tt class="sgmltag-element">sect1<a id="id40634338" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/sect1.html">2.0.9</a>], etc.).
+			</p>
+      </div>
+      <div class="params">
+        <a name="id40634350" id="id40634350"></a>
+        <h2>C. Template Parameters</h2>
+        <div class="variablelist">
+          <dl>
+            <dt>
+              <span class="term">bridgehead</span>
+            </dt>
+            <dd>
+              <p>
+
+							If <tt class="literal">true()</tt>, the title is
+							processed like a <a href="http://www.oasis-open.org/docbook/documentation/reference/html/bridgehead.html"><tt class="sgmltag-element">bridgehead<a id="id40634384" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/bridgehead.html">2.0.9</a>] (that
+							is, the section is unnumbered and does not appear
+							in the <a href="http://www.oasis-open.org/docbook/documentation/reference/html/toc.html"><tt class="sgmltag-element">toc<a id="id40634403" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/toc.html">2.0.9</a>]). This parameter
+							defaults to <tt class="literal">false()</tt> unless the
+							section appears within a preface.
+
+						</p>
+            </dd>
+            <dt>
+              <span class="term">level</span>
+            </dt>
+            <dd>
+              <p>
+
+						The numeric nesting level of the section. This is
+						automatically calculated as "one greater than the
+						number of ancestor <a href="http://www.oasis-open.org/docbook/documentation/reference/html/section.html"><tt class="sgmltag-element">section<a id="id40634441" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/section.html">2.0.9</a>]s".
+
+						</p>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="variables">
+        <a name="id40634454" id="id40634454"></a>
+        <h2>B. Pertinent Variables</h2>
+        <p>There are no configuration variables for this template.</p>
+      </div>
+      <div class="notes">
+        <a name="id40634467" id="id40634467"></a>
+        <h2>D. DocBook Compliance and LaTeX Notes</h2>
+        <p>Titles for sections nested beyond a depth of five are
+			formatted like <a href="http://www.oasis-open.org/docbook/documentation/reference/html/sect5.html"><tt class="sgmltag-element">sect5<a id="id40634487" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/sect5.html">2.0.9</a>].</p>
+        <p>Currently, “<span class="quote">info</span>” elements (e.g.
+			<a href="http://www.oasis-open.org/docbook/documentation/reference/html/sectioninfo.html"><tt class="sgmltag-element">sectioninfo<a id="id40634515" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/sectioninfo.html">2.0.9</a>]), <a href="http://www.oasis-open.org/docbook/documentation/reference/html/subtitle.html"><tt class="sgmltag-element">subtitle<a id="id40634534" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/subtitle.html">2.0.9</a>] and
+			<a href="http://www.oasis-open.org/docbook/documentation/reference/html/titleabbrev.html"><tt class="sgmltag-element">titleabbrev<a id="id40634553" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/titleabbrev.html">2.0.9</a>] are not honoured.</p>
+        <p>The use of special components such as <a href="http://www.oasis-open.org/docbook/documentation/reference/html/toc.html"><tt class="sgmltag-element">toc<a id="id40634577" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/toc.html">2.0.9</a>],
+			<a href="http://www.oasis-open.org/docbook/documentation/reference/html/lot.html"><tt class="sgmltag-element">lot<a id="id40634596" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/lot.html">2.0.9</a>], <a href="http://www.oasis-open.org/docbook/documentation/reference/html/index.html"><tt class="sgmltag-element">index<a id="id40634614" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/index.html">2.0.9</a>] and
+			<a href="http://www.oasis-open.org/docbook/documentation/reference/html/glossary.html"><tt class="sgmltag-element">glossary<a id="id40634633" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/glossary.html">2.0.9</a>] is unlikely to be successful.</p>
+        <p><span class="productname">LaTeX</span> makes no semantic distinction between
+			<a href="http://www.oasis-open.org/docbook/documentation/reference/html/section.html"><tt class="sgmltag-element">section<a id="id40634663" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/section.html">2.0.9</a>] and <a href="http://www.oasis-open.org/docbook/documentation/reference/html/simplesect.html"><tt class="sgmltag-element">simplesect<a id="id40634682" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/simplesect.html">2.0.9</a>].</p>
+      </div>
+      <div class="samples">
+        <a name="id40634694" id="id40634694"></a>
+        <h2>E. Samples and Tests</h2>
+        <p>
+          <span class="simplelist"><tt class="filename">test_article.pdf</tt> from <tt class="filename">test_article/article.xml</tt>, <tt class="filename">test_book.pdf</tt> from <tt class="filename">test_book/test.xml</tt></span>
+        </p>
+      </div>
+      <div class="seealso">
+        <a name="id40634737" id="id40634737"></a>
+        <h2>F. Further Reading</h2>
+        <div class="itemizedlist">
+          <ul type="disc">
+            <li>
+              <p>
+                <a href="rn02.html" title="The DB2LaTeX mapping system latex.mapping.xsl">The DB2LaTeX mapping system latex.mapping.xsl</a>
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="rn43re486.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="rn43.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="rn44.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">sect1|sect2|sect3|sect4|sect5 </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> SGML Tags sgmltag.mod.xsl</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Bibliographies biblio.mod.xsl</title>
+    <link rel="stylesheet" href="../db2latex-web.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.64.1" />
+    <link rel="home" href="index.html" title="DB2LaTeX API Documentation" />
+    <link rel="up" href="index.html" title="DB2LaTeX API Documentation" />
+    <link rel="previous" href="rn06re58.html" title="authorinitials" />
+    <link rel="next" href="rn07re59.html" title="latex.preamble.essential.biblio" />
+    <link rel="icon" href="../graphics/rarrow.gif" type="image/gif" />
+  </head>
+  <body bgcolor="#ffffcc" text="black" link="#ac0204" vlink="#dc720c" alink="red">
+    <div class="top">
+      <ul class="top_left">
+        <li><a href="#top"><img align="top" border="0" src="../graphics/db2latex_new_banner.png" width="133" height="22" alt="Bibliographies biblio.mod.xsl" /></a> </li>
+      </ul>
+      <ul class="top_right">
+        <li>
+          <a href="http://sourceforge.net/projects/db2latex/">SourceForge</a>
+        </li>
+        <li>
+          <a href="../index.html">Home Page</a>
+        </li>
+        <li>
+          <a href="../sample/">Samples</a>
+        </li>
+      </ul>
+      <ul class="bottom_left">
+        <li><a href="./index.html">Reference Contents</a> | </li>
+        <li><a href="../install.html">Download &amp; Install</a> | </li>
+        <li><a href="../guides.html">User Guides</a> | </li>
+        <li><a href="../notes.html">Notes, E-mail &amp; Bugs</a> | </li>
+        <li>
+          <a href="../qanda.html">Q&amp;A</a>
+        </li>
+      </ul>
+    </div>
+    <div class="left">
+      <table class="panel" width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <th>Suggestions</th>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Search:</span>
+            <br />
+            <form method="get" action="http://www.google.com/search"><input type="text" maxlength="255" name="q" class="q" /> <input type="submit" value="Go" class="submit" /><input type="hidden" name="domains" value="db2latex.sourceforge.net" /><input type="hidden" name="sitesearch" value="db2latex.sourceforge.net" /></form>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Next:</span>
+            <br />
+            <a accesskey="n" href="rn07re59.html">latex.preamble.essential.biblio</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Previous:</span>
+            <br />
+            <a accesskey="p" href="rn06re58.html">authorinitials</a>
+          </td>
+        </tr>
+      </table>
+      <div class="sidebar"><h2>On this page:</h2>(Bibliographies biblio.mod.xsl) </div>
+    </div>
+    <div class="note" style="margin-top:2px; color: #804020; text-align: center; font-weight: bold">
+      <a name="top" id="top">Reference Section</a>
+    </div>
+    <div class="reference" lang="en" xml:lang="en">
+      <a id="biblio"></a>
+      <div class="titlepage">
+        <div>
+          <div>
+            <h1 class="title"><a id="biblio"></a>Bibliographies <tt class="filename">biblio.mod.xsl</tt></h1>
+          </div>
+          <div>
+            <div class="authorgroup">
+              <div class="author">
+                <h3 class="author">
+                  <span class="firstname">Ramon</span>
+                  <span class="surname">Casellas</span>
+                </h3>
+              </div>
+              <div class="author">
+                <h3 class="author">
+                  <span class="firstname">James</span>
+                  <span class="surname">Devenish</span>
+                </h3>
+              </div>
+            </div>
+          </div>
+          <div>
+            <p class="releaseinfo">
+				$Id: biblio.mod.xsl,v 1.21 2004/01/26 08:57:46 j-devenish Exp $
+			</p>
+          </div>
+          <div>
+            <p class="copyright">Copyright © 2000, 2001, 2002, 2003 Ramon Casellas</p>
+          </div>
+          <div>
+            <div class="revhistory">
+              <table border="1" width="100%" summary="Revision history">
+                <tr>
+                  <th align="left" valign="top" colspan="3">
+                    <b>Revision History</b>
+                  </th>
+                </tr>
+                <tr>
+                  <td align="left">Revision 1.16</td>
+                  <td align="left">May-January 2004</td>
+                  <td> </td>
+                </tr>
+                <tr>
+                  <td align="left" colspan="3">Major review of documentation.</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+        
+        <hr />
+      </div>
+      <div class="partintro" lang="en" xml:lang="en">
+        <div>
+          
+          
+        </div>
+        <p>The file <tt class="filename">biblio.mod.xsl</tt> contains the XSL
+			template for <a href="http://www.oasis-open.org/docbook/documentation/reference/html/bibliography.html"><tt class="sgmltag-element">bibliography<a id="id40524884" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/bibliography.html">2.0.9</a>] and associated
+			elements.</p>
+        <h2><a id="id40524896"></a>“<span class="quote">All</span>” versus “<span class="quote">cited</span>” mode</h2>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <h3 class="title">Note</h3>
+          <p>These modes are superseded by <span class="productname">BibTeX<a id="id40524916" class="indexterm"></a></span>
+					when using <span class="productname">BibTeX<a id="id40524933" class="indexterm"></a></span>.</p>
+        </div>
+        <p>
+
+				The <a href="rn34re412.html" title="latex.biblio.output">latex.biblio.output</a> option can be used
+				to select “<span class="quote">all</span>” mode or “<span class="quote">cited</span>” mode.
+				With the “<span class="quote">cited</span>” mode, only the <a href="http://www.oasis-open.org/docbook/documentation/reference/html/biblioentry.html"><tt class="sgmltag-element">biblioentries<a id="id40524977" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/biblioentry.html">2.0.9</a>] that have been
+				cited somewhere in the document are output. Otherwise (in
+				“<span class="quote">all</span>” mode) all biblioentries found are output (as
+				the HTML stylesheets do).
+
+				</p>
+        <h2><a id="id40524994"></a><span class="productname">DocBook</span> versus <span class="productname">BibTeX<a id="id40525009" class="indexterm"></a></span></h2>
+        <p><span class="productname">DB2LaTeX</span> supports <span class="productname">BibTeX<a id="id40525035" class="indexterm"></a></span>. When this mode is enabled,
+					you can use a <span class="productname">BibTeX<a id="id40525052" class="indexterm"></a></span> citations file. Your <a href="http://www.oasis-open.org/docbook/documentation/reference/html/citation.html"><tt class="sgmltag-element">citations<a id="id40525073" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/citation.html">2.0.9</a>] can then refer to
+					your <span class="productname">BibTeX<a id="id40525090" class="indexterm"></a></span> keys (<a href="http://www.oasis-open.org/docbook/documentation/reference/html/xref.html"><tt class="sgmltag-element">xrefs<a id="id40525111" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/xref.html">2.0.9</a>]
+					are unlikely to work, though). You will need to provide a
+					<span class="productname">LaTeX</span> command to select a bibliographic citation style as
+					is normal for <span class="productname">BibTeX<a id="id40525136" class="indexterm"></a></span> (see <a href="rn07.html#bibtex.example" title="Example 2. Using BibTeX with DB2LaTeX">Example 2, “Using BibTeX with DB2LaTeX”</a>). You must also run the
+					<span><b class="command">bibtex<a id="id40525157" class="indexterm"></a></b></span> command when typesetting your
+					document with <span class="productname">LaTeX</span>.
+					
+				</p>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <h3 class="title">Note</h3>
+          <p>Although <span class="productname">DocBook</span> allows <a href="http://www.oasis-open.org/docbook/documentation/reference/html/bibliography.html"><tt class="sgmltag-element">bibliographies<a id="id40525200" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/bibliography.html">2.0.9</a>]
+					within a number of components, such as <a href="http://www.oasis-open.org/docbook/documentation/reference/html/section.html"><tt class="sgmltag-element">section<a id="id40525219" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/section.html">2.0.9</a>], the use of <span class="productname">BibTeX<a id="id40525236" class="indexterm"></a></span>
+					is only useful for a single, chapter-level bibliography.</p>
+        </div>
+        <p>
+
+					To enable <span class="productname">BibTeX<a id="id40525258" class="indexterm"></a></span> mode, insert an empty
+					<a href="http://www.oasis-open.org/docbook/documentation/reference/html/bibliography.html"><tt class="sgmltag-element">bibliography<a id="id40525277" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/bibliography.html">2.0.9</a>] element in your <span class="productname">DocBook</span>
+					document. However, note that this is not valid <span class="productname">DocBook</span>,
+					though it will lead to the desired results with most
+					<span class="productname">DocBook</span> XSL stylesheets (including those for HTML).
+					You will also need to set the <a href="rn34re380.html" title="latex.bibfiles">latex.bibfiles</a>
+					variable to the correct path of your <span class="productname">BibTeX<a id="id40525322" class="indexterm"></a></span> citations file.
+
+					Alternatively, you may choose to use a processing
+					instruction named “<span class="quote">bibtex-bibliography</span>”
+					instead of an empty element. The name of the citations file
+					may be specified within the processing instruction or via
+					<a href="rn34re380.html" title="latex.bibfiles">latex.bibfiles</a> (see
+					<a href="rn07.html#bibtex.example" title="Example 2. Using BibTeX with DB2LaTeX">Example 2, “Using BibTeX with DB2LaTeX”</a>).
+
+				</p>
+        <div class="example">
+          <a id="bibtex.example"></a>
+          <p class="title">
+            <b>Example 2. Using <span class="productname">BibTeX<a id="id40525362" class="indexterm"></a></span> with <span class="productname">DB2LaTeX</span></b>
+          </p>
+          <p>
+
+						A <span class="productname">BibTeX<a id="id40525388" class="indexterm"></a></span> bibliography may be enabled by providing the
+						name of your citations file, the name of a <span class="productname">BibTeX<a id="id40525405" class="indexterm"></a></span> style,
+						and the insertion of an appropriate node in your
+						<span class="productname">DocBook</span> document. In your customisation layer:
+
+					</p>
+          <pre class="programlisting">
+&lt;xsl:variable name="latex.book.preamble.post"&gt;
+% Your LaTeX customisation commands
+\bibliographystyle{ieeetr}
+&lt;/xsl:variable&gt;
+&lt;xsl:variable name="latex.bibfiles" select="'../citations.bib'"/&gt;
+</pre>
+          <p>
+
+						Then, in your document, type this:
+
+					</p>
+          <pre class="programlisting">
+&lt;bibliography/&gt;
+</pre>
+          <p>
+
+						Although this is not valid according to the <span class="productname">DocBook</span>
+						DTD, it will work with most stylesheets (not just
+						<span class="productname">DB2LaTeX</span>). Alternatively, you may instead use a
+						processing instruction in compliance with the DTD,
+						though this will work only with <span class="productname">DB2LaTeX</span> and you will
+						not be able to specify a custom <a href="http://www.oasis-open.org/docbook/documentation/reference/html/title.html"><tt class="sgmltag-element">title<a id="id40525471" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/title.html">2.0.9</a>]
+						for your bibliography:
+
+					</p>
+          <pre class="programlisting">
+&lt;?bibtex-bibliography?&gt;
+</pre>
+          <p>
+
+						You may optionally specify the citations file directly
+						(you will not need to set
+						<tt class="literal">latex.bibfiles</tt>):
+
+					</p>
+          <pre class="programlisting">
+&lt;?bibtex-bibliography ../citations.bib?&gt;
+</pre>
+          <p>
+
+					</p>
+        </div>
+        <div class="section" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h2 class="title" style="clear: both"><a id="id40525504"></a>1. Pertinent Variables</h2>
+              </div>
+            </div>
+            
+          </div>
+          <div class="itemizedlist">
+            <ul type="disc">
+              <li>
+                <a href="rn34re380.html" title="latex.bibfiles">latex.bibfiles</a>
+              </li>
+              <li>
+                <a href="rn34re412.html" title="latex.biblio.output">latex.biblio.output</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="toc">
+          <p>
+            <b>Table of Contents</b>
+          </p>
+          <dl>
+            <dt><a href="rn07re59.html">latex.preamble.essential.biblio</a> -  Essential preamble for biblio.mod.xsl support </dt>
+            <dt><a href="rn07re60.html">bibliography</a> - Process bibliography elements</dt>
+            <dt><a href="rn07re61.html">processing-instruction('bibtex-bibliography')</a> - Process bibtex-bibliography nodes</dt>
+            <dt><a href="rn07re62.html">bibliodiv</a> - Process bibliodiv elements</dt>
+            <dt><a href="rn07re63.html">biblioentry (in bibliography.cited mode)</a> - Process biblioentry elements</dt>
+            <dt><a href="rn07re64.html">biblioentry (in bibliography.all mode)</a> - Process biblioentry elements</dt>
+            <dt><a href="rn07re65.html">biblioentry</a> - Process biblioentry elements</dt>
+            <dt><a href="rn07re66.html">biblioentry.output</a> - Format biblioentries</dt>
+          </dl>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="rn06re58.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="index.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="rn07re59.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">authorinitials </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> latex.preamble.essential.biblio</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

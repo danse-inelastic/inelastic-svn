@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>biblioentry (in bibliography.cited mode)</title>
+    <link rel="stylesheet" href="../db2latex-web.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.64.1" />
+    <link rel="home" href="index.html" title="DB2LaTeX API Documentation" />
+    <link rel="up" href="rn07.html" title="Bibliographies biblio.mod.xsl" />
+    <link rel="previous" href="rn07re62.html" title="bibliodiv" />
+    <link rel="next" href="rn07re64.html" title="biblioentry (in bibliography.all mode)" />
+    <link rel="icon" href="../graphics/rarrow.gif" type="image/gif" />
+  </head>
+  <body bgcolor="#ffffcc" text="black" link="#ac0204" vlink="#dc720c" alink="red">
+    <div class="top">
+      <ul class="top_left">
+        <li><a href="#top"><img align="top" border="0" src="../graphics/db2latex_new_banner.png" width="133" height="22" alt="biblioentry (in bibliography.cited mode)" /></a> </li>
+      </ul>
+      <ul class="top_right">
+        <li>
+          <a href="http://sourceforge.net/projects/db2latex/">SourceForge</a>
+        </li>
+        <li>
+          <a href="../index.html">Home Page</a>
+        </li>
+        <li>
+          <a href="../sample/">Samples</a>
+        </li>
+      </ul>
+      <ul class="bottom_left">
+        <li><a href="./index.html">Reference Contents</a> | </li>
+        <li><a href="../install.html">Download &amp; Install</a> | </li>
+        <li><a href="../guides.html">User Guides</a> | </li>
+        <li><a href="../notes.html">Notes, E-mail &amp; Bugs</a> | </li>
+        <li>
+          <a href="../qanda.html">Q&amp;A</a>
+        </li>
+      </ul>
+    </div>
+    <div class="left">
+      <table class="panel" width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <th>Suggestions</th>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Search:</span>
+            <br />
+            <form method="get" action="http://www.google.com/search"><input type="text" maxlength="255" name="q" class="q" /> <input type="submit" value="Go" class="submit" /><input type="hidden" name="domains" value="db2latex.sourceforge.net" /><input type="hidden" name="sitesearch" value="db2latex.sourceforge.net" /></form>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Next:</span>
+            <br />
+            <a accesskey="n" href="rn07re64.html">biblioentry (in bibliography.all mode)</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Previous:</span>
+            <br />
+            <a accesskey="p" href="rn07re62.html">bibliodiv</a>
+            <br />
+            <span class="minihead">Up:</span>
+            <br />
+            <a accesskey="u" href="rn07.html">Bibliographies biblio.mod.xsl</a>
+          </td>
+        </tr>
+      </table>
+      <div class="sidebar"><h2>On this page:</h2>(biblioentry (in bibliography.cited mode)) <a href="rn07re63.html#id40526616">A. Description</a>; <a href="rn07re63.html#id40526629">F. Further Reading</a>.</div>
+    </div>
+    <div class="note" style="margin-top:2px; color: #804020; text-align: center; font-weight: bold">
+      <a name="top" id="top">Reference Section</a>
+    </div>
+    <div class="refentry" lang="en" xml:lang="en">
+      <a id="id40526535"></a>
+      <div class="titlepage">
+        
+        
+      </div>
+      <a id="id40526537" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>biblioentry (in bibliography.cited mode) — Process <a href="http://www.oasis-open.org/docbook/documentation/reference/html/biblioentry.html"><tt class="sgmltag-element">biblioentry<a id="id40526572" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/biblioentry.html">2.0.9</a>] elements</p>
+      </div>
+      <div class="refsynopsisdiv">
+        <h2>Synopsis</h2>
+        <a id="template.biblioentry-bibliography.cited"></a>
+        <a id="id40526590" class="indexterm"></a>
+        <pre class="synopsis">&lt;xsl:template match="biblioentry" mode="bibliography.cited"&gt;
+&lt;xsl:param name="bibid" select="@id"/&gt;
+&lt;xsl:param name="ab" select="abbrev"/&gt;
+&lt;xsl:variable name="nx" select="//xref[@linkend=$bibid]"/&gt;
+&lt;xsl:variable name="nc" select="//citation[text()=$ab]"/&gt;
+  ...
+&lt;/xsl:template&gt;</pre>
+      </div>
+      <div class="description">
+        <a name="id40526616" id="id40526616"></a>
+        <h2>A. Description</h2>
+        <p>
+				Emits a bibiographic entry if the reference was cited in the document.
+			</p>
+      </div>
+      <div class="seealso">
+        <a name="id40526629" id="id40526629"></a>
+        <h2>F. Further Reading</h2>
+        <p>This template calls <a href="rn07re66.html" title="biblioentry.output">biblioentry.output</a> to format the entry.</p>
+      </div>
+      <div class="refsection">
+        <a name="id41066368" id="id41066368"></a>
+        <h2>G. Variations</h2>
+        <p>Variations on this template:
+          </p>
+        <div class="itemizedlist">
+          <ul type="disc">
+            <li>
+              <a href="rn07re64.html" target="_top">biblioentry (in bibliography.all mode)</a>
+            </li>
+            <li>
+              <a href="rn07re65.html" target="_top">biblioentry</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="rn07re62.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="rn07.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="rn07re64.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">bibliodiv </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> biblioentry (in bibliography.all mode)</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

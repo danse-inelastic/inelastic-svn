@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>generate.latex.pagestyle</title>
+    <link rel="stylesheet" href="../db2latex-web.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.64.1" />
+    <link rel="home" href="index.html" title="DB2LaTeX API Documentation" />
+    <link rel="up" href="rn09.html" title="Books and Articles book-article.mod.xsl" />
+    <link rel="previous" href="rn09re93.html" title="lot" />
+    <link rel="next" href="rn10.html" title="Free-floating Headings bridgehead.mod.xsl" />
+    <link rel="icon" href="../graphics/rarrow.gif" type="image/gif" />
+  </head>
+  <body bgcolor="#ffffcc" text="black" link="#ac0204" vlink="#dc720c" alink="red">
+    <div class="top">
+      <ul class="top_left">
+        <li><a href="#top"><img align="top" border="0" src="../graphics/db2latex_new_banner.png" width="133" height="22" alt="generate.latex.pagestyle" /></a> </li>
+      </ul>
+      <ul class="top_right">
+        <li>
+          <a href="http://sourceforge.net/projects/db2latex/">SourceForge</a>
+        </li>
+        <li>
+          <a href="../index.html">Home Page</a>
+        </li>
+        <li>
+          <a href="../sample/">Samples</a>
+        </li>
+      </ul>
+      <ul class="bottom_left">
+        <li><a href="./index.html">Reference Contents</a> | </li>
+        <li><a href="../install.html">Download &amp; Install</a> | </li>
+        <li><a href="../guides.html">User Guides</a> | </li>
+        <li><a href="../notes.html">Notes, E-mail &amp; Bugs</a> | </li>
+        <li>
+          <a href="../qanda.html">Q&amp;A</a>
+        </li>
+      </ul>
+    </div>
+    <div class="left">
+      <table class="panel" width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <th>Suggestions</th>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Search:</span>
+            <br />
+            <form method="get" action="http://www.google.com/search"><input type="text" maxlength="255" name="q" class="q" /> <input type="submit" value="Go" class="submit" /><input type="hidden" name="domains" value="db2latex.sourceforge.net" /><input type="hidden" name="sitesearch" value="db2latex.sourceforge.net" /></form>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Next:</span>
+            <br />
+            <a accesskey="n" href="rn10.html">Free floating Headings bridgehead.mod.xsl</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Previous:</span>
+            <br />
+            <a accesskey="p" href="rn09re93.html">lot</a>
+            <br />
+            <span class="minihead">Up:</span>
+            <br />
+            <a accesskey="u" href="rn09.html">Books and Articles book article.mod.xsl</a>
+          </td>
+        </tr>
+      </table>
+      <div class="sidebar"><h2>On this page:</h2>(generate.latex.pagestyle) <a href="rn09re94.html#id40536508">A. Description</a>; <a href="rn09re94.html#id40536607">B. Pertinent Variables</a>; <a href="rn09re94.html#id40536631">D. DocBook Compliance and LaTeX Notes</a>.</div>
+    </div>
+    <div class="note" style="margin-top:2px; color: #804020; text-align: center; font-weight: bold">
+      <a name="top" id="top">Reference Section</a>
+    </div>
+    <div class="refentry" lang="en" xml:lang="en">
+      <a id="template.generate.latex.pagestyle"></a>
+      <div class="titlepage">
+        
+        
+      </div>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>generate.latex.pagestyle —  Choose the preferred page style for document body </p>
+      </div>
+      <div class="refsynopsisdiv">
+        <h2>Synopsis</h2>
+        <pre class="synopsis"></pre>
+      </div>
+      <div class="description">
+        <a name="id40536508" id="id40536508"></a>
+        <h2>A. Description</h2>
+        <p>
+
+				If no page style is preferred by the user, the defaults will be
+				<tt class="literal">empty</tt> for <a href="http://www.oasis-open.org/docbook/documentation/reference/html/article.html"><tt class="sgmltag-element">articles<a id="id40536537" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/article.html">2.0.9</a>], <tt class="literal">plain</tt>
+				for <a href="http://www.oasis-open.org/docbook/documentation/reference/html/book.html"><tt class="sgmltag-element">books<a id="id40536565" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/book.html">2.0.9</a>], or
+				<tt class="literal">fancy</tt> (if the <span class="productname">LaTeX</span>
+				<span class="productname">fancyhdr<a id="id40536595" class="indexterm"></a></span> package is permitted).
+
+			</p>
+      </div>
+      <div class="variables">
+        <a name="id40536607" id="id40536607"></a>
+        <h2>B. Pertinent Variables</h2>
+        <div class="itemizedlist">
+          <ul type="disc">
+            <li>
+              <a href="rn33re357.html" title="latex.pagestyle">latex.pagestyle</a>
+            </li>
+            <li>
+              <a href="rn34re396.html" title="latex.use.fancyhdr">latex.use.fancyhdr</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="notes">
+        <a name="id40536631" id="id40536631"></a>
+        <h2>D. DocBook Compliance and LaTeX Notes</h2>
+        <p>
+			
+			The <span class="productname">LaTeX</span> <tt class="function">\pagestyle</tt>
+			command is used to effect the page style.
+			
+			</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="rn09re93.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="rn09.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="rn10.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">lot </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Free-floating Headings bridgehead.mod.xsl</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

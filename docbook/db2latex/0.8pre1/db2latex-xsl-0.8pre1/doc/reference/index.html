@@ -1,0 +1,1171 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>DB2LaTeX API Documentation</title>
+    <link rel="stylesheet" href="../db2latex-web.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.64.1" />
+    <link rel="home" href="index.html" title="DB2LaTeX API Documentation" />
+    <link rel="next" href="ch01.html" title="Chapter 1. DocBook Element Coverage" />
+    <link rel="icon" href="../graphics/rarrow.gif" type="image/gif" />
+  </head>
+  <body bgcolor="#ffffcc" text="black" link="#ac0204" vlink="#dc720c" alink="red">
+    <div class="top">
+      <ul class="top_left">
+        <li><a href="#top"><img align="top" border="0" src="../graphics/db2latex_new_banner.png" width="133" height="22" alt="DB2LaTeX API Documentation" /></a> </li>
+      </ul>
+      <ul class="top_right">
+        <li>
+          <a href="http://sourceforge.net/projects/db2latex/">SourceForge</a>
+        </li>
+        <li>
+          <a href="../index.html">Home Page</a>
+        </li>
+        <li>
+          <a href="../sample/">Samples</a>
+        </li>
+      </ul>
+      <ul class="bottom_left">
+        <li><a href="./index.html">Reference Contents</a> | </li>
+        <li><a href="../install.html">Download &amp; Install</a> | </li>
+        <li><a href="../guides.html">User Guides</a> | </li>
+        <li><a href="../notes.html">Notes, E-mail &amp; Bugs</a> | </li>
+        <li>
+          <a href="../qanda.html">Q&amp;A</a>
+        </li>
+      </ul>
+    </div>
+    <div class="left">
+      <table class="panel" width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <th>Suggestions</th>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Search:</span>
+            <br />
+            <form method="get" action="http://www.google.com/search"><input type="text" maxlength="255" name="q" class="q" /> <input type="submit" value="Go" class="submit" /><input type="hidden" name="domains" value="db2latex.sourceforge.net" /><input type="hidden" name="sitesearch" value="db2latex.sourceforge.net" /></form>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Next:</span>
+            <br />
+            <a accesskey="n" href="ch01.html">Chapter 1. DocBook Element Coverage</a>
+          </td>
+        </tr>
+      </table>
+      <div class="sidebar"><h2>On this page:</h2>(DB2LaTeX API Documentation) </div>
+    </div>
+    <div class="note" style="margin-top:2px; color: #804020; text-align: center; font-weight: bold">
+      <a name="top" id="top">Reference Section</a>
+    </div>
+    <div class="book" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h1 class="title"><a id="book_documentation"></a><span class="productname">DB2LaTeX<br /></span> API Documentation</h1>
+          </div>
+          <div>
+            <h2 class="subtitle">Documentation for XSL params, vars and templates</h2>
+          </div>
+          <div>
+            <div class="authorgroup">
+              <div class="author">
+                <h3 class="author">
+                  <span class="firstname">Ramon</span>
+                  <span class="surname">Casellas</span>
+                </h3>
+              </div>
+              <div class="author">
+                <h3 class="author">
+                  <span class="firstname">James</span>
+                  <span class="surname">Devenish</span>
+                </h3>
+              </div>
+            </div>
+          </div>
+          <div>
+            <p class="copyright">Copyright © 2000, 2001, 2002, 2003, 2004 Ramon Casellas</p>
+          </div>
+          <div>
+            <p class="pubdate">$Date: 2004/01/25 03:01:36 $</p>
+          </div>
+        </div>
+        
+        <hr />
+      </div>
+      <div class="toc">
+        <p>
+          <b>Table of Contents</b>
+        </p>
+        <dl>
+          <dt>
+            <span class="chapter">
+              <a href="ch01.html">1. DocBook Element Coverage</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="chapter">
+              <a href="ch02.html">2. DocBook Element Templates</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="reference">
+              <a href="rn01.html">I. DocBook Driver docbook.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn01re01.html">/</a> - Root node</dt>
+              <dt><a href="rn01re02.html">*</a> - Catches unhandled elements</dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn02.html">II. The DB2LaTeX mapping system latex.mapping.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn02re03.html">latex.mapping.xml</a> - The primary mapping file</dt>
+              <dt><a href="rn02re04.html">latex.mapping.xml.default</a> - The default mapping file</dt>
+              <dt><a href="rn02re05.html">latex.mapping</a> - Perform DocBook to LaTeX mapping</dt>
+              <dt><a href="rn02re06.html">extract.object.title</a> - Choose a title for an object</dt>
+              <dt><a href="rn02re07.html">title (in latex mode)</a> - Process title elements</dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn03.html">III. DB2LaTeX Localisation</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn03re08.html">Afrikaans (af)</a> - Afrikaans-language phrases and symbols</dt>
+              <dt><a href="rn03re09.html">Arabic (ar)</a> - Arabic-language phrases and symbols</dt>
+              <dt><a href="rn03re10.html">Bulgarian (bg)</a> - Bulgarian-language phrases and symbols</dt>
+              <dt><a href="rn03re11.html">Bangla (bn)</a> - Bangla-language phrases and symbols</dt>
+              <dt><a href="rn03re12.html">Catalan (ca)</a> - Catalan-language phrases and symbols</dt>
+              <dt><a href="rn03re13.html">Czech (cs)</a> - Czech-language phrases and symbols</dt>
+              <dt><a href="rn03re14.html">Danish (da)</a> - Danish-language phrases and symbols</dt>
+              <dt><a href="rn03re15.html">German (de)</a> - German-language phrases and symbols</dt>
+              <dt><a href="rn03re16.html">Greek (el)</a> - Greek-language phrases and symbols</dt>
+              <dt><a href="rn03re17.html">English (en)</a> - Generic English-language phrases and symbols</dt>
+              <dt><a href="rn03re18.html">Spanish (es)</a> - Generic Spanish-language phrases and symbols</dt>
+              <dt><a href="rn03re19.html">Estonian (et)</a> - Estonian-language phrases and symbols</dt>
+              <dt><a href="rn03re20.html">Basque (eu)</a> - Basque-language phrases and symbols</dt>
+              <dt><a href="rn03re21.html">Finnish (fi)</a> - Finnish-language phrases and symbols</dt>
+              <dt><a href="rn03re22.html">French (fr)</a> - Generic French-language phrases and symbols</dt>
+              <dt><a href="rn03re23.html">Hebrew (he)</a> - Hebrew-language phrases and symbols</dt>
+              <dt><a href="rn03re24.html">Croatian (hr)</a> - Croatian-language phrases and symbols</dt>
+              <dt><a href="rn03re25.html">Hungarian (hu)</a> - Hungarian-language phrases and symbols</dt>
+              <dt><a href="rn03re26.html">Indonesian (id)</a> - Indonesian-language phrases and symbols</dt>
+              <dt><a href="rn03re27.html">Italian (it)</a> - Italian-language phrases and symbols</dt>
+              <dt><a href="rn03re28.html">Japanese (ja)</a> - Japanese-language phrases and symbols</dt>
+              <dt><a href="rn03re29.html">Korean (ko)</a> - Korean-language phrases and symbols</dt>
+              <dt><a href="rn03re30.html">Latin (la)</a> - Latin-language phrases and symbols</dt>
+              <dt><a href="rn03re31.html">Lithuanian (lt)</a> - Lithuanian-language phrases and symbols</dt>
+              <dt><a href="rn03re32.html">Dutch (nl)</a> - Dutch-language phrases and symbols</dt>
+              <dt><a href="rn03re33.html">Nynorsk (nn)</a> - Nynorsk-language phrases and symbols</dt>
+              <dt><a href="rn03re34.html">Norwegian (no)</a> - Norwegian-language phrases and symbols</dt>
+              <dt><a href="rn03re35.html">Polish (pl)</a> - Polish-language phrases and symbols</dt>
+              <dt><a href="rn03re36.html">Portuguese (pt)</a> - Portuguese-language phrases and symbols</dt>
+              <dt><a href="rn03re37.html">Portuguese (Brazil) (pt_br)</a> - Portuguese (Brazil)-language phrases and symbols</dt>
+              <dt><a href="rn03re38.html">Romanian (ro)</a> - Romanian-language phrases and symbols</dt>
+              <dt><a href="rn03re39.html">Russian (ru)</a> - Russian-language phrases and symbols</dt>
+              <dt><a href="rn03re40.html">Slovak (sk)</a> - Slovak-language phrases and symbols</dt>
+              <dt><a href="rn03re41.html">Slovenian (sl)</a> - Slovenian-language phrases and symbols</dt>
+              <dt><a href="rn03re42.html">Serbian (sr)</a> - Serbian-language phrases and symbols</dt>
+              <dt><a href="rn03re43.html">Serbian in Latin script (sr_Latn)</a> - Serbian in Latin script-language phrases and symbols</dt>
+              <dt><a href="rn03re44.html">Swedish (sv)</a> - Swedish-language phrases and symbols</dt>
+              <dt><a href="rn03re45.html">Thai (th)</a> - Thai-language phrases and symbols</dt>
+              <dt><a href="rn03re46.html">Turkish (tr)</a> - Turkish-language phrases and symbols</dt>
+              <dt><a href="rn03re47.html">Ukranian (uk)</a> - Ukranian-language phrases and symbols</dt>
+              <dt><a href="rn03re48.html">Vietnamese (vi)</a> - Vietnamese-language phrases and symbols</dt>
+              <dt><a href="rn03re49.html">Xhosa (xh)</a> - Xhosa-language phrases and symbols</dt>
+              <dt><a href="rn03re50.html">Chinese (Continental) (zh_cn)</a> - Chinese (Continental)-language phrases and symbols</dt>
+              <dt><a href="rn03re51.html">Chinese (Traditional) (zh_tw)</a> - Chinese (Traditional)-language phrases and symbols</dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn04.html">IV. Abstracts abstract.mod.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn04re52.html">abstract</a> - Process abstract elements</dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn05.html">V. Admonitions admonition.mod.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn05re53.html">latex.admonition.environment</a> - 
+			Declares a new environment to be used for admonitions
+		</dt>
+              <dt><a href="rn05re54.html">admon.graphic</a> -  Choose an admonition graphic </dt>
+              <dt><a href="rn05re55.html">note|important|warning|caution|tip</a> -  Process admonitions </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn06.html">VI. Authorgroups authorgroup.mod.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn06re56.html">authorgroup</a> - Process authorgroup elements</dt>
+              <dt><a href="rn06re57.html">author|editor|othercredit|personname</a> - Process names of authors and similar elements</dt>
+              <dt><a href="rn06re58.html">authorinitials</a> - Process authorinitials elements</dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn07.html">VII. Bibliographies biblio.mod.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn07re59.html">latex.preamble.essential.biblio</a> -  Essential preamble for biblio.mod.xsl support </dt>
+              <dt><a href="rn07re60.html">bibliography</a> - Process bibliography elements</dt>
+              <dt><a href="rn07re61.html">processing-instruction('bibtex-bibliography')</a> - Process bibtex-bibliography nodes</dt>
+              <dt><a href="rn07re62.html">bibliodiv</a> - Process bibliodiv elements</dt>
+              <dt><a href="rn07re63.html">biblioentry (in bibliography.cited mode)</a> - Process biblioentry elements</dt>
+              <dt><a href="rn07re64.html">biblioentry (in bibliography.all mode)</a> - Process biblioentry elements</dt>
+              <dt><a href="rn07re65.html">biblioentry</a> - Process biblioentry elements</dt>
+              <dt><a href="rn07re66.html">biblioentry.output</a> - Format biblioentries</dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn08.html">VIII. Block Objects block.mod.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn08re67.html">content-templates</a> - 
+			Generic handler for interior elements of block-formatted components
+		</dt>
+              <dt><a href="rn08re68.html">block.object</a> - 
+			Generic handler for block-formatted components
+		</dt>
+              <dt><a href="rn08re69.html">blockquote</a> - 
+			A quotation set off from the main text (not inline)
+		</dt>
+              <dt><a href="rn08re70.html">epigraph</a> - 
+			A short inscription that occurs at the beginning of a section, chapter, or document
+		</dt>
+              <dt><a href="rn08re71.html">attribution</a> - 
+			This template produces no output
+		</dt>
+              <dt><a href="rn08re72.html">attribution (in block.attribution mode)</a> - 
+			The source of a block quote or epigraph
+		</dt>
+              <dt><a href="rn08re73.html">sidebar</a> - 
+			A block of text that is isolated from the main flow
+		</dt>
+              <dt><a href="rn08re74.html">title|subtitle</a> - 
+			Titles and subtitles
+		</dt>
+              <dt><a href="rn08re75.html">title|subtitle (in caption.mode mode)</a> - 
+			Captions generated from titles
+		</dt>
+              <dt><a href="rn08re76.html">ackno</a> - 
+			Acknowledgements in an article
+		</dt>
+              <dt><a href="rn08re77.html">generate.latex.float.position</a> -  Interpret a user's placement preferences for certain LaTeX floats </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn09.html">IX. Books and Articles book-article.mod.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn09re78.html">book</a> - Process a DocBook book document</dt>
+              <dt><a href="rn09re79.html">book/title</a> - Process title elements</dt>
+              <dt><a href="rn09re80.html">book/subtitle</a> - Process subtitle elements</dt>
+              <dt><a href="rn09re81.html">book/bookinfo/title</a> - Process title elements</dt>
+              <dt><a href="rn09re82.html">book/bookinfo/subtitle</a> - Process subtitle elements</dt>
+              <dt><a href="rn09re83.html">book/bookinfo</a> - Process bookinfo elements</dt>
+              <dt><a href="rn09re84.html">bookinfo/copyright</a> - Process bookinfo's copyright elements</dt>
+              <dt><a href="rn09re85.html">book/article</a> - Process a book's article elements</dt>
+              <dt><a href="rn09re86.html">article</a> - Process a DocBook article document</dt>
+              <dt><a href="rn09re87.html">articleinfo/date|artheader/date</a> - Process date in articleinfo elements</dt>
+              <dt><a href="rn09re88.html">article/artheader|article/articleinfo (in standalone.article mode)</a> - Process articleinfo in article elements</dt>
+              <dt><a href="rn09re89.html">article/artheader|article/articleinfo (in article.within.book mode)</a> - Process articleinfo in article elements</dt>
+              <dt><a href="rn09re90.html">legalnotice</a> - Process legalnotice elements</dt>
+              <dt><a href="rn09re91.html">legalnotice.title</a> -  Choose a title for legalnotices </dt>
+              <dt><a href="rn09re92.html">toc</a> -  Generate and typeset a toc </dt>
+              <dt><a href="rn09re93.html">lot</a> -  Generate and typeset a toc </dt>
+              <dt><a href="rn09re94.html">generate.latex.pagestyle</a> -  Choose the preferred page style for document body </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn10.html">X. Free-floating Headings bridgehead.mod.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn10re95.html">bridgehead</a> - Process bridgehead elements</dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn11.html">XI. Callouts callout.mod.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn11re96.html">latex.preamble.essential.callout</a> -  Essential preamble for callout.mod.xsl support </dt>
+              <dt><a href="rn11re97.html">programlistingco|screenco</a> - Process programlistingco and screenco elements</dt>
+              <dt><a href="rn11re98.html">areaspec|areaset</a> - Process areaset-related elements</dt>
+              <dt><a href="rn11re99.html">co</a> - Process co-related elements</dt>
+              <dt><a href="rn11re100.html">calloutlist</a> - Process calloutlist elements</dt>
+              <dt><a href="rn11re101.html">calloutlist/title</a> - Process titles for calloutlist elements</dt>
+              <dt><a href="rn11re102.html">callout</a> - Process callout elements</dt>
+              <dt><a href="rn11re103.html">generate.callout.arearefs</a> - Determine a callout's arearefs</dt>
+              <dt><a href="rn11re104.html">callout (in generate.callout.arearef mode)</a> - Format a callout's arearefs</dt>
+              <dt><a href="rn11re105.html">area (in generate.area.arearef mode)</a> - Illustrate a reference to a callout's area</dt>
+              <dt><a href="rn11re106.html">area (in generate.arearef mode)</a> - Illustrate a reference to a callout's area</dt>
+              <dt><a href="rn11re107.html">area (in generate.arearef.calspair mode)</a> - Illustrate a reference to a callout's area</dt>
+              <dt><a href="rn11re108.html">area (in generate.arearef.linerange mode)</a> - Illustrate a reference to a callout's area</dt>
+              <dt><a href="rn11re109.html">area</a> - Illustrate a callout's area as part of an image or listing</dt>
+              <dt><a href="rn11re110.html">area (in generate.area.areamark mode)</a> - Illustrate a callout's area as part of an image or listing</dt>
+              <dt><a href="rn11re111.html">area (in generate.areamark mode)</a> - Illustrate a callout's area as part of an image or listing</dt>
+              <dt><a href="rn11re112.html">area (in generate.areamark.calspair mode)</a> - Illustrate a callout's area as part of an image or listing</dt>
+              <dt><a href="rn11re113.html">area (in generate.area.areasymbol mode)</a> - Illustrate a callout's area as part of an image or listing</dt>
+              <dt><a href="rn11re114.html">callout (in generate.callout.areasymbol mode)</a> - Illustrate a callout's area as part of an image or listing</dt>
+              <dt><a href="rn11re115.html">mediaobjectco</a> - Process mediaobjectco elements</dt>
+              <dt><a href="rn11re116.html">imageobjectco</a> - Process imageobjectco elements</dt>
+              <dt><a href="rn11re117.html">imageobjectco/imageobject</a> - Process a imageobjectco's imageobject elements</dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn12.html">XII. Citations citation.mod.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn12re118.html">citation</a> -  Process citation elements  </dt>
+              <dt><a href="rn12re119.html">latex.preamble.essential.citation</a> -  Essential preamble for citation.mod.xsl support </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn13.html">XIII. Chapter-level Components component.mod.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn13re120.html">dedication|colophon|preface|partintro</a> - Process some simply chapter-level components</dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn14.html">XIV. Dingbats dingbat.mod.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn14re121.html">dingbat</a> -  Generate a LaTeX dingbat </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn15.html">XV. E-mail Addreses email.mod.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn15re122.html">email</a> - Process email elements</dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn16.html">XVI. Examples example.mod.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn16re123.html">example</a> - Process example elements</dt>
+              <dt><a href="rn16re124.html">informalexample</a> - Process informalexample elements</dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn17.html">XVII. Figures and InformalFigures figure.mod.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn17re125.html">generate.aux.figure.caption</a> -  Typeset a caption for a formal figure  </dt>
+              <dt><a href="rn17re126.html">figure</a> -  Process figure elements </dt>
+              <dt><a href="rn17re127.html">generate.aux.informalfigure.caption</a> -  Typeset a caption for an informal figure  </dt>
+              <dt><a href="rn17re128.html">informalfigure</a> - Process informalfigure elements</dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn18.html">XVIII. Footnotes footnote.mod.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn18re129.html">footnote</a> - Process footnote elements</dt>
+              <dt><a href="rn18re130.html">latex.preamble.essential.footnote</a> -  Essential preamble for footnote.mod.xsl support </dt>
+              <dt><a href="rn18re131.html">generate.ulink.in.footnote</a> - Process ulink elements within footnotes</dt>
+              <dt><a href="rn18re132.html">footnoteref</a> - Process footnote elements</dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn19.html">XIX. Formal Objects formal.mod.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn19re133.html">formal.object</a> -  Typeset a formal object generically </dt>
+              <dt><a href="rn19re134.html">formal.object.title</a> -  Typeset the title of a formal object generically </dt>
+              <dt><a href="rn19re135.html">informal.object</a> -  Typeset an informal object generically </dt>
+              <dt><a href="rn19re136.html">semiformal.object</a> -  Typeset formal or informal object generically </dt>
+              <dt><a href="rn19re137.html">generate.formal.title.placement</a> -  Determine the relative position for a caption </dt>
+              <dt><a href="rn19re138.html">equation</a> - Process equation elements</dt>
+              <dt><a href="rn19re139.html">informalequation</a> - Process informalequation elements</dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn20.html">XX. Glossaries glossary.mod.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn20re140.html">glossary</a> - Process glossary elements</dt>
+              <dt><a href="rn20re141.html">glossdiv|glosslist</a> - Process glossdiv and glosslist elements</dt>
+              <dt><a href="rn20re142.html">glossentry</a> - Process glossentry elements</dt>
+              <dt><a href="rn20re143.html">glossentry/glossterm</a> - Process a glossentry's glossterm elements</dt>
+              <dt><a href="rn20re144.html">glossentry/acronym</a> - Process a glossentry's acronym elements</dt>
+              <dt><a href="rn20re145.html">glossentry/abbrev</a> - Process a glossentry's abbrev elements</dt>
+              <dt><a href="rn20re146.html">glossentry/revhistory</a> - Process a glossentry's revhistory elements</dt>
+              <dt><a href="rn20re147.html">glossentry/glossdef</a> - Process a glossentry's glossdef elements</dt>
+              <dt><a href="rn20re148.html">glossseealso|glosssee</a> - Process glossseealso and glosssee elements</dt>
+              <dt><a href="rn20re149.html">latex.preamble.essential.glossary</a> -  Essential preamble for glossary.mod.xsl support </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn21.html">XXI. Graphics graphic.mod.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn21re150.html">screenshot</a> - Process screenshot elements</dt>
+              <dt><a href="rn21re151.html">screeninfo</a> - Process screeninfo elements</dt>
+              <dt><a href="rn21re152.html">graphic</a> - Process graphic elements</dt>
+              <dt><a href="rn21re153.html">inlinegraphic</a> - Process inlinegraphic elements</dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn22.html">XXII. Indices index.mod.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn22re154.html">index|setindex</a> - Process index and setindex elements</dt>
+              <dt><a href="rn22re155.html">latex.preamble.essential.index</a> -  Essential preamble for index.mod.xsl support </dt>
+              <dt><a href="rn22re156.html">indexterm</a> - Process indexterm elements</dt>
+              <dt><a href="rn22re157.html">primary (in indexterm mode)</a> - Process the contents of indexterms</dt>
+              <dt><a href="rn22re158.html">secondary|tertiary (in indexterm mode)</a> - Process the contents of indexterms</dt>
+              <dt><a href="rn22re159.html">index.subterm</a> - Process the contents of indexterms</dt>
+              <dt><a href="rn22re160.html">see|seealso (in indexterm mode)</a> - Process the contents of see and seealso elements</dt>
+              <dt><a href="rn22re161.html">indexentry|primaryie|secondaryie|tertiaryie|seeie|seealsoie</a> -  Skip indexentry-related elements </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn23.html">XXIII. Inline Elements inline.mod.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn23re162.html">inline.charseq</a> - Process regular text</dt>
+              <dt><a href="rn23re163.html">inline.monoseq</a> - Process monospace text</dt>
+              <dt><a href="rn23re164.html">inline.boldseq</a> - Process bold text</dt>
+              <dt><a href="rn23re165.html">inline.italicseq</a> - Process italic text</dt>
+              <dt><a href="rn23re166.html">inline.boldmonoseq</a> - Process bold monospace text</dt>
+              <dt><a href="rn23re167.html">inline.italicmonoseq</a> - Process italic monospace text</dt>
+              <dt><a href="rn23re168.html">inline.superscriptseq</a> - Process superscript text</dt>
+              <dt><a href="rn23re169.html">inline.subscriptseq</a> - Process subscript text</dt>
+              <dt><a href="rn23re170.html">accel</a> - Process accel elements</dt>
+              <dt><a href="rn23re171.html">action</a> - Process action elements</dt>
+              <dt><a href="rn23re172.html">honorific|firstname|surname|lineage|othername</a> - Process name-type elements</dt>
+              <dt><a href="rn23re173.html">application</a> - Process application elements</dt>
+              <dt><a href="rn23re174.html">classname</a> - Process classname elements</dt>
+              <dt><a href="rn23re175.html">copyright</a> - Process copyright elements</dt>
+              <dt><a href="rn23re176.html">copyright/holder</a> - Process a copyright's holder elements</dt>
+              <dt><a href="rn23re177.html">exceptionname</a> - Process exceptionname elements</dt>
+              <dt><a href="rn23re178.html">interfacename</a> - Process interfacename elements</dt>
+              <dt><a href="rn23re179.html">methodname</a> - Process methodname elements</dt>
+              <dt><a href="rn23re180.html">command</a> - Process command elements</dt>
+              <dt><a href="rn23re181.html">computeroutput</a> - Process computeroutput elements</dt>
+              <dt><a href="rn23re182.html">constant</a> - Process constant elements</dt>
+              <dt><a href="rn23re183.html">database</a> - Process database elements</dt>
+              <dt><a href="rn23re184.html">errorcode</a> - Process errorcode elements</dt>
+              <dt><a href="rn23re185.html">errorname</a> - Process errorname elements</dt>
+              <dt><a href="rn23re186.html">errortype</a> - Process errortype elements</dt>
+              <dt><a href="rn23re187.html">envar</a> - Process envar elements</dt>
+              <dt><a href="rn23re188.html">filename</a> - Process filename elements</dt>
+              <dt><a href="rn23re189.html">function</a> - Process function elements</dt>
+              <dt><a href="rn23re190.html">function/parameter</a> - Process a function's parameter elements</dt>
+              <dt><a href="rn23re191.html">function/replaceable</a> - Process a function's replaceable elements</dt>
+              <dt><a href="rn23re192.html">guibutton|guiicon|guilabel|guimenu|guimenuitem|guisubmenu|interface</a> - Process GUI-type elements</dt>
+              <dt><a href="rn23re193.html">hardware</a> - Process hardware elements</dt>
+              <dt><a href="rn23re194.html">interfacedefinition</a> - Process interfacedefinition elements</dt>
+              <dt><a href="rn23re195.html">keycap|keysym</a> - Process keycap and keysym elements</dt>
+              <dt><a href="rn23re196.html">keycode</a> - Process keycode elements</dt>
+              <dt><a href="rn23re197.html">literal</a> - Process literal elements</dt>
+              <dt><a href="rn23re198.html">medialabel</a> - Process medialabel elements</dt>
+              <dt><a href="rn23re199.html">shortcut</a> - Process shortcut elements</dt>
+              <dt><a href="rn23re200.html">mousebutton</a> - Process mousebutton elements</dt>
+              <dt><a href="rn23re201.html">option</a> - Process option elements</dt>
+              <dt><a href="rn23re202.html">parameter</a> - Process parameter elements</dt>
+              <dt><a href="rn23re203.html">property</a> - Process property elements</dt>
+              <dt><a href="rn23re204.html">prompt</a> - Process prompt elements</dt>
+              <dt><a href="rn23re205.html">replaceable</a> - Process replaceable elements</dt>
+              <dt><a href="rn23re206.html">returnvalue</a> - Process returnvalue elements</dt>
+              <dt><a href="rn23re207.html">structfield</a> - Process structfield elements</dt>
+              <dt><a href="rn23re208.html">structname</a> - Process structname elements</dt>
+              <dt><a href="rn23re209.html">symbol</a> - Process symbol elements</dt>
+              <dt><a href="rn23re210.html">systemitem</a> - Process systemitem elements</dt>
+              <dt><a href="rn23re211.html">token</a> - Process token elements</dt>
+              <dt><a href="rn23re212.html">type</a> - Process type elements</dt>
+              <dt><a href="rn23re213.html">userinput</a> - Process userinput elements</dt>
+              <dt><a href="rn23re214.html">abbrev</a> - Process abbrev elements</dt>
+              <dt><a href="rn23re215.html">acronym</a> - Process acronym elements</dt>
+              <dt><a href="rn23re216.html">citerefentry</a> - Process citerefentry elements</dt>
+              <dt><a href="rn23re217.html">citetitle</a> - Process citetitle elements</dt>
+              <dt><a href="rn23re218.html">corpauthor</a> - Process corpauthor elements</dt>
+              <dt><a href="rn23re219.html">emphasis</a> - Process emphasis elements</dt>
+              <dt><a href="rn23re220.html">emphasis[@role='bold']</a> - Process emphasis elements with bold role</dt>
+              <dt><a href="rn23re221.html">foreignphrase</a> - Process foreignphrase elements</dt>
+              <dt><a href="rn23re222.html">jobtitle</a> - Process jobtitle elements</dt>
+              <dt><a href="rn23re223.html">markup</a> - Process markup elements</dt>
+              <dt><a href="rn23re224.html">orgdiv</a> - Process orgdiv elements</dt>
+              <dt><a href="rn23re225.html">orgname</a> - Process orgname elements</dt>
+              <dt><a href="rn23re226.html">phrase</a> - Process phrase elements</dt>
+              <dt><a href="rn23re227.html">quote</a> - Process quote elements</dt>
+              <dt><a href="rn23re228.html">varname</a> - Process varname elements</dt>
+              <dt><a href="rn23re229.html">wordasword</a> - Process wordasword elements</dt>
+              <dt><a href="rn23re230.html">lineannotation</a> - Process lineannotation elements</dt>
+              <dt><a href="rn23re231.html">superscript</a> - Process superscript elements</dt>
+              <dt><a href="rn23re232.html">subscript</a> - Process subscript elements</dt>
+              <dt><a href="rn23re233.html">trademark</a> - Process trademark elements</dt>
+              <dt><a href="rn23re234.html">firstterm</a> - Process firstterm elements</dt>
+              <dt><a href="rn23re235.html">glossterm</a> - Process glossterm elements</dt>
+              <dt><a href="rn23re236.html">keycombo</a> - Process keycombo elements</dt>
+              <dt><a href="rn23re237.html">menuchoice</a> - Process menuchoice elements</dt>
+              <dt><a href="rn23re238.html">process.menuchoice</a> - Process menuchoice children (not shortcut) </dt>
+              <dt><a href="rn23re239.html">optional</a> - Process optional elements</dt>
+              <dt><a href="rn23re240.html">comment|remark</a> - Process remark elements</dt>
+              <dt><a href="rn23re241.html">productname</a> - Process productname elements</dt>
+              <dt><a href="rn23re242.html">productnumber</a> - Process productnumber elements</dt>
+              <dt><a href="rn23re243.html">pob|street|city|state|postcode|country|phone|fax|otheraddr</a> - Process address-like elements</dt>
+              <dt><a href="rn23re244.html">beginpage</a> - Process beginpage elements</dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn24.html">XXIV. Keywords keywords.mod.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn24re245.html">keywordset</a> - Process keywordset elements</dt>
+              <dt><a href="rn24re246.html">keyword</a> - Process keywords</dt>
+              <dt><a href="rn24re247.html">subjectset|subject</a> - Process subjectset elements</dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn25.html">XXV. Labels and Anchors for Cross-referencing labelid.mod.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn25re248.html">label.id</a> -  Generate LaTeX labels </dt>
+              <dt><a href="rn25re249.html">generate.label.id</a> -  Generate a reliable cross-reference id </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn26.html">XXVI. Lists lists.mod.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn26re250.html">variablelist/title|orderedlist/title|itemizedlist/title|simplelist/title</a> - Process titles for variablelist, orderedlist, itemizedlist and simplelist elements</dt>
+              <dt><a href="rn26re251.html">listitem</a> - Process listitem elements</dt>
+              <dt><a href="rn26re252.html">itemizedlist</a> - Process itemizedlist elements</dt>
+              <dt><a href="rn26re253.html">variablelist</a> - Process variablelist elements</dt>
+              <dt><a href="rn26re254.html">orderedlist</a> - Process orderedlist elements</dt>
+              <dt><a href="rn26re255.html">varlistentry</a> - Process varlistentry elements</dt>
+              <dt><a href="rn26re256.html">varlistentry/term</a> - Process varlistentry's term elements</dt>
+              <dt><a href="rn26re257.html">varlistentry/listitem</a> - Process listitem elements</dt>
+              <dt><a href="rn26re258.html">generate.simplelist.tabular.string</a> - Generate a tabular specification</dt>
+              <dt><a href="rn26re259.html">generate.simplelist.inline</a> - Process simplelist elements with inline members</dt>
+              <dt><a href="rn26re260.html">generate.simplelist.horiz</a> - Process simplelist elements with horiz members</dt>
+              <dt><a href="rn26re261.html">generate.simplelist.vert</a> - Process simplelist elements with vert members</dt>
+              <dt><a href="rn26re262.html">member</a> - Process member elements</dt>
+              <dt><a href="rn26re263.html">segmentedlist</a> - Process segmentedlist elements</dt>
+              <dt><a href="rn26re264.html">segmentedlist/title</a> - Process titles for segmentedlist elements</dt>
+              <dt><a href="rn26re265.html">segtitle</a> - Process segtitle elements</dt>
+              <dt><a href="rn26re266.html">seglistitem</a> - Process seglistitem elements</dt>
+              <dt><a href="rn26re267.html">seg</a> - Process seg elements</dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn27.html">XXVII. Mathematics mathelems.mod.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn27re268.html">mathelement</a> - Process mathelement elements</dt>
+              <dt><a href="rn27re269.html">mathelement.environment</a> - Typeset mathelement environments</dt>
+              <dt><a href="rn27re270.html">mathelement/mathhypothesis</a> - Process mathelement/mathhypothesis elements</dt>
+              <dt><a href="rn27re271.html">mathelement/mathremark</a> - Process mathelement/mathremark elements</dt>
+              <dt><a href="rn27re272.html">mathelement/mathexample</a> - Process mathelement/mathexample elements</dt>
+              <dt><a href="rn27re273.html">mathelement/mathproposition</a> - Process mathelement/mathproposition elements</dt>
+              <dt><a href="rn27re274.html">mathelement/maththeorem</a> - Process mathelement/maththeorem elements</dt>
+              <dt><a href="rn27re275.html">mathelement/mathdefinition</a> - Process mathelement/mathdefinition elements</dt>
+              <dt><a href="rn27re276.html">mathelement/mathlemma</a> - Process mathelement/mathlemma elements</dt>
+              <dt><a href="rn27re277.html">mathelement/mathproof</a> - Process mathelement/mathproof elements</dt>
+              <dt><a href="rn27re278.html">mathphrase|mathcondition|mathassertion</a> - Process mathphrase, mathcondition and mathassertion elements</dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn28.html">XXVIII. MediaObjects mediaobject.mod.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn28re279.html">textobject</a> - Process textobject elements</dt>
+              <dt><a href="rn28re280.html">mediaobject</a> - Process mediaobject elements</dt>
+              <dt><a href="rn28re281.html">para/mediaobject</a> - Process a para's mediaobject elements</dt>
+              <dt><a href="rn28re282.html">inlinemediaobject</a> - Process inlinemediaobject elements</dt>
+              <dt><a href="rn28re283.html">mediacontent</a> - Process media and inline media </dt>
+              <dt><a href="rn28re284.html">imageobject</a> - Process imageobject elements</dt>
+              <dt><a href="rn28re285.html">imagedata</a> - Process imagedata elements</dt>
+              <dt><a href="rn28re286.html">caption</a> - Process caption elements</dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn29.html">XXIX. Message Sets msgset.mod.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn29re287.html">msgset</a> - Process msgset elements</dt>
+              <dt><a href="rn29re288.html">msgentry</a> - Process msgentry elements</dt>
+              <dt><a href="rn29re289.html">simplemsgentry</a> - Process simplemsgentry elements</dt>
+              <dt><a href="rn29re290.html">msg</a> - Process msg elements</dt>
+              <dt><a href="rn29re291.html">msgmain</a> - Process msgmain elements</dt>
+              <dt><a href="rn29re292.html">msgmain/title|msgsub/title|msgrel/title</a> - Process msgmain's title elements</dt>
+              <dt><a href="rn29re293.html">msgsub</a> - Process msgsub elements</dt>
+              <dt><a href="rn29re294.html">msgrel</a> - Process msgrel elements</dt>
+              <dt><a href="rn29re295.html">msgtext</a> - Process msgtext elements</dt>
+              <dt><a href="rn29re296.html">msginfo</a> - Process msginfo elements</dt>
+              <dt><a href="rn29re297.html">msglevel|msgorig|msgaud</a> - Process msglevel, msgorig and msgaud elements</dt>
+              <dt><a href="rn29re298.html">msgexplan</a> - Process msgexplan elements</dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn30.html">XXX. Whitespace Normalization and Character Encoding normalize-scape.mod.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn30re299.html">text()</a> - Process text() nodes</dt>
+              <dt><a href="rn30re300.html">text() (in xref.text mode)</a> - Process text() nodes</dt>
+              <dt><a href="rn30re301.html">text() (in xref-to mode)</a> - Process text() nodes</dt>
+              <dt><a href="rn30re302.html">text() (in latex.verbatim mode)</a> - Process text() nodes</dt>
+              <dt><a href="rn30re303.html">text() (in slash.hyphen mode)</a> - Process text() nodes</dt>
+              <dt><a href="rn30re304.html">trim-outer</a> - Whitespace Normalization and Discretionary Elision</dt>
+              <dt><a href="rn30re305.html">scape.slash.hyphen</a> - Process URL text</dt>
+              <dt><a href="rn30re306.html">normalize-scape</a> - Character Escaping and Whitespace Normalization</dt>
+              <dt><a href="rn30re307.html">string-replace</a> - Search-and-replace</dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn31.html">XXXI. Paragraphs para.mod.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn31re308.html">latex.noparskip</a> - Use normal paragraph spacing instead of parskip spacing</dt>
+              <dt><a href="rn31re309.html">latex.restoreparskip</a> - Use parkip spacing, if user desires it</dt>
+              <dt><a href="rn31re310.html">para|simpara</a> - Process para and simpara elements</dt>
+              <dt><a href="rn31re311.html">formalpara</a> - Process formalpara elements</dt>
+              <dt><a href="rn31re312.html">generate.formalpara.title.delimiter</a> - Delimite a formalpara's title from its para</dt>
+              <dt><a href="rn31re313.html">para-noline</a> - Suppressed paragraphs</dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn32.html">XXXII. Parameters: Common Options param-common.mod.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn32re314.html">admon.graphics.path</a> -  LaTeX location for admonition graphics </dt>
+              <dt><a href="rn32re315.html">tex.math.in.alt</a> -  Control the escaping of alt text </dt>
+              <dt><a href="rn32re316.html">show.comments</a> -  Display remark and comment elements? </dt>
+              <dt><a href="rn32re317.html">author.othername.in.middle</a> -  Control the display of othername elements in authors </dt>
+              <dt><a href="rn32re318.html">biblioentry.item.separator</a> -  Separator for bibliography items </dt>
+              <dt><a href="rn32re319.html">toc.section.depth</a> -  Cull table-of-contents entries that are deeply nested </dt>
+              <dt><a href="rn32re320.html">section.depth</a> -  Control the automatic numbering of section, parts, and chapters </dt>
+              <dt><a href="rn32re321.html">graphic.default.extension</a> -  Default filename extension for includegraphics </dt>
+              <dt><a href="rn32re322.html">use.role.for.mediaobject</a> -  Control mediaobject selection methods </dt>
+              <dt><a href="rn32re323.html">preferred.mediaobject.role</a> -  Control mediaobject selection methods </dt>
+              <dt><a href="rn32re324.html">formal.title.placement</a> -  Specifies where formal component titles should occur </dt>
+              <dt><a href="rn32re325.html">insert.xref.page.number</a> -  Control the appearance of page numbers in cross references </dt>
+              <dt><a href="rn32re326.html">ulink.show</a> -  Control the display of URLs after ulinks </dt>
+              <dt><a href="rn32re327.html">ulink.footnotes</a> -  Control the generation of footnotes for ulinks </dt>
+              <dt><a href="rn32re328.html">use.role.as.xrefstyle</a> -  Honour role as proxy for xrefstyle </dt>
+              <dt><a href="rn32re329.html">refentry.xref.manvolnum</a> -  Choose whether to include manvolnum in cross-references </dt>
+              <dt><a href="rn32re330.html">refentry.generate.name</a> -  Control the use of NAME headers </dt>
+              <dt><a href="rn32re331.html">rootid</a> -  Process only one element tree within a document </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn33.html">XXXIII. Parameters: LaTeX-direct Strings param-direct.mod.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn33re332.html">latex.documentclass</a> -  DB2LaTeX document class </dt>
+              <dt><a href="rn33re333.html">latex.maketitle</a> -  The \maketitle for books and articles. </dt>
+              <dt><a href="rn33re334.html">latex.article.preamble.pre</a> -  Undocumented </dt>
+              <dt><a href="rn33re335.html">latex.article.preamble.post</a> -  Undocumented </dt>
+              <dt><a href="rn33re336.html">latex.article.varsets</a> -  Controls what is output after the LaTeX preamble. </dt>
+              <dt><a href="rn33re337.html">latex.book.preamble.pre</a> -  Undocumented </dt>
+              <dt><a href="rn33re338.html">latex.book.preamble.post</a> -  Undocumented </dt>
+              <dt><a href="rn33re339.html">latex.book.varsets</a> - 
+			All purpose commands to change text width, height, counters, etc.
+			Defaults to a two-sided margin layout.
+		</dt>
+              <dt><a href="rn33re340.html">latex.book.begindocument</a> -  
+			Begin document command
+		</dt>
+              <dt><a href="rn33re341.html">latex.book.afterauthor</a> - 
+			LaTeX code that is output after the author (e.g. 
+			\makeindex, \makeglossary
+		</dt>
+              <dt><a href="rn33re342.html">latex.thead.row.entry</a> -  Format the output of tabular headings. </dt>
+              <dt><a href="rn33re343.html">latex.tfoot.row.entry</a> -  Format the output of tabular footers. </dt>
+              <dt><a href="rn33re344.html">latex.article.title.style</a> -  Control the style of article titles </dt>
+              <dt><a href="rn33re345.html">latex.book.article.title.style</a> -  Control the style of article titles within books </dt>
+              <dt><a href="rn33re346.html">latex.book.article.header.style</a> -  Control the style of authors and dates within a book's articles </dt>
+              <dt><a href="rn33re347.html">latex.equation.caption.style</a> -  Control the style of equation captions  </dt>
+              <dt><a href="rn33re348.html">latex.example.caption.style</a> -  Control the style of example captions  </dt>
+              <dt><a href="rn33re349.html">latex.figure.caption.style</a> -  Control the style of figure captions  </dt>
+              <dt><a href="rn33re350.html">latex.figure.title.style</a> -  Control the style of figure titles  </dt>
+              <dt><a href="rn33re351.html">latex.formalpara.title.style</a> -  Control the style of equation captions  </dt>
+              <dt><a href="rn33re352.html">latex.list.title.style</a> -  Control the style of list titles  </dt>
+              <dt><a href="rn33re353.html">latex.procedure.title.style</a> -  Control the style of procedure titles  </dt>
+              <dt><a href="rn33re354.html">latex.segtitle.style</a> -  Control the style of segtitles  </dt>
+              <dt><a href="rn33re355.html">latex.step.title.style</a> -  Control the style of step titles  </dt>
+              <dt><a href="rn33re356.html">latex.table.caption.style</a> -  Control the style of table captions  </dt>
+              <dt><a href="rn33re357.html">latex.pagestyle</a> -  Override DB2LaTeX's choice of LaTeX page numbering style </dt>
+              <dt><a href="rn33re358.html">latex.hyperref.param.common</a> -  DB2LaTeX hyperref options</dt>
+              <dt><a href="rn33re359.html">latex.hyperref.param.pdftex</a> -  DB2LaTeX hyperref options for pdfTeX output</dt>
+              <dt><a href="rn33re360.html">latex.hyperref.param.dvips</a> -  DB2LaTeX hyperref options for dvips output</dt>
+              <dt><a href="rn33re361.html">latex.varioref.options</a> - Options for the varioref LaTeX package</dt>
+              <dt><a href="rn33re362.html">latex.vpageref.options</a> - Toggle the use of the varioref LaTeX package</dt>
+              <dt><a href="rn33re363.html">latex.fancyvrb.tabsize</a> - Choose indentation for tabs in verbatim environments</dt>
+              <dt><a href="rn33re364.html">latex.fancyvrb.options</a> - Insert LaTeX options for fancyvrb Verbatim environments</dt>
+              <dt><a href="rn33re365.html">latex.inputenc</a> - Control the use of the inputenc LaTeX package</dt>
+              <dt><a href="rn33re366.html">latex.fontenc</a> -  Options for the fontenc package </dt>
+              <dt><a href="rn33re367.html">latex.ucs.options</a> - Select the optional parameter(s) for the unicode LaTeX package</dt>
+              <dt><a href="rn33re368.html">latex.babel.language</a> - Select the optional parameter for the babel LaTeX package</dt>
+              <dt><a href="rn33re369.html">latex.bibwidelabel</a> -  Adjust bibliography formatting </dt>
+              <dt><a href="rn33re370.html">latex.documentclass.common</a> -  DB2LaTeX document class options  </dt>
+              <dt><a href="rn33re371.html">latex.documentclass.article</a> -  DB2LaTeX document class options for articles</dt>
+              <dt><a href="rn33re372.html">latex.documentclass.book</a> -  DB2LaTeX document class options for books</dt>
+              <dt><a href="rn33re373.html">latex.documentclass.pdftex</a> -  DB2LaTeX document class options for pdfTeX output</dt>
+              <dt><a href="rn33re374.html">latex.documentclass.dvips</a> -  DB2LaTeX document class options for dvips output</dt>
+              <dt><a href="rn33re375.html">latex.admonition.imagesize</a> -  DB2LaTeX graphics admonitions size</dt>
+              <dt><a href="rn33re376.html">latex.titlepage.file</a> -  DB2LaTeX allows using an (externally generated) cover page  </dt>
+              <dt><a href="rn33re377.html">latex.document.font</a> -  Document Font(s)  </dt>
+              <dt><a href="rn33re378.html">latex.override</a> -  Override DB2LaTeX's preamble with a custom preamble. </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn34.html">XXXIV. Parameters: DB2LaTeX Switches param-switch.mod.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn34re379.html">latex.caption.lot.titles.only</a> -  Control the display of captions in lists of figures.  </dt>
+              <dt><a href="rn34re380.html">latex.bibfiles</a> - 
+		Control the output of the \bibliography{.bib}.
+	</dt>
+              <dt><a href="rn34re381.html">latex.math.support</a> -  Controls the output of LaTeX packages and commands to support 
+	    documents with math commands and environments..</dt>
+              <dt><a href="rn34re382.html">latex.output.revhistory</a> -  Controls  if the revision history table is generated as the first document 
+	    table.
+	</dt>
+              <dt><a href="rn34re383.html">latex.fancybox.options</a> -  Options for fancybox </dt>
+              <dt><a href="rn34re384.html">latex.pdf.support</a> -  Controls the output of LaTeX commands to support the generation 
+	    of PDF files.</dt>
+              <dt><a href="rn34re385.html">latex.generate.indexterm</a> -  Enable the generation of indexterms </dt>
+              <dt><a href="rn34re386.html">latex.hyphenation.tttricks</a> -  DB2LaTeX hyphenation linebreak tricks </dt>
+              <dt><a href="rn34re387.html">latex.decimal.point</a> -  Decimal point for LaTeX tables </dt>
+              <dt><a href="rn34re388.html">latex.trim.verbatim</a> - Toggle the trimming of leading and trailing whitespace in verbatim environments </dt>
+              <dt><a href="rn34re389.html">latex.use.ltxtable</a> - Toggle the use of the ltxtable LaTeX package</dt>
+              <dt><a href="rn34re390.html">latex.use.longtable</a> - Toggle the use of the longtable LaTeX package</dt>
+              <dt><a href="rn34re391.html">latex.use.overpic</a> - Toggle the use of the overpic LaTeX package</dt>
+              <dt><a href="rn34re392.html">latex.use.umoline</a> - Toggle the use of the umoline LaTeX package</dt>
+              <dt><a href="rn34re393.html">latex.use.url</a> - Toggle the use of the url LaTeX package</dt>
+              <dt><a href="rn34re394.html">latex.is.draft</a> - Toggle the use of the the draft preamble</dt>
+              <dt><a href="rn34re395.html">latex.use.varioref</a> - Toggle the use of the varioref LaTeX package</dt>
+              <dt><a href="rn34re396.html">latex.use.fancyhdr</a> - Toggle the use of the fancyhdr LaTeX package</dt>
+              <dt><a href="rn34re397.html">latex.bridgehead.in.lot</a> -  Control the inclusion of chapter titles in lots </dt>
+              <dt><a href="rn34re398.html">latex.fancyhdr.truncation.style</a> -  Configure the application of truncation partitions </dt>
+              <dt><a href="rn34re399.html">latex.fancyhdr.truncation.partition</a> -  Configure the width of header portions on each page </dt>
+              <dt><a href="rn34re400.html">latex.fancyhdr.style</a> -  Section/chapter style for fancy headers </dt>
+              <dt><a href="rn34re401.html">latex.use.parskip</a> - Toggle the use of the parskip LaTeX package</dt>
+              <dt><a href="rn34re402.html">latex.use.noindent</a> - Toggle the use of noindent commands</dt>
+              <dt><a href="rn34re403.html">latex.use.subfigure</a> - Toggle the use of the subfigure LaTeX package</dt>
+              <dt><a href="rn34re404.html">latex.use.rotating</a> - Toggle the use of the rotating LaTeX package</dt>
+              <dt><a href="rn34re405.html">latex.use.tabularx</a> - Toggle the use of the tabularx LaTeX package</dt>
+              <dt><a href="rn34re406.html">latex.use.dcolumn</a> - Toggle the use of the dcolumn LaTeX package</dt>
+              <dt><a href="rn34re407.html">latex.use.hyperref</a> - Toggle the use of the hyperref LaTeX package</dt>
+              <dt><a href="rn34re408.html">latex.use.fancybox</a> - Toggle the use of the fancybox LaTeX package</dt>
+              <dt><a href="rn34re409.html">latex.use.fancyvrb</a> - Toggle the use of the fancyvrb LaTeX package</dt>
+              <dt><a href="rn34re410.html">latex.use.isolatin1</a> - Toggle the use of the isolatin1 LaTeX package</dt>
+              <dt><a href="rn34re411.html">latex.use.ucs</a> -  Choose whether to use the unicode LaTeX package</dt>
+              <dt><a href="rn34re412.html">latex.biblio.output</a> -  Control which references are cited in the bibliography </dt>
+              <dt><a href="rn34re413.html">latex.biblioentry.style</a> -  Control bibliographic citation style </dt>
+              <dt><a href="rn34re414.html">latex.caption.swapskip</a> -  Improved typesetting of captions  </dt>
+              <dt><a href="rn34re415.html">latex.graphics.formats</a> -  Control imagedata selection. </dt>
+              <dt><a href="rn34re416.html">latex.entities</a> -  Control Unicode character handling. </dt>
+              <dt><a href="rn34re417.html">latex.otherterm.is.preferred</a> -  Control the use of otherterm attributes </dt>
+              <dt><a href="rn34re418.html">latex.alt.is.preferred</a> -  Control the use of alt text </dt>
+              <dt><a href="rn34re419.html">latex.apply.title.templates</a> -  Whether to apply templates for component titles. </dt>
+              <dt><a href="rn34re420.html">latex.apply.title.templates.admonitions</a> -  Whether to apply templates for admonition titles. </dt>
+              <dt><a href="rn34re421.html">latex.url.quotation</a> -  Whether to delimit URLs with quotation characters </dt>
+              <dt><a href="rn34re422.html">latex.ulink.protocols.relaxed</a> -  Control string comparison for ulinks </dt>
+              <dt><a href="rn34re423.html">latex.suppress.blank.page.headers</a> -  Control the suppression of headers/footers on blank pages in double-side documents </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn35.html">XXXV. Parts, Chapters and Appendixes part-chap-app.mod.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn35re424.html">set|part|chapter</a> - Process set, part and chapter elements</dt>
+              <dt><a href="rn35re425.html">appendix</a> - Process appendix elements</dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn36.html">XXXVI. Processing Instructions pi.mod.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn36re426.html">processing-instruction()</a> -  Process generic processing instructions </dt>
+              <dt><a href="rn36re427.html">processing-instruction('latex')</a> -  Output arbitrary LaTeX text </dt>
+              <dt><a href="rn36re428.html">processing-instruction('db2latex')</a> -  Output arbitrary LaTeX text </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn37.html">XXXVII. Variables and Templates used in LaTeX Preamble Generation</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn37re429.html">generate.latex.article.preamble</a> - 
+
+			Top level template, called by article template, responsible of
+			generating the LaTeX preamble according to user
+			XSL variables and templates.
+
+		</dt>
+              <dt><a href="rn37re430.html">generate.latex.book.preamble</a> - 
+
+			Top level template, called by book template, responsible of
+			generating the LaTeX preamble according to user
+			XSL variables and templates.
+
+		</dt>
+              <dt><a href="rn37re431.html">latex.article.preamblestart</a> -  Generate documentclass for articles  </dt>
+              <dt><a href="rn37re432.html">latex.book.preamblestart</a> -  Generate documentclass for books  </dt>
+              <dt><a href="rn37re433.html">document.xml.language</a> -  Select localisation language  </dt>
+              <dt><a href="rn37re434.html">latex.language.option</a> -  Select babel option </dt>
+              <dt><a href="rn37re435.html">generate.latex.common.preamble</a> - 
+
+			Common LaTeX preamble shared by articles and
+			books, and other document classes. Most of the
+			packages and package options are managed here.
+
+		</dt>
+              <dt><a href="rn37re436.html">generate.latex.draft.preamble</a> - 
+
+			Common LaTeX preamble shared by article and
+			book when their status is draft.
+
+		</dt>
+              <dt><a href="rn37re437.html">generate.latex.essential.preamble</a> -  Unavoidable LaTeX preamble shared by articles and books  </dt>
+              <dt><a href="rn37re438.html">latex.float.preamble</a> -  Preamble for certain floats </dt>
+              <dt><a href="rn37re439.html">latex.pdf.preamble</a> - </dt>
+              <dt><a href="rn37re440.html">latex.hyperref.preamble</a> -  Manage the part of the preamble that handles the hyperref package.</dt>
+              <dt><a href="rn37re441.html">latex.math.preamble</a> -  LaTeX mathematics support  </dt>
+              <dt><a href="rn37re442.html">latex.graphicext</a> -  Declared graphic extensions </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn38.html">XXXVIII. Procedures procedure.mod.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn38re443.html">procedure</a> - Process procedure elements</dt>
+              <dt><a href="rn38re444.html">procedure/title</a> - Process a procedure's title </dt>
+              <dt><a href="rn38re445.html">step</a> - Process step elements </dt>
+              <dt><a href="rn38re446.html">generate.step.title</a> - Generate a step's title </dt>
+              <dt><a href="rn38re447.html">substeps</a> - Process substep elements </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn39.html">XXXIX. QandaSet qandaset.mod.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn39re448.html">qandaset</a> - Process qandadiv elements</dt>
+              <dt><a href="rn39re449.html">qandaset/qandaentry</a> - Process qandadiv elements</dt>
+              <dt><a href="rn39re450.html">qandadiv</a> - Process qandadiv elements</dt>
+              <dt><a href="rn39re451.html">question</a> - Process question elements</dt>
+              <dt><a href="rn39re452.html">answer</a> - Process answer elements</dt>
+              <dt><a href="rn39re453.html">label</a> - Process label elements</dt>
+              <dt><a href="rn39re454.html">qandadiv (in qandatoc.mode mode)</a> - Process qandadiv elements</dt>
+              <dt><a href="rn39re455.html">qandadiv/title (in qandatoc.mode mode)</a> - Process a qandadiv's title elements</dt>
+              <dt><a href="rn39re456.html">qandaentry (in qandatoc.mode mode)</a> - Process qandaentry elements</dt>
+              <dt><a href="rn39re457.html">question (in qandatoc.mode mode)</a> - Process question elements</dt>
+              <dt><a href="rn39re458.html">answer (in qandatoc.mode mode)</a> - Process answer elements</dt>
+              <dt><a href="rn39re459.html">revhistory (in qandatoc.mode mode)</a> - Process revhistory elements</dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn40.html">XL. References and Entries refentry.mod.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn40re460.html">reference</a> - Process reference elements</dt>
+              <dt><a href="rn40re461.html">refentry</a> - Process refentry elements</dt>
+              <dt><a href="rn40re462.html">refmeta</a> - Process refentry elements</dt>
+              <dt><a href="rn40re463.html">refentrytitle</a> - Process refentrytitle elements</dt>
+              <dt><a href="rn40re464.html">manvolnum</a> - Process manvolnum elements</dt>
+              <dt><a href="rn40re465.html">refnamediv</a> - Process refnamediv elements</dt>
+              <dt><a href="rn40re466.html">refname</a> - Process refname elements</dt>
+              <dt><a href="rn40re467.html">refpurpose</a> - Process refpurpose elements</dt>
+              <dt><a href="rn40re468.html">refdescriptor</a> - Process refdescriptor elements</dt>
+              <dt><a href="rn40re469.html">refclass</a> - Process refclass elements</dt>
+              <dt><a href="rn40re470.html">refsynopsisdiv</a> - Process refsynopsisdiv elements</dt>
+              <dt><a href="rn40re471.html">refsect1|refsect2|refsect3</a> - Process refsect elements</dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn41.html">XLI. Revision Management revision.mod.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn41re472.html">revhistory</a> - Process revhistory elements</dt>
+              <dt><a href="rn41re473.html">revision</a> - Process revision elements</dt>
+              <dt><a href="rn41re474.html">revision/authorinitials</a> - Process a revision's authorinitials elements</dt>
+              <dt><a href="rn41re475.html">revnumber</a> - Process revnumber elements</dt>
+              <dt><a href="rn41re476.html">revision/date</a> - Process a revision's date elements</dt>
+              <dt><a href="rn41re477.html">revremark</a> - Process revremark elements</dt>
+              <dt><a href="rn41re478.html">revdescription</a> - Process revdescription elements</dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn42.html">XLII. LaTeX Active-character Escaping</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn42re479.html">scape</a> - General text escaping for LaTeX active characters</dt>
+              <dt><a href="rn42re480.html">scape-indexterm</a> - Escape characters for use with index 
+         LaTeX command</dt>
+              <dt><a href="rn42re481.html">scape-verbatim</a> - Verbatim-text escaping for LaTeX active characters</dt>
+              <dt><a href="rn42re482.html">scape-href</a> - Escape characters for use with the hyperref 
+         LaTeX package</dt>
+              <dt><a href="rn42re483.html">scape-url</a> - Escape characters for use with the url 
+         LaTeX package</dt>
+              <dt><a href="rn42re484.html">scape-optionalarg</a> - Escape the ] character in LaTeX optional arguments (experimental)</dt>
+              <dt><a href="rn42re485.html">scape-slash</a> - Basic line-breaking for verbatim text</dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn43.html">XLIII. Sections sections.mod.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn43re486.html">sect1|sect2|sect3|sect4|sect5</a> - Process explicitly-nested sections</dt>
+              <dt><a href="rn43re487.html">section|simplesect</a> - Process recursive and leaf sections</dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn44.html">XLIV. SGML Tags sgmltag.mod.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn44re488.html">sgmltag</a> -  Process sgmltag elements </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn45.html">XLV. Tables table.mod.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn45re489.html">table</a> - Process table elements</dt>
+              <dt><a href="rn45re490.html">informaltable</a> - Process informaltable elements</dt>
+              <dt><a href="rn45re491.html">table.format.tabularx</a> - Process tables using tabularx </dt>
+              <dt><a href="rn45re492.html">table.format.tabular</a> - Process tables using tabular </dt>
+              <dt><a href="rn45re493.html">generate.starfactor</a> - Calculate relative column sizes</dt>
+              <dt><a href="rn45re494.html">tgroup</a> - Process tgroup elements</dt>
+              <dt><a href="rn45re495.html">colspec</a> - Process colspec elements</dt>
+              <dt><a href="rn45re496.html">spanspec</a> - Process spanspec elements</dt>
+              <dt><a href="rn45re497.html">thead</a> - Process thead elements</dt>
+              <dt><a href="rn45re498.html">thead.longtable.caption (in longtable.caption mode)</a> - Process thead elements</dt>
+              <dt><a href="rn45re499.html">thead.longtable.caption.continuation (in longtable.caption.continuation mode)</a> - Process thead elements</dt>
+              <dt><a href="rn45re500.html">tfoot</a> - Process tfoot elements</dt>
+              <dt><a href="rn45re501.html">tfoot.longtable.caption (in longtable.caption mode)</a> - Process tfoot elements</dt>
+              <dt><a href="rn45re502.html">tfoot.longtable.caption.continued (in longtable.caption.continued mode)</a> - Process tfoot elements</dt>
+              <dt><a href="rn45re503.html">thead/row/entry</a> - Process a thead's entry elements</dt>
+              <dt><a href="rn45re504.html">tfoot/row/entry</a> - Process a tfoot's entry elements</dt>
+              <dt><a href="rn45re505.html">tbody</a> - Process tbody elements</dt>
+              <dt><a href="rn45re506.html">tbody/row</a> - Process a tbody's row elements</dt>
+              <dt><a href="rn45re507.html">thead/row</a> - Process a thead's row elements</dt>
+              <dt><a href="rn45re508.html">tfoot/row</a> - Process a tfoot's row elements</dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn46.html">XLVI. LaTeX-only Commands texmath.mod.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn46re509.html">alt</a> - Process alt elements</dt>
+              <dt><a href="rn46re510.html">latex|tex</a> - Process latex and tex elements</dt>
+              <dt><a href="rn46re511.html">latex[@fileref]|tex[@fileref]</a> - Process fileref elements</dt>
+              <dt><a href="rn46re512.html">inlineequation</a> - Process inlineequation elements</dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn47.html">XLVII. Verbatim verbatim.mod.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn47re513.html">verbatim.apply.templates</a> -  Auxiliary template to output verbatim LaTeX code in verbatim mode </dt>
+              <dt><a href="rn47re514.html">address|screen|programlisting|literallayout</a> -  Process verbatim environment where whitespace is significant </dt>
+              <dt><a href="rn47re515.html">literal (in latex.verbatim mode)</a> - Process literal elements</dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="reference">
+              <a href="rn48.html">XLVIII. Cross References xref.mod.xsl</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt><a href="rn48re516.html">anchor</a> - Process anchor elements</dt>
+              <dt><a href="rn48re517.html">id.is.xrefed</a> - Auxiliary named template</dt>
+              <dt><a href="rn48re518.html">xref.xreflabel</a> - Auxiliary named template</dt>
+              <dt><a href="rn48re519.html">xref|link</a> - Xref and Link XSL Template</dt>
+              <dt><a href="rn48re520.html">generate.xref.text</a> -  Generate xref text </dt>
+              <dt><a href="rn48re521.html">generate.hyperlink</a> -  Choose hyperlink syntax </dt>
+              <dt><a href="rn48re522.html">insert.label.markup (in insert.label.markup mode)</a> - Numbering template</dt>
+              <dt><a href="rn48re523.html">title (in insert.label.markup mode)</a> - Numbering template -- uses parent's @id</dt>
+              <dt><a href="rn48re524.html">generate.title.markup (in insert.title.markup mode)</a> -  Format titles in xref text </dt>
+              <dt><a href="rn48re525.html">title (in insert.title.markup mode)</a> -  Format titles in xref text </dt>
+              <dt><a href="rn48re526.html">book (in insert.title.markup mode)</a> -  Format titles in xref text </dt>
+              <dt><a href="rn48re527.html">ulink</a> - A link that addresses its target by means of a URL (Uniform Resource Locator)</dt>
+              <dt><a href="rn48re528.html">olink</a> - OLink XSL template</dt>
+              <dt><a href="rn48re529.html">generate.typeset.url</a> -  Typeset a URL using the url or href commands </dt>
+              <dt><a href="rn48re530.html">generate.string.url</a> - Escape and hyphenate a string as a teletype URL.</dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="index">
+              <a href="ix01.html">Index of Elements and Software</a>
+            </span>
+          </dt>
+        </dl>
+      </div>
+      <div class="list-of-examples">
+        <p>
+          <b>List of Examples</b>
+        </p>
+        <dl>
+          <dt>1. <a href="rn05re53.html#id40521264">Processing the warning admonition</a></dt>
+          <dt>2. <a href="rn07.html#bibtex.example">Using BibTeX with DB2LaTeX</a></dt>
+        </dl>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"> </td>
+          <td width="20%" align="center"> </td>
+          <td width="40%" align="right"> <a accesskey="n" href="ch01.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top"> </td>
+          <td width="20%" align="center"> </td>
+          <td width="40%" align="right" valign="top"> Chapter 1. DocBook Element Coverage</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

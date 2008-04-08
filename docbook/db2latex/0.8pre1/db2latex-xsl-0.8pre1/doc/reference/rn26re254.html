@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>orderedlist</title>
+    <link rel="stylesheet" href="../db2latex-web.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.64.1" />
+    <link rel="home" href="index.html" title="DB2LaTeX API Documentation" />
+    <link rel="up" href="rn26.html" title="Lists lists.mod.xsl" />
+    <link rel="previous" href="rn26re253.html" title="variablelist" />
+    <link rel="next" href="rn26re255.html" title="varlistentry" />
+    <link rel="icon" href="../graphics/rarrow.gif" type="image/gif" />
+  </head>
+  <body bgcolor="#ffffcc" text="black" link="#ac0204" vlink="#dc720c" alink="red">
+    <div class="top">
+      <ul class="top_left">
+        <li><a href="#top"><img align="top" border="0" src="../graphics/db2latex_new_banner.png" width="133" height="22" alt="orderedlist" /></a> </li>
+      </ul>
+      <ul class="top_right">
+        <li>
+          <a href="http://sourceforge.net/projects/db2latex/">SourceForge</a>
+        </li>
+        <li>
+          <a href="../index.html">Home Page</a>
+        </li>
+        <li>
+          <a href="../sample/">Samples</a>
+        </li>
+      </ul>
+      <ul class="bottom_left">
+        <li><a href="./index.html">Reference Contents</a> | </li>
+        <li><a href="../install.html">Download &amp; Install</a> | </li>
+        <li><a href="../guides.html">User Guides</a> | </li>
+        <li><a href="../notes.html">Notes, E-mail &amp; Bugs</a> | </li>
+        <li>
+          <a href="../qanda.html">Q&amp;A</a>
+        </li>
+      </ul>
+    </div>
+    <div class="left">
+      <table class="panel" width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <th>Suggestions</th>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Search:</span>
+            <br />
+            <form method="get" action="http://www.google.com/search"><input type="text" maxlength="255" name="q" class="q" /> <input type="submit" value="Go" class="submit" /><input type="hidden" name="domains" value="db2latex.sourceforge.net" /><input type="hidden" name="sitesearch" value="db2latex.sourceforge.net" /></form>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Next:</span>
+            <br />
+            <a accesskey="n" href="rn26re255.html">varlistentry</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Previous:</span>
+            <br />
+            <a accesskey="p" href="rn26re253.html">variablelist</a>
+            <br />
+            <span class="minihead">Up:</span>
+            <br />
+            <a accesskey="u" href="rn26.html">Lists lists.mod.xsl</a>
+          </td>
+        </tr>
+      </table>
+      <div class="sidebar"><h2>On this page:</h2>(orderedlist) <a href="rn26re254.html#id40581599">A. Description</a>; <a href="rn26re254.html#id40581612">B. Pertinent Variables</a>; <a href="rn26re254.html#id40581630">D. DocBook Compliance and LaTeX Notes</a>; <a href="rn26re254.html#id40581704">E. Samples and Tests</a>.</div>
+    </div>
+    <div class="note" style="margin-top:2px; color: #804020; text-align: center; font-weight: bold">
+      <a name="top" id="top">Reference Section</a>
+    </div>
+    <div class="refentry" lang="en" xml:lang="en">
+      <a id="id40581548"></a>
+      <div class="titlepage">
+        
+        
+      </div>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>orderedlist — Process <a href="http://www.oasis-open.org/docbook/documentation/reference/html/orderedlist.html"><tt class="sgmltag-element">orderedlist<a id="id40581569" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/orderedlist.html">2.0.9</a>] elements</p>
+      </div>
+      <div class="refsynopsisdiv">
+        <h2>Synopsis</h2>
+        <a id="template.orderedlist"></a>
+        <pre class="synopsis">&lt;xsl:template match="orderedlist"&gt;
+&lt;xsl:variable name="numeration"&gt;
+			&lt;xsl:choose&gt;
+				&lt;xsl:when test="@numeration"&gt;
+					&lt;xsl:value-of select="@numeration"/&gt;
+				&lt;/xsl:when&gt;
+				&lt;xsl:otherwise&gt;
+					&lt;xsl:value-of select="arabic"/&gt;
+				&lt;/xsl:otherwise&gt;
+			&lt;/xsl:choose&gt;
+		&lt;/xsl:variable&gt;
+  ...
+&lt;/xsl:template&gt;</pre>
+      </div>
+      <div class="description">
+        <a name="id40581599" id="id40581599"></a>
+        <h2>A. Description</h2>
+        <p>
+				Formats a list in which each item is denoted by a numeric label.
+			</p>
+      </div>
+      <div class="variables">
+        <a name="id40581612" id="id40581612"></a>
+        <h2>B. Pertinent Variables</h2>
+        <div class="itemizedlist">
+          <ul type="disc">
+            <li>
+              <a href="rn34re402.html" title="latex.use.noindent">latex.use.noindent</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="notes">
+        <a name="id40581630" id="id40581630"></a>
+        <h2>D. DocBook Compliance and LaTeX Notes</h2>
+        <p>The only <span class="productname">DocBook</span> attribute that is supported is <tt class="sgmltag-attribute">numeration</tt>.</p>
+        <p>
+				Applies templates. Uses a <span class="productname">LaTeX</span> <tt class="function">\begin{enumerate}</tt>
+				environment.
+			</p>
+        <p>
+				The <tt class="sgmltag-attribute">spacing</tt>=“<span class="quote">compact</span>”
+				attribute is recognised.
+			</p>
+        <p>
+				The <tt class="sgmltag-attribute">numeration</tt> attribute
+				is recognised.
+			</p>
+      </div>
+      <div class="samples">
+        <a name="id40581704" id="id40581704"></a>
+        <h2>E. Samples and Tests</h2>
+        <p>
+          <span class="simplelist"><tt class="filename">test_book.pdf</tt> from <tt class="filename">test_book/test.xml</tt>, <tt class="filename">test_chemistry.pdf</tt> from <tt class="filename">test_chemistry/test.xml</tt></span>
+        </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="rn26re253.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="rn26.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="rn26re255.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">variablelist </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> varlistentry</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>generate.simplelist.horiz</title>
+    <link rel="stylesheet" href="../db2latex-web.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.64.1" />
+    <link rel="home" href="index.html" title="DB2LaTeX API Documentation" />
+    <link rel="up" href="rn26.html" title="Lists lists.mod.xsl" />
+    <link rel="previous" href="rn26re259.html" title="generate.simplelist.inline" />
+    <link rel="next" href="rn26re261.html" title="generate.simplelist.vert" />
+    <link rel="icon" href="../graphics/rarrow.gif" type="image/gif" />
+  </head>
+  <body bgcolor="#ffffcc" text="black" link="#ac0204" vlink="#dc720c" alink="red">
+    <div class="top">
+      <ul class="top_left">
+        <li><a href="#top"><img align="top" border="0" src="../graphics/db2latex_new_banner.png" width="133" height="22" alt="generate.simplelist.horiz" /></a> </li>
+      </ul>
+      <ul class="top_right">
+        <li>
+          <a href="http://sourceforge.net/projects/db2latex/">SourceForge</a>
+        </li>
+        <li>
+          <a href="../index.html">Home Page</a>
+        </li>
+        <li>
+          <a href="../sample/">Samples</a>
+        </li>
+      </ul>
+      <ul class="bottom_left">
+        <li><a href="./index.html">Reference Contents</a> | </li>
+        <li><a href="../install.html">Download &amp; Install</a> | </li>
+        <li><a href="../guides.html">User Guides</a> | </li>
+        <li><a href="../notes.html">Notes, E-mail &amp; Bugs</a> | </li>
+        <li>
+          <a href="../qanda.html">Q&amp;A</a>
+        </li>
+      </ul>
+    </div>
+    <div class="left">
+      <table class="panel" width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <th>Suggestions</th>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Search:</span>
+            <br />
+            <form method="get" action="http://www.google.com/search"><input type="text" maxlength="255" name="q" class="q" /> <input type="submit" value="Go" class="submit" /><input type="hidden" name="domains" value="db2latex.sourceforge.net" /><input type="hidden" name="sitesearch" value="db2latex.sourceforge.net" /></form>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Next:</span>
+            <br />
+            <a accesskey="n" href="rn26re261.html">generate.simplelist.vert</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Previous:</span>
+            <br />
+            <a accesskey="p" href="rn26re259.html">generate.simplelist.inline</a>
+            <br />
+            <span class="minihead">Up:</span>
+            <br />
+            <a accesskey="u" href="rn26.html">Lists lists.mod.xsl</a>
+          </td>
+        </tr>
+      </table>
+      <div class="sidebar"><h2>On this page:</h2>(generate.simplelist.horiz) <a href="rn26re260.html#id40582552">A. Description</a>; <a href="rn26re260.html#id40582594">B. Pertinent Variables</a>; <a href="rn26re260.html#id40582607">C. Template Parameters</a>; <a href="rn26re260.html#id40582668">D. DocBook Compliance and LaTeX Notes</a>.</div>
+    </div>
+    <div class="note" style="margin-top:2px; color: #804020; text-align: center; font-weight: bold">
+      <a name="top" id="top">Reference Section</a>
+    </div>
+    <div class="refentry" lang="en" xml:lang="en">
+      <a id="template.generate.simplelist.horiz"></a>
+      <div class="titlepage">
+        
+        
+      </div>
+      <a id="id40582458" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>generate.simplelist.horiz — Process <a href="http://www.oasis-open.org/docbook/documentation/reference/html/simplelist.html"><tt class="sgmltag-element">simplelist<a id="id40582492" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/simplelist.html">2.0.9</a>] elements with “<span class="quote">horiz</span>” <a href="http://www.oasis-open.org/docbook/documentation/reference/html/member.html"><tt class="sgmltag-element">members<a id="id40582518" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/member.html">2.0.9</a>]</p>
+      </div>
+      <div class="refsynopsisdiv">
+        <h2>Synopsis</h2>
+        <a id="template.simplelist[@type='horiz']"></a>
+        <pre class="synopsis">&lt;xsl:template match="simplelist[@type='horiz']" name="generate.simplelist.horiz"&gt;
+&lt;xsl:param name="environment"&gt;
+			&lt;xsl:choose&gt;
+				&lt;xsl:when test="$latex.use.ltxtable='1' or $latex.use.longtable='1'"&gt;
+					&lt;xsl:text&gt;longtable&lt;/xsl:text&gt;
+				&lt;/xsl:when&gt;
+				&lt;xsl:otherwise&gt;
+					&lt;xsl:text&gt;tabular&lt;/xsl:text&gt;
+				&lt;/xsl:otherwise&gt;
+			&lt;/xsl:choose&gt;
+		&lt;/xsl:param&gt;
+&lt;xsl:param name="cols"&gt;
+			&lt;xsl:choose&gt;
+			&lt;xsl:when test="@columns"&gt;
+				&lt;xsl:value-of select="@columns"/&gt;
+			&lt;/xsl:when&gt;
+			&lt;xsl:otherwise&gt;1&lt;/xsl:otherwise&gt;
+			&lt;/xsl:choose&gt;
+		&lt;/xsl:param&gt;
+  ...
+&lt;/xsl:template&gt;</pre>
+      </div>
+      <div class="description">
+        <a name="id40582552" id="id40582552"></a>
+        <h2>A. Description</h2>
+        <p>
+			Formats a simple, comma-separated list for a <a href="http://www.oasis-open.org/docbook/documentation/reference/html/simplelist.html"><tt class="sgmltag-element">simplelist<a id="id40582572" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/simplelist.html">2.0.9</a>]
+			that has a <tt class="sgmltag-attribute">type</tt> attribute equal to “<span class="quote">horiz</span>”.
+			</p>
+      </div>
+      <div class="variables">
+        <a name="id40582594" id="id40582594"></a>
+        <h2>B. Pertinent Variables</h2>
+        <p>There are no configuration variables for this template.</p>
+      </div>
+      <div class="params">
+        <a name="id40582607" id="id40582607"></a>
+        <h2>C. Template Parameters</h2>
+        <div class="variablelist">
+          <dl>
+            <dt>
+              <span class="term">environment</span>
+            </dt>
+            <dd>The <span class="productname">LaTeX</span> tabular-like environment to use. Defaults to “<span class="quote">tabular</span>” unless <a href="rn34re389.html" title="latex.use.ltxtable">latex.use.ltxtable</a> or <a href="rn34re390.html" title="latex.use.longtable">latex.use.longtable</a> is enabled, in which case the default is “<span class="quote">longtable</span>”.</dd>
+            <dt>
+              <span class="term">cols</span>
+            </dt>
+            <dd>The number of members per line (defaults to the value of the <tt class="sgmltag-attribute">columns</tt> attribute).</dd>
+          </dl>
+        </div>
+      </div>
+      <div class="notes">
+        <a name="id40582668" id="id40582668"></a>
+        <h2>D. DocBook Compliance and LaTeX Notes</h2>
+        <p>
+				This is formatted as a border-less <span class="productname">LaTeX</span> table.
+			</p>
+      </div>
+      <div class="refsection">
+        <a name="id41055091" id="id41055091"></a>
+        <h2>G. Variations</h2>
+        <p>Variations on this template:
+          </p>
+        <div class="itemizedlist">
+          <ul type="disc">
+            <li>
+              <a href="rn26re259.html" target="_top">generate.simplelist.inline</a>
+            </li>
+            <li>
+              <a href="rn26re261.html" target="_top">generate.simplelist.vert</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="rn26re259.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="rn26.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="rn26re261.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">generate.simplelist.inline </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> generate.simplelist.vert</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

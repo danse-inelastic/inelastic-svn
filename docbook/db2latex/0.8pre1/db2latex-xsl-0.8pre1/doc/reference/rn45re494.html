@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>tgroup</title>
+    <link rel="stylesheet" href="../db2latex-web.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.64.1" />
+    <link rel="home" href="index.html" title="DB2LaTeX API Documentation" />
+    <link rel="up" href="rn45.html" title="Tables table.mod.xsl" />
+    <link rel="previous" href="rn45re493.html" title="generate.starfactor" />
+    <link rel="next" href="rn45re495.html" title="colspec" />
+    <link rel="icon" href="../graphics/rarrow.gif" type="image/gif" />
+  </head>
+  <body bgcolor="#ffffcc" text="black" link="#ac0204" vlink="#dc720c" alink="red">
+    <div class="top">
+      <ul class="top_left">
+        <li><a href="#top"><img align="top" border="0" src="../graphics/db2latex_new_banner.png" width="133" height="22" alt="tgroup" /></a> </li>
+      </ul>
+      <ul class="top_right">
+        <li>
+          <a href="http://sourceforge.net/projects/db2latex/">SourceForge</a>
+        </li>
+        <li>
+          <a href="../index.html">Home Page</a>
+        </li>
+        <li>
+          <a href="../sample/">Samples</a>
+        </li>
+      </ul>
+      <ul class="bottom_left">
+        <li><a href="./index.html">Reference Contents</a> | </li>
+        <li><a href="../install.html">Download &amp; Install</a> | </li>
+        <li><a href="../guides.html">User Guides</a> | </li>
+        <li><a href="../notes.html">Notes, E-mail &amp; Bugs</a> | </li>
+        <li>
+          <a href="../qanda.html">Q&amp;A</a>
+        </li>
+      </ul>
+    </div>
+    <div class="left">
+      <table class="panel" width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <th>Suggestions</th>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Search:</span>
+            <br />
+            <form method="get" action="http://www.google.com/search"><input type="text" maxlength="255" name="q" class="q" /> <input type="submit" value="Go" class="submit" /><input type="hidden" name="domains" value="db2latex.sourceforge.net" /><input type="hidden" name="sitesearch" value="db2latex.sourceforge.net" /></form>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Next:</span>
+            <br />
+            <a accesskey="n" href="rn45re495.html">colspec</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Previous:</span>
+            <br />
+            <a accesskey="p" href="rn45re493.html">generate.starfactor</a>
+            <br />
+            <span class="minihead">Up:</span>
+            <br />
+            <a accesskey="u" href="rn45.html">Tables table.mod.xsl</a>
+          </td>
+        </tr>
+      </table>
+      <div class="sidebar"><h2>On this page:</h2>(tgroup) <a href="rn45re494.html#id40637288">B. Pertinent Variables</a>.</div>
+    </div>
+    <div class="note" style="margin-top:2px; color: #804020; text-align: center; font-weight: bold">
+      <a name="top" id="top">Reference Section</a>
+    </div>
+    <div class="refentry" lang="en" xml:lang="en">
+      <a id="id40637194"></a>
+      <div class="titlepage">
+        
+        
+      </div>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>tgroup — Process <a href="http://www.oasis-open.org/docbook/documentation/reference/html/tgroup.html"><tt class="sgmltag-element">tgroup<a id="id40637214" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/tgroup.html">2.0.9</a>] elements</p>
+      </div>
+      <div class="refsynopsisdiv">
+        <h2>Synopsis</h2>
+        <a id="template.tgroup"></a>
+        <pre class="synopsis">&lt;xsl:template match="tgroup"&gt;
+&lt;xsl:variable name="colsep"&gt;
+			&lt;xsl:choose&gt;
+				&lt;xsl:when test="@colsep!=''"&gt;
+					&lt;xsl:value-of select="number(@colsep)"/&gt;
+				&lt;/xsl:when&gt;
+				&lt;xsl:when test="../@colsep!=''"&gt;
+					&lt;xsl:value-of select="number(../@colsep)"/&gt;
+				&lt;/xsl:when&gt;
+				&lt;xsl:otherwise&gt;1&lt;/xsl:otherwise&gt;
+			&lt;/xsl:choose&gt;
+		&lt;/xsl:variable&gt;
+&lt;xsl:variable name="frame"&gt;
+			&lt;xsl:choose&gt;
+				&lt;xsl:when test="string-length(../@frame)&lt;1"&gt;all&lt;/xsl:when&gt;
+				&lt;xsl:otherwise&gt;
+					&lt;xsl:value-of select="../@frame"/&gt;
+				&lt;/xsl:otherwise&gt;
+			&lt;/xsl:choose&gt;
+		&lt;/xsl:variable&gt;
+&lt;xsl:variable name="colspecs" select="./colspec"/&gt;
+&lt;xsl:variable name="usex"&gt;
+			&lt;xsl:choose&gt;
+				&lt;xsl:when test="$latex.use.ltxtable='1'"&gt;
+					&lt;xsl:text&gt;0&lt;/xsl:text&gt;
+				&lt;/xsl:when&gt;
+				&lt;!-- if there are lists within cells, we need tabularx --&gt;
+				&lt;xsl:when test="$latex.use.tabularx=1 and (descendant::itemizedlist|descendant::orderedlist|descendant::variablelist)"&gt;
+					&lt;xsl:text&gt;1&lt;/xsl:text&gt;
+				&lt;/xsl:when&gt;
+				&lt;!-- if there are instances of 1*-style colwidths, we need tabularx --&gt;
+				&lt;xsl:when test="$latex.use.tabularx=1 and contains(colspec/@colwidth,'*')"&gt;
+					&lt;xsl:text&gt;1&lt;/xsl:text&gt;
+				&lt;/xsl:when&gt;
+				&lt;!-- if there are colspecs with 'justify' alignment and no explicit width, we need tabularx --&gt;
+				&lt;xsl:when test="$latex.use.tabularx=1 and count(colspec[@align='justify'])&gt;0"&gt;
+					&lt;xsl:text&gt;1&lt;/xsl:text&gt;
+				&lt;/xsl:when&gt;
+				&lt;xsl:otherwise&gt;
+					&lt;xsl:text&gt;0&lt;/xsl:text&gt;
+				&lt;/xsl:otherwise&gt;
+			&lt;/xsl:choose&gt;
+		&lt;/xsl:variable&gt;
+&lt;xsl:variable name="useminipage"&gt;
+			&lt;!-- Hack to get around LaTeX issue with tabular (not necessary with tabularx).
+			This is NOT a good solution, and has problems of its own, but at least the footnotes
+			do not actually disappear (which is what would otherwise happen). --&gt;
+			&lt;xsl:if test="count(.//footnote)!=0"&gt;1&lt;/xsl:if&gt;
+		&lt;/xsl:variable&gt;
+&lt;xsl:variable name="cols"&gt;
+			&lt;xsl:choose&gt;
+				&lt;xsl:when test="@cols"&gt;
+					&lt;xsl:value-of select="@cols"/&gt;
+				&lt;/xsl:when&gt;
+				&lt;xsl:otherwise&gt;
+					&lt;xsl:value-of select="count(tbody/row[1]/entry)"/&gt;
+					&lt;xsl:message&gt;Warning: table's tgroup lacks cols attribute. Assuming &lt;xsl:value-of select="count(tbody/row[1]/entry)"/&gt;.&lt;/xsl:message&gt;
+				&lt;/xsl:otherwise&gt;
+			&lt;/xsl:choose&gt;
+		&lt;/xsl:variable&gt;
+&lt;xsl:variable name="thead.frame"&gt;
+			&lt;xsl:choose&gt;
+				&lt;xsl:when test="$frame!='sides' and $frame!='none' and $frame!='bottom'"&gt;
+					&lt;xsl:value-of select="1"/&gt;
+				&lt;/xsl:when&gt;
+				&lt;xsl:otherwise&gt;
+					&lt;xsl:value-of select="0"/&gt;
+				&lt;/xsl:otherwise&gt;
+			&lt;/xsl:choose&gt;
+		&lt;/xsl:variable&gt;
+&lt;xsl:variable name="tfoot.frame"&gt;
+			&lt;xsl:choose&gt;
+				&lt;xsl:when test="$frame!='sides' and $frame!='none' and $frame!='top'"&gt;
+					&lt;xsl:value-of select="1"/&gt;
+				&lt;/xsl:when&gt;
+				&lt;xsl:otherwise&gt;
+					&lt;xsl:value-of select="0"/&gt;
+				&lt;/xsl:otherwise&gt;
+			&lt;/xsl:choose&gt;
+		&lt;/xsl:variable&gt;
+  ...
+&lt;/xsl:template&gt;</pre>
+      </div>
+      <div class="variables">
+        <a name="id40637288" id="id40637288"></a>
+        <h2>B. Pertinent Variables</h2>
+        <p>There are no configuration variables for this template.</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="rn45re493.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="rn45.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="rn45re495.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">generate.starfactor </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> colspec</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

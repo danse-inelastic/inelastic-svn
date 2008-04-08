@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>latex.admonition.environment</title>
+    <link rel="stylesheet" href="../db2latex-web.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.64.1" />
+    <link rel="home" href="index.html" title="DB2LaTeX API Documentation" />
+    <link rel="up" href="rn05.html" title="Admonitions admonition.mod.xsl" />
+    <link rel="previous" href="rn05.html" title="Admonitions admonition.mod.xsl" />
+    <link rel="next" href="rn05re54.html" title="admon.graphic" />
+    <link rel="icon" href="../graphics/rarrow.gif" type="image/gif" />
+  </head>
+  <body bgcolor="#ffffcc" text="black" link="#ac0204" vlink="#dc720c" alink="red">
+    <div class="top">
+      <ul class="top_left">
+        <li><a href="#top"><img align="top" border="0" src="../graphics/db2latex_new_banner.png" width="133" height="22" alt="latex.admonition.environment" /></a> </li>
+      </ul>
+      <ul class="top_right">
+        <li>
+          <a href="http://sourceforge.net/projects/db2latex/">SourceForge</a>
+        </li>
+        <li>
+          <a href="../index.html">Home Page</a>
+        </li>
+        <li>
+          <a href="../sample/">Samples</a>
+        </li>
+      </ul>
+      <ul class="bottom_left">
+        <li><a href="./index.html">Reference Contents</a> | </li>
+        <li><a href="../install.html">Download &amp; Install</a> | </li>
+        <li><a href="../guides.html">User Guides</a> | </li>
+        <li><a href="../notes.html">Notes, E-mail &amp; Bugs</a> | </li>
+        <li>
+          <a href="../qanda.html">Q&amp;A</a>
+        </li>
+      </ul>
+    </div>
+    <div class="left">
+      <table class="panel" width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <th>Suggestions</th>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Search:</span>
+            <br />
+            <form method="get" action="http://www.google.com/search"><input type="text" maxlength="255" name="q" class="q" /> <input type="submit" value="Go" class="submit" /><input type="hidden" name="domains" value="db2latex.sourceforge.net" /><input type="hidden" name="sitesearch" value="db2latex.sourceforge.net" /></form>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Next:</span>
+            <br />
+            <a accesskey="n" href="rn05re54.html">admon.graphic</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Up:</span>
+            <br />
+            <a accesskey="u" href="rn05.html">Admonitions admonition.mod.xsl</a>
+          </td>
+        </tr>
+      </table>
+      <div class="sidebar"><h2>On this page:</h2>(latex.admonition.environment) <a href="rn05re53.html#id40521229">A. Description</a>; <a href="rn05re53.html#id40521300">D. DocBook Compliance and LaTeX Notes</a>; <a href="rn05re53.html#id40521326">B. Pertinent Variables</a>.</div>
+    </div>
+    <div class="note" style="margin-top:2px; color: #804020; text-align: center; font-weight: bold">
+      <a name="top" id="top">Reference Section</a>
+    </div>
+    <div class="refentry" lang="en" xml:lang="en">
+      <a id="param.latex.admonition.environment"></a>
+      <div class="titlepage">
+        
+        
+      </div>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>latex.admonition.environment — 
+			Declares a new environment to be used for admonitions
+		</p>
+      </div>
+      <div class="refsynopsisdiv">
+        <h2>Synopsis</h2>
+        <pre class="synopsis">
+&lt;xsl:param name="latex.admonition.environment"&gt;
+		&lt;xsl:text&gt;% ----------------------------------------------
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt;% Define a new LaTeX environment (adminipage)
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt;% ----------------------------------------------
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt;\newenvironment{admminipage}%
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt;{ % this code corresponds to the \begin{adminipage} command
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt; \begin{Sbox}%
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt; \begin{minipage}%
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt;} %done
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt;{ % this code corresponds to the \end{adminipage} command
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt; \end{minipage}
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt; \end{Sbox}
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt; \fbox{\TheSbox}
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt;} %done
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt;% ----------------------------------------------
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt;% Define a new LaTeX length (admlength)
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt;% ----------------------------------------------
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt;\newlength{\admlength}
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt;% ----------------------------------------------
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt;% Define a new LaTeX environment (admonition)
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt;% With 2 parameters:
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt;% #1 The file (e.g. note.pdf)
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt;% #2 The caption
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt;% ----------------------------------------------
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt;\newenvironment{admonition}[2] 
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt;{ % this code corresponds to the \begin{admonition} command
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt; \hspace{0mm}\newline\hspace*\fill\newline
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt; \noindent
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt; \setlength{\fboxsep}{5pt}
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt; \setlength{\admlength}{\linewidth}
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt; \addtolength{\admlength}{-10\fboxsep}
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt; \addtolength{\admlength}{-10\fboxrule}
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt; \admminipage{\admlength}
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt; {\bfseries \sc\large{#2}}&lt;/xsl:text&gt;
+		&lt;xsl:text&gt; \newline
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt; \\[1mm]
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt; \sffamily
+&lt;/xsl:text&gt;
+		&lt;!--
+		If we cannot find the admon.graphics.path;
+		Comment out the next line (\includegraphics).
+		This tactic is to avoid deleting the \includegraphics
+		altogether, as that could confuse a person trying to
+		find the use of parameter #1 in the environment.
+		--&gt;
+		&lt;xsl:if test="$admon.graphics.path=''"&gt;
+			&lt;xsl:text&gt;%&lt;/xsl:text&gt;
+		&lt;/xsl:if&gt;
+		&lt;xsl:text&gt; \includegraphics[&lt;/xsl:text&gt; &lt;xsl:value-of select="$latex.admonition.imagesize"/&gt; &lt;xsl:text&gt;]{#1}
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt; \addtolength{\admlength}{-1cm}
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt; \addtolength{\admlength}{-20pt}
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt; \begin{minipage}[lt]{\admlength}
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt; \parskip=0.5\baselineskip \advance\parskip by 0pt plus 2pt
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt;} %done
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt;{ % this code corresponds to the \end{admonition} command
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt; \vspace{5mm} 
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt; \end{minipage}
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt; \endadmminipage
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt; \vspace{.5em}
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt; \par
+&lt;/xsl:text&gt;
+		&lt;xsl:text&gt;}
+&lt;/xsl:text&gt;
+	&lt;/xsl:param&gt;</pre>
+      </div>
+      <div class="description">
+        <a name="id40521229" id="id40521229"></a>
+        <h2>A. Description</h2>
+        <p>
+
+			This <span class="productname">LaTeX</span> environment is emitted during the preamble. That
+			environment has two mandatory parameters. Instances of the
+			environment are customised for each admonition via those
+			parameters. Instances will be typeset as boxed areas in the
+			document flow.
+
+			</p>
+        <p>
+
+			The first argument is the filename for graphics (e.g.
+			<tt class="filename">$admon.graphics.path/warning</tt>).
+			The second argument is the admonition title or the associated
+			generic text.
+
+			</p>
+        <div class="example">
+          <a id="id40521264"></a>
+          <p class="title">
+            <b>Example 1. Processing the <a href="http://www.oasis-open.org/docbook/documentation/reference/html/warning.html"><tt class="sgmltag-element">warning<a id="id40521277" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/warning.html">2.0.9</a>] admonition</b>
+          </p>
+          <p> When processing the admonition, the following code is generated: </p>
+          <pre class="programlisting">
+				\begin{admonition}{figures/warning}{My WARNING}
+...
+\end{admonition}
+				</pre>
+        </div>
+      </div>
+      <div class="notes">
+        <a name="id40521300" id="id40521300"></a>
+        <h2>D. DocBook Compliance and LaTeX Notes</h2>
+        <p>
+				The environment uses graphics by default. This may generate errors or warnings
+				if <span class="productname">LaTeX</span> cannot find the graphics. If necessary, graphics may be disabled
+				via <a href="rn32re314.html" title="admon.graphics.path">admon.graphics.path</a>.
+			</p>
+      </div>
+      <div class="variables">
+        <a name="id40521326" id="id40521326"></a>
+        <h2>B. Pertinent Variables</h2>
+        <div class="itemizedlist">
+          <ul type="disc">
+            <li>
+              <a href="rn34re408.html" title="latex.use.fancybox">latex.use.fancybox</a>
+            </li>
+            <li>
+              <a href="rn32re314.html" title="admon.graphics.path">admon.graphics.path</a>
+            </li>
+            <li>
+              <a href="rn33re375.html" title="latex.admonition.imagesize">latex.admonition.imagesize</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="refsection">
+        <a name="id41064910" id="id41064910"></a>
+        <h2>G. Uses</h2>
+        <p>Documented templates that use this parameter:
+          </p>
+        <div class="itemizedlist">
+          <ul type="disc">
+            <li>
+              <a href="rn05re55.html" target="_top">note|important|warning|caution|tip</a>
+            </li>
+            <li>
+              <a href="rn37re435.html" target="_top">generate.latex.common.preamble</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="rn05.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="rn05.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="rn05re54.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Admonitions admonition.mod.xsl </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> admon.graphic</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

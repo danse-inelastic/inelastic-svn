@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>book/article</title>
+    <link rel="stylesheet" href="../db2latex-web.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.64.1" />
+    <link rel="home" href="index.html" title="DB2LaTeX API Documentation" />
+    <link rel="up" href="rn09.html" title="Books and Articles book-article.mod.xsl" />
+    <link rel="previous" href="rn09re84.html" title="bookinfo/copyright" />
+    <link rel="next" href="rn09re86.html" title="article" />
+    <link rel="icon" href="../graphics/rarrow.gif" type="image/gif" />
+  </head>
+  <body bgcolor="#ffffcc" text="black" link="#ac0204" vlink="#dc720c" alink="red">
+    <div class="top">
+      <ul class="top_left">
+        <li><a href="#top"><img align="top" border="0" src="../graphics/db2latex_new_banner.png" width="133" height="22" alt="book/article" /></a> </li>
+      </ul>
+      <ul class="top_right">
+        <li>
+          <a href="http://sourceforge.net/projects/db2latex/">SourceForge</a>
+        </li>
+        <li>
+          <a href="../index.html">Home Page</a>
+        </li>
+        <li>
+          <a href="../sample/">Samples</a>
+        </li>
+      </ul>
+      <ul class="bottom_left">
+        <li><a href="./index.html">Reference Contents</a> | </li>
+        <li><a href="../install.html">Download &amp; Install</a> | </li>
+        <li><a href="../guides.html">User Guides</a> | </li>
+        <li><a href="../notes.html">Notes, E-mail &amp; Bugs</a> | </li>
+        <li>
+          <a href="../qanda.html">Q&amp;A</a>
+        </li>
+      </ul>
+    </div>
+    <div class="left">
+      <table class="panel" width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <th>Suggestions</th>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Search:</span>
+            <br />
+            <form method="get" action="http://www.google.com/search"><input type="text" maxlength="255" name="q" class="q" /> <input type="submit" value="Go" class="submit" /><input type="hidden" name="domains" value="db2latex.sourceforge.net" /><input type="hidden" name="sitesearch" value="db2latex.sourceforge.net" /></form>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Next:</span>
+            <br />
+            <a accesskey="n" href="rn09re86.html">article</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Previous:</span>
+            <br />
+            <a accesskey="p" href="rn09re84.html">bookinfo/copyright</a>
+            <br />
+            <span class="minihead">Up:</span>
+            <br />
+            <a accesskey="u" href="rn09.html">Books and Articles book article.mod.xsl</a>
+          </td>
+        </tr>
+      </table>
+      <div class="sidebar"><h2>On this page:</h2>(book/article) <a href="rn09re85.html#id40534290">A. Description</a>; <a href="rn09re85.html#id40534331">B. Pertinent Variables</a>; <a href="rn09re85.html#id40534356">D. DocBook Compliance and LaTeX Notes</a>; <a href="rn09re85.html#id40534510">F. Further Reading</a>.</div>
+    </div>
+    <div class="note" style="margin-top:2px; color: #804020; text-align: center; font-weight: bold">
+      <a name="top" id="top">Reference Section</a>
+    </div>
+    <div class="refentry" lang="en" xml:lang="en">
+      <a id="id40534184"></a>
+      <div class="titlepage">
+        
+        
+      </div>
+      <a id="id40534186" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>book/article — Process a <a href="http://www.oasis-open.org/docbook/documentation/reference/html/book.html"><tt class="sgmltag-element">book<a id="id40534221" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/book.html">2.0.9</a>]'s <a href="http://www.oasis-open.org/docbook/documentation/reference/html/article.html"><tt class="sgmltag-element">article<a id="id40534240" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/article.html">2.0.9</a>] elements</p>
+      </div>
+      <div class="refsynopsisdiv">
+        <h2>Synopsis</h2>
+        <a id="template.book/article"></a>
+        <a id="id40534258" class="indexterm"></a>
+        <pre class="synopsis">&lt;xsl:template match="book/article"&gt;
+&lt;xsl:variable name="article.title"&gt;
+			&lt;xsl:choose&gt;
+				&lt;xsl:when test="./title"&gt; 
+					&lt;xsl:apply-templates select="./title"/&gt;
+				&lt;/xsl:when&gt;
+				&lt;xsl:when test="./articleinfo/title"&gt;
+					&lt;xsl:apply-templates select="./articleinfo/title"/&gt;
+				&lt;/xsl:when&gt;
+				&lt;xsl:otherwise&gt;
+					&lt;xsl:apply-templates select="./artheader/title"/&gt;
+				&lt;/xsl:otherwise&gt;
+			&lt;/xsl:choose&gt;
+		&lt;/xsl:variable&gt;
+&lt;xsl:variable name="article.date"&gt;
+			&lt;xsl:apply-templates select="./artheader/date|./articleinfo/date"/&gt;
+		&lt;/xsl:variable&gt;
+  ...
+&lt;/xsl:template&gt;</pre>
+      </div>
+      <div class="description">
+        <a name="id40534290" id="id40534290"></a>
+        <h2>A. Description</h2>
+        <p>
+				Entry point for a <tt class="literal">book</tt>'s <a href="http://www.oasis-open.org/docbook/documentation/reference/html/article.html"><tt class="sgmltag-element">articles<a id="id40534319" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/article.html">2.0.9</a>].
+			</p>
+      </div>
+      <div class="variables">
+        <a name="id40534331" id="id40534331"></a>
+        <h2>B. Pertinent Variables</h2>
+        <div class="itemizedlist">
+          <ul type="disc">
+            <li>
+              <a href="rn33re345.html" title="latex.book.article.title.style">latex.book.article.title.style</a>
+            </li>
+            <li>
+              <a href="rn33re346.html" title="latex.book.article.header.style">latex.book.article.header.style</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="notes">
+        <a name="id40534356" id="id40534356"></a>
+        <h2>D. DocBook Compliance and LaTeX Notes</h2>
+        <p>
+				For double-sided books, each article will commence on a right-hand page.
+			</p>
+        <p>
+				
+				This template will call upon the following variables or
+				templates in this order:
+				<tt class="literal">generate.latex.pagestyle</tt>,
+				<tt class="literal">title</tt> (or <a href="http://www.oasis-open.org/docbook/documentation/reference/html/articleinfo.html"><tt class="sgmltag-element">articleinfo<a id="id40534394" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/articleinfo.html">2.0.9</a>] or
+				<a href="http://www.oasis-open.org/docbook/documentation/reference/html/artheader.html"><tt class="sgmltag-element">artheader<a id="id40534413" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/artheader.html">2.0.9</a>]),
+				<tt class="literal">$latex.book.article.title.style</tt>,
+				<tt class="literal">date</tt> (from <tt class="literal">articleinfo</tt> or
+				<tt class="literal">artheader</tt>), <tt class="literal">authorgroup</tt>
+				or <tt class="literal">author</tt> (or <tt class="literal">articleinfo</tt>
+				or <tt class="literal">artheader</tt>),
+				<tt class="literal">$latex.book.article.header.style</tt>,
+				<tt class="literal">articleinfo</tt> or <tt class="literal">artheader</tt>
+				in the XSLT <tt class="literal">article.within.book</tt> mode,
+				<tt class="literal">content-templates</tt>.
+
+			</p>
+      </div>
+      <div class="seealso">
+        <a name="id40534510" id="id40534510"></a>
+        <h2>F. Further Reading</h2>
+        <div class="itemizedlist">
+          <ul type="disc">
+            <li>
+              <a href="rn09re94.html" title="generate.latex.pagestyle">generate.latex.pagestyle</a>
+            </li>
+            <li>
+              <a href="rn09re89.html" title="article/artheader|article/articleinfo (in article.within.book mode)">article/artheader|article/articleinfo (in article.within.book mode)</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="refsection">
+        <a name="id41063926" id="id41063926"></a>
+        <h2>G. Variations</h2>
+        <p>Variations on this template:
+          </p>
+        <div class="itemizedlist">
+          <ul type="disc">
+            <li>
+              <a href="rn09re86.html" target="_top">article</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="rn09re84.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="rn09.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="rn09re86.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">bookinfo/copyright </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> article</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

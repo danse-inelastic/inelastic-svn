@@ -1,0 +1,210 @@
+<html lang="en" lang="en">
+<head>
+<meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type">
+<meta name="generator" content="Website XSL Stylesheet V2.4.1">
+<link rel="home" href="index.html" title="Welcome to the DB2LaTeX XSL Stylesheets">
+<link rel="up" href="notes.html" title="Notes">
+<link rel="previous" href="legalnotice.html" title="Copyright and Warranty">
+<link rel="next" href="developer.html" title="Developer Information">
+<link rel="first" href="credits.html" title="Credits">
+<link rel="last" href="developer.html" title="Developer Information">
+<link rel="icon" href="graphics/rarrow.gif" type="image/gif">
+<link rel="stylesheet" href="db2latex-web.css" type="text/css">
+    <title>Known Bugs</title>
+    
+  </head>
+<body class="website" bgcolor="#ffffcc" text="black" link="#ac0204" vlink="#dc720c" alink="red">
+<div class="top">
+<ul class="top_left"><li>
+<a href="#top"><img align="top" border="0" src="./graphics/db2latex_new_banner.png" width="133" height="22" alt="Known Bugs"></a> </li></ul>
+<ul class="top_right">
+<li><a href="http://sourceforge.net/projects/db2latex/">SourceForge</a></li>
+<li><a href="./reference/index.html">Reference</a></li>
+<li><a href="./sample/">Samples</a></li>
+</ul>
+<ul class="bottom_left">
+<li>
+<a href="./index.html">Welcome &amp; News</a> | </li>
+<li>
+<a href="./install.html">Download &amp; Install</a> | </li>
+<li>
+<a href="./guides.html">User Guides</a> | </li>
+<li>
+<a href="./notes.html">Notes, E-mail &amp; Bugs</a> | </li>
+<li><a href="./qanda.html">Q&amp;A</a></li>
+</ul>
+</div>
+<div class="left">
+<table class="panel" width="100%" cellspacing="0" cellpadding="0" border="0">
+<tr><th>Suggestions</th></tr>
+<tr><td>
+<span class="minihead">Search:</span><br><form method="get" action="http://www.google.com/search">
+<input type="text" maxlength="255" name="q" class="q"> <input type="submit" value="Go" class="submit"><input type="hidden" name="domains" value="db2latex.sourceforge.net"><input type="hidden" name="sitesearch" value="db2latex.sourceforge.net">
+</form>
+</td></tr>
+</table>
+<div class="sidebar">
+<h2>On this page:</h2>(Known Bugs) <a href="#id46719720">Further Investigation Required</a>; <a href="#id46660651">Long-term Projects</a>.</div>
+</div>
+<a name="top"></a><h1>Known Bugs</h1>
+<h2>
+<a name="id46719722"></a>User Feedback</h2>
+<div class="itemizedlist"><ul type="disc">
+<li><p>Chunking does not work.</p></li>
+<li><p>Table Support is partially implemented.</p></li>
+<li><p>Lists column management , half - fixed.</p></li>
+<li><p>When the user specifies a preamble or overrides some templates,
+      there may exist undefined commands (e.g. \hypertarget without the
+      hyperref package). Check.</p></li>
+<li><p>Extra spaces generated at the end of segtitle.</p></li>
+<li><p>\usepackage{fancybox} prevents toc and lof, even added by hand,
+      to be generate: we get empty shells (try it directly in the TeX).</p></li>
+<li><p>biblioset is not supported (Workaround, need to work on this).</p></li>
+<li><p>biblioentry have funny final punctuation (dangling commas and the
+      like).</p></li>
+<li><p>character not supported in the text Check out all iso-latin-1
+      while you're at it.</p></li>
+<li><p>Feature requests: . I would like the thing to handle languages in
+      documents (article lang=&quot;fr&quot;. Right now I add by hand the needed.</p></li>
+<li><p>\usepackage for input encoding and active characters.</p></li>
+<li><p>Aesthetics remarks: sometimes you use {} and sometimes not in the
+      preamble (\usepackage).</p></li>
+<li><p>itemizedlists inside tables will cause LaTeX errors unless column widths are specified (but tabularx is fine).</p></li>
+<li><p>Ordered lists don't support 'continues' (only 'enumerate').</p></li>
+<li><p>longtable/widetable</p></li>
+<li><p>Trouble with screen/verbatim environments inside tables, admonition.</p></li>
+<li><p>Alternative presentations for revhistory</p></li>
+<li><p>Empty hypertarget problem (paragraph breaks) with latex (as opposed to pdftex).</p></li>
+<li><p>Using a style file for <span><b class="command">makeindex</b></span> can cause incorrect
+      index generation if it involves changing the &#8220;<span class="quote">quote</span>&#8221; character.
+      This may conflict with the <span><b class="command">makeindex</b></span> <tt class="option">-g</tt> option.</p></li>
+</ul></div>
+<div class="section" lang="en">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="id46719720"></a>Further Investigation Required</h2></div></div>
+<div></div>
+</div>
+<div class="itemizedlist"><ul type="disc">
+<li><p>
+        Footnotes: if possible, improve upon the existing \catcode kludge
+        for \urls within \footnotes.
+        Do index links work inside footnotes?
+        How can footnotes work in tables?
+      </p></li>
+<li><p>
+        Page-spanning floats in two-column reports. Add a Q&amp;A.
+      </p></li>
+<li><p>
+        Handling of character entities. Make a user guide about this.
+      </p></li>
+<li><p>
+        authorgroup and copyright ranges -- localise rather than
+        use hard-coded &quot;x, y, and z&quot;.
+      </p></li>
+<li><p>
+        Provide a more compact \maketitle for articles.
+      </p></li>
+<li><p>
+        Support per-chapter ToC. Does LaTeX already provide a facility?
+      </p></li>
+<li><p>
+        Support for regular typefaces in literallayout.
+      </p></li>
+<li><p>
+        Support for subtitles.
+      </p></li>
+<li><p>
+        Support for tocbibind.
+      </p></li>
+<li><p>
+        LaTeX whitespace distance after acronyms/abbrevs that terminate with mid-sentence full stops.
+      </p></li>
+<li><p>
+        Parameterise remaining \sc usage.
+      </p></li>
+<li><p>
+        itemizedlist in varlistentry?
+      </p></li>
+<li><p>
+        Better hooks, in places where it can be provided (e.g. figures).
+      </p></li>
+<li><p>
+        Verbatim in tables
+      </p></li>
+<li><p>
+        \refs inside \hyperlinks
+      </p></li>
+<li><p>
+        Processing of PIs
+      </p></li>
+<li><p>
+        Persistent links for reference documentation.
+      </p></li>
+<li><p>
+        Different modes for long headers (e.g. two-per-page or chap on one page
+        and section on the other.)
+      </p></li>
+</ul></div>
+</div>
+<div class="section" lang="en">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="id46660651"></a>Long-term Projects</h2></div></div>
+<div></div>
+</div>
+<div class="itemizedlist"><ul type="disc">
+<li><p>
+        Documentation.
+      </p></li>
+<li><p>
+        Index support.
+      </p></li>
+<li><p>
+        xrefs to unusual types such as anchors.
+      </p></li>
+<li><p>
+        Use xmllint --valid on samples.
+      </p></li>
+<li><p>
+        Proper tables support.
+      </p></li>
+<li><p>
+        bibliomixed support.
+      </p></li>
+<li><p>
+        Componentinfo support. Support of abstracts in more places?
+      </p></li>
+<li><p>
+        Improved verbatim-type support.
+      </p></li>
+<li><p>
+        Q&amp;A support (including hyperlinks).
+      </p></li>
+<li><p>
+        Support multiple section-level indices, etc.
+        (Already have biblio support.)
+      </p></li>
+<li><p>
+        MathML support.
+      </p></li>
+<li><p>
+        Add chunking, so each chapter/part/etc... is created on a separate .tex file
+        and manage the \input. (Also: automation of cover file generation.)
+        May support $rootid attribute, though LaTeX hyperlinking won't work.
+      </p></li>
+</ul></div>
+</div>
+<div class="navfoot">
+<hr>
+<table width="100%" border="0" summary="Footer navigation">
+<tr>
+<td width="33%" align="left"><span class="footdate">$Date: 2004/01/31 08:24:30 $</span></td>
+<td width="34%" align="center"><span class="foothome"><a href="index.html">Home</a></span></td>
+<td width="33%" align="right"> <a href="http://sourceforge.net/projects/db2latex"><img src="http://sourceforge.net/sflogo.php?group_id=22450&amp;type=1" border="0" width="88" height="31" alt="Hosted at SourceForge." /></a> <a href="http://docbook.sourceforge.net/projects/website/"><img src="http://docbook.sourceforge.net/graphics/buttons/website-1.png" border="0" width="128" height="40" alt="Created with Website: a DocBook document type." /></a></td>
+</tr>
+<tr><td colspan="3" align="right"><span class="footcopy"><span class="copyright">Copyright © 2000, 2001, 2002, 2003, 2004 Ramon Casellas and James Devenish. </span></span></td></tr>
+</table>
+</div>
+</body>
+</html>

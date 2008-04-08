@@ -1,0 +1,144 @@
+<html lang="en" lang="en">
+<head>
+<meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type">
+<meta name="generator" content="Website XSL Stylesheet V2.4.1">
+<link rel="home" href="index.html" title="Welcome to the DB2LaTeX XSL Stylesheets">
+<link rel="up" href="notes.html" title="Notes">
+<link rel="previous" href="bugs.html" title="Known Bugs">
+<link rel="next" href="qanda.html" title="FAQ">
+<link rel="first" href="credits.html" title="Credits">
+<link rel="icon" href="graphics/rarrow.gif" type="image/gif">
+<link rel="stylesheet" href="db2latex-web.css" type="text/css">
+    <title>Developer Information</title>
+    
+  </head>
+<body class="website" bgcolor="#ffffcc" text="black" link="#ac0204" vlink="#dc720c" alink="red">
+<div class="top">
+<ul class="top_left"><li>
+<a href="#top"><img align="top" border="0" src="./graphics/db2latex_new_banner.png" width="133" height="22" alt="Developer Information"></a> </li></ul>
+<ul class="top_right">
+<li><a href="http://sourceforge.net/projects/db2latex/">SourceForge</a></li>
+<li><a href="./reference/index.html">Reference</a></li>
+<li><a href="./sample/">Samples</a></li>
+</ul>
+<ul class="bottom_left">
+<li>
+<a href="./index.html">Welcome &amp; News</a> | </li>
+<li>
+<a href="./install.html">Download &amp; Install</a> | </li>
+<li>
+<a href="./guides.html">User Guides</a> | </li>
+<li>
+<a href="./notes.html">Notes, E-mail &amp; Bugs</a> | </li>
+<li><a href="./qanda.html">Q&amp;A</a></li>
+</ul>
+</div>
+<div class="left">
+<table class="panel" width="100%" cellspacing="0" cellpadding="0" border="0">
+<tr><th>Suggestions</th></tr>
+<tr><td>
+<span class="minihead">Search:</span><br><form method="get" action="http://www.google.com/search">
+<input type="text" maxlength="255" name="q" class="q"> <input type="submit" value="Go" class="submit"><input type="hidden" name="domains" value="db2latex.sourceforge.net"><input type="hidden" name="sitesearch" value="db2latex.sourceforge.net">
+</form>
+</td></tr>
+</table>
+<div class="sidebar">
+<h2>On this page:</h2>(Developer Information) <a href="#id46720084">Introduction</a>; <a href="#id46720181">Getting the <span class="acronym">XSL</span> stylesheets</a>.</div>
+</div>
+<a name="top"></a><h1>Developer Information</h1>
+<div class="sect1" lang="en">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="id46720084"></a>Introduction</h2></div></div>
+<div></div>
+</div>
+<p>The contents of this page apply if you are interested in the
+    internals of the <span class="productname">DB2LaTeX</span> <span class="acronym">XSL</span> transformation stylesheets, or if you are
+    interested in becoming an active developer and mantainer of the <span class="productname">DB2LaTeX</span>
+    stylesheets, or just if you would like to be able to write your own XSL
+    customization layers. Also, modification of the localisation files requires
+    a developer-style <span class="productname">DB2LaTeX</span> source tree.</p>
+</div>
+<div class="sect1" lang="en">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="id46720181"></a>Getting the <span class="acronym">XSL</span> stylesheets</h2></div></div>
+<div></div>
+</div>
+<p>In general, see our installation guide.</p>
+<div class="sect2" lang="en">
+<div class="titlepage">
+<div><div><h3 class="title">
+<a name="id46720198"></a>Anonymous <span class="productname">CVS</span> Access</h3></div></div>
+<div></div>
+</div>
+<p>Anonymous <span class="productname">CVS</span> read-only access is available for the <span class="productname">DB2LaTeX</span>
+      project. Follow the following instructions:</p>
+<pre class="screen">baldrick(/opt/sgml/xsl)% cvs -z3
+      -d:pserver:anonymous@cvs.db2latex.sourceforge.net:/cvsroot/db2latex
+      login baldrick(/opt/sgml/xsl)% cvs -z3
+      -d:pserver:anonymous@cvs.db2latex.sourceforge.net:/cvsroot/db2latex co
+      db2latex baldrick(/opt/sgml/xsl)% cvs -z3
+      -d:pserver:anonymous@cvs.db2latex.sourceforge.net:/cvsroot/db2latex
+      logout (Logging out of anonymous@cvs.db2latex.sourceforge.net)</pre>
+</div>
+<div class="sect2" lang="en">
+<div class="titlepage">
+<div><div><h3 class="title">
+<a name="id46720141"></a>Developer <span class="productname">CVS</span> Access</h3></div></div>
+<div></div>
+</div>
+<p>Developer (full) <span class="productname">CVS</span> access is available for the <span class="productname">DB2LaTeX</span> project
+      upon request.</p>
+<pre class="screen">baldrick(/opt/sgml/xsl)% export CVS_RSH=ssh
+      baldrick(/opt/sgml/xsl)% cvs -z3
+      -d:ext:rcasellas@cvs.db2latex.sourceforge.net:/cvsroot/db2latex co
+      db2latex rcasellas@cvs.db2latex.sourceforge.net's password: xxxxxyxxxx
+      cvs server: Updating db2latex...</pre>
+<div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Important">
+<tr>
+<td rowspan="2" align="center" valign="top" width="25"><img alt="[Important]" src="images/important.gif"></td>
+<th align="left">Important</th>
+</tr>
+<tr><td colspan="2" align="left" valign="top"><p>Do not forget to export (setenv in C-sh) the
+        <tt class="envar">CVS_RSH</tt> variable. Otherwise, sourceforge will close the
+        connection without further notice. (Yes, it happened to me too
+        :)</p></td></tr>
+</table></div>
+</div>
+<div class="sect2" lang="en">
+<div class="titlepage">
+<div><div><h3 class="title">
+<a name="id46720222"></a>Configuring and Building <span class="productname">DB2LaTeX</span></h3></div></div>
+<div></div>
+</div>
+<p>
+
+        A <tt class="filename">GNUmakefile</tt> is provided. It can build the
+        <span class="productname">DB2LaTeX</span> documentation and packages. Within the
+        <tt class="filename">admin</tt>, <tt class="filename">xsl/sample</tt> and
+        <tt class="filename">contrib</tt> directories you will find further
+        Makefiles. Some are accompanied by <tt class="filename">README</tt> files or
+        <tt class="literal">help</tt> targets. There is also a top-level
+        <tt class="filename">./configure</tt> script that will set up
+        <tt class="filename">Makefile.local</tt> files for you (currently, this is
+        only known to work with <span class="productname">xsltproc</span> and
+        <span class="productname">Saxon</span>). For regenerating the localisation
+        files, you will need access to the Internet or gentext CVS checkouts.
+
+      </p>
+</div>
+</div>
+<div class="navfoot">
+<hr>
+<table width="100%" border="0" summary="Footer navigation">
+<tr>
+<td width="33%" align="left"><span class="footdate">$Date: 2004/01/31 10:18:27 $</span></td>
+<td width="34%" align="center"><span class="foothome"><a href="index.html">Home</a></span></td>
+<td width="33%" align="right"> <a href="http://sourceforge.net/projects/db2latex"><img src="http://sourceforge.net/sflogo.php?group_id=22450&amp;type=1" border="0" width="88" height="31" alt="Hosted at SourceForge." /></a> <a href="http://docbook.sourceforge.net/projects/website/"><img src="http://docbook.sourceforge.net/graphics/buttons/website-1.png" border="0" width="128" height="40" alt="Created with Website: a DocBook document type." /></a></td>
+</tr>
+<tr><td colspan="3" align="right"><span class="footcopy"><span class="copyright">Copyright © 2000, 2001, 2002, 2003, 2004 Ramon Casellas and James Devenish. </span></span></td></tr>
+</table>
+</div>
+</body>
+</html>

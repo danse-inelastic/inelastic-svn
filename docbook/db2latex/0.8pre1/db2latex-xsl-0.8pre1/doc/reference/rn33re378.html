@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>latex.override</title>
+    <link rel="stylesheet" href="../db2latex-web.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.64.1" />
+    <link rel="home" href="index.html" title="DB2LaTeX API Documentation" />
+    <link rel="up" href="rn33.html" title="Parameters: LaTeX-direct Strings param-direct.mod.xsl" />
+    <link rel="previous" href="rn33re377.html" title="latex.document.font" />
+    <link rel="next" href="rn34.html" title="Parameters: DB2LaTeX Switches param-switch.mod.xsl" />
+    <link rel="icon" href="../graphics/rarrow.gif" type="image/gif" />
+  </head>
+  <body bgcolor="#ffffcc" text="black" link="#ac0204" vlink="#dc720c" alink="red">
+    <div class="top">
+      <ul class="top_left">
+        <li><a href="#top"><img align="top" border="0" src="../graphics/db2latex_new_banner.png" width="133" height="22" alt="latex.override" /></a> </li>
+      </ul>
+      <ul class="top_right">
+        <li>
+          <a href="http://sourceforge.net/projects/db2latex/">SourceForge</a>
+        </li>
+        <li>
+          <a href="../index.html">Home Page</a>
+        </li>
+        <li>
+          <a href="../sample/">Samples</a>
+        </li>
+      </ul>
+      <ul class="bottom_left">
+        <li><a href="./index.html">Reference Contents</a> | </li>
+        <li><a href="../install.html">Download &amp; Install</a> | </li>
+        <li><a href="../guides.html">User Guides</a> | </li>
+        <li><a href="../notes.html">Notes, E-mail &amp; Bugs</a> | </li>
+        <li>
+          <a href="../qanda.html">Q&amp;A</a>
+        </li>
+      </ul>
+    </div>
+    <div class="left">
+      <table class="panel" width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <th>Suggestions</th>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Search:</span>
+            <br />
+            <form method="get" action="http://www.google.com/search"><input type="text" maxlength="255" name="q" class="q" /> <input type="submit" value="Go" class="submit" /><input type="hidden" name="domains" value="db2latex.sourceforge.net" /><input type="hidden" name="sitesearch" value="db2latex.sourceforge.net" /></form>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Next:</span>
+            <br />
+            <a accesskey="n" href="rn34.html">Parameters: DB2LaTeX Switches param switch.mod.xsl</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Previous:</span>
+            <br />
+            <a accesskey="p" href="rn33re377.html">latex.document.font</a>
+            <br />
+            <span class="minihead">Up:</span>
+            <br />
+            <a accesskey="u" href="rn33.html">Parameters: LaTeX direct Strings param direct.mod.xsl</a>
+          </td>
+        </tr>
+      </table>
+      <div class="sidebar"><h2>On this page:</h2>(latex.override) <a href="rn33re378.html#id40605866">A. Description</a>.</div>
+    </div>
+    <div class="note" style="margin-top:2px; color: #804020; text-align: center; font-weight: bold">
+      <a name="top" id="top">Reference Section</a>
+    </div>
+    <div class="refentry" lang="en" xml:lang="en">
+      <a id="param.latex.override"></a>
+      <div class="titlepage">
+        
+        
+      </div>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>latex.override —  Override DB2LaTeX's preamble with a custom preamble. </p>
+      </div>
+      <div class="refsynopsisdiv">
+        <h2>Synopsis</h2>
+        <pre class="synopsis">
+&lt;xsl:param name="latex.override"/&gt;</pre>
+      </div>
+      <div class="description">
+        <a name="id40605866" id="id40605866"></a>
+        <h2>A. Description</h2>
+        <p>
+		When this variable is set, the entire DB2LaTeX premable will be superseded.
+		<span class="emphasis"><em>You should not normally need or want to use this.</em></span>
+		It may cause LaTeX typesetting problems. This is a last resort or
+		“<span class="quote">expert</span>” feature.
+		</p>
+      </div>
+      <div class="refsection">
+        <a name="id41064519" id="id41064519"></a>
+        <h2>G. Uses</h2>
+        <p>Documented templates that use this parameter:
+          </p>
+        <div class="itemizedlist">
+          <ul type="disc">
+            <li>
+              <a href="rn37re429.html" target="_top">generate.latex.article.preamble</a>
+            </li>
+            <li>
+              <a href="rn37re430.html" target="_top">generate.latex.book.preamble</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="rn33re377.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="rn33.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="rn34.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">latex.document.font </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Parameters: DB2LaTeX Switches param-switch.mod.xsl</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

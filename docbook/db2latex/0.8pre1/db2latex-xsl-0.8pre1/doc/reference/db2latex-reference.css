@@ -1,0 +1,63 @@
+BODY {
+	background-color: #f7f7ff;
+}
+
+H1 {
+	margin-bottom: 0em;
+}
+
+H2 {
+	margin-top: 0.25em;
+	margin-bottom: 0em;
+	color: #4282fe;
+}
+
+H2.title {
+	margin-top: 0em;
+	margin-bottom: 0.5em;
+}
+
+H3 {
+	color: #22429e;
+}
+
+P {
+	margin-top: 0px;
+}
+
+DIV.titlepage {
+	font-family: sans-serif;
+	text-align: center;
+	color: #660033;
+}
+
+/* background-color: #ffc; */
+
+DIV.revhistory TABLE {
+	border-collapse: collapse;
+	border: 2px orange dashed;
+	background-color: white;
+}
+
+DIV.revhistory TABLE TH, DIV.revhistory TABLE TD {
+	border: 2px orange dashed;
+	text-align: center;
+}
+
+DIV.navheader {
+	background-color: #f7f7ff;
+	color: #22429e;
+}
+
+DIV.navheader TD,DIV.navfooter TD[align="right"],DIV.navfooter TD[align="left"] {
+	border: 1px solid #4282fe;
+	background-color: white;
+	color: #22429e;
+}
+
+DIV.navheader HR {
+	background-color: #f7f7ff;
+	color: #4282fe;
+	height: 3px;
+}
+

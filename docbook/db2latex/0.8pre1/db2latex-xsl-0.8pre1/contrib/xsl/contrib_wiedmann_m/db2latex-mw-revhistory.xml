@@ -1,0 +1,25 @@
+<?xml version='1.0'?>
+<!DOCTYPE latexbindings SYSTEM "http://db2latex.sourceforge.net/xsl/latex.mapping.dtd">
+
+<latexbindings>
+
+  <latexmapping role="begin">
+    <mapping key="revhistory" text="">
+      <line>&#10;</line>
+      <line>\pagebreak&#10;</line>
+      <line>\section*{%title%}&#10;</line>
+      <line>\label{%id%}\hypertarget{%id%}{}%&#10;</line>
+      <line>\begin{center}&#10;</line>
+      <line>\begin{tabularx}{\linewidth}{@{}llX@{}}&#10;</line>
+    </mapping>
+  </latexmapping>
+
+  <!-- LaTeX mapping, role, END -->
+  <latexmapping role="end">
+    <mapping key="revhistory" text="">
+      <line>\end{tabularx}&#10;</line>
+      <line>\end{center}&#10;</line>
+    </mapping>
+  </latexmapping>
+
+</latexbindings>

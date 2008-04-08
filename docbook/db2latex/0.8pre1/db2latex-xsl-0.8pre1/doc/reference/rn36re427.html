@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>processing-instruction('latex')</title>
+    <link rel="stylesheet" href="../db2latex-web.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.64.1" />
+    <link rel="home" href="index.html" title="DB2LaTeX API Documentation" />
+    <link rel="up" href="rn36.html" title="Processing Instructions pi.mod.xsl" />
+    <link rel="previous" href="rn36re426.html" title="processing-instruction()" />
+    <link rel="next" href="rn36re428.html" title="processing-instruction('db2latex')" />
+    <link rel="icon" href="../graphics/rarrow.gif" type="image/gif" />
+  </head>
+  <body bgcolor="#ffffcc" text="black" link="#ac0204" vlink="#dc720c" alink="red">
+    <div class="top">
+      <ul class="top_left">
+        <li><a href="#top"><img align="top" border="0" src="../graphics/db2latex_new_banner.png" width="133" height="22" alt="processing-instruction('latex')" /></a> </li>
+      </ul>
+      <ul class="top_right">
+        <li>
+          <a href="http://sourceforge.net/projects/db2latex/">SourceForge</a>
+        </li>
+        <li>
+          <a href="../index.html">Home Page</a>
+        </li>
+        <li>
+          <a href="../sample/">Samples</a>
+        </li>
+      </ul>
+      <ul class="bottom_left">
+        <li><a href="./index.html">Reference Contents</a> | </li>
+        <li><a href="../install.html">Download &amp; Install</a> | </li>
+        <li><a href="../guides.html">User Guides</a> | </li>
+        <li><a href="../notes.html">Notes, E-mail &amp; Bugs</a> | </li>
+        <li>
+          <a href="../qanda.html">Q&amp;A</a>
+        </li>
+      </ul>
+    </div>
+    <div class="left">
+      <table class="panel" width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <th>Suggestions</th>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Search:</span>
+            <br />
+            <form method="get" action="http://www.google.com/search"><input type="text" maxlength="255" name="q" class="q" /> <input type="submit" value="Go" class="submit" /><input type="hidden" name="domains" value="db2latex.sourceforge.net" /><input type="hidden" name="sitesearch" value="db2latex.sourceforge.net" /></form>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Next:</span>
+            <br />
+            <a accesskey="n" href="rn36re428.html">processing instruction('db2latex')</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Previous:</span>
+            <br />
+            <a accesskey="p" href="rn36re426.html">processing instruction()</a>
+            <br />
+            <span class="minihead">Up:</span>
+            <br />
+            <a accesskey="u" href="rn36.html">Processing Instructions pi.mod.xsl</a>
+          </td>
+        </tr>
+      </table>
+      <div class="sidebar"><h2>On this page:</h2>(processing instruction('latex')) <a href="rn36re427.html#id40617215">A. Description</a>; <a href="rn36re427.html#id40617264">B. Pertinent Variables</a>.</div>
+    </div>
+    <div class="note" style="margin-top:2px; color: #804020; text-align: center; font-weight: bold">
+      <a name="top" id="top">Reference Section</a>
+    </div>
+    <div class="refentry" lang="en" xml:lang="en">
+      <a id="id40617177"></a>
+      <div class="titlepage">
+        
+        
+      </div>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>processing-instruction('latex') —  Output arbitrary <span class="productname">LaTeX</span> text </p>
+      </div>
+      <div class="refsynopsisdiv">
+        <h2>Synopsis</h2>
+        <a id="template.processing-instruction('latex')"></a>
+        <pre class="synopsis">&lt;xsl:template match="processing-instruction('latex')"/&gt;</pre>
+      </div>
+      <div class="description">
+        <a name="id40617215" id="id40617215"></a>
+        <h2>A. Description</h2>
+        <p>
+			
+			The contents of this processing instruction will
+			output directly by <span class="productname">DB2LaTeX</span>. This allows the
+			inclusion of <span class="productname">LaTeX</span>-specific instructions that
+			will be recognised only by <span class="productname">LaTeX</span> stylesheets.
+			For example, <tt class="literal">&lt;?latex \sloppy?&gt;</tt>
+			would insert <tt class="literal">\sloppy</tt> into the output
+			without any character escaping.
+			
+			</p>
+      </div>
+      <div class="variables">
+        <a name="id40617264" id="id40617264"></a>
+        <h2>B. Pertinent Variables</h2>
+        <p>There are no configuration variables for this template.</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="rn36re426.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="rn36.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="rn36re428.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">processing-instruction() </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> processing-instruction('db2latex')</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>
