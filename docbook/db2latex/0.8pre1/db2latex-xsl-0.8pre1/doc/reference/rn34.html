@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Parameters: DB2LaTeX Switches param-switch.mod.xsl</title>
+    <link rel="stylesheet" href="../db2latex-web.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.64.1" />
+    <link rel="home" href="index.html" title="DB2LaTeX API Documentation" />
+    <link rel="up" href="index.html" title="DB2LaTeX API Documentation" />
+    <link rel="previous" href="rn33re378.html" title="latex.override" />
+    <link rel="next" href="rn34re379.html" title="latex.caption.lot.titles.only" />
+    <link rel="icon" href="../graphics/rarrow.gif" type="image/gif" />
+  </head>
+  <body bgcolor="#ffffcc" text="black" link="#ac0204" vlink="#dc720c" alink="red">
+    <div class="top">
+      <ul class="top_left">
+        <li><a href="#top"><img align="top" border="0" src="../graphics/db2latex_new_banner.png" width="133" height="22" alt="Parameters: DB2LaTeX Switches param-switch.mod.xsl" /></a> </li>
+      </ul>
+      <ul class="top_right">
+        <li>
+          <a href="http://sourceforge.net/projects/db2latex/">SourceForge</a>
+        </li>
+        <li>
+          <a href="../index.html">Home Page</a>
+        </li>
+        <li>
+          <a href="../sample/">Samples</a>
+        </li>
+      </ul>
+      <ul class="bottom_left">
+        <li><a href="./index.html">Reference Contents</a> | </li>
+        <li><a href="../install.html">Download &amp; Install</a> | </li>
+        <li><a href="../guides.html">User Guides</a> | </li>
+        <li><a href="../notes.html">Notes, E-mail &amp; Bugs</a> | </li>
+        <li>
+          <a href="../qanda.html">Q&amp;A</a>
+        </li>
+      </ul>
+    </div>
+    <div class="left">
+      <table class="panel" width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <th>Suggestions</th>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Search:</span>
+            <br />
+            <form method="get" action="http://www.google.com/search"><input type="text" maxlength="255" name="q" class="q" /> <input type="submit" value="Go" class="submit" /><input type="hidden" name="domains" value="db2latex.sourceforge.net" /><input type="hidden" name="sitesearch" value="db2latex.sourceforge.net" /></form>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Next:</span>
+            <br />
+            <a accesskey="n" href="rn34re379.html">latex.caption.lot.titles.only</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Previous:</span>
+            <br />
+            <a accesskey="p" href="rn33re378.html">latex.override</a>
+          </td>
+        </tr>
+      </table>
+      <div class="sidebar"><h2>On this page:</h2>(Parameters: DB2LaTeX Switches param switch.mod.xsl) </div>
+    </div>
+    <div class="note" style="margin-top:2px; color: #804020; text-align: center; font-weight: bold">
+      <a name="top" id="top">Reference Section</a>
+    </div>
+    <div class="reference" lang="en" xml:lang="en">
+      <a id="param-switch"></a>
+      <div class="titlepage">
+        <div>
+          <div>
+            <h1 class="title"><a id="param-switch"></a>Parameters: <span class="productname">DB2LaTeX<br /></span> Switches <tt class="filename">param-switch.mod.xsl</tt></h1>
+          </div>
+          <div>
+            <div class="authorgroup">
+              <div class="author">
+                <h3 class="author">
+                  <span class="firstname">Ramon</span>
+                  <span class="surname">Casellas</span>
+                </h3>
+              </div>
+              <div class="author">
+                <h3 class="author">
+                  <span class="firstname">James</span>
+                  <span class="surname">Devenish</span>
+                </h3>
+              </div>
+            </div>
+          </div>
+          <div>
+            <p class="releaseinfo">
+				$Id: param-switch.mod.xsl,v 1.17 2004/01/31 11:52:31 j-devenish Exp $
+			</p>
+          </div>
+          <div>
+            <p class="copyright">Copyright © 2000, 2001, 2002, 2003, 2004 Ramon Casellas</p>
+          </div>
+          <div>
+            <div class="revhistory">
+              <table border="1" width="100%" summary="Revision history">
+                <tr>
+                  <th align="left" valign="top" colspan="3">
+                    <b>Revision History</b>
+                  </th>
+                </tr>
+                <tr>
+                  <td align="left">Revision 1.1</td>
+                  <td align="left">May-January 2004</td>
+                  <td> </td>
+                </tr>
+                <tr>
+                  <td align="left" colspan="3">Major review of documentation.</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+        
+        <hr />
+      </div>
+      <div class="partintro" lang="en" xml:lang="en">
+        <div>
+          
+          
+        </div>
+        <p>
+			
+			The values of parameters in this file are used to influence
+			the behaviour of <span class="productname">DB2LaTeX</span> templates through the selection
+			of pre-defined options.
+			All parameter names begin with “<span class="quote">latex.</span>”.
+			
+			</p>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <h3 class="title">Note</h3>
+          <p>
+				
+				In some stylesheets, tests of parameter values use
+				“<span class="quote">!=0</span>” logic. However, <span class="productname">DB2LaTeX</span> uses
+				“<span class="quote">=1</span>” logic. This means that empty parameters are
+				“<span class="quote">off</span>” in <span class="productname">DB2LaTeX</span> but “<span class="quote">on</span>” in those
+				other stylesheets. The <a href="http://www.w3.org" target="_top">XPath</a> values
+				“<span class="quote">true()</span>” and “<span class="quote">false()</span>” work as
+				expected.
+				
+				</p>
+        </div>
+        <div class="toc">
+          <p>
+            <b>Table of Contents</b>
+          </p>
+          <dl>
+            <dt><a href="rn34re379.html">latex.caption.lot.titles.only</a> -  Control the display of captions in lists of figures.  </dt>
+            <dt><a href="rn34re380.html">latex.bibfiles</a> - 
+		Control the output of the \bibliography{.bib}.
+	</dt>
+            <dt><a href="rn34re381.html">latex.math.support</a> -  Controls the output of LaTeX packages and commands to support 
+	    documents with math commands and environments..</dt>
+            <dt><a href="rn34re382.html">latex.output.revhistory</a> -  Controls  if the revision history table is generated as the first document 
+	    table.
+	</dt>
+            <dt><a href="rn34re383.html">latex.fancybox.options</a> -  Options for fancybox </dt>
+            <dt><a href="rn34re384.html">latex.pdf.support</a> -  Controls the output of LaTeX commands to support the generation 
+	    of PDF files.</dt>
+            <dt><a href="rn34re385.html">latex.generate.indexterm</a> -  Enable the generation of indexterms </dt>
+            <dt><a href="rn34re386.html">latex.hyphenation.tttricks</a> -  DB2LaTeX hyphenation linebreak tricks </dt>
+            <dt><a href="rn34re387.html">latex.decimal.point</a> -  Decimal point for LaTeX tables </dt>
+            <dt><a href="rn34re388.html">latex.trim.verbatim</a> - Toggle the trimming of leading and trailing whitespace in verbatim environments </dt>
+            <dt><a href="rn34re389.html">latex.use.ltxtable</a> - Toggle the use of the ltxtable LaTeX package</dt>
+            <dt><a href="rn34re390.html">latex.use.longtable</a> - Toggle the use of the longtable LaTeX package</dt>
+            <dt><a href="rn34re391.html">latex.use.overpic</a> - Toggle the use of the overpic LaTeX package</dt>
+            <dt><a href="rn34re392.html">latex.use.umoline</a> - Toggle the use of the umoline LaTeX package</dt>
+            <dt><a href="rn34re393.html">latex.use.url</a> - Toggle the use of the url LaTeX package</dt>
+            <dt><a href="rn34re394.html">latex.is.draft</a> - Toggle the use of the the draft preamble</dt>
+            <dt><a href="rn34re395.html">latex.use.varioref</a> - Toggle the use of the varioref LaTeX package</dt>
+            <dt><a href="rn34re396.html">latex.use.fancyhdr</a> - Toggle the use of the fancyhdr LaTeX package</dt>
+            <dt><a href="rn34re397.html">latex.bridgehead.in.lot</a> -  Control the inclusion of chapter titles in lots </dt>
+            <dt><a href="rn34re398.html">latex.fancyhdr.truncation.style</a> -  Configure the application of truncation partitions </dt>
+            <dt><a href="rn34re399.html">latex.fancyhdr.truncation.partition</a> -  Configure the width of header portions on each page </dt>
+            <dt><a href="rn34re400.html">latex.fancyhdr.style</a> -  Section/chapter style for fancy headers </dt>
+            <dt><a href="rn34re401.html">latex.use.parskip</a> - Toggle the use of the parskip LaTeX package</dt>
+            <dt><a href="rn34re402.html">latex.use.noindent</a> - Toggle the use of noindent commands</dt>
+            <dt><a href="rn34re403.html">latex.use.subfigure</a> - Toggle the use of the subfigure LaTeX package</dt>
+            <dt><a href="rn34re404.html">latex.use.rotating</a> - Toggle the use of the rotating LaTeX package</dt>
+            <dt><a href="rn34re405.html">latex.use.tabularx</a> - Toggle the use of the tabularx LaTeX package</dt>
+            <dt><a href="rn34re406.html">latex.use.dcolumn</a> - Toggle the use of the dcolumn LaTeX package</dt>
+            <dt><a href="rn34re407.html">latex.use.hyperref</a> - Toggle the use of the hyperref LaTeX package</dt>
+            <dt><a href="rn34re408.html">latex.use.fancybox</a> - Toggle the use of the fancybox LaTeX package</dt>
+            <dt><a href="rn34re409.html">latex.use.fancyvrb</a> - Toggle the use of the fancyvrb LaTeX package</dt>
+            <dt><a href="rn34re410.html">latex.use.isolatin1</a> - Toggle the use of the isolatin1 LaTeX package</dt>
+            <dt><a href="rn34re411.html">latex.use.ucs</a> -  Choose whether to use the unicode LaTeX package</dt>
+            <dt><a href="rn34re412.html">latex.biblio.output</a> -  Control which references are cited in the bibliography </dt>
+            <dt><a href="rn34re413.html">latex.biblioentry.style</a> -  Control bibliographic citation style </dt>
+            <dt><a href="rn34re414.html">latex.caption.swapskip</a> -  Improved typesetting of captions  </dt>
+            <dt><a href="rn34re415.html">latex.graphics.formats</a> -  Control imagedata selection. </dt>
+            <dt><a href="rn34re416.html">latex.entities</a> -  Control Unicode character handling. </dt>
+            <dt><a href="rn34re417.html">latex.otherterm.is.preferred</a> -  Control the use of otherterm attributes </dt>
+            <dt><a href="rn34re418.html">latex.alt.is.preferred</a> -  Control the use of alt text </dt>
+            <dt><a href="rn34re419.html">latex.apply.title.templates</a> -  Whether to apply templates for component titles. </dt>
+            <dt><a href="rn34re420.html">latex.apply.title.templates.admonitions</a> -  Whether to apply templates for admonition titles. </dt>
+            <dt><a href="rn34re421.html">latex.url.quotation</a> -  Whether to delimit URLs with quotation characters </dt>
+            <dt><a href="rn34re422.html">latex.ulink.protocols.relaxed</a> -  Control string comparison for ulinks </dt>
+            <dt><a href="rn34re423.html">latex.suppress.blank.page.headers</a> -  Control the suppression of headers/footers on blank pages in double-side documents </dt>
+          </dl>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="rn33re378.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="index.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="rn34re379.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">latex.override </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> latex.caption.lot.titles.only</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Callouts callout.mod.xsl</title>
+    <link rel="stylesheet" href="../db2latex-web.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.64.1" />
+    <link rel="home" href="index.html" title="DB2LaTeX API Documentation" />
+    <link rel="up" href="index.html" title="DB2LaTeX API Documentation" />
+    <link rel="previous" href="rn10re95.html" title="bridgehead" />
+    <link rel="next" href="rn11re96.html" title="latex.preamble.essential.callout" />
+    <link rel="icon" href="../graphics/rarrow.gif" type="image/gif" />
+  </head>
+  <body bgcolor="#ffffcc" text="black" link="#ac0204" vlink="#dc720c" alink="red">
+    <div class="top">
+      <ul class="top_left">
+        <li><a href="#top"><img align="top" border="0" src="../graphics/db2latex_new_banner.png" width="133" height="22" alt="Callouts callout.mod.xsl" /></a> </li>
+      </ul>
+      <ul class="top_right">
+        <li>
+          <a href="http://sourceforge.net/projects/db2latex/">SourceForge</a>
+        </li>
+        <li>
+          <a href="../index.html">Home Page</a>
+        </li>
+        <li>
+          <a href="../sample/">Samples</a>
+        </li>
+      </ul>
+      <ul class="bottom_left">
+        <li><a href="./index.html">Reference Contents</a> | </li>
+        <li><a href="../install.html">Download &amp; Install</a> | </li>
+        <li><a href="../guides.html">User Guides</a> | </li>
+        <li><a href="../notes.html">Notes, E-mail &amp; Bugs</a> | </li>
+        <li>
+          <a href="../qanda.html">Q&amp;A</a>
+        </li>
+      </ul>
+    </div>
+    <div class="left">
+      <table class="panel" width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <th>Suggestions</th>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Search:</span>
+            <br />
+            <form method="get" action="http://www.google.com/search"><input type="text" maxlength="255" name="q" class="q" /> <input type="submit" value="Go" class="submit" /><input type="hidden" name="domains" value="db2latex.sourceforge.net" /><input type="hidden" name="sitesearch" value="db2latex.sourceforge.net" /></form>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Next:</span>
+            <br />
+            <a accesskey="n" href="rn11re96.html">latex.preamble.essential.callout</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Previous:</span>
+            <br />
+            <a accesskey="p" href="rn10re95.html">bridgehead</a>
+          </td>
+        </tr>
+      </table>
+      <div class="sidebar"><h2>On this page:</h2>(Callouts callout.mod.xsl) </div>
+    </div>
+    <div class="note" style="margin-top:2px; color: #804020; text-align: center; font-weight: bold">
+      <a name="top" id="top">Reference Section</a>
+    </div>
+    <div class="reference" lang="en" xml:lang="en">
+      <a id="callout"></a>
+      <div class="titlepage">
+        <div>
+          <div>
+            <h1 class="title"><a id="callout"></a>Callouts <tt class="filename">callout.mod.xsl</tt></h1>
+          </div>
+          <div>
+            <div class="authorgroup">
+              <div class="author">
+                <h3 class="author">
+                  <span class="firstname">Ramon</span>
+                  <span class="surname">Casellas</span>
+                </h3>
+              </div>
+              <div class="author">
+                <h3 class="author">
+                  <span class="firstname">James</span>
+                  <span class="surname">Devenish</span>
+                </h3>
+              </div>
+            </div>
+          </div>
+          <div>
+            <p class="releaseinfo">
+				$Id: callout.mod.xsl,v 1.10 2004/01/14 14:54:32 j-devenish Exp $
+			</p>
+          </div>
+          <div>
+            <p class="copyright">Copyright © 2000, 2001, 2002, 2003, 2004 Ramon Casellas</p>
+          </div>
+          <div>
+            <div class="revhistory">
+              <table border="1" width="100%" summary="Revision history">
+                <tr>
+                  <th align="left" valign="top" colspan="3">
+                    <b>Revision History</b>
+                  </th>
+                </tr>
+                <tr>
+                  <td align="left">Revision 1.5</td>
+                  <td align="left">May-January 2004</td>
+                  <td> </td>
+                </tr>
+                <tr>
+                  <td align="left" colspan="3">Major review of documentation.</td>
+                </tr>
+                <tr>
+                  <td align="left">Revision 1.6</td>
+                  <td align="left">January 2004</td>
+                  <td> </td>
+                </tr>
+                <tr>
+                  <td align="left" colspan="3">Added callout support.</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+        
+        <hr />
+      </div>
+      <div class="partintro" lang="en" xml:lang="en">
+        <div>
+          
+          
+        </div>
+        <p>
+			
+			These template use the concept of an “<span class="quote">areamark</span>”, an
+			“<span class="quote">arearef</span>” and an “<span class="quote">areasymbol</span>”. An areamark
+			is a way of illustrating a callout area as part of an image or
+			listing. An arearef is a way of illustrating a callout area as part of
+			a callout list. By default, the areamark and the arearef are both
+			represented by the areasymbol. (Aside: that the areamark is drawn
+			first.) This system allows opens the possibility for an areamark to
+			draw a box around an area in addition to displaying the areasymbol.
+			
+			</p>
+        <div class="toc">
+          <p>
+            <b>Table of Contents</b>
+          </p>
+          <dl>
+            <dt><a href="rn11re96.html">latex.preamble.essential.callout</a> -  Essential preamble for callout.mod.xsl support </dt>
+            <dt><a href="rn11re97.html">programlistingco|screenco</a> - Process programlistingco and screenco elements</dt>
+            <dt><a href="rn11re98.html">areaspec|areaset</a> - Process areaset-related elements</dt>
+            <dt><a href="rn11re99.html">co</a> - Process co-related elements</dt>
+            <dt><a href="rn11re100.html">calloutlist</a> - Process calloutlist elements</dt>
+            <dt><a href="rn11re101.html">calloutlist/title</a> - Process titles for calloutlist elements</dt>
+            <dt><a href="rn11re102.html">callout</a> - Process callout elements</dt>
+            <dt><a href="rn11re103.html">generate.callout.arearefs</a> - Determine a callout's arearefs</dt>
+            <dt><a href="rn11re104.html">callout (in generate.callout.arearef mode)</a> - Format a callout's arearefs</dt>
+            <dt><a href="rn11re105.html">area (in generate.area.arearef mode)</a> - Illustrate a reference to a callout's area</dt>
+            <dt><a href="rn11re106.html">area (in generate.arearef mode)</a> - Illustrate a reference to a callout's area</dt>
+            <dt><a href="rn11re107.html">area (in generate.arearef.calspair mode)</a> - Illustrate a reference to a callout's area</dt>
+            <dt><a href="rn11re108.html">area (in generate.arearef.linerange mode)</a> - Illustrate a reference to a callout's area</dt>
+            <dt><a href="rn11re109.html">area</a> - Illustrate a callout's area as part of an image or listing</dt>
+            <dt><a href="rn11re110.html">area (in generate.area.areamark mode)</a> - Illustrate a callout's area as part of an image or listing</dt>
+            <dt><a href="rn11re111.html">area (in generate.areamark mode)</a> - Illustrate a callout's area as part of an image or listing</dt>
+            <dt><a href="rn11re112.html">area (in generate.areamark.calspair mode)</a> - Illustrate a callout's area as part of an image or listing</dt>
+            <dt><a href="rn11re113.html">area (in generate.area.areasymbol mode)</a> - Illustrate a callout's area as part of an image or listing</dt>
+            <dt><a href="rn11re114.html">callout (in generate.callout.areasymbol mode)</a> - Illustrate a callout's area as part of an image or listing</dt>
+            <dt><a href="rn11re115.html">mediaobjectco</a> - Process mediaobjectco elements</dt>
+            <dt><a href="rn11re116.html">imageobjectco</a> - Process imageobjectco elements</dt>
+            <dt><a href="rn11re117.html">imageobjectco/imageobject</a> - Process a imageobjectco's imageobject elements</dt>
+          </dl>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="rn10re95.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="index.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="rn11re96.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">bridgehead </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> latex.preamble.essential.callout</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

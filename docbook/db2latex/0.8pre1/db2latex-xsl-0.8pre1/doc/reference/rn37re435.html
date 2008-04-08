@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>generate.latex.common.preamble</title>
+    <link rel="stylesheet" href="../db2latex-web.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.64.1" />
+    <link rel="home" href="index.html" title="DB2LaTeX API Documentation" />
+    <link rel="up" href="rn37.html" title="Variables and Templates used in LaTeX Preamble Generation" />
+    <link rel="previous" href="rn37re434.html" title="latex.language.option" />
+    <link rel="next" href="rn37re436.html" title="generate.latex.draft.preamble" />
+    <link rel="icon" href="../graphics/rarrow.gif" type="image/gif" />
+  </head>
+  <body bgcolor="#ffffcc" text="black" link="#ac0204" vlink="#dc720c" alink="red">
+    <div class="top">
+      <ul class="top_left">
+        <li><a href="#top"><img align="top" border="0" src="../graphics/db2latex_new_banner.png" width="133" height="22" alt="generate.latex.common.preamble" /></a> </li>
+      </ul>
+      <ul class="top_right">
+        <li>
+          <a href="http://sourceforge.net/projects/db2latex/">SourceForge</a>
+        </li>
+        <li>
+          <a href="../index.html">Home Page</a>
+        </li>
+        <li>
+          <a href="../sample/">Samples</a>
+        </li>
+      </ul>
+      <ul class="bottom_left">
+        <li><a href="./index.html">Reference Contents</a> | </li>
+        <li><a href="../install.html">Download &amp; Install</a> | </li>
+        <li><a href="../guides.html">User Guides</a> | </li>
+        <li><a href="../notes.html">Notes, E-mail &amp; Bugs</a> | </li>
+        <li>
+          <a href="../qanda.html">Q&amp;A</a>
+        </li>
+      </ul>
+    </div>
+    <div class="left">
+      <table class="panel" width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <th>Suggestions</th>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Search:</span>
+            <br />
+            <form method="get" action="http://www.google.com/search"><input type="text" maxlength="255" name="q" class="q" /> <input type="submit" value="Go" class="submit" /><input type="hidden" name="domains" value="db2latex.sourceforge.net" /><input type="hidden" name="sitesearch" value="db2latex.sourceforge.net" /></form>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Next:</span>
+            <br />
+            <a accesskey="n" href="rn37re436.html">generate.latex.draft.preamble</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Previous:</span>
+            <br />
+            <a accesskey="p" href="rn37re434.html">latex.language.option</a>
+            <br />
+            <span class="minihead">Up:</span>
+            <br />
+            <a accesskey="u" href="rn37.html">Variables and Templates used in LaTeX Preamble Generation</a>
+          </td>
+        </tr>
+      </table>
+      <div class="sidebar"><h2>On this page:</h2>(generate.latex.common.preamble) <a href="rn37re435.html#id40618798">A. Description</a>; <a href="rn37re435.html#id40618836">B. Pertinent Variables</a>; <a href="rn37re435.html#id40619060">F. Further Reading</a>.</div>
+    </div>
+    <div class="note" style="margin-top:2px; color: #804020; text-align: center; font-weight: bold">
+      <a name="top" id="top">Reference Section</a>
+    </div>
+    <div class="refentry" lang="en" xml:lang="en">
+      <a id="template.generate.latex.common.preamble"></a>
+      <div class="titlepage">
+        
+        
+      </div>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>generate.latex.common.preamble — 
+
+			Common <span class="productname">LaTeX</span> preamble shared by <a href="http://www.oasis-open.org/docbook/documentation/reference/html/articles.html"><tt class="sgmltag-element">articles<a id="id40618756" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/articles.html">2.0.9</a>] and
+			<a href="http://www.oasis-open.org/docbook/documentation/reference/html/books.html"><tt class="sgmltag-element">books<a id="id40618775" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/books.html">2.0.9</a>], and other document classes. Most of the
+			packages and package options are managed here.
+
+		</p>
+      </div>
+      <div class="refsynopsisdiv">
+        <h2>Synopsis</h2>
+        <pre class="synopsis"></pre>
+      </div>
+      <div class="description">
+        <a name="id40618798" id="id40618798"></a>
+        <h2>A. Description</h2>
+        <p>
+
+			The <span class="productname">LaTeX</span> preamble, after the <tt class="function">\documentclass</tt> command but before the
+			<tt class="function">\begin{document}</tt> environment.
+
+			</p>
+      </div>
+      <div class="variables">
+        <a name="id40618836" id="id40618836"></a>
+        <h2>B. Pertinent Variables</h2>
+        <div class="itemizedlist">
+          <ul type="disc">
+            <li>
+              <a href="rn34re384.html" title="latex.pdf.support">latex.pdf.support</a>
+            </li>
+            <li>
+              <a href="rn37re439.html" title="latex.pdf.preamble">latex.pdf.preamble</a>
+            </li>
+            <li>
+              <a href="rn33re336.html" title="latex.article.varsets">latex.article.varsets</a>
+            </li>
+            <li>
+              <a href="rn33re339.html" title="latex.book.varsets">latex.book.varsets</a>
+            </li>
+            <li>
+              <a href="rn34re397.html" title="latex.bridgehead.in.lot">latex.bridgehead.in.lot</a>
+            </li>
+            <li>
+              <a href="rn34re396.html" title="latex.use.fancyhdr">latex.use.fancyhdr</a>
+            </li>
+            <li>
+              <a href="rn34re400.html" title="latex.fancyhdr.style">latex.fancyhdr.style</a>
+            </li>
+            <li>
+              <a href="rn34re399.html" title="latex.fancyhdr.truncation.partition">latex.fancyhdr.truncation.partition</a>
+            </li>
+            <li>
+              <a href="rn34re398.html" title="latex.fancyhdr.truncation.style">latex.fancyhdr.truncation.style</a>
+            </li>
+            <li>
+              <a href="rn34re395.html" title="latex.use.varioref">latex.use.varioref</a>
+            </li>
+            <li>
+              <a href="rn33re361.html" title="latex.varioref.options">latex.varioref.options</a>
+            </li>
+            <li>
+              <a href="rn34re406.html" title="latex.use.dcolumn">latex.use.dcolumn</a>
+            </li>
+            <li>
+              <a href="rn34re387.html" title="latex.decimal.point">latex.decimal.point</a>
+            </li>
+            <li>
+              <a href="rn34re408.html" title="latex.use.fancybox">latex.use.fancybox</a>
+            </li>
+            <li>
+              <a href="rn34re409.html" title="latex.use.fancyvrb">latex.use.fancyvrb</a>
+            </li>
+            <li>
+              <a href="rn33re363.html" title="latex.fancyvrb.tabsize">latex.fancyvrb.tabsize</a>
+            </li>
+            <li>
+              <a href="rn34re410.html" title="latex.use.isolatin1">latex.use.isolatin1</a>
+            </li>
+            <li>
+              <a href="rn34re401.html" title="latex.use.parskip">latex.use.parskip</a>
+            </li>
+            <li>
+              <a href="rn34re404.html" title="latex.use.rotating">latex.use.rotating</a>
+            </li>
+            <li>
+              <a href="rn34re403.html" title="latex.use.subfigure">latex.use.subfigure</a>
+            </li>
+            <li>
+              <a href="rn34re405.html" title="latex.use.tabularx">latex.use.tabularx</a>
+            </li>
+            <li>
+              <a href="rn34re392.html" title="latex.use.umoline">latex.use.umoline</a>
+            </li>
+            <li>
+              <a href="rn34re393.html" title="latex.use.url">latex.use.url</a>
+            </li>
+            <li>
+              <a href="rn34re381.html" title="latex.math.support">latex.math.support</a>
+            </li>
+            <li>
+              <a href="rn37re441.html">latex.math.preamble</a>
+            </li>
+            <li>
+              <a href="rn33re377.html" title="latex.document.font">latex.document.font</a>
+            </li>
+            <li>
+              <a href="rn34re407.html" title="latex.use.hyperref">latex.use.hyperref</a>
+            </li>
+            <li>
+              <a href="rn05re53.html" title="latex.admonition.environment">latex.admonition.environment</a>
+            </li>
+            <li>
+              <a href="rn34re414.html" title="latex.caption.swapskip">latex.caption.swapskip</a>
+            </li>
+            <li>
+              <a href="rn34re386.html" title="latex.hyphenation.tttricks">latex.hyphenation.tttricks</a>
+            </li>
+            <li>
+              <a href="rn37re434.html" title="latex.language.option">latex.language.option</a>
+            </li>
+            <li>
+              <a href="rn34re394.html" title="latex.is.draft">latex.is.draft</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="seealso">
+        <a name="id40619060" id="id40619060"></a>
+        <h2>F. Further Reading</h2>
+        <div class="itemizedlist">
+          <ul type="disc">
+            <li>
+              <a href="rn09re94.html" title="generate.latex.pagestyle">generate.latex.pagestyle</a>
+            </li>
+            <li>???</li>
+            <li>
+              <a href="rn37re440.html" title="latex.hyperref.preamble">latex.hyperref.preamble</a>
+            </li>
+            <li>???</li>
+            <li>
+              <a href="rn37re442.html" title="latex.graphicext">latex.graphicext</a>
+            </li>
+            <li>
+              <a href="rn37re436.html" title="generate.latex.draft.preamble">generate.latex.draft.preamble</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="rn37re434.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="rn37.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="rn37re436.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">latex.language.option </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> generate.latex.draft.preamble</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,861 @@
+<html lang="en" lang="en">
+<head>
+<meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type">
+<meta name="generator" content="Website XSL Stylesheet V2.4.1">
+<link rel="home" href="index.html" title="Welcome to the DB2LaTeX XSL Stylesheets">
+<link rel="up" href="index.html" title="Welcome to the DB2LaTeX XSL Stylesheets">
+<link rel="previous" href="notes.html" title="Notes">
+<link rel="next" href="" title="Reference">
+<link rel="first" href="whatis.html" title="What is DB2LaTeX?">
+<link rel="last" href="" title="Reference">
+<link rel="icon" href="graphics/rarrow.gif" type="image/gif">
+<link rel="stylesheet" href="db2latex-web.css" type="text/css">
+    <title>FAQ</title>
+    
+  </head>
+<body class="website" bgcolor="#ffffcc" text="black" link="#ac0204" vlink="#dc720c" alink="red">
+<div class="top">
+<ul class="top_left"><li>
+<a href="#top"><img align="top" border="0" src="./graphics/db2latex_new_banner.png" width="133" height="22" alt="FAQ"></a> </li></ul>
+<ul class="top_right">
+<li><a href="http://sourceforge.net/projects/db2latex/">SourceForge</a></li>
+<li><a href="./reference/index.html">Reference</a></li>
+<li><a href="./sample/">Samples</a></li>
+</ul>
+<ul class="bottom_left">
+<li>
+<a href="./index.html">Welcome &amp; News</a> | </li>
+<li>
+<a href="./install.html">Download &amp; Install</a> | </li>
+<li>
+<a href="./guides.html">User Guides</a> | </li>
+<li>
+<a href="./notes.html">Notes, E-mail &amp; Bugs</a> | </li>
+<li><a href="./qanda.html">Q&amp;A</a></li>
+</ul>
+</div>
+<div class="left">
+<table class="panel" width="100%" cellspacing="0" cellpadding="0" border="0">
+<tr><th>Suggestions</th></tr>
+<tr><td>
+<span class="minihead">Search:</span><br><form method="get" action="http://www.google.com/search">
+<input type="text" maxlength="255" name="q" class="q"> <input type="submit" value="Go" class="submit"><input type="hidden" name="domains" value="db2latex.sourceforge.net"><input type="hidden" name="sitesearch" value="db2latex.sourceforge.net">
+</form>
+</td></tr>
+</table>
+<div class="sidebar">
+<h2>On this page:</h2>(FAQ) <a href="#id46719777">DB2LaTeX Meta-FAQ</a>; <a href="#id46662686">DB2LaTeX Installation</a>; <a href="#id46719904">DB2LaTeX Customization</a>; <a href="#id46666629">Revision of DB2LaTeX Behaviour</a>; <a href="#id46661225">General</a>.</div>
+</div>
+<a name="top"></a><h1>FAQ</h1>
+<div class="qandaset">
+<dl>
+<dt>1.  <a href="#id46719777">DB2LaTeX Meta-FAQ</a>
+</dt>
+<dd><dl>
+<dt>1.1. <a href="#id46719784">What is DB2LaTeX?</a>
+</dt>
+<dt>1.2. <a href="#id46719815">Where can I find DB2LaTeX?</a>
+</dt>
+<dt>1.3. <a href="#id46659472">Why use DB2LaTeX instead of FO/FOP/Xtreme/...?</a>
+</dt>
+</dl></dd>
+<dt>2.  <a href="#id46662686">DB2LaTeX Installation</a>
+</dt>
+<dd><dl>
+<dt>2.1. <a href="#id46662277">Why Can't LaTeX Find its 'Figures' for Admonitions?</a>
+</dt>
+<dt>2.2. <a href="#id46660666">Why is There French in DB2LaTeX Output?</a>
+</dt>
+</dl></dd>
+<dt>3.  <a href="#id46719904">DB2LaTeX Customization</a>
+</dt>
+<dd><dl>
+<dt>3.1. <a href="#id46719912">How to do I Choose Block Style Instead of Indented Paragraphs?</a>
+</dt>
+<dt>3.2. <a href="#id46719936">Issues for Double-sided Print Documents</a>
+</dt>
+<dt>3.3. <a href="#id46666405">How do I get LaTeX Default Fonts (e.g., Computer
+          Modern)?</a>
+</dt>
+<dt>3.4. <a href="#id46666433">How do I Modify the LaTeX Preamble in DB2LaTeX's
+          Output?</a>
+</dt>
+<dt>3.5. <a href="#id46666489">PDFs Open With a Weird Magnification or Blank Page</a>
+</dt>
+<dt>3.6. <a href="#id46666554">Unwanted Overlapping of Text in Headers and Footers</a>
+</dt>
+</dl></dd>
+<dt>4.  <a href="#id46666629">Revision of DB2LaTeX Behaviour</a>
+</dt>
+<dd><dl>
+<dt>4.1. <a href="#id46666648">Why Have Tables Changed and How Do I Make Them Work?</a>
+</dt>
+<dt>4.2. <a href="#id46720722">What's the Deal with Linebreaks and Hyphenation in URLs and
+          Monospace Text?</a>
+</dt>
+<dt>4.3. <a href="#id46661023">How Should I Mark Up Figures and MediaObjects?</a>
+</dt>
+</dl></dd>
+<dt>5.  <a href="#id46661225">General</a>
+</dt>
+<dd><dl><dt>5.1. <a href="#id46661487">Handling Character Entities</a>
+</dt></dl></dd>
+</dl>
+<p>FAQ items (and errors) were contributed by j-devenish at
+    users.sourceforge.net</p>
+<table border="0" summary="Q and A Set">
+<col align="left" width="1%">
+<tbody>
+<tr class="qandadiv"><td align="left" valign="top" colspan="2">
+<a name="id46719777"></a><h3 class="title">
+<a name="id46719777"></a>1. DB2LaTeX Meta-FAQ</h3>
+</td></tr>
+<tr class="toc" colspan="2"><td align="left" valign="top" colspan="2"><dl>
+<dt>1.1. <a href="#id46719784">What is DB2LaTeX?</a>
+</dt>
+<dt>1.2. <a href="#id46719815">Where can I find DB2LaTeX?</a>
+</dt>
+<dt>1.3. <a href="#id46659472">Why use DB2LaTeX instead of FO/FOP/Xtreme/...?</a>
+</dt>
+</dl></td></tr>
+<tr class="question">
+<td align="left" valign="top">
+<a name="id46719784"></a><a name="id46719787"></a><b>1.1.</b>
+</td>
+<td align="left" valign="top"><p>What is DB2LaTeX?</p></td>
+</tr>
+<tr class="answer">
+<td align="left" valign="top"><b></b></td>
+<td align="left" valign="top"><p>Please see 
+          <a href="whatis.html">the introduction</a>.</p></td>
+</tr>
+<tr class="question">
+<td align="left" valign="top">
+<a name="id46719815"></a><a name="id46719818"></a><b>1.2.</b>
+</td>
+<td align="left" valign="top"><p>Where can I find DB2LaTeX?</p></td>
+</tr>
+<tr class="answer">
+<td align="left" valign="top"><b></b></td>
+<td align="left" valign="top"><p>The DB2LaTeX web site is at 
+          <a href="http://db2latex.sourceforge.net/" target="_top">http://db2latex.sourceforge.net/</a>. It also has a 
+          <a href="http://www.sourceforge.net/projects/db2latex" target="_top">
+          SourceForge project page</a>. Please see 
+          <a href="install.html">the installation notes</a> 
+          and 
+          <a href="">quickstart guide</a>  for
+          further information.</p></td>
+</tr>
+<tr class="question">
+<td align="left" valign="top">
+<a name="id46659472"></a><a name="id46719842"></a><b>1.3.</b>
+</td>
+<td align="left" valign="top"><p>Why use DB2LaTeX instead of FO/FOP/Xtreme/...?</p></td>
+</tr>
+<tr class="answer">
+<td align="left" valign="top"><b></b></td>
+<td align="left" valign="top"><p></td>
+</tr>
+<tr class="qandadiv"><td align="left" valign="top" colspan="2">
+<a name="id46662686"></a><h3 class="title">
+<a name="id46662686"></a>2. DB2LaTeX Installation</h3>
+</td></tr>
+<tr class="toc" colspan="2"><td align="left" valign="top" colspan="2"><dl>
+<dt>2.1. <a href="#id46662277">Why Can't LaTeX Find its 'Figures' for Admonitions?</a>
+</dt>
+<dt>2.2. <a href="#id46660666">Why is There French in DB2LaTeX Output?</a>
+</dt>
+</dl></td></tr>
+<tr class="question">
+<td align="left" valign="top">
+<a name="id46662277"></a><a name="id46662280"></a><b>2.1.</b>
+</td>
+<td align="left" valign="top"><p>Why Can't LaTeX Find its 'Figures' for Admonitions?</p></td>
+</tr>
+<tr class="answer">
+<td align="left" valign="top"><b></b></td>
+<td align="left" valign="top">
+<p>DB2LaTeX formats admonitions as LaTeX minipages (surrounded
+          by a border) with helpful images ('icons') corresponding to the
+          different types of admonition. However, you need to tell LaTeX
+          where it can find those images. DB2LaTeX includes some EPS and PDF
+          images that you can use if you want to. They can be found in the
+          'figures' folder within the 'latex' folder of the DB2LaTeX
+          distribution. You may need to use this:</p>
+<pre class="programlisting">
+&lt;xsl:variable name=&quot;latex.admonition.path&quot;&gt;/path/to/db2latex/latex/figures&lt;/xsl:variable&gt;
+</pre>
+<p>(You need not put a trailing slash on the end of the path,
+          though POSIX-like operating systems usually don't mind if you
+          do.)</p>
+<p>Alternatively, you could copy the figures from the DB2LaTeX
+          distribution into the directory containing the DB2LaTeX output
+          (that is, put 'figures' into the directory that contains the LaTeX
+          file). Then LaTeX will locate the images relative to its &quot;current
+          wrking directory&quot;.</p>
+<p>A third option is to disable the use of images using:</p>
+<pre class="programlisting">
+&lt;xsl:variable name=&quot;latex.admonition.path&quot;&gt;&lt;/xsl:variable&gt;
+</pre>
+<p>If you actually want LaTeX to look for the images in its
+          working directory, specify '.' as the path:</p>
+<pre class="programlisting">
+&lt;xsl:variable name=&quot;latex.admonition.path&quot;&gt;.&lt;/xsl:variable&gt;
+</pre>
+</td>
+</tr>
+<tr class="question">
+<td align="left" valign="top">
+<a name="id46660666"></a><a name="id46660669"></a><b>2.2.</b>
+</td>
+<td align="left" valign="top"><p>Why is There French in DB2LaTeX Output?</p></td>
+</tr>
+<tr class="answer">
+<td align="left" valign="top"><b></b></td>
+<td align="left" valign="top">
+<p>You have not specified that you wish the 'gentext' language
+          to be something other than French. For English, remove references
+          to French:</p>
+<pre class="programlisting">
+&lt;xsl:variable name=&quot;l10n.gentext.default.language&quot;&gt;en&lt;/xsl:variable&gt;
+&lt;xsl:variable name=&quot;latex.documentclass.common&quot;&gt;&lt;/xsl:variable&gt;
+&lt;xsl:variable name=&quot;latex.babel.language&quot;&gt;&lt;/xsl:variable&gt;
+</pre>
+</td>
+</tr>
+<tr class="qandadiv"><td align="left" valign="top" colspan="2">
+<a name="id46719904"></a><h3 class="title">
+<a name="id46719904"></a>3. DB2LaTeX Customization</h3>
+</td></tr>
+<tr class="toc" colspan="2"><td align="left" valign="top" colspan="2"><dl>
+<dt>3.1. <a href="#id46719912">How to do I Choose Block Style Instead of Indented Paragraphs?</a>
+</dt>
+<dt>3.2. <a href="#id46719936">Issues for Double-sided Print Documents</a>
+</dt>
+<dt>3.3. <a href="#id46666405">How do I get LaTeX Default Fonts (e.g., Computer
+          Modern)?</a>
+</dt>
+<dt>3.4. <a href="#id46666433">How do I Modify the LaTeX Preamble in DB2LaTeX's
+          Output?</a>
+</dt>
+<dt>3.5. <a href="#id46666489">PDFs Open With a Weird Magnification or Blank Page</a>
+</dt>
+<dt>3.6. <a href="#id46666554">Unwanted Overlapping of Text in Headers and Footers</a>
+</dt>
+</dl></td></tr>
+<tr class="question">
+<td align="left" valign="top">
+<a name="id46719912"></a><a name="id46719915"></a><b>3.1.</b>
+</td>
+<td align="left" valign="top"><p>How to do I Choose Block Style Instead of Indented Paragraphs?</p></td>
+</tr>
+<tr class="answer">
+<td align="left" valign="top"><b></b></td>
+<td align="left" valign="top"><pre class="programlisting">&lt;xsl:variable name=&quot;latex.use.parskip&quot;&gt;1&lt;/xsl:variable&gt;</pre></td>
+</tr>
+<tr class="question">
+<td align="left" valign="top">
+<a name="id46719936"></a><a name="id46719939"></a><b>3.2.</b>
+</td>
+<td align="left" valign="top"><p>Issues for Double-sided Print Documents</p></td>
+</tr>
+<tr class="answer">
+<td align="left" valign="top"><b></b></td>
+<td align="left" valign="top">
+<p>If you want double-sided book/report output, you will usually
+          want chapters to begin on odd-numbered pages. For this, your
+          \documentclass should include the 'twoside' and 'openright'
+          options.</p>
+<p>But by default, you will get headers and footers on the blank
+          pages between chapters. This will occur when a chapter finishes on
+          an odd-numbered page: the subsequent even-numbered page should be
+          completely blank but by default fancyhdr will render text.</p>
+<p>To prevent this, you can try including this in the .tex
+          output of db2latex or another .tex file which is subject to \input
+          or \usepackage:</p>
+<pre class="programlisting">
+\def\cleardoublepage{\clearpage\if@twoside%
+  \ifodd\c@page\else\hbox{}\thispagestyle{empty}\newpage%
+  \if@twocolumn\hbox{}\newpage\fi\fi\fi}
+</pre>
+</td>
+</tr>
+<tr class="question">
+<td align="left" valign="top">
+<a name="id46666405"></a><a name="id46666408"></a><b>3.3.</b>
+</td>
+<td align="left" valign="top"><p>How do I get LaTeX Default Fonts (e.g., Computer
+          Modern)?</p></td>
+</tr>
+<tr class="answer">
+<td align="left" valign="top"><b></b></td>
+<td align="left" valign="top"><pre class="programlisting">
+&lt;xsl:variable name=&quot;latex.document.font&quot;&gt;default&lt;/xsl:variable&gt;
+</pre></td>
+</tr>
+<tr class="question">
+<td align="left" valign="top">
+<a name="id46666433"></a><a name="id46666436"></a><b>3.4.</b>
+</td>
+<td align="left" valign="top"><p>How do I Modify the LaTeX Preamble in DB2LaTeX's
+          Output?</p></td>
+</tr>
+<tr class="answer">
+<td align="left" valign="top"><b></b></td>
+<td align="left" valign="top">
+<p>You can insert free text into the preamble using</p>
+<pre class="programlisting">
+&lt;xsl:variable name=&quot;latex.book.preamble.post&quot;&gt;...&lt;/xsl:variable&gt;
+</pre>
+<p>or</p>
+<pre class="programlisting">
+&lt;xsl:variable name=&quot;latex.article.preamble.post&quot;&gt;...&lt;/xsl:variable&gt;
+</pre>
+<p>You can also use $latex.override</p>
+<p>See the documentation of vars.mod.xsl for a complete list of
+          configurable variables.</p>
+</td>
+</tr>
+<tr class="question">
+<td align="left" valign="top">
+<a name="id46666489"></a><a name="id46666492"></a><b>3.5.</b>
+</td>
+<td align="left" valign="top"><p>PDFs Open With a Weird Magnification or Blank Page</p></td>
+</tr>
+<tr class="answer">
+<td align="left" valign="top"><b></b></td>
+<td align="left" valign="top">
+<p>This is to do with the default zoom rectangle of PDF
+          documents. It is related to the first objects on the first page. I
+          like to do this to produce convenient documents:</p>
+<pre class="programlisting">
+&lt;xsl:variable name=&quot;latex.hyperref.param.pdftex&quot;&gt;pdfstartview=FitH&lt;/xsl:variable&gt;
+</pre>
+<p>Note that you can also configure other items, including the
+          PDF summary window:</p>
+<pre class="programlisting">
+&lt;xsl:variable name=&quot;latex.hyperref.param.pdftex&quot;
+  &gt;pdfstartview=FitH, pdfhighlight=/O, pdfauthor={James Devenish}&lt;/xsl:variable&gt;
+</pre>
+<p>You can prevent Adobe Acrobat Reader from displaying
+          bookmarks when documents are opened:</p>
+<pre class="programlisting">
+&lt;xsl:variable name=&quot;latex.hyperref.param.pdftex&quot;&gt;pdfpagemode=UseNone&lt;/xsl:variable&gt;
+</pre>
+</td>
+</tr>
+<tr class="question">
+<td align="left" valign="top">
+<a name="id46666554"></a><a name="id46666558"></a><b>3.6.</b>
+</td>
+<td align="left" valign="top"><p>Unwanted Overlapping of Text in Headers and Footers</p></td>
+</tr>
+<tr class="answer">
+<td align="left" valign="top"><b></b></td>
+<td align="left" valign="top">
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.gif"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td colspan="2" align="left" valign="top">
+<p>Note: if you do not want headers, use:</p>
+<pre class="programlisting">
+&lt;xsl:variable name=&quot;latex.use.fancyhdr&quot;&gt;0&lt;/xsl:variable&gt;
+</pre>
+</td></tr>
+</table></div>
+<p>There may be times when you have long section headings or
+          narrow pages. In this case, the default header style of fancyhdr
+          (capital letters) will fail because the text of one of the headings
+          will overlap with the text of the other. To overcome this, try
+          making your section titles shorter. If that is not possible, you
+          can utilised truncate.sty to work around the problem. You might
+          find truncate.sty on your disk at
+          $TEXMF/tex/latex/misc/truncate.sty (or the equivalent of your
+          distribution). If not, try 
+          <a href="http://www.ctan.org/search/" target="_top">CTAN</a>. You will
+          need to have this included the .tex file that db2latex produces, or
+          in another .tex file that is subject to \input or \usepackage in
+          the .tex file. It can instead be inserted into your DB2LaTeX output
+          using the latex.book.preamble.post and latex.article.preamble.post
+          variables (however, you will need to 
+          <span class="emphasis"><em>un</em></span>  comment the \makeatletter and
+          \makeatother lines).</p>
+<pre class="programlisting">
+% Safeguard against long headers.
+\usepackage{truncate}
+% Use an ellipsis when text would be larger than 49% of the text width.
+% Preserve left/right text alignment using \hfill (works for English).
+\fancyhead[ol]{\truncate{0.49\textwidth}{\sl\leftmark}}
+\fancyhead[or]{\truncate{0.49\textwidth}{\hfill\sl\rightmark}}
+% Use an ellipsis when text would be larger than 49% of the text width
+% Preserve left/right text alignment using \hfill (works for English).
+\fancyhead[el]{\truncate{0.49\textwidth}{\sl\leftmark}}
+\fancyhead[er]{\truncate{0.49\textwidth}{\hfill\sl\rightmark}}
+% Override the default from fancyhdr (which would be to have all-caps headings).
+%\makeatletter
+\renewcommand{\chaptermark}[1]{\markboth{%
+  {\ifnum \c@secnumdepth&gt;\m@ne \@chapapp\ \thechapter. \ \fi #1}}{}}
+\renewcommand{\sectionmark}[1]{\markright{%
+  {\ifnum \c@secnumdepth &gt;\z@ \thesection. \ \fi #1}}}
+%\makeatother
+</pre>
+</td>
+</tr>
+<tr class="qandadiv"><td align="left" valign="top" colspan="2">
+<a name="id46666629"></a><h3 class="title">
+<a name="id46666629"></a>4. Revision of DB2LaTeX Behaviour</h3>
+</td></tr>
+<tr class="toc" colspan="2"><td align="left" valign="top" colspan="2"><dl>
+<dt>4.1. <a href="#id46666648">Why Have Tables Changed and How Do I Make Them Work?</a>
+</dt>
+<dt>4.2. <a href="#id46720722">What's the Deal with Linebreaks and Hyphenation in URLs and
+          Monospace Text?</a>
+</dt>
+<dt>4.3. <a href="#id46661023">How Should I Mark Up Figures and MediaObjects?</a>
+</dt>
+</dl></td></tr>
+<tr class="question">
+<td align="left" valign="top">
+<a name="id46666648"></a><a name="id46666651"></a><b>4.1.</b>
+</td>
+<td align="left" valign="top"><p>Why Have Tables Changed and How Do I Make Them Work?</p></td>
+</tr>
+<tr class="answer">
+<td align="left" valign="top"><b></b></td>
+<td align="left" valign="top">
+<p>Recently, tables have been brought closer to the DocBook and
+          CALS specifications whereby entries should be formatted as block
+          text and surrounded by line borders. DB2LaTeX now supports
+          paragraph block formatting (but this is not enabled by
+          default).</p>
+<h2>
+<a name="id46666670"></a>Frames</h2>
+<p>Frames and borders are now closer to the OASIS CALS model
+          defaults.</p>
+<p>By default, the framing is &quot;all&quot; and rowsep=&quot;1&quot; and
+          colsep=&quot;1&quot;. You can, of course, override these as you wish.</p>
+<h2>
+<a name="id46666684"></a>Paragraph Wrapping</h2>
+<p>In assessing the current table-handling code it was noted
+          that there is a gap between the best aesthetic rendering and what
+          LaTeX can facilitate when given minimal DocBook markup.</p>
+<p>A problem arises because LaTeX can 
+          <span class="emphasis"><em>either</em></span>  have variable-width columns 
+          <span class="emphasis"><em>or</em></span>  do paragraph wrapping. (This is
+          common amongst much page design software and it is web browsers
+          that have given most people the expectation that tables will be
+          sized automatically.)</p>
+<p>In this DB2LaTeX release, as in previous releases, the
+          default column style is non-wrapped, centred text. This is wrong
+          with regard to the DocBook specification but is advantageous
+          because it allows column widths to shrink to the minimum required
+          to hold the longest line and this prevents tables from swelling to
+          the entire page width even when they contain small amounts of text.
+          To compensate for this, DB2LaTeX will now honour several important
+          table attributes and the colspec element. Therefore, many
+          well-written DocBook documents can be rendered properly by
+          DB2LaTeX. If you want paragraph-wrapped text, specify colwidths or
+          the &quot;justified&quot; alignment. Furthermore, a wrap-by-default option is
+          available (though it will force the table to occupy the entire
+          column width unless explicit widths are given).</p>
+<h2>
+<a name="id46720523"></a>Supported Markup</h2>
+<div class="itemizedlist"><ul type="disc">
+<li>Colname is not understood (and is ignored).</li>
+<li>Colwidth is understood if 
+              <tt class="literal">
+colnum
+</tt>  is used (though widths must be LaTeX-compatible or of the 1*
+form).</li>
+<li>If you specify colwidth, text it becomes wrappable and
+              justified.</li>
+<li>You may use the 'align' attribute in colspecs and in
+              individual cells. The &quot;justify&quot; alignment in a colspec implies
+              a &quot;1*&quot; colwidth unless an explicit colwidth is given.</li>
+<li>The &quot;justify&quot; alignment is only understood when used
+              in a colspec.</li>
+<li>If align is used without colwidth, the text will not
+              be wrapped and the column width will be the minimum required to
+              fit the text.</li>
+<li>1* style is only supported if tabularx is allowed.
+              Note that it will force the table width to fill the column
+              width.</li>
+<li>The pgwide and orient attributes are not supported,
+              though they could be in future.</li>
+<li>Mixed style 1*+2pt is not supported and probably won't
+              be in future unless we release a LaTeX style file that can
+              calculate this. Using 2pt+1* will probably cause the wrong
+              width calculation to be made.</li>
+<li>Spans and morerows are not supported, so you will have
+              to touch these up manually.</li>
+</ul></div>
+<h2>
+<a name="id46720637"></a>Bold Column Headings</h2>
+<p>If you want headings to be bold, use the emphasis element
+          (with role='bold') around the text in each entry.</p>
+<p>If you need a LaTeX-specific feature then you can redefine
+          the &quot;latex.thead.row.entry&quot; template:</p>
+<pre class="programlisting">
+&lt;xsl:template name=&quot;latex.thead.row.entry&quot;&gt;
+&lt;xsl:text&gt;{\bfseries &lt;/xsl:text&gt;&lt;xsl:apply-templates/&gt;&lt;xsl:text&gt;}&lt;/xsl:text&gt;
+&lt;/xsl:template&gt;
+</pre>
+<h2>
+<a name="id46720667"></a>Captions</h2>
+<p>Table captions are now typeset above tables (rather than
+          below them). This is conventional in some publishing circles, as is
+          having figure captions below the figures. This is configurable
+          using $formal.title.placement.</p>
+<p>A major improvement is that markup in titles will now be
+          honoured. 
+          <span class="emphasis"><em>However</em></span>, this could be detrimental for PDF
+          output with hyperref bookmarks due to unintended link
+          nesting.</p>
+<h2>
+<a name="id46720688"></a>Floats</h2>
+<p>If you want to remove the horizontal lines from above and
+          below floats (tables and figures), use:</p>
+<pre class="programlisting">
+&lt;xsl:template name=&quot;latex.float.preamble&quot; /&gt;
+</pre>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.gif"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td colspan="2" align="left" valign="top"><p>Informaltables are no longer LaTeX 'floats' and will not
+            appear with captions or in the list of tables.</p></td></tr>
+</table></div>
+</td>
+</tr>
+<tr class="question">
+<td align="left" valign="top">
+<a name="id46720722"></a><a name="id46720725"></a><b>4.2.</b>
+</td>
+<td align="left" valign="top"><p>What's the Deal with Linebreaks and Hyphenation in URLs and
+          Monospace Text?</p></td>
+</tr>
+<tr class="answer">
+<td align="left" valign="top"><b></b></td>
+<td align="left" valign="top">
+<p>DB2LaTeX uses the 
+          <tt class="literal">
+url
+</tt>  and 
+          <tt class="literal">
+hyperref
+</tt>  packages to provide hyperlinks and URLs. However, there are
+certain situations when they will fail to give us the results we desire and
+where the two packages conflict (perhaps depending on what versions you
+have). To work around this, DB2LaTeX used to insert 
+          &#8220;<span class="quote">optional hyphens</span>&#8221;  after slashes in URLs. While
+          this does indeed split URLs across lines, it has the unfortunate
+          side effect of outputting hyphens when a URL is split across two
+          lines. A new feature has now been added to DB2LaTeX which causes
+          slash characters themselves to be the hyphenation characters.
+          Therefore, in URLs, slashes will now behave like hyphens behave in
+          regular text. Additionally, the 
+          <tt class="literal">
+url
+</tt>  LaTeX package can be used to hyphenate inline monospace
+sequences such as 
+          <tt class="literal">
+literal
+</tt>  and 
+          <tt class="literal">
+filename
+</tt>  and 
+          <tt class="literal">
+systemitem
+</tt>. These new features are enabled (by default) and work well with
+English. If they do not suit you, they can be disabled using:</p>
+<pre class="programlisting">
+&lt;xsl:variable name=&quot;latex.hyphenation.tttricks&quot;&gt;0&lt;/xsl:variable&gt;
+</pre>
+<p>A deficiency of the ttricks is that only one hyphenation
+          character can be used. Depending on the text of the document, the
+          DB2LaTeX default characters might not be useful. It is possible to
+          choose a different character and if this is a common requirement,
+          instructions could appear here in future. A better solution would
+          be to provide behaviour that is like David Carlisle's url package,
+          which has several hyphenation characters. The nicest solution may
+          be to utilise the url package itself. The current impediment is
+          that use of the url package would result in monospace text becoming
+          active hyperlinks.</p>
+</td>
+</tr>
+<tr class="question">
+<td align="left" valign="top">
+<a name="id46661023"></a><a name="id46661026"></a><b>4.3.</b>
+</td>
+<td align="left" valign="top"><p>How Should I Mark Up Figures and MediaObjects?</p></td>
+</tr>
+<tr class="answer">
+<td align="left" valign="top"><b></b></td>
+<td align="left" valign="top">
+<p>Only ImageObjects are supported. If VideoObjects and AudioObjects are present
+          they will be ignored -- any remaining ImageObjects or TextObjects will be used.
+          TextObjects will never be used when ImageObjects are present.</p>
+<p>If you have a single image, you may wish to do this:</p>
+<pre class="programlisting">
+&lt;figure id='x1'&gt;&lt;title&gt;Caption&lt;/title&gt;
+  &lt;mediaobject&gt;
+    &lt;imageobject&gt;&lt;imagedata fileref='y.png' scale='80' /&gt;&lt;/imageobject&gt;
+  &lt;/mediaobject&gt;
+&lt;/figure&gt;
+</pre>
+<p>For some publications, you may prefer to have a short title
+          and an explanatory caption:</p>
+<pre class="programlisting">
+&lt;figure id='x1'&gt;&lt;title&gt;Title&lt;/title&gt;
+  &lt;mediaobject&gt;
+    &lt;imageobject&gt;&lt;imagedata fileref='y.png' scale='80' /&gt;&lt;/imageobject&gt;
+    &lt;caption&gt;&lt;para&gt;Explanatory caption.&lt;/para&gt;&lt;/caption&gt;
+  &lt;/mediaobject&gt;
+&lt;/figure&gt;
+</pre>
+<p>
+            <span class="emphasis"><em>The caption will be typeset as part of the title
+            paragraph.</em></span>
+          </p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.gif"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td colspan="2" align="left" valign="top"><p>Titles should 
+            <span class="emphasis"><em>not</em></span>  have full stops (periods), but
+            captions 
+            <span class="emphasis"><em>should</em></span>.</p></td></tr>
+</table></div>
+<p>If you have multiple images, use multiple <tt class="literal">mediaobjects</tt>:</p>
+<pre class="programlisting">
+&lt;figure id='x2'&gt;&lt;title&gt;Title&lt;/title&gt;
+  &lt;mediaobject&gt;
+    &lt;imageobject&gt;&lt;imagedata format='PNG' fileref='y.png' scale='80' /&gt;&lt;/imageobject&gt;
+    &lt;caption&gt;&lt;para&gt;Explanatory caption.&lt;/para&gt;&lt;/caption&gt;
+  &lt;/mediaobject&gt;
+  &lt;mediaobject&gt;
+    &lt;imageobject&gt;&lt;imagedata format='PNG' fileref='z.png' width='3cm' /&gt;&lt;/imageobject&gt;
+    &lt;caption&gt;&lt;para&gt;Explanatory caption.&lt;/para&gt;&lt;/caption&gt;
+  &lt;/mediaobject&gt;
+&lt;/figure&gt;
+</pre>
+<p>
+            Each mediaobject will become a labelled 'subfigure' and
+            the captions will appear with each subfigure (then the title will
+            stand on its own).
+          </p>
+<p>You may also wish to investigate the effect of:</p>
+<pre class="programlisting">
+&lt;xsl:variable name=&quot;latex.figure.title.style&quot;&gt;\itshape &lt;/xsl:variable&gt;
+</pre>
+<p>If multiple ImageData are present because you have an image in
+          multiple formats, DB2LaTeX is fundamentally unable to choose the
+          correct image format for your document. This is because DB2LaTeX does not know whether
+          you will be using LaTeX or pdfTeX. Therefore, you must give it hints using roles
+          and formats (see <a href="#tab:media_attributes" title="Table 1. Important Attributes and Variables for ImageObject and MediaObject Selection">Table 1, &#8220;Important Attributes and Variables for ImageObject and MediaObject Selection&#8221;</a>).</p>
+<div class="table">
+<a name="tab:media_attributes"></a><p class="title"><b>Table 1. Important Attributes and Variables for ImageObject and MediaObject Selection</b></p>
+<table summary="Important Attributes and Variables for ImageObject and MediaObject Selection" border="1">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>Element</th>
+<th>Pertinent Attribute</th>
+<th>Consider This</th>
+<th>Recommendation</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><tt class="literal">imageobject</tt></td>
+<td>role</td>
+<td>$use.role.for.mediaobject</td>
+<td>
+                    Use a value of <tt class="literal">1</tt>  to enable support.
+                    If not enabled, merely the first imageobject is chosen
+                    (unless $latex.graphics.formats is used).
+                  </td>
+</tr>
+<tr>
+<td><tt class="literal">imageobject</tt></td>
+<td>role</td>
+<td>$preferred.mediaobject.role</td>
+<td>
+                  Normally, leave this empty and use the &quot;latex&quot; role.
+                  However, if you have documents that use a different
+                  role, you can set this variable to that role.
+                  A typical example would be &quot;pdf&quot;.
+                  </td>
+</tr>
+<tr>
+<td><tt class="literal">imageobject</tt></td>
+<td>role</td>
+<td>Attribute value.</td>
+<td>
+                    Use a value of
+                    <tt class="literal">latex</tt>  (preferred)
+                    or
+                    <tt class="literal">tex</tt>  (deprecated).
+                    These can co-exist with roles such
+                    as <tt class="literal">html</tt>.
+                    If no imageobject matches @role=&quot;latex&quot;
+                    or @role=&quot;tex&quot; then the stylesheets
+                    merely choose the first imageobject.
+                    If $preferred.mediaobject.role is not empty,
+                    that role is checked before the &quot;latex&quot; role.
+                  </td>
+</tr>
+<tr>
+<td><tt class="literal">imagedata</tt></td>
+<td>fileref</td>
+<td>Attribute value.</td>
+<td>If used with a <tt class="literal">latex</tt> mediaobject role, we recommend
+                  that you do not include the filename extension at the end of
+                  the fileref. For example, use
+                  <tt class="literal">fileref=&quot;abc&quot;</tt>  instead of
+                  <tt class="literal">fileref=&quot;abc.eps&quot;</tt>. This
+                  allows LaTeX to choose the correct image format amongst the ones
+                  that it knows about.</td>
+</tr>
+<tr>
+<td><tt class="literal">imagedata</tt></td>
+<td>format</td>
+<td>$latex.graphics.formats</td>
+<td>If you use filename extensions in filerefs
+                  and do not use roles for mediaobjects, DB2LaTeX will
+                  use imagedata format attributes.
+                  Set this variable to &quot;EPS&quot; for <span class="application">LaTeX</span>
+                  or &quot;PDF,PNG,TIFF&quot; for <span class="application">pdfTeX</span>.
+                  </td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="example">
+<a name="id46661467"></a><p class="title"><b>Example 1. Using the features described in <a href="#tab:media_attributes" title="Table 1. Important Attributes and Variables for ImageObject and MediaObject Selection">Table 1, &#8220;Important Attributes and Variables for ImageObject and MediaObject Selection&#8221;</a></b></p>
+<pre class="programlisting">
+&lt;figure id='x3'&gt;&lt;title&gt;Title&lt;/title&gt;
+  &lt;mediaobject&gt;
+    &lt;imageobject role='html'&gt;&lt;imagedata format='GIF' fileref='y.gif' scale='80' /&gt;&lt;/imageobject&gt;
+    &lt;imageobject role='html'&gt;&lt;imagedata format='PNG' fileref='y.png' scale='80' /&gt;&lt;/imageobject&gt;
+    &lt;imageobject role='latex'&gt;&lt;imagedata fileref='y' width='3cm' /&gt;&lt;/imageobject&gt;
+    &lt;caption&gt;&lt;para&gt;Explanatory caption.&lt;/para&gt;&lt;/caption&gt;
+  &lt;/mediaobject&gt;
+&lt;/figure&gt;
+</pre>
+</div>
+</td>
+</tr>
+<tr class="qandadiv"><td align="left" valign="top" colspan="2">
+<a name="id46661225"></a><h3 class="title">
+<a name="id46661225"></a>5. General</h3>
+</td></tr>
+<tr class="toc" colspan="2"><td align="left" valign="top" colspan="2"><dl><dt>5.1. <a href="#id46661487">Handling Character Entities</a>
+</dt></dl></td></tr>
+<tr class="question">
+<td align="left" valign="top">
+<a name="id46661487"></a><a name="id46661490"></a><b>5.1.</b>
+</td>
+<td align="left" valign="top"><p>Handling Character Entities</p></td>
+</tr>
+<tr class="answer">
+<td align="left" valign="top"><b></b></td>
+<td align="left" valign="top">
+<p>For DocBook authors with multiple output modalities (such as
+          LaTeX, HTML, plain text), the expression of symbols within text
+          poses difficulties. For example, a non-breaking space in HTML needs
+          to be expressed literally as &amp;nbsp; while in LaTeX it would be
+          ~.</p>
+<p>One way to provide a flexible mechanisms for symbols is to
+          use DocBook's symbol element in combination with character
+          entities.</p>
+<p>For example, you could declare some entities in your DocBook
+          files...</p>
+<pre class="programlisting">
+&lt;!ENTITY nbsp   &quot;&lt;symbol&gt;&amp;amp;#160;&lt;/symbol&gt;&quot;&gt; &lt;!-- non-breaking space, U+00A0 ISOnum --&gt;
+&lt;!ENTITY ndash  &quot;&lt;symbol&gt;&amp;amp;#8211;&lt;/symbol&gt;&quot;&gt; &lt;!-- en dash, U+2013 ISOpub --&gt;
+&lt;!ENTITY hellip &quot;&lt;symbol&gt;&amp;amp;#8230;&lt;/symbol&gt;&quot;&gt; &lt;!-- horizontal ellipsis, U+2026 ISOpub --&gt;
+</pre>
+<p>...and then insert this into the stylesheet you are using
+          with db2latex...</p>
+<pre class="programlisting">
+&lt;xsl:template match=&quot;symbol&quot;&gt;
+  &lt;xsl:param name=&quot;entity&quot;&gt;&lt;xsl:value-of select=&quot;.&quot; /&gt;&lt;/xsl:param&gt;
+  &lt;xsl:choose&gt;
+    &lt;xsl:when test=&quot;$entity='&amp;amp;#160;'&quot;&gt;&lt;xsl:text&gt;~&lt;/xsl:text&gt;&lt;/xsl:when&gt;
+    &lt;xsl:when test=&quot;$entity='&amp;amp;#8211;'&quot;&gt;&lt;xsl:text&gt;--&lt;/xsl:text&gt;&lt;/xsl:when&gt;
+    &lt;xsl:when test=&quot;$entity='&amp;amp;#8230;'&quot;&gt;&lt;xsl:text&gt;\ldots&lt;/xsl:text&gt;&lt;/xsl:when&gt;
+    &lt;xsl:otherwise&gt;
+      &lt;xsl:call-template name=&quot;inline.charseq&quot;/&gt;
+    &lt;/xsl:otherwise&gt;
+  &lt;/xsl:choose&gt;
+&lt;/xsl:template&gt;
+</pre>
+<p>...and then insert this into the stylesheet you are using
+          with HTML output...</p>
+<pre class="programlisting">
+&lt;xsl:template match=&quot;symbol&quot;&gt;
+  &lt;xsl:param name=&quot;entity&quot;&gt;&lt;xsl:value-of select=&quot;.&quot; /&gt;&lt;/xsl:param&gt;
+  &lt;xsl:choose&gt;
+    &lt;-- Replace some high-order characters with ASCII equivalents --&gt;
+    &lt;xsl:when test=&quot;$entity='&amp;amp;#8211;'&quot;&gt;&lt;xsl:text&gt;-&lt;/xsl:text&gt;&lt;/xsl:when&gt;
+    &lt;xsl:when test=&quot;$entity='&amp;amp;#8230;'&quot;&gt;&lt;xsl:text&gt;...&lt;/xsl:text&gt;&lt;/xsl:when&gt;
+    &lt;-- No need to modify &amp;amp;#160; --&gt;
+    &lt;xsl:otherwise&gt;
+      &lt;xsl:call-template name=&quot;inline.charseq&quot;/&gt;
+    &lt;/xsl:otherwise&gt;
+  &lt;/xsl:choose&gt;
+&lt;/xsl:template&gt;
+</pre>
+<p>(Note that DB2LaTeX and other DocBook stylesheets may have a
+          'dingbat' template, so you may wish to investigate that. Instead of
+          the 
+          <tt class="literal">
+&lt;xsl:text&gt;
+</tt>above, you could call the dingbat template.)</p>
+<p>In this way, you can adapt the symbols according to the
+          output modality. Furthermore, you have the full flexibility of XSL
+          templates which means that you can adapt your symbols with XSL
+          logic. This is useful for output formats which have special
+          requirements depending on the context of the text (such as can be
+          the case with PDF).</p>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Warning">
+<tr>
+<td rowspan="2" align="center" valign="top" width="25"><img alt="[Warning]" src="images/warning.gif"></td>
+<th align="left">Warning</th>
+</tr>
+<tr><td colspan="2" align="left" valign="top">
+<p>Warning: symbol elements are not allowed within every other
+            element and, therefore, are not a cure-all.</p>
+<p>Also, it will not work if the text is subsequently escaped
+            (e.g. if the backslash in \ldots gets escaped).</p>
+</td></tr>
+</table></div>
+<p>For the bulk of your entities, you can probably replace this
+          method with a proper XML/XSL mechanism, though I am not
+          knowledgeable enough to know what such a method might be.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="navfoot">
+<hr>
+<table width="100%" border="0" summary="Footer navigation">
+<tr>
+<td width="33%" align="left"><span class="footdate">$Date: 2003/05/30 08:10:59 $</span></td>
+<td width="34%" align="center"><span class="foothome"><a href="index.html">Home</a></span></td>
+<td width="33%" align="right"> <a href="http://sourceforge.net/projects/db2latex"><img src="http://sourceforge.net/sflogo.php?group_id=22450&amp;type=1" border="0" width="88" height="31" alt="Hosted at SourceForge." /></a> <a href="http://docbook.sourceforge.net/projects/website/"><img src="http://docbook.sourceforge.net/graphics/buttons/website-1.png" border="0" width="128" height="40" alt="Created with Website: a DocBook document type." /></a></td>
+</tr>
+<tr><td colspan="3" align="right"><span class="footcopy"><span class="copyright">Copyright © 2000, 2001, 2002, 2003, 2004 Ramon Casellas and James Devenish. </span></span></td></tr>
+</table>
+</div>
+</body>
+</html>

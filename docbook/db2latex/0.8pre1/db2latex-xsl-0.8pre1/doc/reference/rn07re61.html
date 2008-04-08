@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>processing-instruction('bibtex-bibliography')</title>
+    <link rel="stylesheet" href="../db2latex-web.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.64.1" />
+    <link rel="home" href="index.html" title="DB2LaTeX API Documentation" />
+    <link rel="up" href="rn07.html" title="Bibliographies biblio.mod.xsl" />
+    <link rel="previous" href="rn07re60.html" title="bibliography" />
+    <link rel="next" href="rn07re62.html" title="bibliodiv" />
+    <link rel="icon" href="../graphics/rarrow.gif" type="image/gif" />
+  </head>
+  <body bgcolor="#ffffcc" text="black" link="#ac0204" vlink="#dc720c" alink="red">
+    <div class="top">
+      <ul class="top_left">
+        <li><a href="#top"><img align="top" border="0" src="../graphics/db2latex_new_banner.png" width="133" height="22" alt="processing-instruction('bibtex-bibliography')" /></a> </li>
+      </ul>
+      <ul class="top_right">
+        <li>
+          <a href="http://sourceforge.net/projects/db2latex/">SourceForge</a>
+        </li>
+        <li>
+          <a href="../index.html">Home Page</a>
+        </li>
+        <li>
+          <a href="../sample/">Samples</a>
+        </li>
+      </ul>
+      <ul class="bottom_left">
+        <li><a href="./index.html">Reference Contents</a> | </li>
+        <li><a href="../install.html">Download &amp; Install</a> | </li>
+        <li><a href="../guides.html">User Guides</a> | </li>
+        <li><a href="../notes.html">Notes, E-mail &amp; Bugs</a> | </li>
+        <li>
+          <a href="../qanda.html">Q&amp;A</a>
+        </li>
+      </ul>
+    </div>
+    <div class="left">
+      <table class="panel" width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <th>Suggestions</th>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Search:</span>
+            <br />
+            <form method="get" action="http://www.google.com/search"><input type="text" maxlength="255" name="q" class="q" /> <input type="submit" value="Go" class="submit" /><input type="hidden" name="domains" value="db2latex.sourceforge.net" /><input type="hidden" name="sitesearch" value="db2latex.sourceforge.net" /></form>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Next:</span>
+            <br />
+            <a accesskey="n" href="rn07re62.html">bibliodiv</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Previous:</span>
+            <br />
+            <a accesskey="p" href="rn07re60.html">bibliography</a>
+            <br />
+            <span class="minihead">Up:</span>
+            <br />
+            <a accesskey="u" href="rn07.html">Bibliographies biblio.mod.xsl</a>
+          </td>
+        </tr>
+      </table>
+      <div class="sidebar"><h2>On this page:</h2>(processing instruction('bibtex bibliography')) <a href="rn07re61.html#id40526075">A. Description</a>; <a href="rn07re61.html#id40526104">B. Pertinent Variables</a>; <a href="rn07re61.html#id40526122">C. Template Parameters</a>; <a href="rn07re61.html#id40526240">D. DocBook Compliance and LaTeX Notes</a>; <a href="rn07re61.html#id40526282">F. Further Reading</a>.</div>
+    </div>
+    <div class="note" style="margin-top:2px; color: #804020; text-align: center; font-weight: bold">
+      <a name="top" id="top">Reference Section</a>
+    </div>
+    <div class="refentry" lang="en" xml:lang="en">
+      <a id="id40526032"></a>
+      <div class="titlepage">
+        
+        
+      </div>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>processing-instruction('bibtex-bibliography') — Process <tt class="sgmltag-xmlpi">&lt;?bibtex-bibliography?&gt;</tt> nodes</p>
+      </div>
+      <div class="refsynopsisdiv">
+        <h2>Synopsis</h2>
+        <a id="template.processing-instruction('bibtex-bibliography')"></a>
+        <pre class="synopsis">&lt;xsl:template match="processing-instruction('bibtex-bibliography')"&gt;
+&lt;xsl:param name="makechapter" select="local-name(..)='book' or local-name(..)='part'"/&gt;
+&lt;xsl:param name="filename"&gt;
+			&lt;xsl:choose&gt;
+				&lt;xsl:when test="normalize-space(.)!=''"&gt;
+					&lt;xsl:value-of select="."/&gt;
+				&lt;/xsl:when&gt;
+				&lt;xsl:otherwise&gt;
+					&lt;xsl:value-of select="$latex.bibfiles"/&gt;
+				&lt;/xsl:otherwise&gt;
+			&lt;/xsl:choose&gt;
+		&lt;/xsl:param&gt;
+&lt;xsl:variable name="keyword"&gt;
+			&lt;xsl:choose&gt;
+				&lt;xsl:when test="$makechapter"&gt;
+					&lt;xsl:text&gt;bibliography-chapter&lt;/xsl:text&gt;
+				&lt;/xsl:when&gt;
+				&lt;xsl:otherwise&gt;
+					&lt;xsl:text&gt;bibliography-section&lt;/xsl:text&gt;
+				&lt;/xsl:otherwise&gt;
+			&lt;/xsl:choose&gt;
+		&lt;/xsl:variable&gt;
+  ...
+&lt;/xsl:template&gt;</pre>
+      </div>
+      <div class="description">
+        <a name="id40526075" id="id40526075"></a>
+        <h2>A. Description</h2>
+        <p>
+				Output a <span class="productname">BibTeX<a id="id40526092" class="indexterm"></a></span> bibliography.
+			</p>
+      </div>
+      <div class="variables">
+        <a name="id40526104" id="id40526104"></a>
+        <h2>B. Pertinent Variables</h2>
+        <div class="itemizedlist">
+          <ul type="disc">
+            <li>
+              <a href="rn34re380.html" title="latex.bibfiles">latex.bibfiles</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="params">
+        <a name="id40526122" id="id40526122"></a>
+        <h2>C. Template Parameters</h2>
+        <div class="variablelist">
+          <dl>
+            <dt>
+              <span class="term">makechapter</span>
+            </dt>
+            <dd>
+              <p>
+
+							Choose which <span class="productname">LaTeX</span> mapping to use. This is
+							normally determined by examining whether the PI
+							occurs as a child of a <a href="http://www.oasis-open.org/docbook/documentation/reference/html/book.html"><tt class="sgmltag-element">book<a id="id40526158" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/book.html">2.0.9</a>] or
+							<a href="http://www.oasis-open.org/docbook/documentation/reference/html/part.html"><tt class="sgmltag-element">part<a id="id40526177" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/part.html">2.0.9</a>]. Regardless of this
+							parameter, the bibliography will be formatted as a
+							chapter via the <span class="productname">LaTeX</span> <tt class="function">\bibliography</tt> command.
+
+						</p>
+            </dd>
+            <dt>
+              <span class="term">filename</span>
+            </dt>
+            <dd>
+              <p>
+
+							The filename of the <span class="productname">BibTeX<a id="id40526221" class="indexterm"></a></span> citations source file.
+							By default, this will be obtained from the content
+							of the process instruction, if present, or
+							otherwise from <a href="rn34re380.html" title="latex.bibfiles">latex.bibfiles</a>.
+
+						</p>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="notes">
+        <a name="id40526240" id="id40526240"></a>
+        <h2>D. DocBook Compliance and LaTeX Notes</h2>
+        <p>This PI is not part of <span class="productname">DocBook</span> and is only supported by <span class="productname">DB2LaTeX</span>
+			The formatting of the bibliography is performed by <span class="productname">LaTeX</span> and is not
+			configurable by <span class="productname">DB2LaTeX</span>.</p>
+      </div>
+      <div class="seealso">
+        <a name="id40526282" id="id40526282"></a>
+        <h2>F. Further Reading</h2>
+        <div class="itemizedlist">
+          <ul type="disc">
+            <li><a href="rn02.html" title="The DB2LaTeX mapping system latex.mapping.xsl">The DB2LaTeX mapping system latex.mapping.xsl</a>: This template will use the <tt class="literal">bibliography-chapter</tt>
+				or <tt class="literal">bibliography-section</tt> mapping.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="rn07re60.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="rn07.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="rn07re62.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">bibliography </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> bibliodiv</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

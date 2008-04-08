@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>latex.language.option</title>
+    <link rel="stylesheet" href="../db2latex-web.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.64.1" />
+    <link rel="home" href="index.html" title="DB2LaTeX API Documentation" />
+    <link rel="up" href="rn37.html" title="Variables and Templates used in LaTeX Preamble Generation" />
+    <link rel="previous" href="rn37re433.html" title="document.xml.language" />
+    <link rel="next" href="rn37re435.html" title="generate.latex.common.preamble" />
+    <link rel="icon" href="../graphics/rarrow.gif" type="image/gif" />
+  </head>
+  <body bgcolor="#ffffcc" text="black" link="#ac0204" vlink="#dc720c" alink="red">
+    <div class="top">
+      <ul class="top_left">
+        <li><a href="#top"><img align="top" border="0" src="../graphics/db2latex_new_banner.png" width="133" height="22" alt="latex.language.option" /></a> </li>
+      </ul>
+      <ul class="top_right">
+        <li>
+          <a href="http://sourceforge.net/projects/db2latex/">SourceForge</a>
+        </li>
+        <li>
+          <a href="../index.html">Home Page</a>
+        </li>
+        <li>
+          <a href="../sample/">Samples</a>
+        </li>
+      </ul>
+      <ul class="bottom_left">
+        <li><a href="./index.html">Reference Contents</a> | </li>
+        <li><a href="../install.html">Download &amp; Install</a> | </li>
+        <li><a href="../guides.html">User Guides</a> | </li>
+        <li><a href="../notes.html">Notes, E-mail &amp; Bugs</a> | </li>
+        <li>
+          <a href="../qanda.html">Q&amp;A</a>
+        </li>
+      </ul>
+    </div>
+    <div class="left">
+      <table class="panel" width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <th>Suggestions</th>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Search:</span>
+            <br />
+            <form method="get" action="http://www.google.com/search"><input type="text" maxlength="255" name="q" class="q" /> <input type="submit" value="Go" class="submit" /><input type="hidden" name="domains" value="db2latex.sourceforge.net" /><input type="hidden" name="sitesearch" value="db2latex.sourceforge.net" /></form>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Next:</span>
+            <br />
+            <a accesskey="n" href="rn37re435.html">generate.latex.common.preamble</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Previous:</span>
+            <br />
+            <a accesskey="p" href="rn37re433.html">document.xml.language</a>
+            <br />
+            <span class="minihead">Up:</span>
+            <br />
+            <a accesskey="u" href="rn37.html">Variables and Templates used in LaTeX Preamble Generation</a>
+          </td>
+        </tr>
+      </table>
+      <div class="sidebar"><h2>On this page:</h2>(latex.language.option) <a href="rn37re434.html#id40618620">A. Description</a>; <a href="rn37re434.html#id40618660">B. Pertinent Variables</a>; <a href="rn37re434.html#id40618684">D. DocBook Compliance and LaTeX Notes</a>.</div>
+    </div>
+    <div class="note" style="margin-top:2px; color: #804020; text-align: center; font-weight: bold">
+      <a name="top" id="top">Reference Section</a>
+    </div>
+    <div class="refentry" lang="en" xml:lang="en">
+      <a id="param.latex.language.option"></a>
+      <div class="titlepage">
+        
+        
+      </div>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>latex.language.option —  Select <span class="productname">babel<a id="id40618552" class="indexterm"></a></span> option </p>
+      </div>
+      <div class="refsynopsisdiv">
+        <h2>Synopsis</h2>
+        <pre class="synopsis">
+&lt;xsl:param name="latex.language.option"&gt;
+		&lt;xsl:choose&gt;
+			&lt;xsl:when test="$latex.babel.language!=''"&gt;
+				&lt;xsl:value-of select="$latex.babel.language"/&gt;
+			&lt;/xsl:when&gt;
+			&lt;xsl:when test="starts-with($document.xml.language,'af')"&gt;afrikaans&lt;/xsl:when&gt;
+			&lt;xsl:when test="starts-with($document.xml.language,'br')"&gt;breton&lt;/xsl:when&gt;
+			&lt;xsl:when test="starts-with($document.xml.language,'ca')"&gt;catalan&lt;/xsl:when&gt;
+			&lt;xsl:when test="starts-with($document.xml.language,'cs')"&gt;czech&lt;/xsl:when&gt;
+			&lt;xsl:when test="starts-with($document.xml.language,'cy')"&gt;welsh&lt;/xsl:when&gt;
+			&lt;xsl:when test="starts-with($document.xml.language,'da')"&gt;danish&lt;/xsl:when&gt;
+			&lt;xsl:when test="starts-with($document.xml.language,'de')"&gt;ngerman&lt;/xsl:when&gt;&lt;!-- ngerman, german or germanb? --&gt;
+			&lt;xsl:when test="starts-with($document.xml.language,'el')"&gt;greek&lt;/xsl:when&gt;
+			&lt;xsl:when test="starts-with($document.xml.language,'en')"&gt;
+				&lt;xsl:choose&gt;
+					&lt;xsl:when test="starts-with($document.xml.language,'en-CA')"&gt;canadian&lt;/xsl:when&gt;
+					&lt;xsl:when test="starts-with($document.xml.language,'en-GB')"&gt;british&lt;/xsl:when&gt;
+					&lt;xsl:when test="starts-with($document.xml.language,'en-US')"&gt;USenglish&lt;/xsl:when&gt;
+					&lt;xsl:otherwise&gt;none&lt;/xsl:otherwise&gt;
+				&lt;/xsl:choose&gt;
+			&lt;/xsl:when&gt;
+			&lt;xsl:when test="starts-with($document.xml.language,'eo')"&gt;esperanto&lt;/xsl:when&gt;
+			&lt;xsl:when test="starts-with($document.xml.language,'es')"&gt;spanish&lt;/xsl:when&gt;
+			&lt;xsl:when test="starts-with($document.xml.language,'et')"&gt;estonian&lt;/xsl:when&gt;
+			&lt;xsl:when test="starts-with($document.xml.language,'fi')"&gt;finnish&lt;/xsl:when&gt;
+			&lt;xsl:when test="starts-with($document.xml.language,'fr')"&gt;french&lt;/xsl:when&gt;&lt;!-- francais, french, or frenchb? --&gt;
+			&lt;xsl:when test="starts-with($document.xml.language,'ga')"&gt;irish&lt;/xsl:when&gt;
+			&lt;xsl:when test="starts-with($document.xml.language,'gd')"&gt;scottish&lt;/xsl:when&gt;
+			&lt;xsl:when test="starts-with($document.xml.language,'gl')"&gt;galician&lt;/xsl:when&gt;
+			&lt;xsl:when test="starts-with($document.xml.language,'he')"&gt;hebrew&lt;/xsl:when&gt;
+			&lt;xsl:when test="starts-with($document.xml.language,'hr')"&gt;croatian&lt;/xsl:when&gt;
+			&lt;xsl:when test="starts-with($document.xml.language,'hu')"&gt;hungarian&lt;/xsl:when&gt;
+			&lt;xsl:when test="starts-with($document.xml.language,'id')"&gt;bahasa&lt;/xsl:when&gt;
+			&lt;xsl:when test="starts-with($document.xml.language,'it')"&gt;italian&lt;/xsl:when&gt;
+			&lt;xsl:when test="starts-with($document.xml.language,'nl')"&gt;dutch&lt;/xsl:when&gt;
+			&lt;xsl:when test="starts-with($document.xml.language,'nn')"&gt;norsk&lt;/xsl:when&gt;
+			&lt;xsl:when test="starts-with($document.xml.language,'pl')"&gt;polish&lt;/xsl:when&gt;
+			&lt;xsl:when test="starts-with($document.xml.language,'pt')"&gt;
+				&lt;xsl:choose&gt;
+					&lt;xsl:when test="starts-with($document.xml.language,'pt-BR')"&gt;brazil&lt;/xsl:when&gt;
+					&lt;xsl:otherwise&gt;portugese&lt;/xsl:otherwise&gt;
+				&lt;/xsl:choose&gt;
+			&lt;/xsl:when&gt;
+			&lt;xsl:when test="starts-with($document.xml.language,'ro')"&gt;romanian&lt;/xsl:when&gt;
+			&lt;xsl:when test="starts-with($document.xml.language,'ru')"&gt;russian&lt;/xsl:when&gt;
+			&lt;xsl:when test="starts-with($document.xml.language,'sk')"&gt;slovak&lt;/xsl:when&gt;
+			&lt;xsl:when test="starts-with($document.xml.language,'sl')"&gt;slovene&lt;/xsl:when&gt;
+			&lt;xsl:when test="starts-with($document.xml.language,'sv')"&gt;swedish&lt;/xsl:when&gt;
+			&lt;xsl:when test="starts-with($document.xml.language,'tr')"&gt;turkish&lt;/xsl:when&gt;
+			&lt;xsl:when test="starts-with($document.xml.language,'uk')"&gt;ukrainian&lt;/xsl:when&gt;
+		&lt;/xsl:choose&gt;
+	&lt;/xsl:param&gt;</pre>
+      </div>
+      <div class="description">
+        <a name="id40618620" id="id40618620"></a>
+        <h2>A. Description</h2>
+        <p>
+				If <a href="rn33re368.html" title="latex.babel.language">latex.babel.language</a> is not set, this
+				template will select a <span class="productname">babel<a id="id40618642" class="indexterm"></a></span> option
+				based on the <a href="rn37re433.html" title="document.xml.language">document.xml.language</a>.
+			</p>
+      </div>
+      <div class="variables">
+        <a name="id40618660" id="id40618660"></a>
+        <h2>B. Pertinent Variables</h2>
+        <div class="itemizedlist">
+          <ul type="disc">
+            <li>
+              <a href="rn33re368.html" title="latex.babel.language">latex.babel.language</a>
+            </li>
+            <li>
+              <a href="rn37re433.html" title="document.xml.language">document.xml.language</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="notes">
+        <a name="id40618684" id="id40618684"></a>
+        <h2>D. DocBook Compliance and LaTeX Notes</h2>
+        <p>A special value of “<span class="quote"><tt class="literal">none</tt></span>”
+			can be used to disable <span class="productname">babel<a id="id40618710" class="indexterm"></a></span>.</p>
+      </div>
+      <div class="refsection">
+        <a name="id41064091" id="id41064091"></a>
+        <h2>G. Uses</h2>
+        <p>Documented templates that use this parameter:
+          </p>
+        <div class="itemizedlist">
+          <ul type="disc">
+            <li>
+              <a href="rn37re435.html" target="_top">generate.latex.common.preamble</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="rn37re433.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="rn37.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="rn37re435.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">document.xml.language </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> generate.latex.common.preamble</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

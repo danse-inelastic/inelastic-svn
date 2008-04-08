@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>generate.latex.book.preamble</title>
+    <link rel="stylesheet" href="../db2latex-web.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.64.1" />
+    <link rel="home" href="index.html" title="DB2LaTeX API Documentation" />
+    <link rel="up" href="rn37.html" title="Variables and Templates used in LaTeX Preamble Generation" />
+    <link rel="previous" href="rn37re429.html" title="generate.latex.article.preamble" />
+    <link rel="next" href="rn37re431.html" title="latex.article.preamblestart" />
+    <link rel="icon" href="../graphics/rarrow.gif" type="image/gif" />
+  </head>
+  <body bgcolor="#ffffcc" text="black" link="#ac0204" vlink="#dc720c" alink="red">
+    <div class="top">
+      <ul class="top_left">
+        <li><a href="#top"><img align="top" border="0" src="../graphics/db2latex_new_banner.png" width="133" height="22" alt="generate.latex.book.preamble" /></a> </li>
+      </ul>
+      <ul class="top_right">
+        <li>
+          <a href="http://sourceforge.net/projects/db2latex/">SourceForge</a>
+        </li>
+        <li>
+          <a href="../index.html">Home Page</a>
+        </li>
+        <li>
+          <a href="../sample/">Samples</a>
+        </li>
+      </ul>
+      <ul class="bottom_left">
+        <li><a href="./index.html">Reference Contents</a> | </li>
+        <li><a href="../install.html">Download &amp; Install</a> | </li>
+        <li><a href="../guides.html">User Guides</a> | </li>
+        <li><a href="../notes.html">Notes, E-mail &amp; Bugs</a> | </li>
+        <li>
+          <a href="../qanda.html">Q&amp;A</a>
+        </li>
+      </ul>
+    </div>
+    <div class="left">
+      <table class="panel" width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <th>Suggestions</th>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Search:</span>
+            <br />
+            <form method="get" action="http://www.google.com/search"><input type="text" maxlength="255" name="q" class="q" /> <input type="submit" value="Go" class="submit" /><input type="hidden" name="domains" value="db2latex.sourceforge.net" /><input type="hidden" name="sitesearch" value="db2latex.sourceforge.net" /></form>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Next:</span>
+            <br />
+            <a accesskey="n" href="rn37re431.html">latex.article.preamblestart</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Previous:</span>
+            <br />
+            <a accesskey="p" href="rn37re429.html">generate.latex.article.preamble</a>
+            <br />
+            <span class="minihead">Up:</span>
+            <br />
+            <a accesskey="u" href="rn37.html">Variables and Templates used in LaTeX Preamble Generation</a>
+          </td>
+        </tr>
+      </table>
+      <div class="sidebar"><h2>On this page:</h2>(generate.latex.book.preamble) <a href="rn37re430.html#id40618063">A. Description</a>.</div>
+    </div>
+    <div class="note" style="margin-top:2px; color: #804020; text-align: center; font-weight: bold">
+      <a name="top" id="top">Reference Section</a>
+    </div>
+    <div class="refentry" lang="en" xml:lang="en">
+      <a id="template.generate.latex.book.preamble"></a>
+      <div class="titlepage">
+        
+        
+      </div>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>generate.latex.book.preamble — 
+
+			Top level template, called by book template, responsible of
+			generating the <span class="productname">LaTeX</span> preamble according to user
+			<span class="acronym">XSL</span> variables and templates.
+
+		</p>
+      </div>
+      <div class="refsynopsisdiv">
+        <h2>Synopsis</h2>
+        <pre class="synopsis">&lt;xsl:template name="generate.latex.book.preamble"/&gt;</pre>
+      </div>
+      <div class="description">
+        <a name="id40618063" id="id40618063"></a>
+        <h2>A. Description</h2>
+        <p>
+
+			If <a href="rn33re378.html" title="latex.override">latex.override</a> is empty, the template
+			outputs <a href="rn37re432.html" title="latex.book.preamblestart">latex.book.preamblestart</a> and
+			<a href="rn33re337.html" title="latex.book.preamble.pre">latex.book.preamble.pre</a>, then calls
+			<a href="rn37re435.html" title="generate.latex.common.preamble">generate.latex.common.preamble</a> and <a href="rn37re437.html" title="generate.latex.essential.preamble">generate.latex.essential.preamble</a> followed by
+			the value of <a href="rn33re338.html" title="latex.book.preamble.post">latex.book.preamble.post</a>.
+			Otherwise, it outputs the value of <a href="rn33re378.html" title="latex.override">latex.override</a>
+			followed by <a href="rn37re437.html" title="generate.latex.essential.preamble">generate.latex.essential.preamble</a>.
+
+			</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="rn37re429.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="rn37.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="rn37re431.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">generate.latex.article.preamble </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> latex.article.preamblestart</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

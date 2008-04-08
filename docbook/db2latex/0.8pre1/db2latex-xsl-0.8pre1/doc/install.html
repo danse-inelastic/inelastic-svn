@@ -1,0 +1,418 @@
+<html lang="en" lang="en">
+<head>
+<meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type">
+<meta name="generator" content="Website XSL Stylesheet V2.4.1">
+<link rel="home" href="index.html" title="Welcome to the DB2LaTeX XSL Stylesheets">
+<link rel="up" href="index.html" title="Welcome to the DB2LaTeX XSL Stylesheets">
+<link rel="previous" href="whatis.html" title="What is DB2LaTeX?">
+<link rel="next" href="guides.html" title="User Guides">
+<link rel="first" href="whatis.html" title="What is DB2LaTeX?">
+<link rel="last" href="" title="Reference">
+<link rel="icon" href="graphics/rarrow.gif" type="image/gif">
+<link rel="stylesheet" href="db2latex-web.css" type="text/css">
+    <title>Installing the Stylesheets</title>
+    
+  </head>
+<body class="website" bgcolor="#ffffcc" text="black" link="#ac0204" vlink="#dc720c" alink="red">
+<div class="top">
+<ul class="top_left"><li>
+<a href="#top"><img align="top" border="0" src="./graphics/db2latex_new_banner.png" width="133" height="22" alt="Installing the Stylesheets"></a> </li></ul>
+<ul class="top_right">
+<li><a href="http://sourceforge.net/projects/db2latex/">SourceForge</a></li>
+<li><a href="./reference/index.html">Reference</a></li>
+<li><a href="./sample/">Samples</a></li>
+</ul>
+<ul class="bottom_left">
+<li>
+<a href="./index.html">Welcome &amp; News</a> | </li>
+<li>
+<a href="./install.html">Download &amp; Install</a> | </li>
+<li>
+<a href="./guides.html">User Guides</a> | </li>
+<li>
+<a href="./notes.html">Notes, E-mail &amp; Bugs</a> | </li>
+<li><a href="./qanda.html">Q&amp;A</a></li>
+</ul>
+</div>
+<div class="left">
+<table class="panel" width="100%" cellspacing="0" cellpadding="0" border="0">
+<tr><th>Suggestions</th></tr>
+<tr><td>
+<span class="minihead">Search:</span><br><form method="get" action="http://www.google.com/search">
+<input type="text" maxlength="255" name="q" class="q"> <input type="submit" value="Go" class="submit"><input type="hidden" name="domains" value="db2latex.sourceforge.net"><input type="hidden" name="sitesearch" value="db2latex.sourceforge.net">
+</form>
+</td></tr>
+</table>
+<div class="sidebar">
+<h2>On this page:</h2>(Installing the Stylesheets) <a href="#id46720178">Getting Started: Online Resources</a>; <a href="#id46661850">Introduction and Prerequisites</a>; <a href="#id46721100">End-user Releases and Pre-releases</a>; <a href="#id46666963">End-user Snapshots</a>; <a href="#id46667032">Entire Access (Developer Access)</a>; <a href="#tarballs">Using <tt class="filename">.tar.gz</tt> Archives</a>.</div>
+</div>
+<a name="top"></a><h1>Installing the Stylesheets</h1>
+<div class="section" lang="en">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="id46720178"></a>Getting Started: Online Resources</h2></div></div>
+<div></div>
+</div>
+<div class="variablelist"><dl>
+<dt><span class="term"><a href="http://db2latex.sourceforge.net/" target="_top">http://db2latex.sourceforge.net/</a></span></dt>
+<dd>
+          Online <span class="productname">DB2LaTeX</span> documentation.
+        </dd>
+<dt><span class="term"><a href="http://sourceforge.net/projects/db2latex" target="_top">http://sourceforge.net/projects/db2latex</a></span></dt>
+<dd>
+          <span class="productname">DB2LaTeX</span> releases and development site (includes the official
+          <span class="productname">DB2LaTeX</span> <span class="acronym">XSLT</span> stylesheet distribution).
+        </dd>
+<dt><span class="term"><a href="http://db2latex.sourceforge.net/xsl/docbook.xsl" target="_top">http://db2latex.sourceforge.net/xsl/docbook.xsl</a></span></dt>
+<dd>
+          <span class="productname">DB2LaTeX</span> <span class="acronym">XSLT</span> stylesheets online (latest snapshot).
+        </dd>
+<dt><span class="term"><a href="http://db2latex.sourceforge.net/sample/" target="_top">http://db2latex.sourceforge.net/sample/</a></span></dt>
+<dd>
+          Samples of <span class="productname">DB2LaTeX</span> output (<span class="productname">PDF</span> format).
+        </dd>
+<dt><span class="term"><a href="http://db2latex.sourceforge.net/reference/" target="_top">http://db2latex.sourceforge.net/reference/</a></span></dt>
+<dd>
+          <span class="productname">DB2LaTeX</span> <span class="acronym">XSLT</span> template and parameter reference pages.
+        </dd>
+<dt><span class="term"><a href="http://db2latex.sourceforge.net/find/" target="_top">http://db2latex.sourceforge.net/find/<i class="replaceable"><tt>(locale|param|template)</tt></i></a></span></dt>
+<dd>
+          Persistent hyperlink scheme for reference pages.
+        </dd>
+<dt><span class="term"><a href="http://db2latex.sourceforge.net/snapshot/" target="_top">http://db2latex.sourceforge.net/snapshot/</a></span></dt>
+<dd>
+          <span class="productname">DB2LaTeX</span> snapshot site (the non-release distribution of <span class="productname">DB2LaTeX</span>).
+        </dd>
+<dt><span class="term"><a href="http://db2latex.sourceforge.net/debian/" target="_top">http://db2latex.sourceforge.net/debian binary-all/nightly/</a></span></dt>
+<dd>
+          An <span class="productname">APT</span> source for <span class="productname">DB2LaTeX</span> snapshots (uses the <tt class="filename">.dpkg</tt> format for <span class="productname">Debian</span>).
+        </dd>
+</dl></div>
+</div>
+<div class="section" lang="en">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="id46661850"></a>Introduction and Prerequisites</h2></div></div>
+<div></div>
+</div>
+<p>
+    <span class="productname">DB2LaTeX</span> essentially consists of a set of <span class="acronym">XSL</span> stylesheets (and some
+    accompanying graphics that faciliate <span class="productname">DocBook</span> <tt class="sgmltag-element">admonition</tt>s).
+    These stylesheets can be used to translate <span class="productname">DocBook</span> <span class="acronym">XML</span> documents into <span class="productname">LaTeX</span> documents.
+    To produce final documents, you will also require access to a <span class="productname">LaTeX</span> typesetter.
+  </p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: XSLT Processor">
+<tr>
+<td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.gif"></td>
+<th align="left">XSLT Processor</th>
+</tr>
+<tr><td colspan="2" align="left" valign="top"><p>You will need an <span class="acronym">XSLT</span> processor. See our <a href="using.html">usage guide</a> if you do not already have a processor.</p></td></tr>
+</table></div>
+<p>
+    <span class="productname">DB2LaTeX</span> is distributed with sample files that
+    illustrate the use of <span class="productname">DocBook</span>, <span class="acronym">XSL</span> and <span class="productname">DB2LaTeX</span>.
+    Together, these form &#8216;<span class="quote">end-user</span>&#8217; packages.
+    They are available as compressed file archives or
+    Linux packages.
+    <span class="productname">DB2LaTeX</span> and its samples can also be obtained via <span class="productname">CVS</span>.
+  </p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Distribution of Samples">
+<tr>
+<td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.gif"></td>
+<th align="left">Distribution of Samples</th>
+</tr>
+<tr><td colspan="2" align="left" valign="top"><p>
+    The sample cases are large and are often distributed separately.
+    This means that it is possible to download the stylesheets without
+    having to wait for the samples to download.
+    <a href="http://db2latex.sourceforge.net/sample/" target="_top">Sample 
+    <span class="productname">PDF</span>s</a> can be viewed individually online.
+    </p></td></tr>
+</table></div>
+<p>It is recommended that you install local copies of the <a href="http://www.oasis-open.org/docbook/xml/" target="_top">OASIS <span class="productname">DocBook</span> <span class="acronym">XML</span> <span class="acronym">DTD</span>s</a> and the <a href="http://docbook.sourceforge.net/" target="_top"><span class="productname">DocBook</span> Open Repository Project <span class="acronym">XSL</span> Stylesheets</a>. If you use a package-managed operating system you will probably find that these are available in packages already. You should use an <span class="acronym">XML</span> &#8216;<span class="quote">catalogue</span>&#8217; to make sure your <span class="acronym">XSLT</span> processor uses your local <span class="acronym">DTD</span>s (catalogues are described in the <a href="using.html">usage guide</a>).</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.gif"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td colspan="2" align="left" valign="top"><p>You <span class="emphasis"><em>can</em></span> use <span class="productname">DB2LaTeX</span> without a catalogue system,
+    but processing will be slowed as your processor downloads <span class="acronym">DTD</span>s and <span class="acronym">XSL</span>
+    stylesheets from the Internet.</p></td></tr>
+</table></div>
+<div class="itemizedlist">
+<p class="title"><b><span class="productname">DB2LaTeX</span> Software Checklist</b></p>
+<ul type="disc">
+<li><span class="productname">LaTeX</span></li>
+<li>
+<span class="acronym">XSL</span> processor</li>
+<li>
+<span class="productname">DocBook</span> <span class="acronym">XML</span> <span class="acronym">DTD</span> (optional but recommended)</li>
+<li>
+<span class="acronym">XML</span> catalog (optional but recommended)</li>
+<li>
+<span class="productname">DB2LaTeX</span> <span class="acronym">XSL</span> stylesheets (see below)</li>
+</ul>
+</div>
+<p>The following question-and-answer section indicates the different
+  <span class="productname">DB2LaTeX</span> distributions and how to obtain them. Package maintainers may
+  wish to look a &#8216;<span class="quote">releases</span>&#8217; while active authors may prefer
+  &#8216;<span class="quote">snapshots</span>&#8217;. End-user availability does not include certain
+  development and administration files, whilst developer access does not
+  include pre-built documentation.</p>
+</div>
+<div class="qandaset">
+<h2 class="title">Obtaining <span class="productname">DB2LaTeX</span>
+</h2>
+<dl>
+<dt>1.  <a href="#id46721100">End-user Releases and Pre-releases</a>
+</dt>
+<dd><dl>
+<dt>1.1. <a href="#id46721147">Whence Can I Obtain End-user Release Archives?</a>
+</dt>
+<dt>1.2. <a href="#id46666832">Is There a Package I Can Use?</a>
+</dt>
+</dl></dd>
+<dt>2.  <a href="#id46666963">End-user Snapshots</a>
+</dt>
+<dd><dl>
+<dt>2.1. <a href="#id46667009">Whence Can I Obtain End-user Snapshot Archives?</a>
+</dt>
+<dt>2.2. <a href="#id46667044">Is There a Package I Can Use?</a>
+</dt>
+</dl></dd>
+<dt>3.  <a href="#id46667032">Entire Access (Developer Access)</a>
+</dt>
+<dd><dl>
+<dt>3.1. <a href="#id46721181">How Can I Start With the Latest Release?</a>
+</dt>
+<dt>3.2. <a href="#id46663071">How do I Use the Latest Patches?</a>
+</dt>
+<dt>3.3. <a href="#id46660658">What are the CVS Details?</a>
+</dt>
+</dl></dd>
+<dt>4.  <a href="#tarballs">Using <tt class="filename">.tar.gz</tt> Archives</a>
+</dt>
+<dd><dl><dt>4.1. <a href="#id46661090">How Can I Use The Downloaded .tar.gz Archives?</a>
+</dt></dl></dd>
+</dl>
+<table border="0" summary="Q and A Set">
+<col align="left" width="1%">
+<tbody>
+<tr class="qandadiv"><td align="left" valign="top" colspan="2">
+<a name="id46721100"></a><h3 class="title">
+<a name="id46721100"></a>1. End-user Releases and Pre-releases</h3>
+</td></tr>
+<tr class="toc" colspan="2"><td align="left" valign="top" colspan="2"><dl>
+<dt>1.1. <a href="#id46721147">Whence Can I Obtain End-user Release Archives?</a>
+</dt>
+<dt>1.2. <a href="#id46666832">Is There a Package I Can Use?</a>
+</dt>
+</dl></td></tr>
+<tr class="toc" colspan="2"><td align="left" valign="top" colspan="2">
+<p>
+        End-user <span class="emphasis"><em>releases</em></span> are designed for:
+      </p>
+<div class="itemizedlist"><ul type="disc">
+<li>Users who wish to use a stable version of <span class="productname">DB2LaTeX</span> and do not have <span class="productname">CVS</span>.</li>
+<li>Maintainers of distribution packages.</li>
+</ul></div>
+</td></tr>
+<tr class="question">
+<td align="left" valign="top">
+<a name="id46721147"></a><a name="id46721150"></a><b>1.1.</b>
+</td>
+<td align="left" valign="top"><p>Whence Can I Obtain End-user Release Archives?</p></td>
+</tr>
+<tr class="answer">
+<td align="left" valign="top"><b></b></td>
+<td align="left" valign="top"><p>
+          The official point of distribution is <a href="http://sourceforge.net/project/showfiles.php?group_id=22450" target="_top">SourceForge</a>.
+          There, you can obtain releases (and pre-releases) in the <tt class="filename">.tar.gz</tt> archive format.
+          After uncompressing and extracting the files from the archives, the stylesheets
+          can be used as described <a href="#tarballs">below</a>, in <a href="using.html">the usage guide</a>.
+          </p></td>
+</tr>
+<tr class="question">
+<td align="left" valign="top">
+<a name="id46666832"></a><a name="id46666835"></a><b>1.2.</b>
+</td>
+<td align="left" valign="top"><p>Is There a Package I Can Use?</p></td>
+</tr>
+<tr class="answer">
+<td align="left" valign="top"><b></b></td>
+<td align="left" valign="top">
+<p>
+          
+          Unofficial <span class="productname">Debian</span> packages are available from the <span class="productname">DB2LaTeX</span> website at SourceForge.
+          (These may differ substantially from any potential official packages.)
+          <span class="productname">Debian</span> users can add an <span class="acronym">HTTP</span> source to their <tt class="filename">/etc/apt/sources.list</tt> file:
+          </p>
+<pre class="programlisting">deb http://db2latex.sourceforge.net/debian binary-all/releases/</pre>
+<p>
+            Then, invoke <span><b class="command">apt-get update &amp;&amp; apt-get install db2latex-xsl</b></span>
+            to install both the stylesheets and the sample cases.
+            You can use <span><b class="command">dpkg -L db2latex-xsl</b></span> to find the
+            location of the stylesheets on disk.
+          </p>
+</td>
+</tr>
+<tr class="qandadiv"><td align="left" valign="top" colspan="2">
+<a name="id46666963"></a><h3 class="title">
+<a name="id46666963"></a>2. End-user Snapshots</h3>
+</td></tr>
+<tr class="toc" colspan="2"><td align="left" valign="top" colspan="2"><dl>
+<dt>2.1. <a href="#id46667009">Whence Can I Obtain End-user Snapshot Archives?</a>
+</dt>
+<dt>2.2. <a href="#id46667044">Is There a Package I Can Use?</a>
+</dt>
+</dl></td></tr>
+<tr class="toc" colspan="2"><td align="left" valign="top" colspan="2">
+<p>
+        Snapshots are generated automatically on days when <span class="productname">DB2LaTeX</span> development has occurred.
+        These end-user <span class="emphasis"><em>snapshots</em></span> are designed for:
+      </p>
+<div class="itemizedlist"><ul type="disc"><li>Users who wish to use benefit from the latest <span class="productname">DB2LaTeX</span> features and corrections.</li></ul></div>
+</td></tr>
+<tr class="question">
+<td align="left" valign="top">
+<a name="id46667009"></a><a name="id46667012"></a><b>2.1.</b>
+</td>
+<td align="left" valign="top"><p>Whence Can I Obtain End-user Snapshot Archives?</p></td>
+</tr>
+<tr class="answer">
+<td align="left" valign="top"><b></b></td>
+<td align="left" valign="top"><p>
+            Snapshot archives in the <tt class="filename">.tar.gz</tt> format can be obtained from the <a href="http://db2latex.sourceforge.net/snapshot/" target="_top">the snapshot site</a>.
+          </p></td>
+</tr>
+<tr class="question">
+<td align="left" valign="top">
+<a name="id46667044"></a><a name="id46667047"></a><b>2.2.</b>
+</td>
+<td align="left" valign="top"><p>Is There a Package I Can Use?</p></td>
+</tr>
+<tr class="answer">
+<td align="left" valign="top"><b></b></td>
+<td align="left" valign="top">
+<p>
+          Yes, <span class="productname">Debian</span> users can add an <span class="acronym">HTTP</span> source to their <tt class="filename">/etc/apt/sources.list</tt> files:
+          </p>
+<pre class="programlisting">deb http://db2latex.sourceforge.net/debian binary-all/nightly/</pre>
+<p>
+            Then, invoke <span><b class="command">apt-get update &amp;&amp; apt-get install db2latex-xsl</b></span>
+            to install both the stylesheets and the sample cases.
+            You can use <span><b class="command">dpkg -L db2latex-xsl</b></span> to find the
+            location of the stylesheets on disk.
+          </p>
+</td>
+</tr>
+<tr class="qandadiv"><td align="left" valign="top" colspan="2">
+<a name="id46667032"></a><h3 class="title">
+<a name="id46667032"></a>3. Entire Access (Developer Access)</h3>
+</td></tr>
+<tr class="toc" colspan="2"><td align="left" valign="top" colspan="2"><dl>
+<dt>3.1. <a href="#id46721181">How Can I Start With the Latest Release?</a>
+</dt>
+<dt>3.2. <a href="#id46663071">How do I Use the Latest Patches?</a>
+</dt>
+<dt>3.3. <a href="#id46660658">What are the CVS Details?</a>
+</dt>
+</dl></td></tr>
+<tr class="question">
+<td align="left" valign="top">
+<a name="id46721181"></a><a name="id46721184"></a><b>3.1.</b>
+</td>
+<td align="left" valign="top"><p>How Can I Start With the Latest Release?</p></td>
+</tr>
+<tr class="answer">
+<td align="left" valign="top"><b></b></td>
+<td align="left" valign="top">
+<p>You just need to checkout the latest &#8220;<span class="quote">tagged</span>&#8221; release
+        from the <span class="productname">CVS</span> repository. In a <span class="productname">UNIX</span> or <span class="productname">Cygwin</span> environment with <span><b class="command">sh</b></span>,
+        <span><b class="command">cvs</b></span>, and <span><b class="command">lynx</b></span> installed, you may type:</p>
+<pre class="programlisting">$ lynx -source http://db2latex.sourceforge.net/get-db2latex.sh | sh</pre>
+<p>(This script simply invokes <span><b class="command">cvs</b></span> with the right arguments.)</p>
+<p>And that's all. The directory <tt class="filename">db2latex</tt> will be created,
+        and can be used straight away. It is a ~10Mb download and includes pre-built sample
+        cases. However, the website and reference files must be generated via the Makefiles.
+        It is recommended that the <span class="productname">DocBook</span> <span class="acronym">XSL</span> Stylesheets be installed locally. </p>
+</td>
+</tr>
+<tr class="question">
+<td align="left" valign="top">
+<a name="id46663071"></a><a name="id46663074"></a><b>3.2.</b>
+</td>
+<td align="left" valign="top"><p>How do I Use the Latest Patches?</p></td>
+</tr>
+<tr class="answer">
+<td align="left" valign="top"><b></b></td>
+<td align="left" valign="top">
+<p>You will need to move from the release tag to the head of the trunk:</p>
+<pre class="programlisting">$ cd db2latex
+$ cvs -q update -dAP</pre>
+</td>
+</tr>
+<tr class="question">
+<td align="left" valign="top">
+<a name="id46660658"></a><a name="id46660661"></a><b>3.3.</b>
+</td>
+<td align="left" valign="top"><p>What are the <span class="productname">CVS</span> Details?</p></td>
+</tr>
+<tr class="answer">
+<td align="left" valign="top"><b></b></td>
+<td align="left" valign="top">
+<p>If you wish to manually obtain <span class="productname">DB2LaTeX</span> (e.g. to obtain the &#8220;<span class="quote">HEAD</span>&#8221;):</p>
+<pre class="programlisting">
+$ cvs -z3 -d:pserver:anonymous:@cvs.db2latex.sourceforge.net:/cvsroot/db2latex login
+$ cvs -z3 -d:pserver:anonymous@cvs.db2latex.sourceforge.net:/cvsroot/db2latex co db2latex</pre>
+</td>
+</tr>
+<tr class="qandadiv"><td align="left" valign="top" colspan="2">
+<a name="tarballs"></a><h3 class="title">
+<a name="tarballs"></a>4. Using <tt class="filename">.tar.gz</tt> Archives</h3>
+</td></tr>
+<tr class="toc" colspan="2"><td align="left" valign="top" colspan="2"><dl><dt>4.1. <a href="#id46661090">How Can I Use The Downloaded .tar.gz Archives?</a>
+</dt></dl></td></tr>
+<tr class="toc" colspan="2"><td align="left" valign="top" colspan="2"><p>
+        The <tt class="filename">.tar.gz</tt> format is common on <span class="productname">POSIX</span>-like systems (unlike <span class="productname">Microsoft Windows</span> or <span class="productname">Apple Mac OS 9</span>).
+      </p></td></tr>
+<tr class="question">
+<td align="left" valign="top">
+<a name="id46661090"></a><a name="id46661094"></a><b>4.1.</b>
+</td>
+<td align="left" valign="top"><p>How Can I Use The Downloaded <tt class="filename">.tar.gz</tt> Archives?</p></td>
+</tr>
+<tr class="answer">
+<td align="left" valign="top"><b></b></td>
+<td align="left" valign="top">
+<p>
+              Unpack, such as by using <span><b class="command">tar xvfz db2latex-x.y.z.tar.gz</b></span>
+              In doing so, the <tt class="filename">db2latex</tt> directory hierarchy is created.
+            </p>
+<p>For example:</p>
+<div class="informalexample"><pre class="screen">$ cd /tmp
+$ # download file from SourceForge
+$ su
+Password:
+# cd /usr/final/destination
+# umask 022
+# tar xvfz /tmp/db2latex-x.y.z.tar.gz
+</pre></div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="navfoot">
+<hr>
+<table width="100%" border="0" summary="Footer navigation">
+<tr>
+<td width="33%" align="left"><span class="footdate">$Date: 2004/01/31 12:16:02 $</span></td>
+<td width="34%" align="center"><span class="foothome"><a href="index.html">Home</a></span></td>
+<td width="33%" align="right"> <a href="http://sourceforge.net/projects/db2latex"><img src="http://sourceforge.net/sflogo.php?group_id=22450&amp;type=1" border="0" width="88" height="31" alt="Hosted at SourceForge." /></a> <a href="http://docbook.sourceforge.net/projects/website/"><img src="http://docbook.sourceforge.net/graphics/buttons/website-1.png" border="0" width="128" height="40" alt="Created with Website: a DocBook document type." /></a></td>
+</tr>
+<tr><td colspan="3" align="right"><span class="footcopy"><span class="copyright">Copyright © 2000, 2001, 2002, 2003, 2004 Ramon Casellas and James Devenish. </span></span></td></tr>
+</table>
+</div>
+</body>
+</html>

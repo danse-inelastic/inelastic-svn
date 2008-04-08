@@ -1,0 +1,89 @@
+BODY {
+	font-family: helvetica, arial, lucida sans, sans-serif;
+	background-color: #FFD;
+}
+
+H1, H2, H3, DIV.qandaset H4 {
+	font-size: 120%;
+	padding: 2px;
+}
+
+H1 {
+	background-color: #606;
+	color: white;
+	margin-top: 0px;
+}
+
+H2 {
+	background-color: #dbb;
+	color: #936;
+}
+
+H3 {
+	background-color: #fed;
+	color: #936;
+	margin-top: 0.5em;
+}
+
+/*
+DIV.qandaset H3 {
+	margin-top: 1em;
+	border-top: solid #dbb 2px;
+	background: transparent;
+	font-size: 100%;
+}
+*/
+
+H4 {
+	color: #936;
+}
+
+DIV.qandaset H4 {
+	border-top: solid #dbb 2px;
+	font-size: 100%;
+	margin-top: 0px;
+}
+
+TR.qandadiv TD {
+	padding-top: 1em;
+}
+
+DIV.navhead {
+	font-size: 80%;
+}
+
+A:link {
+	color: #36F;
+}
+
+A:visited {
+	color: #96C;
+}
+
+A:active {
+	color: #F63;
+}
+
+TR.question {
+	color: #33C;
+	font-weight: bold;
+}
+
+TR.question TD {
+	padding-top: 1em;
+}
+
+DIV.note, DIV.warning, DIV.caution, DIV.tip, DIV.important {
+	border: solid 2px;
+	background-color: #FFE;
+	margin-bottom: 1em;
+}
+
+PRE.programlisting, PRE.screen {
+	border: #630 1px dashed;
+	color: #630;
+}
+
+/* bad idea? */
+DIV UL { margin-bottom: 0px }
+

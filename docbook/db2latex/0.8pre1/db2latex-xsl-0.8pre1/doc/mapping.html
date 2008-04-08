@@ -1,0 +1,141 @@
+<html lang="en" lang="en">
+<head>
+<meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type">
+<meta name="generator" content="Website XSL Stylesheet V2.4.1">
+<link rel="home" href="index.html" title="Welcome to the DB2LaTeX XSL Stylesheets">
+<link rel="up" href="guides.html" title="User Guides">
+<link rel="previous" href="custom.html" title="Custom Stylesheet Templates">
+<link rel="next" href="latex.html" title="Custom LaTeX Styles">
+<link rel="first" href="using.html" title="Using DB2LaTeX">
+<link rel="last" href="latex.html" title="Custom LaTeX Styles">
+<link rel="icon" href="graphics/rarrow.gif" type="image/gif">
+<link rel="stylesheet" href="db2latex-web.css" type="text/css">
+    <title>Custom Mappings</title>
+    
+    
+  </head>
+<body class="website" bgcolor="#ffffcc" text="black" link="#ac0204" vlink="#dc720c" alink="red">
+<div class="top">
+<ul class="top_left"><li>
+<a href="#top"><img align="top" border="0" src="./graphics/db2latex_new_banner.png" width="133" height="22" alt="Custom Mappings"></a> </li></ul>
+<ul class="top_right">
+<li><a href="http://sourceforge.net/projects/db2latex/">SourceForge</a></li>
+<li><a href="./reference/index.html">Reference</a></li>
+<li><a href="./sample/">Samples</a></li>
+</ul>
+<ul class="bottom_left">
+<li>
+<a href="./index.html">Welcome &amp; News</a> | </li>
+<li>
+<a href="./install.html">Download &amp; Install</a> | </li>
+<li>
+<a href="./guides.html">User Guides</a> | </li>
+<li>
+<a href="./notes.html">Notes, E-mail &amp; Bugs</a> | </li>
+<li><a href="./qanda.html">Q&amp;A</a></li>
+</ul>
+</div>
+<div class="left">
+<table class="panel" width="100%" cellspacing="0" cellpadding="0" border="0">
+<tr><th>Suggestions</th></tr>
+<tr><td>
+<span class="minihead">Search:</span><br><form method="get" action="http://www.google.com/search">
+<input type="text" maxlength="255" name="q" class="q"> <input type="submit" value="Go" class="submit"><input type="hidden" name="domains" value="db2latex.sourceforge.net"><input type="hidden" name="sitesearch" value="db2latex.sourceforge.net">
+</form>
+</td></tr>
+</table>
+<div class="sidebar">
+<h2>On this page:</h2>(Custom Mappings) <a href="#id46720019">Introduction</a>; <a href="#id46661859">Create an <span class="acronym">XML</span> file that contains your mappings</a>; <a href="#id46719958">Configure your driver file</a>; <a href="#id46720090">Further <span class="productname">LaTeX</span> Customization</a>.</div>
+</div>
+<a name="top"></a><h1>Custom Mappings</h1>
+<div class="section" lang="en">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="id46720019"></a>Introduction</h2></div></div>
+<div></div>
+</div>
+<p>You can modify the &#8216;<span class="quote">beginnings</span>&#8217; and &#8216;<span class="quote">ends</span>&#8217; of
+    some templates through the <span class="productname">DB2LaTeX</span> &#8216;<span class="quote">mapping</span>&#8217; system. This is
+    commonly used to commence and environment or section-type component. The
+    steps to do this are the following:</p>
+<div class="procedure"><ol type="1">
+<li><p>Create an <span class="acronym">XML</span> file that contains your mappings. This
+        is called your &#8216;<span class="quote">mapping file</span>&#8217;.</p></li>
+<li><p>Override an <span class="acronym">XSL</span> parameter in your driver file so that
+        your mapping file can be found.</p></li>
+<li><p>Process your <span class="productname">DocBook</span> source document with your favourite <span class="acronym">XSL</span>
+        processor.</p></li>
+</ol></div>
+<p>
+      The availability of mappings is indicated in <a href="./reference/ch01.html" target="_top">Chapter 1 of the Reference</a>
+      and may be found in <a href="http://db2latex.sourceforge.net/xsl/latex.mapping.xml" target="_top"><tt class="filename">latex.mapping.xml</tt></a>.
+    </p>
+</div>
+<div class="section" lang="en">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="id46661859"></a>Create an <span class="acronym">XML</span> file that contains your mappings</h2></div></div>
+<div></div>
+</div>
+<p>Create a text file, e.g.
+      <tt class="filename">mydb2latex.map</tt>, like this:</p>
+<pre class="programlisting">
+&lt;?xml version='1.0'?&gt;
+&lt;!DOCTYPE latexbindings SYSTEM &quot;http://db2latex.sourceforge.net/xsl/latex.mapping.dtd&quot;&gt;
+&lt;latexbindings&gt;
+  &lt;latexmapping role=&quot;begin&quot;&gt;
+    &lt;mapping key=&quot;glossary&quot; text=&quot;&quot;&gt;
+      &lt;line&gt;\section{%title}&amp;#10;&lt;/line&gt;
+    &lt;/mapping&gt;
+  &lt;/latexmapping&gt;
+  &lt;latexmapping role=&quot;end&quot;&gt;
+    &lt;mapping key=&quot;glossary&quot; text=&quot;\hrulefill &amp;#10;&quot;/&gt;
+  &lt;/latexmapping&gt;
+&lt;/latexbindings&gt;
+</pre>
+</div>
+<div class="section" lang="en">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="id46719958"></a>Configure your driver file</h2></div></div>
+<div></div>
+</div>
+<p>
+<span class="productname">DB2LaTeX</span> lets you specify your mappings via the
+    <tt class="literal">latex.mapping.xml</tt> parameter:</p>
+<pre class="programlisting">
+&lt;?xml version='1.0'?&gt;
+&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; version='1.0'&gt;
+  &lt;xsl:import href=&quot;http://db2latex.souceforge.net/xsl/docbook.xsl&quot;/&gt;
+  &lt;xsl:param name=&quot;latex.mapping.xml&quot; select=&quot;document('mydb2latex.map')&quot;/&gt;
+&lt;/xsl:stylesheet&gt;
+</pre>
+</div>
+<div class="section" lang="en">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="id46720090"></a>Further <span class="productname">LaTeX</span> Customization</h2></div></div>
+<div></div>
+</div>
+<p>
+        A large number of customizations are possible if you have some
+        knowledge of <span class="productname">LaTeX</span>. For example, you could change the way <tt class="sgmltag-element">chapter</tt> headings are formatted. You may wish
+        to refer to our <span class="productname">LaTeX</span> guide:
+        </p>
+<div class="itemizedlist"><ul type="disc"><li><a href=""></a></li></ul></div>
+<p>
+      </p>
+</div>
+<div class="navfoot">
+<hr>
+<table width="100%" border="0" summary="Footer navigation">
+<tr>
+<td width="33%" align="left"><span class="footdate">$Date: 2004/01/31 09:50:47 $</span></td>
+<td width="34%" align="center"><span class="foothome"><a href="index.html">Home</a></span></td>
+<td width="33%" align="right"> <a href="http://sourceforge.net/projects/db2latex"><img src="http://sourceforge.net/sflogo.php?group_id=22450&amp;type=1" border="0" width="88" height="31" alt="Hosted at SourceForge." /></a> <a href="http://docbook.sourceforge.net/projects/website/"><img src="http://docbook.sourceforge.net/graphics/buttons/website-1.png" border="0" width="128" height="40" alt="Created with Website: a DocBook document type." /></a></td>
+</tr>
+<tr><td colspan="3" align="right"><span class="footcopy"><span class="copyright">Copyright © 2000, 2001, 2002, 2003, 2004 Ramon Casellas and James Devenish. </span></span></td></tr>
+</table>
+</div>
+</body>
+</html>

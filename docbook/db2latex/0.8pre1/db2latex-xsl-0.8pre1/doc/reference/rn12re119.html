@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>latex.preamble.essential.citation</title>
+    <link rel="stylesheet" href="../db2latex-web.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.64.1" />
+    <link rel="home" href="index.html" title="DB2LaTeX API Documentation" />
+    <link rel="up" href="rn12.html" title="Citations citation.mod.xsl" />
+    <link rel="previous" href="rn12re118.html" title="citation" />
+    <link rel="next" href="rn13.html" title="Chapter-level Components component.mod.xsl" />
+    <link rel="icon" href="../graphics/rarrow.gif" type="image/gif" />
+  </head>
+  <body bgcolor="#ffffcc" text="black" link="#ac0204" vlink="#dc720c" alink="red">
+    <div class="top">
+      <ul class="top_left">
+        <li><a href="#top"><img align="top" border="0" src="../graphics/db2latex_new_banner.png" width="133" height="22" alt="latex.preamble.essential.citation" /></a> </li>
+      </ul>
+      <ul class="top_right">
+        <li>
+          <a href="http://sourceforge.net/projects/db2latex/">SourceForge</a>
+        </li>
+        <li>
+          <a href="../index.html">Home Page</a>
+        </li>
+        <li>
+          <a href="../sample/">Samples</a>
+        </li>
+      </ul>
+      <ul class="bottom_left">
+        <li><a href="./index.html">Reference Contents</a> | </li>
+        <li><a href="../install.html">Download &amp; Install</a> | </li>
+        <li><a href="../guides.html">User Guides</a> | </li>
+        <li><a href="../notes.html">Notes, E-mail &amp; Bugs</a> | </li>
+        <li>
+          <a href="../qanda.html">Q&amp;A</a>
+        </li>
+      </ul>
+    </div>
+    <div class="left">
+      <table class="panel" width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <th>Suggestions</th>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Search:</span>
+            <br />
+            <form method="get" action="http://www.google.com/search"><input type="text" maxlength="255" name="q" class="q" /> <input type="submit" value="Go" class="submit" /><input type="hidden" name="domains" value="db2latex.sourceforge.net" /><input type="hidden" name="sitesearch" value="db2latex.sourceforge.net" /></form>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Next:</span>
+            <br />
+            <a accesskey="n" href="rn13.html">Chapter level Components component.mod.xsl</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Previous:</span>
+            <br />
+            <a accesskey="p" href="rn12re118.html">citation</a>
+            <br />
+            <span class="minihead">Up:</span>
+            <br />
+            <a accesskey="u" href="rn12.html">Citations citation.mod.xsl</a>
+          </td>
+        </tr>
+      </table>
+      <div class="sidebar"><h2>On this page:</h2>(latex.preamble.essential.citation) <a href="rn12re119.html#id40547543">A. Description</a>; <a href="rn12re119.html#id40547677">F. Further Reading</a>.</div>
+    </div>
+    <div class="note" style="margin-top:2px; color: #804020; text-align: center; font-weight: bold">
+      <a name="top" id="top">Reference Section</a>
+    </div>
+    <div class="refentry" lang="en" xml:lang="en">
+      <a id="template.latex.preamble.essential.citation"></a>
+      <div class="titlepage">
+        
+        
+      </div>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>latex.preamble.essential.citation —  Essential preamble for <tt class="filename">citation.mod.xsl</tt> support </p>
+      </div>
+      <div class="refsynopsisdiv">
+        <h2>Synopsis</h2>
+        <pre class="synopsis"></pre>
+      </div>
+      <div class="description">
+        <a name="id40547543" id="id40547543"></a>
+        <h2>A. Description</h2>
+        <p>
+
+				Defines <tt class="function">\docbooktolatexcite</tt>. This function
+				helps to integrate <a href="http://www.oasis-open.org/docbook/documentation/reference/html/bibioentry.html"><tt class="sgmltag-element">bibioentry<a id="id40547572" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/bibioentry.html">2.0.9</a>]/@<tt class="sgmltag-attribute">id</tt> and
+				<a href="http://www.oasis-open.org/docbook/documentation/reference/html/bibioentry.html"><tt class="sgmltag-element">bibioentry<a id="id40547597" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/bibioentry.html">2.0.9</a>]/<a href="http://www.oasis-open.org/docbook/documentation/reference/html/abbrev.html"><tt class="sgmltag-element">abbrev<a id="id40547616" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/abbrev.html">2.0.9</a>] with
+				<span class="productname">LaTeX</span>.
+				Also defines <tt class="function">\docbooktolatexbackcite</tt>
+				for compatability with <span class="productname">hyperref<a id="id40547649" class="indexterm"></a></span>'s
+				<span class="productname">backref<a id="id40547665" class="indexterm"></a></span> functionality.
+
+			</p>
+      </div>
+      <div class="seealso">
+        <a name="id40547677" id="id40547677"></a>
+        <h2>F. Further Reading</h2>
+        <div class="itemizedlist">
+          <ul type="disc">
+            <li>
+              <a href="rn37.html" title="Variables and Templates used in LaTeX Preamble Generation">Variables and Templates used in LaTeX Preamble Generation</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="rn12re118.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="rn12.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="rn13.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">citation </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Chapter-level Components component.mod.xsl</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>latex.use.noindent</title>
+    <link rel="stylesheet" href="../db2latex-web.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.64.1" />
+    <link rel="home" href="index.html" title="DB2LaTeX API Documentation" />
+    <link rel="up" href="rn34.html" title="Parameters: DB2LaTeX Switches param-switch.mod.xsl" />
+    <link rel="previous" href="rn34re401.html" title="latex.use.parskip" />
+    <link rel="next" href="rn34re403.html" title="latex.use.subfigure" />
+    <link rel="icon" href="../graphics/rarrow.gif" type="image/gif" />
+  </head>
+  <body bgcolor="#ffffcc" text="black" link="#ac0204" vlink="#dc720c" alink="red">
+    <div class="top">
+      <ul class="top_left">
+        <li><a href="#top"><img align="top" border="0" src="../graphics/db2latex_new_banner.png" width="133" height="22" alt="latex.use.noindent" /></a> </li>
+      </ul>
+      <ul class="top_right">
+        <li>
+          <a href="http://sourceforge.net/projects/db2latex/">SourceForge</a>
+        </li>
+        <li>
+          <a href="../index.html">Home Page</a>
+        </li>
+        <li>
+          <a href="../sample/">Samples</a>
+        </li>
+      </ul>
+      <ul class="bottom_left">
+        <li><a href="./index.html">Reference Contents</a> | </li>
+        <li><a href="../install.html">Download &amp; Install</a> | </li>
+        <li><a href="../guides.html">User Guides</a> | </li>
+        <li><a href="../notes.html">Notes, E-mail &amp; Bugs</a> | </li>
+        <li>
+          <a href="../qanda.html">Q&amp;A</a>
+        </li>
+      </ul>
+    </div>
+    <div class="left">
+      <table class="panel" width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <th>Suggestions</th>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Search:</span>
+            <br />
+            <form method="get" action="http://www.google.com/search"><input type="text" maxlength="255" name="q" class="q" /> <input type="submit" value="Go" class="submit" /><input type="hidden" name="domains" value="db2latex.sourceforge.net" /><input type="hidden" name="sitesearch" value="db2latex.sourceforge.net" /></form>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Next:</span>
+            <br />
+            <a accesskey="n" href="rn34re403.html">latex.use.subfigure</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Previous:</span>
+            <br />
+            <a accesskey="p" href="rn34re401.html">latex.use.parskip</a>
+            <br />
+            <span class="minihead">Up:</span>
+            <br />
+            <a accesskey="u" href="rn34.html">Parameters: DB2LaTeX Switches param switch.mod.xsl</a>
+          </td>
+        </tr>
+      </table>
+      <div class="sidebar"><h2>On this page:</h2>(latex.use.noindent) <a href="rn34re402.html#id40610899">A. Description</a>; <a href="rn34re402.html#id40610920">D. DocBook Compliance and LaTeX Notes</a>; <a href="rn34re402.html#id40611002">F. Further Reading</a>.</div>
+    </div>
+    <div class="note" style="margin-top:2px; color: #804020; text-align: center; font-weight: bold">
+      <a name="top" id="top">Reference Section</a>
+    </div>
+    <div class="refentry" lang="en" xml:lang="en">
+      <a id="param.latex.use.noindent"></a>
+      <div class="titlepage">
+        
+        
+      </div>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>latex.use.noindent — Toggle the use of <tt class="function">\noindent</tt> commands</p>
+      </div>
+      <div class="refsynopsisdiv">
+        <h2>Synopsis</h2>
+        <pre class="synopsis">
+&lt;xsl:param name="latex.use.noindent"&gt;
+		&lt;xsl:choose&gt;
+			&lt;xsl:when test="$latex.use.parskip=1"&gt;
+				&lt;xsl:value-of select="0"/&gt;
+			&lt;/xsl:when&gt;
+			&lt;xsl:otherwise&gt;
+				&lt;xsl:value-of select="1"/&gt;
+			&lt;/xsl:otherwise&gt;
+		&lt;/xsl:choose&gt;
+	&lt;/xsl:param&gt;</pre>
+      </div>
+      <div class="description">
+        <a name="id40610899" id="id40610899"></a>
+        <h2>A. Description</h2>
+        <p>
+			
+			When this parameter is 1, <span class="productname">DB2LaTeX</span> will deliberately insert
+			noindents at particular locations within your document.
+
+			</p>
+      </div>
+      <div class="notes">
+        <a name="id40610920" id="id40610920"></a>
+        <h2>D. DocBook Compliance and LaTeX Notes</h2>
+        <p>
+
+			When traditional <span class="productname">LaTeX</span> paragraph indentation and spacing is used,
+			it is often necessary to use <tt class="function">\noindent</tt> after certain block-formatted
+			elements (e.g. <a href="http://www.oasis-open.org/docbook/documentation/reference/html/itemizedlist.html"><tt class="sgmltag-element">itemizedlist<a id="id40610956" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/itemizedlist.html">2.0.9</a>]). Let us know if we
+			need to insert more <tt class="function">\noindent</tt>---so far, there are few
+			places where we make use of it.
+
+			</p>
+        <p>
+				
+			By default, this option will be turned on when <a href="rn34re401.html" title="latex.use.parskip">latex.use.parskip</a> is <span class="emphasis"><em>off</em></span> and
+			will be turned off when <a href="rn34re401.html" title="latex.use.parskip">latex.use.parskip</a>
+			is <span class="emphasis"><em>on</em></span>.
+				
+			</p>
+      </div>
+      <div class="seealso">
+        <a name="id40611002" id="id40611002"></a>
+        <h2>F. Further Reading</h2>
+        <div class="itemizedlist">
+          <ul type="disc">
+            <li>
+              <a href="rn34re401.html" title="latex.use.parskip">latex.use.parskip</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="refsection">
+        <a name="id41064700" id="id41064700"></a>
+        <h2>G. Uses</h2>
+        <p>Documented templates that use this parameter:
+          </p>
+        <div class="itemizedlist">
+          <ul type="disc">
+            <li>
+              <a href="rn26re252.html" target="_top">itemizedlist</a>
+            </li>
+            <li>
+              <a href="rn26re253.html" target="_top">variablelist</a>
+            </li>
+            <li>
+              <a href="rn26re254.html" target="_top">orderedlist</a>
+            </li>
+            <li>
+              <a href="rn34re401.html" target="_top">latex.use.parskip</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="rn34re401.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="rn34.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="rn34re403.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">latex.use.parskip </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> latex.use.subfigure</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

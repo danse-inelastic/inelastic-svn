@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>variablelist</title>
+    <link rel="stylesheet" href="../db2latex-web.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.64.1" />
+    <link rel="home" href="index.html" title="DB2LaTeX API Documentation" />
+    <link rel="up" href="rn26.html" title="Lists lists.mod.xsl" />
+    <link rel="previous" href="rn26re252.html" title="itemizedlist" />
+    <link rel="next" href="rn26re254.html" title="orderedlist" />
+    <link rel="icon" href="../graphics/rarrow.gif" type="image/gif" />
+  </head>
+  <body bgcolor="#ffffcc" text="black" link="#ac0204" vlink="#dc720c" alink="red">
+    <div class="top">
+      <ul class="top_left">
+        <li><a href="#top"><img align="top" border="0" src="../graphics/db2latex_new_banner.png" width="133" height="22" alt="variablelist" /></a> </li>
+      </ul>
+      <ul class="top_right">
+        <li>
+          <a href="http://sourceforge.net/projects/db2latex/">SourceForge</a>
+        </li>
+        <li>
+          <a href="../index.html">Home Page</a>
+        </li>
+        <li>
+          <a href="../sample/">Samples</a>
+        </li>
+      </ul>
+      <ul class="bottom_left">
+        <li><a href="./index.html">Reference Contents</a> | </li>
+        <li><a href="../install.html">Download &amp; Install</a> | </li>
+        <li><a href="../guides.html">User Guides</a> | </li>
+        <li><a href="../notes.html">Notes, E-mail &amp; Bugs</a> | </li>
+        <li>
+          <a href="../qanda.html">Q&amp;A</a>
+        </li>
+      </ul>
+    </div>
+    <div class="left">
+      <table class="panel" width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <th>Suggestions</th>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Search:</span>
+            <br />
+            <form method="get" action="http://www.google.com/search"><input type="text" maxlength="255" name="q" class="q" /> <input type="submit" value="Go" class="submit" /><input type="hidden" name="domains" value="db2latex.sourceforge.net" /><input type="hidden" name="sitesearch" value="db2latex.sourceforge.net" /></form>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Next:</span>
+            <br />
+            <a accesskey="n" href="rn26re254.html">orderedlist</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Previous:</span>
+            <br />
+            <a accesskey="p" href="rn26re252.html">itemizedlist</a>
+            <br />
+            <span class="minihead">Up:</span>
+            <br />
+            <a accesskey="u" href="rn26.html">Lists lists.mod.xsl</a>
+          </td>
+        </tr>
+      </table>
+      <div class="sidebar"><h2>On this page:</h2>(variablelist) <a href="rn26re253.html#id40581410">A. Description</a>; <a href="rn26re253.html#id40581423">B. Pertinent Variables</a>; <a href="rn26re253.html#id40581441">D. DocBook Compliance and LaTeX Notes</a>; <a href="rn26re253.html#id40581470">E. Samples and Tests</a>.</div>
+    </div>
+    <div class="note" style="margin-top:2px; color: #804020; text-align: center; font-weight: bold">
+      <a name="top" id="top">Reference Section</a>
+    </div>
+    <div class="refentry" lang="en" xml:lang="en">
+      <a id="id40581361"></a>
+      <div class="titlepage">
+        
+        
+      </div>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>variablelist — Process <a href="http://www.oasis-open.org/docbook/documentation/reference/html/variablelist.html"><tt class="sgmltag-element">variablelist<a id="id40581382" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/variablelist.html">2.0.9</a>] elements</p>
+      </div>
+      <div class="refsynopsisdiv">
+        <h2>Synopsis</h2>
+        <a id="template.variablelist"></a>
+        <pre class="synopsis">&lt;xsl:template match="variablelist"/&gt;</pre>
+      </div>
+      <div class="description">
+        <a name="id40581410" id="id40581410"></a>
+        <h2>A. Description</h2>
+        <p>
+				Formats a list in which each item is denoted by a textual label.
+			</p>
+      </div>
+      <div class="variables">
+        <a name="id40581423" id="id40581423"></a>
+        <h2>B. Pertinent Variables</h2>
+        <div class="itemizedlist">
+          <ul type="disc">
+            <li>
+              <a href="rn34re402.html" title="latex.use.noindent">latex.use.noindent</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="notes">
+        <a name="id40581441" id="id40581441"></a>
+        <h2>D. DocBook Compliance and LaTeX Notes</h2>
+        <p>
+				Applies templates. Uses a <span class="productname">LaTeX</span> <tt class="function">\begin{description}</tt>
+				environment.
+			</p>
+      </div>
+      <div class="samples">
+        <a name="id40581470" id="id40581470"></a>
+        <h2>E. Samples and Tests</h2>
+        <p>
+          <span class="simplelist"><tt class="filename">test_bind_Bv9ARM-book.pdf</tt> from <tt class="filename">test_bind/Bv9ARM-book.xml</tt>, <tt class="filename">test_book.pdf</tt> from <tt class="filename">test_book/test.xml</tt>, <tt class="filename">test_ddh_article.pdf</tt> from <tt class="filename">test_ddh/article.xml</tt>, <tt class="filename">test_lists.pdf</tt> from <tt class="filename">test_lists/test.xml</tt></span>
+        </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="rn26re252.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="rn26.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="rn26re254.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">itemizedlist </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> orderedlist</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,669 @@
+<html lang="en" lang="en">
+<head>
+<meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type">
+<meta name="generator" content="Website XSL Stylesheet V2.4.1">
+<link rel="home" href="index.html" title="Welcome to the DB2LaTeX XSL Stylesheets">
+<link rel="up" href="guides.html" title="User Guides">
+<link rel="previous" href="guides.html" title="User Guides">
+<link rel="next" href="custom.html" title="Custom Stylesheet Templates">
+<link rel="last" href="latex.html" title="Custom LaTeX Styles">
+<link rel="icon" href="graphics/rarrow.gif" type="image/gif">
+<link rel="stylesheet" href="db2latex-web.css" type="text/css">
+    <title>Using DB2LaTeX</title>
+    
+  </head>
+<body class="website" bgcolor="#ffffcc" text="black" link="#ac0204" vlink="#dc720c" alink="red">
+<div class="top">
+<ul class="top_left"><li>
+<a href="#top"><img align="top" border="0" src="./graphics/db2latex_new_banner.png" width="133" height="22" alt="Using DB2LaTeX"></a> </li></ul>
+<ul class="top_right">
+<li><a href="http://sourceforge.net/projects/db2latex/">SourceForge</a></li>
+<li><a href="./reference/index.html">Reference</a></li>
+<li><a href="./sample/">Samples</a></li>
+</ul>
+<ul class="bottom_left">
+<li>
+<a href="./index.html">Welcome &amp; News</a> | </li>
+<li>
+<a href="./install.html">Download &amp; Install</a> | </li>
+<li>
+<a href="./guides.html">User Guides</a> | </li>
+<li>
+<a href="./notes.html">Notes, E-mail &amp; Bugs</a> | </li>
+<li><a href="./qanda.html">Q&amp;A</a></li>
+</ul>
+</div>
+<div class="left">
+<table class="panel" width="100%" cellspacing="0" cellpadding="0" border="0">
+<tr><th>Suggestions</th></tr>
+<tr><td>
+<span class="minihead">Search:</span><br><form method="get" action="http://www.google.com/search">
+<input type="text" maxlength="255" name="q" class="q"> <input type="submit" value="Go" class="submit"><input type="hidden" name="domains" value="db2latex.sourceforge.net"><input type="hidden" name="sitesearch" value="db2latex.sourceforge.net">
+</form>
+</td></tr>
+</table>
+<div class="sidebar">
+<h2>On this page:</h2>(Using <span class="productname">DB2LaTeX</span>) <a href="#id46720203">Toolchain</a>; <a href="#id46662110">The <span class="acronym">XSLT</span> processor</a>; <a href="#sec:resolver">Using an Entity and URI Resolver with Catalogues</a>; <a href="#id46661214">Creating your <span class="acronym">XML</span> document (<tt class="filename">mydb2latex.xml</tt>)</a>; <a href="#id46661282">Set up Your Driver File (<tt class="filename">mydb2latex.xsl</tt>)</a>; <a href="#id46661251">Process Your Document</a>.</div>
+</div>
+<a name="top"></a><h1>Using <span class="productname">DB2LaTeX</span>
+</h1>
+<p>
+    This self-contained guide explains the invocation of an <span class="acronym">XSLT</span> processor
+    with the <span class="productname">DB2LaTeX</span> stylesheets. Some sample sources files (an XML document
+    and an XSL customisation layer) are illustrated.
+  </p>
+<div class="section" lang="en">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="id46720203"></a>Toolchain</h2></div></div>
+<div></div>
+</div>
+<p>
+
+      Common output formats for <span class="productname">DocBook</span> are <span class="acronym">HTML</span> (or <span class="acronym">XHTML</span>) and <span class="productname">PDF</span>.
+      <span class="productname">PDF</span> output uses a two-stage toolchain. First, you will need to
+      transform your <span class="productname">DocBook</span> source files into a typesetting format. Then,
+      you need to typeset the document to produce <span class="productname">PDF</span>. For <span class="productname">DB2LaTeX</span>, the
+      typesetter is <span class="productname">LaTeX</span> (including <span class="productname">pdfTeX</span>). It
+      use useful to create a &#8216;<span class="quote"><tt class="filename">Makefile</tt></span>&#8217; to
+      build your printable document on an ongoing basis. <span class="productname">DB2LaTeX</span> allows you
+      to combine <span class="productname">DocBook</span> with existing <span class="productname">LaTeX</span> systems such as
+      <span class="productname">BibTeX</span> and
+      <span class="productname">makeindex</span>.
+
+    </p>
+</div>
+<div class="section" lang="en">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="id46662110"></a>The <span class="acronym">XSLT</span> processor</h2></div></div>
+<div></div>
+</div>
+<p>To transform a <span class="acronym">XML</span> document using <span class="acronym">XSL</span> stylesheets you need an <span class="acronym">XSLT</span>
+    processor. There are several commercial and free <span class="acronym">XSLT</span> processors available.
+    To use the <span class="productname">DB2LaTeX</span> stylesheets, your processor will need support for
+    <span class="acronym">XSLT</span> 1.0 and <span class="productname">XPath</span> 1.0 (you do not need
+    <span class="productname">XInclude</span> or extensions support). The processor
+    must support <span class="acronym">XSL</span> &#8216;<span class="quote">keys</span>&#8217;. (Some processors have broken ID
+    support, but <span class="productname">DB2LaTeX</span> will use keys to avoid this pitfall and others.)
+    </p>
+<p>Basically, all <span class="acronym">XSLT</span> processors are invoked with three parameters: the
+    input <span class="acronym">XML</span> document, the <span class="acronym">XSLT</span> stylesheet to apply, and the (optional)
+    output filename. The syntax depends on your processor. This guide includes
+    examples for <span class="productname">xsltproc</span> and
+    <span class="productname">Saxon</span>.</p>
+<div class="qandaset">
+<h3 class="title">Preparing to Invoke Your Processor</h3>
+<dl>
+<dt>1.  <a href="#id46663020">Choosing a Processor</a>
+</dt>
+<dd><dl>
+<dt>1.1. <a href="#id46663027">What Processor Should I Use?</a>
+</dt>
+<dt>1.2. <a href="#id46720215">How are Processors Installed?</a>
+</dt>
+</dl></dd>
+<dt>2.  <a href="#id46720978">Using a Processor</a>
+</dt>
+<dd><dl>
+<dt>2.1. <a href="#id46720986">Do I Need to use Resolvers and Catalogues?</a>
+</dt>
+<dt>2.2. <a href="#id46721047">Do I Need to use Extensions?</a>
+</dt>
+<dt>2.3. <a href="#id46721078">Do I Need Special Capabilities</a>
+</dt>
+</dl></dd>
+</dl>
+<table border="0" summary="Q and A Set">
+<col align="left" width="1%">
+<tbody>
+<tr class="qandadiv"><td align="left" valign="top" colspan="2">
+<a name="id46663020"></a><h4 class="title">
+<a name="id46663020"></a>1. Choosing a Processor</h4>
+</td></tr>
+<tr class="toc" colspan="2"><td align="left" valign="top" colspan="2"><dl>
+<dt>1.1. <a href="#id46663027">What Processor Should I Use?</a>
+</dt>
+<dt>1.2. <a href="#id46720215">How are Processors Installed?</a>
+</dt>
+</dl></td></tr>
+<tr class="question">
+<td align="left" valign="top">
+<a name="id46663027"></a><a name="id46663030"></a><b>1.1.</b>
+</td>
+<td align="left" valign="top"><p>What Processor Should I Use?</p></td>
+</tr>
+<tr class="answer">
+<td align="left" valign="top"><b></b></td>
+<td align="left" valign="top">
+<p>People choose different <span class="acronym">XSLT</span> processors based on criteria such as availability, speed, interface features, support for new standards, and support for extensions. It is known that <span class="productname">xsltproc</span>, <span class="productname">Xalan-Java</span> and <span class="productname">Saxon</span> can process <span class="productname">DocBook</span> documents. <span class="productname">xsltproc</span> is most easy to use, it is very fast, and most users will prefer to use it. However, various versions of <span class="productname">xsltproc</span> suffer from a number of bugs that can cause intermittent failures or incorrect output. <span class="productname">Saxon</span> is more cumbersome but is also more reliable. </p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.gif"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td colspan="2" align="left" valign="top"><p>People have used <span class="productname">XT</span> with <span class="productname">DocBook</span> in the past.
+              However, it does not support some <span class="acronym">XSL</span> features (such as keys).</p></td></tr>
+</table></div>
+<div class="itemizedlist">
+<p class="title"><b>Some Well-known <span class="acronym">XSLT</span> Processors</b></p>
+<ul type="disc">
+<li>
+<a href="http://www.xmlsoft.org/XSLT/xsltproc2.html" target="_top">xsltproc</a> (popular option, but suffers intermittent failures or invalid output)</li>
+<li>
+<a href="http://saxon.sourceforge.net/" target="_top">Saxon</a> (very reliable, but slower than <span class="productname">xsltproc</span> in many circumstances)</li>
+<li><a href="http://xml.apache.org/xalan-j/" target="_top">Xalan-Java</a></li>
+<li>
+<a href="http://www.gingerall.com/charlie/ga/xml/p_sab.xml" target="_top">Sablotron</a> (success not yet reported for <span class="productname">DB2LaTeX</span>)</li>
+</ul>
+</div>
+</td>
+</tr>
+<tr class="question">
+<td align="left" valign="top">
+<a name="id46720215"></a><a name="id46720218"></a><b>1.2.</b>
+</td>
+<td align="left" valign="top"><p>How are Processors Installed?</p></td>
+</tr>
+<tr class="answer">
+<td align="left" valign="top"><b></b></td>
+<td align="left" valign="top"><p>
+<span class="acronym">XSLT</span> processors are easy to install (there is usually no &#8216;<span class="quote">installation</span>&#8217; actually needed).
+            For package-managed operating systems, an <span class="productname">xsltproc</span> (or <span class="productname">libxslt</span>) package is probably available. If you install a <span class="productname">Java</span>- or <span class="productname">Perl</span>-based processor (such as <span class="productname">Saxon</span>) you will need to have installed <span class="productname">Java</span> or <span class="productname">Perl</span> installed.
+            </p></td>
+</tr>
+<tr class="qandadiv"><td align="left" valign="top" colspan="2">
+<a name="id46720978"></a><h4 class="title">
+<a name="id46720978"></a>2. Using a Processor</h4>
+</td></tr>
+<tr class="toc" colspan="2"><td align="left" valign="top" colspan="2"><dl>
+<dt>2.1. <a href="#id46720986">Do I Need to use Resolvers and Catalogues?</a>
+</dt>
+<dt>2.2. <a href="#id46721047">Do I Need to use Extensions?</a>
+</dt>
+<dt>2.3. <a href="#id46721078">Do I Need Special Capabilities</a>
+</dt>
+</dl></td></tr>
+<tr class="question">
+<td align="left" valign="top">
+<a name="id46720986"></a><a name="id46720989"></a><b>2.1.</b>
+</td>
+<td align="left" valign="top"><p>Do I Need to use Resolvers and Catalogues?</p></td>
+</tr>
+<tr class="answer">
+<td align="left" valign="top"><b></b></td>
+<td align="left" valign="top"><p>We recommend that you set up a resolver for all your <span class="productname">DocBook</span> <span class="acronym">XML</span> work.
+            This includes keeping local copies of the <span class="acronym">DTD</span>s and <span class="productname">DB2LaTeX</span> stylesheets.
+            However, this is not technically necessary.
+            </p></td>
+</tr>
+<tr class="question">
+<td align="left" valign="top">
+<a name="id46721047"></a><a name="id46721050"></a><b>2.2.</b>
+</td>
+<td align="left" valign="top"><p>Do I Need to use Extensions?</p></td>
+</tr>
+<tr class="answer">
+<td align="left" valign="top"><b></b></td>
+<td align="left" valign="top"><p>There are no extensions specifically provided for <span class="productname">DB2LaTeX</span>.</p></td>
+</tr>
+<tr class="question">
+<td align="left" valign="top">
+<a name="id46721078"></a><a name="id46721081"></a><b>2.3.</b>
+</td>
+<td align="left" valign="top"><p>Do I Need Special Capabilities</p></td>
+</tr>
+<tr class="answer">
+<td align="left" valign="top"><b></b></td>
+<td align="left" valign="top"><p>
+<span class="productname">DB2LaTeX</span> requires only <span class="acronym">XSLT</span> 1.0 and <span class="productname">XSL</span> 1.0.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="qandaset">
+<h3 class="title">Identifying <span class="acronym">XML</span> Resources</h3>
+<dl>
+<dt>1. <a href="#id46721144">What DTDs Are Involved?</a>
+</dt>
+<dt>2. <a href="#id46662859">What XSLT Stylesheets Are Involved?</a>
+</dt>
+</dl>
+<table border="0" summary="Q and A Set">
+<col align="left" width="1%">
+<tbody>
+<tr class="question">
+<td align="left" valign="top">
+<a name="id46721144"></a><a name="id46721147"></a><b>1.</b>
+</td>
+<td align="left" valign="top"><p>What <span class="acronym">DTD</span>s Are Involved?</p></td>
+</tr>
+<tr class="answer">
+<td align="left" valign="top"><b></b></td>
+<td align="left" valign="top">
+<p>The <span class="productname">DocBook</span> <span class="acronym">XML</span> <span class="acronym">DTD</span> is the only <span class="acronym">DTD</span> that is not supplied with
+          <span class="productname">DB2LaTeX</span>. You would normally use the <span class="productname">DocBook</span> <span class="acronym">DTD</span> for your <span class="acronym">XML</span>
+          source files (as shown in this guide).
+          </p>
+<p>
+          <span class="productname">DB2LaTeX</span> also uses a
+          number of <span class="acronym">DTD</span>s for ancillary files such as the <span class="productname">LaTeX</span>
+          &#8220;<span class="quote">mapping</span>&#8221; system and localisation. However, these
+          are included with <span class="productname">DB2LaTeX</span> itself.</p>
+<p>
+            A typical <tt class="literal">DOCTYPE</tt> declaration for a source file is:
+    </p>
+<pre class="screen">&lt;!DOCTYPE article PUBLIC &quot;-//OASIS//DTD DocBook XML V4.2//EN&quot;
+    &quot;http://www.oasis-open.org/docbook/xml/4.2/docbookx.dtd&quot;&gt;</pre>
+<p>
+          </p>
+</td>
+</tr>
+<tr class="question">
+<td align="left" valign="top">
+<a name="id46662859"></a><a name="id46662862"></a><b>2.</b>
+</td>
+<td align="left" valign="top"><p>What <span class="acronym">XSLT</span> Stylesheets Are Involved?</p></td>
+</tr>
+<tr class="answer">
+<td align="left" valign="top"><b></b></td>
+<td align="left" valign="top">
+<p>Only the <span class="productname">DB2LaTeX</span> <span class="acronym">XSLT</span> stylesheet distribution.</p>
+<p>
+            A typical <span class="acronym">URL</span> for <span class="productname">DB2LaTeX</span> is <a href="http://db2latex.sourceforge.net/xsl/docbook.xsl" target="_top">http://db2latex.sourceforge.net/xsl/docbook.xsl</a>.
+            (Note, however, that this is the address of the &#8220;<span class="quote">snapshot</span>&#8221; stylesheets.
+            You would normally use a resolver catalogue to map the <span class="acronym">URL</span> to &#8220;<span class="quote">release</span>&#8221;
+            stylesheets stored on your hard drive.)
+          </p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" lang="en">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="sec:resolver"></a>Using an Entity and URI Resolver with Catalogues</h2></div></div>
+<div></div>
+</div>
+<p>
+      <span class="acronym">XML</span> files often contain references to other <span class="acronym">XML</span> files or <span class="acronym">DTD</span>s.
+      For instance, <tt class="literal">DOCTYPE</tt> declarations contain
+      &#8216;<span class="quote">public</span>&#8217; or &#8216;<span class="quote">system</span>&#8217; identifiers.
+      Additionally, <span class="acronym">XSL</span> files may contain <span class="acronym">URL</span>s to locate other <span class="acronym">XSL</span> files.
+      These identifiers and locators may refer to resources on your local
+      computer or on &#8216;<span class="quote">remote hosts</span>&#8217;. Often, users will choose to
+      store a local mirror of something that originated on a remote host.
+    </p>
+<p>
+      When processing <span class="productname">DocBook</span> files, your <span class="acronym">XSLT</span> processor will require access to the <span class="productname">DocBook</span> <span class="acronym">DTD</span>s
+      and the <span class="productname">DB2LaTeX</span> stylesheets. The &#8216;<span class="quote">canonical</span>&#8217; <span class="acronym">URL</span>s for
+      these resources are public web hosts in the United States of America.
+      Your <span class="acronym">XSLT</span> processor will therefore attempt to load the <span class="acronym">DTD</span>s and
+      stylesheets from the web.
+      However, this is slow and may be costly.
+      Resolver catalogues can provide your processor with a means of using local mirrors rather than canonical sources.
+    </p>
+<p>
+      Also, you may sometimes use a local filesystem locator when you are writing your own stylesheets.
+      This could make your files non-portable.
+      Resolver catalogues can be used to solve this problem without having to rewrite your files (or files that you received from other people).
+    </p>
+<div class="itemizedlist">
+<p class="title"><b>Suggested Reading</b></p>
+<ul type="disc">
+<li><a href="http://www.sagehill.net/xml/docbookxsl/Catalogs.html" target="_top">Using the DocBook XSL Stylesheets: XML catalogs</a></li>
+<li><a href="http://wwws.sun.com/software/xml/developers/resolver/article/" target="_top">Sun Developer Connection: XML Entity and URI Resolvers</a></li>
+</ul>
+</div>
+<div class="qandaset">
+<h3 class="title">Getting Started with a Resolver</h3>
+<dl>
+<dt>1.  <a href="#id46662146">XSLT Processor Support for Resolvers and Catalogues</a>
+</dt>
+<dd><dl><dt>1.1. <a href="#id46662154">Does my XSLT Processor Support a Resolver?</a>
+</dt></dl></dd>
+<dt>2.  <a href="#id46660653">Setting up Catalogues</a>
+</dt>
+<dd><dl><dt>2.1. <a href="#id46660660">How do I Set Up an XML Catalogue?</a>
+</dt></dl></dd>
+<dt>3.  <a href="#id46667088">Using Your Resolver</a>
+</dt>
+<dd><dl>
+<dt>3.1. <a href="#id46667020">How do I Use an XML Catalogue with xsltproc?</a>
+</dt>
+<dt>3.2. <a href="#id46661103">How do I Use an XML Catalogue with Saxon and Sun's Resolver?</a>
+</dt>
+<dt>3.3. <a href="#id46661042">How do I Use an XML Catalogue with Xalan-Java and Sun's Resolver?</a>
+</dt>
+</dl></dd>
+</dl>
+<table border="0" summary="Q and A Set">
+<col align="left" width="1%">
+<tbody>
+<tr class="qandadiv"><td align="left" valign="top" colspan="2">
+<a name="id46662146"></a><h4 class="title">
+<a name="id46662146"></a>1. XSLT Processor Support for Resolvers and Catalogues</h4>
+</td></tr>
+<tr class="toc" colspan="2"><td align="left" valign="top" colspan="2"><dl><dt>1.1. <a href="#id46662154">Does my XSLT Processor Support a Resolver?</a>
+</dt></dl></td></tr>
+<tr class="question">
+<td align="left" valign="top">
+<a name="id46662154"></a><a name="id46662157"></a><b>1.1.</b>
+</td>
+<td align="left" valign="top"><p>Does my <span class="acronym">XSLT</span> Processor Support a Resolver?</p></td>
+</tr>
+<tr class="answer">
+<td align="left" valign="top"><b></b></td>
+<td align="left" valign="top">
+<p>It is widely known that <span class="productname">xsltproc</span> (<span class="productname">libxml2</span>), <span class="productname">Saxon</span> and <span class="productname">Xalan-Java</span> support entity and <span class="acronym">URI</span> resolution.
+            <span class="productname">Saxon</span> and <span class="productname">Xalan-Java</span> need you to supply resolver classes to fulfil this role.</p>
+<div class="itemizedlist">
+<p class="title"><b>Resolver Support</b></p>
+<ul type="disc">
+<li>
+<a href="http://www.xmlsoft.org/" target="_top">libxml2</a> (see also <a href="http://www.xmlsoft.org/XSLT/" target="_top">libxslt</a>)</li>
+<li><a href="http://wwws.sun.com/software/xml/developers/resolver/" target="_top">Sun's Resolver for Java (Norman Walsh)</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr class="qandadiv"><td align="left" valign="top" colspan="2">
+<a name="id46660653"></a><h4 class="title">
+<a name="id46660653"></a>2. Setting up Catalogues</h4>
+</td></tr>
+<tr class="toc" colspan="2"><td align="left" valign="top" colspan="2"><dl><dt>2.1. <a href="#id46660660">How do I Set Up an XML Catalogue?</a>
+</dt></dl></td></tr>
+<tr class="question">
+<td align="left" valign="top">
+<a name="id46660660"></a><a name="id46660663"></a><b>2.1.</b>
+</td>
+<td align="left" valign="top"><p>How do I Set Up an XML Catalogue?</p></td>
+</tr>
+<tr class="answer">
+<td align="left" valign="top"><b></b></td>
+<td align="left" valign="top">
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Warning">
+<tr>
+<td rowspan="2" align="center" valign="top" width="25"><img alt="[Warning]" src="images/warning.gif"></td>
+<th align="left">Warning</th>
+</tr>
+<tr><td colspan="2" align="left" valign="top"><p>This example uses file paths that are specific to one computer. Your computer may require different paths.</p></td></tr>
+</table></div>
+<p>Here is an example that provides local copies of the <span class="productname">DocBook</span> <span class="acronym">DTD</span>s, Norman Walsh's <span class="acronym">XSL</span> Stylesheets, and <span class="productname">DB2LaTeX</span>.
+              </p>
+<div class="informalexample"><pre class="screen">&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;catalog xmlns=&quot;urn:oasis:names:tc:entity:xmlns:xml:catalog&quot;&gt;
+  &lt;!-- map DOCTYPE public identifiers to local copies --&gt;
+  &lt;public publicId=&quot;-//OASIS//DTD DocBook XML V4.2//EN&quot;
+    uri=&quot;/usr/local/share/xml/docbook/4.2/docbookx.dtd&quot;/&gt;
+  &lt;public publicId=&quot;-//OASIS//DTD DocBook XML V4.1.2//EN&quot;
+    uri=&quot;/usr/local/share/xml/docbook/4.1.2/docbookx.dtd&quot;/&gt;
+  &lt;public publicId=&quot;-//OASIS//DTD DocBook XML V4.0//EN&quot;
+    uri=&quot;/usr/local/share/xml/docbook/4.1.2/docbookx.dtd&quot;/&gt;
+  &lt;public publicId=&quot;-//OASIS//DTD DocBook XML V3.1//EN&quot;
+    uri=&quot;/usr/local/share/xml/docbook/4.2/docbookx.dtd&quot;/&gt;
+
+  &lt;!-- map DOCTYPE system identifiers to local copies --&gt;
+  &lt;system systemId=&quot;http://www.oasis-open.org/docbook/xml/4.2/docbookx.dtd&quot;
+    uri=&quot;/usr/local/share/xml/docbook/4.2/docbookx.dtd&quot;/&gt;
+  &lt;system systemId=&quot;http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd&quot;
+    uri=&quot;/usr/local/share/xml/docbook/4.1.2/docbookx.dtd&quot;/&gt;
+  &lt;system systemId=&quot;http://www.oasis-open.org/docbook/xml/4.0/docbookx.dtd&quot;
+    uri=&quot;/usr/local/share/xml/docbook/4.1.2/docbookx.dtd&quot;/&gt;
+
+  &lt;!-- map URLs to local files --&gt;
+  &lt;rewriteURI uriStartString=&quot;http://db2latex.sourceforge.net/xsl/&quot;
+    rewritePrefix=&quot;/export/user/me/source/docbook/db2latex/xsl/&quot;/&gt;
+  &lt;rewriteURI uriStartString=&quot;http://docbook.sourceforge.net/release/xsl/current/&quot;
+    rewritePrefix=&quot;/export/user/me/source/docbook/docbook-xsl/&quot;/&gt;
+&lt;/catalog&gt;</pre></div>
+<p>
+            </p>
+<p>
+              If this were being used with Sun's resolver (see above), you could use this <tt class="filename">CatalogManager.properties</tt>:
+              </p>
+<div class="informalexample"><pre class="screen"># Enable this to help check that your local files are being found and used:
+#verbosity=4
+
+relative-catalogs=no
+
+# Always use semicolons in this list
+catalogs=catalogue.xml
+
+prefer=system
+
+static-catalog=yes
+
+catalog-class-name=com.sun.resolver.Resolver</pre></div>
+<p>
+            </p>
+</td>
+</tr>
+<tr class="qandadiv"><td align="left" valign="top" colspan="2">
+<a name="id46667088"></a><h4 class="title">
+<a name="id46667088"></a>3. Using Your Resolver</h4>
+</td></tr>
+<tr class="toc" colspan="2"><td align="left" valign="top" colspan="2"><dl>
+<dt>3.1. <a href="#id46667020">How do I Use an XML Catalogue with xsltproc?</a>
+</dt>
+<dt>3.2. <a href="#id46661103">How do I Use an XML Catalogue with Saxon and Sun's Resolver?</a>
+</dt>
+<dt>3.3. <a href="#id46661042">How do I Use an XML Catalogue with Xalan-Java and Sun's Resolver?</a>
+</dt>
+</dl></td></tr>
+<tr class="question">
+<td align="left" valign="top">
+<a name="id46667020"></a><a name="id46667023"></a><b>3.1.</b>
+</td>
+<td align="left" valign="top"><p>How do I Use an <span class="acronym">XML</span> Catalogue with <span class="productname">xsltproc</span>?</p></td>
+</tr>
+<tr class="answer">
+<td align="left" valign="top"><b></b></td>
+<td align="left" valign="top"><p>If you are using <span class="productname">xsltproc</span> under a <span class="productname">UNIX</span>-like system then you can place your catalogue file at <tt class="filename">/etc/xml/catalog</tt> and <span class="productname">xsltproc</span> will use it by default.</p></td>
+</tr>
+<tr class="question">
+<td align="left" valign="top">
+<a name="id46661103"></a><a name="id46661106"></a><b>3.2.</b>
+</td>
+<td align="left" valign="top"><p>How do I Use an <span class="acronym">XML</span> Catalogue with <span class="productname">Saxon</span> and Sun's Resolver?</p></td>
+</tr>
+<tr class="answer">
+<td align="left" valign="top"><b></b></td>
+<td align="left" valign="top"><div class="procedure"><ol type="1">
+<li><p>
+                Ensure that <tt class="filename">resolver.jar</tt> and <tt class="filename">CatalogManager.properties</tt> are in the Java classpath for <span class="productname">Saxon</span>.
+              </p></li>
+<li>
+<p>
+                Tell <span class="productname">Saxon</span> to use Sun's resolver. For example, use the following command-line arguments:
+                </p>
+<pre class="screen">-r com.sun.resolver.tools.CatalogResolver
+-x com.sun.resolver.tools.ResolvingXMLReader
+-y com.sun.resolver.tools.ResolvingXMLReader</pre>
+<p>
+              </p>
+</li>
+</ol></div></td>
+</tr>
+<tr class="question">
+<td align="left" valign="top">
+<a name="id46661042"></a><a name="id46661045"></a><b>3.3.</b>
+</td>
+<td align="left" valign="top"><p>How do I Use an <span class="acronym">XML</span> Catalogue with <span class="productname">Xalan-Java</span> and Sun's Resolver?</p></td>
+</tr>
+<tr class="answer">
+<td align="left" valign="top"><b></b></td>
+<td align="left" valign="top"><div class="procedure"><ol type="1">
+<li><p>
+                Ensure that <tt class="filename">resolver.jar</tt> and <tt class="filename">CatalogManager.properties</tt> are in the Java classpath for <span class="productname">Xalan-Java</span>.
+              </p></li>
+<li>
+<p>
+                Tell <span class="productname">Xalan-Java</span> to use Sun's resolver. For example, use the following command-line arguments:
+                </p>
+<pre class="screen">-URIRESOLVER com.sun.resolver.tools.CatalogResolver
+-ENTITYRESOLVER com.sun.resolver.tools.CatalogResolver</pre>
+<p>
+              </p>
+</li>
+</ol></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" lang="en">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="id46661214"></a>Creating your <span class="acronym">XML</span> document (<tt class="filename">mydb2latex.xml</tt>)</h2></div></div>
+<div></div>
+</div>
+<p>Create a source document using your favourite editor (it's <a href="http://www.vim.org/" target="_top">vim</a>, right?).</p>
+<pre class="screen">&lt;?xml version=&quot;1.0&quot; encoding=&quot;iso-8859-1&quot;?&gt;
+&lt;!DOCTYPE article SYSTEM &quot;http://www.oasis-open.org/docbook/xml/4.2/docbookx.dtd&quot;&gt;
+&lt;article id=&quot;ArticleId&quot; lang=&quot;en&quot;&gt;
+&lt;articleinfo&gt;
+&lt;title&gt; A short introduction to the XSL LaTeX
+Stylesheets in the framework of the DocBook DTD. &lt;/title&gt;
+&lt;authorgroup&gt;
+        &lt;author&gt; &lt;surname&gt;Casellas&lt;/surname&gt; &lt;firstname&gt;Ramon&lt;/firstname&gt; &lt;/author&gt;
+        &lt;corpauthor&gt;Ecole Nationale Superieure des Telecommunications&lt;/corpauthor&gt;
+&lt;/authorgroup&gt;
+&lt;/articleinfo&gt;
+
+&lt;abstract&gt;&lt;para&gt; Most articles start with a nice abstract, which is usually left for 
+the very last moment, and consists of several short sentences cut and
+pasted basically from the introduction.  &lt;/para&gt;&lt;/abstract&gt;
+
+&lt;sect1&gt;&lt;title&gt;Introduction&lt;/title&gt;
+&lt;para&gt; This paper.... the purpose of this work... highlights...
+Extensive simulations.... Numerical Results ...
+&lt;/para&gt;
+&lt;/sect1&gt;
+
+
+&lt;bibliography&gt;&lt;title&gt;Bibliographie&lt;/title&gt;
+&lt;biblioentry id=&quot;PimPum&quot; xreflabel=&quot;PimPum&quot;&gt;
+&lt;abbrev&gt;PimPum&lt;/abbrev&gt;
+        &lt;title&gt;&quot; Pim Pam Pum&quot;&lt;/title&gt;
+        &lt;authorgroup&gt;
+                &lt;author&gt;&lt;firstname&gt;James&lt;/firstname&gt;&lt;surname&gt;Pim&lt;/surname&gt;&lt;/author&gt;
+                &lt;author&gt;&lt;firstname&gt;Robert&lt;/firstname&gt;&lt;surname&gt;Pum&lt;/surname&gt;&lt;/author&gt;
+        &lt;/authorgroup&gt;
+        &lt;publisher&gt;
+                &lt;publishername&gt;Get a Life International Editions.
+                ISBN 0-XS-xsxs-1&lt;/publishername&gt;
+        &lt;/publisher&gt;
+        &lt;pubdate&gt;2001&lt;/pubdate&gt;
+&lt;/biblioentry&gt;
+
+&lt;/bibliography&gt;
+&lt;/article&gt;</pre>
+</div>
+<div class="section" lang="en">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="id46661282"></a>Set up Your Driver File (<tt class="filename">mydb2latex.xsl</tt>)</h2></div></div>
+<div></div>
+</div>
+<p>Often, you will want to customise <span class="productname">DB2LaTeX</span>. For this, you will need
+  to create a &quot;driver&quot; file (an <span class="acronym">XSL</span> stylesheet). This &quot;customisation layer&quot;
+  is explained in <a href="custom.html">our customisation
+  guide</a>. For the purposes of illustration, a small driver file
+  is illustrated:</p>
+<pre class="screen">&lt;?xml version='1.0'?&gt;
+&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; version='1.0'&gt;
+    &lt;xsl:import href=&quot;http://db2latex.sourceforge.net/xsl/docbook.xsl&quot;/&gt;
+    &lt;!-- optionally, insert your customisations here --&gt;
+&lt;/xsl:stylesheet&gt;</pre>
+</div>
+<div class="section" lang="en">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="id46661251"></a>Process Your Document</h2></div></div>
+<div></div>
+</div>
+<p>The next step is to transform your <span class="productname">DocBook</span> source file using your favourite <span class="acronym">XSLT</span> processor.
+    See the documentation of your <span class="acronym">XSLT</span> processor for details. For <span class="application">xsltproc</span>:</p>
+<pre class="screen">xsltproc -o mydb2latex.tex mydb2latex.xsl mydb2latex.xml</pre>
+<p>For <span class="application">Saxon</span>:</p>
+<pre class="screen">java -cp /usr/share/java/saxon.jar:..:/my/home/resolver.jar \
+  com.icl.saxon.StyleSheet -r com.sun.resolver.tools.CatalogResolver \
+  -x com.sun.resolver.tools.ResolvingXMLReader \
+  -y com.sun.resolver.tools.ResolvingXMLReader \
+  -o mydb2latex.tex mydb2latex.xml mydb2latex.xsl</pre>
+<p>The resulting file will look similar to:</p>
+<pre class="screen">% ----------------------- Preamble
+\documentclass[english,a4]{article}
+%
+% ... DB2LaTeX preamble ...
+%
+\title{A short introduction to the XSL LaTeX
+Stylesheets in the framework of the DocBook DTD.}
+\author{Ramon Casellas}
+\begin{document}
+
+\maketitle
+
+% --------------------------------------------
+% Abstract
+% --------------------------------------------
+\begin{abstract}
+
+Most articles start with a nice abstract, which is usually left for
+the very last moment, and consists of several short sentences cut and
+pasted basically from the introduction.
+
+\end{abstract}
+
+\section{Introduction}
+\label{N2624}\hypertarget{N2624}{}
+
+ This paper.... the purpose of this work... highlights...
+Extensive simulations.... Numerical Results ...
+
+
+% -------------------------------------------
+%
+%  Bibliography
+%
+% -------------------------------------------
+\begin{thebibliography}{WIDELABEL}
+
+% -------------- biblioentry
+\bibitem[PimPum]{PimPum}
+James Pim and Robert Pum, \emph{&quot; Pim Pam Pum&quot;, } Get a Life International Editions.
+ISBN 0-XS-xsxs-1, 2001, .
+\label{PimPum}\hypertarget{PimPum}{}
+
+\end{thebibliography}
+
+% --------------------------------------------
+% End of document
+% --------------------------------------------
+\end{document}</pre>
+<p>You will now want to typeset this <span class="productname">LaTeX</span> file into a display format such as
+    <span class="acronym">DVI</span> or <span class="productname">PDF</span>. For <span class="application">pdfTeX</span>:</p>
+<pre class="screen">pdflatex mydb2latex.tex &amp;&amp; acroread mydb2latex.pdf</pre>
+<p>In some cases, you will need to run your typesetter twice or invoke an
+  ancillary programme like <span><b class="command">makeindex</b></span>:</p>
+<pre class="screen">pdflatex mydb2latex
+makeindex mydb2latex
+pdflatex mydb2latex
+acroread mydb2latex.pdf</pre>
+</div>
+<div class="navfoot">
+<hr>
+<table width="100%" border="0" summary="Footer navigation">
+<tr>
+<td width="33%" align="left"><span class="footdate">$Date: 2004/01/31 10:04:21 $</span></td>
+<td width="34%" align="center"><span class="foothome"><a href="index.html">Home</a></span></td>
+<td width="33%" align="right"> <a href="http://sourceforge.net/projects/db2latex"><img src="http://sourceforge.net/sflogo.php?group_id=22450&amp;type=1" border="0" width="88" height="31" alt="Hosted at SourceForge." /></a> <a href="http://docbook.sourceforge.net/projects/website/"><img src="http://docbook.sourceforge.net/graphics/buttons/website-1.png" border="0" width="128" height="40" alt="Created with Website: a DocBook document type." /></a></td>
+</tr>
+<tr><td colspan="3" align="right"><span class="footcopy"><span class="copyright">Copyright © 2000, 2001, 2002, 2003, 2004 Ramon Casellas and James Devenish. </span></span></td></tr>
+</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>latex.fancyhdr.truncation.partition</title>
+    <link rel="stylesheet" href="../db2latex-web.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.64.1" />
+    <link rel="home" href="index.html" title="DB2LaTeX API Documentation" />
+    <link rel="up" href="rn34.html" title="Parameters: DB2LaTeX Switches param-switch.mod.xsl" />
+    <link rel="previous" href="rn34re398.html" title="latex.fancyhdr.truncation.style" />
+    <link rel="next" href="rn34re400.html" title="latex.fancyhdr.style" />
+    <link rel="icon" href="../graphics/rarrow.gif" type="image/gif" />
+  </head>
+  <body bgcolor="#ffffcc" text="black" link="#ac0204" vlink="#dc720c" alink="red">
+    <div class="top">
+      <ul class="top_left">
+        <li><a href="#top"><img align="top" border="0" src="../graphics/db2latex_new_banner.png" width="133" height="22" alt="latex.fancyhdr.truncation.partition" /></a> </li>
+      </ul>
+      <ul class="top_right">
+        <li>
+          <a href="http://sourceforge.net/projects/db2latex/">SourceForge</a>
+        </li>
+        <li>
+          <a href="../index.html">Home Page</a>
+        </li>
+        <li>
+          <a href="../sample/">Samples</a>
+        </li>
+      </ul>
+      <ul class="bottom_left">
+        <li><a href="./index.html">Reference Contents</a> | </li>
+        <li><a href="../install.html">Download &amp; Install</a> | </li>
+        <li><a href="../guides.html">User Guides</a> | </li>
+        <li><a href="../notes.html">Notes, E-mail &amp; Bugs</a> | </li>
+        <li>
+          <a href="../qanda.html">Q&amp;A</a>
+        </li>
+      </ul>
+    </div>
+    <div class="left">
+      <table class="panel" width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <th>Suggestions</th>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Search:</span>
+            <br />
+            <form method="get" action="http://www.google.com/search"><input type="text" maxlength="255" name="q" class="q" /> <input type="submit" value="Go" class="submit" /><input type="hidden" name="domains" value="db2latex.sourceforge.net" /><input type="hidden" name="sitesearch" value="db2latex.sourceforge.net" /></form>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Next:</span>
+            <br />
+            <a accesskey="n" href="rn34re400.html">latex.fancyhdr.style</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Previous:</span>
+            <br />
+            <a accesskey="p" href="rn34re398.html">latex.fancyhdr.truncation.style</a>
+            <br />
+            <span class="minihead">Up:</span>
+            <br />
+            <a accesskey="u" href="rn34.html">Parameters: DB2LaTeX Switches param switch.mod.xsl</a>
+          </td>
+        </tr>
+      </table>
+      <div class="sidebar"><h2>On this page:</h2>(latex.fancyhdr.truncation.partition) <a href="rn34re399.html#id40610474">A. Description</a>.</div>
+    </div>
+    <div class="note" style="margin-top:2px; color: #804020; text-align: center; font-weight: bold">
+      <a name="top" id="top">Reference Section</a>
+    </div>
+    <div class="refentry" lang="en" xml:lang="en">
+      <a id="param.latex.fancyhdr.truncation.partition"></a>
+      <div class="titlepage">
+        
+        
+      </div>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>latex.fancyhdr.truncation.partition —  Configure the width of header portions on each page </p>
+      </div>
+      <div class="refsynopsisdiv">
+        <h2>Synopsis</h2>
+        <pre class="synopsis">
+&lt;xsl:param name="latex.fancyhdr.truncation.partition"&gt;50&lt;/xsl:param&gt;</pre>
+      </div>
+      <div class="description">
+        <a name="id40610474" id="id40610474"></a>
+        <h2>A. Description</h2>
+        <p>
+
+				It is possible that the titles of chapter or sections will
+				occupy more than the width of a single line. When this variable
+				is empty, headers will be allowed to occupy multiple lines.
+				However, it is possible that the left-hand portion of a header
+				will collide with the right-hand portion of header. To prevent
+				this, headers can be truncated if they exceed an allowable
+				width. When this variables is set to a number from zero to 100,
+				the left-hand (or inside) side of each header will have that
+				width reserved. The right-hand (or outside) side will have the
+				remainder. A common option is to set this variable to zero and
+				set <a href="rn34re398.html" title="latex.fancyhdr.truncation.style">latex.fancyhdr.truncation.style</a> to
+				“<span class="quote">io</span>”.
+
+			</p>
+      </div>
+      <div class="refsection">
+        <a name="id41064652" id="id41064652"></a>
+        <h2>G. Uses</h2>
+        <p>Documented templates that use this parameter:
+          </p>
+        <div class="itemizedlist">
+          <ul type="disc">
+            <li>
+              <a href="rn34re398.html" target="_top">latex.fancyhdr.truncation.style</a>
+            </li>
+            <li>
+              <a href="rn37re435.html" target="_top">generate.latex.common.preamble</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="rn34re398.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="rn34.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="rn34re400.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">latex.fancyhdr.truncation.style </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> latex.fancyhdr.style</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

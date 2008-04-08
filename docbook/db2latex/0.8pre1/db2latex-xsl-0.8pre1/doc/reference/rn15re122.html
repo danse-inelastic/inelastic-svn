@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>email</title>
+    <link rel="stylesheet" href="../db2latex-web.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.64.1" />
+    <link rel="home" href="index.html" title="DB2LaTeX API Documentation" />
+    <link rel="up" href="rn15.html" title="E-mail Addreses email.mod.xsl" />
+    <link rel="previous" href="rn15.html" title="E-mail Addreses email.mod.xsl" />
+    <link rel="next" href="rn16.html" title="Examples example.mod.xsl" />
+    <link rel="icon" href="../graphics/rarrow.gif" type="image/gif" />
+  </head>
+  <body bgcolor="#ffffcc" text="black" link="#ac0204" vlink="#dc720c" alink="red">
+    <div class="top">
+      <ul class="top_left">
+        <li><a href="#top"><img align="top" border="0" src="../graphics/db2latex_new_banner.png" width="133" height="22" alt="email" /></a> </li>
+      </ul>
+      <ul class="top_right">
+        <li>
+          <a href="http://sourceforge.net/projects/db2latex/">SourceForge</a>
+        </li>
+        <li>
+          <a href="../index.html">Home Page</a>
+        </li>
+        <li>
+          <a href="../sample/">Samples</a>
+        </li>
+      </ul>
+      <ul class="bottom_left">
+        <li><a href="./index.html">Reference Contents</a> | </li>
+        <li><a href="../install.html">Download &amp; Install</a> | </li>
+        <li><a href="../guides.html">User Guides</a> | </li>
+        <li><a href="../notes.html">Notes, E-mail &amp; Bugs</a> | </li>
+        <li>
+          <a href="../qanda.html">Q&amp;A</a>
+        </li>
+      </ul>
+    </div>
+    <div class="left">
+      <table class="panel" width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <th>Suggestions</th>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Search:</span>
+            <br />
+            <form method="get" action="http://www.google.com/search"><input type="text" maxlength="255" name="q" class="q" /> <input type="submit" value="Go" class="submit" /><input type="hidden" name="domains" value="db2latex.sourceforge.net" /><input type="hidden" name="sitesearch" value="db2latex.sourceforge.net" /></form>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Next:</span>
+            <br />
+            <a accesskey="n" href="rn16.html">Examples example.mod.xsl</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="minihead">Up:</span>
+            <br />
+            <a accesskey="u" href="rn15.html">E mail Addreses email.mod.xsl</a>
+          </td>
+        </tr>
+      </table>
+      <div class="sidebar"><h2>On this page:</h2>(email) <a href="rn15re122.html#id40549101">A. Description</a>; <a href="rn15re122.html#id40549133">B. Pertinent Variables</a>; <a href="rn15re122.html#id40549151">D. DocBook Compliance and LaTeX Notes</a>; <a href="rn15re122.html#id40549206">E. Samples and Tests</a>; <a href="rn15re122.html#id40549263">F. Further Reading</a>.</div>
+    </div>
+    <div class="note" style="margin-top:2px; color: #804020; text-align: center; font-weight: bold">
+      <a name="top" id="top">Reference Section</a>
+    </div>
+    <div class="refentry" lang="en" xml:lang="en">
+      <a id="id40549036"></a>
+      <div class="titlepage">
+        
+        
+      </div>
+      <a id="id40549039" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>email — Process <a href="http://www.oasis-open.org/docbook/documentation/reference/html/email.html"><tt class="sgmltag-element">email<a id="id40549073" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/email.html">2.0.9</a>] elements</p>
+      </div>
+      <div class="refsynopsisdiv">
+        <h2>Synopsis</h2>
+        <a id="template.email"></a>
+        <pre class="synopsis">&lt;xsl:template match="email"/&gt;</pre>
+      </div>
+      <div class="description">
+        <a name="id40549101" id="id40549101"></a>
+        <h2>A. Description</h2>
+        <p>
+				Constructs a URL from the given e-mail address and
+				formats it with the template for <a href="http://www.oasis-open.org/docbook/documentation/reference/html/ulink.html"><tt class="sgmltag-element">ulink<a id="id40549121" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/ulink.html">2.0.9</a>].
+			</p>
+      </div>
+      <div class="variables">
+        <a name="id40549133" id="id40549133"></a>
+        <h2>B. Pertinent Variables</h2>
+        <p>As for the <a href="rn48re527.html#template.ulink">ulink</a> template.</p>
+      </div>
+      <div class="notes">
+        <a name="id40549151" id="id40549151"></a>
+        <h2>D. DocBook Compliance and LaTeX Notes</h2>
+        <p>When a an <a href="http://www.oasis-open.org/docbook/documentation/reference/html/email.html"><tt class="sgmltag-element">email<a id="id40549171" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/email.html">2.0.9</a>] is a child of an <a href="http://www.oasis-open.org/docbook/documentation/reference/html/address.html"><tt class="sgmltag-element">address<a id="id40549190" class="indexterm"></a></tt></a> [<a href="http://docbook.org/tdg/en/html/address.html">2.0.9</a>],
+			it will be formatted along with all “<span class="quote">verbatim</span>” address text. In this
+			case, it might not be hyperlinked.</p>
+      </div>
+      <div class="samples">
+        <a name="id40549206" id="id40549206"></a>
+        <h2>E. Samples and Tests</h2>
+        <p>
+          <span class="simplelist"><tt class="filename">test_book.pdf</tt> from <tt class="filename">test_book/test.xml</tt>, <tt class="filename">test_ddh_article.pdf</tt> from <tt class="filename">test_ddh/article.xml</tt>, <tt class="filename">test_links.pdf</tt> from <tt class="filename">test_links/test.xml</tt></span>
+        </p>
+      </div>
+      <div class="seealso">
+        <a name="id40549263" id="id40549263"></a>
+        <h2>F. Further Reading</h2>
+        <div class="itemizedlist">
+          <ul type="disc">
+            <li>
+              <a href="rn48re527.html#template.ulink">ulink</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="rn15.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="rn15.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="rn16.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">E-mail Addreses email.mod.xsl </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Examples example.mod.xsl</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>
