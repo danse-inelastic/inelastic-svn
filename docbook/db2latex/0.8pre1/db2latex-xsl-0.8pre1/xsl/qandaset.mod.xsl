@@ -363,10 +363,9 @@
 	</doc:template>
 	<xsl:template match="revhistory" mode="qandatoc.mode"/>
 
+<!--
 <xsl:template name="question.answer.label">
-	<!-- variable: deflabel -->
   <xsl:variable name="deflabel">
-  	<!-- chck whether someone has a defaultlabel attribute -->
     <xsl:choose>
 		<xsl:when test="ancestor-or-self::*[@defaultlabel]">
         	<xsl:value-of select="(ancestor-or-self::*[@defaultlabel])[last()]/@defaultlabel"/>
@@ -407,9 +406,9 @@
       </xsl:choose>
     </xsl:when>
     <xsl:otherwise>
-      <!-- nothing -->
     </xsl:otherwise>
   </xsl:choose>
 </xsl:template>
+-->
 
 </xsl:stylesheet>
