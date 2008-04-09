@@ -14,12 +14,12 @@
 <inventory>
 
   <component name='main'>
-    <property name='actor'>examplePage</property>
-<!--    <property name='actor'>greet</property>
+<!--    <property name='actor'>examplePage</property>-->
+    <property name='actor'>greet</property>
     <component name='sentry'>
     <property name='username'>demo</property>
     <property name='passwd'>demo</property>
-    </component>-->
+    </component>
   </component>
 
 </inventory>
