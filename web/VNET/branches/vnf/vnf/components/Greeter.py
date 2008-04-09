@@ -66,12 +66,16 @@ class Greeter(Actor):
             'instrument', director.sentry, 'Instruments'),
             director.cgihome) + "<br/>",
             
-            '<a href="%s/sample/Samples.html">Samples</a><br/>' % director.home,
+            action_link(
+            actionRequireAuthentication(
+            'sample', director.sentry, 'Samples'),
+            director.cgihome) + "<br/>",
+            
             '<a href="%s/InstrumentSimulation.html">Instrument Simulation</a><br/>' % director.home,
             
             action_link(
             actionRequireAuthentication(
-            'jobMonitoring', director.sentry, 'Job Monitoring'),
+            'job', director.sentry, 'Job Monitoring'),
             director.cgihome) + "<br/>",
             
             '<a href="manageServers.html">Manage Servers</a><br/>',
