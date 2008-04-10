@@ -26,6 +26,13 @@ def portlet(app):
     home.icon = "images/link_icon.gif"
     home.type = "navItem"
     
+    sampleAssemblies = portlet.item(description="Sample Assemblies")
+    sampleAssemblies.target = action_href(
+            actionRequireAuthentication(
+            'sampleassembly', app.sentry, 'Sample Assemblies'),
+            app.cgihome)
+    sampleAssemblies.icon = "images/link_icon.gif"
+    sampleAssemblies.type = "navItem"
     
     samples = portlet.item(description="Samples")
     samples.target = action_href(
@@ -34,6 +41,30 @@ def portlet(app):
             app.cgihome)
     samples.icon = "images/link_icon.gif"
     samples.type = "navItem"
+    
+    instruments = portlet.item(description="Instruments")
+    instruments.target = action_href(
+            actionRequireAuthentication(
+            'instrument', app.sentry, 'Instruments'),
+            app.cgihome)
+    instruments.icon = "images/link_icon.gif"
+    instruments.type = "navItem"
+    
+    jobs = portlet.item(description="Jobs")
+    jobs.target = action_href(
+            actionRequireAuthentication(
+            'job', app.sentry, 'Jobs'),
+            app.cgihome)
+    jobs.icon = "images/link_icon.gif"
+    jobs.type = "navItem"
+    
+    servers = portlet.item(description="Manage Servers")
+    servers.target = action_href(
+            actionRequireAuthentication(
+            'server', app.sentry, 'Servers'),
+            app.cgihome)
+    servers.icon = "images/link_icon.gif"
+    servers.type = "navItem"
     
 #        document = main.document(title='Samples and Equipment')
 #        p = document.paragraph()

@@ -26,6 +26,7 @@ def page(app):
 
     # build the client area
     content = body.pageContent()
+    left = content.leftColumn()
     main = content.main()
     
     # populate the left column
