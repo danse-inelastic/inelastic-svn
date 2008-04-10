@@ -45,17 +45,43 @@ class SSHer(base):
         env = {
             'SSH_AUTH_SOCK': self.inventory.auth_sock,
             }
-        fail, output, error = spawn( cmd, env = env )
-        if fail:
+        failed, output, error = spawn( cmd, env = env )
+        if failed:
             msg = '%r failed: %s' % (
                 cmd, error )
             raise RemoteAccessError, msg
-        return 
+        return
+
+
+    def execute( self, cmd, directory, server ):
+        'execute command in the given directory of the given server'
+
+        address = server.server
+        workdir = self.inventory.remote_workdir
+        username = self.inventory.remote_username
+
+        path = os.path.join( workdir, directory )
+
+        cmd = 'cd %s && %s' % (path, cmd)
+        
+        cmd = 'ssh %s@%s %s' % (username, address, cmd)
+
+        env = {
+            'SSH_AUTH_SOCK': self.inventory.auth_sock,
+            }
+        failed, output, error = spawn( cmd, env = env )
+        if failed:
+            msg = '%r failed: %s' % (
+                cmd, error )
+            raise RemoteAccessError, msg
+
+        return
 
 
     pass # end of SSHer
 
 
+import os
 from spawn import spawn
 
 
