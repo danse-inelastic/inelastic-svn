@@ -15,7 +15,7 @@
 
   <component name='main'>
 <!--    <property name='actor'>examplePage</property>-->
-    <property name='actor'>greet</property>
+    <property name='actor'>login</property>
     <component name='sentry'>
     <property name='username'>demo</property>
     <property name='passwd'>demo</property>
