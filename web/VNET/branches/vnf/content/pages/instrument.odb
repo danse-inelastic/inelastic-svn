@@ -30,6 +30,11 @@ def page(app):
     # build the client area
     content = body.pageContent()
     main = content.main()
+    
+    # populate the left column
+    nav = app.retrievePortlet("navigation")
+    if nav:
+        left.add(nav)
 
     return page
 

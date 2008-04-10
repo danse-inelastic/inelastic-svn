@@ -78,7 +78,11 @@ class Greeter(Actor):
             'job', director.sentry, 'Job Monitoring'),
             director.cgihome) + "<br/>",
             
-            '<a href="manageServers.html">Manage Servers</a><br/>',
+            action_link(
+            actionRequireAuthentication(
+            'server', director.sentry, 'Manage Servers'),
+            director.cgihome) + "<br/>",
+
             '<a href="MaterialSimulation.html">Supporting Calculations</a><br/>',
             ]
 

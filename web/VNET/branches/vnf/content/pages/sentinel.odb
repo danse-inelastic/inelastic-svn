@@ -37,6 +37,11 @@ def page(app):
     p.text = [
         "Welcome to <strong>vnf</strong>, a web built entirely out of pyre componets.",
         ]
+    
+    # populate the left column
+    nav = app.retrievePortlet("navigation")
+    if nav:
+        left.add(nav)
 
     # build the footer
     footer = body.pageFooter()
