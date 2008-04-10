@@ -29,7 +29,7 @@ def page(app):
     main = content.main()
 
     # populate the main column
-    document = main.document()
+    document = main.document( title = 'login' )
     document.description = ('You have successfully logged out.')
 
     # build the login form

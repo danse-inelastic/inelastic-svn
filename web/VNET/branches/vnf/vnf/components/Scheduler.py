@@ -25,6 +25,7 @@ def schedule( job, director ):
     server = director.clerk.getServer( server_id )
     
     director.csaccessor.push( path, server )
+    #director.csaccessor.execute( 'nohup ./run.sh', path, server )
     
     return
 
