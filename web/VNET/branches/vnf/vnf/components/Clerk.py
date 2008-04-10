@@ -144,37 +144,31 @@ class Clerk(Component):
         '''retrieve sample of given id'''
         from vnf.dom.Sample import Sample
         return self._getRecordByID( Sample, id )
-
+    
+    def getSamples(self, where = None):
+        '''retrieve all samples'''
+        from vnf.dom.Sample import Sample
+        return self._getAll( Sample, where )
 
     def getSampleAssembly(self, id):
         '''retrieve sample assembly of given id'''
         from vnf.dom.SampleAssembly import SampleAssembly
         return self._getRecordByID( SampleAssembly, id )
 
-
-    def getServers(self, where = None):
-        '''retrieve all servers'''
-        from vnf.dom.Server import Server
-        return self._getAll( Server, where )
-
-
     def getInstrument(self, id):
         '''retrieve instrument of given id'''
         from vnf.dom.Instrument import Instrument
         return self._getRecordByID( Instrument, id )
 
-
     def getComponent(self, id):
         '''retrieve component of given id'''
         from vnf.dom.Component import Component
         return self._getRecordByID( Component, id )
-
     
     def getScatterer(self, id):
         '''retrieve scatterer of given id'''
         from vnf.dom.Scatterer import Scatterer
         return self._getRecordByID( Scatterer, id )
-
     
     def getScatterers(self, id):
         '''retrieve scatterers in the sample assembly of given id'''
@@ -182,7 +176,6 @@ class Clerk(Component):
         from vnf.dom.Scatterer import Scatterer
         return self._getElements(
             id, SampleAssembly.Scatterers, Scatterer)
-
 
     def getComponents(self, id):
         '''retrieve components in the instrument of given id'''
@@ -204,7 +197,6 @@ class Clerk(Component):
 
         return ret
 
-
     def getInstrumentGeometer(self, instrument):
         id = instrument.id
         from vnf.dom.Instrument import Instrument
@@ -215,7 +207,6 @@ class Clerk(Component):
             geometer[ record.element_label ] = record
             continue
         return geometer
-
 
     def getPolyXtalKernels(self, id):
         '''retrieve kernels in the scatterer of given id'''
@@ -229,6 +220,11 @@ class Clerk(Component):
         '''retrieve server of given id'''
         from vnf.dom.Server import Server
         return self._getRecordByID( Server, id )
+    
+    def getServers(self, where = None):
+        '''retrieve all servers'''
+        from vnf.dom.Server import Server
+        return self._getAll( Server, where )
 
 
     def getShape(self, id):

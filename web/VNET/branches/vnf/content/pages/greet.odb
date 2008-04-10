@@ -35,12 +35,17 @@ def page(app):
 
     # build the client area
     content = body.pageContent()
+    left = content.leftColumn()
     main = content.main()
+    right = content.rightColumn()
 
     # populate the left column
     nav = app.retrievePortlet("navigation")
     if nav:
         left.add(nav)
+        
+    # populate the right column
+    news = right.portlet(title="Some News")
 
     # build the footer
     footer = body.pageFooter()
