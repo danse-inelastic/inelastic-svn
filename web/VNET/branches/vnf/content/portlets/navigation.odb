@@ -66,6 +66,13 @@ def portlet(app):
     servers.icon = "images/link_icon.gif"
     servers.type = "navItem"
     
+    supportingCalcs = portlet.item(description="Supporting Calculations")
+    supportingCalcs.target = action_href(
+            actionRequireAuthentication(
+            'supportingCalcs', app.sentry, 'Supporting Calculations'),
+            app.cgihome)
+    supportingCalcs.icon = "images/link_icon.gif"
+    supportingCalcs.type = "navItem"
 #        document = main.document(title='Samples and Equipment')
 #        p = document.paragraph()
 #        p.text = [

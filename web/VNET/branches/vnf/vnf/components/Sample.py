@@ -58,6 +58,13 @@ class Sample(Actor):
                 colNum+=1
         p.text = [t.return_html()]
         
+        p = document.paragraph()
+        p.text = [
+        '''<strong>Note</strong>: would like to modify material and/or construct overall sample shape here.  
+It may be advisable to reuse DANSE Python code by Python/Jython 
+Web Start (http://personalpages.tds.net/~kent37/Python/JythonWebStart.html)'''
+        ]
+        
         return page  
 
 
