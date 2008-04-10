@@ -14,7 +14,7 @@
 <inventory>
 
   <component name='main'>
-<!--    <property name='actor'>examplePage</property>-->
+<!--  <property name='actor'>examplePage</property>-->
     <property name='actor'>login</property>
     <component name='sentry'>
     <property name='username'>demo</property>
