@@ -44,7 +44,7 @@ EXPORT_PYTHON_MODULES = \
 	SampleAssembly.py \
 	SampleAssemblyXMLBuilder.py \
 	SamplePreparation.py \
-	Samples.py \
+	Sample.py \
 	Scheduler.py \
 	Server.py \
 	Scatterer.py \

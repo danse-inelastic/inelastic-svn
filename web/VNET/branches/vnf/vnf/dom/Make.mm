@@ -48,6 +48,7 @@ EXPORT_PYTHON_MODULES = \
 	PolyXtalCoherentPhononScatteringKernel.py \
 	PositionOrientationRegistry.py \
 	ReferenceSet.py \
+	Sample.py \
 	SampleAssembly.py \
 	Scatterer.py \
 	ScatteringKernel.py \
