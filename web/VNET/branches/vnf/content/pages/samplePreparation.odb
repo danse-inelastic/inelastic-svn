@@ -58,6 +58,10 @@ It may be advisable to reuse DANSE Python code by Python/Jython
 Web Start (http://personalpages.tds.net/~kent37/Python/JythonWebStart.html)'''
         ]
     
+    # populate the left column
+    nav = app.retrievePortlet("navigation")
+    if nav:
+        left.add(nav)
 
     # build the footer
     footer = body.pageFooter()
