@@ -11,7 +11,7 @@
 
 
 from Actor import Actor, action_link, action, actionRequireAuthentication
-
+from vnf.weaver import action_href
 
 class Sample(Actor):
 
@@ -59,12 +59,17 @@ class Sample(Actor):
         p.text = [t.return_html()]
         
         p = document.paragraph()
-        p.text = [
-        '''<strong>Note</strong>: would like to modify material and/or construct overall sample shape here.  
-It may be advisable to reuse DANSE Python code by Python/Jython 
-Web Start (http://personalpages.tds.net/~kent37/Python/JythonWebStart.html)'''
-        ]
-        
+        p.text = [action_link(
+        actionRequireAuthentication(
+        'materialInput', director.sentry,
+        label = 'Add a new type of material'),  director.cgihome
+        ),'<br>',
+        action_link(
+        actionRequireAuthentication(
+        'shapeInput', director.sentry,
+        label = 'Add a new sample shape'),  director.cgihome
+        )]
+
         return page  
 
 

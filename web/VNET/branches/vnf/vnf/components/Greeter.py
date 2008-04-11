@@ -47,44 +47,44 @@ class Greeter(Actor):
         from NeutronExperiment import listexperiments
         listexperiments( experiments, document, director )
 
-        # misc links
-        document = main.document(title='Samples and Equipment')
-        p = document.paragraph()
-        p.text = [
-            action_link(
-            actionRequireAuthentication(
-            'sampleassembly', director.sentry, 'Sample Assemblies'),
-            director.cgihome) + "<br/>",
-            
-            action_link(
-            actionRequireAuthentication(
-            'samplePreparation', director.sentry, 'Sample Preparation'),
-            director.cgihome) + "<br/>",
-            
-            action_link(
-            actionRequireAuthentication(
-            'instrument', director.sentry, 'Instruments'),
-            director.cgihome) + "<br/>",
-            
-            action_link(
-            actionRequireAuthentication(
-            'sample', director.sentry, 'Samples'),
-            director.cgihome) + "<br/>",
-            
-            '<a href="%s/InstrumentSimulation.html">Instrument Simulation</a><br/>' % director.home,
-            
-            action_link(
-            actionRequireAuthentication(
-            'job', director.sentry, 'Job Monitoring'),
-            director.cgihome) + "<br/>",
-            
-            action_link(
-            actionRequireAuthentication(
-            'server', director.sentry, 'Manage Servers'),
-            director.cgihome) + "<br/>",
-
-            '<a href="MaterialSimulation.html">Supporting Calculations</a><br/>',
-            ]
+#        # misc links
+#        document = main.document(title='Samples and Equipment')
+#        p = document.paragraph()
+#        p.text = [
+#            action_link(
+#            actionRequireAuthentication(
+#            'sampleassembly', director.sentry, 'Sample Assemblies'),
+#            director.cgihome) + "<br/>",
+#            
+#            action_link(
+#            actionRequireAuthentication(
+#            'samplePreparation', director.sentry, 'Sample Preparation'),
+#            director.cgihome) + "<br/>",
+#            
+#            action_link(
+#            actionRequireAuthentication(
+#            'instrument', director.sentry, 'Instruments'),
+#            director.cgihome) + "<br/>",
+#            
+#            action_link(
+#            actionRequireAuthentication(
+#            'sample', director.sentry, 'Samples'),
+#            director.cgihome) + "<br/>",
+#            
+#            '<a href="%s/InstrumentSimulation.html">Instrument Simulation</a><br/>' % director.home,
+#            
+#            action_link(
+#            actionRequireAuthentication(
+#            'job', director.sentry, 'Job Monitoring'),
+#            director.cgihome) + "<br/>",
+#            
+#            action_link(
+#            actionRequireAuthentication(
+#            'server', director.sentry, 'Manage Servers'),
+#            director.cgihome) + "<br/>",
+#
+#            '<a href="MaterialSimulation.html">Supporting Calculations</a><br/>',
+#            ]
 
         return page
 
