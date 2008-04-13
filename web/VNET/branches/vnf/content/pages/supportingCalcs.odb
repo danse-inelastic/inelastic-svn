@@ -30,9 +30,18 @@ def page(app):
     main = content.main()
     
     # populate the main column
-    document = main.document(title='Sample preparation')
+    document = main.document(title='Supporting Calculations')
 
     # build the sample input form
+    p = document.paragraph()
+    p.text = ['<h1>Samples</h1>
+
+              '''    p = document.paragraph()
+    p.text = ['''<script type="text/javascript"> 
+jmolInitialize("jmol-11.4.RC10"); 
+jmolApplet(600, "load orthoGraphKH212x12x1.xyz");</script>''']
+Simulate the material with atomistic forcefields (powered by GULP/MMTK).''']
+    
     atoms = document.form(name='login', legend='Upload xyz file', action=app.cgihome)
     
     name = atoms.text(id='name', name='name', label='Sample Name')
