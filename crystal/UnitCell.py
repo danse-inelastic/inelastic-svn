@@ -29,11 +29,11 @@ class Site:
         for x in position:
             if (x < 0) or (x > 1):
                 raise ValueError, "Site coordinates must be fractional positions."
-        self._position = position
+        self._position = np.array(position)
         
     def getPosition(self):
         """Get the position (in fractional coordinates) of a site."""
-        return self._position
+        return np.array(self._position)
 
     def setAtom(self, atom):
         """Set an atom at a site."""
