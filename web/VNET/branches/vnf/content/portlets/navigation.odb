@@ -42,6 +42,14 @@ def portlet(app):
     samples.icon = "images/link_icon.gif"
     samples.type = "navItem"
     
+    scatteringKernels = portlet.item(description="Scattering Kernels")
+    scatteringKernels.target = action_href(
+            actionRequireAuthentication(
+            'scatteringKernel', app.sentry, 'Scattering Kernels'),
+            app.cgihome)
+    samples.icon = "images/link_icon.gif"
+    samples.type = "navItem"
+    
     instruments = portlet.item(description="Instruments")
     instruments.target = action_href(
             actionRequireAuthentication(

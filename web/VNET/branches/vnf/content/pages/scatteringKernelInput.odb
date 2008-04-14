@@ -34,16 +34,18 @@ def page(app):
     # populate the main column
     document = main.document(title='Scattering Kernel Input')
 
-    # build the sample input form
-    atoms = document.form(name='login', legend='Upload xyz file', action=app.cgihome)
+    # build the input form
+    input = document.form(name='input', legend='Energetics / Dynamics', action=app.cgihome)
     
-    name = atoms.text(id='name', name='name', label='Sample Name')
-    name.help = 'An identifying name for this sample.'
+    gulpHarmonic = input.radio(id='radio1', name='gulpHarmonic', label='Gulp Harmonic Motion')
+    gulpNE = input.radio(id='radio2', name='gulpNE', label="Gulp Newton's Equations")
+    mmtkNE = input.radio(id='radio3', name='mmtkNE', label="Mmtk Newton's Equations")
+
+    vaspPhon = input.radio(id='radio4', name='vaspPhon', label='Vasp Energies, Phon Harmonic Motion')
+    abinitPhon = input.radio(id='radio5', name='abinitPhon', label="AbInit Energies, Phon Harmonic Motion")
     
-    atomFile = atoms.file(id='atomFile', name='atomFile', label='Xyz file containing atoms')
-    atomFile.help = 'Lattice vectors a,b,c should be on comment line in form a_x a_y a_z b_x b_y b_z c_x c_y c_z'
     
-    submit = atoms.control(name="submit", type="submit", value="submit")
+    submit = input.control(name="submit", type="submit", value="submit")
     
     # view the sample (maybe put this on another page after clicking
     # to submit the sample
