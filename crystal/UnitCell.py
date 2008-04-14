@@ -134,6 +134,15 @@ class UnitCell:
     def __len__(self):
         return self.getNumAtoms()
 
+    def __copy__(self):
+        new = UnitCell(self)
+        for siteId in self._siteIds.keys():
+            newsite = Site(self._siteIds[siteId].getPosition(),
+                           Atom(Z=self._siteIds[siteId].getAtom().Z))
+            new.addSite(newsite, siteId = siteId)
+        return new
+
+
     def addSite(self, site, siteId=None):
         """Adds a site to the unit cell."""
         assert ( isinstance(site, Site) )
