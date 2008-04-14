@@ -63,7 +63,8 @@ class Sample(Actor):
         actionRequireAuthentication(
         'materialInput', director.sentry,
         label = 'Add a new type of material'),  director.cgihome
-        ),'<br>',
+        ),
+        '<br>',
         action_link(
         actionRequireAuthentication(
         'shapeInput', director.sentry,

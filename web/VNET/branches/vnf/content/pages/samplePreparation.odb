@@ -35,7 +35,7 @@ def page(app):
     document = main.document(title='Sample preparation')
 
     # build the sample input form
-    atoms = document.form(name='login', legend='Upload xyz file', action=app.cgihome)
+    atoms = document.form(name='atoms', legend='Upload xyz file', action=app.cgihome)
     
     name = atoms.text(id='name', name='name', label='Sample Name')
     name.help = 'An identifying name for this sample.'
