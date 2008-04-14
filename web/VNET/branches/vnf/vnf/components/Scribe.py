@@ -18,6 +18,12 @@ from pyre.components.Component import Component
 class Scribe(Component):
 
     
+    def retrieveForm(self, name, director, *args):
+        form = self.retrieveComponent(
+            name, factory='form', args = [director] + list(args),  vault=['forms'])
+        return form
+
+
     def objectEditForm(self, document, obj, properties,
                        toplevel_container, actor, director):
         '''a form to edit the given object inside the

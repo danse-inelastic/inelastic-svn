@@ -24,6 +24,4 @@ from vnf.weaver import action_link
 # version
 __id__ = "$Id$"
 
-# Generated automatically by PythonMill on Fri Mar 14 22:18:28 2008
-
 # End of file 

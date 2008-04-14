@@ -1,0 +1,51 @@
+# -*- Python -*-
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                   Jiao Lin
+#                      California Institute of Technology
+#                        (C) 2007  All Rights Reserved
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+
+
+from vnf.components.DBObjectForm import DBObjectForm as base
+
+
+class Block(base):
+
+
+    class Inventory(base.Inventory):
+
+        import pyre.inventory
+        width = pyre.inventory.float( name = 'width' )
+        height = pyre.inventory.float( name = 'height' )
+        thickness = pyre.inventory.float( name = 'thickness' )
+
+        pass # end of Inventory
+
+
+    parameters = ['width', 'height', 'thickness']
+    DBTable = 'Block'
+
+
+    def __init__(self, name = None):
+        if name is None:
+            name = 'block'
+
+        base.__init__(self, name)
+
+        return
+
+
+
+def form(): return Block()
+
+# version
+__id__ = "$Id$"
+
+# End of file 

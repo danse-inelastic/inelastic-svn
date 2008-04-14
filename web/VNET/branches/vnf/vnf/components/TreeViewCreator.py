@@ -104,7 +104,7 @@ class TreeViewCreator:
             actor,
             director.sentry,
             routine='edit',
-            dataobject = type.lower(),
+            editee = '%s,%s' % (type.lower(), record.id),
             id = self._rootcontainer.id,
             arguments = { '%s.id' % type.lower(): record.id },
             )

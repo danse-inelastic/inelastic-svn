@@ -27,8 +27,10 @@ EXPORT_PYTHON_MODULES = \
 	Actor.py \
 	Clerk.py \
 	CSAccessor.py \
+	DBObjectForm.py \
+	Form.py \
+	FormActor.py \
 	Geometer.py \
-	GeometerFacility.py \
 	Greeter.py \
 	Instrument.py \
 	InstrumentSimulationAppBuilder.py \
@@ -38,7 +40,6 @@ EXPORT_PYTHON_MODULES = \
 	McvineScattererXMLBuilder.py \
 	NeutronExperiment.py \
 	NeutronExperimentSimulationRunBuilder.py \
-	ObjectEditFormCreater.py \
 	PyHtmlTable.py \
 	Run.py \
 	SampleAssembly.py \
@@ -51,7 +52,6 @@ EXPORT_PYTHON_MODULES = \
 	Scribe.py \
 	SSHer.py \
 	TreeViewCreator.py \
-	DataObject.py \
 	inventorylist.py \
 	spawn.py \
 	twodarr.py \

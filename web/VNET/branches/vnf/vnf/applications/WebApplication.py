@@ -65,6 +65,11 @@ class WebApplication(Base):
             name='javascriptpath', default = '/vnf/javascripts' )
 
 
+    def main(self, *args, **kwds):
+        super(WebApplication, self).main(*args, **kwds)
+        return
+
+
     def retrievePage(self, name):
         page = super(WebApplication, self).retrievePage(name)
         if page:
@@ -122,7 +127,7 @@ class WebApplication(Base):
         self.scribe = self.inventory.scribe
         self.debug = self.inventory.debug
         self.csaccessor = self.inventory.csaccessor
-        
+
         import vnf.weaver
         configurations = {
             'cgihome':self.cgihome,

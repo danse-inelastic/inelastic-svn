@@ -12,20 +12,31 @@
 #
 
 
-def dataobject( *args, **kwds ):
-    from DataObject import DataObject
-    return DataObject( *args, **kwds )
+
+from vnf.components.DBObjectForm import DBObjectFormy as base
 
 
-def form( *args, **kwds ):
-    from Form import Form
-    return Form( *args, **kwds )
+class IDFPhononDispersion(base):
 
 
-def geometer( *args, **kwds ):
-    from Geometer import Geometer
-    return Geometer( *args, **kwds )
+    class Inventory(base.Inventory):
 
+        import pyre.inventory
+
+        pass # end of Inventory
+
+
+    def __init__(self, name = None):
+        if name is None:
+            name = 'idfphonondispersion'
+
+        base.__init__(self, name)
+
+        return
+
+
+
+def form(): return IDFPhononDispersion()
 
 # version
 __id__ = "$Id$"

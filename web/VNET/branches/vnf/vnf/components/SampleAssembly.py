@@ -10,13 +10,14 @@
 #
 
 
-from Actor import Actor, action_link, action, actionRequireAuthentication, AuthenticationError
+from Actor import action_link, action, actionRequireAuthentication, AuthenticationError
+
+from FormActor import FormActor as base
+
+class SampleAssembly(base):
 
 
-class SampleAssembly(Actor):
-
-
-    class Inventory(Actor.Inventory):
+    class Inventory(base.Inventory):
 
         import time
         import pyre.inventory
@@ -24,11 +25,8 @@ class SampleAssembly(Actor):
         id = pyre.inventory.str("id", default=None)
         id.meta['tip'] = "the unique identifier of the sample assembly"
 
-
-        import vnf.inventory
-        dataobject = vnf.inventory.dataobject(
-            'dataobject', default='sampleassembly' )
-        dataobject.meta['tip'] = 'the data object to be edited'
+        editee = pyre.inventory.str('editee', default = 'sampleassembly,#id#')
+        editee.meta['tip'] = 'The sub element to edit for edit routine'
 
         pass # end of Inventory
 
@@ -61,42 +59,51 @@ class SampleAssembly(Actor):
 
 
     def edit(self, director):
-        page, document = self._head( director )
+        try:
+            page, document = self._head( director )
+        except AuthenticationError, err:
+            return err.page
+
+        elementtype, elementid = self.inventory.editee.split(',')
+        if elementtype == 'sampleassembly': elementid = self.inventory.id
         
-        scribe = director.scribe
-
-        # the record
-        obj = self._getDataObjectRecord( director )
-
-        # properties of the data object
-        properties = self.inventory.dataobject.propertyNames( director )
+        formcomponent = self.retrieveFormToShow( elementtype )
+        formcomponent.inventory.id = elementid
+        formcomponent.director = director
         
         # create form
-        sampleassembly = self.sampleassembly_record
-        scribe.objectEditForm(
-            document, obj, properties,
-            sampleassembly, 'sampleassembly',
-            director)
+        form = document.form(
+            name='sampleassembly',
+            legend= formcomponent.legend(),
+            action=director.cgihome)
 
+        # specify action
+        action = actionRequireAuthentication(
+            actor = 'sampleassembly', sentry = director.sentry,
+            label = '', routine = 'set',
+            arguments = { 'id': self.inventory.id,
+                          'form-received': formcomponent.name } )
+        from vnf.weaver import action_formfields
+        action_formfields( action, form )
+
+        # expand the form with fields of the data object that is being edited
+        formcomponent.expand( form )
+
+        # ok button
+        submit = form.control(name="submit", type="submit", value="OK")
+        
         return page    
 
 
     def set(self, director):
-        page, document = self._head( director )
+        try:
+            page, document = self._head( director )
+        except AuthenticationError, error:
+            return error.page
+
+        self.processFormInputs( director )
         
-        obj = self._getDataObjectRecord( director )
-
-        dataobject = self.inventory.dataobject
-
-        for prop in dataobject.propertyNames( director ):
-            setattr(
-                obj, prop,
-                dataobject.inventory.getTraitValue( prop ) )
-            continue
-
-        director.clerk.updateRecord( obj )
-        
-        return page    
+        return page
 
 
     def __init__(self, name=None):
@@ -107,10 +114,7 @@ class SampleAssembly(Actor):
 
 
     def _head(self, director):
-        try:
-            page = director.retrieveSecurePage( 'sampleassembly' )
-        except AuthenticationError, error:
-            return error.page
+        page = director.retrieveSecurePage( 'sampleassembly' )
         
         main = page._body._content._main
 
@@ -133,21 +137,17 @@ class SampleAssembly(Actor):
         return page, document
 
 
-    def _getDataObjectRecord(self, director):
-        return self.inventory.dataobject.getRecord( director )
-    
-
     def _getsampleassembly(self, id, director):
         clerk = director.clerk
         return clerk.getSampleAssembly( id )
 
 
     def _configure(self):
-        Actor._configure(self)
+        base._configure(self)
         self.id = self.inventory.id
-        dataobject = self.dataobject = self.inventory.dataobject
-        if dataobject.name == 'sampleassembly':
-            dataobject.inventory.id = self.id
+        form_received = self.form_received = self.inventory.form_received
+        if form_received.name == 'sampleassembly':
+            form_received.inventory.id = self.id
             pass
         return
 
