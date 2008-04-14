@@ -203,6 +203,12 @@ class UnitCell:
         """Returns the (fractional) position of a site."""
         return self._siteIds[siteId].getPosition()
 
+    def setPositions(self, positions):
+        """Sets the (fractional) positions of the sites in the unit cell."""
+        assert(len(positions) == self.getNumSites())
+        for isite in range(self.getNumSites()):
+            self._sites[isite].setPosition(positions[isite])
+
     def getCartesianPosition(self, siteId):
         """Returns the cartesian position of a site."""
         return self.fractionalToCartesian(self._siteIds[siteId].getPosition())
