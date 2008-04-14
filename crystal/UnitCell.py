@@ -135,7 +135,8 @@ class UnitCell:
         return self.getNumAtoms()
 
     def __copy__(self):
-        new = UnitCell(self)
+        new = UnitCell()
+        new._cellvectors = self._cellvectors
         for siteId in self._siteIds.keys():
             newsite = Site(self._siteIds[siteId].getPosition(),
                            Atom(Z=self._siteIds[siteId].getAtom().Z))
