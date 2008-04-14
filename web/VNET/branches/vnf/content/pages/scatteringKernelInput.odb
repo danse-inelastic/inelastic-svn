@@ -17,7 +17,7 @@ def page(app):
     import vnf.content
 
     # create the page
-    page = vnf.content.page(name='samplePreparation', title='Sample preparation', root=app.home)
+    page = vnf.content.page(name='scatteringKernelInput', title='ScatteringKernelInput', root=app.home)
     
     # build the body
     body = page.body()
@@ -32,10 +32,10 @@ def page(app):
     main = content.main()
 
     # populate the main column
-    document = main.document(title='Sample preparation')
+    document = main.document(title='Scattering Kernel Input')
 
     # build the sample input form
-    atoms = document.form(name='atoms', legend='Upload xyz file', action=app.cgihome)
+    atoms = document.form(name='login', legend='Upload xyz file', action=app.cgihome)
     
     name = atoms.text(id='name', name='name', label='Sample Name')
     name.help = 'An identifying name for this sample.'

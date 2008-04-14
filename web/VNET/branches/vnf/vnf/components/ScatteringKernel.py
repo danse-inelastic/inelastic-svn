@@ -2,7 +2,6 @@
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
-#                                  Jiao Lin
 #                     California Institute of Technology
 #                       (C) 2007  All Rights Reserved
 #
@@ -11,9 +10,9 @@
 
 
 from Actor import Actor, action_link, action, actionRequireAuthentication
-from vnf.weaver import action_href
 
-class Sample(Actor):
+
+class ScatteringKernel(Actor):
 
     class Inventory(Actor.Inventory):
 
@@ -29,56 +28,59 @@ class Sample(Actor):
         return self.listall( director )
 
     def listall(self, director):
-        page = director.retrievePage( 'sample' )
+        page = director.retrievePage('scatteringKernel')
         
         main = page._body._content._main
         
         # populate the main column
-        document = main.document(title='List of samples')
+        document = main.document(title='List of scattering kernels')
         document.description = ''
         document.byline = 'byline?'
 
         # retrieve id:record dictionary from db
         clerk = director.clerk
-        samples = clerk.getSamples()
-        sampleValues=[]
-        for sample in samples:
-            sampleValues.append(sample.getValues())
+        scatteringKernels = clerk.getScatteringKernels()
+        scatteringKernelValues=[]
+        for scatteringKernel in scatteringKernels:
+            scatteringKernelValues.append(scatteringKernel.getValues())
             
         p = document.paragraph()
-        numSamples = len(samples)
-        numColumns=samples[0].getNumColumns()
+        numScatteringKernels = len(scatteringKernels)
+        numColumns=scatteringKernels[0].getNumColumns()
 
         from PyHtmlTable import PyHtmlTable
-        t=PyHtmlTable(numSamples,numColumns)#, {'width':'400','border':2,'bgcolor':'white'})
-        for row in range(numSamples):
+        t=PyHtmlTable(numScatteringKernels,numColumns)#, {'width':'400','border':2,'bgcolor':'white'})
+        for row in range(numScatteringKernels):
             colNum=0
-            for name in samples[row].getColumnNames():
-                t.setc(row,colNum,samples[row].getColumnValue(name))
+            for name in scatteringKernels[row].getColumnNames():
+                t.setc(row,colNum,scatteringKernels[row].getColumnValue(name))
                 colNum+=1
         p.text = [t.return_html()]
         
         p = document.paragraph()
         p.text = [action_link(
         actionRequireAuthentication(
-        'materialInput', director.sentry,
-        label = 'Add a new type of material'),  director.cgihome
+        'scatteringKernelInput', director.sentry,
+        label = 'Add a new scattering kernel'),  director.cgihome
         ),
-        '<br>',
-        action_link(
-        actionRequireAuthentication(
-        'shapeInput', director.sentry,
-        label = 'Add a new sample shape'),  director.cgihome
-        )]
+        '<br>']
+        
+        return page          
 
-        return page  
 
 
     def __init__(self, name=None):
         if name is None:
-            name = "sample"
-        super(Sample, self).__init__(name)
+            name = "scatteringKernel"
+        super(ScatteringKernel, self).__init__(name)
         return
+
+
+
+
+
+
+
 
 # version
 __id__ = "$Id$"

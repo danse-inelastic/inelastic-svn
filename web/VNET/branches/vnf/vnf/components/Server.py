@@ -30,7 +30,7 @@ class Server(Actor):
         return self.listall( director )
 
     def listall(self, director):
-        page = director.retrievePage( 'job' )
+        page = director.retrievePage( 'server' )
         
         main = page._body._content._main
         

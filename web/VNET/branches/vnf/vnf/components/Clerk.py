@@ -154,6 +154,11 @@ class Clerk(Component):
         '''retrieve sample assembly of given id'''
         from vnf.dom.SampleAssembly import SampleAssembly
         return self._getRecordByID( SampleAssembly, id )
+    
+    def getScatteringKernels(self, where = None):
+        '''retrieve all scattering kernels'''
+        from vnf.dom.ScatteringKernel2 import ScatteringKernel2
+        return self._getAll( ScatteringKernel2, where )
 
     def getInstrument(self, id):
         '''retrieve instrument of given id'''
