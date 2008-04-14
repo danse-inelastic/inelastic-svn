@@ -15,13 +15,14 @@
 from pyre.components.Component import Component
 
 class Clerk(Component):
-    
+
 
     def __init__(self, *args, **kwds):
         Component.__init__(self, *args, **kwds)
         self.getHierarchy = HierarchyRetriever(self)
         return
-    
+
+
     def indexUsers(self, where=None):
         """create an index of all users that meet the specified criteria"""
         from vnf.dom.User import User

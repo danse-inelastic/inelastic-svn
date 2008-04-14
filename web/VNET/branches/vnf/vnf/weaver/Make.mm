@@ -32,6 +32,7 @@ all: export
 EXPORT_PYTHON_MODULES = \
 	ActionLinkRenderer.py \
 	ActionHrefRenderer.py \
+	ActionMill_forForm.py \
 	BodyMill.py \
 	DocumentMill.py \
 	HeadMill.py \

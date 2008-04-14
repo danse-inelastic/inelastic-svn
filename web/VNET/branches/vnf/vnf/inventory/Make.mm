@@ -31,6 +31,8 @@ all: export
 
 EXPORT_PYTHON_MODULES = \
 	DataObject.py \
+	Form.py \
+	Geometer.py \
 	__init__.py \
 
 

@@ -12,11 +12,13 @@
 
 from Actor import Actor, action_link, action, actionRequireAuthentication, AuthenticationError
 
+from FormActor import FormActor as base
 
-class Instrument(Actor):
+
+class Instrument(base):
 
 
-    class Inventory(Actor.Inventory):
+    class Inventory(base.Inventory):
 
         import time
         import pyre.inventory
@@ -24,14 +26,11 @@ class Instrument(Actor):
         id = pyre.inventory.str("id", default=None)
         id.meta['tip'] = "the unique identifier of the instrument"
 
-
         import vnf.inventory
-        dataobject = vnf.inventory.dataobject(
-            'dataobject', default='instrument' )
-        dataobject.meta['tip'] = 'the data object to be edited'
+        geometer = vnf.inventory.geometer( 'geometer' )
 
-        from GeometerFacility import GeometerFacility
-        geometer = GeometerFacility( 'geometer' )
+        editee = pyre.inventory.str('editee', default = 'instrument,#id#')
+        editee.meta['tip'] = 'The sub element to edit for edit routine'
 
         pass # end of Inventory
 
@@ -64,71 +63,49 @@ class Instrument(Actor):
 
 
     def edit(self, director):
-        page, document = self._head( director )
-        
-        scribe = director.scribe
+        try:
+            page, document = self._head( director )
+        except AuthenticationError, err:
+            return err.page
 
-        # the record
-        obj = self._getDataObjectRecord( director )
-
-        # properties of the data object
-        properties = self.inventory.dataobject.propertyNames( director )
+        elementtype, elementid = self.inventory.editee.split(',')
+        if elementtype == 'instrument': elementid = self.inventory.id
         
+        formcomponent = self.retrieveFormToShow( elementtype )
+        formcomponent.inventory.id = elementid
+        formcomponent.director = director
+
         # create form
-        instrument = self.instrument_record
-        scribe.objectEditForm(
-            document, obj, properties,
-            instrument, 'instrument',
-            director)
+        form = document.form(
+            name='instrument',
+            legend= formcomponent.legend(),
+            action=director.cgihome)
 
+        # specify action
+        action = actionRequireAuthentication(
+            actor = 'instrument', sentry = director.sentry,
+            label = '', routine = 'set',
+            arguments = { 'id': self.inventory.id,
+                          'form-received': formcomponent.name } )
+        from vnf.weaver import action_formfields
+        action_formfields( action, form )
+
+        # expand the form with fields of the data object that is being edited
+        formcomponent.expand( form )
+
+        # ok button
+        submit = form.control(name="submit", type="submit", value="OK")
+        
         return page    
 
 
     def set(self, director):
-        page, document = self._head( director )
-        
-        obj = self._getDataObjectRecord( director )
+        try:
+            page, document = self._head( director )
+        except AuthenticationError, error:
+            return error.page
 
-        dataobject = self.inventory.dataobject
-
-        for prop in dataobject.propertyNames( director ):
-            setattr(
-                obj, prop,
-                dataobject.inventory.getTraitValue( prop ) )
-            continue
-
-        director.clerk.updateRecord( obj )
-
-        from vnf.dom.Instrument import Instrument
-        if not isinstance(obj, Instrument): return page
-
-        # when edit instrument, we need to update geometer in
-        # addition to normal properties
-        
-        geometer = self.inventory.geometer
-        registry = geometer.registry
-
-        geometer_records = director.clerk.getInstrumentGeometer( obj )
-        for component, value in registry:
-
-            value = eval(value)
-
-            if len(value) == 3:
-                position, orientation, reference = value
-            elif len(value) == 2:
-                position, orientation = value
-                reference = ''
-            else:
-                raise ValueError, value
-            
-            record = geometer_records[ component ]
-            record.position = position
-            record.orientation = orientation
-            record.reference_label = reference
-
-            director.clerk.updateRecord( record )
-
-            continue
+        self.processFormInputs( director )
         
         return page
 
@@ -141,10 +118,7 @@ class Instrument(Actor):
 
 
     def _head(self, director):
-        try:
-            page = director.retrieveSecurePage( 'instrument' )
-        except AuthenticationError, error:
-            return error.page
+        page = director.retrieveSecurePage( 'instrument' )
         
         main = page._body._content._main
 
@@ -169,21 +143,17 @@ class Instrument(Actor):
         return page, document
 
 
-    def _getDataObjectRecord(self, director):
-        return self.inventory.dataobject.getRecord( director )
-    
-
     def _getinstrument(self, id, director):
         clerk = director.clerk
         return clerk.getInstrument( id )
 
 
     def _configure(self):
-        Actor._configure(self)
+        base._configure(self)
         self.id = self.inventory.id
-        dataobject = self.dataobject = self.inventory.dataobject
-        if dataobject.name == 'instrument':
-            dataobject.inventory.id = self.id
+        form_received = self.form_received = self.inventory.form_received
+        if form_received.name == 'instrument':
+            form_received.inventory.id = self.id
             pass
         return
 

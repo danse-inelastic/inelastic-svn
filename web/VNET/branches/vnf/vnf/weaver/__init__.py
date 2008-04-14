@@ -34,6 +34,11 @@ def action_href(action, cgihome):
     renderer = ActionHrefRenderer( cgihome )
     return renderer.render( action )
 
+def action_formfields( action, form ):
+    from ActionMill_forForm import ActionMill_forForm
+    renderer = ActionMill_forForm( form )
+    return renderer.render( action )
+
 
 # version
 __id__ = "$Id$"

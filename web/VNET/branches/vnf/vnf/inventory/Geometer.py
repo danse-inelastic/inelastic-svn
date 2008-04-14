@@ -15,11 +15,11 @@
 from pyre.inventory.Facility import Facility
 
 
-class GeometerFacility(Facility):
+class Geometer(Facility):
 
 
     def __init__(self, name):
-        from Geometer import Geometer
+        from vnf.components.Geometer import Geometer
         Facility.__init__(self, name=name, factory=Geometer, args=[name])
 
         return

@@ -1,0 +1,48 @@
+# -*- Python -*-
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                   Jiao Lin
+#                      California Institute of Technology
+#                        (C) 2007  All Rights Reserved
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+
+
+from vnf.components.DBObjectForm import DBObjectForm as base
+
+
+class SampleAssembly(base):
+
+
+    class Inventory(base.Inventory):
+
+        import pyre.inventory
+
+        pass # end of Inventory
+
+
+    parameters = []
+    DBTable = 'SampleAssembly'
+
+
+    def __init__(self, name = None):
+        if name is None:
+            name = 'sampleassembly'
+
+        base.__init__(self, name)
+
+        return
+
+
+
+def form(): return SampleAssembly()
+
+# version
+__id__ = "$Id$"
+
+# End of file 
