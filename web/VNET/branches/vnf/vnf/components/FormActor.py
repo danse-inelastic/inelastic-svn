@@ -29,7 +29,8 @@ class FormActor(Actor):
         import vnf.inventory
 
         from Form import Form
-        form_received = vnf.inventory.form( 'form-received', family = 'form', default = Form('empty-form') )
+        form_received = vnf.inventory.form(
+            'form-received', family = 'form', default = 'empty' )
 
         pass # end of Inventory
 
