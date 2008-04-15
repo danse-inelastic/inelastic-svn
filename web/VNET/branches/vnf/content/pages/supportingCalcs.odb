@@ -34,12 +34,7 @@ def page(app):
 
     # build the sample input form
     p = document.paragraph()
-    p.text = ['<h1>Samples</h1>
-
-              '''    p = document.paragraph()
-    p.text = ['''<script type="text/javascript"> 
-jmolInitialize("jmol-11.4.RC10"); 
-jmolApplet(600, "load orthoGraphKH212x12x1.xyz");</script>''']
+    p.text = ['''<h1>Supporting Calculations</h1>
 Simulate the material with atomistic forcefields (powered by GULP/MMTK).''']
     
     atoms = document.form(name='login', legend='Upload xyz file', action=app.cgihome)

@@ -49,8 +49,11 @@ EXPORT_PYTHON_MODULES = \
 	Scheduler.py \
 	Server.py \
 	Scatterer.py \
+	ScatteringKernel.py \
+	ScatteringKernelInput.py \
 	Scribe.py \
 	SSHer.py \
+	SupportingCalcs.py \
 	TreeViewCreator.py \
 	inventorylist.py \
 	spawn.py \

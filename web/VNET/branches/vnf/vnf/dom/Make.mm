@@ -34,16 +34,17 @@ EXPORT_PYTHON_MODULES = \
 	Block.py \
 	Crystal.py \
 	DbObject.py \
+	Disordered.py \
 	IDFPhononDispersion.py \
 	Instrument.py \
 	Component.py \
 	IQEMonitor.py \
 	Job.py \
+	Matter.py \
 	MonochromaticSource.py \
 	NeutronExperiment.py \
-	Object.py \
-	VirtualObject.py \
 	PhononDispersion.py \
+	PolyCrystal.py \
 	PolyXtalScatterer.py \
 	PolyXtalCoherentPhononScatteringKernel.py \
 	PositionOrientationRegistry.py \
@@ -52,10 +53,13 @@ EXPORT_PYTHON_MODULES = \
 	SampleAssembly.py \
 	Scatterer.py \
 	ScatteringKernel.py \
+	ScatteringKernel2.py \
 	Server.py \
 	Shape.py \
+	SingleCrystal.py \
 	Table.py \
 	User.py \
+	VirtualObject.py \
 
 
 
