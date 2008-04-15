@@ -29,36 +29,8 @@ def page(app):
 
     # build the client area
     content = body.pageContent()
+    left = content.leftColumn()
     main = content.main()
-
-    # populate the main column
-    document = main.document(title='Scattering Kernel Input')
-
-    # build the input form
-    input = document.form(name='input', legend='Energetics / Dynamics', action=app.cgihome)
-    
-    gulpHarmonic = input.radio(id='radio1', name='gulpHarmonic', label='Gulp Harmonic Motion')
-    gulpNE = input.radio(id='radio2', name='gulpNE', label="Gulp Newton's Equations")
-    mmtkNE = input.radio(id='radio3', name='mmtkNE', label="Mmtk Newton's Equations")
-
-    vaspPhon = input.radio(id='radio4', name='vaspPhon', label='Vasp Energies, Phon Harmonic Motion')
-    abinitPhon = input.radio(id='radio5', name='abinitPhon', label="AbInit Energies, Phon Harmonic Motion")
-    
-    
-    submit = input.control(name="submit", type="submit", value="submit")
-    
-    # view the sample (maybe put this on another page after clicking
-    # to submit the sample
-    p = document.paragraph()
-    p.text = ['''<script type="text/javascript"> 
-jmolInitialize("jmol-11.4.RC10"); 
-jmolApplet(600, "load orthoGraphKH212x12x1.xyz");</script>''']
-    p = document.paragraph()
-    p.text = [
-        '''<strong>Note</strong>: would like to modify material and/or construct overall sample shape here.  
-It may be advisable to reuse DANSE Python code by Python/Jython 
-Web Start (http://personalpages.tds.net/~kent37/Python/JythonWebStart.html)'''
-        ]
     
     # populate the left column
     nav = app.retrievePortlet("navigation")
