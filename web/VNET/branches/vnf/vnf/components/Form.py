@@ -33,7 +33,13 @@ class Form( base ):
 
     def processUserInputs(self):
         'process user inputs and save them to db'
-        return
+        raise NotImplementedError
+
+
+    def expand(self, form):
+        'expand the given form with fields from this form component'
+        raise NotImplementedError
+    
 
     pass # end of Form
 
