@@ -1,0 +1,72 @@
+# -*- Python -*-
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                   Jiao Lin
+#                      California Institute of Technology
+#                        (C) 2007  All Rights Reserved
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+
+from vnf.components.Form import Form as base
+
+
+class Form( base ):
+
+    class Inventory( base.Inventory ):
+
+        import pyre.inventory as inv
+        gulpHarmonic = inv.bool('gulpHarmonic',default=True)
+        #gulpHarmonic.help = 'Gulp Harmonic Motion'
+        gulpNE = inv.bool('gulpNE', default = False)
+        #mmtkNE = SKChoice.radio(id='radio3', name='mmtkNE', label="Mmtk Newton's Equations")
+    
+        #vaspPhon = SKChoice.radio(id='radio4', name='vaspPhon', label='Vasp Energies, Phon Harmonic Motion')
+        #abinitPhon = SKChoice.radio(id='radio5', name='abinitPhon', label="AbInit Energies, Phon Harmonic Motion")
+        
+        #phononDispersions = SKChoice.radio(id='radio6', name='phononDispersions', label="Phonon Dispersions")
+
+    #parameters = ['gulpHarmonic','gulpNE','mmtkNE','vaspPhon','abinitPhon','phononDispersion'] # parameters to edit in the form
+    parameters = ['gulpHarmonic','gulpNE']
+    
+    def legend(self):
+        'return a legend string'
+        return 'kernel'
+
+    def expand(self, form):
+        '''expand an existing form with fields from this component'''
+        prefix = formactor_action_prefix
+
+        gulpHarmonic = form.radio( id= 'radio1', name = '%s.gulpHarmonic' % (prefix, ), label = 'Gulp Harmonic' )
+        gulpNE = form.radio( id= 'radio2', name = '%s.gulpNE' % (prefix, ), label = "Gulp Newton's Equation" )
+
+        return
+
+    def processUserInputs(self):
+        'process user inputs and save them to db'
+        choices = self.parameters
+        choosed = []
+        for choice in choices: 
+            value = getattr( self.inventory, choice )
+            if value: choosed.append( choice )
+            continue
+        if len( choosed ) !=  1: raise RuntimeError, "only one itme should be choosed"
+        return choosed[0]
+
+
+
+
+formactor_action_prefix = 'actor.form-received' # assumed actor is a form actor
+
+
+def form(): return Form( 'selectkernel' )
+
+
+# version
+__id__ = "$Id$"
+
+# End of file 

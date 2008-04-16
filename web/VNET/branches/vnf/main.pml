@@ -14,8 +14,10 @@
 <inventory>
 
   <component name='main'>
-<!--  <property name='actor'>examplePage</property>-->
-    <property name='actor'>scatteringKernel</property>
+    <property name='actor'>scatteringKernelInput</property>
+    <!--
+    <property name='routine'>onselect</property>
+    -->
     <component name='sentry'>
     <property name='username'>demo</property>
     <property name='passwd'>demo</property>
