@@ -19,7 +19,6 @@ class SampleAssembly(base):
 
     class Inventory(base.Inventory):
 
-        import time
         import pyre.inventory
 
         id = pyre.inventory.str("id", default=None)
