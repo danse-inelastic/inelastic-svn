@@ -33,15 +33,16 @@ class ScatteringKernelInput(base):
         formcomponent.director = director
         
         # build the SKChoice form
-        SKChoice = document.form(name='SKChoice', action=director.cgihome)
+        SKChoice = document.form(name='scatteringKernelInput', action=director.cgihome)
         
         # specify action
         action = actionRequireAuthentication(          
-            actor = 'scatteringKenelInput', 
+            actor = 'scatteringKernelInput', 
             sentry = director.sentry,
             routine = 'onselect',
-            label = '')#, 
-            #arguments = { 'id': self.inventory.id, 'form-received': formcomponent.name } )
+            label = '',
+            arguments = {'form-received': formcomponent.name },
+            )
             
         from vnf.weaver import action_formfields
         action_formfields( action, SKChoice )
@@ -55,19 +56,18 @@ class ScatteringKernelInput(base):
     
     
     def onselect(self, director):
+        selected = self.processFormInputs(director)
+        raise RuntimeError, selected
+        method = getattr(self, selected )
+        return method( director )
+
+
+    def gulpHarmonic(self, director):
         try:
-            page, document = self._head( director )
+            page = director.retrieveSecurePage( 'gulpHarmonic' )
         except AuthenticationError, err:
             return err.page
-    
-        #selected = self.processFormInputs(director)
-        #formcomponent = self.retrieveFormToShow( selected )
-        
-        #formcomponent.director = director
-        
-        #form = formcomponent.create( document )
-        
-        return page 
+        return page
 
 
     def __init__(self, name=None):

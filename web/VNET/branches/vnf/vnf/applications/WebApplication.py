@@ -66,6 +66,8 @@ class WebApplication(Base):
 
 
     def main(self, *args, **kwds):
+        from configurationSaver import toPml
+        toPml( self, '/tmp/main-debug.pml' )
         super(WebApplication, self).main(*args, **kwds)
         return
 
