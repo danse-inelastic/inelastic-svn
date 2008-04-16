@@ -15,12 +15,13 @@ from FormActor import FormActor as base
 
 class ScatteringKernelInput(base):
 
-    class Inventory(Actor.Inventory):
+    class Inventory(base.Inventory):
 
         import pyre.inventory
 
         id = pyre.inventory.str("id", default=None)
         id.meta['tip'] = "the unique identifier of a scattering kernel"
+        
 
     def default(self, director):
         try:
@@ -28,7 +29,7 @@ class ScatteringKernelInput(base):
         except AuthenticationError, err:
             return err.page
     
-        formcomponent = self.retrieveFormToShow( 'scatteringKernelInputForm')
+        formcomponent = self.retrieveFormToShow( 'selectkernel')
         formcomponent.director = director
         
         # build the SKChoice form
@@ -36,7 +37,9 @@ class ScatteringKernelInput(base):
         
         # specify action
         action = actionRequireAuthentication(          
-            actor = 'sKChoice', sentry = director.sentry,
+            actor = 'scatteringKenelInput', 
+            sentry = director.sentry,
+            routine = 'onselect',
             label = '')#, 
             #arguments = { 'id': self.inventory.id, 'form-received': formcomponent.name } )
             
@@ -46,8 +49,24 @@ class ScatteringKernelInput(base):
         # expand the form with fields of the data object that is being edited
         formcomponent.expand( SKChoice )
         
-        submit = SKChoice.control(name='next',type="submit", value="next")
+        submit = SKChoice.control(name='submit',type="submit", value="next")
     
+        return page 
+    
+    
+    def onselect(self, director):
+        try:
+            page, document = self._head( director )
+        except AuthenticationError, err:
+            return err.page
+    
+        #selected = self.processFormInputs(director)
+        #formcomponent = self.retrieveFormToShow( selected )
+        
+        #formcomponent.director = director
+        
+        #form = formcomponent.create( document )
+        
         return page 
 
 

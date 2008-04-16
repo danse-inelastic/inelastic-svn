@@ -61,7 +61,7 @@ class Job(Actor):
         numColumns=jobs[0].getNumColumns()
 
         from PyHtmlTable import PyHtmlTable
-        t=PyHtmlTable(numJobs,numColumns)#, {'width':'400','border':2,'bgcolor':'white'})
+        t=PyHtmlTable(numJobs,numColumns, {'width':'400','border':2,'bgcolor':'white'})
         for row in range(numJobs):
             colNum=0
             for name in jobs[row].getColumnNames():

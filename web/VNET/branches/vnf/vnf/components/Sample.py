@@ -50,7 +50,7 @@ class Sample(Actor):
         numColumns=samples[0].getNumColumns()
 
         from PyHtmlTable import PyHtmlTable
-        t=PyHtmlTable(numSamples,numColumns)#, {'width':'400','border':2,'bgcolor':'white'})
+        t=PyHtmlTable(numSamples,numColumns, {'width':'400','border':2,'bgcolor':'white'})
         for row in range(numSamples):
             colNum=0
             for name in samples[row].getColumnNames():
