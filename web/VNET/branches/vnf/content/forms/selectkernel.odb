@@ -30,8 +30,7 @@ class Form( base ):
         
         phononDispersions = inv.bool('phononDispersions', default = False)
 
-    #parameters = ['gulpHarmonic','gulpNE','mmtkNE','vaspPhon','abinitPhon','phononDispersion'] # parameters to edit in the form
-    parameters = ['gulpHarmonic','gulpNE']
+    parameters = ['gulpHarmonic','gulpNE','mmtkNE','vaspPhon','abinitPhon','phononDispersion'] # parameters to edit in the form
     
     def legend(self):
         'return a legend string'
