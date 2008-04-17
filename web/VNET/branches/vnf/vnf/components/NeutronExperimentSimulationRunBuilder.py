@@ -52,6 +52,10 @@ class Builder:
             ['--%s="%s"' % (item, options.get(item))
              for item in options ] ) )
 
+        ########
+        # this is for debuggiing purpose:
+        command = 'ls > ls.log'
+
         shscriptname = self.shscriptname
         files = [ (pyscriptname, pyscriptconents),
                   (shscriptname, [command] ),
