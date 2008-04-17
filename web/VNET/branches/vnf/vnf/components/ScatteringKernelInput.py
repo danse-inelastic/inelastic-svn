@@ -62,40 +62,9 @@ class ScatteringKernelInput(base):
 
 
     def gulpHarmonic(self, director):
-        try:
-            page = director.retrieveSecurePage( 'gulpHarmonic' )
-        except AuthenticationError, err:
-            return err.page
-        
-        main = page._body._content._main
-        
-        document = main.document(title='Hamonic dynamics from Gulp' )
-        document.byline = '<a href="http://danse.us">DANSE</a>'
-        
-        formcomponent = self.retrieveFormToShow( 'gulpHarmonic')
-        formcomponent.director = director
-        
-        # build the SKChoice form
-        SKChoice = document.form(name='scatteringKernelInput', action=director.cgihome)
-        
-        # specify action
-        action = actionRequireAuthentication(          
-            actor = 'scatteringKernelInput', 
-            sentry = director.sentry,
-            routine = 'onselect',
-            label = '',
-            arguments = {'form-received': formcomponent.name },
-            )
-            
-        from vnf.weaver import action_formfields
-        action_formfields( action, SKChoice )
-        
-        # expand the form with fields of the data object that is being edited
-        formcomponent.expand( SKChoice )
-        
-        submit = SKChoice.control(name='submit',type="submit", value="next")
-        
-        return page
+        from GulpHarmonic import GulpHarmonic
+        return GulpHarmonic()
+
 
 
     def __init__(self, name=None):
