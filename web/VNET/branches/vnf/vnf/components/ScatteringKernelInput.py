@@ -39,7 +39,7 @@ class ScatteringKernelInput(base):
         action = actionRequireAuthentication(          
             actor = 'scatteringKernelInput', 
             sentry = director.sentry,
-            routine = 'onselect',
+            routine = 'onSelect',
             label = '',
             arguments = {'form-received': formcomponent.name },
             )
@@ -55,7 +55,7 @@ class ScatteringKernelInput(base):
         return page 
     
     
-    def onselect(self, director):
+    def onSelect(self, director):
         selected = self.processFormInputs(director)
         method = getattr(self, selected )
         return method( director )
@@ -67,7 +67,12 @@ class ScatteringKernelInput(base):
         except AuthenticationError, err:
             return err.page
         
-        formcomponent = self.retrieveFormToShow( 'selectkernel')
+        main = page._body._content._main
+        
+        document = main.document(title='Hamonic dynamics from Gulp' )
+        document.byline = '<a href="http://danse.us">DANSE</a>'
+        
+        formcomponent = self.retrieveFormToShow( 'gulpHarmonic')
         formcomponent.director = director
         
         # build the SKChoice form

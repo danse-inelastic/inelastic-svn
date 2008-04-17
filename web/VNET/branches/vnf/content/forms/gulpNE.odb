@@ -45,7 +45,7 @@ class Form( base ):
         p.text = ['<h1>Thermodynamic Ensemble</h1>',
                   '<h2>Thermodynamic Ensemble</h2>',
 '''
-<script src="SpryAssets/SpryAccordion.js"
+<script src="/vnfBK/javascripts/SpryAssets/SpryAccordion.js"
  type="text/javascript"></script>
 
 <script type="text/javascript">
