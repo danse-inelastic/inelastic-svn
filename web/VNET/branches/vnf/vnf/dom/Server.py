@@ -38,6 +38,9 @@ class Server(Table):
     workdir = pyre.db.varchar( name='workdir', length = 1024)
     workdir.meta['tip'] = 'path in the server where jobs will be posted and run'
 
+    scheduler = pyre.db.varchar( name='scheduler', length = 64)
+    scheduler.meta['tip'] = 'scheduler to use on the server'
+
 
 
 # version
