@@ -24,11 +24,18 @@ class DocumentMill(ActionLinkRenderer, base):
 
         from TreeViewMill import TreeViewMill
         self.treeviewmill = TreeViewMill(configurations)
+        
+        from AccordionMill import AccordionMill
+        self.accordionMill = AccordionMill(configurations)
         return
 
 
     def onTreeView(self, treeview):
         return self.treeviewmill.render( treeview )
+
+
+    def onAccordion(self, accordion):
+        return self.accordionMill.render( accordion )
 
     pass # end of DocumentMill
 

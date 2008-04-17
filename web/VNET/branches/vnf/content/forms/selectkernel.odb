@@ -28,7 +28,7 @@ class Form( base ):
         vaspPhon = inv.bool('vaspPhon', default = False)
         abinitPhon = inv.bool('abinitPhon', default = False)
         
-        phononDispersions = inv.bool('phononDispersions', default = False)
+        phononDispersion = inv.bool('phononDispersion', default = False)
 
     parameters = ['gulpHarmonic','gulpNE','mmtkNE','vaspPhon','abinitPhon','phononDispersion'] # parameters to edit in the form
     
@@ -39,17 +39,12 @@ class Form( base ):
     def expand(self, form):
         '''expand an existing form with fields from this component'''
         prefix = formactor_action_prefix
-
-        gulpHarmonic = form.radio( id= 'radio1', name = '%s.gulpHarmonic' % (prefix, ), label = 'Gulp Harmonic' )
-        gulpNE = form.radio( id= 'radio2', name = '%s.gulpNE' % (prefix, ), label = "Gulp Newton's Equation" )
-        mmtkNE = form.radio(id='radio3', name='%s.mmtkNE' % (prefix, ), label="Mmtk Newton's Equations")
-    
-        vaspPhon = form.radio(id='radio4', name='%s.vaspPhon' % (prefix, ), label='Vasp Energies, Phon Harmonic Motion')
-        abinitPhon = form.radio(id='radio5', name='%s.abinitPhon' % (prefix, ), label="AbInit Energies, Phon Harmonic Motion")
-        
-        phononDispersions = form.radio(id='radio6', name='%s.phononDispersions' % (prefix, ), label="Phonon Dispersions")
-
-        return
+        gulpHarmonic = form.radio( id= 'radio1', name = '%s' % (prefix, ), label = 'Gulp Harmonic', checked = True)
+        gulpNE = form.radio( id= 'radio2', name = '%s' % (prefix, ), label = "Gulp Newton's Equation" )
+        mmtkNE = form.radio(id='radio3', name='%s' % (prefix, ), label="Mmtk Newton's Equations")
+        vaspPhon = form.radio(id='radio4', name='%s' % (prefix, ), label='Vasp Energies, Phon Harmonic Motion')
+        abinitPhon = form.radio(id='radio5', name='%s' % (prefix, ), label="AbInit Energies, Phon Harmonic Motion")
+        phononDispersions = form.radio(id='radio6', name='%s' % (prefix, ), label="Phonon Dispersions")
 
     def processUserInputs(self):
         'process user inputs and save them to db'
@@ -59,7 +54,6 @@ class Form( base ):
             value = getattr( self.inventory, choice )
             if value: choosed.append( choice )
             continue
-        if len( choosed ) !=  1: raise RuntimeError, "only one itme should be choosed"
         return choosed[0]
 
 
