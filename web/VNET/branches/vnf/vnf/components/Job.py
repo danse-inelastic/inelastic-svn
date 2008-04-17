@@ -104,6 +104,18 @@ class Job(base):
         return page
 
 
+    def show(self, director):
+        try:
+            page = director.retrieveSecurePage( 'job' )
+        except AuthenticationError, err:
+            return err.page
+        
+        main = page._body._content._main
+
+        
+        return page
+
+
     def submit(self, director):
         try:
             page = director.retrieveSecurePage( 'job' )

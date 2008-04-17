@@ -14,6 +14,7 @@ PROJECT = vnf
 PACKAGE = vnf
 
 BUILD_DIRS = \
+    clusterscheduler \
     components \
     applications \
     content \

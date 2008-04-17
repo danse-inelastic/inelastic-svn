@@ -26,9 +26,19 @@ def schedule( job, director ):
     
     director.csaccessor.push( path, server )
 
-    id1 = director.csaccessor.execute(
-        submit_cmd( "./run.sh" ),
-        job.id, server )
+    scheduler = server.scheduler
+    if scheduler in [ None, '', 'None' ]:
+        raise RuntimeError, "scheduler not specified"
+
+    from vnf.clusterscheduler import scheduler as factory
+    try: scheduler = factory( scheduler )
+    except: raise NotImplementedError, 'scheduler %r' % scheduler
+
+    scheduler = scheduler(
+        lambda cmd: director.csaccessor.execute( cmd, job.id, server ),
+        prefix = 'source ~/.vnf' )
+
+    id1 = scheduler.submit( './run.sh' )
 
     job.id_incomputingserver = id1
 
@@ -38,10 +48,6 @@ def schedule( job, director ):
     director.clerk.updateRecord( job )
     
     return
-
-
-def submit_cmd( cmd ):
-    return r'source ~/.vnf ;  echo \"%s\" | qsub' % cmd
 
 
 from CSAccessor import RemoteAccessError
