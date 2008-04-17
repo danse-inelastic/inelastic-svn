@@ -14,7 +14,7 @@
 
 def page(app):
     import vnf.content
-    page = vnf.content.page(name='shape', title='Shape Builder', root=app.home)
+    page = vnf.content.page(name='shape', title='Hamonic dynamics from Gulp', root=app.home)
     
     # build the body
     body = page.body()

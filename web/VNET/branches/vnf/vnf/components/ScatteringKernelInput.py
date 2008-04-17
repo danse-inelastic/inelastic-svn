@@ -57,7 +57,6 @@ class ScatteringKernelInput(base):
     
     def onselect(self, director):
         selected = self.processFormInputs(director)
-        raise RuntimeError, selected
         method = getattr(self, selected )
         return method( director )
 
@@ -67,6 +66,30 @@ class ScatteringKernelInput(base):
             page = director.retrieveSecurePage( 'gulpHarmonic' )
         except AuthenticationError, err:
             return err.page
+        
+        formcomponent = self.retrieveFormToShow( 'selectkernel')
+        formcomponent.director = director
+        
+        # build the SKChoice form
+        SKChoice = document.form(name='scatteringKernelInput', action=director.cgihome)
+        
+        # specify action
+        action = actionRequireAuthentication(          
+            actor = 'scatteringKernelInput', 
+            sentry = director.sentry,
+            routine = 'onselect',
+            label = '',
+            arguments = {'form-received': formcomponent.name },
+            )
+            
+        from vnf.weaver import action_formfields
+        action_formfields( action, SKChoice )
+        
+        # expand the form with fields of the data object that is being edited
+        formcomponent.expand( SKChoice )
+        
+        submit = SKChoice.control(name='submit',type="submit", value="next")
+        
         return page
 
 
@@ -89,12 +112,6 @@ class ScatteringKernelInput(base):
         document.byline = '<a href="http://danse.us">DANSE</a>'
 
         return page, document
-
-
-
-
-
-
 
 
 # version

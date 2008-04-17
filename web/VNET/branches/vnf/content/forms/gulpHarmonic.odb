@@ -40,6 +40,13 @@ class Form( base ):
     def expand(self, form):
         '''expand an existing form with fields from this component'''
         prefix = formactor_action_prefix
+        
+        p = form.paragraph()
+        p.text = ['<h1>Thermodynamic Ensemble</h1>','<h2>Thermodynamic Ensemble</h2>']
+        
+        
+        
+        form.text(id= 'radio1', name = '%s.gulpHarmonic' % (prefix, ), label = 'Gulp Harmonic' )
 
         gulpHarmonic = form.radio( id= 'radio1', name = '%s.gulpHarmonic' % (prefix, ), label = 'Gulp Harmonic' )
         gulpNE = form.radio( id= 'radio2', name = '%s.gulpNE' % (prefix, ), label = "Gulp Newton's Equation" )
@@ -49,6 +56,9 @@ class Form( base ):
         abinitPhon = form.radio(id='radio5', name='%s.abinitPhon' % (prefix, ), label="AbInit Energies, Phon Harmonic Motion")
         
         phononDispersions = form.radio(id='radio6', name='%s.phononDispersions' % (prefix, ), label="Phonon Dispersions")
+
+        p = form.paragraph()
+        p.text = ['<h2>Settings</h2>']
 
         return
 

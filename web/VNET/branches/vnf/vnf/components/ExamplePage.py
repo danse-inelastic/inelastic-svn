@@ -37,7 +37,7 @@ class ExamplePage(Actor):
 
     def __init__(self, name=None):
         if name is None:
-            name = "greet"
+            name = "examplePage"
         super(ExamplePage, self).__init__(name)
         return
 
