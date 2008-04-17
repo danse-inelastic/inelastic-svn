@@ -88,7 +88,7 @@ class Form(base):
         
         build_run( experiment, path = jobdir )
 
-        return job.id
+        return job
 
 
     pass # end of Form
