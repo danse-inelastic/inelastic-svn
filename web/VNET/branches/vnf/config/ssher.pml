@@ -19,8 +19,6 @@
 
   <component name='ssher'>
     <property name='auth_sock'>/tmp/ssh-dkqst16356/agent.16356</property>
-    <property name='remote_username'>linjiao</property>
-    <property name='remote_workdir'>vnf-jobs</property>
   </component>
 
 </inventory>

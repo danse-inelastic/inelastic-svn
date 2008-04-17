@@ -21,10 +21,6 @@ class SSHer(base):
         import pyre.inventory
         auth_sock = pyre.inventory.str( 'auth_sock', default = '' )
 
-        remote_username = pyre.inventory.str( 'remote_username', default = 'vnf' )
-
-        remote_workdir = pyre.inventory.str( 'remote_workdir', default = 'jobs' )
-        
         pass # end of Inventory
     
 
@@ -36,11 +32,12 @@ class SSHer(base):
     def push( self, path, server ):
         'push a local directory to remote server'
         address = server.server
-        directory = self.inventory.remote_workdir
-        username = self.inventory.remote_username
+        directory = server.workdir
+        username = server.username
         
         cmd = 'scp -r %s %s@%s:%s' % (
             path, username, address, directory )
+        self._info.log( 'execute: %s' % cmd )
 
         env = {
             'SSH_AUTH_SOCK': self.inventory.auth_sock,
@@ -57,15 +54,16 @@ class SSHer(base):
         'execute command in the given directory of the given server'
 
         address = server.server
-        workdir = self.inventory.remote_workdir
-        username = self.inventory.remote_username
+        workdir = server.workdir
+        username = server.username
 
         path = os.path.join( workdir, directory )
 
         cmd = 'cd %s && %s' % (path, cmd)
         
-        cmd = 'ssh %s@%s %s' % (username, address, cmd)
+        cmd = 'ssh %s@%s "%s"' % (username, address, cmd)
 
+        self._info.log( 'execute: %s' % cmd )
         env = {
             'SSH_AUTH_SOCK': self.inventory.auth_sock,
             }
@@ -75,7 +73,7 @@ class SSHer(base):
                 cmd, error )
             raise RemoteAccessError, msg
 
-        return
+        return output
 
 
     pass # end of SSHer

@@ -41,6 +41,9 @@ class Job(Table):
     owner = pyre.db.varchar( name = 'owner', length = 30 )
     owner.meta['tip'] = 'the owner of this job'
     
+    id_incomputingserver = pyre.db.varchar(name="id_incomputingserver", length=100)
+    id_incomputingserver.meta['tip'] = "the id of this job when submitted to the computing server. this is given by the computing server."
+
 #    reference = pyre.db.varchar(name='reference', length = 100 )
 #    reference.meta['tip'] = 'reference id in the table of the given type'
 

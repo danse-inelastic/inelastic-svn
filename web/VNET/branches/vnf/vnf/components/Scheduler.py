@@ -25,9 +25,23 @@ def schedule( job, director ):
     server = director.clerk.getServer( server_id )
     
     director.csaccessor.push( path, server )
-    #director.csaccessor.execute( 'nohup ./run.sh', path, server )
+
+    id1 = director.csaccessor.execute(
+        submit_cmd( "./run.sh" ),
+        job.id, server )
+
+    job.id_incomputingserver = id1
+
+    import time
+    job.timestart = time.ctime()
+
+    director.clerk.updateRecord( job )
     
     return
+
+
+def submit_cmd( cmd ):
+    return r'source ~/.vnf ;  echo \"%s\" | qsub' % cmd
 
 
 from CSAccessor import RemoteAccessError

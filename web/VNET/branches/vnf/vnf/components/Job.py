@@ -10,13 +10,16 @@
 #
 
 
-from Actor import Actor, action_link, action, actionRequireAuthentication, AuthenticationError
+from Actor import action_link, action, actionRequireAuthentication, AuthenticationError
 from wording import plural, present_be
 
 
-class Job(Actor):
+from FormActor import FormActor as base
 
-    class Inventory(Actor.Inventory):
+
+class Job(base):
+
+    class Inventory(base.Inventory):
 
         import time
         import pyre.inventory
@@ -80,7 +83,7 @@ class Job(Actor):
         
         main = page._body._content._main
 
-        id = self.inventory.id
+        id = self.processFormInputs( director )
         
         document = main.document( title = 'Job editor' )
 
@@ -165,6 +168,8 @@ class Job(Actor):
         try:
             schedule(job, director)
         except RemoteAccessError, err:
+            import traceback
+            self._debug.log( traceback.format_exc() )
             document = main.document( title = 'Job not submitted' )
             p = document.paragraph()
             p.text = [

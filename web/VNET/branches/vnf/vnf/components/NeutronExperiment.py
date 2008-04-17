@@ -10,13 +10,14 @@
 #
 
 
-from Actor import Actor, actionRequireAuthentication, action_link, AuthenticationError
+from Actor import actionRequireAuthentication, action_link, AuthenticationError
+from FormActor import FormActor as base
 
 
-class NeutronExperiment(Actor):
+class NeutronExperiment(base):
 
 
-    class Inventory(Actor.Inventory):
+    class Inventory(base.Inventory):
 
         import pyre.inventory
 
@@ -61,115 +62,31 @@ class NeutronExperiment(Actor):
         except AuthenticationError, error:
             return error.page
 
-        experiment = director.clerk.getNeutronExperiment( self.inventory.id )
+        formcomponent = self.retrieveFormToShow( 'run_neutron_experiment' )
+        formcomponent.inventory.id = self.inventory.id
+        formcomponent.director = director
         
-        instrument_id = experiment.instrument_id
-        instrument = director.clerk.getInstrument( instrument_id )
-        
-        p = document.paragraph()
-        p.text = [
-            'Instrument: %s' % instrument.short_description,
-            ]
-
-        sampleassembly_id = experiment.sampleassembly_id
-        sampleassembly = director.clerk.getSampleAssembly( sampleassembly_id )
-        
-        p = document.paragraph()
-        p.text = [
-            'Sample assembly: %s' % sampleassembly.short_description,
-            ]
-
-        actor = self.name
+        # create form
         form = document.form(
-            name=actor,
-            legend='Run neutron experiment:',
+            name='neutronexperiment',
+            legend= formcomponent.legend(),
             action=director.cgihome)
 
-        actor_field = form.hidden(name='actor', value=actor)
-        routine_field = form.hidden(name='routine', value='run')
-        id_field = form.hidden(
-            name = '%s.id' % actor, value = experiment.id)
-        
-        username_filed = form.hidden(
-            name='sentry.username', value = director.sentry.username)
-        ticket_filed = form.hidden(
-            name='sentry.ticket', value = director.sentry.ticket)
+        # specify action
+        action = actionRequireAuthentication(
+            actor = 'job', sentry = director.sentry,
+            label = '', routine = 'edit',
+            arguments = {'form-received': formcomponent.name } )
+        from vnf.weaver import action_formfields
+        action_formfields( action, form )
 
-        properties = self.parameters()
-        table = experiment.__class__
-        
-        for property in properties:
-            
-            value = getattr( experiment, property )
-            field = form.text(
-                id = property,
-                name='%s.%s' % (actor, property),
-                label=property,
-                value = value)
-            
-            descriptor = getattr(table, property)
-            tip = descriptor.meta.get('tip')
-            if tip: field.help = tip
+        # expand the form with fields of the data object that is being edited
+        formcomponent.expand( form )
 
-            continue
-            
+        # run button
         submit = form.control(name="submit", type="submit", value="Run")
             
-        p = form.paragraph()
-        p.text = [
-            ]        
-
         return page    
-
-
-    def run(self, director):
-        try:
-            page, document = self._head( director )
-        except AuthenticationError, error:
-            return error.page
-        
-        id = self.inventory.id
-        experiment = director.clerk.getNeutronExperiment( id )
-
-        parameters = self.parameters()
-        for parameter in parameters:
-            setattr(
-                experiment, parameter,
-                self.inventory.getTraitValue( parameter ) )
-            continue
-        
-        director.clerk.updateRecord( experiment )
-
-        experiment = director.clerk.getHierarchy( experiment )
-
-        #create a new job
-        from Job import new_job, jobpath
-        job = new_job( director )
-        job.jobName = experiment.short_description
-        director.clerk.updateRecord( job )
-        
-        jobdir = jobpath( job.id )
-        
-        build_run( experiment, path = jobdir )
-
-        #
-        p = document.paragraph()
-        edit_job = action_link(
-            actionRequireAuthentication(
-            actor = 'job', sentry = director.sentry,
-            label = 'this job', routine = 'edit',
-            id = job.id ), director.cgihome
-            )
-            
-        p.text = [
-            'A job has been created. Please edit %s and submit it.' % edit_job,
-            ]
-
-        return page
-
-
-    def parameters(self):
-        return ['ncount']
 
 
     def __init__(self, name=None):
@@ -198,7 +115,7 @@ class NeutronExperiment(Actor):
 
 
     def _configure(self):
-        Actor._configure(self)
+        base._configure(self)
         self.id = self.inventory.id
         return
 
@@ -233,11 +150,6 @@ def instrument_selector( document, instruments ):
     document.contents.append( widget )
     return
 
-
-
-def build_run( experiment, path ):
-    from NeutronExperimentSimulationRunBuilder import Builder
-    return Builder(path).render(experiment)
 
 
 # version

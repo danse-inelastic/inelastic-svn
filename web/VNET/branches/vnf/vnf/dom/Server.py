@@ -32,6 +32,12 @@ class Server(Table):
     groupAccess = pyre.db.varchar(name='groupAccess', length = 128)
     groupAccess.meta['tip'] = 'which group of users has access to the server'
     
+    username = pyre.db.varchar( name='username', length = 100)
+    username.meta['tip'] = 'name of user that can run applications'
+
+    workdir = pyre.db.varchar( name='workdir', length = 1024)
+    workdir.meta['tip'] = 'path in the server where jobs will be posted and run'
+
 
 
 # version
