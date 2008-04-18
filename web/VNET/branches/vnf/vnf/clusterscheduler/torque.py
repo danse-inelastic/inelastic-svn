@@ -12,6 +12,11 @@
 #
 
 
+import journal
+debug = journal.debug( 'torque' )
+
+
+
 class Scheduler:
 
     
@@ -23,22 +28,46 @@ class Scheduler:
     
     def submit( self, cmd ):
         cmds = [ r'echo \"%s\" | qsub' % (cmd,) ]
-        return self._launch( cmds )
+        return self._launch( cmds ).strip()
     
 
     def status( self, jobid ):
         cmds = [ 'qstat -f %s' % (jobid,) ]
-        ret = self._launch( cmds )
+        try:
+            ret = self._launch( cmds )
+        except:
+            import traceback
+            debug.log( traceback.format_exc() )
+            return self.statusByTracejob( jobid )
         
         ret = ret.split( '\n' )
         ret = ret[1:] # first line removed
+        if len(ret) == 0: return self.statusByTracejob( jobid )
         d = {}
         for line in ret:
-            k,v = line.split( '=' )
+            try:
+                k,v = line.split( '=' )
+            except:
+                continue
             d[ k.strip() ] = v.strip()
             continue
         return d
 
+
+    def statusByTracejob( self, jobid ):
+        tag = 'Exit_status'
+        cmds = [ 'tracejob %s | grep %s' % (jobid, tag) ]
+        output = self._launch( cmds )
+
+        words = output.split( )
+        debug.log( 'words: %s' % words )
+        status = words[3]
+        
+        key, value = status.split( '=' )
+        assert key.lower() == 'exit_status'
+
+        return { 'exit_status': value }
+    
 
     def _launch(self, cmds):
         if self.prefix: cmds = [ self.prefix ] + cmds
