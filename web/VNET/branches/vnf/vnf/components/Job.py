@@ -95,6 +95,9 @@ class Job(base):
         main = page._body._content._main
 
         job = self.processFormInputs( director )
+        if job is None: # input is not from form
+            job = director.clerk.getJob( self.inventory.id )
+            pass # endif
         
         document = main.document( title = 'Job editor' )
 
@@ -136,6 +139,25 @@ class Job(base):
         main = page._body._content._main
         document = main.document( title = 'Job # %s: %s' % (
             record.id, record.status ) )
+
+        if record.status == 'created':
+            p = document.paragraph()
+            link = action_link(
+                actionRequireAuthentication(
+                'job',
+                director.sentry,
+                label = 'submit',
+                routine = 'edit',
+                id = record.id,
+                ),  director.cgihome
+                )
+            
+            p.text = [
+                'This job is created but not submitted.',
+                'Please %s it first' % link,
+                ]
+            return page
+            
 
         status = check( record, director )
 

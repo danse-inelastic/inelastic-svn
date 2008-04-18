@@ -41,7 +41,7 @@ class Scheduler:
         jobid = job.id_incomputingserver
         
         cmds = [ 'qstat -f %s' % (jobid,) ]
-        failed, out, error  = self._launch( cmds )
+        failed, output, error  = self._launch( cmds )
         if failed:
             if error.find( 'Unknown Job Id' ) != -1:
                 return self.statusByTracejob( jobid )
@@ -49,7 +49,7 @@ class Scheduler:
                 cmds, output, error )
             raise RuntimeError, msg
         
-        lines = out.split( '\n' )
+        lines = output.split( '\n' )
         lines = lines[1:] # first line removed
         if len(lines) == 0: return self.statusByTracejob( jobid )
         d = {}
