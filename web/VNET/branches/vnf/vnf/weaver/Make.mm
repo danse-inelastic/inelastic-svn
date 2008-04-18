@@ -30,6 +30,7 @@ all: export
 # export
 
 EXPORT_PYTHON_MODULES = \
+	AccordionMill.py \
 	ActionLinkRenderer.py \
 	ActionHrefRenderer.py \
 	ActionMill_forForm.py \
