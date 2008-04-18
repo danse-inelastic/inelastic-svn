@@ -16,7 +16,6 @@ from FormActor import FormActor as base
 
 class SampleAssembly(base):
 
-
     class Inventory(base.Inventory):
 
         import pyre.inventory
@@ -26,8 +25,6 @@ class SampleAssembly(base):
 
         editee = pyre.inventory.str('editee', default = 'sampleassembly,#id#')
         editee.meta['tip'] = 'The sub element to edit for edit routine'
-
-        pass # end of Inventory
 
 
 

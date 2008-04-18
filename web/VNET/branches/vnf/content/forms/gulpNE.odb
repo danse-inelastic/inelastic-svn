@@ -20,15 +20,7 @@ class Form( base ):
     class Inventory( base.Inventory ):
 
         import pyre.inventory as inv
-        gulpHarmonic = inv.bool('gulpHarmonic',default=True)
-        #gulpHarmonic.help = 'Gulp Harmonic Motion'
-        gulpNE = inv.bool('gulpNE', default = False)
-        mmtkNE = inv.bool('mmtkNE', default = False)
-    
-        vaspPhon = inv.bool('vaspPhon', default = False)
-        abinitPhon = inv.bool('abinitPhon', default = False)
-        
-        phononDispersions = inv.bool('phononDispersions', default = False)
+
 
     #parameters = ['gulpHarmonic','gulpNE','mmtkNE','vaspPhon','abinitPhon','phononDispersion'] # parameters to edit in the form
     parameters = ['gulpHarmonic','gulpNE']
@@ -42,19 +34,17 @@ class Form( base ):
         prefix = formactor_action_prefix
         
         p = form.paragraph()
-        p.text = ['<h1>Thermodynamic Ensemble</h1>',
-                  '<h2>Thermodynamic Ensemble</h2>',
-'''
-<script src="/vnfBK/javascripts/SpryAssets/SpryAccordion.js"
- type="text/javascript"></script>
+        p.text = ['''<script src="/vnfBK/javascripts/SpryAssets/SpryAccordion.js" 
+type="text/javascript"></script>
 
 <script type="text/javascript">
 <!--
 var Accordion1 = new Spry.Widget.Accordion("themoEnsemble");
 //-->
-</script>
-
- <br />
+</script>''',
+"<h1>Newton's equations from Gulp</h1>",
+'<h2>Thermodynamic Ensemble</h2>',
+'''<br />
   <br />
   </label>
   <div id="themoEnsemble" class="Accordion"
@@ -104,8 +94,11 @@ Constant Number, Pressure, Temperature</label> </div>
   </p>
   </div>
   </div>
-  </div>
-  <p> <label>Time Step (fs) <input name="timeStep"
+  </div>'''
+]
+        p = form.paragraph()
+        p.text = ['<h2>Settings</h2>',
+'''<p><label>Time Step (fs) <input name="timeStep"
  id="timeStep" value="1.0" type="text" /> </label>
   </p>
   <p> <label>Equilibrium Time (ps) <input
@@ -132,22 +125,6 @@ Constant Number, Pressure, Temperature</label> </div>
  id="restartFileOutputFrequency" value="0.25" type="text" />
   </label>
   ''']
-        
-        
-        
-        form.text(id= 'radio1', name = '%s.gulpHarmonic' % (prefix, ), label = 'Gulp Harmonic' )
-
-        gulpHarmonic = form.radio( id= 'radio1', name = '%s.gulpHarmonic' % (prefix, ), label = 'Gulp Harmonic' )
-        gulpNE = form.radio( id= 'radio2', name = '%s.gulpNE' % (prefix, ), label = "Gulp Newton's Equation" )
-        mmtkNE = form.radio(id='radio3', name='%s.mmtkNE' % (prefix, ), label="Mmtk Newton's Equations")
-    
-        vaspPhon = form.radio(id='radio4', name='%s.vaspPhon' % (prefix, ), label='Vasp Energies, Phon Harmonic Motion')
-        abinitPhon = form.radio(id='radio5', name='%s.abinitPhon' % (prefix, ), label="AbInit Energies, Phon Harmonic Motion")
-        
-        phononDispersions = form.radio(id='radio6', name='%s.phononDispersions' % (prefix, ), label="Phonon Dispersions")
-
-        p = form.paragraph()
-        p.text = ['<h2>Settings</h2>']
 
         return
 
