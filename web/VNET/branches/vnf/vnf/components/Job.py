@@ -44,23 +44,35 @@ class Job(base):
 
         # retrieve id:record dictionary from db
         clerk = director.clerk
-        jobs = clerk.getJobs()
-        jobValues=[]
-        for job in jobs:
-            jobValues.append(job.getValues())
-        #get the number of columns of info about a representative job
-        numColumns=jobs[0].getNumColumns() 
+        jobs = clerk.getJobs( where = 'owner=%r' % director.sentry.username )
             
         p = document.paragraph()
+
         numJobs = len(jobs)
+
+        #get the number of columns of info about a representative job
         numColumns=jobs[0].getNumColumns()
 
         from PyHtmlTable import PyHtmlTable
         t=PyHtmlTable(numJobs,numColumns, {'width':'400','border':2,'bgcolor':'white'})
         for row in range(numJobs):
-            colNum=0
-            for name in jobs[row].getColumnNames():
-                t.setc(row,colNum,jobs[row].getColumnValue(name))
+            job = jobs[row]
+            for colNum, colName in enumerate(job.getColumnNames()):
+                value = job.getColumnValue(colName)
+                if colName == 'id':
+                    link = action_link(
+                        actionRequireAuthentication(
+                        'job',
+                        director.sentry,
+                        label = value,
+                        routine = 'show',
+                        id = value,
+                        ),  director.cgihome
+                        )
+                    value = link
+                    pass # endif
+                        
+                t.setc(row,colNum,value)
                 colNum+=1
         p.text = [t.return_html()]
         
@@ -110,9 +122,20 @@ class Job(base):
         except AuthenticationError, err:
             return err.page
         
-        main = page._body._content._main
+        id = self.inventory.id
+        record = director.clerk.getJob( id )
+        assert record.owner == director.sentry.username
 
-        
+        main = page._body._content._main
+        document = main.document( title = 'Job # %s: %s' % (
+            record.id, record.status ) )
+
+        status = check( record, director )
+        lines = ['%s=%s' % (k,v) for k,v in status.iteritems()]
+        for line in lines:
+            p = document.paragraph()
+            p.text = [line]
+            continue
         return page
 
 
@@ -142,12 +165,19 @@ class Job(base):
                 ]
             return page
 
+        job.status = 'submitted'
+        director.clerk.updateRecord( job )
+        
         document = main.document( title = 'Job submitted' )
         p = document.paragraph()
-
         p.text = [
             'Job #%s has been submitted to %s' % (
             job.id, server_record.server, ),
+            ]
+            
+        p = document.paragraph()
+        p.text = [
+            'You can click "Jobs" link on the left menu to see all of your jobs',
             ]
             
         return page
@@ -160,7 +190,7 @@ class Job(base):
         return
 
 
-from Scheduler import schedule, RemoteAccessError
+from Scheduler import schedule, check, RemoteAccessError
 
 
 def new_job( director ):
@@ -171,6 +201,7 @@ def new_job( director ):
     director.clerk.newJob( job )
 
     job.owner = director.sentry.username
+    job.status = 'created'
     import time
     job.timeStart = job.timeCompletion = time.ctime()
 

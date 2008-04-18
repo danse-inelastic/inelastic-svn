@@ -29,14 +29,13 @@ class SSHer(base):
         return
     
 
-    def push( self, path, server ):
+    def push( self, path, server, remotepath ):
         'push a local directory to remote server'
         address = server.server
-        directory = server.workdir
         username = server.username
         
         cmd = 'scp -r %s %s@%s:%s' % (
-            path, username, address, directory )
+            path, username, address, remotepath )
         self._info.log( 'execute: %s' % cmd )
 
         env = {
@@ -50,16 +49,13 @@ class SSHer(base):
         return
 
 
-    def execute( self, cmd, directory, server ):
+    def execute( self, cmd, server, remotepath ):
         'execute command in the given directory of the given server'
 
         address = server.server
-        workdir = server.workdir
         username = server.username
 
-        path = os.path.join( workdir, directory )
-
-        cmd = 'cd %s && %s' % (path, cmd)
+        cmd = 'cd %s && %s' % (remotepath, cmd)
         
         cmd = 'ssh %s@%s "%s"' % (username, address, cmd)
 
