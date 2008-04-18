@@ -34,7 +34,6 @@ def schedule( job, director ):
         prefix = 'source ~/.vnf' )
     
     id1 = scheduler.submit( 'sh %s/run.sh' % server_jobpath )
-
     job.id_incomputingserver = id1
 
     import time
@@ -48,6 +47,8 @@ def schedule( job, director ):
 def check( job, director ):
     "check status of a job"
 
+    if job.status == 'finished': return job
+
     server_id = job.server
     server = director.clerk.getServer( server_id )
     scheduler = schedulerfactory( server )
@@ -60,8 +61,14 @@ def check( job, director ):
         launch,
         prefix = 'source ~/.vnf' )
 
-    return scheduler.status( job.id_incomputingserver )
+    jobstatus = scheduler.status( job )
 
+    for k,v in jobstatus.iteritems():
+        setattr(job, k, v)
+        continue
+
+    director.clerk.updateRecord( job )
+    return job
 
 
 def remote_jobpath( server, job ):

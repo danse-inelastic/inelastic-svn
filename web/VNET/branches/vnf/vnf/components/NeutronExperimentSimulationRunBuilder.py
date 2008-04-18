@@ -54,7 +54,7 @@ class Builder:
 
         ########
         # this is for debuggiing purpose:
-        command = 'ls > ls.log'
+        command = 'ls'
 
         shscriptname = self.shscriptname
         files = [ (pyscriptname, pyscriptconents),

@@ -28,45 +28,127 @@ class Scheduler:
     
     def submit( self, cmd ):
         cmds = [ r'echo \"%s\" | qsub' % (cmd,) ]
-        return self._launch( cmds ).strip()
+        failed, output, error = self._launch( cmds )
+        if failed:
+            msg = "error in executing cmds %s. output: %s, error: %s" % (
+                cmds, output, error )
+            raise RuntimeError, msg
+        return output
     
 
-    def status( self, jobid ):
-        cmds = [ 'qstat -f %s' % (jobid,) ]
-        try:
-            ret = self._launch( cmds )
-        except:
-            import traceback
-            debug.log( traceback.format_exc() )
-            return self.statusByTracejob( jobid )
+    def status( self, job ):
         
-        ret = ret.split( '\n' )
-        ret = ret[1:] # first line removed
-        if len(ret) == 0: return self.statusByTracejob( jobid )
+        jobid = job.id_incomputingserver
+        
+        cmds = [ 'qstat -f %s' % (jobid,) ]
+        failed, out, error  = self._launch( cmds )
+        if failed:
+            if error.find( 'Unknown Job Id' ) != -1:
+                return self.statusByTracejob( jobid )
+            msg = "error in executing cmds %s. output: %s, error: %s" % (
+                cmds, output, error )
+            raise RuntimeError, msg
+        
+        lines = out.split( '\n' )
+        lines = lines[1:] # first line removed
+        if len(lines) == 0: return self.statusByTracejob( jobid )
         d = {}
-        for line in ret:
+        for line in lines:
             try:
                 k,v = line.split( '=' )
             except:
                 continue
             d[ k.strip() ] = v.strip()
             continue
+
+        errorpath = d['Error_Path']
+        dummy, errorfilename = os.path.split(errorpath)
+
+        outputpath = d['Output_Path']
+        dummy, outputfilename = os.path.split(outputpath)
+
+        state = d['job_state']
+        start_time = d['start_time']
+        
+        ret = {
+            'remote_outputfilename': outputfilename,
+            'remote_errorfilename': errorfilename,
+            'status': _state( state ),
+            'timeStart': start_time,
+            }
+
+        if ret['status'] == 'finished':
+            output, error = self._readoutputerror(
+                outputfilename, errorfilename )
+            ret.update(
+                { 'exit_code': d['exit_status'],
+                  'timeCompletion': d['etime'],
+                  'output': output,
+                  'error': error,
+                  } )
+            pass
+
+        return ret
+
+
+    def statusByTracejob( self, job ):
+
+        jobid = job.id_incomputingserver
+        d = {}
+        
+        tag = 'Exit_status'
+        words = self._tracejob_search( jobid, tag )
+        status = words[3]
+        key, value = status.split( '=' )
+        assert key.lower() == 'exit_status'
+        d [ 'exit_code' ] =  value
+
+        tag = 'job was terminated'
+        words = self._tracejob_search( jobid, tag )
+        d[ 'timeCompletion' ] = ' '.join( words[0:2] )
+
+        output, error = self._readoutputerror(
+            job.outputfilename, job.errorfilename )
+
+        d.update( {
+            'output': output,
+            'error': error,
+            } )
+            
         return d
 
 
-    def statusByTracejob( self, jobid ):
-        tag = 'Exit_status'
-        cmds = [ 'tracejob %s | grep %s' % (jobid, tag) ]
-        output = self._launch( cmds )
+    def _readoutputerror(self, outputfilename, errorfilename ):
+        return self._read( outputfilename ), self._read( errorfilename )
 
-        words = output.split( )
-        debug.log( 'words: %s' % words )
-        status = words[3]
+
+    def _read(self, filename):
+        'read file in the remote job directory'
+        cmds = [ 'cat %r' % (filename,) ]
+        failed, output, error = self._launch( cmds )
+        if failed:
+            msg = "error in executing cmds %s. output: %s, error: %s" % (
+                cmds, output, error )
+            raise RuntimeError, msg
+        return output
+
+
+    def _tracejob_search(self, jobid, tag):
+        cmds = [ 'tracejob %s | grep %r' % (jobid, tag) ]
         
-        key, value = status.split( '=' )
-        assert key.lower() == 'exit_status'
+        failed, output, error = self._launch( cmds )
 
-        return { 'exit_status': value }
+        if failed:
+            msg = "error in executing cmds %s. output: %s, error: %s" % (
+                cmds, output, error )
+            raise RuntimeError, msg
+
+        # remove trailing \n to make parsing easier
+        if output.endswith( '\n' ): output = output[:-1] 
+        lines = output.split( '\n' )
+        words = lines[-1].split( )
+        debug.log( 'words: %s' % words )
+        return words
     
 
     def _launch(self, cmds):
@@ -74,6 +156,19 @@ class Scheduler:
         return self.launcher( ' && '.join( cmds ) )
 
     pass # end of Scheduler
+
+import os
+
+
+_states = {
+    'C': 'finished',
+    'R': 'running',
+    }
+    
+def _state( state ):
+    r = _states.get( state )
+    if r: return r
+    return 'unknown state: %s' % state
 
 
 def test():

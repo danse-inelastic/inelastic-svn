@@ -64,12 +64,7 @@ class SSHer(base):
             'SSH_AUTH_SOCK': self.inventory.auth_sock,
             }
         failed, output, error = spawn( cmd, env = env )
-        if failed:
-            msg = '%r failed: %s' % (
-                cmd, error )
-            raise RemoteAccessError, msg
-
-        return output
+        return failed, output, error
 
 
     pass # end of SSHer
