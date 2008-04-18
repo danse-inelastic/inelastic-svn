@@ -50,29 +50,36 @@ class Job(base):
 
         numJobs = len(jobs)
 
-        #get the number of columns of info about a representative job
-        numColumns=jobs[0].getNumColumns()
+        columns = [
+            'jobName', 'id', 'owner', 'server',
+            'numprocessors', 'status', 'timeStart', 'timeCompletion',
+            ]
+        numColumns=len(columns)
 
         from PyHtmlTable import PyHtmlTable
         t=PyHtmlTable(numJobs,numColumns, {'width':'400','border':2,'bgcolor':'white'})
-        for row in range(numJobs):
-            job = jobs[row]
-            for colNum, colName in enumerate(job.getColumnNames()):
+        for colNum, col in enumerate(columns):
+            t.setc(0,colNum,col)
+            continue
+        
+        for row, job in enumerate( jobs ):
+            for colNum, colName in enumerate( columns ):
+                
                 value = job.getColumnValue(colName)
-                if colName == 'id':
+                if colName == 'jobName':
                     link = action_link(
                         actionRequireAuthentication(
                         'job',
                         director.sentry,
                         label = value,
                         routine = 'show',
-                        id = value,
+                        id = job.id,
                         ),  director.cgihome
                         )
                     value = link
                     pass # endif
                         
-                t.setc(row,colNum,value)
+                t.setc(row+1,colNum,value)
                 colNum+=1
         p.text = [t.return_html()]
         
@@ -131,7 +138,9 @@ class Job(base):
             record.id, record.status ) )
 
         status = check( record, director )
-        lines = ['%s=%s' % (k,v) for k,v in status.iteritems()]
+
+        props = record.getColumnNames()
+        lines = ['%s=%s' % (prop, getattr(record, prop) ) for prop in props]
         for line in lines:
             p = document.paragraph()
             p.text = [line]
@@ -154,7 +163,7 @@ class Job(base):
 
         try:
             schedule(job, director)
-        except RemoteAccessError, err:
+        except Exception, err:
             import traceback
             self._debug.log( traceback.format_exc() )
             document = main.document( title = 'Job not submitted' )
@@ -167,6 +176,8 @@ class Job(base):
 
         job.status = 'submitted'
         director.clerk.updateRecord( job )
+        # check status of job
+        check( job, director )
         
         document = main.document( title = 'Job submitted' )
         p = document.paragraph()
@@ -202,6 +213,7 @@ def new_job( director ):
 
     job.owner = director.sentry.username
     job.status = 'created'
+    job.exit_code = -1
     import time
     job.timeStart = job.timeCompletion = time.ctime()
 

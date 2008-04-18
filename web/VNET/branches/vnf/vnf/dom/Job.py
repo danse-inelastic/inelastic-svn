@@ -38,9 +38,6 @@ class Job(Table):
     numprocessors = pyre.db.integer(name='numprocessors', default = 1)
     numprocessors.meta['tip'] = 'the number of processors this job uses'
 
-    owner = pyre.db.varchar( name = 'owner', length = 30 )
-    owner.meta['tip'] = 'the owner of this job'
-    
     id_incomputingserver = pyre.db.varchar(name="id_incomputingserver", length=100)
     id_incomputingserver.meta['tip'] = "the id of this job when submitted to the computing server. this is given by the computing server."
 
@@ -52,8 +49,19 @@ class Job(Table):
     #   - created: just created. has not been submitted
     #   - submitted
     #   - running
+    #   - onhold
     #   - finished
+
+    remote_outputfilename = pyre.db.varchar(
+        name = 'remote_outputfilename', length = 512 )
+    remote_errorfilename = pyre.db.varchar(
+        name = 'remote_errorfilename', length = 512 )
+
+    output = pyre.db.varchar(name = 'output', length = 2048)
+    error = pyre.db.varchar(name = 'error', length = 2048)
     
+    exit_code = pyre.db.integer(name = 'exit_code', default = -1)
+
 #    reference = pyre.db.varchar(name='reference', length = 100 )
 #    reference.meta['tip'] = 'reference id in the table of the given type'
 
