@@ -51,7 +51,7 @@ class Server(Actor):
         numColumns=servers[0].getNumColumns()
 
         from PyHtmlTable import PyHtmlTable
-        t=PyHtmlTable(numServers,numColumns)#, {'width':'400','border':2,'bgcolor':'white'})
+        t=PyHtmlTable(numServers,numColumns, {'width':'400','border':2,'bgcolor':'white'})
         for row in range(numServers):
             colNum=0
             for name in servers[row].getColumnNames():
