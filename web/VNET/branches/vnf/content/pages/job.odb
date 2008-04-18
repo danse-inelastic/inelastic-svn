@@ -34,6 +34,16 @@ def page(app):
     if nav:
         left.add(nav)
 
+    # build the footer
+    footer = body.pageFooter()
+
+    # build the credits
+    credits = body.pageCredits()
+    p = credits.paragraph(cls="discreet")
+    p.text = [
+        "powered by opal"
+        ]
+    
     return page
 
 # version
