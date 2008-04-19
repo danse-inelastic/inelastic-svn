@@ -19,7 +19,8 @@ class SSHer(base):
     class Inventory(base.Inventory):
 
         import pyre.inventory
-        auth_sock = pyre.inventory.str( 'auth_sock', default = '' )
+        #auth_sock = pyre.inventory.str( 'auth_sock')
+        private_key = pyre.inventory.str( 'private_key' )
 
         pass # end of Inventory
     
@@ -33,13 +34,13 @@ class SSHer(base):
         'push a local directory to remote server'
         address = server.server
         username = server.username
+        private_key = self.inventory.private_key
         
-        cmd = 'scp -r %s %s@%s:%s' % (
-            path, username, address, remotepath )
+        cmd = 'scp -i %s -r %s %s@%s:%s' % (
+            private_key, path, username, address, remotepath )
         self._info.log( 'execute: %s' % cmd )
 
         env = {
-            'SSH_AUTH_SOCK': self.inventory.auth_sock,
             }
         failed, output, error = spawn( cmd, env = env )
         if failed:
@@ -54,14 +55,14 @@ class SSHer(base):
 
         address = server.server
         username = server.username
+        private_key = self.inventory.private_key
 
         cmd = 'cd %s && %s' % (remotepath, cmd)
         
-        cmd = 'ssh %s@%s "%s"' % (username, address, cmd)
+        cmd = 'ssh -i %s %s@%s "%s"' % (private_key, username, address, cmd)
 
         self._info.log( 'execute: %s' % cmd )
         env = {
-            'SSH_AUTH_SOCK': self.inventory.auth_sock,
             }
         failed, output, error = spawn( cmd, env = env )
         return failed, output, error

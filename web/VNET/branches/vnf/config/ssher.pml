@@ -18,7 +18,7 @@
 <inventory>
 
   <component name='ssher'>
-    <property name='auth_sock'>/tmp/ssh-dkqst16356/agent.16356</property>
+    <property name='private_key'>/home/vnf/.ssh/id_rsa.www-data</property>
   </component>
 
 </inventory>
