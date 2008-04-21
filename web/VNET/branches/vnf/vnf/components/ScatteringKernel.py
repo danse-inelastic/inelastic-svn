@@ -40,21 +40,36 @@ class ScatteringKernel(Actor):
         # retrieve id:record dictionary from db
         clerk = director.clerk
         scatteringKernels = clerk.getScatteringKernels()
+        
         scatteringKernelValues=[]
         for scatteringKernel in scatteringKernels:
             scatteringKernelValues.append(scatteringKernel.getValues())
             
         p = document.paragraph()
         numScatteringKernels = len(scatteringKernels)
-        numColumns=scatteringKernels[0].getNumColumns()
+        columns = ['description', 'texture','creator','date created','id']
+        numColumns=len(columns)#scatteringKernels[0].getNumColumns()
 
         from PyHtmlTable import PyHtmlTable
-        t=PyHtmlTable(numScatteringKernels,numColumns)#, {'width':'400','border':2,'bgcolor':'white'})
-        for row in range(numScatteringKernels):
-            colNum=0
-            for name in scatteringKernels[row].getColumnNames():
-                t.setc(row,colNum,scatteringKernels[row].getColumnValue(name))
-                colNum+=1
+        t=PyHtmlTable(numScatteringKernels,numColumns, {'width':'400','border':2,'bgcolor':'white'})
+        for colNum, col in enumerate(columns):
+            t.setc(0,colNum,col)
+            
+        for row, job in enumerate(scatteringKernels):
+            for colNum, colName in enumerate( columns ):           
+                value = job.getColumnValue(colName)
+                if colName == 'description':
+                    link = action_link(
+                        actionRequireAuthentication(
+                        'scatteringKernel',
+                        director.sentry,
+                        label = value,
+                        routine = 'show',
+                        id = job.id,
+                        ),  director.cgihome
+                        )
+                    value = link
+                t.setc(row+1,colNum,value)
         p.text = [t.return_html()]
         
         p = document.paragraph()
@@ -64,9 +79,26 @@ class ScatteringKernel(Actor):
         label = 'Add a new scattering kernel'),  director.cgihome
         ),
         '<br>']
-        
         return page          
 
+# this method should be altered so it loads all the values into the form fields
+# and basically gives the user complete editing power
+    def show(self, director):
+        page = director.retrieveSecurePage( 'scatteringKernel' )
+        
+        id = self.inventory.id
+        record = director.clerk.getJob( id )
+
+        main = page._body._content._main
+        document = main.document( title = '%s' % (record.description,) )
+
+        props = record.getColumnNames()
+        lines = ['%s=%s' % (prop, getattr(record, prop) ) for prop in props]
+        for line in lines:
+            p = document.paragraph()
+            p.text = [line]
+            continue
+        return page
 
 
     def __init__(self, name=None):

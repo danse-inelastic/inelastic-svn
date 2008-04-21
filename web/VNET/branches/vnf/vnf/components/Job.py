@@ -80,7 +80,7 @@ class Job(base):
                     pass # endif
                         
                 t.setc(row+1,colNum,value)
-                colNum+=1
+                #colNum+=1
         p.text = [t.return_html()]
         
         return page

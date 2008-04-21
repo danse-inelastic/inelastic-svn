@@ -22,13 +22,6 @@ class Form( base ):
         import pyre.inventory as inv
 
 
-    #parameters = ['gulpHarmonic','gulpNE','mmtkNE','vaspPhon','abinitPhon','phononDispersion'] # parameters to edit in the form
-    parameters = ['gulpHarmonic','gulpNE']
-    
-    def legend(self):
-        'return a legend string'
-        return 'kernel'
-
     def expand(self, form):
         '''expand an existing form with fields from this component'''
         prefix = formactor_action_prefix
@@ -128,24 +121,14 @@ Constant Number, Pressure, Temperature</label> </div>
 
         return
 
-    def processUserInputs(self):
-        'process user inputs and save them to db'
-        choices = self.parameters
-        choosed = []
-        for choice in choices: 
-            value = getattr( self.inventory, choice )
-            if value: choosed.append( choice )
-            continue
-        if len( choosed ) !=  1: raise RuntimeError, "only one itme should be choosed"
-        return choosed[0]
 
 
 
 
-formactor_action_prefix = 'actor.form-received' # assumed actor is a form actor
+formactor_action_prefix = 'actor.form' # assumed actor is a form actor
 
 
-def form(): return Form( 'selectkernel' )
+def form(): return Form( 'gulpNE' )
 
 
 # version
