@@ -42,6 +42,9 @@ class Server(Actor):
         # retrieve id:record dictionary from db
         clerk = director.clerk
         servers = clerk.getServers()
+        columnNames=['Name','Location','Group Access','Working Directory','Scheduler']
+        numColumns=len(columnNames)
+        
         serverValues=[]
         for server in servers:
             serverValues.append(server.getValues())
