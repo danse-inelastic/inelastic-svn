@@ -34,48 +34,19 @@ class SampleAssembly(base):
 
 
     def default(self, director):
+        return self.listall(director)
+    
+
+    def new(self, director):
         try:
             page = director.retrieveSecurePage( 'sampleassembly' )
         except AuthenticationError, err:
             return err.page
 
-        main = page._body._content._main
-
-        # populate the main column
-        document = main.document(title='Sample Assembly')
-        document.description = (
-            'A sample assembly is a collection of neutron scatterers. '\
-            'For example, it can consist of a main sample, '\
-            'a sample container, and a furnace.\n'\
-            )
-        document.byline = 'byline?'
-
-        p = document.paragraph()
-        link = action_link(
-            actionRequireAuthentication(
-                'sampleassemblywizard',
-                director.sentry,
-                label = 'wizard',
-                ),  director.cgihome
-            )
-        p.text = [
-            'To create a new sample assembly, please use this %s' % link
-            ]
-
-        p = document.paragraph()
-        link = action_link(
-            actionRequireAuthentication(
-                'sampleassembly',
-                director.sentry,
-                routine = 'listall',
-                label = 'list',
-                ),  director.cgihome
-            )
-        p.text = [
-            'Here is a %s of sample assemblies.' % link
-            ]
-        return page
-
+        sampleassembly = new_sampleassembly( director )
+        self.inventory.id = sampleassembly.id
+        return self.edit( director )
+    
 
     def listall(self, director):
         try:
@@ -90,6 +61,22 @@ class SampleAssembly(base):
         document.description = ''
         document.byline = 'byline?'
 
+        p = document.paragraph()
+        link = action_link(
+            actionRequireAuthentication(
+                'sampleassembly',
+                director.sentry,
+                label = 'link',
+                routine = 'new',
+                ),  director.cgihome
+            )
+        p.text = [
+            'To create a new sample assembly, please use this %s' % link
+            ]
+
+        p = document.paragraph()
+        p = document.paragraph()
+
         # retrieve id:record dictionary from db
         clerk = director.clerk
         sampleassemblies = clerk.indexSampleAssemblies()
@@ -101,16 +88,30 @@ class SampleAssembly(base):
 
     def edit(self, director):
         try:
-            page, document = self._head( director )
+            page = director.retrieveSecurePage( 'sampleassembly' )
         except AuthenticationError, err:
             return err.page
 
+        #subcomponent to edit
         elementtype, elementid = self.inventory.editee.split(',')
         if elementtype == 'sampleassembly': elementid = self.inventory.id
+
+        handler = 'edit_%s' % elementtype
+        try:
+            handler = getattr(self, handler)
+        except AttributeError:
+            handler = None
+            pass
+        if handler: return handler( elementid, director ) 
         
         formcomponent = self.retrieveFormToShow( elementtype )
         formcomponent.inventory.id = elementid
         formcomponent.director = director
+
+        # start document
+        main = page._body._content._main
+        document = self._document( main, director )
+        self._tree( document, director )
         
         # start form
         form = document.form(
@@ -149,7 +150,7 @@ class SampleAssembly(base):
         # ok button
         submit = form.control(name="submit", type="submit", value="OK")
         
-        return page    
+        return page
 
 
     def delete(self, director):
@@ -168,7 +169,7 @@ class SampleAssembly(base):
         method = getattr( self, method )
         method( elementid, director )
         
-        self._tree( self.sampleassembly_record, document, director )
+        self._tree( document, director )
         return page
 
 
@@ -190,18 +191,18 @@ class SampleAssembly(base):
         except AuthenticationError, error:
             return error.page
 
+        self.processFormInputs( director )
+        
         main = page._body._content._main
         document = self._document( main, director )
 
-        self.processFormInputs( director )
-        
-        self._tree( self.sampleassembly_record, document, director )
+        self._tree( document, director )
         return page
 
 
     def addnewscatterer(self, director ):
         try:
-            page, document = self._head( director )
+            page = director.retrieveSecurePage( 'sampleassembly' )
         except AuthenticationError, error:
             return error.page
 
@@ -212,6 +213,21 @@ class SampleAssembly(base):
         # add new scatterer to sample assembly
         reference = new_reference(
             self.inventory.id, scatterer.id, director )
+
+        return self.edit_scatterer( scatterer.id, director )
+
+
+    def edit_scatterer(self, scatterer_id, director):
+        try:
+            page = director.retrieveSecurePage( 'sampleassembly' )
+        except AuthenticationError, error:
+            return error.page
+
+        scatterer = director.clerk.getScatterer( scatterer_id )
+
+        main = page._body._content._main
+        document = self._document( main, director )
+        self._tree( document, director )        
 
         # create form to set scatterer type
         formcomponent = self.retrieveFormToShow( 'selectscatterertype' )
@@ -253,7 +269,7 @@ class SampleAssembly(base):
         page = director.retrieveSecurePage( 'sampleassembly' )
         main = page._body._content._main
         document = self._document( main, director )
-        self._tree( self.sampleassembly_record, document, director )
+        self._tree( document, director )
         
         return page, document
 
@@ -261,7 +277,7 @@ class SampleAssembly(base):
     def _document(self, main, director):
         # the record we are working on
         id = self.inventory.id
-        self.sampleassembly_record = sampleassembly = self._getsampleassembly( id, director )
+        sampleassembly = self._getsampleassembly( director )
 
         # populate the main column
         document = main.document(title='Sample Assembly: %s' % sampleassembly.short_description )
@@ -273,7 +289,8 @@ class SampleAssembly(base):
         return document
 
 
-    def _tree(self, sampleassembly, document, director):
+    def _tree(self, document, director):
+        sampleassembly = self._getsampleassembly( director )
         treeview = create_treeview(
             director.clerk.getHierarchy(sampleassembly),
             director)
@@ -281,7 +298,8 @@ class SampleAssembly(base):
         return
 
 
-    def _getsampleassembly(self, id, director):
+    def _getsampleassembly(self, director):
+        id = self.inventory.id
         clerk = director.clerk
         return clerk.getSampleAssembly( id )
 
@@ -307,7 +325,7 @@ def listsampleassemblies( sampleassemblies, document, director ):
 
     n = len(sampleassemblies)
 
-    p.text = [ 'There %s %s sampleassembl%s: ' %
+    p.text = [ 'There %s %s existing sampleassembl%s: ' %
                (present_be(n), n, plural(n, 'y'))
                 ]
 
@@ -368,6 +386,27 @@ def new_reference( sampleassembly_id, scatterer_id, director ):
     director.clerk.newRecord( record )
     
     return record
+
+
+
+def new_sampleassembly( director ):
+    from vnf.dom.SampleAssembly import SampleAssembly
+    record = SampleAssembly()
+
+    id = new_id( director )
+    record.id = id
+
+    record.constructed = False
+    record.short_description = ''
+    record.creator = director.sentry.username
+
+    import time
+    record.date = time.ctime()
+
+    director.clerk.newRecord( record )
+    
+    return record
+
 
             
 

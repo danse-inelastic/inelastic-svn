@@ -72,8 +72,9 @@ class TreeViewCreator:
 
 
     def onAbstractElement(self, element):
+        typename = element.__class__.__name__.lower()
         try:
-            realelement = getattr( element, 'real%s' % element.__class__.__name__.lower() )
+            realelement = getattr( element, 'real%s' % typename )
             return self(realelement)
         except:
             director = self.director
@@ -85,6 +86,7 @@ class TreeViewCreator:
                     director.sentry,
                     routine='edit',
                     id = self._rootcontainer.id,
+                    editee = "%s,%s" % (typename, element.id)
                     )
                 )
 

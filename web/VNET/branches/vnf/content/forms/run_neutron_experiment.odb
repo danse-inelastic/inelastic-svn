@@ -10,9 +10,10 @@
 #
 
 
+from vnf.components.Actor import action_link, actionRequireAuthentication
+
+
 from vnf.components.DBObjectForm import DBObjectForm as base
-
-
 class Form(base):
 
 
@@ -53,16 +54,34 @@ class Form(base):
         instrument = director.clerk.getInstrument( instrument_id )
         
         p = form.paragraph()
+        link = action_link(
+            actionRequireAuthentication(
+            'instrument',
+            director.sentry,
+            label = instrument.short_description,
+            routine = 'edit',
+            id = instrument.id,
+            ),  director.cgihome
+            )
         p.text = [
-            'Instrument: %s' % instrument.short_description,
+            'Instrument: %s' % link,
             ]
 
         sampleassembly_id = record.sampleassembly_id
         sampleassembly = director.clerk.getSampleAssembly( sampleassembly_id )
         
         p = form.paragraph()
+        link = action_link(
+            actionRequireAuthentication(
+            'sampleassembly',
+            director.sentry,
+            label = sampleassembly.short_description,
+            routine = 'edit',
+            id = sampleassembly.id,
+            ),  director.cgihome
+            )
         p.text = [
-            'Sample assembly: %s' % sampleassembly.short_description,
+            'Sample assembly: %s' % link,
             ]
 
         base.expand(self, form)
