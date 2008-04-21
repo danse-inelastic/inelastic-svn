@@ -12,17 +12,16 @@
 #
 
 
-from Table import Table
-class DbObject(Table):
+from DbObject import DbObject
+class OwnedObject(DbObject):
 
     import pyre.db
-    
-    id = pyre.db.varchar(name="id", length=100)
-    id.constraints = 'PRIMARY KEY'
-    id.meta['tip'] = "the unique id"
 
-    description = pyre.db.varchar(name='description', length = 128)
-    description.meta['tip'] = 'description'
+    creator = pyre.db.varchar(name='creator', length = 32)
+    creator.meta['tip'] = 'creator name'
+
+    date = pyre.db.date( name='date' )
+    date.meta['tip'] = 'date of creation'
 
     pass # end of Shape
 
