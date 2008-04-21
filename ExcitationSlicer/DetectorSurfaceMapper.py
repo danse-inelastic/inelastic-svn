@@ -4,22 +4,28 @@ __doc__ = """A module to map a t-o-f chopper detector surface in reciprocal spac
 #from pyre.components.Component import Component
 
 
-class DetectorSurfaceMapper():
+class DetectorSurfaceMapper:
     """Base class for detector surface mapper."""
 
     def __init__(self, Ei=50, Etransfer=0):
-        self.ei = Ei
-        self.e  = Etransfer
+        self.Ei = Ei
+        self.Etransfer  = Etransfer
+
+    def setEi(self, Ei):
+        self.Ei = Ei
+
+    def getEi(self):
+        return self.Ei
 
     def setEtransfer(self, Etransfer):
-        self.e = Etransfer
+        self.Etransfer = Etransfer
 
     def getEtransfer(self):
-        return self.e
+        return self.Etransfer
 
     def _checkEtransfer(self, Etransfer):
         """Checks that energy transfer input is compatible with incident E."""
-        if (Etransfer > self.ei):
+        if (Etransfer > self.Ei):
             raise ValueError, 'Energy transfer larger than incident E.'
         pass
 
