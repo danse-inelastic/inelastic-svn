@@ -12,8 +12,13 @@
 #
 
 
+from opal.components.Login import Login as base
+class Login(base):
+    def _init(self):
+        self._debug.log( 'hello here' )
+        base._init(self)
+
 def actor():
-    from opal.components.Login import Login
     return Login()
 
 

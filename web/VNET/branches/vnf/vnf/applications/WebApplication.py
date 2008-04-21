@@ -42,8 +42,7 @@ class WebApplication(Base):
         actor.meta['tip'] = "the component that defines the application behavior"
 
         import pyre.idd
-        idd = pyre.inventory.facility(
-            'idd-session', factory=pyre.idd.session, args=['idd-session'])
+        idd = pyre.inventory.facility('idd-session', factory=pyre.idd.session, args=['idd-session'])
         idd.meta['tip'] = "access to the token server"
 
         import vnf.components
@@ -59,10 +58,8 @@ class WebApplication(Base):
         debug = pyre.inventory.bool(name="debug", default=False)
         debug.meta['tip'] = "suppress some html output for debugging purposes"
 
-        imagepath = pyre.inventory.str(
-            name='imagepath', default = '/vnf/images' )
-        javascriptpath = pyre.inventory.str(
-            name='javascriptpath', default = '/vnf/javascripts' )
+        imagepath = pyre.inventory.str(name='imagepath', default = '/vnf/images' )
+        javascriptpath = pyre.inventory.str(name='javascriptpath', default = '/vnf/javascripts' )
 
 
     def main(self, *args, **kwds):

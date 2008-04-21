@@ -15,12 +15,17 @@
 
   <component name='main'>
     <property name='actor'>scatteringKernelInput</property>
-    <!--
-    <property name='routine'>onselect</property>
-    -->
+    <property name='submit'>next</property>
+    <component name='scatteringKernelInput'>
+    	<property name='form-recieved'>selectkernel</property>
+    </component>    
+    <property name='routine'>onSelect</property>
+    <component name='selectkernel'>
+    	<property name='kernel'>gulpNE</property>
+    </component>    
     <component name='sentry'>
-    <property name='username'>demo</property>
-    <property name='passwd'>demo</property>
+    	<property name='username'>demo</property>
+    	<property name='passwd'>demo</property>
     </component>
   </component>
 

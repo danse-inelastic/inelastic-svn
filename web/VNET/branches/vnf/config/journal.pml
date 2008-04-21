@@ -23,9 +23,13 @@
     <component name='info'>
       <property name='idd'>on</property>
       <property name='ipa'>on</property>
+      <property name='job'>on</property>
+      <property name='ssher'>on</property>
     </component>
 
     <component name='debug'>
+      <property name='job'>on</property>
+      <property name='torque'>on</property>
     </component>
 
   </component>
