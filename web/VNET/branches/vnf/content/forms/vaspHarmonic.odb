@@ -39,11 +39,16 @@ class Form( base ):
                 label=property,
                 value = value)
         
-        field = form.text(
+        electronicKpointGrid = form.text(
                 id = property,
                 name='%s.%s' % (prefix, property),
                 label=property,
-                value = value)        
+                value = value)  
+        electronicKpointGrid = form.text(
+                id = property,
+                name='%s.%s' % (prefix, property),
+                label=property,
+                value = value)       
         
 
 
