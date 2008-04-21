@@ -55,7 +55,8 @@ class DBObjectForm( base ):
         for property in self.parameters:
             
             value = getattr( record, property )
-            value = tostr( value )
+            exec 'self.inventory.%s = value' % property
+            value = tostr( getattr(self.inventory, property) )
             
             field = form.text(
                 id = property,

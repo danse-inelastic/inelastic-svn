@@ -114,6 +114,7 @@ def new_block( director ):
     record.id = id
 
     record.creator = director.sentry.username
+    record.width = record.height = record.thickness = 0.01
 
     import time
     record.date = time.ctime()
