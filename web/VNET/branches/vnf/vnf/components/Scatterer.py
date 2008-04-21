@@ -10,13 +10,15 @@
 #
 
 
-from Actor import Actor, action_link, actionRequireAuthentication, AuthenticationError
+from Actor import action_link, actionRequireAuthentication, AuthenticationError
+
+from FormActor import FormActor as base
 
 
-class Scatterer(Actor):
+class Scatterer(base):
 
 
-    class Inventory(Actor.Inventory):
+    class Inventory(base.Inventory):
 
         import time
         import pyre.inventory
@@ -54,29 +56,213 @@ class Scatterer(Actor):
         return page
 
 
-    def edit(self, director):
+    def selectshapetype(self, director):
         try:
             page = director.retrieveSecurePage( 'scatterer' )
         except AuthenticationError, error:
             return error.page
-        
+
         main = page._body._content._main
 
-        # the record we are working on
-        id = self.inventory.id
-        scatterer = self._getscatterer( id, director )
-
         # populate the main column
-        document = main.document(title='Scatterer: %s' % scatterer.short_description )
+        document = main.document(title='Scatterer shape')
         document.description = ''
         document.byline = 'byline?'
 
-        type = scatterer.type
-        editors[ type ](
-            director.clerk.getRealScatterer( id ),
-            document, director )
-    
-        return page    
+        self.processFormInputs( director )
+
+        id = self.inventory.id
+        realscatterer = record = director.clerk.getRealScatterer( id )
+
+        # new abstract shape record
+        from Shape import new_shape
+        shape = new_shape( director )
+
+        # refer to the new shape record
+        realscatterer.shape_id = shape.id
+        director.clerk.updateRecord( realscatterer )
+
+        #
+        # create form
+        formcomponent = self.retrieveFormToShow( 'selectshapetype' )
+        formcomponent.inventory.id = shape.id
+        formcomponent.director = director
+        
+        form = document.form(
+            name='selectshapetype',
+            legend= formcomponent.legend(),
+            action=director.cgihome)
+
+        # specify action
+        action = actionRequireAuthentication(
+            actor = 'scatterer', sentry = director.sentry,
+            label = '',
+            routine = 'editshape',
+            arguments = { 'id': self.inventory.id,
+                          'form-received': formcomponent.name } )
+        from vnf.weaver import action_formfields
+        action_formfields( action, form )
+
+        # expand the form with fields of the data object that is being edited
+        formcomponent.expand( form )
+
+        # ok button
+        submit = form.control(name="submit", type="submit", value="OK")
+        
+        return page
+
+
+    def editshape(self, director):
+        try:
+            page = director.retrieveSecurePage( 'scatterer' )
+        except AuthenticationError, error:
+            return error.page
+
+        main = page._body._content._main
+
+        # populate the main column
+        document = main.document(title='Scatterer shape')
+        document.description = ''
+        document.byline = 'byline?'
+
+        self.processFormInputs( director )
+
+        realscatterer = director.clerk.getRealScatterer( self.inventory.id )
+        realshape = director.clerk.getRealShape( realscatterer.shape_id )
+
+        # create form
+        formcomponent = self.retrieveFormToShow(
+            realshape.__class__.__name__.lower() )
+        formcomponent.inventory.id = realshape.id
+        formcomponent.director = director
+        
+        form = document.form(
+            name='editshape',
+            legend= formcomponent.legend(),
+            action=director.cgihome)
+
+        # specify action
+        action = actionRequireAuthentication(
+            actor = 'scatterer', sentry = director.sentry,
+            label = '',
+            routine = 'edit_%s_start' % realscatterer.__class__.__name__.lower(),
+            arguments = { 'id': self.inventory.id,
+                          'form-received': formcomponent.name } )
+        from vnf.weaver import action_formfields
+        action_formfields( action, form )
+
+        # expand the form with fields of the data object that is being edited
+        formcomponent.expand( form )
+
+        # ok button
+        submit = form.control(name="submit", type="submit", value="OK")
+        
+        return page
+
+
+    def edit_crystal(self, submit_routine, director):
+        try:
+            page = director.retrieveSecurePage( 'scatterer' )
+        except AuthenticationError, error:
+            return error.page
+
+        main = page._body._content._main
+
+        # populate the main column
+        document = main.document(title='Crystal')
+        document.description = ''
+        document.byline = 'byline?'
+
+        self.processFormInputs( director )
+
+        id = self.inventory.id
+        realscatterer = director.clerk.getRealScatterer( id )
+        crystal_id = realscatterer.crystal_id
+
+        # create form
+        formcomponent = self.retrieveFormToShow( 'crystal' )
+        formcomponent.inventory.id = crystal_id
+        formcomponent.director = director
+        
+        form = document.form(
+            name='editcrystal',
+            legend= formcomponent.legend(),
+            action=director.cgihome)
+
+        # specify action
+        action = actionRequireAuthentication(
+            actor = 'scatterer', sentry = director.sentry,
+            label = '',
+            routine = submit_routine,
+            arguments = { 'id': self.inventory.id,
+                          'form-received': formcomponent.name,
+                          'form-received.id': crystal_id,
+                          } )
+        from vnf.weaver import action_formfields
+        action_formfields( action, form )
+
+        # expand the form with fields of the data object that is being edited
+        formcomponent.expand( form )
+
+        # ok button
+        submit = form.control(name="submit", type="submit", value="OK")
+        
+        return page
+
+
+    def edit_polyxtalscatterer_start(self, director):
+        return self.edit_crystal( 'edit_polyxtalscatterer_end', director )
+
+
+    def edit_polyxtalscatterer_end(self, director):
+        try:
+            page = director.retrieveSecurePage( 'scatterer' )
+        except AuthenticationError, error:
+            return error.page
+
+        main = page._body._content._main
+
+        # populate the main column
+        document = main.document(title='Polycrystal Scatterer')
+        document.description = ''
+        document.byline = 'byline?'
+
+        self.processFormInputs( director )
+
+        id = self.inventory.id
+        polyxtalscatterer = director.clerk.getRealScatterer( id )
+
+        # create form
+        formcomponent = self.retrieveFormToShow( 'polyxtalscatterer' )
+        formcomponent.inventory.id = polyxtalscatterer.id
+        formcomponent.director = director
+        
+        form = document.form(
+            name='editpolyxtalscatterer',
+            legend= formcomponent.legend(),
+            action=director.cgihome)
+
+        sa_id = director.clerk.findParentSampleAssembly( id ).id
+        
+        # specify action
+        action = actionRequireAuthentication(
+            actor = 'sampleassembly', sentry = director.sentry,
+            label = '',
+            routine = 'set',
+            arguments = { 'id': sa_id,
+                          'form-received': formcomponent.name,
+                          'form-received.id': polyxtalscatterer.id,
+                          } )
+        from vnf.weaver import action_formfields
+        action_formfields( action, form )
+
+        # expand the form with fields of the data object that is being edited
+        formcomponent.expand( form )
+
+        # ok button
+        submit = form.control(name="submit", type="submit", value="OK")
+        
+        return page
 
 
     def __init__(self, name=None):
@@ -130,55 +316,27 @@ def noscatterer( document, director ):
 
 
 
-def edit_polyxtalscatterer( scatterer, document, director ):
-    p = document.paragraph()
-    shape_id = scatterer.shape_id
-    shape_ctrl = object_description_sentence( shape_id, 'Shape', director )
-    p.text = ["Shape: %s" % shape_ctrl,]
-
-    p = document.paragraph()
-    crystal_id = scatterer.crystal_id
-    crystal_ctrl = object_description_sentence( crystal_id, 'Crystal', director )
-    p.text = ["Crystal: %s" % crystal_ctrl,]
-    return
+def new_id( director ):
+    #new token
+    token = director.idd.token()
+    uniquename = '%s-%s-%s' % (token.locator, token.tid, token.date)
+    return uniquename
 
 
-def object_description_sentence( objid, type, director):
-    """given an object's id, return a sentence describing
-    the object.
+def new_scatterer( director ):
+    from vnf.dom.Scatterer import Scatterer
+    record = Scatterer()
+
+    id = new_id( director )
+    record.id = id
+
+    import time
+    record.date = time.ctime()
+
+    director.clerk.newRecord( record )
     
-    In case the id is empty, return a sentence saying
-    the object is not yet created, please create it.
-    
-    In case the id is valid, return a sentence describing
-    the object, and a link to configure the object.
-    """
-    if objid == '':
-        link = action_link(
-            actionRequireAuthentication(
-            type.lower(), director.sentry,
-            label = 'create', routine = 'new',
-            ), director.cgihome)
-        obj_ctrl = "%s has not been defined. Please %s a %s" % (
-            type, link, type.lower())
-    else:
-        link = action_link(
-            actionRequireAuthentication(
-            type.lower(), director.sentry,
-            label = 'configure', routine = 'new',
-            ), director.cgihome)
-        method = 'get%s' % type
-        method = getattr( director.clerk, method )
-        obj_record = method( objid )
-        obj_ctrl = "%s (%s)" % (
-            obj_record.short_description, link)
-        pass
-    return obj_ctrl
+    return record
 
-
-
-editors = {}
-editors['PolyXtalScatterer'] = edit_polyxtalscatterer
 
 
 # version

@@ -51,6 +51,7 @@ EXPORT_PYTHON_MODULES = \
 	Scatterer.py \
 	ScatteringKernel.py \
 	ScatteringKernelInput.py \
+	Shape.py \
 	Scribe.py \
 	SSHer.py \
 	SupportingCalcs.py \
