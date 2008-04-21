@@ -20,6 +20,7 @@ class SSHer(base):
 
         import pyre.inventory
         #auth_sock = pyre.inventory.str( 'auth_sock')
+        #known_hosts = pyre.inventory.str( 'known_hosts' )
         private_key = pyre.inventory.str( 'private_key' )
 
         pass # end of Inventory
@@ -34,10 +35,13 @@ class SSHer(base):
         'push a local directory to remote server'
         address = server.server
         username = server.username
+        #known_hosts = self.inventory.known_hosts
         private_key = self.inventory.private_key
         
-        cmd = 'scp -i %s -r %s %s@%s:%s' % (
+        cmd = "scp -o 'StrictHostKeyChecking=no' -i %s -r %s %s@%s:%s" % (
             private_key, path, username, address, remotepath )
+        #cmd = "scp -o 'UserKnownHostsFile=%s' -i %s -r %s %s@%s:%s" % (
+        #    known_hosts, private_key, path, username, address, remotepath )
         self._info.log( 'execute: %s' % cmd )
 
         env = {
@@ -55,11 +59,13 @@ class SSHer(base):
 
         address = server.server
         username = server.username
+        #known_hosts = self.inventory.known_hosts
         private_key = self.inventory.private_key
 
         cmd = 'cd %s && %s' % (remotepath, cmd)
         
-        cmd = 'ssh -i %s %s@%s "%s"' % (private_key, username, address, cmd)
+        cmd = 'ssh -o "StrictHostKeyChecking=no" -i %s %s@%s "%s"' % (private_key, username, address, cmd)
+        #cmd = 'ssh -o "UserKnownHostsFile=%s" -i %s %s@%s "%s"' % (known_hosts, private_key, username, address, cmd)
 
         self._info.log( 'execute: %s' % cmd )
         env = {
