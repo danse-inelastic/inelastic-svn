@@ -415,6 +415,33 @@ class phonIsoSurfaceCalcor(Component):
         input = raw_input("Press enter to close plot window.")
         planecut.DestroyWindow()
         return
+
+    def plotIsoSufaceAndDetector(self, branchtoplot, energyvalues, detectorGeometry='spherical'):
+        """Show the detector surface mapped into the reciprocal space of the crystal."""
+        if detectorGeometry is not 'spherical':
+            raise NotImplementedError
+
+        self.setEnergyGridForBranch(branchtoplot)
+        
+        self._plotter.setGrid(self._energyGrid)
+
+        print "Plotter type:"
+        print self._plotter.__class__
+        print "Plotter grid shape: ", self._plotter._grid.GetShape()
+        
+        plot = self._plotter.plot(contours=energyvalues)
+        window = plot.GetWindow()
+        renderer = window.GetRenderer()
+        detectorActor = self._getVtkDetectorActor()
+        rendere.AddActor(detectorActor)
+        input = raw_input("Press enter to close plot window.")
+        plot.DestroyWindow()
+
+        return #end of plotIsoSurfaceAndDetector()
+
+    def _getVtkDetectorActor(self):
+        "returns a VTK Actor for the detector surface."""
+        raise NotImplementedError
         
     pass # end of class phonIsoSurfaceCalcor()
         
