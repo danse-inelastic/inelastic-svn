@@ -41,13 +41,11 @@ class Sample(Actor):
         # retrieve id:record dictionary from db
         clerk = director.clerk
         samples = clerk.getSamples()
-        sampleValues=[]
-        for sample in samples:
-            sampleValues.append(sample.getValues())
             
         p = document.paragraph()
         numSamples = len(samples)
-        numColumns=samples[0].getNumColumns()
+        columns = ['description', 'texture','creator','date created','id']
+        numColumns=len(columns)#scatteringKernels[0].getNumColumns()
 
         from PyHtmlTable import PyHtmlTable
         t=PyHtmlTable(numSamples,numColumns, {'width':'400','border':2,'bgcolor':'white'})

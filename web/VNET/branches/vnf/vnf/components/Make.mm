@@ -41,18 +41,17 @@ EXPORT_PYTHON_MODULES = \
 	NeutronExperiment.py \
 	NeutronExperimentSimulationRunBuilder.py \
 	PyHtmlTable.py \
-	Run.py \
+	Sample.py \
 	SampleAssembly.py \
 	SampleAssemblyXMLBuilder.py \
 	SamplePreparation.py \
-	Sample.py \
-	Scheduler.py \
-	Server.py \
 	Scatterer.py \
 	ScatteringKernel.py \
 	ScatteringKernelInput.py \
-	Shape.py \
+	Scheduler.py \
 	Scribe.py \
+	Server.py \
+	Shape.py \
 	SSHer.py \
 	SupportingCalcs.py \
 	TreeViewCreator.py \

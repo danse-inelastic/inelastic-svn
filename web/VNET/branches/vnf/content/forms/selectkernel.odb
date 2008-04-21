@@ -32,7 +32,7 @@ class Form( base ):
 #        
 #        phononDispersion = inv.bool('phononDispersion', default = False)
 
-    parameters = ['gulpHarmonic','gulpNE','mmtkNE','vaspPhon','abinitPhon','phononDispersion'] # parameters to edit in the form
+    #parameters = ['gulpHarmonic','gulpNE','mmtkNE','vaspPhon','abinitPhon','phononDispersion'] # parameters to edit in the form
     
     def legend(self):
         'return a legend string'
@@ -49,14 +49,16 @@ class Form( base ):
         phononDispersions = form.radio(id='radio6', name='%s' % (prefix, ), label="Phonon Dispersions", value = 'phononDispersions')
 
     def processUserInputs(self):
-        'process user inputs and save them to db'
-        choices = self.parameters
-        chosen = []
-        for choice in choices: 
-            value = getattr( self.inventory, choice )
-            if value: chosen.append( choice )
-            continue
-        return chosen[0]
+        'process user input '
+        return self.inventory.kernel
+        
+#        choices = self.parameters
+#        chosen = []
+#        for choice in choices: 
+#            value = getattr( self.inventory, choice )
+#            if value: chosen.append( choice )
+#            continue
+#        return chosen[0]
 
 
 
