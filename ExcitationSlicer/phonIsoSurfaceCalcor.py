@@ -29,6 +29,13 @@ from IsoSurfacePlotter import VTKIsoSurfacePlotter
 from IsoSurfacePlotter import VTKIsoSurfaceIntensityPlotter
 from DataSlicer import VTKPlaneSlicer
 
+# Load VTK stuff up here for now, but maybe should only load pieces needed in specific methods
+from vtk import *
+# load VTK extensions
+from libvtkCommonPython import *
+from libvtkGraphicsPython import *
+
+
 from pyre.components.Component import Component
 
 __doc__ = """Provides facilities to plot phonon iso-energy surfaces and neutron scattering intensity,
@@ -50,7 +57,8 @@ class phonIsoSurfaceCalcor(Component):
 
     def __init__(self, name='phonIsoSurfaceCalcor',
                  unitcell=None, phonondatasource=None, tau=None,
-                 plotter=None, slicer=None):
+                 plotter=None, slicer=None,
+                 Ei=50, Etransfer=20):
                  #branchtoplot=None, atomtoplot=None, energies=None):
         Component.__init__(self, name, facility='facility')
         self._uc = unitcell
@@ -77,6 +85,10 @@ class phonIsoSurfaceCalcor(Component):
         if slicer is None:
             slicer = VTKPlaneSlicer()
         self._slicer = slicer
+
+        # neutron scattering parameters:
+        self.Ei = Ei
+        self.Etransfer = Etransfer
 
 
     def setDataFile(self, filename):        
@@ -422,7 +434,6 @@ class phonIsoSurfaceCalcor(Component):
             raise NotImplementedError
 
         self.setEnergyGridForBranch(branchtoplot)
-        
         self._plotter.setGrid(self._energyGrid)
 
         print "Plotter type:"
@@ -433,7 +444,7 @@ class phonIsoSurfaceCalcor(Component):
         window = plot.GetWindow()
         renderer = window.GetRenderer()
         detectorActor = self._getVtkDetectorActor()
-        rendere.AddActor(detectorActor)
+        renderer.AddActor(detectorActor)
         input = raw_input("Press enter to close plot window.")
         plot.DestroyWindow()
 
@@ -441,7 +452,14 @@ class phonIsoSurfaceCalcor(Component):
 
     def _getVtkDetectorActor(self):
         "returns a VTK Actor for the detector surface."""
-        raise NotImplementedError
+        from SphereDetectorSurfaceMapper import SphereDetectorSurfaceMapper
+        print "Ei: ", self.Ei
+        print "Etransfer: ", self.Etransfer
+        sphDetector = SphereDetectorSurfaceMapper(Ei=self.Ei, Etransfer=self.Etransfer)
+        sphMapper = sphDetector.getVtkMapper()
+        detActor = vtkActor()
+        detActor.SetMapper(sphMapper)
+        return detActor
         
     pass # end of class phonIsoSurfaceCalcor()
         
