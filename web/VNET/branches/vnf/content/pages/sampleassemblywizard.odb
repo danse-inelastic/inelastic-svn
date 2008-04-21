@@ -14,7 +14,10 @@
 
 def page(app):
     import vnf.content
-    page = vnf.content.page(name='sampleassembly', title='Sampleassembly', root=app.home)
+    page = vnf.content.page(
+        name='sampleassemblywizard',
+        title='Sampleassembly Builder',
+        root=app.home)
     
     # build the body
     body = page.body()

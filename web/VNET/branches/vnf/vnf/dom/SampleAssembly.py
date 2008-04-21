@@ -20,6 +20,8 @@ class SampleAssembly(DbObject):
     name = "sampleassemblies"
     
     import pyre.db
+
+    status = pyre.db.varchar( name = 'status', default = 'new', length = 16 )
     
     from ReferenceSet import ReferenceSet
     class Scatterers( ReferenceSet ):

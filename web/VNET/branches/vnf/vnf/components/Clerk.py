@@ -95,6 +95,17 @@ class Clerk(Component):
         exec 'from vnf.dom.%s import %s as Table' % (tablename, tablename) \
              in locals()
         return self._getRecordByID( Table, id )
+
+
+    def findParentSampleAssembly(self, scatterer_id ):
+        from vnf.dom.SampleAssembly import SampleAssembly
+        table = SampleAssembly.Scatterers
+        all = self.db.fetchall( table, where = "remotekey='%s'" % scatterer_id )
+        if len(all) != 1:
+            raise RuntimeError, "Every scatterer should have only one parent sample assembly"
+        record = all[0]
+        id = record.localkey
+        return self.getSampleAssembly( id )
         
 
     def getCrystal(self, id):
@@ -278,8 +289,47 @@ class Clerk(Component):
         return self._getRecordByID( NeutronExperiment, id )
 
 
+    def getAbstractScatterer(self, impltablename, id ):
+        '''obtain record in the abstract scatterer table given the
+        implementation table and id'''
+        
+        from vnf.dom.Scatterer import Scatterer
+        all = self.db.fetchall(
+            Scatterer, where = "type='%s' and reference='%s'" % (
+            impltablename, id) )
+        assert len(all) == 1
+        return all[0]
+
+
+    def deleteScattererFromSampleAssembly(self, scatterer_id, sampleassembly_id ):
+        # mark scatterer as deleted
+        record = self.getScatterer( scatterer_id )
+        assignments = [ ('status', 'd'), ]
+        self.db.updateRow(
+            record, assignments, where = "id='%s'" % scatterer_id)
+
+        # detach scatterer from sampleassembly
+        from vnf.dom.SampleAssembly import SampleAssembly
+        table = SampleAssembly.Scatterers
+        records = self.db.fetchall(
+            table,
+            where = "localkey='%s' and remotekey='%s'" % (
+            sampleassembly_id, scatterer_id )
+            )
+        assert len(records) == 1
+        reference = records[0]
+
+        self.db.deleteRow(table, where="id='%s'" % reference.id)
+        return
+
+
     def newJob(self, job):
         self.db.insertRow(job)
+        return
+
+
+    def newRecord(self, record):
+        self.db.insertRow( record )
         return
 
 
@@ -401,7 +451,12 @@ class HierarchyRetriever:
 
 
     def onScatterer(self, scatterer):
-        realscatterer = self.clerk.getRealScatterer( scatterer.id )
+        try:
+            realscatterer = self.clerk.getRealScatterer( scatterer.id )
+        except Exception, error:
+            import traceback
+            self.clerk._debug.log(traceback.format_exc() )
+            return scatterer
         scatterer.realscatterer = self(realscatterer)
         return scatterer
     
@@ -413,8 +468,12 @@ class HierarchyRetriever:
         scatterer.shape = shape
         
         crystal_id = scatterer.crystal_id
-        crystal = self.clerk.getCrystal( crystal_id )
-        crystal = self(crystal)
+        try:
+            crystal = self.clerk.getCrystal( crystal_id )
+            crystal = self(crystal)
+        except:
+            crystal = None
+            pass
         scatterer.crystal = crystal
 
         kernels = self.clerk.getPolyXtalKernels( scatterer.id )
@@ -453,7 +512,12 @@ class HierarchyRetriever:
 
 
     def onShape(self, shape):
-        realshape = self.clerk.getRealShape( shape.id )
+        try:
+            realshape = self.clerk.getRealShape( shape.id )
+        except Exception, error:
+            import traceback
+            self.clerk._debug.log(traceback.format_exc() )
+            return shape
         shape.realshape = self(realshape)
         return shape
 

@@ -23,6 +23,9 @@ class DBObjectForm( base ):
     class Inventory( base.Inventory ):
         import pyre.inventory
         id = pyre.inventory.str( 'id', default = '' )
+        short_description = pyre.inventory.str(
+            'short_description', default = '' )
+        short_description.meta['tip'] = 'A short description'
         pass # end of Inventory
 
 
@@ -34,7 +37,9 @@ class DBObjectForm( base ):
     def legend(self):
         'return a legend string'
         record = self.getRecord()
-        return record.short_description
+        return 'Edit %s %r' % (
+            self.__class__.__name__.lower(),
+            record.short_description)
 
 
     def expand(self, form):
@@ -58,9 +63,11 @@ class DBObjectForm( base ):
                 label=property,
                 value = value)
             
-            descriptor = getattr(record.__class__, property)
+            descriptor = getattr(self.Inventory, property)
             tip = descriptor.meta.get('tip')
-            if tip: field.help = tip
+            if tip:
+                field.help = tip
+                #field.error = tip
 
             continue
 

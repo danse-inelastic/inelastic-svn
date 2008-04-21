@@ -12,15 +12,26 @@
 #
 
 
-from VirtualObject import VirtualObject
-class Scatterer(VirtualObject):
+def new_id( director ):
+    #new token
+    token = director.idd.token()
+    uniquename = '%s-%s-%s' % (token.locator, token.tid, token.date)
+    return uniquename
 
-    name = 'scatterers'
 
-    import pyre.db
-    status = pyre.db.varchar( name = 'status', default = 'new', length = 16 )
+def new_shape( director ):
+    from vnf.dom.Shape import Shape
+    record = Shape()
+
+    id = new_id( director )
+    record.id = id
+
+    import time
+    record.date = time.ctime()
+
+    director.clerk.newRecord( record )
     
-    pass # end of Scatterer
+    return record
 
 
 # version

@@ -72,9 +72,21 @@ class TreeViewCreator:
 
 
     def onAbstractElement(self, element):
-        realelement = getattr( element, 'real%s' % element.__class__.__name__.lower() )
-        return self(realelement)
-
+        try:
+            realelement = getattr( element, 'real%s' % element.__class__.__name__.lower() )
+            return self(realelement)
+        except:
+            director = self.director
+            actor = self.actor
+            return factory.treeview.leaf(
+                'Not Yet Established', 
+                factory.actionRequireAuthentication(
+                    actor,
+                    director.sentry,
+                    routine='edit',
+                    id = self._rootcontainer.id,
+                    )
+                )
 
     onPolyXtalCoherentPhononScatteringKernel = onMonochromaticSource = onIQEMonitor = onCrystal = onBlock = onElement
     onScatteringKernel = onComponent = onScatterer = onShape = onAbstractElement

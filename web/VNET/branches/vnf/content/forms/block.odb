@@ -26,7 +26,7 @@ class Block(base):
         height = pyre.inventory.float( name = 'height' )
         thickness = pyre.inventory.float( name = 'thickness' )
 
-    parameters = ['width', 'height', 'thickness']
+    parameters = ['short_description', 'width', 'height', 'thickness']
     DBTable = 'Block'
 
 

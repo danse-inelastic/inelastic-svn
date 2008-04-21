@@ -30,7 +30,7 @@ class Crystal(base):
         pass # end of Inventory
 
 
-    parameters = ['chemical_formula', 'datafile']
+    parameters = [ 'short_description', 'chemical_formula', 'datafile']
     DBTable = 'Crystal'
 
 
