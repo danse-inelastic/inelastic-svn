@@ -24,23 +24,23 @@ class Form( base ):
 
     def expand(self, form):
         '''expand an existing form with fields from this component'''
-        prefix = formactor_action_prefix
         
         p = form.paragraph()
-        p.text = ['''<script src="/vnfBK/javascripts/SpryAssets/SpryAccordion.js" 
+        p.text = ['''<script src="javascripts/Accordion/SpryAccordion.js" 
 type="text/javascript"></script>
-
-<script type="text/javascript">
+<link href="SpryAssets/SpryAccordion.css" rel="stylesheet"
+ type="text/css" />
+  <style type="text/css">
 <!--
-var Accordion1 = new Spry.Widget.Accordion("themoEnsemble");
-//-->
-</script>''',
+.style1 {font-size: medium}
+-->
+  </style>''',
 "<h1>Newton's equations from Gulp</h1>",
 '<h2>Thermodynamic Ensemble</h2>',
 '''<br />
   <br />
   </label>
-  <div id="themoEnsemble" class="Accordion"
+  <div id="thermoEnsemble" class="Accordion"
  tabindex="0">
   <div class="AccordionPanel">
   <div class="AccordionPanelTab"> <label> <input
@@ -48,9 +48,7 @@ var Accordion1 = new Spry.Widget.Accordion("themoEnsemble");
 Number, Volume, Energy Ensemble (NVE)</label>
   </div>
   <div class="AccordionPanelContent">
-  <div class="AccordionPanelContent"> <label>Energy
-(K) <input name="temp2" id="temp2" value="0"
- type="text" /> </label>
+  <div class="AccordionPanelContent"> <label>Energy (K) <input name="temp2" id="temp2" value="0" type="text" /> </label>
   <p>&nbsp;</p>
   </div>
   </div>
@@ -117,15 +115,14 @@ Constant Number, Pressure, Temperature</label> </div>
  name="restartFileOutputFrequency"
  id="restartFileOutputFrequency" value="0.25" type="text" />
   </label>
-  ''']
+  ''','''<script type="text/javascript">
+<!--
+var Accordion1 = new Spry.Widget.Accordion("thermoEnsemble");
+//-->
+</script>''']
 
-        return
 
 
-
-
-
-formactor_action_prefix = 'actor.form' # assumed actor is a form actor
 
 
 def form(): return Form( 'gulpNE' )

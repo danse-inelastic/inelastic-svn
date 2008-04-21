@@ -35,7 +35,7 @@ class ScatteringKernelInput(base):
             sentry = director.sentry,
             routine = 'onSelect',
             label = '',
-            arguments = {'form-recieved': formcomponent.name },
+            arguments = {'form-received': formcomponent.name },
             )
         from vnf.weaver import action_formfields
         action_formfields( action, SKChoice )
@@ -68,7 +68,7 @@ class ScatteringKernelInput(base):
             sentry = director.sentry,
             routine = 'edit',
             label = '',
-            arguments = {'form-recieved': formcomponent.name },
+            arguments = {'form-received': formcomponent.name },
             )
         from vnf.weaver import action_formfields
         action_formfields( action, form )

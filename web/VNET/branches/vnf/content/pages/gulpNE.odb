@@ -14,7 +14,7 @@
 
 def page(app):
     import vnf.content
-    page = vnf.content.page(name='shape', title="Newton's equations from Gulp", root=app.home)
+    page = vnf.content.page(name='gulpNE', title="Newton's equations from Gulp", root=app.home)
     
     # build the body
     body = page.body()

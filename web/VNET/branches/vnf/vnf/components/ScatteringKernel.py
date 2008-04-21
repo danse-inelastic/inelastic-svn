@@ -40,10 +40,6 @@ class ScatteringKernel(Actor):
         # retrieve id:record dictionary from db
         clerk = director.clerk
         scatteringKernels = clerk.getScatteringKernels()
-        
-        scatteringKernelValues=[]
-        for scatteringKernel in scatteringKernels:
-            scatteringKernelValues.append(scatteringKernel.getValues())
             
         p = document.paragraph()
         numScatteringKernels = len(scatteringKernels)
