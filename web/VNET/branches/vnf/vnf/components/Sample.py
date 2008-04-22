@@ -44,7 +44,9 @@ class Sample(Actor):
             
         p = document.paragraph()
         numSamples = len(samples)
-        columns = ['description', 'texture','creator','date created','id']
+        columns = ['Sample Name', 'Texture','Creator','Date Created','Id']
+        matterColumns=['Matter Description','Cartesian Lattice','Atom Positions']
+        shapeColumns=[]
         numColumns=len(columns)#scatteringKernels[0].getNumColumns()
 
         from PyHtmlTable import PyHtmlTable

@@ -14,15 +14,7 @@
 <inventory>
 
   <component name='main'>
-    <property name='actor'>scatteringKernelInput</property>
-    <property name='submit'>next</property>
-    <component name='scatteringKernelInput'>
-    	<property name='form-received'>selectkernel</property>
-    </component>    
-    <property name='routine'>onSelect</property>
-    <component name='selectkernel'>
-    	<property name='kernel'>gulpNE</property>
-    </component>    
+    <property name='actor'>greet</property>   
     <component name='sentry'>
     	<property name='username'>demo</property>
     	<property name='passwd'>demo</property>

@@ -26,7 +26,6 @@ class Form( base ):
         '''expand an existing form with fields from this component'''
         
         p = form.paragraph()
-        
         p.text = ['<h2> VASP Engine</h2>']
 
 #drop down menu for abinitio engine: [vasp, (abinit)]
@@ -39,22 +38,22 @@ class Form( base ):
                 label=property,
                 value = value)
         
-        electronicKpointGrid = form.text(
+        nKx = form.text(
                 id = property,
                 name='%s.%s' % (prefix, property),
                 label=property,
                 value = value)  
-        electronicKpointGrid = form.text(
+        nKy = form.text(
                 id = property,
                 name='%s.%s' % (prefix, property),
                 label=property,
                 value = value)       
-        
+        nKz = form.text(
+                id = property,
+                name='%s.%s' % (prefix, property),
+                label=property,
+                value = value)     
 
-
-* Kinetic Energy cutoff: [float] (in eV)
-
-* Electronic K-point grid: [nkx, nky, nkz]
 
 ~~~
 

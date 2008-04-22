@@ -43,7 +43,7 @@ class ScatteringKernel(Actor):
             
         p = document.paragraph()
         numScatteringKernels = len(scatteringKernels)
-        columns = ['description', 'texture','creator','date created','id']
+        columns = ['description', 'texture','id']
         numColumns=len(columns)#scatteringKernels[0].getNumColumns()
 
         from PyHtmlTable import PyHtmlTable

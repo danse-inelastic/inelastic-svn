@@ -17,8 +17,8 @@ class OwnedObject(DbObject):
 
     import pyre.db
 
-    creator = pyre.db.varchar(name='creator', length = 32)
-    creator.meta['tip'] = 'creator name'
+    owner = pyre.db.varchar(name='owner', length = 32)
+    owner.meta['tip'] = 'owner name'
 
     date = pyre.db.date( name='date' )
     date.meta['tip'] = 'date of creation'

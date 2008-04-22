@@ -13,6 +13,7 @@
 
 
 from DbObject import DbObject
+
 class ScatteringKernel2(DbObject):
     
     name = 'scatteringkernel'
