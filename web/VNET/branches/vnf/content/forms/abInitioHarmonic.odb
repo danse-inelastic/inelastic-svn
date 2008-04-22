@@ -50,7 +50,9 @@ class Form( base ):
         p.text = ['<h2> VASP Engine</h2>']
 
 #drop down menu for abinitio engine: [vasp, (abinit)]
-
+        p.text = ['''<div>
+<label>AbInitio Energies, Phon Harmonic Motion</label>
+</div>'''] 
         choices=['vasp','abinit (not completely functional)']
         entries=enumerate(choices)
 
@@ -62,6 +64,8 @@ class Form( base ):
             selected = choices[0],
             )
         form.contents.append( engine )
+        p.text = ['<br>']        
+        
 
 # drop down menu XC-functional type: [PAW-PBE, PAW-GGA, LDA]
 
@@ -72,9 +76,9 @@ class Form( base ):
             name = 'abInitioHarmonic.xcFunctional',
             entries = entries,
             label = 'Exchange correlation functional',
-            selected = shapes[0],
+            selected = choices[0],
             )
-        form.contents.append( selector )
+        form.contents.append(xcFunctional)
         
         kineticEnergyCutoff = form.text(
                 id = 'text1',
