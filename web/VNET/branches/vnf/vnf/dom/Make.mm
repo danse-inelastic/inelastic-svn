@@ -43,6 +43,7 @@ EXPORT_PYTHON_MODULES = \
 	Matter.py \
 	MonochromaticSource.py \
 	NeutronExperiment.py \
+	OwnedObject.py \
 	PhononDispersion.py \
 	PolyCrystal.py \
 	PolyXtalScatterer.py \
