@@ -1,0 +1,149 @@
+# -*- Python -*-
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                   Jiao Lin
+#                      California Institute of Technology
+#                        (C) 2007  All Rights Reserved
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+
+from vnf.components.Form import Form as base
+
+
+class Form( base ):
+
+    class Inventory( base.Inventory ):
+
+        import pyre.inventory as inv
+        
+    parameters=[]
+
+    def expand(self, form):
+        '''expand an existing form with fields from this component'''
+        
+        prefix = formactor_action_prefix
+        
+        for property in self.parameters:
+        
+            value = getattr( record, property )
+            exec 'self.inventory.%s = value' % property
+            value = tostr( getattr(self.inventory, property) )
+            
+            field = form.text(
+                id = property,
+                name='%s.%s' % (prefix, property),
+                label=property,
+                value = value)
+            
+            descriptor = getattr(self.Inventory, property)
+            tip = descriptor.meta.get('tip')
+            if tip:
+                field.help = tip
+        
+        
+        p = form.paragraph()
+        p.text = ['<h2> VASP Engine</h2>']
+
+#drop down menu for abinitio engine: [vasp, (abinit)]
+
+        choices=['vasp','abinit (not completely functional)']
+        entries=enumerate(choices)
+
+        import opal.content
+        engine = opal.content.selector(
+            name = 'abInitioHarmonic.engine',
+            entries = entries,
+            label = 'Electronic Structure Engine',
+            selected = choices[0],
+            )
+        form.contents.append( engine )
+
+# drop down menu XC-functional type: [PAW-PBE, PAW-GGA, LDA]
+
+        choices=['PAW-PBE', 'PAW-GGA', 'LDA']
+        entries=enumerate(choices)
+
+        xcFunctional = opal.content.selector(
+            name = 'abInitioHarmonic.xcFunctional',
+            entries = entries,
+            label = 'Exchange correlation functional',
+            selected = shapes[0],
+            )
+        form.contents.append( selector )
+        
+        kineticEnergyCutoff = form.text(
+                id = 'text1',
+                name='abInitioHarmonic.kineticEnergyCutoff',
+                label='Kinetic energy cutoff (eV)',
+                value = '140')
+        
+        nKx = form.text(
+                id = 'text2',
+                name='abInitioHarmonic.nKx',
+                label = 'Number of k-points (x-direction)',
+                value = '1')  
+        nKy = form.text(
+                id = 'text3',
+                name='abInitioHarmonic.nKy',
+                label = 'Number of k-points (y-direction)',
+                value = '1')       
+        nKz = form.text(
+                id = 'text4',
+                name='abInitioHarmonic.nKz',
+                label = 'Number of k-points (z-direction)',
+                value = '1')     
+
+        p.text = ['<h2>Phonons</h2>']
+
+        supercellx = form.text(
+                id = 'text5',
+                name='abInitioHarmonic.supercellx',
+                label='Supercell expansion (x-direction)',
+                value = '1')  
+        supercelly = form.text(
+                id = 'text6',
+                name='abInitioHarmonic.supercelly',
+                label='Supercell expansion (y-direction)',
+                value = '1')       
+        supercellz = form.text(
+                id = 'text7',
+                name='abInitioHarmonic.supercellz',
+                label='Supercell expansion (z-direction)',
+                value = '1')   
+        displacementAmplitude = form.text(
+                id = 'text8',
+                name='abInitioHarmonic.displacementAmplitude',
+                label='Displacement amplitude',
+                value = '0.01') 
+        Qx = form.text(
+                id = 'text9',
+                name='abInitioHarmonic.Qx',
+                label='Phonon Q-points (x-direction)',
+                value = '1')  
+        Qy = form.text(
+                id = 'text10',
+                name='abInitioHarmonic.supercelly',
+                label='Phonon Q-points (y-direction)',
+                value = '1')       
+        Qz = form.text(
+                id = 'text11',
+                name='abInitioHarmonic.supercellz',
+                label='Phonon Q-points (z-direction)',
+                value = '1') 
+
+
+formactor_action_prefix = 'actor.form-received'
+
+
+def form(): return Form( 'gulpNE' )
+
+
+# version
+__id__ = "$Id$"
+
+# End of file 
