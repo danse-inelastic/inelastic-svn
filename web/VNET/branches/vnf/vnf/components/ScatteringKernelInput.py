@@ -55,7 +55,7 @@ class ScatteringKernelInput(base):
         except AuthenticationError, err:
             return err.page
         main = page._body._content._main
-        document = main.document(title="Newton's equations from Gulp")
+        document = main.document(title="")
         document.byline = '<a href="http://danse.us">DANSE</a>'
         
         formcomponent = self.retrieveFormToShow( 'gulpHarmonic')
@@ -84,7 +84,7 @@ class ScatteringKernelInput(base):
         except AuthenticationError, err:
             return err.page
         main = page._body._content._main
-        document = main.document(title="Newton's equations from Gulp")
+        document = main.document()
         document.byline = '<a href="http://danse.us">DANSE</a>'
         
         formcomponent = self.retrieveFormToShow( 'gulpNE')
@@ -104,6 +104,34 @@ class ScatteringKernelInput(base):
         # expand the form with fields of the data object that is being edited
         formcomponent.expand( form )
         next = form.control(name='submit',type="submit", value="submit job")
+        return page 
+    
+    def abInitioHarmonic(self, director):
+        try:
+            page = director.retrievePage( 'abInitioHarmonic' )
+        except AuthenticationError, err:
+            return err.page
+        main = page._body._content._main
+        document = main.document(title="")
+        document.byline = '<a href="http://danse.us">DANSE</a>'
+        
+        formcomponent = self.retrieveFormToShow( 'abInitioHarmonic')
+        formcomponent.director = director
+        # build the SKChoice form
+        form = document.form(name='scatteringKernelInput', action=director.cgihome)
+        # specify action
+        action = actionRequireAuthentication(          
+            actor = 'job', 
+            sentry = director.sentry,
+            routine = 'edit',
+            label = '',
+            arguments = {'form-received': formcomponent.name },
+            )
+        from vnf.weaver import action_formfields
+        action_formfields( action, form )
+        # expand the form with fields of the data object that is being edited
+        formcomponent.expand( form )
+        submit = form.control(name='submit',type="submit", value="next")
         return page 
         
 
