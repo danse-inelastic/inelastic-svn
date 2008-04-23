@@ -29,7 +29,12 @@
 
     <component name='debug'>
       <property name='job'>on</property>
+      <property name='treeviewcreator'>on</property>
+      <property name='clerk'>on</property>
       <property name='torque'>on</property>
+      <property name='sampleassemblywizard'>on</property>
+      <property name='sampleassembly'>on</property>
+      <property name='scatterer'>on</property>
     </component>
 
   </component>
