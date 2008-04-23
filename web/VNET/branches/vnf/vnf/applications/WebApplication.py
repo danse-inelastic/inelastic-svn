@@ -68,7 +68,6 @@ class WebApplication(Base):
             toPml( self, '/tmp/main-debug.pml' )
             pass # end if
         super(WebApplication, self).main(*args, **kwds)
-        toPml( self, '/tmp/main.pml' )
         return
 
 

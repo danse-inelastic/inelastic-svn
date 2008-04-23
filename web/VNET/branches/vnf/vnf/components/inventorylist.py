@@ -15,28 +15,37 @@
 from Actor import action_link, actionRequireAuthentication
 
 
-def list( container, document, actor, director ):
+def list( container, document, actor, director,
+          routines = ['edit'] ):
     p = document.paragraph()
 
-    formatstr = '%(index)s: %(name)s (%(link)s)'
+    formatstr = '%(index)s: %(name)s '
+    formatstr += ' '.join(
+        [ '(%'+'(%slink)s)' % routine for routine in routines ]
+        )
 
     for i, element in enumerate( container ):
         
         p = document.paragraph()
+
+        subs = {'name': element.short_description,
+                'index': i+1}
         
-        # link of callback
-        link = action_link(
-            actionRequireAuthentication(
-            actor, director.sentry,
-            routine = 'edit',
-            label = 'configure',
-            id = element.id,
-            ),  director.cgihome
-            )
+        #links
+        for routine in routines:
+            link = action_link(
+                actionRequireAuthentication(
+                actor, director.sentry,
+                routine = routine,
+                label = routine,
+                id = element.id,
+                ),  director.cgihome
+                )
+            subs[ '%slink' % routine ] = link
+            continue
+
         p.text += [
-            formatstr % {'name': element.short_description,
-                         'link': link,
-                         'index': i+1}
+            formatstr % subs,
             ]
         continue
     return

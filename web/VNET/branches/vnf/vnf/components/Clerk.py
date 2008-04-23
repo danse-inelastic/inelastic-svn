@@ -323,6 +323,12 @@ class Clerk(Component):
         return
 
 
+    def deleteRecord(self, record):
+        table = record.__class__
+        self.db.deleteRow( table, where="id='%s'" % record.id )
+        return
+    
+
     def newJob(self, job):
         self.db.insertRow(job)
         return

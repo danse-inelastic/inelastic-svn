@@ -127,7 +127,7 @@ class SampleAssembly(base):
                     'sampleassembly',
                     director.sentry,
                     label = 'Delete this %s' % elementtype.lower(),
-                    routine = 'delete',
+                    routine = 'delete_subelement',
                     id = self.inventory.id,
                     editee = self.inventory.editee,
                     ),  director.cgihome
@@ -159,17 +159,33 @@ class SampleAssembly(base):
         except AuthenticationError, error:
             return error.page
 
+        record = director.clerk.getSampleAssembly( self.inventory.id )
+        name = record.short_description
+        
+        director.clerk.deleteRecord( record )
+
+        return self.listall(director)
+        
+
+    def delete_subelement(self, director):
+        try:
+            page = director.retrieveSecurePage( 'sampleassembly' )
+        except AuthenticationError, error:
+            return error.page
+
         main = page._body._content._main
         document = self._document( main, director )
 
         elementtype, elementid = self.inventory.editee.split(',')
+        
         assert elementtype in deletables, '%r is not deletable' % elementtype
 
         method = 'delete_%s' % elementtype.lower()
         method = getattr( self, method )
         method( elementid, director )
-        
+
         self._tree( document, director )
+
         return page
 
 
@@ -197,6 +213,11 @@ class SampleAssembly(base):
         document = self._document( main, director )
 
         self._tree( document, director )
+
+        p = document.paragraph()
+        p.text = [
+            'To edit this sample assembly, please click a link in the tree.',
+            ]
         return page
 
 
@@ -265,15 +286,6 @@ class SampleAssembly(base):
         return
 
 
-    def _head(self, director):
-        page = director.retrieveSecurePage( 'sampleassembly' )
-        main = page._body._content._main
-        document = self._document( main, director )
-        self._tree( document, director )
-        
-        return page, document
-
-
     def _document(self, main, director):
         # the record we are working on
         id = self.inventory.id
@@ -330,7 +342,9 @@ def listsampleassemblies( sampleassemblies, document, director ):
                 ]
 
     from inventorylist import list
-    list( sampleassemblies, document, 'sampleassembly', director )
+    list( sampleassemblies, document, 'sampleassembly', director,
+          routines = ( 'edit', 'delete' )
+          )
     return
 
 

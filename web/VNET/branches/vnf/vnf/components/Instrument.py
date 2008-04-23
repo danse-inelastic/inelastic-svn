@@ -64,7 +64,7 @@ class Instrument(base):
 
     def edit(self, director):
         try:
-            page, document = self._head( director )
+            page = director.retrieveSecurePage( 'sampleassembly' )
         except AuthenticationError, err:
             return err.page
 
@@ -75,6 +75,11 @@ class Instrument(base):
         formcomponent.inventory.id = elementid
         formcomponent.director = director
 
+        # start document
+        main = page._body._content._main
+        document = self._document( main, director )
+        self._tree( document, director )
+        
         # create form
         form = document.form(
             name='instrument',
@@ -96,17 +101,25 @@ class Instrument(base):
         # ok button
         submit = form.control(name="submit", type="submit", value="OK")
         
-        return page    
+        return page
 
 
     def set(self, director):
         try:
-            page, document = self._head( director )
+            page = director.retrieveSecurePage( 'sampleassembly' )
         except AuthenticationError, error:
             return error.page
 
         self.processFormInputs( director )
         
+        main = page._body._content._main
+        document = self._document( main, director )
+        self._tree( document, director )
+
+        p = document.paragraph()
+        p.text = [
+            'To edit this instrument, please click a link in the tree.',
+            ]
         return page
 
 
@@ -117,14 +130,10 @@ class Instrument(base):
         return
 
 
-    def _head(self, director):
-        page = director.retrieveSecurePage( 'instrument' )
-        
-        main = page._body._content._main
-
+    def _document(self, main, director):
         # the record we are working on
         id = self.inventory.id
-        self.instrument_record = instrument = self._getinstrument( id, director )
+        instrument = self._getinstrument( director )
 
         # populate the main column
         document = main.document(title='Instrument: %s' % instrument.short_description )
@@ -133,17 +142,22 @@ class Instrument(base):
             'it can consist of a neutron source, a sample, and a detector system.\n'\
             )
         document.byline = '<a href="http://danse.us">DANSE</a>'
+        return document
 
+
+    def _tree(self, document, director):
+        instrument = self._getinstrument( director )
         from TreeViewCreator import create as create_treeview
         treeview = create_treeview(
             director.clerk.getHierarchy(instrument),
             'instrument',
             director)
         document.contents.append(  treeview )
-        return page, document
+        return
 
 
-    def _getinstrument(self, id, director):
+    def _getinstrument(self, director):
+        id = self.inventory.id
         clerk = director.clerk
         return clerk.getInstrument( id )
 
