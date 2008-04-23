@@ -20,6 +20,11 @@ class Form( base ):
     class Inventory( base.Inventory ):
 
         import pyre.inventory as inv
+        id = pyre.inventory.str( 'id', default = '' )
+        id.meta['tip'] = 'A short description'
+        
+        short_description = pyre.inventory.str('short_description', default = '' )
+        short_description.meta['tip'] = 'A short description'
 
 
     def expand(self, form):
