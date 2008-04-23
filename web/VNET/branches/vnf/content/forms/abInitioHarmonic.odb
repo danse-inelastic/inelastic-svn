@@ -20,6 +20,18 @@ class Form( base ):
     class Inventory( base.Inventory ):
 
         import pyre.inventory as inv
+        engine = inv.str('engine', default='vasp')
+        engine.validator=inv.choice(['vasp', 'ab init'])
+        engine.meta['tip'] = 'ab initio engine'
+        xcFunctional = inv.str('xcFunctional', default='PAW-PBE')
+        xcFunctional.validator=inv.choice(['PAW-PBE', 'PAW-GGA', 'LDA'])
+        xcFunctional.meta['tip'] = 'exchange correlation functional'
+        kineticEnergyCutoff = inv.float('kineticEnergyCutoff', default=140.0)
+        kineticEnergyCutoff.meta['tip'] = 'Kinetic energy cutoff'
+        monkhorstPackMesh = inv.list('monkhorstPackMesh', default=[1,1,1])
+        
+        
+        
         
     parameters=[]
 
@@ -65,7 +77,6 @@ class Form( base ):
             )
         form.contents.append( engine )
         p.text = ['<br>']        
-        
 
 # drop down menu XC-functional type: [PAW-PBE, PAW-GGA, LDA]
 
