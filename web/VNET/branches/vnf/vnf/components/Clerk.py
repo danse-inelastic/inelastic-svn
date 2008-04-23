@@ -499,7 +499,8 @@ class HierarchyRetriever:
 
     def onPhononDispersion(self, dispersion):
         realdispersion = self.clerk.getRealPhononDispersion( dispersion.id )
-        dispersion.realdispersion = realdispersion
+        realdispersion = self(realdispersion)
+        dispersion.realphonondispersion = realdispersion
         return dispersion
 
 

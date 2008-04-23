@@ -22,18 +22,27 @@ class Builder:
     
 
     def render(self, sampleassembly):
+        
+        # the sample assembly xml
         from SampleAssemblyXMLBuilder import Builder
         import os
         filename = os.path.join( self.path, self.sampleassemblyxmlfilename )
         Builder(filename).render(sampleassembly)
 
+        # xml files for scatterers
         from McvineScattererXMLBuilder import Builder
         builder = Builder(self.path)
         scatterers = sampleassembly.scatterers
         for scatterer in scatterers:
             builder.render( scatterer.realscatterer )
             continue
-        
+
+        # other data files
+        from McvineDatafilesCollector import Collector
+        collector = Collector(self.path)
+        collector.render( sampleassembly )
+
+        # odb file for the sample assembly
         options = self._build_odb( )
         
         return options
@@ -42,7 +51,11 @@ class Builder:
     def _build_odb(self):
         contents = [
             'from mcni.pyre_support import componentfactory',
-            "def sample(): return componentfactory('samples', 'SampleAssemblyFromXml' )('sampleassembly')",
+            
+            #the next line should be rendered kernel requirements
+            'import mccomponents.sample.phonon.xml',
+            
+            "def sample(): return componentfactory('samples', 'SampleAssemblyFromXml' )('sample')",
             ]
         
         path = self.path

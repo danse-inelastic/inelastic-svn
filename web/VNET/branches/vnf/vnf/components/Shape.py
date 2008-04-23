@@ -34,6 +34,10 @@ def new_shape( director ):
     return record
 
 
+
+from misc import new_id
+
+
 # version
 __id__ = "$Id$"
 

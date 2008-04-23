@@ -96,6 +96,7 @@ class Builder(ShapeRenderer, XMLMill):
         self._write('')
 
         self._outdent()
+        self._write( '</PowderSample>' )
         return
 
 

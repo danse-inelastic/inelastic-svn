@@ -17,6 +17,9 @@ class Builder(XMLMill):
 
 
     def __init__(self, path):
+        '''
+        path: the run directory where all files about the run should be placed.
+        '''
         self.path = path
         XMLMill.__init__(self)
         return
@@ -56,6 +59,7 @@ class Builder(XMLMill):
             self.dispatch( kernel )
             continue
 
+        self._outdent()
         self._write( '</homogeneous_scatterer>' )
         return
 
@@ -69,9 +73,9 @@ class Builder(XMLMill):
     def onPolyXtalCoherentPhononScatteringKernel(self, kernel):
         attrs = {
             #'Ei': kernel.Ei,
-            'Ei': 60,
-            'max-omega': kernel.max_energy_transfer,
-            'max-Q': kernel.max_momentum_transfer,
+            'Ei': '60*meV',
+            'max-omega': '%s*meV' % kernel.max_energy_transfer,
+            'max-Q': '%s*angstrom**-1' % kernel.max_momentum_transfer,
             'nMCsteps_to_calc_RARV': 10000,
             }
 
@@ -88,8 +92,8 @@ class Builder(XMLMill):
 
 
     def onPhononDispersion(self, dispersion):
-        realdispersion = dispersion.realdispersion
-        self.dispatch( realdispersion )
+        realphonondispersion = dispersion.realphonondispersion
+        self.dispatch( realphonondispersion )
         return
     
 

@@ -53,6 +53,13 @@ class Builder:
 
         self._outdent()
 
+        #need to get geometer right
+        self._write('def _defaults(self):')
+        self._indent()
+        self._write('base._defaults(self)')
+        self._write('geometer = self.inventory.geometer')
+        self._outdent()
+
         self.cmdline_opts[ 'sequence' ] = sequence
 
         geometer = instrument.geometer
@@ -103,7 +110,7 @@ class Builder:
 
     def onSample(self):
         self._write(
-            "sample = pyre.inventory.facility( 'sample', default = 'sample' )"
+            "sample = facility( 'sample', default = 'sample' )"
             )
         return
 
@@ -112,8 +119,8 @@ class Builder:
         kwds = {
             'name': m.label,
             'category': 'monitors',
-            'type': 'IQEMonitor',
-            'supplier': 'mcstas',
+            'type': 'IQE_monitor',
+            'supplier': 'mcstas2',
             }
         self.onNeutronComponent( **kwds )
 

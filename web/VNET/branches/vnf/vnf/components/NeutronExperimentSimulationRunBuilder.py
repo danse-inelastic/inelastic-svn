@@ -48,13 +48,13 @@ class Builder:
             continue
 
         pyscriptname = self.pyscriptname
-        command = '%s %s' % (pyscriptname, ' '.join(
+        command = '. ~/.mcvine && python %s %s' % (pyscriptname, ' '.join(
             ['--%s="%s"' % (item, options.get(item))
              for item in options ] ) )
 
         ########
         # this is for debuggiing purpose:
-        command = 'ls'
+        # command = 'ls'
 
         shscriptname = self.shscriptname
         files = [ (pyscriptname, pyscriptconents),

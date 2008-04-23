@@ -338,6 +338,7 @@ def new_scatterer( director ):
     return record
 
 
+from misc import new_id
 
 # version
 __id__ = "$Id$"

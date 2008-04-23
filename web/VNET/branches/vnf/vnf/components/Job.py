@@ -248,11 +248,7 @@ def new_job( director ):
     return job
 
 
-def new_jobid( director ):
-    #new token
-    token = director.idd.token()
-    uniquename = '%s-%s-%s' % (token.locator, token.tid, token.date)
-    return uniquename
+from misc import new_id as new_jobid
 
 
 def jobpath( jobid ):

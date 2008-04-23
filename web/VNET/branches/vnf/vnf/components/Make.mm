@@ -36,6 +36,7 @@ EXPORT_PYTHON_MODULES = \
 	InstrumentSimulationAppBuilder.py \
 	Job.py \
 	McstasSampleBuilder.py \
+	McvineDatafilesCollector.py \
 	McvineSampleAssemblyBuilder.py \
 	McvineScattererXMLBuilder.py \
 	NeutronExperiment.py \
@@ -56,6 +57,7 @@ EXPORT_PYTHON_MODULES = \
 	SupportingCalcs.py \
 	TreeViewCreator.py \
 	inventorylist.py \
+	misc.py \
 	spawn.py \
 	twodarr.py \
 	wording.py \

@@ -18,6 +18,7 @@
 <inventory>
 
   <component name='ssher'>
+    <property name='known_hosts'>/home/vnf/.ssh/known_hosts.www-data</property>
     <property name='private_key'>/home/vnf/.ssh/id_rsa.www-data</property>
   </component>
 

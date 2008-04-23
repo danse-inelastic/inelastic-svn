@@ -19,6 +19,8 @@ class IDFPhononDispersion(DbObject):
 
     import pyre.db
 
+    origin = pyre.db.varchar( name = 'origin', length = 1024 )
+
     pass # end of IDFPhononDispersion
 
 
