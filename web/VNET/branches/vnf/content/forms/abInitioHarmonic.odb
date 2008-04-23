@@ -19,20 +19,33 @@ class Form( base ):
     class Inventory( base.Inventory ):
 
         import pyre.inventory as inv
+        id = pyre.inventory.str( 'id', default = '' )
+        id.meta['tip'] = 'A short description'
+        
+        short_description = pyre.inventory.str(
+            'short_description', default = '' )
+        short_description.meta['tip'] = 'A short description'
+        
         engine = inv.str('engine', default='vasp')
         engine.validator=inv.choice(['vasp', 'ab init'])
         engine.meta['tip'] = 'ab initio engine'
+        
         xcFunctional = inv.str('xcFunctional', default='PAW-PBE')
         xcFunctional.validator=inv.choice(['PAW-PBE', 'PAW-GGA', 'LDA'])
         xcFunctional.meta['tip'] = 'exchange correlation functional'
+        
         kineticEnergyCutoff = inv.float('kineticEnergyCutoff', default=140.0)
         kineticEnergyCutoff.meta['tip'] = 'Kinetic energy cutoff'
+        
         monkhorstPackMesh = inv.list('monkhorstPackMesh', default=[1,1,1])
         monkhorstPackMesh.meta['tip'] = 'Monkhorst pack mesh'
+        
         supercell = inv.list('supercell', default=[1,1,1])
         supercell.meta['tip'] = 'Supercell for phonon calculation'
+        
         displacementAmplitude = inv.float('displacementAmplitude', default=0.01)
         displacementAmplitude.meta['tip'] = 'Displacement amplitude'      
+        
         qGrid = inv.list('qGrid', default=[1,1,1])
         qGrid.meta['tip'] = 'Q grid for phonon calculation'         
 
@@ -141,9 +154,27 @@ class Form( base ):
                 name='abInitioHarmonic.Qz',
                 label='Phonon Q-points (z-direction)',
                 value = str(self.inventory.qGrid[2])) 
+        
+    def processUserInputs(self):
 
+        base.processUserInputs( self )
+        
+        record = self.getRecord()
+        director = self.director
+        experiment = director.clerk.getHierarchy( record )
 
-formactor_action_prefix = 'actor.form-received'
+        #create a new job
+        from vnf.components.Job import new_job, jobpath
+        job = new_job( director )
+        job.jobName = experiment.short_description
+        director.clerk.updateRecord( job )
+        
+        jobdir = jobpath( job.id )
+        
+        build_run( experiment, path = jobdir )
+
+        return job
+
 
 
 def form(): return Form( 'gulpNE' )

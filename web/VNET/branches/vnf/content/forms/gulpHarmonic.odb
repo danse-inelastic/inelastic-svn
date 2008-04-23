@@ -20,15 +20,12 @@ class Form( base ):
     class Inventory( base.Inventory ):
 
         import pyre.inventory as inv
-        gulpHarmonic = inv.bool('gulpHarmonic',default=True)
-        #gulpHarmonic.help = 'Gulp Harmonic Motion'
-        gulpNE = inv.bool('gulpNE', default = False)
-        mmtkNE = inv.bool('mmtkNE', default = False)
-    
-        vaspPhon = inv.bool('vaspPhon', default = False)
-        abinitPhon = inv.bool('abinitPhon', default = False)
+        id = pyre.inventory.str( 'id', default = '' )
+        id.meta['tip'] = 'A short description'
         
-        phononDispersions = inv.bool('phononDispersions', default = False)
+        short_description = pyre.inventory.str(
+            'short_description', default = '' )
+        short_description.meta['tip'] = 'A short description'
 
     #parameters = ['gulpHarmonic','gulpNE','mmtkNE','vaspPhon','abinitPhon','phononDispersion'] # parameters to edit in the form
     parameters = ['gulpHarmonic','gulpNE']
