@@ -20,9 +20,10 @@ debug = journal.debug( 'torque' )
 class Scheduler:
 
     
-    def __init__(self, launcher, prefix = None):
+    def __init__(self, launcher, prefix = None, outputstr_maxlen = 2048):
         self.prefix = prefix
         self.launcher = launcher
+        self.outputstr_maxlen = outputstr_maxlen
         return
     
     
@@ -124,13 +125,14 @@ class Scheduler:
 
     def _read(self, filename):
         'read file in the remote job directory'
-        cmds = [ 'cat %r' % (filename,) ]
+        cmds = [ 'tail %r' % (filename,) ]
         failed, output, error = self._launch( cmds )
         if failed:
             msg = "error in executing cmds %s. output: %s, error: %s" % (
                 cmds, output, error )
             raise RuntimeError, msg
-        return output
+        maxlen = self.outputstr_maxlen
+        return output[-maxlen+1:]
 
 
     def _tracejob_search(self, jobid, tag):

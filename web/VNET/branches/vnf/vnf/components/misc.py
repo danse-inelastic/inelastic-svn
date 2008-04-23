@@ -12,16 +12,16 @@
 #
 
 
-from DbObject import DbObject
-class IDFPhononDispersion(DbObject):
+def new_id( director ):
+    #new token
+    token = director.idd.token()
+    uniquename = '%s' % (token.locator,)
+    return uniquename
 
-    name = 'idfphonondispersions'
 
-    import pyre.db
-
-    origin = pyre.db.varchar( name = 'origin', length = 1024 )
-
-    pass # end of IDFPhononDispersion
+def datadir( ):
+    import os
+    return os.path.join( 'content', 'data' )
 
 
 # version

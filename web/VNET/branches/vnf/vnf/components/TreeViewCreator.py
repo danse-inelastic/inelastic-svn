@@ -11,6 +11,11 @@
 
 
 
+import journal
+debug = journal.debug( 'treeviewcreator' )
+
+
+
 def create( instrument, actor, director ):
     '''given the db hierarchy of instrument, render a teeview
     '''
@@ -50,6 +55,11 @@ class TreeViewCreator:
         elements = [ scatterer.crystal, scatterer.shape ] + scatterer.kernels
         return self.onContainer( scatterer, elements )
 
+
+    def onPolyXtalCoherentPhononScatteringKernel(self, kernel):
+        elements = [ kernel.dispersion ]
+        return self.onContainer( kernel, elements )
+
     
     def onContainer(self, container, elements):
         if container == self._rootcontainer:
@@ -77,6 +87,9 @@ class TreeViewCreator:
             realelement = getattr( element, 'real%s' % typename )
             return self(realelement)
         except:
+            import traceback
+            debug.log( traceback.format_exc() )
+            
             director = self.director
             actor = self.actor
             return factory.treeview.leaf(
@@ -89,10 +102,12 @@ class TreeViewCreator:
                     editee = "%s,%s" % (typename, element.id)
                     )
                 )
+        raise RuntimeError, "should not reach here"
 
-    onPolyXtalCoherentPhononScatteringKernel = onMonochromaticSource = onIQEMonitor = onCrystal = onBlock = onElement
-    onScatteringKernel = onComponent = onScatterer = onShape = onAbstractElement
 
+    onIDFPhononDispersion = onMonochromaticSource = onIQEMonitor = onCrystal = onBlock = onElement
+    onPhononDispersion = onScatteringKernel = onComponent = onScatterer = onShape = onAbstractElement
+    
 
     def rootNode(self, container):
         return self._node( container, factory.treeview )

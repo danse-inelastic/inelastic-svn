@@ -366,12 +366,7 @@ def create_treeview( sampleassembly, director ):
 
 
 
-def new_id( director ):
-    #new token
-    token = director.idd.token()
-    uniquename = '%s-%s-%s' % (token.locator, token.tid, token.date)
-    return uniquename
-
+from misc import new_id
 
 def new_reference( sampleassembly_id, scatterer_id, director ):
     from vnf.dom.SampleAssembly import SampleAssembly

@@ -33,7 +33,7 @@ def schedule( job, director ):
         lambda cmd: director.csaccessor.execute( cmd, server, server_jobpath ),
         prefix = 'source ~/.vnf' )
     
-    id1 = scheduler.submit( 'sh %s/run.sh' % server_jobpath )
+    id1 = scheduler.submit( 'cd %s && sh run.sh' % server_jobpath )
     job.id_incomputingserver = id1
 
     import time
