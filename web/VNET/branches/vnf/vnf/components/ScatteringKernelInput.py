@@ -51,7 +51,7 @@ class ScatteringKernelInput(base):
 
     def gulpHarmonic(self, director):
         try:
-            page = director.retrievePage( 'gulpHarmonic' )
+            page = director.retrieveSecurePage( 'gulpHarmonic' )
         except AuthenticationError, err:
             return err.page
         main = page._body._content._main
@@ -80,7 +80,7 @@ class ScatteringKernelInput(base):
     
     def gulpNE(self, director):
         try:
-            page = director.retrievePage( 'gulpNE' )
+            page = director.retrieveSecurePage( 'gulpNE' )
         except AuthenticationError, err:
             return err.page
         main = page._body._content._main
@@ -108,7 +108,7 @@ class ScatteringKernelInput(base):
     
     def abInitioHarmonic(self, director):
         try:
-            page = director.retrievePage( 'abInitioHarmonic' )
+            page = director.retrieveSecurePage( 'abInitioHarmonic' )
         except AuthenticationError, err:
             return err.page
         main = page._body._content._main
