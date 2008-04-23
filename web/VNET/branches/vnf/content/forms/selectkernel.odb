@@ -24,20 +24,6 @@ class Form( base ):
         kernel.validator=inv.choice(['gulpHarmonic', 'gulpNE', 'mmtkNE', 'abInitioHarmonic', 'phononDispersion'])
         kernel.meta['tip'] = 'type of kernel'
 
-#        gulpNE = inv.bool('gulpNE', default = False)
-#        mmtkNE = inv.bool('mmtkNE', default = False)
-#    
-#        vaspPhon = inv.bool('vaspPhon', default = False)
-#        abinitPhon = inv.bool('abinitPhon', default = False)
-#        
-#        phononDispersion = inv.bool('phononDispersion', default = False)
-
-    #parameters = ['gulpHarmonic','gulpNE','mmtkNE','vaspPhon','abinitPhon','phononDispersion'] # parameters to edit in the form
-    
-    def legend(self):
-        'return a legend string'
-        return 'kernel'
-
     def expand(self, form):
         '''expand an existing form with fields from this component'''
         prefix = formactor_action_prefix
