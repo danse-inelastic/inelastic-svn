@@ -1,0 +1,67 @@
+#!/usr/bin/env python
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                             Michael A.G. Aivazis
+#                      California Institute of Technology
+#                      (C) 1998-2005  All Rights Reserved
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+from vnf.components.Actor import Actor, action_link, actionRequireAuthentication, AuthenticationError
+from vnf.weaver import action_href
+
+def portlet(app):
+    import opal.content
+    portlet = opal.content.portlet(title="navigation", id="portlet-navigation-tree")
+
+    instrument = portlet.item(description="Select instrument")
+    action = actionRequireAuthentication(
+        actor = 'neutronexperimentwizard', sentry = app.sentry,
+        routine = 'select_instrument',)
+    instrument.target = action_href(action, app.cgihome)
+    instrument.icon = "images/link_icon.gif"
+    instrument.type = "navItem"
+    
+    sample = portlet.item(description="Sample preparation")
+    action = actionRequireAuthentication(
+        actor = 'neutronexperimentwizard', sentry = app.sentry,
+        routine = 'sample_preparation',)
+    sample.target = action_href(action, app.cgihome)
+    sample.icon = "images/link_icon.gif"
+    sample.type = "navItem"
+    
+    sampleenvironment = portlet.item(description="Sample environment")
+    action = actionRequireAuthentication(
+        actor = 'neutronexperimentwizard', sentry = app.sentry,
+        routine = 'sample_environment')
+    sampleenvironment.target = action_href(action, app.cgihome)
+    sampleenvironment.icon = "images/link_icon.gif"
+    sampleenvironment.type = "navItem"
+    
+    experimentparameters = portlet.item(description="Experiment parameters")
+    action = actionRequireAuthentication(
+        actor = 'neutronexperimentwizard', sentry = app.sentry,
+        routine = 'experiment_parameters')
+    experimentparameters.target = action_href(action, app.cgihome)
+    experimentparameters.icon = "images/link_icon.gif"
+    experimentparameters.type = "navItem"
+    
+    computationserver = portlet.item(description="Pick computation server")
+    action = actionRequireAuthentication(
+        actor = 'neutronexperimentwizard', sentry = app.sentry,
+        routine = 'pick_computation_server')
+    computationserver.target = action_href(action, app.cgihome)
+    computationserver.icon = "images/link_icon.gif"
+    computationserver.type = "navItem"
+    
+    return portlet
+
+
+# version
+__id__ = "$Id: navigation.odb,v 1.1.1.1 2006-11-27 00:09:19 aivazis Exp $"
+
+# End of file 

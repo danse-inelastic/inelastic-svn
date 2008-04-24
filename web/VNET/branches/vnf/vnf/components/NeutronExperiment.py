@@ -31,7 +31,39 @@ class NeutronExperiment(base):
 
 
     def default(self, director):
-        return self.listall( director )
+        try:
+            page = director.retrieveSecurePage( 'neutronexperiment' )
+        except AuthenticationError, err:
+            return err.page
+        
+        main = page._body._content._main
+
+        # populate the main column
+        document = main.document(title='Neutron Experiment')
+        document.description = ''
+        document.byline = 'byline?'
+
+        p = document.paragraph()
+        action = actionRequireAuthentication(
+            actor = 'neutronexperimentwizard', sentry = director.sentry,
+            label = 'this wizard', routine = 'start',
+            )
+        wizard_link = action_link( action, director.cgihome )        
+
+        action = actionRequireAuthentication(
+            actor = 'neutronexperiment', sentry = director.sentry,
+            label = 'experiments', routine = 'listall',
+            )
+        list_link = action_link( action, director.cgihome )        
+
+        p.text = [
+            'In this virtual neutron facility, you can setup',
+            'a new experiment by using %s.' % wizard_link,
+            'Or you can select from one of the %s you have run' % list_link,
+            'and rerun it.',
+            ]
+            
+        return page
 
 
     def listall(self, director):
@@ -177,17 +209,6 @@ def listexperiments( experiments, document, director ):
 
     from inventorylist import list
     list( experiments, document, 'neutronexperiment', director )
-    return
-
-
-def instrument_selector( document, instruments ):
-    label = "Instrument selector: "
-    entries = [ (instrument.id, instrument.short_description)
-                for instrument in instruments]
-    name = 'instrument'
-    from opal.content import selector
-    widget = selector( name=name, entries=entries, label=label )
-    document.contents.append( widget )
     return
 
 
