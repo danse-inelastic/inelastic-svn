@@ -54,7 +54,7 @@ class Form(base):
         instrument = director.clerk.getInstrument( instrument_id )
         
         p = form.paragraph()
-        link = action_link(
+        edit_link = action_link(
             actionRequireAuthentication(
             'instrument',
             director.sentry,
@@ -63,8 +63,19 @@ class Form(base):
             id = instrument.id,
             ),  director.cgihome
             )
+        change_link = action_link(
+            actionRequireAuthentication(
+            'neutronexperiment',
+            director.sentry,
+            label = 'this link',
+            routine = 'selectinstrument',
+            id = record.id,
+            ),  director.cgihome
+            )
         p.text = [
-            'Instrument: %s' % link,
+            'Instrument: %s. ' % edit_link,
+            'You could change the neutron instrument by clicking %s.' % (
+            change_link,),
             ]
 
         sampleassembly_id = record.sampleassembly_id

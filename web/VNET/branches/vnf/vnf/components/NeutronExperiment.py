@@ -62,6 +62,8 @@ class NeutronExperiment(base):
         except AuthenticationError, error:
             return error.page
 
+        self.processFormInputs( director )
+
         formcomponent = self.retrieveFormToShow( 'run_neutron_experiment' )
         formcomponent.inventory.id = self.inventory.id
         formcomponent.director = director
@@ -86,7 +88,45 @@ class NeutronExperiment(base):
         # run button
         submit = form.control(name="submit", type="submit", value="Run")
             
-        return page    
+        return page
+
+
+    def selectinstrument(self, director):
+        try:
+            page, document = self._head( director )
+        except AuthenticationError, error:
+            return error.page
+
+        experiment = director.clerk.getNeutronExperiment(
+            self.inventory.id )
+        
+        # create form to set scatterer type
+        formcomponent = self.retrieveFormToShow( 'selectneutroninstrument' )
+        formcomponent.inventory.experiment_id = experiment.id
+        formcomponent.director = director
+        
+        # create form
+        form = document.form(
+            name='selectneutroninstrument',
+            legend= formcomponent.legend(),
+            action=director.cgihome)
+
+        # specify action
+        action = actionRequireAuthentication(
+            actor = 'neutronexperiment', sentry = director.sentry,
+            label = '', routine = 'edit',
+            arguments = { 'id': experiment.id,
+                          'form-received': formcomponent.name } )
+        from vnf.weaver import action_formfields
+        action_formfields( action, form )
+
+        # expand the form with fields of the data object that is being edited
+        formcomponent.expand( form )
+
+        # ok button
+        submit = form.control(name="submit", type="submit", value="OK")
+        
+        return page
 
 
     def __init__(self, name=None):
@@ -103,11 +143,11 @@ class NeutronExperiment(base):
 
         # the record we are working on
         id = self.inventory.id
-        self.experiment_record = experiment = \
-                                 director.clerk.getNeutronExperiment( id )
+        experiment = director.clerk.getNeutronExperiment( id )
 
         # populate the main column
-        document = main.document(title='Neutron Experiment: %s' % experiment.short_description )
+        document = main.document(
+            title='Neutron Experiment: %s' % experiment.short_description )
         document.description = ( '')
         document.byline = '<a href="http://danse.us">DANSE</a>'
 

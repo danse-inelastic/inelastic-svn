@@ -172,6 +172,13 @@ class Clerk(Component):
         from vnf.dom.ScatteringKernel2 import ScatteringKernel2
         return self._getAll( ScatteringKernel2, where )
 
+    def getUser(self, username):
+        '''retrieve user of given username'''
+        from vnf.dom.User import User
+        all = self.db.fetchall( User, where = "username='%s'" % username )
+        assert len(all) == 1
+        return all[0]
+        
     def getInstrument(self, id):
         '''retrieve instrument of given id'''
         from vnf.dom.Instrument import Instrument

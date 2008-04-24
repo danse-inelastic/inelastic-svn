@@ -31,21 +31,68 @@ class Greeter(Actor):
         main = page._body._content._main
 
         # populate the main column
-        document = main.document(title='Welcome')
+        username = director.sentry.username
+        userrecord = director.clerk.getUser( username )
+        fullname = userrecord.fullname
+        title = 'Welcome to the Virtual Neutron Facility, %s!' % (
+            fullname,),
+        document = main.document(title=title)
+        
         p = document.paragraph()
+        action = actionRequireAuthentication(
+            actor = 'neutronexperiment', sentry = director.sentry,
+            label = 'run virtual neutron experiments', routine = 'default',
+            )
+        link = action_link( action, director.cgihome )
         p.text = [
-            'Welcome to the Virtual Neutron Facility!',
+            'In this virtual neutron facility, you can %s. ' % link,
+            'In a virtual neutron experiment, ',
+            'virtual neutrons are generated from a virtual neutron moderator,',
+            'guided by virtual neutron guides,',
+            'scattered by a virtual sample and sample environment,',
+            'and intercepted by detectors.',
             ]
 
-        # my experiments
-        document = main.document(title='Experiments')
-        clerk = director.clerk
-        username = director.sentry.username
-        experiments = clerk.indexNeutronExperiments(
-            where = 'creator=%r' % username )
-        experiments = experiments.values()
-        from NeutronExperiment import listexperiments
-        listexperiments( experiments, document, director )
+        p = document.paragraph()
+        action = actionRequireAuthentication(
+            actor = 'instrument', sentry = director.sentry,
+            label = 'neutron instruments', routine = 'listall',
+            )
+        link = action_link( action, director.cgihome )
+        p.text = [
+            'You can do your experiments in a variety of %s,' % link,
+            'some of them mimic real instruments,',
+            'and some of them are purely imaginary.',
+            ]
+
+        p = document.paragraph()
+        action = actionRequireAuthentication(
+            actor = 'scatteringKernel', sentry = director.sentry,
+            label = 'scattering kernels', routine = 'default',
+            )
+        link = action_link( action, director.cgihome )
+        p.text = [
+            'You can also create your sample and calculate its neutron',
+            'scattering properties by running material simulations.',
+            'The computation results of such simulations become',
+            '%s that can be used in the sample simulation' % link,
+            'part of virtual experimennts.',
+            ]
+
+        p = document.paragraph()
+        p.text = [
+            'On the left, several menu items link to a variety of',
+            'functions.',
+            'You can review past experiments by clicking "Experiments",',
+            'or browse your personal library of sample assemblies by',
+            'clicking "Sample Assemblies".',
+            'Neutron instruments in which you can run your experiments',
+            'are accessible through "Instruments".',
+            'When you start a virtual experiment, or a material',
+            'simulation, they became jobs submitted to computing',
+            'resources. You can monitor their progress by clicking',
+            '"Jobs".',
+            ]
 
         return page
 
