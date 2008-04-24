@@ -26,6 +26,14 @@ def portlet(app):
     home.icon = "images/link_icon.gif"
     home.type = "navItem"
     
+    experiments = portlet.item(description="Experiments")
+    experiments.target = action_href(
+        actionRequireAuthentication(
+        'neutronexperiment', app.sentry, 'Experiments'),
+        app.cgihome)
+    experiments.icon = "images/link_icon.gif"
+    experiments.type = "navItem"
+    
     sampleAssemblies = portlet.item(description="Sample Assemblies")
     sampleAssemblies.target = action_href(
             actionRequireAuthentication(

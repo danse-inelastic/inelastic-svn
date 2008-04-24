@@ -28,6 +28,8 @@ class User(Table):
     password = pyre.db.varchar(name="password", length=30)
     password.meta['tip'] = "the user's password"
 
+    fullname = pyre.db.varchar( name = 'fullname', length = 1024 )
+
     pass # end of User
 
 
