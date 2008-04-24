@@ -40,6 +40,7 @@ EXPORT_PYTHON_MODULES = \
 	McvineSampleAssemblyBuilder.py \
 	McvineScattererXMLBuilder.py \
 	NeutronExperiment.py \
+	NeutronExperimentWizard.py \
 	NeutronExperimentSimulationRunBuilder.py \
 	PyHtmlTable.py \
 	Sample.py \
