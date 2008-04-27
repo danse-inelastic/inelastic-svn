@@ -136,6 +136,7 @@ class WebApplication(Base):
             'cgihome':self.cgihome,
             'imagepath':self.inventory.imagepath,
             'javascriptpath':self.inventory.javascriptpath,
+            'javapath':self.inventory.javapath,
             }
         self.pageMill = vnf.weaver.pageMill( configurations )
         return

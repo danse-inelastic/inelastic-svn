@@ -14,15 +14,8 @@
 <inventory>
 
   <component name='main'>
-    <property name='actor'>scatteringKernelInput</property>
-    <property name='routine'>onSelect</property>
-    <component name='scatteringKernelInput'>
-    	<property name='form-received'>selectkernel</property>
-<!--    	<property name='submit'>next</property>-->
-   		<component name='selectkernel'>
-    		<property name='kernel'>abInitioHarmonic</property>
-    	</component>     	
-    </component>    
+    <property name='actor'>supportingCalcs</property>
+    <property name='routine'>default</property>
     <component name='sentry'>
     	<property name='username'>demo</property>
     	<property name='passwd'>demo</property>

@@ -91,34 +91,7 @@ def portlet(app):
             app.cgihome)
     supportingCalcs.icon = "images/link_icon.gif"
     supportingCalcs.type = "navItem"
-#        document = main.document(title='Samples and Equipment')
-#        p = document.paragraph()
-#        p.text = [
-#            action_link(
-#            actionRequireAuthentication(
-#            'sampleassembly', director.sentry, 'Sample Assemblies'),
-#            director.cgihome) + "<br/>",
-#            
-#            action_link(
-#            actionRequireAuthentication(
-#            'samplePreparation', director.sentry, 'Sample Preparation'),
-#            director.cgihome) + "<br/>",
-#            
-#            action_link(
-#            actionRequireAuthentication(
-#            'instrument', director.sentry, 'Instruments'),
-#            director.cgihome) + "<br/>",
-#            
-#            '<a href="%s/sample/Samples.html">Samples</a><br/>' % director.home,
-#            '<a href="%s/InstrumentSimulation.html">Instrument Simulation</a><br/>' % director.home,
-#            
-#            action_link(
-#            actionRequireAuthentication(
-#            'jobMonitoring', director.sentry, 'Job Monitoring'),
-#            director.cgihome) + "<br/>",
-#            
-#            '<a href="manageServers.html">Manage Servers</a><br/>',
-#            '<a href="MaterialSimulation.html">Supporting Calculations</a><br/>',
+
     
     logout = portlet.item(description="Logout")
     logout.target = action_href(
