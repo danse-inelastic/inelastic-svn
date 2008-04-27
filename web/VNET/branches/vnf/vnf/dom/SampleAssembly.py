@@ -12,10 +12,10 @@
 #
 
 
-from DbObject import DbObject
+from OwnedObject import OwnedObject
 
 
-class SampleAssembly(DbObject):
+class SampleAssembly(OwnedObject):
 
     name = "sampleassemblies"
     

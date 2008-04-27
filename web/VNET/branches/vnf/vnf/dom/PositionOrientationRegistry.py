@@ -36,8 +36,10 @@ class PositionOrientationRegistry(Table):
     
     element_label = pyre.db.varchar( name = 'element_label', length = 100 )
     
-    position = pyre.db.doubleArray( name = 'position' )
-    orientation = pyre.db.doubleArray( name = 'orientation' )
+    position = pyre.db.doubleArray(
+        name = 'position',  default = [0.,0.,0.] )
+    orientation = pyre.db.doubleArray(
+        name = 'orientation', default = [0.,0.,0.] )
     
     reference_label = pyre.db.varchar(
         name = 'reference_label', length = 100, default = '')

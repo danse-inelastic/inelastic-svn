@@ -34,7 +34,9 @@
       <property name='torque'>on</property>
       <property name='sampleassemblywizard'>on</property>
       <property name='sampleassembly'>on</property>
+      <property name='neutronexperimentwizard'>on</property>
       <property name='scatterer'>on</property>
+      <property name='db'>on</property>
     </component>
 
   </component>

@@ -12,7 +12,7 @@
 #
 
 
-from DbObject import DbObject as base
+from OwnedObject import OwnedObject as base
 class PolyXtalScatterer(base):
 
     name = 'polyxtalscatterers'

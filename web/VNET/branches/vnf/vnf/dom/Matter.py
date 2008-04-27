@@ -18,13 +18,16 @@ class Matter(DbObject):
 
     import pyre.db
 
-    cartesianLattice = pyre.db.doubleArray( name = 'cartesianLattice')
+    cartesianLattice = pyre.db.doubleArray(
+        name = 'cartesianLattice', default = [])
     cartesianLattice.meta['tip'] = 'array of cartesian lattice vectors'
     
-    fractionalCoordinates = pyre.db.doubleArray( name = 'fractional_coordinates')
+    fractionalCoordinates = pyre.db.doubleArray(
+        name = 'fractional_coordinates', default = [])
     fractionalCoordinates.meta['tip'] = 'array positions as fractional values of unit cell'
     
-    atomSymbols = pyre.db.varcharArray( name = 'atom_symbols', length = 2 )
+    atomSymbols = pyre.db.varcharArray(
+        name = 'atom_symbols', length = 2, default = [] )
     atomSymbols.meta['tip'] = 'atom symbols for each position in the unit cell'
 
     pass # end of PolyXtalScatterer

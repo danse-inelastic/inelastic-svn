@@ -12,14 +12,15 @@
 #
 
 
-from DbObject import DbObject
-class IDFPhononDispersion(DbObject):
+from OwnedObject import OwnedObject
+class IDFPhononDispersion(OwnedObject):
 
     name = 'idfphonondispersions'
 
     import pyre.db
 
     origin = pyre.db.varchar( name = 'origin', length = 1024 )
+    origin.meta['tip'] = 'origin of this dispersion. BvK? or else?'
 
     pass # end of IDFPhononDispersion
 

@@ -27,6 +27,10 @@ class NeutronExperiment(base):
 
     ncount = pyre.db.real( name = 'ncount', default = 1e6)
 
+    constructed = pyre.db.varchar( name = 'constructed', length = 4 )
+
+    job_id = pyre.db.varchar( name = 'job_id', length = 100 )
+
     pass # end of NeutronExperiment
 
 
