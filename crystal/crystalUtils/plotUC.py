@@ -5,6 +5,6 @@ def plotUnitCell(unitcell):
     from ExcitationSlicer.vtktools.vtkplotting import VTKPlotAtoms
     from crystal.crystalIO.converters import unitCell2ListOfAtom
     loa = unitCell2ListOfAtom(unitcell)
-    VTKPlotAtoms(loa)
-    raw_input("Press Enter.")    
-    return
+    plot = VTKPlotAtoms(loa)
+    #raw_input("Press Enter.")    
+    return plot
