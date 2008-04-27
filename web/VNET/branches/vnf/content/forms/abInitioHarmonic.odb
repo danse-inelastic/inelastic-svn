@@ -19,20 +19,19 @@ class Form( base ):
     class Inventory( base.Inventory ):
 
         import pyre.inventory as inv
-        id = pyre.inventory.str( 'id', default = '' )
-        id.meta['tip'] = 'A short description'
+        id = inv.str( 'id', default = '' )
+        id.meta['tip'] = 'Scattering kernel calculation id'
         
-        short_description = pyre.inventory.str(
-            'short_description', default = '' )
+        short_description = inv.str('short_description', default = '' )
         short_description.meta['tip'] = 'A short description'
         
         engine = inv.str('engine', default='vasp')
         engine.validator=inv.choice(['vasp', 'ab init'])
-        engine.meta['tip'] = 'ab initio engine'
+        engine.meta['tip'] = 'Ab initio engine'
         
         xcFunctional = inv.str('xcFunctional', default='PAW-PBE')
         xcFunctional.validator=inv.choice(['PAW-PBE', 'PAW-GGA', 'LDA'])
-        xcFunctional.meta['tip'] = 'exchange correlation functional'
+        xcFunctional.meta['tip'] = 'Exchange correlation functional'
         
         kineticEnergyCutoff = inv.float('kineticEnergyCutoff', default=140.0)
         kineticEnergyCutoff.meta['tip'] = 'Kinetic energy cutoff'
@@ -68,6 +67,12 @@ class Form( base ):
 #            tip = descriptor.meta.get('tip')
 #            if tip:
 #                field.help = tip
+        
+        self.short_description = form.text(
+                id = 'text0',
+                name='short_description',
+                label='Name of scattering kernel calculation',
+                value = self.inventory.short_description)
         
         p = form.paragraph()
         p.text = ['<h2> VASP Engine</h2>']
@@ -156,24 +161,28 @@ class Form( base ):
                 value = str(self.inventory.qGrid[2])) 
         
     def processUserInputs(self):
-
-        base.processUserInputs( self )
         
-        record = self.getRecord()
-        director = self.director
-        experiment = director.clerk.getHierarchy( record )
-
-        #create a new job
+        #
         from vnf.components.Job import new_job, jobpath
-        job = new_job( director )
-        job.jobName = experiment.short_description
-        director.clerk.updateRecord( job )
+        job=new_job(self.director)
+
+        job.jobName = self.short_description
+        self.director.clerk.updateRecord( job )
         
         jobdir = jobpath( job.id )
         
         build_run( experiment, path = jobdir )
 
         return job
+    
+    def getRecord(self):
+        'get DB record'
+        return self.director.clerk.getRecordByID( self.DBTable, self.inventory.id )
+    
+    
+def build_run( experiment, path ):
+    from vnf.components.NeutronExperimentSimulationRunBuilder import Builder
+    return Builder(path).render(experiment)
 
 
 

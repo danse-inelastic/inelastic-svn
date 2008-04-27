@@ -24,7 +24,7 @@ class SupportingCalcs(Actor):
         page = pyre.inventory.str('page', default='empty')
 
     def default(self, director):
-        page = director.retrievePage('supportingCalcs')
+        page = director.retrieveSecurePage('supportingCalcs')
         main = page._body._content._main
         
         # populate the main column
@@ -32,18 +32,19 @@ class SupportingCalcs(Actor):
     
         # build the sample input form
         p = document.paragraph()
-        p.text = ['Simulate the material with atomistic forcefields (powered by GULP/MMTK)',
-                  '<a href="GULP.jnlp">Gulp</a>']
+        p.text = ['Simulate the material with atomistic forcefields (powered by GULP/MMTK)<br>',
+                  '<a href="/cgi-bin/java/GULP.jnlp">Gulp</a><br>',
+                  '<a href="/cgi-bin/java/cod.jnlp">cod</a><br>']
         
-        atoms = document.form(name='login', legend='Upload xyz file', action=app.cgihome)
-        
-        name = atoms.text(id='name', name='name', label='Sample Name')
-        name.help = 'An identifying name for this sample.'
-        
-        atomFile = atoms.file(id='atomFile', name='atomFile', label='Xyz file containing atoms')
-        atomFile.help = 'Lattice vectors a,b,c should be on comment line in form a_x a_y a_z b_x b_y b_z c_x c_y c_z'
-        
-        submit = atoms.control(name="submit", type="submit", value="submit")
+#        atoms = document.form(name='login', legend='Upload xyz file', action=app.cgihome)
+#        
+#        name = atoms.text(id='name', name='name', label='Sample Name')
+#        name.help = 'An identifying name for this sample.'
+#        
+#        atomFile = atoms.file(id='atomFile', name='atomFile', label='Xyz file containing atoms')
+#        atomFile.help = 'Lattice vectors a,b,c should be on comment line in form a_x a_y a_z b_x b_y b_z c_x c_y c_z'
+#        
+#        submit = atoms.control(name="submit", type="submit", value="submit")
         
         # view the sample (maybe put this on another page after clicking
         # to submit the sample
