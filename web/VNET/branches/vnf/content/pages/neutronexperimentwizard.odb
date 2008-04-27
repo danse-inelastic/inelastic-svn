@@ -14,7 +14,10 @@
 
 def page(app):
     import vnf.content
-    page = vnf.content.page(name='experiments', title='Neutron Experiment Wizard', root=app.home)
+    page = vnf.content.page(
+        name='experiments',
+        title='Virtual Neutron Facility: Neutron Experiment Wizard',
+        root=app.home)
     
     # build the body
     body = page.body()

@@ -21,7 +21,7 @@ class NeutronExperimentWizard(base):
 
         import pyre.inventory
 
-        id = pyre.inventory.str("id", default=None)
+        id = pyre.inventory.str("id", default='')
         id.meta['tip'] = "the unique identifier of the experiment"
 
         ncount = pyre.inventory.float( 'ncount', default = 1e6 )
@@ -35,11 +35,20 @@ class NeutronExperimentWizard(base):
             page = director.retrieveSecurePage( 'neutronexperimentwizard' )
         except AuthenticationError, err:
             return err.page
+
+        if self.inventory.id == '':
+            #create a new experiment
+            from vnf.dom.NeutronExperiment import NeutronExperiment
+            experiment = director.clerk.new_ownedobject( NeutronExperiment )
+            #need to reload the page so that id is correctly
+            self.inventory.id = experiment.id
+            page = director.retrieveSecurePage( 'neutronexperimentwizard' )
+            pass
         
         main = page._body._content._main
 
         # populate the main column
-        document = main.document(title='Neutron Experiment Wizard - start')
+        document = main.document(title='Neutron Experiment Wizard: start')
         document.description = ''
         document.byline = 'byline?'
 
@@ -54,7 +63,7 @@ class NeutronExperimentWizard(base):
 
         p = document.paragraph()
         p.text = [
-            'Please click one of link on the left side to start',
+            'Please click one of link on the left side to start.',
             ]
 
         return page
@@ -65,15 +74,96 @@ class NeutronExperimentWizard(base):
             page = director.retrieveSecurePage( 'neutronexperimentwizard' )
         except AuthenticationError, err:
             return err.page
-        
+
         main = page._body._content._main
 
         # populate the main column
         document = main.document(
-            title='Neutron Experiment Wizard - select neutron instrument')
+            title='Neutron Experiment Wizard: select neutron instrument')
         document.description = ''
         document.byline = 'byline?'
 
+        formcomponent = self.retrieveFormToShow( 'selectneutroninstrument' )
+        formcomponent.inventory.experiment_id = self.inventory.id
+        formcomponent.director = director
+        
+        # create form
+        form = document.form(
+            name='selectneutroninstrument',
+            legend= formcomponent.legend(),
+            action=director.cgihome)
+
+        # specify action
+        action = actionRequireAuthentication(
+            actor = 'neutronexperimentwizard', sentry = director.sentry,
+            label = '', routine = 'configure_instrument',
+            id = self.inventory.id,
+            arguments = {'form-received': formcomponent.name } )
+        from vnf.weaver import action_formfields
+        action_formfields( action, form )
+
+        # expand the form with fields of the data object that is being edited
+        formcomponent.expand( form )
+
+        # run button
+        submit = form.control(name="submit", type="submit", value="OK")
+            
+        return page
+
+
+    def configure_instrument(self, director):
+        try:
+            page = director.retrieveSecurePage( 'neutronexperimentwizard' )
+        except AuthenticationError, err:
+            return err.page
+        
+        self.processFormInputs( director )
+
+        id = self.inventory.id
+        experiment = director.clerk.getNeutronExperiment( id )
+        instrument_id = experiment.instrument_id
+
+        main = page._body._content._main
+
+        # populate the main column
+        document = main.document(
+            title='Neutron Experiment Wizard: configure')
+        document.description = ''
+        document.byline = 'byline?'
+
+        instrument = director.clerk.getInstrument( instrument_id )
+        formname = 'configure%s' % (
+            instrument.short_description.lower().replace(' ','_')
+            .replace( '-', '_' ), )
+
+        formcomponent = self.retrieveFormToShow(formname)
+        if formcomponent is None:
+            formcomponent = self.retrieveFormToShow('configureneutroninstrument')
+
+        formcomponent.inventory.instrument_id = instrument.id
+        formcomponent.director = director
+        
+        # create form
+        form = document.form(
+            name='configureinstrument',
+            legend= formcomponent.legend(),
+            action=director.cgihome)
+
+        # specify action
+        action = actionRequireAuthentication(
+            actor = 'neutronexperimentwizard', sentry = director.sentry,
+            label = '', routine = 'sample_preparation',
+            id = self.inventory.id,
+            arguments = {'form-received': formcomponent.name } )
+        from vnf.weaver import action_formfields
+        action_formfields( action, form )
+
+        # expand the form with fields of the data object that is being edited
+        formcomponent.expand( form )
+
+        # run button
+        submit = form.control(name="submit", type="submit", value="OK")
+        
         return page
 
 
@@ -87,9 +177,11 @@ class NeutronExperimentWizard(base):
 
         # populate the main column
         document = main.document(
-            title='Neutron Experiment Wizard - sample preparation')
+            title='Neutron Experiment Wizard: sample preparation')
         document.description = ''
         document.byline = 'byline?'
+
+        self.processUserInputs()
 
         return page
 
@@ -104,7 +196,7 @@ class NeutronExperimentWizard(base):
 
         # populate the main column
         document = main.document(
-            title='Neutron Experiment Wizard - sample environment')
+            title='Neutron Experiment Wizard: sample environment')
         document.description = ''
         document.byline = 'byline?'
 
@@ -121,7 +213,7 @@ class NeutronExperimentWizard(base):
 
         # populate the main column
         document = main.document(
-            title='Neutron Experiment Wizard - specify experiment parameters')
+            title='Neutron Experiment Wizard: specify experiment parameters')
         document.description = ''
         document.byline = 'byline?'
 
@@ -138,7 +230,7 @@ class NeutronExperimentWizard(base):
 
         # populate the main column
         document = main.document(
-            title='Neutron Experiment Wizard - pick computation server')
+            title='Neutron Experiment Wizard: pick computation server')
         document.description = ''
         document.byline = 'byline?'
 
@@ -162,22 +254,7 @@ class NeutronExperimentWizard(base):
 
 
 
-from wording import plural, present_be
-
-def listexperiments( experiments, document, director ):
-    p = document.paragraph()
-
-    n = len(experiments)
-
-    p.text = [ 'There %s %s experiment%s: ' %
-               (present_be(n), n, plural(n))
-                ]
-
-    from inventorylist import list
-    list( experiments, document, 'neutronexperiment', director )
-    return
-
-
+from misc import new_id
 
 
 # version

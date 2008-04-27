@@ -88,7 +88,7 @@ class Clerk(Component):
             continue
         
         self.db.updateRow(record, assignments, where)
-        return
+        return record
 
 
     def getRecordByID(self, tablename, id):
@@ -341,9 +341,45 @@ class Clerk(Component):
         return
 
 
+    def newReference(self, table, localkey, remotekey):
+        '''create a new reference record.
+
+        The new record will not be inserted to the db.
+        So you have to do that some time in the future.
+        '''
+        record = table()
+        id = new_id( self.director )
+        record.id = id
+        record.localkey = localkey
+        record.remotekey = remotekey
+        return record
+    
+
+    def new_ownedobject(self, table):
+        '''create a new record for the given table.
+
+        The given table is assumed to have following fields:
+          - id
+          - creator
+          - date
+        '''
+        director = self.director
+        
+        record = table()
+        
+        id = new_id( director )
+        record.id = id
+
+        record.creator = director.sentry.username
+        
+        self.newRecord( record )
+        return record
+
+
     def newRecord(self, record):
+        'insert a new record into db'
         self.db.insertRow( record )
-        return
+        return record
 
 
     def _getElementIDs(self, id, referencetable):
@@ -401,6 +437,117 @@ class Clerk(Component):
             id, table.__name__)
 
 
+    def _init(self):
+        Component._init(self)
+        self.deepcopy = DeepCopier( self )
+        return
+
+
+
+class DeepCopier:
+
+    def __init__(self, clerk):
+        self.clerk = clerk
+        self.director = clerk.director
+        return
+
+
+    def __call__(self, node):
+        klass = node.__class__
+        method = getattr(self, 'on%s' % klass.__name__)
+        return method(node)
+
+
+    def onInstrument(self, instrument):
+        components = instrument.components
+        component_copies = [ self( component ) for component in components ]
+        from vnf.dom.Instrument import Instrument
+        instrument_copy = self.clerk.new_ownedobject( Instrument )
+
+        for prop in ['short_description', 'componentsequence', 'category']:
+            setattr( instrument_copy, prop,
+                     getattr( instrument, prop ) )
+            continue
+        
+        from vnf.dom.Instrument import Instrument
+        for component in component_copies:
+            label = component.label
+            ref = self.clerk.newReference(
+                Instrument.Components,
+                instrument_copy.id, component.id )
+            ref.label = component.label
+            self.clerk.newRecord( ref )
+            continue
+        
+        instrument_copy.components = component_copies
+
+        geometer = instrument.geometer
+        #geometer is a dictionary of label: record
+        geometer_copy = {}
+        for name, record in geometer.iteritems():
+            recordcopy = self.onInstrumentGeometer( record )
+            recordcopy.container_id = instrument_copy.id
+            self.clerk.updateRecord( recordcopy )
+            geometer_copy[ name ] = recordcopy
+            continue
+        instrument_copy.geometer = geometer_copy
+
+        self.clerk.updateRecord( instrument_copy )
+        
+        return instrument_copy
+
+
+    def onInstrumentGeometer(self, record):
+        from vnf.dom.Instrument import Instrument
+        new = self.clerk.new_ownedobject( Instrument.Geometer )
+        attrs = ['element_label', 'position', 'orientation', 'reference_label']
+        for attr in attrs:
+            setattr(new, attr, getattr(record, attr) )
+            continue
+        self.clerk.updateRecord( new )
+        return new
+    
+
+    def onComponent(self, component):
+        realcomponent = component.realcomponent
+        realcomponent_copy = self(realcomponent)
+
+        from vnf.dom.Component import Component
+        component_copy = self.clerk.new_ownedobject( Component )
+        component_copy.type = realcomponent.__class__.__name__
+        component_copy.reference = realcomponent_copy.id
+        self.clerk.updateRecord( component_copy )
+
+        #remember my label in my instrument
+        component_copy.label = component.label
+        return component_copy
+
+
+    def onMonochromaticSource(self, source):
+        from vnf.dom.MonochromaticSource import MonochromaticSource
+        copy = self.clerk.new_ownedobject( MonochromaticSource )
+        copy.energy = source.energy
+        self.clerk.updateRecord(copy)
+        return copy
+
+
+    def onIQEMonitor(self, iqem):
+        from vnf.dom.IQEMonitor import IQEMonitor
+        copy = self.clerk.new_ownedobject( IQEMonitor )
+        attrs = [
+            'Emin', 'Emax', 'nE',
+            'Qmin', 'Qmax', 'nQ',
+            'max_angle_in_plane', 'min_angle_in_plane',
+            'max_angle_out_of_plane', 'min_angle_out_of_plane',
+            'short_description',
+            ]
+        for attr in attrs:
+            setattr( copy, attr, getattr( iqem, attr) )
+            continue
+        self.clerk.updateRecord(copy)
+        return copy
+
+    pass # end of DeepCopier
 
 
 class HierarchyRetriever:
@@ -548,7 +695,9 @@ def _tostr( value ):
         ret =  '{%s}' % ','.join( [ str(item) for item in value ] )
         return ret
     return str(value)
-        
+
+
+from misc import new_id
 
 # version
 __id__ = "$Id$"

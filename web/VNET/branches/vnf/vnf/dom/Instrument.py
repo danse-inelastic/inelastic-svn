@@ -12,10 +12,10 @@
 #
 
 
-from DbObject import DbObject
+from OwnedObject import OwnedObject
 
 
-class Instrument(DbObject):
+class Instrument(OwnedObject):
     
     name = "instruments"
     
@@ -32,7 +32,11 @@ class Instrument(DbObject):
         pass
     
     componentsequence = pyre.db.varcharArray(
-        name = 'componentsequence', length = 128 )
+        name = 'componentsequence', length = 128, default = [] )
+
+    category = pyre.db.varchar( name = 'category', length = 64 )
+
+    template = pyre.db.boolean( name = 'template', default = False )
 
     from PositionOrientationRegistry import PositionOrientationRegistry
     class Geometer( PositionOrientationRegistry ):

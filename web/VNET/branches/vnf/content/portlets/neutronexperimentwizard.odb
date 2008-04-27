@@ -21,7 +21,9 @@ def portlet(app):
     instrument = portlet.item(description="Select instrument")
     action = actionRequireAuthentication(
         actor = 'neutronexperimentwizard', sentry = app.sentry,
-        routine = 'select_instrument',)
+        routine = 'select_instrument',
+        id = app.actor.inventory.id,
+        )
     instrument.target = action_href(action, app.cgihome)
     instrument.icon = "images/link_icon.gif"
     instrument.type = "navItem"
@@ -29,7 +31,9 @@ def portlet(app):
     sample = portlet.item(description="Sample preparation")
     action = actionRequireAuthentication(
         actor = 'neutronexperimentwizard', sentry = app.sentry,
-        routine = 'sample_preparation',)
+        routine = 'sample_preparation',
+        id = app.actor.inventory.id,
+        )
     sample.target = action_href(action, app.cgihome)
     sample.icon = "images/link_icon.gif"
     sample.type = "navItem"
@@ -37,7 +41,9 @@ def portlet(app):
     sampleenvironment = portlet.item(description="Sample environment")
     action = actionRequireAuthentication(
         actor = 'neutronexperimentwizard', sentry = app.sentry,
-        routine = 'sample_environment')
+        routine = 'sample_environment',
+        id = app.actor.inventory.id,
+        )
     sampleenvironment.target = action_href(action, app.cgihome)
     sampleenvironment.icon = "images/link_icon.gif"
     sampleenvironment.type = "navItem"
@@ -45,7 +51,9 @@ def portlet(app):
     experimentparameters = portlet.item(description="Experiment parameters")
     action = actionRequireAuthentication(
         actor = 'neutronexperimentwizard', sentry = app.sentry,
-        routine = 'experiment_parameters')
+        routine = 'experiment_parameters',
+        id = app.actor.inventory.id,
+        )
     experimentparameters.target = action_href(action, app.cgihome)
     experimentparameters.icon = "images/link_icon.gif"
     experimentparameters.type = "navItem"
@@ -53,7 +61,9 @@ def portlet(app):
     computationserver = portlet.item(description="Pick computation server")
     action = actionRequireAuthentication(
         actor = 'neutronexperimentwizard', sentry = app.sentry,
-        routine = 'pick_computation_server')
+        routine = 'pick_computation_server',
+        id = app.actor.inventory.id,
+        )
     computationserver.target = action_href(action, app.cgihome)
     computationserver.icon = "images/link_icon.gif"
     computationserver.type = "navItem"

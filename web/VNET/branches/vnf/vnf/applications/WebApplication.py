@@ -126,6 +126,7 @@ class WebApplication(Base):
 
         self.idd = self.inventory.idd
         self.clerk = self.inventory.clerk
+        self.clerk.director = self
         self.scribe = self.inventory.scribe
         self.debug = self.inventory.debug
         self.csaccessor = self.inventory.csaccessor
