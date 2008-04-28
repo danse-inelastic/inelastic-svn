@@ -79,7 +79,7 @@ class ScatteringKernelInput(base):
         except AuthenticationError, err:
             return err.page
         main = page._body._content._main
-        document = main.document()
+        document = main.document(title="")
         document.byline = '<a href="http://danse.us">DANSE</a>'
         
         formcomponent = self.retrieveFormToShow( 'gulpNE')
