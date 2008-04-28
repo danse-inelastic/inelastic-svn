@@ -36,8 +36,12 @@ class FormActor(Actor):
 
 
     def processFormInputs(self, director):
-        self.form_received.director = director
-        return self.form_received.processUserInputs()
+        form_received = self.form_received
+        if form_received is None:
+            self._debug.log( 'no form received' )
+            return
+        form_received.director = director
+        return form_received.processUserInputs()
 
 
     def retrieveFormToShow(self, name, *args):
@@ -51,6 +55,8 @@ class FormActor(Actor):
         self.form_received = self.inventory.form_received
         return
 
+
+from Form import InputProcessingError
 
 
 # version

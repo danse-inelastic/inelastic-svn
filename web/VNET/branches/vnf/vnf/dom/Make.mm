@@ -38,6 +38,7 @@ EXPORT_PYTHON_MODULES = \
 	IDFPhononDispersion.py \
 	Instrument.py \
 	Component.py \
+	DetectorSystem_fromXML.py \
 	IQEMonitor.py \
 	Job.py \
 	Matter.py \

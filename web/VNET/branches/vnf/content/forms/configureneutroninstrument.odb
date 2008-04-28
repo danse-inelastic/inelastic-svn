@@ -65,7 +65,7 @@ class Form( base ):
 
     def __init__(self, name = None):
         if name is None:
-            name = 'selectneutroninstrument'
+            name = 'configureneutroninstrument'
 
         base.__init__(self, name)
 
