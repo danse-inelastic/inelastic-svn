@@ -33,8 +33,8 @@ class SupportingCalcs(Actor):
         # build the sample input form
         p = document.paragraph()
         p.text = ['Simulate the material with atomistic forcefields (powered by GULP/MMTK)<br>',
-                  '<a href="/cgi-bin/java/GULP.jnlp">Gulp</a><br>',
-                  '<a href="/cgi-bin/java/cod.jnlp">cod</a><br>']
+                  '<a href="/java/GULP.jnlp">Gulp</a><br>',
+                  '<a href="/java/cod.jnlp">cod</a><br>']
         
 #        atoms = document.form(name='login', legend='Upload xyz file', action=app.cgihome)
 #        
