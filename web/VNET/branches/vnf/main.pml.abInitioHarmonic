@@ -19,7 +19,6 @@
     <property name='submit'>next</property>
     <component name='scatteringKernelInput'>
     	<property name='form-received'>selectkernel</property>
-    	
    		<component name='selectkernel'>
     		<property name='kernel'>abInitioHarmonic</property>
     	</component>     	
@@ -29,7 +28,6 @@
     	<property name='passwd'>demo</property>
     </component>
   </component>
-
 </inventory>
 
 
