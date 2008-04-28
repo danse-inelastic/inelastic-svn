@@ -15,11 +15,6 @@ from FormActor import FormActor as base
 
 class ScatteringKernelInput(base):
 
-    class Inventory(base.Inventory):
-        import pyre.inventory
-        id = pyre.inventory.str("id", default=None)
-        id.meta['tip'] = "the unique identifier of a scattering kernel"
-
     def default(self, director):
         try:
             page, document = self._head( director )
