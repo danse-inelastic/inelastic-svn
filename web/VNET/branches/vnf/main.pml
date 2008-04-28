@@ -17,9 +17,9 @@
     <property name='actor'>scatteringKernelInput</property>
     <property name='submit'>next</property>
     <component name='scatteringKernelInput'>
-    	<property name='form-recieved'>selectkernel</property>
+    	<property name='form-received'>selectkernel</property>
         <component name='selectkernel'>
-    	     <property name='kernel'>gulpNE</property>
+    	     <property name='kernel'>abInitioHarmonic</property>
         </component> 
     </component>    
     <property name='routine'>onSelect</property>   

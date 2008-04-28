@@ -17,7 +17,7 @@
     <property name='actor'>scatteringKernelInput</property>
     <property name='submit'>next</property>
     <component name='scatteringKernelInput'>
-    	<property name='form-recieved'>selectkernel</property>
+    	<property name='form-received'>selectkernel</property>
     </component>    
     <property name='routine'>onSelect</property>
     <component name='selectkernel'>
