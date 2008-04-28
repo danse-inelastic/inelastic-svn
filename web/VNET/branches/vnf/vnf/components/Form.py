@@ -44,6 +44,15 @@ class Form( base ):
     pass # end of Form
 
 
+class InputProcessingError(Exception):
+
+    def __init__(self, errors):
+        self.errors = errors
+        Exception.__init__(self, errors)
+        return
+    pass
+
+
 # version
 __id__ = "$Id$"
 

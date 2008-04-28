@@ -11,7 +11,7 @@
 
 
 from Actor import actionRequireAuthentication, action_link, AuthenticationError
-from FormActor import FormActor as base
+from FormActor import FormActor as base, InputProcessingError
 
 
 class NeutronExperimentWizard(base):
@@ -111,12 +111,12 @@ class NeutronExperimentWizard(base):
         return page
 
 
-    def configure_instrument(self, director):
+    def configure_instrument(self, director, errors = None):
         try:
             page = director.retrieveSecurePage( 'neutronexperimentwizard' )
         except AuthenticationError, err:
             return err.page
-        
+
         self.processFormInputs( director )
 
         id = self.inventory.id
@@ -127,18 +127,20 @@ class NeutronExperimentWizard(base):
 
         # populate the main column
         document = main.document(
-            title='Neutron Experiment Wizard: configure')
+            title='Neutron Experiment Wizard: instrument configuration')
         document.description = ''
         document.byline = 'byline?'
 
         instrument = director.clerk.getInstrument( instrument_id )
-        formname = 'configure%s' % (
-            instrument.short_description.lower().replace(' ','_')
-            .replace( '-', '_' ), )
+        formname = 'configure_%s_instrument' % (
+            instrument.short_description
+            .lower().replace(' ','_').replace( '-', '_' ), )
 
+        #raise RuntimeError, formname
         formcomponent = self.retrieveFormToShow(formname)
         if formcomponent is None:
             formcomponent = self.retrieveFormToShow('configureneutroninstrument')
+            pass # end if
 
         formcomponent.inventory.instrument_id = instrument.id
         formcomponent.director = director
@@ -157,16 +159,16 @@ class NeutronExperimentWizard(base):
             arguments = {'form-received': formcomponent.name } )
         from vnf.weaver import action_formfields
         action_formfields( action, form )
-
+        
         # expand the form with fields of the data object that is being edited
-        formcomponent.expand( form )
-
+        formcomponent.expand( form, errors = errors )
+        
         # run button
         submit = form.control(name="submit", type="submit", value="OK")
         
         return page
-
-
+    
+    
     def sample_preparation(self, director):
         try:
             page = director.retrieveSecurePage( 'neutronexperimentwizard' )
@@ -174,15 +176,20 @@ class NeutronExperimentWizard(base):
             return err.page
         
         main = page._body._content._main
-
+        
         # populate the main column
         document = main.document(
             title='Neutron Experiment Wizard: sample preparation')
         document.description = ''
         document.byline = 'byline?'
-
-        self.processUserInputs()
-
+        
+        try:
+            self.processFormInputs( director )
+        except InputProcessingError, err:
+            errors = err.errors
+            self.form_received = None
+            return self.configure_instrument( director, errors = errors )
+        
         return page
 
 

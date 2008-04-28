@@ -547,6 +547,20 @@ class DeepCopier:
         self.clerk.updateRecord(copy)
         return copy
 
+
+    def onDetectorSystem_fromXML(self, record):
+        from vnf.dom.DetectorSystem_fromXML import DetectorSystem_fromXML \
+             as table
+        copy = self.clerk.new_ownedobject( table )
+        attrs = [
+            'tofmin', 'tofmax', 'ntofbins',
+            ]
+        for attr in attrs:
+            setattr( copy, attr, getattr( record, attr) )
+            continue
+        self.clerk.updateRecord(copy)
+        return copy
+
     pass # end of DeepCopier
 
 
@@ -601,6 +615,10 @@ class HierarchyRetriever:
 
     def onIQEMonitor(self, iqem):
         return iqem
+
+
+    def onDetectorSystem_fromXML(self, ds):
+        return ds
 
 
     def onSampleAssembly(self, sampleassembly):
