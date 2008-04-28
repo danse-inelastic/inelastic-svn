@@ -21,7 +21,7 @@
         <property name="port">50001</property>
 
         <component name="ipa-pickler">
-            <property name="key">ig4o9wslbhefzmv1</property>
+            <property name="key">axuz8v5y4bk2fhne</property>
         </component>
 
     </component>
