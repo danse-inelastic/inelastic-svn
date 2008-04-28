@@ -44,16 +44,36 @@ class Sample(Actor):
             
         p = document.paragraph()
         numSamples = len(samples)
-        columns = ['Sample Name', 'Texture','Creator','Date Created','Id']
-        matterColumns=['Matter Description','Cartesian Lattice','Atom Positions']
-        shapeColumns=[]
+        columns = ['Sample', 'Material','Shape']        
+#        columns = ['Sample Name', 'Texture','Creator','Date Created','Id']
+#        matterColumns=['Matter Description','Cartesian Lattice','Atom Positions']
+#        shapeColumns=['Shape Description','Cartesian Lattice','Atom Positions']
         numColumns=len(columns)#scatteringKernels[0].getNumColumns()
 
         from PyHtmlTable import PyHtmlTable
         t=PyHtmlTable(numSamples,numColumns, {'width':'400','border':2,'bgcolor':'white'})
-        for row in range(numSamples):
-            colNum=0
-            for name in samples[row].getColumnNames():
+        for colNum, col in enumerate(columns):
+            t.setc(0,colNum,col)
+#        for row in range(numSamples):
+#            colNum=0
+#            for name in samples[row].getColumnNames():
+        for row, job in enumerate( samples ):
+            for colNum, colName in enumerate( columns ):
+                
+                value = job.getColumnValue(colName)
+                if colName == 'Sample':
+                    link = action_link(
+                        actionRequireAuthentication(
+                        'sample',
+                        director.sentry,
+                        label = value,
+                        routine = 'sampleInput',
+                        id = job.id,
+                        ),  director.cgihome
+                        )
+                    value = link
+                
+                
                 t.setc(row,colNum,samples[row].getColumnValue(name))
                 colNum+=1
         p.text = [t.return_html()]

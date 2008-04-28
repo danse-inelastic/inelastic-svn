@@ -25,7 +25,6 @@ class FormActor(Actor):
 
     class Inventory( Actor.Inventory ):
 
-        import pyre.inventory
         import vnf.inventory
 
         from Form import Form
