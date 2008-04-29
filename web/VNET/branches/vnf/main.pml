@@ -14,7 +14,7 @@
 <inventory>
 
   <component name='main'>
-    <property name='actor'>samplePreparation</property>   
+    <property name='actor'>neutronexperimentwizard</property>   
     <component name='sentry'>
     	<property name='username'>demo</property>
     	<property name='passwd'>demo</property>

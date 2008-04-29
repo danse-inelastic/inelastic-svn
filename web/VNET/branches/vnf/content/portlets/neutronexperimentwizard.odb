@@ -20,6 +20,8 @@ routine2menu = {
     'configure_instrument': 'instrument',
     'sample_preparation': 'sample',
     'sample_environment': 'sample_environment',
+    'kernel_origin': 'kernel_origin',
+    'gulp_dynamics': 'gulp_dynamics',
     'experiment_parameters': 'experiment_parameters',
     'pick_computation_server': 'submit_experiment',
     }
@@ -68,6 +70,26 @@ def portlet(app):
     sample_environment.icon = "images/link_icon.gif"
     sample_environment.type = "navItem"
     
+    kernel_origin = portlet.item(description="Kernel origin")
+    action = actionRequireAuthentication(
+        actor = 'neutronexperimentwizard', sentry = app.sentry,
+        routine = 'kernel_origin',
+        id = app.actor.inventory.id,
+        )
+    kernel_origin.target = action_href(action, app.cgihome)
+    kernel_origin.icon = "images/link_icon.gif"
+    kernel_origin.type = "navItem"
+    
+    gulp_dynamics = portlet.item(description="Gulp dynamics")
+    action = actionRequireAuthentication(
+        actor = 'neutronexperimentwizard', sentry = app.sentry,
+        routine = 'gulp_dynamics',
+        id = app.actor.inventory.id,
+        )
+    gulp_dynamics.target = action_href(action, app.cgihome)
+    gulp_dynamics.icon = "images/link_icon.gif"
+    gulp_dynamics.type = "navItem"
+        
     experiment_parameters = portlet.item(description="Experiment parameters")
     action = actionRequireAuthentication(
         actor = 'neutronexperimentwizard', sentry = app.sentry,
