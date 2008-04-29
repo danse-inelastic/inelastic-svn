@@ -157,7 +157,7 @@ class NeutronExperimentWizard(base):
         configured_instrument_id = experiment.instrument_id
         configured_instrument = director.clerk.getConfiguredInstrument(
             configured_instrument_id)
-        instrument_id = configured_instrument.instrument
+        instrument_id = configured_instrument.instrument_id
 
         main = page._body._content._main
 
@@ -215,6 +215,7 @@ class NeutronExperimentWizard(base):
         except InputProcessingError, err:
             errors = err.errors
             self.form_received = None
+            director.routine = 'configure_instrument'
             return self.configure_instrument( director, errors = errors )
 
         experiment = director.clerk.getNeutronExperiment(

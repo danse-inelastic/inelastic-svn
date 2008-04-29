@@ -197,6 +197,8 @@ class Clerk(Component):
         id: id of configuration for the given instrument
         '''
         table = self._instrument_configuration_table( name )
+        if table is None:
+            from vnf.dom.Instrument import Instrument as table
         return self._getRecordByID( table, id )
 
 
@@ -457,8 +459,11 @@ class Clerk(Component):
 
     def _instrument_configuration_table(self, name):
         tablename = '%sconfiguration' % name
-        exec 'from vnf.dom.%s import %s as table' % (
-            tablename, tablename )
+        try:
+            exec 'from vnf.dom.%s import %s as table' % (
+                tablename, tablename )
+        except ImportError:
+            return
         return table
 
 
@@ -814,25 +819,29 @@ class HierarchyRetriever:
 
 
     def onConfiguredInstrument(self, configured):
-        instrument_id = configured.instrument
+        instrument_id = configured.instrument_id
         instrument = self.clerk.getInstrument( instrument_id )
         instrument = self(instrument)
 
-        configuration_id = configured.configuration
+        configuration_id = configured.configuration_id
         if configuration_id in ['None', None, '']:
-            # if configuration is not explicit, we can retrieve
-            # it as a normal instrument. it could contain
+            # if configuration is not explicit,
+            # it will be explicitly stored in the instrument table.
+            # be sure that this 'instrument' (actually configuration)
+            # could contain
             # less components than the original template instrument.
             # it could contain no component too.
+            
+            # create a new instrument record
             from vnf.dom.Instrument import Instrument
-            instrument = Instrument()
-            instrument.id = configured.id
-            configuration = self.onInstrument( instrument )
-        else:
-            configuration = self.clerk.getInstrumentConfiguration(
-                instrument_id, configuration_id )
-            configuration = self(configuration)
-            pass # end if
+            instrument = self.clerk.new_ownedobject( Instrument )
+            configuration_id = configured.configuration_id = instrument.id
+            self.clerk.updateRecord( configured )
+            pass # endif
+
+        configuration = self.clerk.getInstrumentConfiguration(
+            instrument_id, configuration_id )
+        configuration = self(configuration)
 
         configured.instrument = instrument
         configured.configuration = configuration
@@ -858,6 +867,7 @@ class HierarchyRetriever:
             geometer = self.clerk.getInstrumentGeometer( instrument )
             instrument.geometer = geometer
         except:
+            # does not have geometer records
             import traceback
             self.clerk._debug.log( traceback.format_exc() )
             pass

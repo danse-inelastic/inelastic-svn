@@ -21,11 +21,11 @@ class ConfiguredInstrument(OwnedObject):
     
     import pyre.db
 
-    instrument = pyre.db.varchar( name = 'instrument', length = 100 )
-    instrument.meta['tip'] = 'id of instrument in the instrument table'
+    instrument_id = pyre.db.varchar( name = 'instrument_id', length = 100 )
+    instrument_id.meta['tip'] = 'id of instrument in the instrument table'
     
-    configuration = pyre.db.varchar( name = 'configuration', length = 100 )
-    configuration.meta['tip'] = 'id of configuration in the "<instrument>configuration" table'
+    configuration_id = pyre.db.varchar( name = 'configuration_id', length = 100 )
+    configuration_id.meta['tip'] = 'id of configuration in the "<instrument>configuration" table'
     
     pass # end of Instrument
 

@@ -80,8 +80,8 @@ class Form( base ):
         p.text = [
             'Sample is the heart of your experiment. By placing',
             'your sample in the neutron beam of a neutron instrument,',
-            'you can study, for example, interesting excitations',
-            'such as phonons in your sample.',
+            'you can study, for example, phonons or mangons',
+            'in your sample.',
             ]
 
         p = form.paragraph()
