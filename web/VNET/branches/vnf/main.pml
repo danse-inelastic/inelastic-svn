@@ -14,15 +14,7 @@
 <inventory>
 
   <component name='main'>
-    <property name='actor'>scatteringKernelInput</property>
-    <property name='submit'>next</property>
-    <component name='scatteringKernelInput'>
-    	<property name='form-received'>selectkernel</property>
-        <component name='selectkernel'>
-    	     <property name='kernel'>abInitioHarmonic</property>
-        </component> 
-    </component>    
-    <property name='routine'>onSelect</property>   
+    <property name='actor'>polycrystalScatteringIntensity</property>   
     <component name='sentry'>
     	<property name='username'>demo</property>
     	<property name='passwd'>demo</property>

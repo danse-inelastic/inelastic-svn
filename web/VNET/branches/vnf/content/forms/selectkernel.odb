@@ -27,29 +27,23 @@ class Form( base ):
     def expand(self, form):
         '''expand an existing form with fields from this component'''
         prefix = formactor_action_prefix
-        gulpHarmonic = form.radio( id= 'radio1', name = '%s' % (prefix, ), label = 'Gulp Harmonic', value = 'gulpHarmonic')
-        gulpNE = form.radio( id= 'radio2', name = '%s' % (prefix, ), label = "Gulp Newton's Equation", value = 'gulpNE')
-        mmtkNE = form.radio(id='radio3', name='%s' % (prefix, ), label = "Mmtk Newton's Equations", value = 'mmtkNE')
-        abInitioHarmonic = form.radio(id='radio4', name='%s' % (prefix, ), label = 'AbInitio Energies, Phon Harmonic Motion', value = 'abInitioHarmonic')
-        phononDispersions = form.radio(id='radio6', name='%s' % (prefix, ), label = "Phonon Dispersions", value = 'phononDispersions')
+        name = '%s.%s' % (formactor_action_prefix, 'kernel')
+        gulpHarmonic = form.radio( id= 'radio1', name = name, label = 'Gulp Harmonic', value = 'gulpHarmonic')
+        gulpNE = form.radio( id= 'radio2', name = name, label = "Gulp Newton's Equation", value = 'gulpNE')
+        mmtkNE = form.radio(id='radio3', name= name, label = "Mmtk Newton's Equations", value = 'mmtkNE')
+        abInitioHarmonic = form.radio(id='radio4', name=name, label = 'AbInitio Energies, Phon Harmonic Motion', value = 'abInitioHarmonic')
+        phononDispersions = form.radio(id='radio6', name=name, label = "Phonon Dispersions", value = 'phononDispersions')
 
-    def processUserInputs(self):
+    def processUserInputs(self,director):
         'process user input '
         return self.inventory.kernel
-        
-#        choices = self.parameters
-#        chosen = []
-#        for choice in choices: 
-#            value = getattr( self.inventory, choice )
-#            if value: chosen.append( choice )
-#            continue
-#        return chosen[0]
 
 
 
 
-formactor_action_prefix = 'selectkernel.kernel' # assumed actor is a form actor
 
+#formactor_action_prefix = 'actor.form-received' # assumed actor is a form actor
+from vnf.components.DBObjectForm import formactor_action_prefix
 
 def form(): return Form( 'selectkernel' )
 
