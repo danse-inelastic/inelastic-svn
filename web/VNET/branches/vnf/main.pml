@@ -14,7 +14,7 @@
 <inventory>
 
   <component name='main'>
-    <property name='actor'>polycrystalScatteringIntensity</property>   
+    <property name='actor'>samplePreparation</property>   
     <component name='sentry'>
     	<property name='username'>demo</property>
     	<property name='passwd'>demo</property>
