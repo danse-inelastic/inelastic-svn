@@ -72,7 +72,8 @@ class Scheduler:
         dummy, outputfilename = os.path.split(outputpath)
 
         state = d['job_state']
-        start_time = d['start_time']
+        import time
+        start_time = d.get('start_time') or time.ctime()
         
         ret = {
             'remote_outputfilename': outputfilename,
@@ -168,6 +169,11 @@ import os
 _states = {
     'C': 'finished',
     'R': 'running',
+    'Q': 'queued',
+    'E': 'exiting', #after having run
+    'H': 'onhold',
+    'W': 'waiting',
+    'S': 'suspend',
     }
     
 def _state( state ):

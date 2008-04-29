@@ -27,6 +27,19 @@ class Builder:
         return f( something )
 
 
+    def applyConfiguration( self, configuration, instrument ):
+        from InstrumentConfigurationApplyer import applyer
+        applyer( instrument ).apply( configuration )
+        return
+
+
+    def onConfiguredInstrument(self, configured):
+        instrument = configured.instrument
+        configuration = configured.configuration
+        self.applyConfiguration( configuration, instrument )
+        return self.dispatch( instrument )
+
+
     def onInstrument(self, instrument):
         self._write( 'import mccomponents.pyre_support' )
         self._write( 'from mcni.pyre_support.Instrument import Instrument as base' )

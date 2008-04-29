@@ -12,17 +12,20 @@
 #
 
 
-from DbObject import DbObject
+from OwnedObject import OwnedObject
 
 
-class ARCSconfiguration(DbObject):
+class ConfiguredInstrument(OwnedObject):
     
-    name = "arcsconfigurations"
+    name = "configuredinstruments"
     
     import pyre.db
 
-    Ei = pyre.db.real( name = 'Ei', default = 70 )
-    Eiresolution = pyre.db.real( name = 'Eiresolution', default = 0.03 )
+    instrument = pyre.db.varchar( name = 'instrument', length = 100 )
+    instrument.meta['tip'] = 'id of instrument in the instrument table'
+    
+    configuration = pyre.db.varchar( name = 'configuration', length = 100 )
+    configuration.meta['tip'] = 'id of configuration in the "<instrument>configuration" table'
     
     pass # end of Instrument
 

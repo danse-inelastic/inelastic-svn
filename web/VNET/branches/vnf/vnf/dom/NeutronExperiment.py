@@ -20,7 +20,7 @@ class NeutronExperiment(base):
     import pyre.db
 
     instrument_id = pyre.db.varchar( name = 'instrument_id', length = 100 )
-    instrument_id.meta['tip'] = 'reference id in the instrument table'
+    instrument_id.meta['tip'] = 'reference id in the configuredinstrument table'
 
     sampleassembly_id = pyre.db.varchar( name = 'sampleassembly_id', length = 100 )
     sampleassembly_id.meta['tip'] = 'reference id in the sample assembly table'

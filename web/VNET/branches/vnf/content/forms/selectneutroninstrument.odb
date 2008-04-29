@@ -37,8 +37,20 @@ class Form( base ):
         
         director = self.director
         experiment = director.clerk.getNeutronExperiment( experiment_id )
-        current_instrument_id = experiment.instrument_id
+        configuredinstrument_id = experiment.instrument_id
+        if configuredinstrument_id in ['None', None, '']:
+            # need to create a configured_instrument record
+            from vnf.dom.ConfiguredInstrument import ConfiguredInstrument
+            ci = director.clerk.new_ownedobject( ConfiguredInstrument )
+            # and connect this to the experiment
+            configuredinstrument_id = experiment.instrument_id = ci.id
+            director.clerk.updateRecord( experiment )
+            pass # end if
 
+        # get the configure_instrument record
+        configured_instrument = director.clerk.getConfiguredInstrument(
+            configuredinstrument_id)
+        current_instrument_id = configured_instrument.instrument
 
         p = form.paragraph()
         p.text = [
@@ -52,7 +64,8 @@ class Form( base ):
         prefix = formactor_action_prefix
 
         experiment_id_field = form.hidden(
-            name = '%s.experiment_id' % prefix, value = self.inventory.experiment_id )
+            name = '%s.experiment_id' % prefix,
+            value = self.inventory.experiment_id )
         instruments = director.clerk.indexInstruments()
         instruments = instruments.itervalues()
         instrument_templates = filter(
@@ -81,19 +94,19 @@ class Form( base ):
         director = self.director
         clerk = director.clerk
 
-        #get the selected instrument
-        instrument = clerk.getInstrument( self.inventory.instrument_id )
-        #retrive the hierarchy
-        instrument = clerk.getHierarchy( instrument )
-        #make a deep copy
-        instrument = clerk.deepcopy( instrument )
-        
         experiment_id = self.inventory.experiment_id
         experiment = director.clerk.getNeutronExperiment( experiment_id )
 
-        experiment.instrument_id = instrument.id
-        experiment.status = 'instrument selected'
+        configuredinstrument_id = experiment.instrument_id
         
+        # get the configure_instrument record
+        configured_instrument = director.clerk.getConfiguredInstrument(
+            configuredinstrument_id)
+        
+        configured_instrument.instrument = self.inventory.instrument_id
+        director.clerk.updateRecord( configured_instrument )
+
+        experiment.status = 'instrument selected'
         director.clerk.updateRecord( experiment )
         return
 

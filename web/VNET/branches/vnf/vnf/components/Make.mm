@@ -33,6 +33,7 @@ EXPORT_PYTHON_MODULES = \
 	Geometer.py \
 	Greeter.py \
 	Instrument.py \
+	InstrumentConfigurationApplyer.py \
 	InstrumentSimulationAppBuilder.py \
 	Job.py \
 	McstasSampleBuilder.py \

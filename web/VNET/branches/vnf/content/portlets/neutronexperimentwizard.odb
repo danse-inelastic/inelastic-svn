@@ -15,7 +15,7 @@ from vnf.components.Actor import Actor, action_link, actionRequireAuthentication
 from vnf.weaver import action_href
 
 routine2menu = {
-    'start': None,
+    'start': 'start',
     'select_instrument': 'instrument',
     'configure_instrument': 'instrument',
     'sample_preparation': 'sample',
@@ -27,6 +27,16 @@ routine2menu = {
 def portlet(app):
     import opal.content
     portlet = opal.content.portlet(title="navigation", id="portlet-navigation-tree")
+
+    start = portlet.item(description="Start")
+    action = actionRequireAuthentication(
+        actor = 'neutronexperimentwizard', sentry = app.sentry,
+        routine = 'start',
+        id = app.actor.inventory.id,
+        )
+    start.target = action_href(action, app.cgihome)
+    start.icon = "images/link_icon.gif"
+    start.type = "navItem"
 
     instrument = portlet.item(description="Select instrument")
     action = actionRequireAuthentication(
