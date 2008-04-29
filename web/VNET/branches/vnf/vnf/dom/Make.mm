@@ -31,6 +31,7 @@ all: export
 
 EXPORT_PYTHON_MODULES = \
 	__init__.py \
+	ARCSconfiguration.py \
 	Block.py \
 	Crystal.py \
 	DbObject.py \

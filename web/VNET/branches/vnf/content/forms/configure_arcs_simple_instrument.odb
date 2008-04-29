@@ -52,11 +52,6 @@ class Form( base ):
         instrument = director.clerk.getInstrument( instrument_id )
         instrument = director.clerk.getHierarchy( instrument )
         components = instrument.components
-        d = {}
-        for component in components:
-            d[ component.label ] = component
-            continue
-        components_dict = d
 
         prefix = formactor_action_prefix
 
@@ -86,7 +81,7 @@ class Form( base ):
             'for, for example, a phonon measurement are 60~100 meV.',
             ]
         property = 'Ei'
-        value = components_dict['source'].realcomponent.energy
+        value = instrument.source.realcomponent.energy
         field = form.text(
             id = property,
             name='%s.%s' % (prefix, property),
@@ -124,6 +119,7 @@ class Form( base ):
 
         #get the selected instrument
         instrument = clerk.getInstrument( self.inventory.instrument_id )
+        instrument = clerk.getHierarchy( instrument )
 
         errors = []
         
@@ -133,6 +129,10 @@ class Form( base ):
         if Ei < 0 or Ei > 200.: errors.append( 'Ei' )
         
         if len(errors): raise InputProcessingError, errors
+
+        source = instrument.source.realcomponent
+        source.energy = Ei
+        clerk.updateRecord( source )
         return
 
 

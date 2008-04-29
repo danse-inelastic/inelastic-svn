@@ -72,15 +72,13 @@ class Form(base):
         selected_server = record.server
         if selected_server not in ids: selected_server = entries[0][0]
         
-        import opal.content
-        selector = opal.content.selector(
+        selector = form.selector(
+            id = 'server_selector',
             name = '%s.server' % prefix,
             entries = entries,
             label = 'server',
             selected = selected_server,
             )
-        form.contents.append( selector )
-
         field = form.text(
             id = 'numprocessors',
             name = '%s.numprocessors' % prefix,

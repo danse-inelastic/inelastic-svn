@@ -198,8 +198,30 @@ class Clerk(Component):
         '''retrieve scatterers in the sample assembly of given id'''
         from vnf.dom.SampleAssembly import SampleAssembly
         from vnf.dom.Scatterer import Scatterer
-        return self._getElements(
-            id, SampleAssembly.Scatterers, Scatterer)
+
+        referencetable = SampleAssembly.Scatterers
+        
+        records = self.db.fetchall(
+            referencetable, where = "localkey='%s'" % id )
+
+        ret = []
+        
+        for record in records:
+            scattererID = record.remotekey
+            scattererrecord = self._getRecordByID( Scatterer, scattererID )
+            # set "label" - sample, sample_holder, furnace
+            # label is an attribute of a scatterer in a sample assembly
+            # it is not an attribute of a scatterer itself (you can
+            # do a scattering experiment using a furnace as a sample,
+            # for example). so the label attribute is saved in
+            # the reference table. here we transfer it to the
+            # abstract scatterer record.
+            scattererrecord.label = record.label
+            ret.append( scattererrecord )
+            continue
+
+        return ret
+    
 
     def getComponents(self, id):
         '''retrieve components in the instrument of given id'''
@@ -378,7 +400,17 @@ class Clerk(Component):
 
     def newRecord(self, record):
         'insert a new record into db'
-        self.db.insertRow( record )
+        try:
+            self.db.insertRow( record )
+        except:
+            columns = record.getColumnNames()
+            values = [ record.getColumnValue( column ) for column in columns ]
+            s = ','.join(
+                [ '%s=%s' % (column, value)
+                  for column, value in zip(columns, values)
+                  ] )
+            self._debug.log( 'failed to insert record: %s' % s)
+            raise
         return record
 
 
@@ -458,6 +490,135 @@ class DeepCopier:
         return method(node)
 
 
+    def onSampleAssembly(self, sa):
+        #first copy all scatterers
+        scatterers = sa.scatterers
+        scatterer_copies = [ self( scatterer ) for scatterer in scatterers ]
+        from vnf.dom.SampleAssembly import SampleAssembly
+        sa_copy = self.clerk.new_ownedobject( SampleAssembly )
+
+        self._copy_attrs( sa, sa_copy, attrs = ['short_description'] )
+
+        #fill the one-many relation table of SampleAssembly.Scatterers
+        from vnf.dom.SampleAssembly import SampleAssembly
+        for scatterer in scatterer_copies:
+            label = scatterer.label
+            ref = self.clerk.newReference(
+                SampleAssembly.Scatterers,
+                sa_copy.id, scatterer.id )
+            #transfer label
+            ref.label = label
+            #new record to db
+            self.clerk.newRecord( ref )
+            continue
+        
+        sa_copy.scatterers = scatterer_copies
+
+        # update record
+        self.clerk.updateRecord( sa_copy )
+        
+        return sa_copy
+
+
+    def onShape(self, shape):
+        #first copy the real shape
+        realshape = shape.realshape
+        realshape_copy = self(realshape)
+
+        #now make a new record
+        from vnf.dom.Shape import Shape
+        shape_copy = self.clerk.new_ownedobject( Shape )
+        
+        #copy some attrs from old record
+        attrs = ['type', 'short_description']
+        self._copy_attrs( shape, shape_copy, attrs )
+
+        #new record should point to the new real shape
+        shape_copy.reference = realshape_copy.id
+
+        #update record to db
+        self.clerk.updateRecord( shape_copy )
+        return shape_copy
+
+
+    def onScatterer(self, scatterer):
+        #first copy the real scatterer
+        realscatterer = scatterer.realscatterer
+        realscatterer_copy = self(realscatterer)
+
+        #now make a new record
+        from vnf.dom.Scatterer import Scatterer
+        scatterer_copy = self.clerk.new_ownedobject( Scatterer )
+        
+        #copy some attrs from old record
+        attrs = ['type', 'short_description']
+        self._copy_attrs( scatterer, scatterer_copy, attrs )
+
+        #new record should point to the new real scatterer
+        scatterer_copy.reference = realscatterer_copy.id
+        #attach real scatterer copy to the scatterer copy
+        scatterer_copy.realscatterer = realscatterer_copy
+
+        #update record to db
+        self.clerk.updateRecord( scatterer_copy )
+        
+        #remember my label in my sampleassembly
+        try: scatterer_copy.label = scatterer.label
+        except: scatterer_copy.label = None
+        
+        return scatterer_copy
+
+
+    def onPolyXtalScatterer(self, scatterer):
+        #first make copies of shape and crystal
+        shape_copy = self( scatterer.shape )
+        crystal_copy = self( scatterer.crystal )
+        
+        #now make a new record
+        from vnf.dom.PolyXtalScatterer import PolyXtalScatterer as table
+        scatterer_copy = self.clerk.new_ownedobject( table )
+        
+        #copy some attrs from old record
+        attrs = ['short_description']
+        self._copy_attrs( scatterer, scatterer_copy, attrs )
+
+        #new record should point to the new crystal and shape
+        scatterer_copy.shape_id = shape_copy.id
+        scatterer_copy.crystal_id = crystal_copy.id
+
+        #update record to db
+        self.clerk.updateRecord( scatterer_copy )
+        return scatterer_copy
+
+
+    def onBlock(self, block):
+        #now make a new record
+        from vnf.dom.Block import Block as table
+        block_copy = self.clerk.new_ownedobject( table )
+        
+        #copy some attrs from old record
+        attrs = ['height', 'width', 'thickness', 'short_description']
+        self._copy_attrs( block, block_copy, attrs )
+
+        #update record to db
+        self.clerk.updateRecord( block_copy )
+        return block_copy
+
+
+    def onCrystal(self, crystal):
+        #now make a new record
+        from vnf.dom.Crystal import Crystal as table
+        crystal_copy = self.clerk.new_ownedobject( table )
+        
+        #copy some attrs from old record
+        attrs = ['datafile', 'chemical_formula', 'short_description']
+        self._copy_attrs( crystal, crystal_copy, attrs )
+
+        #update record to db
+        self.clerk.updateRecord( crystal_copy )
+        return crystal_copy
+
+
     def onInstrument(self, instrument):
         components = instrument.components
         component_copies = [ self( component ) for component in components ]
@@ -475,8 +636,11 @@ class DeepCopier:
             ref = self.clerk.newReference(
                 Instrument.Components,
                 instrument_copy.id, component.id )
-            ref.label = component.label
+            #transfer label
+            ref.label = label
             self.clerk.newRecord( ref )
+            #made individual component available in instrument's name space
+            setattr( instrument_copy, label, component )
             continue
         
         instrument_copy.components = component_copies
@@ -561,6 +725,13 @@ class DeepCopier:
         self.clerk.updateRecord(copy)
         return copy
 
+
+    def _copy_attrs(self, old, new, attrs):
+        for attr in attrs:
+            setattr(new, attr, getattr(old, attr) )
+            continue
+        return
+
     pass # end of DeepCopier
 
 
@@ -586,7 +757,7 @@ class HierarchyRetriever:
         sampleassembly_id = experiment.sampleassembly_id
         if sampleassembly_id == '' or sampleassembly_id == 'None':
             experiment.sampleassembly = None
-            return
+            return experiment
         
         sampleassembly = self.clerk.getSampleAssembly( sampleassembly_id )
         sampleassembly = self(sampleassembly)
@@ -598,6 +769,11 @@ class HierarchyRetriever:
         components = self.clerk.getComponents( instrument.id )
         components = [ self( component ) for component in components ]
         instrument.components = components
+        # make individual component available in instrument's namespace
+        for component in components:
+            setattr(instrument, component.label, component)
+            continue
+        
         geometer = self.clerk.getInstrumentGeometer( instrument )
         instrument.geometer = geometer
         return instrument
