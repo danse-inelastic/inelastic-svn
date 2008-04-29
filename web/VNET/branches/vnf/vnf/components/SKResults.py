@@ -28,7 +28,7 @@ class SKResults(Actor):
         p = document.paragraph()
         p.text = ['Here are the results of running the simulation on ...']        
         p = document.paragraph()
-        p.text = ['<a href="/java/sgt.jnlp">Plot of S(Q,E)</a><br>']
+        p.text = ['<a href="/java/SqePlot.jnlp">Plot of S(Q,E)</a><br>']
         return page
 
     def __init__(self, name=None):
