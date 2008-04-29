@@ -289,11 +289,15 @@ class NeutronExperimentWizard(base):
             legend= formcomponent.legend(),
             action=director.cgihome)
 
+        #call scattering kernel input actor
+        
+        #
+
         # specify action
         action = actionRequireAuthentication(
             actor = 'neutronexperimentwizard', sentry = director.sentry,
             label = '',
-            routine = 'experiment_parameters',
+            routine = 'dynamics_selection',
             id = self.inventory.id,
             arguments = {'form-received': formcomponent.name } )
         from vnf.weaver import action_formfields
@@ -307,47 +311,135 @@ class NeutronExperimentWizard(base):
         
         return page
 
+    def dynamics_selection(self, director):
+        try:
+            page, document = self._head( director )
+        except AuthenticationError, err:
+            return err.page
+        formcomponent = self.retrieveFormToShow( 'selectkernel')
+        formcomponent.director = director
+        # build the SKChoice form
+        SKChoice = document.form(name='scatteringKernelInput', action=director.cgihome)
+        # specify action
+        action = actionRequireAuthentication(          
+            actor = 'scatteringKernelInput', 
+            sentry = director.sentry,
+            routine = 'onSelect',
+            label = '',
+            arguments = {'form-received': formcomponent.name },
+            )
+        from vnf.weaver import action_formfields
+        action_formfields( action, SKChoice )
+        # expand the form with fields of the data object that is being edited
+        formcomponent.expand( SKChoice )
+        submit = SKChoice.control(name='submit',type="submit", value="next")
+        return page 
+    
+    def onSelect(self, director):
+        selected = self.processFormInputs(director)
+        method = getattr(self, selected )
+        return method( director )
+    
+    def gulpNE(self, director):
+        try:
+            page = director.retrieveSecurePage( 'gulpNE' )
+        except AuthenticationError, err:
+            return err.page
+        main = page._body._content._main
+        document = main.document(title="")
+        document.byline = '<a href="http://danse.us">DANSE</a>'
+        
+        formcomponent = self.retrieveFormToShow( 'gulpNE')
+        formcomponent.director = director
+        # build the SKChoice form
+        form = document.form(name='scatteringKernelInput', action=director.cgihome)
+        # specify action
+        action = actionRequireAuthentication(          
+            actor = 'job', 
+            sentry = director.sentry,
+            routine = 'edit',
+            label = '',
+            arguments = {'form-received': formcomponent.name },
+            )
+        from vnf.weaver import action_formfields
+        action_formfields( action, form )
+        # expand the form with fields of the data object that is being edited
+        formcomponent.expand( form )
+        next = form.control(name='submit',type="submit", value="submit job")
+        return page 
+    
+    def abInitioHarmonic(self, director):
+        try:
+            page = director.retrieveSecurePage( 'abInitioHarmonic' )
+        except AuthenticationError, err:
+            return err.page
+        main = page._body._content._main
+        document = main.document(title="")
+        document.byline = '<a href="http://danse.us">DANSE</a>'
+        
+        formcomponent = self.retrieveFormToShow( 'abInitioHarmonic')
+        formcomponent.director = director
+        # build the SKChoice form
+        form = document.form(name='scatteringKernelInput', action=director.cgihome)
+        # specify action
+        action = actionRequireAuthentication(          
+            actor = 'job', 
+            sentry = director.sentry,
+            routine = 'edit',
+            label = '',
+            arguments = {'form-received': formcomponent.name },
+            )
+        from vnf.weaver import action_formfields
+        action_formfields( action, form )
+        # expand the form with fields of the data object that is being edited
+        formcomponent.expand( form )
+        submit = form.control(name='scatteringKernelInput.submit',type="submit", value="next")
+        return page 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     def experiment_parameters(self, director):
         try:
             page = director.retrieveSecurePage( 'neutronexperimentwizard' )
         except AuthenticationError, err:
             return err.page
-        
         main = page._body._content._main
-
         # populate the main column
         document = main.document(
             title='Neutron Experiment Wizard: specify experiment parameters')
         document.description = ''
         document.byline = 'byline?'
-
         return page
-
 
     def pick_computation_server(self, director):
         try:
             page = director.retrieveSecurePage( 'neutronexperimentwizard' )
         except AuthenticationError, err:
-            return err.page
-        
+            return err.page        
         main = page._body._content._main
-
         # populate the main column
         document = main.document(
             title='Neutron Experiment Wizard: pick computation server')
         document.description = ''
         document.byline = 'byline?'
-
         return page
-
 
     def __init__(self, name=None):
         if name is None:
             name = "neutronexperimentwizard"
         super(NeutronExperimentWizard, self).__init__(name)
         return
-
 
     def _configure(self):
         base._configure(self)

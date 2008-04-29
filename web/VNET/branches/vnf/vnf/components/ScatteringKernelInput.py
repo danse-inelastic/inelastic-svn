@@ -15,6 +15,7 @@ from FormActor import FormActor as base
 
 class ScatteringKernelInput(base):
 
+#    @staticmethod
     def default(self, director):
         try:
             page, document = self._head( director )
@@ -44,6 +45,7 @@ class ScatteringKernelInput(base):
         method = getattr(self, selected )
         return method( director )
 
+    
     def gulpHarmonic(self, director):
         try:
             page = director.retrieveSecurePage( 'gulpHarmonic' )
