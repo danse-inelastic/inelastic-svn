@@ -45,7 +45,7 @@ class Greeter(Actor):
             )
         link = action_link( action, director.cgihome )
         p.text = [
-            'In this virtual neutron facility, you can %s. ' % link,
+            'In this web service facility, you can %s. ' % link,
             'In a virtual neutron experiment, ',
             'virtual neutrons are generated from a virtual neutron moderator,',
             'guided by virtual neutron guides,',
@@ -60,9 +60,9 @@ class Greeter(Actor):
             )
         link = action_link( action, director.cgihome )
         p.text = [
-            'You can do your experiments in a variety of %s,' % link,
-            'some of them mimic real instruments,',
-            'and some of them are purely imaginary.',
+            'You can do your experiments on a variety of %s,' % link,
+            'some simulate real instruments ',
+            'and some do not.',
             ]
 
         p = document.paragraph()
@@ -73,10 +73,11 @@ class Greeter(Actor):
         link = action_link( action, director.cgihome )
         p.text = [
             'You can also create your sample and calculate its neutron',
-            'scattering properties by running material simulations.',
-            'The computation results of such simulations become',
+            'scattering properties by calculating its structure or dynamics.',
+            'For example, the material behaviors calculated by ab initio'
+            'or molecular dynamics methods become',
             '%s that can be used in the sample simulation' % link,
-            'part of virtual experimennts.',
+            'part of your virtual experiment.',
             ]
 
         p = document.paragraph()
@@ -92,6 +93,17 @@ class Greeter(Actor):
             'simulation, they became jobs submitted to computing',
             'resources. You can monitor their progress by clicking',
             '"Jobs".',
+            ]
+
+        p = document.paragraph()
+        email = '<a href="mailto:danse-inelastic@cacr.caltech.edu">us</a>'
+        p.text = [
+            'We welcome your comments on this web service, ',
+            'suggestions for new features, and reports of',
+            'discrepancies or bugs. ',
+            'We seek real satisfaction for uses of this virtual',
+            'neutron facility.',
+            'Please contact %s.' % email,
             ]
 
         return page

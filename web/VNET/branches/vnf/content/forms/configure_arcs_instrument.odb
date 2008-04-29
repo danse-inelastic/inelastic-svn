@@ -35,7 +35,7 @@ class Form( base ):
             'the incident neutron energy by directly input',
             'it in the following text box.',
             'This energy should be chosen a bit larger than the',
-            'energies of excitations of interest.',
+            'energies of excitations of interest. unit: meV.',
             #'Typical values for incident neutron energy',
             #'for, for example, a phonon measurement are 60~100 meV.',
             ]
@@ -73,14 +73,15 @@ class Form( base ):
         instrument = director.clerk.getInstrument( instrument_name )
         id = self.inventory.id
         configured_instrument = director.clerk.getConfiguredInstrument(id)
+        assert configured_instrument.instrument_id == instrument_name
         
-        configuration_id = configured_instrument.configuration
+        configuration_id = configured_instrument.configuration_id
         if configuration_id in [None, 'None', '']:
             #need to create a new configuration
             configuration = director.clerk.newInstrumentConfiguration(
                 instrument_name )
             #attach the configuration to the configured_instrument
-            configured_instrument.configuration = configuration.id
+            configured_instrument.configuration_id = configuration.id
             director.clerk.updateRecord( configured_instrument )
         else:
             configuration = director.clerk.getInstrumentConfiguration(
@@ -153,9 +154,10 @@ class Form( base ):
         #get the selected instrument
         configured_instrument = clerk.getConfiguredInstrument(
             self.inventory.id)
+        assert configured_instrument.instrument_id == instrument_name
         #get configuration
         configuration = clerk.getInstrumentConfiguration(
-            instrument_name, configured_instrument.configuration )
+            instrument_name, configured_instrument.configuration_id )
 
         errors = []
         

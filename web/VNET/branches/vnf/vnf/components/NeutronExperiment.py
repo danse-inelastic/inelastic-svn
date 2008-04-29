@@ -57,10 +57,10 @@ class NeutronExperiment(base):
         list_link = action_link( action, director.cgihome )        
 
         p.text = [
-            'In this virtual neutron facility, you can setup',
+            'In this virtual neutron facility, you can set up',
             'a new experiment by using %s.' % wizard_link,
             'Or you can select from one of the %s you have run' % list_link,
-            'and rerun it.',
+            'and rerun it with new settings.',
             ]
             
         return page

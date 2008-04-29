@@ -50,15 +50,14 @@ class Form( base ):
         # get the configure_instrument record
         configured_instrument = director.clerk.getConfiguredInstrument(
             configuredinstrument_id)
-        current_instrument_id = configured_instrument.instrument
+        current_instrument_id = configured_instrument.instrument_id
 
         p = form.paragraph()
         p.text = [
-            'A neutron experiment has to be performed with a neutron instrument.',
+            'A neutron experiment requires a neutron instrument.',
             'The following is a list of neutron instruments supported',
             'by this virtual neutron facility.',
-            'Please select the instrument where you want to perform',
-            'your experiment.',
+            'Please select one for your experiment.',
             ]
 
         prefix = formactor_action_prefix
@@ -103,7 +102,7 @@ class Form( base ):
         configured_instrument = director.clerk.getConfiguredInstrument(
             configuredinstrument_id)
         
-        configured_instrument.instrument = self.inventory.instrument_id
+        configured_instrument.instrument_id = self.inventory.instrument_id
         director.clerk.updateRecord( configured_instrument )
 
         experiment.status = 'instrument selected'
