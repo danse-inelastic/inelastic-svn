@@ -33,8 +33,8 @@ class Builder:
 
 
     def onNeutronExperiment(self, experiment):
-        instrument = experiment.instrument
-        pyscriptconents, options = self.dispatch( instrument )
+        configured_instrument = experiment.instrument
+        pyscriptconents, options = self.dispatch( configured_instrument )
 
         sampleassembly = experiment.sampleassembly
         if sampleassembly:
@@ -64,7 +64,7 @@ class Builder:
         return
 
 
-    def onInstrument(self, instrument):
+    def onConfiguredInstrument(self, instrument):
         from InstrumentSimulationAppBuilder import Builder
         return Builder().render( instrument )
 

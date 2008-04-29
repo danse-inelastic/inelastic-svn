@@ -22,6 +22,7 @@ class ARCSconfiguration(DbObject):
     import pyre.db
 
     Ei = pyre.db.real( name = 'Ei', default = 70 )
+    Eiresolution = pyre.db.real( name = 'Eiresolution', default = 0.03 )
     
     pass # end of Instrument
 

@@ -61,13 +61,42 @@ class NeutronExperimentWizard(base):
             'sample in a sample holder, select instrument parameters',
             'for this experiment, and finally pick a computation server',
             'to run your virtual neutron experiment.',
+            'Default values are provided for all these characteristics',
+            'of the experiment, but please review them before launching',
+            'your simulation.',
             ]
 
         p = document.paragraph()
         p.text = [
-            'Please click one of link on the left side to start.',
+            'Please first assign a name to this experiment:',
             ]
 
+        formcomponent = self.retrieveFormToShow(
+            'neutronexperimentwizard_start' )
+        formcomponent.inventory.experiment_id = self.inventory.id
+        formcomponent.director = director
+        
+        # create form
+        form = document.form(
+            name='start',
+            legend= formcomponent.legend(),
+            action=director.cgihome)
+
+        # specify action
+        action = actionRequireAuthentication(
+            actor = 'neutronexperimentwizard', sentry = director.sentry,
+            label = '', routine = 'select_instrument',
+            id = self.inventory.id,
+            arguments = {'form-received': formcomponent.name } )
+        from vnf.weaver import action_formfields
+        action_formfields( action, form )
+
+        # expand the form with fields of the data object that is being edited
+        formcomponent.expand( form )
+
+        # run button
+        submit = form.control(name="submit", type="submit", value="OK")
+            
         return page
 
 
@@ -76,6 +105,8 @@ class NeutronExperimentWizard(base):
             page = director.retrieveSecurePage( 'neutronexperimentwizard' )
         except AuthenticationError, err:
             return err.page
+
+        self.processFormInputs( director )
 
         main = page._body._content._main
 
@@ -123,7 +154,10 @@ class NeutronExperimentWizard(base):
 
         id = self.inventory.id
         experiment = director.clerk.getNeutronExperiment( id )
-        instrument_id = experiment.instrument_id
+        configured_instrument_id = experiment.instrument_id
+        configured_instrument = director.clerk.getConfiguredInstrument(
+            configured_instrument_id)
+        instrument_id = configured_instrument.instrument
 
         main = page._body._content._main
 
@@ -133,9 +167,8 @@ class NeutronExperimentWizard(base):
         document.description = ''
         document.byline = 'byline?'
 
-        instrument = director.clerk.getInstrument( instrument_id )
         formname = 'configure_%s_instrument' % (
-            instrument.short_description
+            instrument_id
             .lower().replace(' ','_').replace( '-', '_' ), )
 
         #raise RuntimeError, formname
@@ -144,7 +177,7 @@ class NeutronExperimentWizard(base):
             formcomponent = self.retrieveFormToShow('configureneutroninstrument')
             pass # end if
 
-        formcomponent.inventory.instrument_id = instrument.id
+        formcomponent.inventory.id = configured_instrument_id
         formcomponent.director = director
         
         # create form

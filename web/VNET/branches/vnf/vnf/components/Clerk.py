@@ -184,6 +184,30 @@ class Clerk(Component):
         from vnf.dom.Instrument import Instrument
         return self._getRecordByID( Instrument, id )
 
+
+    def getConfiguredInstrument(self, id):
+        '''retrieve configured instrument of given id'''
+        from vnf.dom.ConfiguredInstrument import ConfiguredInstrument as table
+        return self._getRecordByID( table, id )
+
+
+    def getInstrumentConfiguration(self, name, id):
+        '''retrieve instrument configuration
+        name: name of instrument
+        id: id of configuration for the given instrument
+        '''
+        table = self._instrument_configuration_table( name )
+        return self._getRecordByID( table, id )
+
+
+    def newInstrumentConfiguration(self, name):
+        '''create new instrument configuration
+        name: name of instrument
+        '''
+        table = self._instrument_configuration_table( name )
+        return self.new_dbobject( table )
+    
+
     def getComponent(self, id):
         '''retrieve component of given id'''
         from vnf.dom.Component import Component
@@ -398,6 +422,23 @@ class Clerk(Component):
         return record
 
 
+    def new_dbobject(self, table):
+        '''create a new record for the given table.
+
+        The given table is assumed to have following fields:
+          - id
+        '''
+        director = self.director
+        
+        record = table()
+        
+        id = new_id( director )
+        record.id = id
+
+        self.newRecord( record )
+        return record
+
+
     def newRecord(self, record):
         'insert a new record into db'
         try:
@@ -412,6 +453,13 @@ class Clerk(Component):
             self._debug.log( 'failed to insert record: %s' % s)
             raise
         return record
+
+
+    def _instrument_configuration_table(self, name):
+        tablename = '%sconfiguration' % name
+        exec 'from vnf.dom.%s import %s as table' % (
+            tablename, tablename )
+        return table
 
 
     def _getElementIDs(self, id, referencetable):
@@ -750,9 +798,9 @@ class HierarchyRetriever:
 
     def onNeutronExperiment(self, experiment):
         instrument_id = experiment.instrument_id
-        instrument = self.clerk.getInstrument( instrument_id )
-        instrument = self(instrument)
-        experiment.instrument = instrument
+        configured_instrument = self.clerk.getConfiguredInstrument( instrument_id )
+        configure_instrument = self(configured_instrument)
+        experiment.instrument = configured_instrument
 
         sampleassembly_id = experiment.sampleassembly_id
         if sampleassembly_id == '' or sampleassembly_id == 'None':
@@ -765,18 +813,60 @@ class HierarchyRetriever:
         return experiment
 
 
+    def onConfiguredInstrument(self, configured):
+        instrument_id = configured.instrument
+        instrument = self.clerk.getInstrument( instrument_id )
+        instrument = self(instrument)
+
+        configuration_id = configured.configuration
+        if configuration_id in ['None', None, '']:
+            # if configuration is not explicit, we can retrieve
+            # it as a normal instrument. it could contain
+            # less components than the original template instrument.
+            # it could contain no component too.
+            from vnf.dom.Instrument import Instrument
+            instrument = Instrument()
+            instrument.id = configured.id
+            configuration = self.onInstrument( instrument )
+        else:
+            configuration = self.clerk.getInstrumentConfiguration(
+                instrument_id, configuration_id )
+            configuration = self(configuration)
+            pass # end if
+
+        configured.instrument = instrument
+        configured.configuration = configuration
+        return configured
+
+
     def onInstrument(self, instrument):
+        self.clerk._debug.line(  str(instrument.__class__) )
+        self.clerk._debug.log( '%s' % instrument.id )
         components = self.clerk.getComponents( instrument.id )
         components = [ self( component ) for component in components ]
         instrument.components = components
+        self.clerk._debug.line( str(dir(instrument)) )
+        self.clerk._debug.log( '%s' % instrument.id )
         # make individual component available in instrument's namespace
         for component in components:
             setattr(instrument, component.label, component)
             continue
+
+        self.clerk._debug.line(  str(dir(instrument)) )
+        self.clerk._debug.log( '%s' % instrument.id )
+        try:
+            geometer = self.clerk.getInstrumentGeometer( instrument )
+            instrument.geometer = geometer
+        except:
+            import traceback
+            self.clerk._debug.log( traceback.format_exc() )
+            pass
         
-        geometer = self.clerk.getInstrumentGeometer( instrument )
-        instrument.geometer = geometer
         return instrument
+
+
+    def onARCSconfiguration(self, configuration):
+        return configuration
 
 
     def onComponent(self, component):
@@ -879,6 +969,7 @@ class HierarchyRetriever:
 
     def onBlock(self, block):
         return block
+
 
     pass # end of Clerk
 

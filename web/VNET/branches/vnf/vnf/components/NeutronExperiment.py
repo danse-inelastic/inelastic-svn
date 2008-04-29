@@ -96,6 +96,16 @@ class NeutronExperiment(base):
 
         self.processFormInputs( director )
 
+        #see if the experiment is constructed or not. if not
+        #ask the wizard to do the editing.
+        experiment = director.clerk.getNeutronExperiment( self.inventory.id )
+        if experiment.status != 'constructed':
+            director.routine = 'start'
+            actor = director.retrieveActor( 'neutronexperimentwizard')
+            director.configureComponent( actor )
+            actor.inventory.id = self.inventory.id
+            return actor.start( director )
+
         formcomponent = self.retrieveFormToShow( 'run_neutron_experiment' )
         formcomponent.inventory.id = self.inventory.id
         formcomponent.director = director

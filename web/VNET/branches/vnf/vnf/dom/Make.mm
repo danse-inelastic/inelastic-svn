@@ -33,6 +33,7 @@ EXPORT_PYTHON_MODULES = \
 	__init__.py \
 	ARCSconfiguration.py \
 	Block.py \
+	ConfiguredInstrument.py \
 	Crystal.py \
 	DbObject.py \
 	Disordered.py \
