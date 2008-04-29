@@ -46,14 +46,13 @@ class Form( base ):
             name = '%s.id' % prefix, value = record.id)
 
         entries = enumerate( shapes )
-        import opal.content
-        selector = opal.content.selector(
+        selector = form.selector(
+            id = 'shape_selector',
             name = '%s.shape' % prefix,
             entries = entries,
             label = 'Shape',
             selected = shapes[0],
             )
-        form.contents.append( selector )
 
         return
 

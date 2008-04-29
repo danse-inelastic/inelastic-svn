@@ -14,6 +14,16 @@
 from vnf.components.Actor import Actor, action_link, actionRequireAuthentication, AuthenticationError
 from vnf.weaver import action_href
 
+routine2menu = {
+    'start': None,
+    'select_instrument': 'instrument',
+    'configure_instrument': 'instrument',
+    'sample_preparation': 'sample',
+    'sample_environment': 'sample_environment',
+    'experiment_parameters': 'experiment_parameters',
+    'pick_computation_server': 'submit_experiment',
+    }
+
 def portlet(app):
     import opal.content
     portlet = opal.content.portlet(title="navigation", id="portlet-navigation-tree")
@@ -38,36 +48,41 @@ def portlet(app):
     sample.icon = "images/link_icon.gif"
     sample.type = "navItem"
     
-    sampleenvironment = portlet.item(description="Sample environment")
+    sample_environment = portlet.item(description="Sample environment")
     action = actionRequireAuthentication(
         actor = 'neutronexperimentwizard', sentry = app.sentry,
         routine = 'sample_environment',
         id = app.actor.inventory.id,
         )
-    sampleenvironment.target = action_href(action, app.cgihome)
-    sampleenvironment.icon = "images/link_icon.gif"
-    sampleenvironment.type = "navItem"
+    sample_environment.target = action_href(action, app.cgihome)
+    sample_environment.icon = "images/link_icon.gif"
+    sample_environment.type = "navItem"
     
-    experimentparameters = portlet.item(description="Experiment parameters")
+    experiment_parameters = portlet.item(description="Experiment parameters")
     action = actionRequireAuthentication(
         actor = 'neutronexperimentwizard', sentry = app.sentry,
         routine = 'experiment_parameters',
         id = app.actor.inventory.id,
         )
-    experimentparameters.target = action_href(action, app.cgihome)
-    experimentparameters.icon = "images/link_icon.gif"
-    experimentparameters.type = "navItem"
+    experiment_parameters.target = action_href(action, app.cgihome)
+    experiment_parameters.icon = "images/link_icon.gif"
+    experiment_parameters.type = "navItem"
     
-    computationserver = portlet.item(description="Pick computation server")
+    submit_experiment = portlet.item(description="Pick computation server")
     action = actionRequireAuthentication(
         actor = 'neutronexperimentwizard', sentry = app.sentry,
         routine = 'pick_computation_server',
         id = app.actor.inventory.id,
         )
-    computationserver.target = action_href(action, app.cgihome)
-    computationserver.icon = "images/link_icon.gif"
-    computationserver.type = "navItem"
-    
+    submit_experiment.target = action_href(action, app.cgihome)
+    submit_experiment.icon = "images/link_icon.gif"
+    submit_experiment.type = "navItem"
+
+    routine = app.routine
+    menu = routine2menu[ routine ]
+    if menu:
+        selected_menu = eval( menu )
+        selected_menu.icon = "images/selectedlink_icon.gif"
     return portlet
 
 

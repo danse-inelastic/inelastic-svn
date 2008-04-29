@@ -15,18 +15,18 @@ from FormActor import FormActor as base, InputProcessingError
 
 
 class NeutronExperimentWizard(base):
-
-
+    
+    
     class Inventory(base.Inventory):
-
+        
         import pyre.inventory
-
+        
         id = pyre.inventory.str("id", default='')
         id.meta['tip'] = "the unique identifier of the experiment"
-
+        
         ncount = pyre.inventory.float( 'ncount', default = 1e6 )
         ncount.meta['tip'] = 'number of neutrons'
-
+        
         pass # end of Inventory
 
 
@@ -40,6 +40,8 @@ class NeutronExperimentWizard(base):
             #create a new experiment
             from vnf.dom.NeutronExperiment import NeutronExperiment
             experiment = director.clerk.new_ownedobject( NeutronExperiment )
+            experiment.status = 'started'
+            director.clerk.updateRecord( experiment )
             #need to reload the page so that id is correctly
             self.inventory.id = experiment.id
             page = director.retrieveSecurePage( 'neutronexperimentwizard' )
@@ -175,6 +177,22 @@ class NeutronExperimentWizard(base):
         except AuthenticationError, err:
             return err.page
         
+        try:
+            self.processFormInputs( director )
+        except InputProcessingError, err:
+            errors = err.errors
+            self.form_received = None
+            return self.configure_instrument( director, errors = errors )
+
+        experiment = director.clerk.getNeutronExperiment(
+            self.inventory.id )
+        if experiment.instrument_id in [ 'None', None, '' ]:
+            director.routine = 'select_instrument'
+            return self.select_instrument( director )
+        
+        experiment.status = 'instrument configured'
+        director.clerk.updateRecord( experiment )
+        
         main = page._body._content._main
         
         # populate the main column
@@ -183,12 +201,31 @@ class NeutronExperimentWizard(base):
         document.description = ''
         document.byline = 'byline?'
         
-        try:
-            self.processFormInputs( director )
-        except InputProcessingError, err:
-            errors = err.errors
-            self.form_received = None
-            return self.configure_instrument( director, errors = errors )
+        formcomponent = self.retrieveFormToShow( 'sample_preparation' )
+        formcomponent.inventory.experiment_id = self.inventory.id
+        formcomponent.director = director
+        
+        # create form
+        form = document.form(
+            name='sample preparation',
+            legend= formcomponent.legend(),
+            action=director.cgihome)
+
+        # specify action
+        action = actionRequireAuthentication(
+            actor = 'neutronexperimentwizard', sentry = director.sentry,
+            label = '',
+            routine = 'sample_environment',
+            id = self.inventory.id,
+            arguments = {'form-received': formcomponent.name } )
+        from vnf.weaver import action_formfields
+        action_formfields( action, form )
+
+        # expand the form with fields of the data object that is being edited
+        formcomponent.expand( form )
+
+        # run button
+        submit = form.control(name="submit", type="submit", value="OK")
         
         return page
 
@@ -207,6 +244,34 @@ class NeutronExperimentWizard(base):
         document.description = ''
         document.byline = 'byline?'
 
+        self.processFormInputs( director )
+        
+        formcomponent = self.retrieveFormToShow( 'sample_environment' )
+        formcomponent.inventory.experiment_id = self.inventory.id
+        formcomponent.director = director
+        
+        # create form
+        form = document.form(
+            name='sample environment',
+            legend= formcomponent.legend(),
+            action=director.cgihome)
+
+        # specify action
+        action = actionRequireAuthentication(
+            actor = 'neutronexperimentwizard', sentry = director.sentry,
+            label = '',
+            routine = 'experiment_parameters',
+            id = self.inventory.id,
+            arguments = {'form-received': formcomponent.name } )
+        from vnf.weaver import action_formfields
+        action_formfields( action, form )
+
+        # expand the form with fields of the data object that is being edited
+        formcomponent.expand( form )
+        
+        # run button
+        submit = form.control(name="submit", type="submit", value="OK")
+        
         return page
 
 

@@ -1,0 +1,195 @@
+# -*- Python -*-
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                   Jiao Lin
+#                      California Institute of Technology
+#                        (C) 2007  All Rights Reserved
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+
+from vnf.components.Form import Form as base, InputProcessingError
+from vnf.components.Actor import action_link, actionRequireAuthentication
+
+
+class Form( base ):
+
+    class Inventory( base.Inventory ):
+        import pyre.inventory
+        experiment_id = pyre.inventory.str( 'experiment_id' )
+        sample_id = pyre.inventory.str( 'sample_id' )
+        pass # end of Inventory
+
+
+    def legend(self):
+        'return a legend string'
+        return 'Select sample for your experiment'
+
+
+    def expand(self, form, errors = None):
+        '''expand an existing form with fields from this component'''
+
+        experiment_id = self.inventory.experiment_id
+        director = self.director
+        experiment = director.clerk.getNeutronExperiment( experiment_id )
+        experiment = director.clerk.getHierarchy( experiment )
+        sampleassembly = experiment.sampleassembly
+
+        if sampleassembly is None:
+            # create a new sample assembly by copying the example
+            # get templates
+            from vnf.dom.SampleAssembly import SampleAssembly
+            sampleassembly_templates = director.db.fetchall(
+                SampleAssembly,
+                where = "template='True'" )
+            assert len(sampleassembly_templates)>0, "Table SampleAssembly should have at least one template"
+            sampleassembly_template = sampleassembly_templates[0]
+            sampleassembly_template = director.clerk.getHierarchy( sampleassembly_template )
+            sampleassembly = director.clerk.deepcopy( sampleassembly_template )
+
+            #sampleassembly is now a hierarchy. attach that to the experiment
+            experiment.sampleassembly = sampleassembly
+            
+            # add sampleassembly to the experiment
+            experiment.sampleassembly_id = sampleassembly.id
+            director.clerk.updateRecord( experiment )
+
+            pass
+
+        sample = getsample( sampleassembly )
+        current_sample_id = sample.id
+        
+        prefix = formactor_action_prefix
+
+        experiment_id_field = form.hidden(
+            name = '%s.experiment_id' % prefix,
+            value = experiment_id )
+
+        if errors:
+            p = form.paragraph( cls = 'error' )
+            p.text = [
+                'The form you filled out contained some errros.',
+                'Please look through the values you have entered',
+                'and correct any mistakes.',
+                ]
+        p = form.paragraph()
+        p.text = [
+            'Sample is the heart of your experiment. By placing',
+            'your sample in the neutron beam of a neutron instrument,',
+            'you can study, for example, interesting excitations',
+            'such as phonons in your sample.',
+            ]
+
+        p = form.paragraph()
+        p.text = [
+            'You can select from a library of existing samples here:',
+            ]
+
+        # find all sample templates
+        from vnf.dom.Scatterer import Scatterer
+        samples = director.clerk.db.fetchall(
+            Scatterer, where = "template='True'" )
+        entries = [ (sample.id, sample.short_description)
+                    for sample in samples ]
+                     
+        selector = form.selector(
+            id = 'sample_selector',
+            name = '%s.sample_id' % prefix,
+            entries = entries,
+            label = 'Select sample',
+            selected = current_sample_id,
+            )
+        
+        p = form.paragraph()
+        action = actionRequireAuthentication(
+            actor = 'neutronexperimentwizard', sentry = director.sentry,
+            label = 'create a new sample and save it to your sample library',
+            routine = 'create_new_sample',
+            id = self.inventory.experiment_id,
+            )
+        link = action_link( action, director.cgihome )
+        p.text = [
+            'Or you can %s.' % link,
+            ]
+        return
+
+
+    def processUserInputs(self):
+        'process user inputs and save them to db'
+
+        director = self.director
+        clerk = director.clerk
+
+        #get the selected sample
+        sample_id = self.inventory.sample_id
+        sample = clerk.getScatterer( sample_id )
+        sample = clerk.getHierarchy( sample )
+        #make a copy
+        sample_copy = clerk.deepcopy( sample )
+
+        #get the selected experiment
+        experiment = clerk.getNeutronExperiment(
+            self.inventory.experiment_id )
+        experiment = clerk.getHierarchy( experiment )
+        sampleassembly = experiment.sampleassembly
+        sample = getsample( sampleassembly )
+        
+        from vnf.dom.SampleAssembly import SampleAssembly
+        table = SampleAssembly.Scatterers
+        records = director.db.fetchall(
+            table,
+            where = "localkey='%s' and remotekey='%s'" % (
+            sampleassembly.id, sample.id)
+            )
+        assert len(records)==1,\
+               "Invalid table %s. sampleassembly: %s, sample: %s, records=%s" %(
+            table.name, sampleassembly.id, sample.id, records)
+        record = records[0]
+
+        #link sampleassembly and sample
+        record.remotekey = sample_copy.id
+        record.label = 'sample'
+        
+        clerk.updateRecord( record )
+        return
+
+
+    def __init__(self, name = None):
+        if name is None:
+            name = 'sample_preparation'
+
+        base.__init__(self, name)
+
+        return
+    
+    pass # end of Form
+
+
+
+def getsample( sampleassembly ):
+    samples = []
+    for scatterer in sampleassembly.scatterers:
+        if scatterer.label == 'sample': samples.append(scatterer)
+        continue
+    
+    if len(samples)!=1:
+        raise RuntimeError, 'There should be only one sample in a sample assembly. Sample assembly %r has following samples: %s' % (
+            sampleassembly.short_description,
+            [ sample.short_description for sample in samples ],
+            )
+    return samples[0]
+
+            
+formactor_action_prefix = 'actor.form-received' # assumed actor is a form actor
+
+def form(): return Form()
+
+
+# version
+__id__ = "$Id$"
+
+# End of file 

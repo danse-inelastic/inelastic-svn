@@ -1,0 +1,103 @@
+# -*- Python -*-
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                   Jiao Lin
+#                      California Institute of Technology
+#                        (C) 2007  All Rights Reserved
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+
+from vnf.components.Form import Form as base, InputProcessingError
+from vnf.components.Actor import action_link, actionRequireAuthentication
+
+
+class Form( base ):
+
+    class Inventory( base.Inventory ):
+        import pyre.inventory
+        experiment_id = pyre.inventory.str( 'experiment_id' )
+        pass # end of Inventory
+
+
+    def legend(self):
+        'return a legend string'
+        return 'Set up sample environment for your experiment'
+
+
+    def expand(self, form, errors = None):
+        '''expand an existing form with fields from this component'''
+
+        experiment_id = self.inventory.experiment_id
+        director = self.director
+        experiment = director.clerk.getNeutronExperiment( experiment_id )
+        experiment = director.clerk.getHierarchy( experiment )
+        sampleassembly = experiment.sampleassembly
+
+        prefix = formactor_action_prefix
+
+        experiment_id_field = form.hidden(
+            name = '%s.experiment_id' % prefix,
+            value = experiment_id )
+
+        if errors:
+            p = form.paragraph( cls = 'error' )
+            p.text = [
+                'The form you filled out contained some errros.',
+                'Please look through the values you have entered',
+                'and correct any mistakes.',
+                ]
+        p = form.paragraph()
+        p.text = [
+            ]
+
+        return
+
+
+    def processUserInputs(self):
+        'process user inputs and save them to db'
+
+        director = self.director
+        clerk = director.clerk
+        return
+
+
+    def __init__(self, name = None):
+        if name is None:
+            name = 'sample_preparation'
+
+        base.__init__(self, name)
+
+        return
+    
+    pass # end of Form
+
+
+
+def getsample( sampleassembly ):
+    samples = []
+    for scatterer in sampleassembly.scatterers:
+        if scatterer.label == 'sample': samples.append(scatterer.realscatterer)
+        continue
+    
+    if len(samples)!=1:
+        raise RuntimeError, 'There should be only one sample in a sample assembly. Sample assembly %r has following samples: %s' % (
+            sampleassembly.short_description,
+            [ sample.short_description for sample in samples ],
+            )
+    return samples[0]
+
+            
+formactor_action_prefix = 'actor.form-received' # assumed actor is a form actor
+
+def form(): return Form()
+
+
+# version
+__id__ = "$Id$"
+
+# End of file 

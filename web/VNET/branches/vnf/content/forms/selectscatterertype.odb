@@ -50,14 +50,13 @@ class Form( base ):
             name = '%s.id' % prefix, value = record.id)
         
         entries = enumerate( phases )
-        import opal.content
-        selector = opal.content.selector(
+        selector = form.selector(
+            id = 'phase_selector'
             name = '%s.phase' % prefix,
             entries = entries,
             label = 'Phase',
             selected = phases[0],
             )
-        form.contents.append( selector )
 
         return
 

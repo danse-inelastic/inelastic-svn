@@ -65,14 +65,13 @@ class Form( base ):
             for instrument in instrument_templates ]
         
         import opal.content
-        selector = opal.content.selector(
+        selector = form.selector(
+            id = 'instrument_selector',
             name = '%s.instrument_id' % prefix,
             entries = entries,
             label = 'Instrument',
             selected = current_instrument_id,
             )
-        form.contents.append( selector )
-
         return
 
 
@@ -93,6 +92,7 @@ class Form( base ):
         experiment = director.clerk.getNeutronExperiment( experiment_id )
 
         experiment.instrument_id = instrument.id
+        experiment.status = 'instrument selected'
         
         director.clerk.updateRecord( experiment )
         return

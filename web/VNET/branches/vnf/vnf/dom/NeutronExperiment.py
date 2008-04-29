@@ -12,7 +12,7 @@
 #
 
 
-from DbObject import DbObject as base
+from OwnedObject import OwnedObject as base
 class NeutronExperiment(base):
 
     name = 'neutronexperiments'
@@ -30,6 +30,8 @@ class NeutronExperiment(base):
     constructed = pyre.db.varchar( name = 'constructed', length = 4 )
 
     job_id = pyre.db.varchar( name = 'job_id', length = 100 )
+
+    status = pyre.db.varchar( name = 'status', length = 16 )
 
     pass # end of NeutronExperiment
 
