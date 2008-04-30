@@ -522,7 +522,7 @@ class NeutronExperimentWizard(base):
         document = main.document(title='Kernel Generator' )
         document.byline = '<a href="http://danse.us">DANSE</a>'        
         
-        formcomponent = self.retrieveFormToShow( 'selectkernel')
+        formcomponent = self.retrieveFormToShow( 'inelasticScatteringKernel')
         formcomponent.director = director
         # build the SKChoice form
         SKChoice = document.form(name='', action=director.cgihome)
@@ -530,7 +530,7 @@ class NeutronExperimentWizard(base):
         action = actionRequireAuthentication(          
             actor = 'neutronexperimentwizard', 
             sentry = director.sentry,
-            routine = 'onSelect',
+            routine = 'submit_experiment',
             label = '',
             arguments = {'form-received': formcomponent.name },
             )
