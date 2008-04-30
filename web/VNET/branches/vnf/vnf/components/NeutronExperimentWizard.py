@@ -542,28 +542,16 @@ class NeutronExperimentWizard(base):
         next = form.control(name='submit',type="submit", value="submit job")
         return page     
 
-    def experiment_parameters(self, director):
+    def submit_experiment(self, director):
         try:
             page = director.retrieveSecurePage( 'neutronexperimentwizard' )
         except AuthenticationError, err:
             return err.page
+        
         main = page._body._content._main
         # populate the main column
         document = main.document(
-            title='Neutron Experiment Wizard: specify experiment parameters')
-        document.description = ''
-        document.byline = 'byline?'
-        return page
-
-    def pick_computation_server(self, director):
-        try:
-            page = director.retrieveSecurePage( 'neutronexperimentwizard' )
-        except AuthenticationError, err:
-            return err.page        
-        main = page._body._content._main
-        # populate the main column
-        document = main.document(
-            title='Neutron Experiment Wizard: pick computation server')
+            title='Neutron Experiment Wizard: submit')
         document.description = ''
         document.byline = 'byline?'
         return page

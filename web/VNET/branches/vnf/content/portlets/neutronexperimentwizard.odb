@@ -26,8 +26,9 @@ routine2menu = {
     'sample_environment': 'sample_environment',
     'scattering_kernel': 'kernel_origin',
 #    'gulp_dynamics': 'gulp_dynamics',
-    'experiment_parameters': 'experiment_parameters',
-    'pick_computation_server': 'submit_experiment',
+    'submit_experiment': 'submit_experiment',
+    #'experiment_parameters': 'experiment_parameters',
+    #'pick_computation_server': 'submit_experiment',
     }
 
 def portlet(app):
@@ -84,20 +85,20 @@ def portlet(app):
     kernel_origin.icon = "images/link_icon.gif"
     kernel_origin.type = "navItem"
         
-    experiment_parameters = portlet.item(description="Experiment parameters")
-    action = actionRequireAuthentication(
-        actor = 'neutronexperimentwizard', sentry = app.sentry,
-        routine = 'experiment_parameters',
-        id = app.actor.inventory.id,
-        )
-    experiment_parameters.target = action_href(action, app.cgihome)
-    experiment_parameters.icon = "images/link_icon.gif"
-    experiment_parameters.type = "navItem"
+    #experiment_parameters = portlet.item(description="Experiment parameters")
+    #action = actionRequireAuthentication(
+    #    actor = 'neutronexperimentwizard', sentry = app.sentry,
+    #    routine = 'experiment_parameters',
+    #    id = app.actor.inventory.id,
+    #    )
+    #experiment_parameters.target = action_href(action, app.cgihome)
+    #experiment_parameters.icon = "images/link_icon.gif"
+    #experiment_parameters.type = "navItem"
     
-    submit_experiment = portlet.item(description="Pick computation server")
+    submit_experiment = portlet.item(description="Submit")
     action = actionRequireAuthentication(
         actor = 'neutronexperimentwizard', sentry = app.sentry,
-        routine = 'pick_computation_server',
+        routine = 'submit_experiment',
         id = app.actor.inventory.id,
         )
     submit_experiment.target = action_href(action, app.cgihome)
