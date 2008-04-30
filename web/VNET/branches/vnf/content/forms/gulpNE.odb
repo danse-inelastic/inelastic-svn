@@ -128,19 +128,7 @@ var Accordion1 = new Spry.Widget.Accordion("thermoEnsemble");
 
 
     def processUserInputs(self):
-        
-        #
-        from vnf.components.Job import new_job, jobpath
-        job=new_job(self.director)
-
-        job.jobName = self.short_description
-        self.director.clerk.updateRecord( job )
-        
-        jobdir = jobpath( job.id )
-        
-        build_run( experiment, path = jobdir )
-
-        return job
+        return
 
 
 def form(): return Form( 'gulpNE' )

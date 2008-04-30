@@ -312,7 +312,7 @@ class NeutronExperimentWizard(base):
         
         return page
 
-    def dynamics_selection(self, director):
+    def kernel_origin(self, director):
         try:
             page, document = self._head( director )
         except AuthenticationError, err:
@@ -337,11 +337,14 @@ class NeutronExperimentWizard(base):
         return page 
     
     def onSelect(self, director):
-        selected = self.processFormInputs(director)
+        selected = self.processKernelSelection(director)
         method = getattr(self, selected )
         return method( director )
     
-    def gulpNE(self, director):
+    def processKernelSelection(self, director):
+        ru
+    
+    def gulp(self, director):
         try:
             page = director.retrieveSecurePage( 'gulpNE' )
         except AuthenticationError, err:
