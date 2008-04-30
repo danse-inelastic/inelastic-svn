@@ -449,7 +449,6 @@ class NeutronExperimentWizard(base):
         
         return page
 
-
     def kernel_origin(self, director):
         try:
             page = director.retrieveSecurePage( 'neutronexperimentwizard' )
@@ -500,7 +499,7 @@ class NeutronExperimentWizard(base):
         form = document.form(name='', action=director.cgihome)
         # specify action
         action = actionRequireAuthentication(          
-            actor = 'job', 
+            actor = 'neutronexperimentwizard', 
             sentry = director.sentry,
             routine = 'edit',
             label = '',
@@ -512,6 +511,35 @@ class NeutronExperimentWizard(base):
         formcomponent.expand( form )
         next = form.control(name='submit',type="submit", value="submit job")
         return page 
+    
+    def kernel_generator(self, director):
+        try:
+            page = director.retrieveSecurePage( 'neutronexperimentwizard' )
+        except AuthenticationError, err:
+            return err.page
+        
+        main = page._body._content._main
+        document = main.document(title='Kernel Generator' )
+        document.byline = '<a href="http://danse.us">DANSE</a>'        
+        
+        formcomponent = self.retrieveFormToShow( 'selectkernel')
+        formcomponent.director = director
+        # build the SKChoice form
+        SKChoice = document.form(name='', action=director.cgihome)
+        # specify action
+        action = actionRequireAuthentication(          
+            actor = 'neutronexperimentwizard', 
+            sentry = director.sentry,
+            routine = 'onSelect',
+            label = '',
+            arguments = {'form-received': formcomponent.name },
+            )
+        from vnf.weaver import action_formfields
+        action_formfields( action, SKChoice )
+        # expand the form with fields of the data object that is being edited
+        formcomponent.expand( SKChoice )
+        submit = SKChoice.control(name='submit',type="submit", value="next")
+        return page       
     
     def submitJob(self, director):
         try:

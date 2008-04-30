@@ -19,52 +19,25 @@ class Form( base ):
     class Inventory( base.Inventory ):
 
         import pyre.inventory as inv
-        id = pyre.inventory.str( 'id', default = '' )
+        id = inv.str( 'id', default = '' )
         id.meta['tip'] = 'A short description'
         
-        short_description = pyre.inventory.str(
+        short_description = inv.str(
             'short_description', default = '' )
         short_description.meta['tip'] = 'A short description'
 
 
     def expand(self, form):
-        '''expand an existing form with fields from this component'''
         prefix = formactor_action_prefix
         
         p = form.paragraph()
         p.text = ['''The Gulp kernel generator uses classical forcefield
         techniques for simulating larger systems.  Gulp contains a vast
-        number of forcefields and a phonon / molecular dynamics capabilities
-        to complement neutron scattering experiments.  Samples ''']
-        
-        
-        
-        form.text(id= 'radio1', name = '%s.gulpHarmonic' % (prefix, ), label = 'Gulp Harmonic' )
-
-        gulpHarmonic = form.radio( id= 'radio1', name = '%s.gulpHarmonic' % (prefix, ), label = 'Gulp Harmonic' )
-        gulpNE = form.radio( id= 'radio2', name = '%s.gulpNE' % (prefix, ), label = "Gulp Newton's Equation" )
-        mmtkNE = form.radio(id='radio3', name='%s.mmtkNE' % (prefix, ), label="Mmtk Newton's Equations")
-    
-        vaspPhon = form.radio(id='radio4', name='%s.vaspPhon' % (prefix, ), label='Vasp Energies, Phon Harmonic Motion')
-        abinitPhon = form.radio(id='radio5', name='%s.abinitPhon' % (prefix, ), label="AbInit Energies, Phon Harmonic Motion")
-        
-        phononDispersions = form.radio(id='radio6', name='%s.phononDispersions' % (prefix, ), label="Phonon Dispersions")
-
-        p = form.paragraph()
-        p.text = ['<h2>Settings</h2>']
-
+        number of forcefields and phonon / molecular dynamics capabilities
+        to complement neutron scattering experiments.<br>''',
+        '<a href="/java/GULP.jnlp">Gulp</a><br>']
         return
 
-    def processUserInputs(self):
-        'process user inputs and save them to db'
-        choices = self.parameters
-        choosed = []
-        for choice in choices: 
-            value = getattr( self.inventory, choice )
-            if value: choosed.append( choice )
-            continue
-        if len( choosed ) !=  1: raise RuntimeError, "only one itme should be choosed"
-        return choosed[0]
 
 
 
@@ -72,7 +45,7 @@ class Form( base ):
 formactor_action_prefix = 'actor.form-received' # assumed actor is a form actor
 
 
-def form(): return Form( 'selectkernel' )
+def form(): return Form( 'gulp' )
 
 
 # version

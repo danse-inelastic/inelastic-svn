@@ -20,26 +20,22 @@ class Form( base ):
     class Inventory( base.Inventory ):
 
         import pyre.inventory as inv
-        kernel = inv.str('kernel',default='gulpNE')
-        kernel.validator=inv.choice(['gulpHarmonic', 'gulpNE', 'mmtkNE', 'abInitioHarmonic', 'phononDispersion'])
+        kernel = inv.str('kernel',default='gulp')
+        kernel.validator=inv.choice(['gulp', 'mmtk', 'abInitioHarmonic', 'phononDispersion'])
         kernel.meta['tip'] = 'type of kernel'
 
     def expand(self, form):
         '''expand an existing form with fields from this component'''
         prefix = formactor_action_prefix
         name = '%s.%s' % (formactor_action_prefix, 'kernel')
-        gulpHarmonic = form.radio( id= 'radio1', name = name, label = 'Gulp Harmonic', value = 'gulpHarmonic')
-        gulpNE = form.radio( id= 'radio2', name = name, label = "Gulp Newton's Equation", value = 'gulpNE')
-        mmtkNE = form.radio(id='radio3', name= name, label = "Mmtk Newton's Equations", value = 'mmtkNE')
+        gulp = form.radio( id= 'radio2', name = name, label = "Gulp", value = 'gulp')
+        mmtk = form.radio(id='radio3', name= name, label = "Mmtk Newton's Equations", value = 'mmtk')
         abInitioHarmonic = form.radio(id='radio4', name=name, label = 'AbInitio Energies, Phon Harmonic Motion', value = 'abInitioHarmonic')
         phononDispersions = form.radio(id='radio6', name=name, label = "Phonon Dispersions", value = 'phononDispersions')
 
     def processUserInputs(self,director):
         'process user input '
         return self.inventory.kernel
-
-
-
 
 
 #formactor_action_prefix = 'actor.form-received' # assumed actor is a form actor
