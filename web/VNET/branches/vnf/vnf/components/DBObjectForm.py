@@ -15,7 +15,7 @@
 # Specialized form to directly deal with a db object.
 
 
-from Form import Form as base
+from Form import Form as base, InputProcessingError
 
 
 class DBObjectForm( base ):

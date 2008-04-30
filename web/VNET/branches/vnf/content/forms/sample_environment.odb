@@ -12,7 +12,7 @@
 #
 
 
-from vnf.components.Form import Form as base, InputProcessingError
+from vnf.components.DBObjectForm import DBObjectForm as base, InputProcessingError
 from vnf.components.Actor import action_link, actionRequireAuthentication
 
 
@@ -20,39 +20,53 @@ class Form( base ):
 
     class Inventory( base.Inventory ):
         import pyre.inventory
-        experiment_id = pyre.inventory.str( 'experiment_id' )
+        temperature = pyre.inventory.str(
+            name = 'temperature', default = 300. )
+        temperature.meta['label'] = 'Temperature'
+        temperature.meta['tip'] = (
+            'Please input the temperature in the sample environment. unit: K'
+            )
+
+        pressure = pyre.inventory.str(
+            name = 'pressure', default = 1. )
+        pressure.meta['label'] = 'Pressure'
+        pressure.meta['tip'] = (
+            'Please input the pressure in the sample environment. unit: atm'
+            )
+
+        magnetic_field = pyre.inventory.str(
+            name = 'magnetic_field', default = 0 )
+        magnetic_field.meta['label'] = 'Magnetic field'
+        magnetic_field.meta['tip'] = (
+            'Please input the magnetic field as a vector',
+            'in the sample environment.',
+            'unit: Tesla',
+            )
         pass # end of Inventory
 
 
+    DBTable = 'SampleEnvironment'
+    parameters = ['temperature', 'pressure', 'magnetic_field']
+
     def legend(self):
         'return a legend string'
-        return 'Set up sample environment for your experiment'
+        return 'Sample Environment'
 
 
     def expand(self, form, errors = None):
         '''expand an existing form with fields from this component'''
 
-        experiment_id = self.inventory.experiment_id
-        director = self.director
-        experiment = director.clerk.getNeutronExperiment( experiment_id )
-
-        prefix = formactor_action_prefix
-
-        experiment_id_field = form.hidden(
-            name = '%s.experiment_id' % prefix,
-            value = experiment_id )
-
-        if errors:
-            p = form.paragraph( cls = 'error' )
-            p.text = [
-                'The form you filled out contained some errros.',
-                'Please look through the values you have entered',
-                'and correct any mistakes.',
-                ]
         p = form.paragraph()
         p.text = [
+            'The thermondynamic intensive variables T, P, H affect',
+            'the structure and dynamics of your sample, and these',
+            'varaibles can also alter the scattering processes.',
+            'The parameters enterered here will be used by both',
+            'the scattering kernel and by multiphonon routines,',
+            'for example.',
             ]
 
+        base.expand( self, form )
         return
 
 
@@ -75,6 +89,7 @@ class Form( base ):
     pass # end of Form
 
 
+from vnf.components.misc import empty_id
 
 formactor_action_prefix = 'actor.form-received' # assumed actor is a form actor
 
