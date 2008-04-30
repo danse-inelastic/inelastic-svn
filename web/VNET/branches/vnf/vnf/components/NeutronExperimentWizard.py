@@ -452,16 +452,21 @@ class NeutronExperimentWizard(base):
 
     def kernel_origin(self, director):
         try:
-            page, document = self._head( director )
+            page = director.retrieveSecurePage( 'neutronexperimentwizard' )
         except AuthenticationError, err:
             return err.page
+        
+        main = page._body._content._main
+        document = main.document(title='Energetics / Dynamics Selection' )
+        document.byline = '<a href="http://danse.us">DANSE</a>'        
+        
         formcomponent = self.retrieveFormToShow( 'selectkernel')
         formcomponent.director = director
         # build the SKChoice form
-        SKChoice = document.form(name='scatteringKernelInput', action=director.cgihome)
+        SKChoice = document.form(name='', action=director.cgihome)
         # specify action
         action = actionRequireAuthentication(          
-            actor = 'scatteringKernelInput', 
+            actor = 'neutronexperimentwizard', 
             sentry = director.sentry,
             routine = 'onSelect',
             label = '',
@@ -472,29 +477,27 @@ class NeutronExperimentWizard(base):
         # expand the form with fields of the data object that is being edited
         formcomponent.expand( SKChoice )
         submit = SKChoice.control(name='submit',type="submit", value="next")
-        return page 
+        return page   
     
     def onSelect(self, director):
-        selected = self.processKernelSelection(director)
+        selected = self.processFormInputs(director)
         method = getattr(self, selected )
         return method( director )
-    
-    def processKernelSelection(self, director):
-        ru
-    
+
     def gulp(self, director):
         try:
-            page = director.retrieveSecurePage( 'gulpNE' )
+            page = director.retrieveSecurePage( 'neutronexperimentwizard' )
         except AuthenticationError, err:
             return err.page
-        main = page._body._content._main
-        document = main.document(title="")
-        document.byline = '<a href="http://danse.us">DANSE</a>'
         
-        formcomponent = self.retrieveFormToShow( 'gulpNE')
+        main = page._body._content._main
+        document = main.document(title='Classical atomistics kernel' )
+        document.byline = '<a href="http://danse.us">DANSE</a>'    
+        
+        formcomponent = self.retrieveFormToShow( 'gulp')
         formcomponent.director = director
         # build the SKChoice form
-        form = document.form(name='scatteringKernelInput', action=director.cgihome)
+        form = document.form(name='', action=director.cgihome)
         # specify action
         action = actionRequireAuthentication(          
             actor = 'job', 
@@ -510,19 +513,20 @@ class NeutronExperimentWizard(base):
         next = form.control(name='submit',type="submit", value="submit job")
         return page 
     
-    def abInitioHarmonic(self, director):
+    def submitJob(self, director):
         try:
-            page = director.retrieveSecurePage( 'abInitioHarmonic' )
+            page = director.retrieveSecurePage( 'neutronexperimentwizard' )
         except AuthenticationError, err:
             return err.page
-        main = page._body._content._main
-        document = main.document(title="")
-        document.byline = '<a href="http://danse.us">DANSE</a>'
         
-        formcomponent = self.retrieveFormToShow( 'abInitioHarmonic')
+        main = page._body._content._main
+        document = main.document(title='Classical atomistics kernel' )
+        document.byline = '<a href="http://danse.us">DANSE</a>'    
+        
+        formcomponent = self.retrieveFormToShow( 'gulp')
         formcomponent.director = director
         # build the SKChoice form
-        form = document.form(name='scatteringKernelInput', action=director.cgihome)
+        form = document.form(name='', action=director.cgihome)
         # specify action
         action = actionRequireAuthentication(          
             actor = 'job', 
@@ -535,13 +539,8 @@ class NeutronExperimentWizard(base):
         action_formfields( action, form )
         # expand the form with fields of the data object that is being edited
         formcomponent.expand( form )
-        submit = form.control(name='scatteringKernelInput.submit',type="submit", value="next")
-        return page 
-    
-    
-    
-    
-    
+        next = form.control(name='submit',type="submit", value="submit job")
+        return page     
 
     def experiment_parameters(self, director):
         try:
