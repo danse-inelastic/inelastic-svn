@@ -83,7 +83,7 @@ class Clerk(Component):
         
         for column in record.getColumnNames():
             value = getattr( record, column )
-            value = _tostr( value )
+            #value = _tostr( value )
             assignments.append( (column, value) )
             continue
         

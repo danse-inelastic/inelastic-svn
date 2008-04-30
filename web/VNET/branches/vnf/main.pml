@@ -14,7 +14,8 @@
 <inventory>
 
   <component name='main'>
-    <property name='actor'>neutronexperimentwizard</property>   
+    <property name='actor'>neutronexperimentwizard</property>  
+    <property name="routine">kernel_origin</property>  
     <component name='sentry'>
     	<property name='username'>demo</property>
     	<property name='passwd'>demo</property>
