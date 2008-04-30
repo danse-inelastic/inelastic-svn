@@ -583,7 +583,7 @@ class NeutronExperimentWizard(base):
 
         # run button
         submit = form.control(name="submit", type="submit", value="OK")
-        
+        back = form.control(name="submit", type="submit", value="back")
         return page
     
 
