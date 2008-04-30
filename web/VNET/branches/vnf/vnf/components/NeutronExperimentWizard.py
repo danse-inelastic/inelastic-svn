@@ -189,7 +189,7 @@ class NeutronExperimentWizard(base):
         # specify action
         action = actionRequireAuthentication(
             actor = 'neutronexperimentwizard', sentry = director.sentry,
-            label = '', routine = 'sample_preparation',
+            label = '', routine = 'verify_instrument_configuration',
             id = self.inventory.id,
             arguments = {'form-received': formcomponent.name } )
         from vnf.weaver import action_formfields
@@ -204,7 +204,7 @@ class NeutronExperimentWizard(base):
         return page
     
     
-    def sample_preparation(self, director):
+    def verify_instrument_configuration(self, director):
         try:
             page = director.retrieveSecurePage( 'neutronexperimentwizard' )
         except AuthenticationError, err:
@@ -220,12 +220,95 @@ class NeutronExperimentWizard(base):
 
         experiment = director.clerk.getNeutronExperiment(
             self.inventory.id )
-        if experiment.instrument_id in [ 'None', None, '' ]:
+        # make sure instrument is configured
+        if empty_id( experiment.instrument_id ):
+            director.routine = 'select_instrument'
+            return self.select_instrument( director )
+        # get configured instrument
+        configured_instrument = director.clerk.getConfiguredInstrument(
+            experiment.instrument_id )
+        # make sure it has a instrument and it is configured
+        if empty_id( configured_instrument.instrument_id ) or \
+           empty_id( configured_instrument.configuration_id ):
             director.routine = 'select_instrument'
             return self.select_instrument( director )
         
         experiment.status = 'instrument configured'
         director.clerk.updateRecord( experiment )
+        director.routine = 'sample_environment'
+        return self.sample_environment(director)
+        
+
+    def sample_environment(self, director):
+        try:
+            page = director.retrieveSecurePage( 'neutronexperimentwizard' )
+        except AuthenticationError, err:
+            return err.page
+                
+        main = page._body._content._main
+
+        # populate the main column
+        document = main.document(
+            title='Neutron Experiment Wizard: sample environment')
+        document.description = ''
+        document.byline = 'byline?'
+
+        formcomponent = self.retrieveFormToShow( 'sample_environment' )
+        formcomponent.inventory.experiment_id = self.inventory.id
+        formcomponent.director = director
+        
+        # create form
+        form = document.form(
+            name='sample environment',
+            legend= formcomponent.legend(),
+            action=director.cgihome)
+
+        #call scattering kernel input actor
+        
+        #
+
+        # specify action
+        action = actionRequireAuthentication(
+            actor = 'neutronexperimentwizard', sentry = director.sentry,
+            label = '',
+            routine = 'verify_sample_environment',
+            id = self.inventory.id,
+            arguments = {'form-received': formcomponent.name } )
+        from vnf.weaver import action_formfields
+        action_formfields( action, form )
+
+        # expand the form with fields of the data object that is being edited
+        formcomponent.expand( form )
+        
+        # run button
+        submit = form.control(name="submit", type="submit", value="OK")
+        
+        return page
+
+
+    def verify_sample_environment(self, director):
+        try:
+            page = director.retrieveSecurePage( 'neutronexperimentwizard' )
+        except AuthenticationError, err:
+            return err.page
+        
+        try:
+            self.processFormInputs( director )
+        except InputProcessingError, err:
+            errors = err.errors
+            self.form_received = None
+            director.routine = 'sample_environment'
+            return self.sample_environment( director, errors = errors )
+
+        director.routine = 'sample_preparation'
+        return self.sample_preparation( director )
+            
+
+    def sample_preparation(self, director):
+        try:
+            page = director.retrieveSecurePage( 'neutronexperimentwizard' )
+        except AuthenticationError, err:
+            return err.page
         
         main = page._body._content._main
         
@@ -249,7 +332,7 @@ class NeutronExperimentWizard(base):
         action = actionRequireAuthentication(
             actor = 'neutronexperimentwizard', sentry = director.sentry,
             label = '',
-            routine = 'sample_environment',
+            routine = 'configure_sample',
             id = self.inventory.id,
             arguments = {'form-received': formcomponent.name } )
         from vnf.weaver import action_formfields
@@ -264,53 +347,86 @@ class NeutronExperimentWizard(base):
         return page
 
 
-    def sample_environment(self, director):
+    def configure_sample(self, director):
+        try:
+            page = director.retrieveSecurePage( 'neutronexperimentwizard' )
+        except AuthenticationError, err:
+            return err.page        
+        main = page._body._content._main
+        # populate the main column
+        document = main.document(
+            title='Neutron Experiment Wizard: sample configuration')
+        document.description = ''
+        document.byline = 'byline?'
+
+        self.processFormInputs( director )
+
+        #get experiment
+        experiment = director.clerk.getNeutronExperiment(
+            self.inventory.id )
+        #get sample assembly
+        sampleassembly = director.clerk.getSampleAssembly(
+            experiment.sampleassembly_id )
+        #get sample
+        configured_scatterers = director.clerk.getConfiguredScatterers(
+            experiment.sampleassembly_id )
+        samples = filter(
+            lambda configured: configured.label == 'sample',
+            configured_scatterers )
+        assert len(samples)==1, 'there should be only 1 sample in sample assembly %r' % sampleassembly.short_description
+        sample = samples[0]
+
+        #
+        assert not empty_id(sample.scatterer_id)
+
+        #In this step we obtain configuration of sample
+        
+        formcomponent = self.retrieveFormToShow( 'configureneutronscatterer' )
+        formcomponent.inventory.id = sample.id
+        formcomponent.director = director
+        
+        # create form
+        form = document.form(
+            name='configure sample',
+            legend= formcomponent.legend(),
+            action=director.cgihome)
+
+        # specify action
+        action = actionRequireAuthentication(
+            actor = 'neutronexperimentwizard', sentry = director.sentry,
+            label = '',
+            routine = 'configure_scatteringkernels',
+            id = self.inventory.id,
+            arguments = {'form-received': formcomponent.name } )
+        from vnf.weaver import action_formfields
+        action_formfields( action, form )
+
+        # expand the form with fields of the data object that is being edited
+        formcomponent.expand( form )
+
+        # run button
+        submit = form.control(name="submit", type="submit", value="OK")
+        
+        return page
+
+
+    def configure_scatteringkernels(self, director):
         try:
             page = director.retrieveSecurePage( 'neutronexperimentwizard' )
         except AuthenticationError, err:
             return err.page
         
         main = page._body._content._main
-
         # populate the main column
         document = main.document(
-            title='Neutron Experiment Wizard: sample environment')
+            title='Neutron Experiment Wizard: scattering kernels')
         document.description = ''
         document.byline = 'byline?'
 
-        self.processFormInputs( director )
-        
-        formcomponent = self.retrieveFormToShow( 'sample_environment' )
-        formcomponent.inventory.experiment_id = self.inventory.id
-        formcomponent.director = director
-        
-        # create form
-        form = document.form(
-            name='sample environment',
-            legend= formcomponent.legend(),
-            action=director.cgihome)
-
-        #call scattering kernel input actor
-        
-        #
-
-        # specify action
-        action = actionRequireAuthentication(
-            actor = 'neutronexperimentwizard', sentry = director.sentry,
-            label = '',
-            routine = 'dynamics_selection',
-            id = self.inventory.id,
-            arguments = {'form-received': formcomponent.name } )
-        from vnf.weaver import action_formfields
-        action_formfields( action, form )
-
-        # expand the form with fields of the data object that is being edited
-        formcomponent.expand( form )
-        
-        # run button
-        submit = form.control(name="submit", type="submit", value="OK")
+        self.processFormInputs(director)
         
         return page
+
 
     def kernel_origin(self, director):
         try:
@@ -404,14 +520,6 @@ class NeutronExperimentWizard(base):
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
 
     def experiment_parameters(self, director):
         try:
@@ -439,6 +547,34 @@ class NeutronExperimentWizard(base):
         document.byline = 'byline?'
         return page
 
+    def select_sample_from_sample_library(self, director):
+        try:
+            page = director.retrieveSecurePage( 'neutronexperimentwizard' )
+        except AuthenticationError, err:
+            return err.page        
+        main = page._body._content._main
+        # populate the main column
+        document = main.document(
+            title='Neutron Experiment Wizard: select sample from sample library')
+        document.description = ''
+        document.byline = 'byline?'
+        return page
+    
+
+    def create_new_sample(self, director):
+        try:
+            page = director.retrieveSecurePage( 'neutronexperimentwizard' )
+        except AuthenticationError, err:
+            return err.page        
+        main = page._body._content._main
+        # populate the main column
+        document = main.document(
+            title='Neutron Experiment Wizard: create new sample')
+        document.description = ''
+        document.byline = 'byline?'
+        return page
+    
+
     def __init__(self, name=None):
         if name is None:
             name = "neutronexperimentwizard"
@@ -455,7 +591,7 @@ class NeutronExperimentWizard(base):
 
 
 
-from misc import new_id
+from misc import new_id, empty_id
 
 
 # version

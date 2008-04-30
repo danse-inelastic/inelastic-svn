@@ -35,8 +35,6 @@ class Form( base ):
         experiment_id = self.inventory.experiment_id
         director = self.director
         experiment = director.clerk.getNeutronExperiment( experiment_id )
-        experiment = director.clerk.getHierarchy( experiment )
-        sampleassembly = experiment.sampleassembly
 
         prefix = formactor_action_prefix
 
@@ -68,7 +66,7 @@ class Form( base ):
 
     def __init__(self, name = None):
         if name is None:
-            name = 'sample_preparation'
+            name = 'sample_environment'
 
         base.__init__(self, name)
 
@@ -78,20 +76,6 @@ class Form( base ):
 
 
 
-def getsample( sampleassembly ):
-    samples = []
-    for scatterer in sampleassembly.scatterers:
-        if scatterer.label == 'sample': samples.append(scatterer.realscatterer)
-        continue
-    
-    if len(samples)!=1:
-        raise RuntimeError, 'There should be only one sample in a sample assembly. Sample assembly %r has following samples: %s' % (
-            sampleassembly.short_description,
-            [ sample.short_description for sample in samples ],
-            )
-    return samples[0]
-
-            
 formactor_action_prefix = 'actor.form-received' # assumed actor is a form actor
 
 def form(): return Form()

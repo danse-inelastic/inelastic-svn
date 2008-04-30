@@ -23,10 +23,27 @@ class Block(base):
 
         import pyre.inventory
         width = pyre.inventory.float( name = 'width', default = 0.05 )
+        width.meta['label'] = 'Width'
+        width.meta['tip'] = (
+            'Width is the horizontal dimension that is perpendicular to',
+            'the incident neutron beam',
+            )
+        
         height = pyre.inventory.float( name = 'height', default = 0.1 )
+        height.meta['label'] = 'Height'
+        height.meta['tip'] = (
+            'Height is the vertical length',
+            )
+        
         thickness = pyre.inventory.float( name = 'thickness', default = 0.002 )
+        thickness.meta['label'] = 'Thickness'
+        thickness.meta['tip'] = (
+            'Thickness is the length of the dimension parallel',
+            'to the neutron beam',
+            )
 
-    parameters = ['short_description', 'width', 'height', 'thickness']
+    parameters = [#'short_description',
+        'width', 'height', 'thickness']
     DBTable = 'Block'
 
 

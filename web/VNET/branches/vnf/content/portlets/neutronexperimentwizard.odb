@@ -19,6 +19,10 @@ routine2menu = {
     'select_instrument': 'instrument',
     'configure_instrument': 'instrument',
     'sample_preparation': 'sample',
+    'configure_sample': 'sample',
+    'configure_scatteringkernels': 'sample',
+    'select_sample_from_sample_library': 'sample',
+    'create_new_sample': 'sample',
     'sample_environment': 'sample_environment',
     'kernel_origin': 'kernel_origin',
     'gulp_dynamics': 'gulp_dynamics',
@@ -50,16 +54,6 @@ def portlet(app):
     instrument.icon = "images/link_icon.gif"
     instrument.type = "navItem"
     
-    sample = portlet.item(description="Sample preparation")
-    action = actionRequireAuthentication(
-        actor = 'neutronexperimentwizard', sentry = app.sentry,
-        routine = 'sample_preparation',
-        id = app.actor.inventory.id,
-        )
-    sample.target = action_href(action, app.cgihome)
-    sample.icon = "images/link_icon.gif"
-    sample.type = "navItem"
-    
     sample_environment = portlet.item(description="Sample environment")
     action = actionRequireAuthentication(
         actor = 'neutronexperimentwizard', sentry = app.sentry,
@@ -69,6 +63,16 @@ def portlet(app):
     sample_environment.target = action_href(action, app.cgihome)
     sample_environment.icon = "images/link_icon.gif"
     sample_environment.type = "navItem"
+    
+    sample = portlet.item(description="Sample preparation")
+    action = actionRequireAuthentication(
+        actor = 'neutronexperimentwizard', sentry = app.sentry,
+        routine = 'sample_preparation',
+        id = app.actor.inventory.id,
+        )
+    sample.target = action_href(action, app.cgihome)
+    sample.icon = "images/link_icon.gif"
+    sample.type = "navItem"
     
     kernel_origin = portlet.item(description="Kernel origin")
     action = actionRequireAuthentication(
@@ -111,7 +115,7 @@ def portlet(app):
     submit_experiment.type = "navItem"
 
     routine = app.routine
-    menu = routine2menu[ routine ]
+    menu = routine2menu.get( routine )
     if menu:
         selected_menu = eval( menu )
         selected_menu.icon = "images/selectedlink_icon.gif"

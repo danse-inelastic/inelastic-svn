@@ -12,20 +12,23 @@
 #
 
 
-def new_id( director ):
-    #new token
-    token = director.idd.token()
-    uniquename = '%s' % (token.locator,)
-    return uniquename
+from DbObject import DbObject
+class SampleEnvironment(DbObject):
 
+    name = 'sampleenvironments'
 
-def empty_id( id ):
-    return id in [None, 'None', '']
+    import pyre.db
 
+    #unit: K
+    temperature = pyre.db.real( name = 'temperature', default = 300 )
 
-def datadir( ):
-    import os
-    return os.path.join( 'content', 'data' )
+    #unit: Gauss
+    magnetic_field = pyre.db.doubleArray(name = 'magnetic_field' )
+
+    #unit: atm
+    pressure = pyre.db.real( name = 'pressure', default = 1. )
+    
+    pass # end of SampleEnvironment
 
 
 # version

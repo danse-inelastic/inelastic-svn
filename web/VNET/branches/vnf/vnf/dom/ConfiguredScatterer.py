@@ -15,19 +15,19 @@
 from OwnedObject import OwnedObject
 
 
-class ConfiguredInstrument(OwnedObject):
+class ConfiguredScatterer(OwnedObject):
     
-    name = "configuredinstruments"
+    name = "configuredscatterers"
     
     import pyre.db
 
-    instrument_id = pyre.db.varchar( name = 'instrument_id', length = 100 )
-    instrument_id.meta['tip'] = 'id of instrument in the instrument table'
+    scatterer_id = pyre.db.varchar( name = 'scatterer_id', length = 100 )
+    scatterer_id.meta['tip'] = 'id of scatterer in the scatterer table'
     
     configuration_id = pyre.db.varchar( name = 'configuration_id', length = 100 )
-    configuration_id.meta['tip'] = 'id of configuration in the "<instrument>configuration" table'
+    configuration_id.meta['tip'] = 'id of configuration in the "<scatterer>configuration" table'
     
-    pass # end of ConfiguredInstrument
+    pass # end of ConfiguredScatterer
 
 
 # version
