@@ -232,9 +232,11 @@ class NeutronExperimentWizard(base):
            empty_id( configured_instrument.configuration_id ):
             director.routine = 'select_instrument'
             return self.select_instrument( director )
-        
+
+        # update experiment status
         experiment.status = 'instrument configured'
         director.clerk.updateRecord( experiment )
+        
         director.routine = 'sample_environment'
         return self.sample_environment(director)
         
@@ -253,8 +255,32 @@ class NeutronExperimentWizard(base):
         document.description = ''
         document.byline = 'byline?'
 
+        #get experiment
+        experiment_id = self.inventory.id
+        experiment = director.clerk.getNeutronExperiment( experiment_id )
+
+        #sample environment
+        sampleenvironment_id = experiment.sampleenvironment_id
+
+        if empty_id(sampleenvironment_id):
+            #create new instance of sampleenvironment
+            from vnf.dom.SampleEnvironment import SampleEnvironment
+            record = SampleEnvironment()
+            id = new_id( director )
+            record.id = id
+            record.magnetic_field = [0,0,0]
+            director.clerk.newRecord( record )
+            sampleenvironment = record
+            
+            #attach to experiment
+            experiment.sampleenvironment_id = sampleenvironment.id
+            #save
+            director.clerk.updateRecord( experiment )
+            sampleenvironment_id = sampleenvironment.id
+            pass # endif
+
         formcomponent = self.retrieveFormToShow( 'sample_environment' )
-        formcomponent.inventory.experiment_id = self.inventory.id
+        formcomponent.inventory.id = sampleenvironment_id
         formcomponent.director = director
         
         # create form
@@ -262,10 +288,6 @@ class NeutronExperimentWizard(base):
             name='sample environment',
             legend= formcomponent.legend(),
             action=director.cgihome)
-
-        #call scattering kernel input actor
-        
-        #
 
         # specify action
         action = actionRequireAuthentication(

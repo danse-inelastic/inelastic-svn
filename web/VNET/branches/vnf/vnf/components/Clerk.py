@@ -350,6 +350,11 @@ class Clerk(Component):
         return self._getRecordByID( NeutronExperiment, id )
 
 
+    def getSampleEnvironment(self,id):
+        from vnf.dom.SampleEnvironment import SampleEnvironment
+        return self._getRecordByID( SampleEnvironment, id )
+
+
     def getAbstractScatterer(self, impltablename, id ):
         '''obtain record in the abstract scatterer table given the
         implementation table and id'''

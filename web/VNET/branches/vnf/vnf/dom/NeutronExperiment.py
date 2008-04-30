@@ -25,6 +25,9 @@ class NeutronExperiment(base):
     sampleassembly_id = pyre.db.varchar( name = 'sampleassembly_id', length = 100 )
     sampleassembly_id.meta['tip'] = 'reference id in the sample assembly table'
 
+    sampleenvironment_id = pyre.db.varchar(
+        name = 'sampleenvironment_id', length = 100)
+
     ncount = pyre.db.real( name = 'ncount', default = 1e6)
 
     constructed = pyre.db.varchar( name = 'constructed', length = 4 )

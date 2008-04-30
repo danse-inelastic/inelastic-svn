@@ -22,7 +22,7 @@ class SampleEnvironment(DbObject):
     #unit: K
     temperature = pyre.db.real( name = 'temperature', default = 300 )
 
-    #unit: Gauss
+    #unit: Tesla
     magnetic_field = pyre.db.doubleArray(name = 'magnetic_field' )
 
     #unit: atm
