@@ -1,0 +1,105 @@
+# -*- Python -*-
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                   Jiao Lin
+#                      California Institute of Technology
+#                        (C) 2007  All Rights Reserved
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+
+from vnf.components.Form import Form as base, InputProcessingError
+from vnf.components.Actor import action_link, actionRequireAuthentication
+
+
+class Form( base ):
+
+    class Inventory( base.Inventory ):
+        import pyre.inventory
+        #id of configured scatterer
+        id = pyre.inventory.str( 'id' )
+        pass # end of Inventory
+
+
+    def legend(self):
+        'return a legend string'
+        director = self.director
+        clerk = director.clerk
+        # get configuration container
+        configured = clerk.getConfiguredScatterer( self.inventory.id )
+        return 'Settings of %r' % configured.short_description
+
+
+    def expand(self, form, errors = None, scattererlabel = 'sample'):
+        '''expand an existing form with fields from this component'''
+
+        director = self.director
+        clerk = director.clerk
+        # get configuration container
+        configured = clerk.getConfiguredScatterer( self.inventory.id )
+
+        # get scatterer template
+        scatterer = clerk.getScatterer( configured.scatterer_id )
+
+        # get hierarchy so we know the real scatterer
+        scatterer = clerk.getHierarchy( scatterer )
+
+        realscatterer = scatterer.realscatterer
+
+        self.parameters = ['width', 'height', 'thickness']
+        p = form.paragraph()
+        p.text = [
+            'In this form, you can fine-tune your %s.' % scattererlabel,
+            ]
+
+        p = form.paragraph()
+        p.text = [
+            'You can change the dimensions of the shape of this %s' % (
+            scattererlabel,),
+            ]
+        
+        # get shape
+        realshape = realscatterer.shape.realshape
+
+        # get form to edit this shape
+        formname = realshape.__class__.__name__.lower()
+        shapeform = director.retrieveForm( formname )
+        shapeform.director = director
+        shapeform.inventory.id = realshape.id
+        shapeform.expand( form, errors = errors)
+        return
+
+
+    def processUserInputs(self):
+        'process user inputs and save them to db'
+        
+        return
+
+
+    def __init__(self, name = None):
+        if name is None:
+            name = 'configureneutronscatterer'
+
+        base.__init__(self, name)
+
+        return
+    
+    pass # end of Form
+
+
+
+formactor_action_prefix = 'actor.form-received' # assumed actor is a form actor
+from vnf.components.misc import empty_id
+
+
+def form(): return Form()
+
+
+# version
+__id__ = "$Id$"
+
+# End of file 

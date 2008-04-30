@@ -49,6 +49,13 @@ class TreeViewCreator:
 
     def onSampleAssembly(self, sampleassembly):
         return self.onContainer(sampleassembly, sampleassembly.scatterers)
+
+
+    def onConfiguredScatterer(self, configured):
+        elements = [ configured.scatterer ]
+        configuration = configured.configuration
+        if configuration: elements.append( configuration )
+        return self.onContainer( configured, elements )
         
         
     def onPolyXtalScatterer(self, scatterer):

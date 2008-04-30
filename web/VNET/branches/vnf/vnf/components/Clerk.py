@@ -185,6 +185,11 @@ class Clerk(Component):
         return self._getRecordByID( Instrument, id )
 
 
+    def getConfiguredScatterer(self, id):
+        from vnf.dom.ConfiguredScatterer import ConfiguredScatterer
+        return self._getRecordByID( ConfiguredScatterer, id )
+
+
     def getConfiguredInstrument(self, id):
         '''retrieve configured instrument of given id'''
         from vnf.dom.ConfiguredInstrument import ConfiguredInstrument as table
@@ -220,10 +225,10 @@ class Clerk(Component):
         from vnf.dom.Scatterer import Scatterer
         return self._getRecordByID( Scatterer, id )
     
-    def getScatterers(self, id):
-        '''retrieve scatterers in the sample assembly of given id'''
+    def getConfiguredScatterers(self, id):
+        '''retrieve configured scatterers in the sample assembly of given id'''
         from vnf.dom.SampleAssembly import SampleAssembly
-        from vnf.dom.Scatterer import Scatterer
+        from vnf.dom.ConfiguredScatterer import ConfiguredScatterer
 
         referencetable = SampleAssembly.Scatterers
         
@@ -234,7 +239,8 @@ class Clerk(Component):
         
         for record in records:
             scattererID = record.remotekey
-            scattererrecord = self._getRecordByID( Scatterer, scattererID )
+            scattererrecord = self._getRecordByID(
+                ConfiguredScatterer, scattererID )
             # set "label" - sample, sample_holder, furnace
             # label is an attribute of a scatterer in a sample assembly
             # it is not an attribute of a scatterer itself (you can
@@ -356,7 +362,9 @@ class Clerk(Component):
         return all[0]
 
 
-    def deleteScattererFromSampleAssembly(self, scatterer_id, sampleassembly_id ):
+    def deleteScattererFromSampleAssembly(
+        self, scatterer_id, sampleassembly_id ):
+
         # mark scatterer as deleted
         record = self.getScatterer( scatterer_id )
         assignments = [ ('status', 'd'), ]
@@ -898,10 +906,29 @@ class HierarchyRetriever:
 
 
     def onSampleAssembly(self, sampleassembly):
-        scatterers = self.clerk.getScatterers( sampleassembly.id )
+        scatterers = self.clerk.getConfiguredScatterers( sampleassembly.id )
         scatterers = [ self( scatterer ) for scatterer in scatterers ]
         sampleassembly.scatterers = scatterers
         return sampleassembly
+
+
+    def onConfiguredScatterer(self, configured):
+        scatterer_id = configured.scatterer_id
+        scatterer = self.clerk.getScatterer( scatterer_id )
+        scatterer = self(scatterer)
+        configured.scatterer = scatterer
+
+        configuration_id = configured.configuration_id
+        if empty_id( configuration_id ): configuration = None
+        else:
+            #configuration table is that of the real scatterer
+            realscatterer = scatterer.realscatterer
+            table = realscatterer.__class__
+            configuration = self.clerk._getRecordByID( table, configuration_id )
+            configuration = self(configuration)
+            pass # endif
+        configured.configuration = configuration
+        return configured
 
 
     def onScatterer(self, scatterer):
@@ -992,7 +1019,7 @@ def _tostr( value ):
     return str(value)
 
 
-from misc import new_id
+from misc import new_id, empty_id
 
 # version
 __id__ = "$Id$"

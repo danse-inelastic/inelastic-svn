@@ -19,6 +19,10 @@ def new_id( director ):
     return uniquename
 
 
+def empty_id( id ):
+    return id in [None, 'None', '']
+
+
 def datadir( ):
     import os
     return os.path.join( 'content', 'data' )

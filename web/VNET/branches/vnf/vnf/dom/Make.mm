@@ -34,6 +34,7 @@ EXPORT_PYTHON_MODULES = \
 	ARCSconfiguration.py \
 	Block.py \
 	ConfiguredInstrument.py \
+	ConfiguredScatterer.py \
 	Crystal.py \
 	DbObject.py \
 	Disordered.py \
@@ -55,6 +56,7 @@ EXPORT_PYTHON_MODULES = \
 	ReferenceSet.py \
 	Sample.py \
 	SampleAssembly.py \
+	SampleEnvironment.py \
 	Scatterer.py \
 	ScatteringKernel.py \
 	ScatteringKernel2.py \

@@ -42,7 +42,7 @@ class DBObjectForm( base ):
             record.short_description)
 
 
-    def expand(self, form):
+    def expand(self, form, errors = None, properties = None):
         '''expand an existing form with fields from this component'''
         
         record = self.getRecord()
@@ -51,25 +51,25 @@ class DBObjectForm( base ):
         
         id_field = form.hidden(
             name = '%s.id' % prefix, value = record.id)
-        
-        for property in self.parameters:
-            
-            value = getattr( record, property )
-            exec 'self.inventory.%s = value' % property
-            value = tostr( getattr(self.inventory, property) )
-            
-            field = form.text(
-                id = property,
-                name='%s.%s' % (prefix, property),
-                label=property,
-                value = value)
-            
-            descriptor = getattr(self.Inventory, property)
-            tip = descriptor.meta.get('tip')
-            if tip:
-                field.help = tip
-                #field.error = tip
 
+        configuration = record
+        if properties is None: properties = self.parameters
+        for property in properties:
+            meta = getattr( self.Inventory, property ).meta
+            value = getattr( configuration, property )
+            field = form.text(
+                id = 'edit_%s' % property,
+                name='%s.%s' % (prefix, property),
+                label = meta.get('label') or property,
+                value = value)
+            tip = meta.get('tip')
+            if isinstance(tip, list) or isinstance(tip, tuple):
+                tip = ' '.join(tip)
+                pass # endif
+            if tip: field.help = tip
+            if errors and property in errors:
+                field.error = meta['tiponerror']
+                pass # end if
             continue
 
         return
