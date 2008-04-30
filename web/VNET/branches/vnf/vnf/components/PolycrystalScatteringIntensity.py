@@ -39,6 +39,13 @@ class PolycrystalScatteringIntensity(Actor):
         p = document.paragraph()
         p.text = ['''<p>&nbsp;</p>
 <form action="" method="post" enctype="multipart/form-data" name="form1" id="form1">
+  <label>Type of material
+  <select name="select" id="select">
+    <option>Polycrystal</option>
+    <option>Disordered</option>
+    <option>Single crystal</option>
+  </select>
+  </label>
   <label>Type of Scattering
   <select name="select" id="select">
     <option>Incoherent</option>
