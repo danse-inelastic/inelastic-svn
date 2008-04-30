@@ -582,8 +582,20 @@ class NeutronExperimentWizard(base):
         formcomponent.expand( form )
 
         # run button
-        submit = form.control(name="submit", type="submit", value="OK")
-        back = form.control(name="submit", type="submit", value="back")
+        submit = form.control(name="actor.form-received.submit", type="submit", value="OK")
+        back = form.control(name="actor.form-received.submit", type="submit", value="back")
+        return page
+
+
+    def verify_experiment_submission(self, director):
+        try:
+            page = director.retrieveSecurePage( 'neutronexperimentwizard' )
+        except AuthenticationError, err:
+            return err.page        
+
+        if self.form_received.submit == 'back':
+            return self.start(director)
+
         return page
     
 

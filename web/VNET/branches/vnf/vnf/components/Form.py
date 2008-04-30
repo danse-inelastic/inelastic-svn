@@ -23,6 +23,7 @@ class Form( base ):
 
     class Inventory( base.Inventory ):
         import pyre.inventory
+        submit = pyre.inventory.str( 'submit' )
         pass # end of Inventory
 
 
@@ -39,7 +40,12 @@ class Form( base ):
     def expand(self, form):
         'expand the given form with fields from this form component'
         raise NotImplementedError
-    
+
+
+    def _init(self):
+        base._init(self)
+        self.submit = self.inventory.submit 
+        return
 
     pass # end of Form
 
