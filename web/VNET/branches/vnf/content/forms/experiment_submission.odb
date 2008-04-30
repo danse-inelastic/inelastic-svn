@@ -1,0 +1,67 @@
+# -*- Python -*-
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                   Jiao Lin
+#                      California Institute of Technology
+#                        (C) 2007  All Rights Reserved
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+
+from vnf.components.Form import Form as base
+from vnf.components.Actor import action_link, actionRequireAuthentication
+
+
+class Form( base ):
+
+    class Inventory( base.Inventory ):
+        import pyre.inventory
+        
+        id = pyre.inventory.str('id')
+        
+        pass # end of Inventory
+
+
+    def legend(self):
+        'return a legend string'
+        return 'Experiment submission'
+
+
+    def expand(self, form):
+        '''expand an existing form with fields from this component'''
+
+        return
+
+
+    def processUserInputs(self):
+        'process user inputs and save them to db'
+        return
+
+
+    def __init__(self, name = None):
+        if name is None:
+            name = 'experiment_submission'
+
+        base.__init__(self, name)
+
+        return
+    
+    pass # end of Form
+
+
+
+
+formactor_action_prefix = 'actor.form-received' # assumed actor is a form actor
+
+
+def form(): return Form()
+
+
+# version
+__id__ = "$Id$"
+
+# End of file 

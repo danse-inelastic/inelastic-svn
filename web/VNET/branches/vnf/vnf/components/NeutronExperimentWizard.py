@@ -542,6 +542,7 @@ class NeutronExperimentWizard(base):
         next = form.control(name='submit',type="submit", value="submit job")
         return page     
 
+
     def submit_experiment(self, director):
         try:
             page = director.retrieveSecurePage( 'neutronexperimentwizard' )
@@ -554,7 +555,37 @@ class NeutronExperimentWizard(base):
             title='Neutron Experiment Wizard: submit')
         document.description = ''
         document.byline = 'byline?'
+
+        #In this step we obtain configuration of sample
+        
+        formcomponent = self.retrieveFormToShow( 'experiment_submission' )
+        formcomponent.inventory.id = self.inventory.id
+        formcomponent.director = director
+        
+        # create form
+        form = document.form(
+            name='experiment submission',
+            legend= formcomponent.legend(),
+            action=director.cgihome)
+
+        # specify action
+        action = actionRequireAuthentication(
+            actor = 'neutronexperimentwizard', sentry = director.sentry,
+            label = '',
+            routine = 'verify_experiment_submission',
+            id = self.inventory.id,
+            arguments = {'form-received': formcomponent.name } )
+        from vnf.weaver import action_formfields
+        action_formfields( action, form )
+
+        # expand the form with fields of the data object that is being edited
+        formcomponent.expand( form )
+
+        # run button
+        submit = form.control(name="submit", type="submit", value="OK")
+        
         return page
+    
 
     def select_sample_from_sample_library(self, director):
         try:
