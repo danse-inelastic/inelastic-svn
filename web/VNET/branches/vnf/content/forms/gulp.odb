@@ -26,19 +26,16 @@ class Form( base ):
             'short_description', default = '' )
         short_description.meta['tip'] = 'A short description'
 
-    #parameters = ['gulpHarmonic','gulpNE','mmtkNE','vaspPhon','abinitPhon','phononDispersion'] # parameters to edit in the form
-    parameters = ['gulpHarmonic','gulpNE']
-    
-    def legend(self):
-        'return a legend string'
-        return 'kernel'
 
     def expand(self, form):
         '''expand an existing form with fields from this component'''
         prefix = formactor_action_prefix
         
         p = form.paragraph()
-        p.text = ['<h1>Thermodynamic Ensemble</h1>','<h2>Thermodynamic Ensemble</h2>']
+        p.text = ['''The Gulp kernel generator uses classical forcefield
+        techniques for simulating larger systems.  Gulp contains a vast
+        number of forcefields and a phonon / molecular dynamics capabilities
+        to complement neutron scattering experiments.  Samples ''']
         
         
         

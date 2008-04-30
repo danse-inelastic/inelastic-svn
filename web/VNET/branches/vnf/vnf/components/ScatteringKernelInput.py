@@ -45,17 +45,16 @@ class ScatteringKernelInput(base):
         method = getattr(self, selected )
         return method( director )
 
-    
-    def gulpHarmonic(self, director):
+    def gulp(self, director):
         try:
-            page = director.retrieveSecurePage( 'gulpHarmonic' )
+            page = director.retrieveSecurePage( 'gulp' )
         except AuthenticationError, err:
             return err.page
         main = page._body._content._main
         document = main.document(title="")
         document.byline = '<a href="http://danse.us">DANSE</a>'
         
-        formcomponent = self.retrieveFormToShow( 'gulpHarmonic')
+        formcomponent = self.retrieveFormToShow( 'gulp')
         formcomponent.director = director
         # build the SKChoice form
         form = document.form(name='scatteringKernelInput', action=director.cgihome)
@@ -72,35 +71,6 @@ class ScatteringKernelInput(base):
         # expand the form with fields of the data object that is being edited
         formcomponent.expand( form )
         submit = form.control(name='submit',type="submit", value="next")
-        return page 
-
-    
-    def gulpNE(self, director):
-        try:
-            page = director.retrieveSecurePage( 'gulpNE' )
-        except AuthenticationError, err:
-            return err.page
-        main = page._body._content._main
-        document = main.document(title="")
-        document.byline = '<a href="http://danse.us">DANSE</a>'
-        
-        formcomponent = self.retrieveFormToShow( 'gulpNE')
-        formcomponent.director = director
-        # build the SKChoice form
-        form = document.form(name='scatteringKernelInput', action=director.cgihome)
-        # specify action
-        action = actionRequireAuthentication(          
-            actor = 'job', 
-            sentry = director.sentry,
-            routine = 'edit',
-            label = '',
-            arguments = {'form-received': formcomponent.name },
-            )
-        from vnf.weaver import action_formfields
-        action_formfields( action, form )
-        # expand the form with fields of the data object that is being edited
-        formcomponent.expand( form )
-        next = form.control(name='submit',type="submit", value="submit job")
         return page 
     
     def abInitioHarmonic(self, director):
@@ -131,7 +101,6 @@ class ScatteringKernelInput(base):
         submit = form.control(name='scatteringKernelInput.submit',type="submit", value="next")
         return page 
         
-
     def __init__(self, name=None):
         if name is None:
             name = "scatteringKernelInput"
