@@ -393,6 +393,34 @@ class NeutronExperimentWizard(base):
         
         return page
 
+    
+
+    def select_sample_from_sample_library(self, director):
+        try:
+            page = director.retrieveSecurePage( 'neutronexperimentwizard' )
+        except AuthenticationError, err:
+            return err.page        
+        main = page._body._content._main
+        # populate the main column
+        document = main.document(
+            title='Neutron Experiment Wizard: select sample from sample library')
+        document.description = ''
+        document.byline = 'byline?'
+        return page
+    
+
+    def create_new_sample(self, director):
+        try:
+            page = director.retrieveSecurePage( 'neutronexperimentwizard' )
+        except AuthenticationError, err:
+            return err.page        
+        main = page._body._content._main
+        # populate the main column
+        document = main.document(
+            title='Neutron Experiment Wizard: create new sample')
+        document.description = ''
+        document.byline = 'byline?'
+        return page
 
     def configure_sample(self, director):
         try:
@@ -516,7 +544,7 @@ class NeutronExperimentWizard(base):
             return err.page
         
         main = page._body._content._main
-        document = main.document(title='Energetics / Dynamics Selection' )
+        document = main.document(title='Kernel origin selection' )
         document.byline = '<a href="http://danse.us">DANSE</a>'        
         
         formcomponent = self.retrieveFormToShow( 'selectkernel')
@@ -737,35 +765,6 @@ class NeutronExperimentWizard(base):
             return self.start(director)
 
         return page
-    
-
-    def select_sample_from_sample_library(self, director):
-        try:
-            page = director.retrieveSecurePage( 'neutronexperimentwizard' )
-        except AuthenticationError, err:
-            return err.page        
-        main = page._body._content._main
-        # populate the main column
-        document = main.document(
-            title='Neutron Experiment Wizard: select sample from sample library')
-        document.description = ''
-        document.byline = 'byline?'
-        return page
-    
-
-    def create_new_sample(self, director):
-        try:
-            page = director.retrieveSecurePage( 'neutronexperimentwizard' )
-        except AuthenticationError, err:
-            return err.page        
-        main = page._body._content._main
-        # populate the main column
-        document = main.document(
-            title='Neutron Experiment Wizard: create new sample')
-        document.description = ''
-        document.byline = 'byline?'
-        return page
-
 
 
     def __init__(self, name=None):

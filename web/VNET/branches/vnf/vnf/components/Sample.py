@@ -44,7 +44,8 @@ class Sample(Actor):
             
         p = document.paragraph()
         numSamples = len(samples)
-        columns = ['Sample', 'Material','Shape']        
+        columns = ['Id', 'Short description','Cartesian lattice', 'Fractional coordinates',        
+        'Atom symbols', 'Shape name', 'Shape parameters']
 #        columns = ['Sample Name', 'Texture','Creator','Date Created','Id']
 #        matterColumns=['Matter Description','Cartesian Lattice','Atom Positions']
 #        shapeColumns=['Shape Description','Cartesian Lattice','Atom Positions']
@@ -57,24 +58,21 @@ class Sample(Actor):
 #        for row in range(numSamples):
 #            colNum=0
 #            for name in samples[row].getColumnNames():
-        for row, job in enumerate( samples ):
+        for row, sample in enumerate( samples ):
             for colNum, colName in enumerate( columns ):
                 
-                value = job.getColumnValue(colName)
-                if colName == 'Sample':
+                value = sample.getColumnValue(colName)
+                if colName == 'short_description':
                     link = action_link(
                         actionRequireAuthentication(
                         'sample',
                         director.sentry,
                         label = value,
-                        routine = 'sampleInput',
-                        id = job.id,
+                        routine = 'sampleInput'
                         ),  director.cgihome
                         )
                     value = link
-                
-                
-                t.setc(row,colNum,samples[row].getColumnValue(name))
+                t.setc(row,colNum,value)
                 colNum+=1
         p.text = [t.return_html()]
         

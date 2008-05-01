@@ -36,9 +36,6 @@ class NeutronExperiment(base):
 
     status = pyre.db.varchar( name = 'status', length = 16, default = '' )
 
-    pass # end of NeutronExperiment
-
-
 # version
 __id__ = "$Id$"
 
