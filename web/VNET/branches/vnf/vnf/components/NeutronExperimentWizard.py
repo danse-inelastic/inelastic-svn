@@ -270,7 +270,7 @@ class NeutronExperimentWizard(base):
         return self.sample_environment(director)
         
 
-    def sample_environment(self, director):
+    def sample_environment(self, director, errors = None):
         try:
             page = director.retrieveSecurePage( 'neutronexperimentwizard' )
         except AuthenticationError, err:
@@ -290,23 +290,6 @@ class NeutronExperimentWizard(base):
 
         #sample environment
         sampleenvironment_id = experiment.sampleenvironment_id
-
-        if empty_id(sampleenvironment_id):
-            #create new instance of sampleenvironment
-            from vnf.dom.SampleEnvironment import SampleEnvironment
-            record = SampleEnvironment()
-            id = new_id( director )
-            record.id = id
-            record.magnetic_field = [0,0,0]
-            director.clerk.newRecord( record )
-            sampleenvironment = record
-            
-            #attach to experiment
-            experiment.sampleenvironment_id = sampleenvironment.id
-            #save
-            director.clerk.updateRecord( experiment )
-            sampleenvironment_id = sampleenvironment.id
-            pass # endif
 
         formcomponent = self.retrieveFormToShow( 'sample_environment' )
         formcomponent.inventory.id = sampleenvironment_id
@@ -329,7 +312,7 @@ class NeutronExperimentWizard(base):
         action_formfields( action, form )
 
         # expand the form with fields of the data object that is being edited
-        formcomponent.expand( form )
+        formcomponent.expand( form, errors = errors )
         
         # run button
         submit = form.control(name="submit", type="submit", value="OK")
@@ -344,7 +327,7 @@ class NeutronExperimentWizard(base):
             return err.page
         
         try:
-            self.processFormInputs( director )
+            sampleenvironment = self.processFormInputs( director )
         except InputProcessingError, err:
             errors = err.errors
             self.form_received = None
@@ -353,6 +336,11 @@ class NeutronExperimentWizard(base):
 
         experiment = director.clerk.getNeutronExperiment(
             self.inventory.id)
+        if empty_id( experiment.sampleenvironment_id ):
+            experiment.sampleenvironment_id = sampleenvironment.id
+            director.clerk.updateRecord( experiment )
+        else:
+            assert experiment.sampleenvironment_id == sampleenvironment.id
         experiment.status = 'sample environment configured'
         director.clerk.updateRecord( experiment )
 
@@ -711,10 +699,9 @@ class NeutronExperimentWizard(base):
         experiment = director.clerk.getNeutronExperiment(
             self.inventory.id)
         #make sure experiment is configured all the way
-        if experiment.status != 'constructed':
-            # if not. jump to the right spot on the workflow
-            return self._jump( status, director )
-
+        self._checkstatus(director)
+        assert self.allconfigured == True
+        
         #get full hierarchy
         experiment = director.clerk.getHierarchy( experiment )
         
@@ -861,7 +848,10 @@ class NeutronExperimentWizard(base):
         self.name_assigned = experiment.short_description not in [None, '']
 
         instrument_id = experiment.instrument_id
-        self.instrument_configured = not empty_id( instrument_id )
+        if not empty_id( instrument_id ):
+            configured = director.clerk.getConfiguredInstrument(instrument_id)
+            self.instrument_configured = not empty_id( configured.instrument_id )
+            pass
 
         sampleenvironment_id = experiment.sampleenvironment_id
         self.sample_environment_configured = not empty_id( sampleenvironment_id )
@@ -891,10 +881,13 @@ class NeutronExperimentWizard(base):
         if not self.kernel_configured: return
 
         if experiment.ncount <=0 : return
-        if not empty_id(experiment.job_id): return
+        if empty_id(experiment.job_id): return
         job = director.clerk.getJob( experiment.job_id )
 
-        if experiment.status == 'constructed': self.allconfigured = True
+        self.allconfigured = True
+
+        # the last is to check if all files for this experiment
+        # are generated
         return        
 
 
