@@ -14,6 +14,16 @@ from Actor import actionRequireAuthentication, action_link, AuthenticationError
 from FormActor import FormActor as base, InputProcessingError
 
 
+states = [
+    'started',
+    'name assigned',
+    'instrument configured',
+    'sample environment configuerd',
+    'sample prepared',
+    'constructed',
+    ]
+
+
 class NeutronExperimentWizard(base):
     
     
@@ -85,7 +95,7 @@ class NeutronExperimentWizard(base):
         # specify action
         action = actionRequireAuthentication(
             actor = 'neutronexperimentwizard', sentry = director.sentry,
-            label = '', routine = 'select_instrument',
+            label = '', routine = 'verify_experiment_name',
             id = self.inventory.id,
             arguments = {'form-received': formcomponent.name } )
         from vnf.weaver import action_formfields
@@ -100,13 +110,32 @@ class NeutronExperimentWizard(base):
         return page
 
 
-    def select_instrument(self, director):
+    def verify_experiment_name(self, director):
         try:
             page = director.retrieveSecurePage( 'neutronexperimentwizard' )
         except AuthenticationError, err:
             return err.page
 
         self.processFormInputs( director )
+
+        experiment = director.clerk.getNeutronExperiment(
+            self.inventory.id)
+        if experiment.short_description in ['', None, 'None']:
+            return self.start( director )
+
+        experiment.status = 'name assigned'
+        director.clerk.updateRecord( experiment )
+        return self.select_instrument( director )
+    
+
+    def select_instrument(self, director):
+        try:
+            page = director.retrieveSecurePage( 'neutronexperimentwizard' )
+        except AuthenticationError, err:
+            return err.page
+
+        experiment = director.clerk.getNeutronExperiment(
+            self.inventory.id)
 
         main = page._body._content._main
 
@@ -247,6 +276,10 @@ class NeutronExperimentWizard(base):
         except AuthenticationError, err:
             return err.page
                 
+        #get experiment
+        experiment_id = self.inventory.id
+        experiment = director.clerk.getNeutronExperiment( experiment_id )
+
         main = page._body._content._main
 
         # populate the main column
@@ -254,10 +287,6 @@ class NeutronExperimentWizard(base):
             title='Neutron Experiment Wizard: sample environment')
         document.description = ''
         document.byline = 'byline?'
-
-        #get experiment
-        experiment_id = self.inventory.id
-        experiment = director.clerk.getNeutronExperiment( experiment_id )
 
         #sample environment
         sampleenvironment_id = experiment.sampleenvironment_id
@@ -322,6 +351,11 @@ class NeutronExperimentWizard(base):
             director.routine = 'sample_environment'
             return self.sample_environment( director, errors = errors )
 
+        experiment = director.clerk.getNeutronExperiment(
+            self.inventory.id)
+        experiment.status = 'sample environment configured'
+        director.clerk.updateRecord( experiment )
+
         director.routine = 'sample_preparation'
         return self.sample_preparation( director )
             
@@ -331,7 +365,10 @@ class NeutronExperimentWizard(base):
             page = director.retrieveSecurePage( 'neutronexperimentwizard' )
         except AuthenticationError, err:
             return err.page
-        
+
+        experiment = director.clerk.getNeutronExperiment(
+            self.inventory.id)
+
         main = page._body._content._main
         
         # populate the main column
@@ -417,7 +454,7 @@ class NeutronExperimentWizard(base):
         action = actionRequireAuthentication(
             actor = 'neutronexperimentwizard', sentry = director.sentry,
             label = '',
-            routine = 'configure_scatteringkernels',
+            routine = 'verify_sample_configuration',
             id = self.inventory.id,
             arguments = {'form-received': formcomponent.name } )
         from vnf.weaver import action_formfields
@@ -432,12 +469,47 @@ class NeutronExperimentWizard(base):
         return page
 
 
+    def verify_sample_configuration(self, director):
+        try:
+            page = director.retrieveSecurePage( 'neutronexperimentwizard' )
+        except AuthenticationError, err:
+            return err.page
+
+        self.processFormInputs(director)
+
+        experiment = director.clerk.getNeutronExperiment(
+            self.inventory.id )
+        sampleassembly_id = experiment.sampleassembly_id
+        if empty_id( sampleassembly_id ):
+            return self.sample_preparation( director )
+
+        sampleassembly = director.clerk.getSampleAssembly( sampleassembly_id )
+        scatterers = director.clerk.getConfiguredScatterers(sampleassembly_id)
+        samples = filter(
+            lambda scatterer: scatterer.label == 'sample',
+            scatterers)
+        if len(samples) != 0:
+            return self.sample_preparation( director )
+        sample = samples[0]
+        if empty_id(sample.scatterer_id): return self.sample_preparation(director)
+        sample_prototype = director.clerk.getScatterer(
+            sample.scatterer_id)
+        
+        experiment.status = 'sample prepared'
+        director.clerk.updateRecord( experiment )
+
+        return self.configure_scatteringkernels(director)
+
+
     def configure_scatteringkernels(self, director):
         try:
             page = director.retrieveSecurePage( 'neutronexperimentwizard' )
         except AuthenticationError, err:
             return err.page
-        
+
+        experiment = director.clerk.getNeutronExperiment(
+            self.inventory.id)
+
         main = page._body._content._main
         # populate the main column
         document = main.document(
@@ -571,11 +643,17 @@ class NeutronExperimentWizard(base):
         return page     
 
 
-    def submit_experiment(self, director):
+    def submit_experiment(self, director, errors = None):
         try:
             page = director.retrieveSecurePage( 'neutronexperimentwizard' )
         except AuthenticationError, err:
             return err.page
+
+        self._checkstatus( director )
+        if not self.instrument_configured or not self.name_assigned or \
+               not self.sample_environment_configured or \
+               not self.sample_prepared or not self.kernel_configured:
+            return self._showstatus( director )
         
         main = page._body._content._main
         # populate the main column
@@ -607,15 +685,62 @@ class NeutronExperimentWizard(base):
         action_formfields( action, form )
 
         # expand the form with fields of the data object that is being edited
-        formcomponent.expand( form )
+        formcomponent.expand( form, errors = errors )
 
         # run button
         submit = form.control(name="actor.form-received.submit", type="submit", value="OK")
-        back = form.control(name="actor.form-received.submit", type="submit", value="back")
+        #back = form.control(name="actor.form-received.submit", type="submit", value="back")
         return page
 
 
     def verify_experiment_submission(self, director):
+        try:
+            page = director.retrieveSecurePage( 'neutronexperimentwizard' )
+        except AuthenticationError, err:
+            return err.page
+        
+        try:
+            self.processFormInputs( director )
+        except InputProcessingError, err:
+            errors = err.errors
+            self.form_received = None
+            director.routine = 'submit_experiment'
+            return self.submit_experiment( director, errors = errors )
+
+        #get experiment
+        experiment = director.clerk.getNeutronExperiment(
+            self.inventory.id)
+        #make sure experiment is configured all the way
+        if experiment.status != 'constructed':
+            # if not. jump to the right spot on the workflow
+            return self._jump( status, director )
+
+        #get full hierarchy
+        experiment = director.clerk.getHierarchy( experiment )
+        
+        from Job import jobpath
+        path = jobpath( experiment.job_id )
+        
+        from NeutronExperimentSimulationRunBuilder import Builder
+        Builder(path).render(experiment)
+
+        experiment.status = 'constructed'
+        director.clerk.updateRecord( experiment )
+        
+        return self.showExperimentStatusPage(director)
+
+
+    def showExperimentStatusPage(self,director):
+        try:
+            page = director.retrieveSecurePage( 'neutronexperimentwizard' )
+        except AuthenticationError, err:
+            return err.page        
+        
+        return page
+    
+
+    def verify_experiment_submission1(self, director):
+        # just to show the back button
         try:
             page = director.retrieveSecurePage( 'neutronexperimentwizard' )
         except AuthenticationError, err:
@@ -653,18 +778,124 @@ class NeutronExperimentWizard(base):
         document.description = ''
         document.byline = 'byline?'
         return page
-    
+
+
 
     def __init__(self, name=None):
         if name is None:
             name = "neutronexperimentwizard"
         super(NeutronExperimentWizard, self).__init__(name)
+        self.started \
+                     = self.name_assigned \
+                     = self.instrument_configured \
+                     = self.sample_environment_configured \
+                     = self.sample_prepared \
+                     = self.kernel_configured \
+                     = self.allconfigured \
+                     = False
         return
+
 
     def _configure(self):
         base._configure(self)
         self.id = self.inventory.id
         return
+
+
+    def _showstatus(self, director):
+        try:
+            page = director.retrieveSecurePage( 'neutronexperimentwizard' )
+        except AuthenticationError, err:
+            return err.page
+        
+        main = page._body._content._main
+
+        # populate the main column
+        document = main.document(title='Neutron Experiment Wizard: status')
+        document.description = ''
+        document.byline = 'byline?'
+
+        p = document.paragraph()
+        p.text = [
+            'You experiment is not yet ready for submission.',
+            'Please',
+            ]
+
+        d = {
+            'name_assigned':  ('assign a name to this experiment',
+                               'start'),
+            'instrument_configured': ('select and configure an instrument',
+                                      'select_instrument'),
+            'sample_environment_configured': ('configure sample environment',
+                                              'sample_environment'),
+            'sample_prepared': ('prepare a sample',
+                                'sample_preparation'),
+            'kernel_configured': ('configure scattering kernel for sample',
+                                  'kernel_origin'),
+            }
+        items = [ 'name_assigned', 'instrument_configured',
+                  'sample_environment_configured',
+                  'sample_prepared', 'kernel_configured',
+                  ]
+        for item in items:
+            label, routine = d[item]
+            if not getattr(self, item):
+                action = actionRequireAuthentication(
+                    actor = 'neutronexperimentwizard',
+                    sentry = director.sentry,
+                    label = label,
+                    routine = routine,
+                    id = self.inventory.id,
+                    )
+                link = action_link( action, director.cgihome)
+                p.text.append( '%s,' % link )
+                pass # endif
+            continue
+
+        return page
+        
+
+    def _checkstatus(self, director):
+        experiment = director.clerk.getNeutronExperiment(
+            self.inventory.id )
+        self.name_assigned = experiment.short_description not in [None, '']
+
+        instrument_id = experiment.instrument_id
+        self.instrument_configured = not empty_id( instrument_id )
+
+        sampleenvironment_id = experiment.sampleenvironment_id
+        self.sample_environment_configured = not empty_id( sampleenvironment_id )
+        
+        sampleassembly_id = experiment.sampleassembly_id
+        
+        if not empty_id( sampleassembly_id ):
+            sampleassembly = director.clerk.getSampleAssembly(
+                sampleassembly_id )
+            
+            scatterers = director.clerk.getConfiguredScatterers(
+                sampleassembly_id)
+            samples = filter(
+                lambda scatterer: scatterer.label == 'sample',
+                scatterers)
+            if len(samples) == 0: return
+            if len(samples) > 1: raise RuntimeError, "more than 1 sample"
+            
+            sample = samples[0]
+            self.sample_prepared = not empty_id(sample.scatterer_id)
+            # need to test if kernel is configured
+            # ...
+            # probably need a canned solution here for the demo...
+            self.kernel_configured = True
+            pass
+
+        if not self.kernel_configured: return
+
+        if experiment.ncount <=0 : return
+        if not empty_id(experiment.job_id): return
+        job = director.clerk.getJob( experiment.job_id )
+
+        if experiment.status == 'constructed': self.allconfigured = True
+        return        
 
 
     pass # end of NeutronExperimentWizard

@@ -19,10 +19,10 @@ class NeutronExperiment(base):
 
     import pyre.db
 
-    instrument_id = pyre.db.varchar( name = 'instrument_id', length = 100, default = '0' )
+    instrument_id = pyre.db.varchar( name = 'instrument_id', length = 100, default = '' )
     instrument_id.meta['tip'] = 'reference id in the configuredinstrument table'
 
-    sampleassembly_id = pyre.db.varchar( name = 'sampleassembly_id', length = 100, default = '0' )
+    sampleassembly_id = pyre.db.varchar( name = 'sampleassembly_id', length = 100, default = '' )
     sampleassembly_id.meta['tip'] = 'reference id in the sample assembly table'
 
     sampleenvironment_id = pyre.db.varchar(
@@ -30,11 +30,11 @@ class NeutronExperiment(base):
 
     ncount = pyre.db.real( name = 'ncount', default = 1e6)
 
-    constructed = pyre.db.varchar( name = 'constructed', length = 4, default = '0' )
+    constructed = pyre.db.varchar( name = 'constructed', length = 4, default = '' )
 
-    job_id = pyre.db.varchar( name = 'job_id', length = 100, default = '0' )
+    job_id = pyre.db.varchar( name = 'job_id', length = 100, default = '' )
 
-    status = pyre.db.varchar( name = 'status', length = 16, default = '0' )
+    status = pyre.db.varchar( name = 'status', length = 16, default = '' )
 
     pass # end of NeutronExperiment
 

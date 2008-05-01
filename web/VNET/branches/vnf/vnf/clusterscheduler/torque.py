@@ -48,14 +48,14 @@ class Scheduler:
         failed, output, error  = self._launch( cmds )
         if failed:
             if error.find( 'Unknown Job Id' ) != -1:
-                return self.statusByTracejob( jobid )
+                return self.statusByTracejob( job )
             msg = "error in executing cmds %s. output: %s, error: %s" % (
                 cmds, output, error )
             raise RuntimeError, msg
         
         lines = output.split( '\n' )
         lines = lines[1:] # first line removed
-        if len(lines) == 0: return self.statusByTracejob( jobid )
+        if len(lines) == 0: return self.statusByTracejob( job )
         d = {}
         for line in lines:
             try:
