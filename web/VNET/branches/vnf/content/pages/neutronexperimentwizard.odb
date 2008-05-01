@@ -36,9 +36,11 @@ def page(app):
     main = content.main()
     
     # populate the left column
-    nav = app.retrievePortlet("neutronexperimentwizard")
-    if nav:
-        left.add(nav)
+    wizardportlet = app.retrievePortlet("neutronexperimentwizard")
+    left.add(wizardportlet)
+
+    nav = app.retrievePortlet("navigation")
+    left.add(nav)
 
     # build the footer
     footer = body.pageFooter()

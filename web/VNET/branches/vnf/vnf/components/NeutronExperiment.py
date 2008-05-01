@@ -66,6 +66,17 @@ class NeutronExperiment(base):
         return page
 
 
+    def delete(self, director):
+        try:
+            page = director.retrieveSecurePage( 'neutronexperiment' )
+        except AuthenticationError, error:
+            return error.page
+
+        record = director.clerk.getNeutronExperiment( self.inventory.id )
+        director.clerk.deleteRecord( record )
+        return self.listall(director)
+        
+
     def listall(self, director):
         try:
             page = director.retrieveSecurePage( 'neutronexperiment' )
@@ -217,8 +228,41 @@ def listexperiments( experiments, document, director ):
                (present_be(n), n, plural(n))
                 ]
 
-    from inventorylist import list
-    list( experiments, document, 'neutronexperiment', director )
+    formatstr = '%(index)s: %(editlink)s (%(status)s) (%(deletelink)s)'
+    actor = 'neutronexperiment'
+    container = experiments
+
+    for i, element in enumerate( container ):
+        
+        p = document.paragraph()
+        name = element.short_description
+        if name in ['', None, 'None'] : name = 'undefined'
+        action = actionRequireAuthentication(
+            actor, director.sentry,
+            routine = 'edit',
+            label = name,
+            id = element.id,
+            )
+        editlink = action_link( action,  director.cgihome )
+
+        action = actionRequireAuthentication(
+            actor, director.sentry,
+            routine = 'delete',
+            label = 'delete',
+            id = element.id,
+            )
+        deletelink = action_link( action,  director.cgihome )
+
+        subs = {'index': i+1,
+                'editlink': editlink,
+                'deletelink': deletelink,
+                'status': element.status,
+                }
+
+        p.text += [
+            formatstr % subs,
+            ]
+        continue
     return
 
 

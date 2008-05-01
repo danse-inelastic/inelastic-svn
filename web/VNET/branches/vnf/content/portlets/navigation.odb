@@ -16,7 +16,7 @@ from vnf.weaver import action_href
 
 def portlet(app):
     import opal.content
-    portlet = opal.content.portlet(title="navigation", id="portlet-navigation-tree")
+    portlet = opal.content.portlet(title="main", id="portlet-main--tree")
 
     home = portlet.item(description="Home")
     home.target = action_href(
