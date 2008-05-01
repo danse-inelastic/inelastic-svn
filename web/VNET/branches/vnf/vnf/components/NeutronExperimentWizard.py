@@ -497,19 +497,24 @@ class NeutronExperimentWizard(base):
             self.inventory.id )
         sampleassembly_id = experiment.sampleassembly_id
         if empty_id( sampleassembly_id ):
-            return self.sample_preparation( director )
+            raise RuntimeError, "sample assembly not set up"
 
         sampleassembly = director.clerk.getSampleAssembly( sampleassembly_id )
         scatterers = director.clerk.getConfiguredScatterers(sampleassembly_id)
         samples = filter(
             lambda scatterer: scatterer.label == 'sample',
             scatterers)
-        if len(samples) != 0:
-            return self.sample_preparation( director )
+        if len(samples) != 1:
+            raise RuntimeError, 'there should be one sample in the sample assembly'
         sample = samples[0]
-        if empty_id(sample.scatterer_id): return self.sample_preparation(director)
-        sample_prototype = director.clerk.getScatterer(
-            sample.scatterer_id)
+        
+        configured_sample = sample
+
+        prototype_id = configured_sample.scatterer_id
+        if empty_id(prototype_id):
+            raise RuntimeError, "sample prototype not established"
+        
+        sample_prototype = director.clerk.getScatterer(prototype_id)
         
         experiment.status = 'sample prepared'
         director.clerk.updateRecord( experiment )

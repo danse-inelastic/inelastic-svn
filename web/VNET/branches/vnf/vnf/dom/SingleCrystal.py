@@ -12,8 +12,8 @@
 #
 
 
-from Matter import Matter
-class SingleCrystal(Matter):
+from MatterBase import MatterBase as base
+class SingleCrystal(base):
 
     name = 'singlecrystals'
 

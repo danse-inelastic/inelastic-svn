@@ -12,8 +12,8 @@
 #
 
 
-from Matter import Matter
-class Disordered(Matter):
+from MatterBase import MatterBase as base
+class Disordered(base):
 
     name = 'disordered'
 

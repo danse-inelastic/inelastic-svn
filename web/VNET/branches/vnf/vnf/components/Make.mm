@@ -25,6 +25,7 @@ all: export
 EXPORT_PYTHON_MODULES = \
 	__init__.py \
 	Actor.py \
+	ARCSConfigurationApplyer.py \
 	Clerk.py \
 	CSAccessor.py \
 	DBObjectForm.py \

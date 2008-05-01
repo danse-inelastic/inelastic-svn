@@ -13,13 +13,18 @@
 
 
 from VirtualObject import VirtualObject
-class Matter(VirtualObject):
+class Scatterer(VirtualObject):
 
-    name = 'matter'
+    name = 'scatterers'
 
     import pyre.db
-    
-    pass # end of Matter
+    #status = pyre.db.varchar( name = 'status', default = 'new', length = 16 )
+    template = pyre.db.boolean( name = 'template', default = False)
+    basic = pyre.db.boolean( name = 'basic', default = False)
+    basic.meta['tip'] = (
+        'Is this scatterer basic? basic scatterers are presented to novice users'
+        )
+    pass # end of Scatterer
 
 
 # version

@@ -113,7 +113,7 @@ class Form( base ):
             if len(magnetic_field) != 3: errors.append( prop )
             else:
                 for i in magnetic_field:
-                    if not isinstance(float) and not isinstance(int):
+                    if not isinstance(i, float) and not isinstance(i, int):
                         errors.append(prop)
                         pass # endif
                     continue

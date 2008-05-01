@@ -45,6 +45,7 @@ EXPORT_PYTHON_MODULES = \
 	IQEMonitor.py \
 	Job.py \
 	Matter.py \
+	MatterBase.py \
 	MonochromaticSource.py \
 	NeutronExperiment.py \
 	OwnedObject.py \
