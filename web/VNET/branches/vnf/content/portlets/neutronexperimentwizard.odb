@@ -33,7 +33,8 @@ routine2menu = {
 
 def portlet(app):
     import opal.content
-    portlet = opal.content.portlet(title="navigation", id="portlet-navigation-tree")
+    portlet = opal.content.portlet(
+        title="wizard steps", id="portlet-neutronexperimentwizard-tree")
 
     start = portlet.item(description="Start")
     action = actionRequireAuthentication(
