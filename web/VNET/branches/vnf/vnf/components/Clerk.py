@@ -124,6 +124,19 @@ class Clerk(Component):
         '''retrieve all jobs'''
         from vnf.dom.Job import Job
         return self._getAll( Job, where )
+    
+    
+    def getRealMatter(self, id):
+        '''given id in the matter table, retrieve the real
+        matter's record.
+        The matter table contains type and reference_id
+        info of the matter.
+        To look up the real matter, we have to
+        go to the table of the given matter type
+        and find the record of given id.
+        '''
+        from vnf.dom.Matter import Matter
+        return self._getRealObject( id, Matter )
 
 
     def getRealScatterer(self, id):
@@ -159,8 +172,8 @@ class Clerk(Component):
     
     def getSamples(self, where = None):
         '''retrieve all samples'''
-        from vnf.dom.Sample import Sample
-        return self._getAll( Sample, where )
+        from vnf.dom.Matter import Matter
+        return self._getAll( Matter, where )
 
     def getSampleAssembly(self, id):
         '''retrieve sample assembly of given id'''
@@ -327,12 +340,6 @@ class Clerk(Component):
     def getRealScatteringKernel(self, id):
         from vnf.dom.ScatteringKernel import ScatteringKernel
         return self._getRealObject( id, ScatteringKernel)
-
-    
-    def getCrystal(self, id):
-        '''retrieve crystal of given id'''
-        from vnf.dom.Crystal import Crystal
-        return self._getRecordByID( Crystal, id )
 
 
     def getPhononDispersion(self, id):
@@ -510,8 +517,9 @@ class Clerk(Component):
         record = self._getRecordByID( table, id )
         type = record.type
         id1 = record.reference
-        exec "from vnf.dom.%s import %s as RealObj" % (type, type)
-        obj = self._getRecordByID( RealObj, id1 )
+        module = __import__( 'vnf.dom.%s' % type, {}, {}, [''] )
+        # "from vnf.dom.%s import %s as RealObj" % (type, type)
+        obj = self._getRecordByID( getattr(module, type), id1 )
         return obj
 
 
@@ -936,15 +944,39 @@ class HierarchyRetriever:
         return configured
 
 
+#    def onScatterer(self, scatterer):
+#        try:
+#            realscatterer = self.clerk.getRealScatterer( scatterer.id )
+#        except Exception, error:
+#            import traceback
+#            self.clerk._debug.log(traceback.format_exc() )
+#            return scatterer
+#        scatterer.realscatterer = self(realscatterer)
+#        return scatterer
+
     def onScatterer(self, scatterer):
-        try:
-            realscatterer = self.clerk.getRealScatterer( scatterer.id )
-        except Exception, error:
-            import traceback
-            self.clerk._debug.log(traceback.format_exc() )
-            return scatterer
-        scatterer.realscatterer = self(realscatterer)
+        matter = self.clerk.getMatter(scatterer.matter_id )
+        matter = self(matter)
+        shape = self.clerk.getShape(scatterer.shape_id)
+        shape = self(shape)
+        scatterer.shape = shape
+        scatterer.matter = matter
         return scatterer
+    
+    
+    def onMatter(self, matter):
+        realmatter = self.clerk.getRealMatter( matter.id )
+        realmatter = self(matter)
+        matter.realmatter = realmatter
+        return matter
+    
+    
+    def onPolyCrystal(self, record):
+        return record
+    
+    
+    def onDisordered(self, record):
+        return record
     
     
     def onPolyXtalScatterer(self, scatterer):
