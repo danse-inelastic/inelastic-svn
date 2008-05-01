@@ -26,12 +26,18 @@ class Form( base ):
         temperature.meta['tip'] = (
             'Please input the temperature in the sample environment. unit: K'
             )
+        temperature.meta['tiponerror'] = (
+            'You must enter temperature as a positive float number. unit: K',
+            )
 
         pressure = pyre.inventory.str(
             name = 'pressure', default = 1. )
         pressure.meta['label'] = 'Pressure'
         pressure.meta['tip'] = (
             'Please input the pressure in the sample environment. unit: atm'
+            )
+        pressure.meta['tiponerror'] = (
+            'You must enter pressure as a positive float number. unit: atm',
             )
 
         magnetic_field = pyre.inventory.str(
@@ -41,6 +47,9 @@ class Form( base ):
             'Please input the magnetic field as a vector',
             'in the sample environment.',
             'unit: Tesla',
+            )
+        magnetic_field.meta['tiponerror'] = (
+            'You must enter magnetic field as a 3-vector, or just 0. unit: Tesla',
             )
         pass # end of Inventory
 
@@ -66,16 +75,54 @@ class Form( base ):
             'for example.',
             ]
 
-        base.expand( self, form )
+        base.expand( self, form, errors = errors )
         return
 
 
     def processUserInputs(self):
         'process user inputs and save them to db'
 
-        director = self.director
-        clerk = director.clerk
-        return
+        errors = []
+        
+        temperature = self.inventory.temperature
+        try: temperature = float( temperature )
+        except: errors.append( 'temperature' )
+        if temperature<0: errors.append( 'temperature' )
+
+        pressure = self.inventory.pressure
+        try: pressure = float( pressure )
+        except: errors.append( 'pressure' )
+        if pressure<0: errors.append( 'pressure' )
+
+        prop = 'magnetic_field'
+        magnetic_field = self.inventory.magnetic_field
+        try: magnetic_field = eval( magnetic_field )
+        except: errors.append( prop )
+        if isinstance( magnetic_field, int ) or \
+           isinstance(magnetic_field, float):
+            if magnetic_field != 0 and magnetic_field != 0.:
+                errors.append( prop )
+            else:
+                self.inventory.magnetic_field = [0,0,0]
+                pass # endif
+            pass # endif
+        elif not isinstance( magnetic_field, tuple) and \
+               not isinstance(magnetic_field, list):
+            errors.append( prop )
+        else:
+            if len(magnetic_field) != 3: errors.append( prop )
+            else:
+                for i in magnetic_field:
+                    if not isinstance(float) and not isinstance(int):
+                        errors.append(prop)
+                        pass # endif
+                    continue
+                pass #end else
+            pass # end else
+                    
+        if len(errors): raise InputProcessingError, errors
+        
+        return base.processUserInputs(self)
 
 
     def __init__(self, name = None):
