@@ -44,15 +44,25 @@ class DBObjectForm( base ):
 
     def expand(self, form, errors = None, properties = None):
         '''expand an existing form with fields from this component'''
-        
-        record = self.getRecord()
+
+        if self.inventory.id == '':
+            configuration = self.inventory
+        else:
+            configuration = self.getRecord()
         
         prefix = formactor_action_prefix
         
         id_field = form.hidden(
-            name = '%s.id' % prefix, value = record.id)
+            name = '%s.id' % prefix, value = configuration.id)
 
-        configuration = record
+        if errors:
+            p = form.paragraph( cls = 'error' )
+            p.text = [
+                'The form you filled out contained some errros.',
+                'Please look through the values you have entered',
+                'and correct any mistakes.',
+                ]
+
         if properties is None: properties = self.parameters
         for property in properties:
             meta = getattr( self.Inventory, property ).meta
@@ -62,13 +72,10 @@ class DBObjectForm( base ):
                 name='%s.%s' % (prefix, property),
                 label = meta.get('label') or property,
                 value = value)
-            tip = meta.get('tip')
-            if isinstance(tip, list) or isinstance(tip, tuple):
-                tip = ' '.join(tip)
-                pass # endif
+            tip = _combine( meta.get('tip') )
             if tip: field.help = tip
             if errors and property in errors:
-                field.error = meta['tiponerror']
+                field.error = _combine( meta['tiponerror'] )
                 pass # end if
             continue
 
@@ -78,7 +85,10 @@ class DBObjectForm( base ):
     def processUserInputs(self):
         'process user inputs and save them to db'
 
-        record = self.getRecord( )
+        if self.inventory.id == '':
+            record = self.createRecord()
+        else:
+            record = self.getRecord( )
         
         for prop in self.parameters:
             setattr(
@@ -89,7 +99,7 @@ class DBObjectForm( base ):
         clerk = self.director.clerk
         clerk.updateRecord( record )
 
-        return
+        return record
 
 
     def getRecord(self):
@@ -100,20 +110,25 @@ class DBObjectForm( base ):
         return clerk.getRecordByID( self.DBTable, id )
 
 
+    def createRecord(self):
+        director = self.director
+        id = new_id( director )
+        exec 'from vnf.dom.%s import %s as table' % (self.DBTable, self.DBTable)
+        record = table()
+        record.id = id
+        director.clerk.newRecord( record )
+        return record
+
     pass # end of DBObjectForm
 
 
+def _combine(text):
+    if isinstance(text, str): return text
+    if isinstance(text, list) or isinstance(text, tuple):
+        return ' '.join( text )
+    raise NotImplementedError, text
 
-def tostr( value ):
-    '''convert a value to a string
-
-    str(obj) sometimes does not work, so we have to have this method.
-    '''
-    if isinstance(value, list) or isinstance(value, tuple):
-        return ','.join( [ str(item) for item in value ] )
-    return str(value)
-
-
+from vnf.components.misc import new_id
 
 formactor_action_prefix = 'actor.form-received' # assumed actor is a form actor
 
