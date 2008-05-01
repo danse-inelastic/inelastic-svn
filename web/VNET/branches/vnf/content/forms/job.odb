@@ -23,9 +23,24 @@ class Form(base):
         import pyre.inventory
 
         id = pyre.inventory.str( 'id', default = '' )
-        name = pyre.inventory.str( 'name', default = 'name' )
+
+        jobName = pyre.inventory.str(name = 'jobName', default = 1e6 )
+        jobName.meta['label'] = 'Name of job'
+        jobName.meta['tip'] = (
+            'Please assign a name for this job',
+            )
+        
         server = pyre.inventory.str( 'server', default = 'serverid' )
-        numprocessors = pyre.inventory.int( 'numprocessors', default = 1 )
+        server.meta['label'] = 'Computation server'
+        server.meta['tip'] = (
+            'Please choose the server on which the job will be run',
+            )
+        
+        numprocessors = pyre.inventory.str( 'numprocessors', default = 1 )
+        numprocessors.meta['label'] = 'Number of processors'
+        numprocessors.meta['tip'] = (
+            'Please input the number of processors',
+            )
 
 
     DBTable = 'Job'
@@ -58,11 +73,14 @@ class Form(base):
         id_field = form.hidden(
             name = '%s.id' % prefix, value = record.id)
 
+        property = 'jobName'
+        meta = getattr( self.Inventory, property ).meta
         field = form.text(
-            id = 'name',
-            name = '%s.name' % prefix,
-            label = 'name',
+            id = 'jobName',
+            name = '%s.jobName' % prefix,
+            label = meta['label'],
             value = record.jobName )
+        field.help = ' '.join( meta['tip'] )
 
         director = self.director
         servers = director.clerk.getServers()
@@ -72,31 +90,38 @@ class Form(base):
         selected_server = record.server
         if selected_server not in ids: selected_server = entries[0][0]
         
+        property = 'server'
+        meta = getattr( self.Inventory, property ).meta
         selector = form.selector(
             id = 'server_selector',
             name = '%s.server' % prefix,
             entries = entries,
-            label = 'server',
+            label = meta['label'],
             selected = selected_server,
             )
+        selector.help = meta['tip']
+
+        property = 'numprocessors'
+        meta = getattr( self.Inventory, property ).meta
         field = form.text(
             id = 'numprocessors',
             name = '%s.numprocessors' % prefix,
-            label = 'number of processors',
+            label = meta['label'],
             value = record.numprocessors,
             )
+        field.help = meta['tip']
 
         return form
 
 
     def processUserInputs(self):
-        name = self.inventory.name
+        jobName = self.inventory.jobName
         server = self.inventory.server
         numprocessors = self.inventory.numprocessors
         
         record = self.getRecord()
 
-        record.jobName = name
+        record.jobName = jobName
         record.server = server
         record.numprocessors = numprocessors
 
