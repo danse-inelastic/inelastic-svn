@@ -156,6 +156,27 @@ class Builder:
         return
 
 
+    def onDetectorSystem_fromXML(self, ds):
+        kwds = {
+            'name': ds.label,
+            'category': 'detectors',
+            'type': 'DetectorSystemFromXml',
+            'supplier': 'mcni',
+            }
+        self.onNeutronComponent( **kwds )
+
+        tofparams = '%s,%s,%s' % (
+            ds.tofmin, ds.tofmax, (ds.tofmax-ds.tofmin)*1./ds.ntofbins )
+        opts = {
+            '%s.eventsdat' % ds.label: self.detectorsystem_output_eventfile,
+            '%s.instrumentxml' % ds.label: self.detectorsystem_xmlfile,
+            '%s.tofparams' % ds.label: tofparams,
+            }
+
+        self.cmdline_opts.update( opts )
+        return
+
+
     def onComponent(self, component):
         realcomponent = component.realcomponent
         realcomponent.label = component.label

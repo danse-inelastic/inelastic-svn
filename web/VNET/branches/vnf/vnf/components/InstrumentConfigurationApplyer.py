@@ -54,7 +54,10 @@ class InstrumentConfigurationApplyer:
 
 default_applyer = InstrumentConfigurationApplyer
 
-_applyers = {}
+from ARCSConfigurationApplyer import ARCSConfigurationApplyer
+_applyers = {
+    'ARCS': ARCSConfigurationApplyer
+    }
 
 # version
 __id__ = "$Id$"

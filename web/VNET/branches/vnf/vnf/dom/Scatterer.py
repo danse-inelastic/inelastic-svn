@@ -2,7 +2,6 @@
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
-#                                   Jiao Lin
 #                      California Institute of Technology
 #                        (C) 2007  All Rights Reserved
 #
@@ -12,19 +11,26 @@
 #
 
 
-from VirtualObject import VirtualObject
-class Scatterer(VirtualObject):
+from DbObject import DbObject as base
+class Scatterer(base):
 
     name = 'scatterers'
 
     import pyre.db
-    status = pyre.db.varchar( name = 'status', default = 'new', length = 16 )
+
+    matter_id = pyre.db.varchar( name = 'matter_id', length = 100)
+    matter_id.meta['tip'] = 'matter_id'
+    
+    shape_id = pyre.db.varchar( name = 'shape_id', length = 100)
+    shape_id.meta['tip'] = 'shape_id'
+
     template = pyre.db.boolean( name = 'template', default = False)
     basic = pyre.db.boolean( name = 'basic', default = False)
     basic.meta['tip'] = (
         'Is this scatterer basic? basic scatterers are presented to novice users'
         )
-    pass # end of Scatterer
+
+    
 
 
 # version

@@ -114,6 +114,12 @@ class Clerk(Component):
         return self._getRecordByID( Crystal, id )
 
     
+    def getMatter(self, id):
+        '''retrieve matter of given id'''
+        from vnf.dom.Matter import Matter
+        return self._getRecordByID( Matter, id )
+
+    
     def getJob(self, id):
         '''retrieve job of given id'''
         from vnf.dom.Job import Job
@@ -966,7 +972,7 @@ class HierarchyRetriever:
     
     def onMatter(self, matter):
         realmatter = self.clerk.getRealMatter( matter.id )
-        realmatter = self(matter)
+        realmatter = self(realmatter)
         matter.realmatter = realmatter
         return matter
     

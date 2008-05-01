@@ -48,8 +48,6 @@ class Form( base ):
         # get hierarchy so we know the real scatterer
         scatterer = clerk.getHierarchy( scatterer )
 
-        realscatterer = scatterer.realscatterer
-
         self.parameters = ['width', 'height', 'thickness']
         p = form.paragraph()
         p.text = [
@@ -63,7 +61,7 @@ class Form( base ):
             ]
         
         # get shape
-        realshape = realscatterer.shape.realshape
+        realshape = scatterer.shape.realshape
 
         # get form to edit this shape
         formname = realshape.__class__.__name__.lower()

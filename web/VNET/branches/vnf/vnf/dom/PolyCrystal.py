@@ -12,8 +12,8 @@
 #
 
 
-from Matter import Matter
-class PolyCrystal(Matter):
+from MatterBase import MatterBase as base
+class PolyCrystal(base):
 
     name = 'polycrystals'
 
