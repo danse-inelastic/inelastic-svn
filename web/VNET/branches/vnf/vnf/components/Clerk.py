@@ -61,6 +61,11 @@ class Clerk(Component):
         from vnf.dom.Scatterer import Scatterer
         return self._index( Scatterer, where )
 
+    def indexScatteringKernels(self, where = None):
+        '''create and index of all scatterers
+        that meet the specified criteria'''
+        from vnf.dom.ScatteringKernel import ScatteringKernel
+        return self._index( ScatteringKernel, where )
 
     def indexServers(self, where = None):
         '''create and index of all servers
@@ -186,10 +191,10 @@ class Clerk(Component):
         from vnf.dom.SampleAssembly import SampleAssembly
         return self._getRecordByID( SampleAssembly, id )
     
-    def getScatteringKernels(self, where = None):
-        '''retrieve all scattering kernels'''
-        from vnf.dom.ScatteringKernel2 import ScatteringKernel2
-        return self._getAll( ScatteringKernel2, where )
+#    def getScatteringKernels(self, where = None):
+#        '''retrieve all scattering kernels'''
+#        from vnf.dom.ScatteringKernel2 import ScatteringKernel2
+#        return self._getAll( ScatteringKernel2, where )
 
     def getUser(self, username):
         '''retrieve user of given username'''

@@ -81,21 +81,20 @@ class Sample(Actor):
         p.text = [action_link(
         actionRequireAuthentication(
         'sampleInput', director.sentry,
-        label = 'Add a new sample'),  director.cgihome
-        )'<br>']
+        label = 'Add a new sample'),  director.cgihome),'<br>']
 #        action_link(
 #        actionRequireAuthentication(
 #        'shapeInput', director.sentry,
 #        label = 'Add a new sample shape'),  director.cgihome
 #        )]
 
-        action = actionRequireAuthentication(          
-            actor = 'neutronexperimentwizard', 
-            sentry = director.sentry,
-            routine = 'onSelect',
-            label = '',
-            arguments = {'form-received': formcomponent.name },
-            )
+#        action = actionRequireAuthentication(          
+#            actor = 'neutronexperimentwizard', 
+#            sentry = director.sentry,
+#            routine = 'onSelect',
+#            label = '',
+#            arguments = {'form-received': formcomponent.name },
+#            )
 
         p.text = [action_link(
         actionRequireAuthentication(

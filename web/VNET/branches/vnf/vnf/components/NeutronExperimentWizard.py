@@ -396,6 +396,7 @@ class NeutronExperimentWizard(base):
             page = director.retrieveSecurePage( 'neutronexperimentwizard' )
         except AuthenticationError, err:
             return err.page             
+#        raise RuntimeError, 'are we here?'
         routine = director.routine = 'default'
         actor = director.retrieveActor( 'sample')
         director.configureComponent( actor )
@@ -423,8 +424,6 @@ class NeutronExperimentWizard(base):
 #            title='Neutron Experiment Wizard: create new sample')
 #        document.description = ''
 #        document.byline = 'byline?'
-
-        return page
 
     def configure_sample(self, director):
         try:
@@ -561,7 +560,7 @@ class NeutronExperimentWizard(base):
         submit = form.control(name='submit',type="submit", value="next")
         
         #self.processFormInputs(director)
-        self._form_footer( SKChoice, director )
+        self._form_footer( form, director )
         return page   
     
     def onSelect(self, director):
