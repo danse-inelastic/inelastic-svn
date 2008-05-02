@@ -96,8 +96,9 @@ class NeutronExperimentWizard(base):
         formcomponent.expand( form )
 
         # run button
-        submit = form.control(name="submit", type="submit", value="OK")
-            
+        submit = form.control(name="actor.form-received.submit", type="submit", value="Continue")
+
+        self._form_footer( form, director )
         return page
 
 
@@ -159,8 +160,9 @@ class NeutronExperimentWizard(base):
         formcomponent.expand( form )
 
         # run button
-        submit = form.control(name="submit", type="submit", value="OK")
+        submit = form.control(name="submit", type="submit", value="Continue")
             
+        self._form_footer( form, director )
         return page
 
 
@@ -219,8 +221,9 @@ class NeutronExperimentWizard(base):
         formcomponent.expand( form, errors = errors )
         
         # run button
-        submit = form.control(name="submit", type="submit", value="OK")
+        submit = form.control(name="submit", type="submit", value="Continue")
         
+        self._form_footer( form, director )
         return page
     
     
@@ -306,8 +309,9 @@ class NeutronExperimentWizard(base):
         formcomponent.expand( form, errors = errors )
         
         # run button
-        submit = form.control(name="submit", type="submit", value="OK")
+        submit = form.control(name="submit", type="submit", value="Continue")
         
+        self._form_footer( form, director )
         return page
 
 
@@ -380,8 +384,9 @@ class NeutronExperimentWizard(base):
         formcomponent.expand( form )
 
         # run button
-        submit = form.control(name="submit", type="submit", value="OK")
+        submit = form.control(name="submit", type="submit", value="Continue")
         
+        self._form_footer( form, director )
         return page
 
     
@@ -397,6 +402,7 @@ class NeutronExperimentWizard(base):
             title='Neutron Experiment Wizard: select sample from sample library')
         document.description = ''
         document.byline = 'byline?'
+
         return page
     
 
@@ -411,6 +417,7 @@ class NeutronExperimentWizard(base):
             title='Neutron Experiment Wizard: create new sample')
         document.description = ''
         document.byline = 'byline?'
+
         return page
 
     def configure_sample(self, director):
@@ -471,8 +478,9 @@ class NeutronExperimentWizard(base):
         formcomponent.expand( form )
 
         # run button
-        submit = form.control(name="submit", type="submit", value="OK")
+        submit = form.control(name="submit", type="submit", value="Continue")
         
+        self._form_footer( form, director )
         return page
 
 
@@ -547,6 +555,7 @@ class NeutronExperimentWizard(base):
         submit = form.control(name='submit',type="submit", value="next")
         
         #self.processFormInputs(director)
+        self._form_footer( SKChoice, director )
         return page   
     
     def onSelect(self, director):
@@ -581,6 +590,7 @@ class NeutronExperimentWizard(base):
         # expand the form with fields of the data object that is being edited
         formcomponent.expand( form )
         next = form.control(name='submit',type="submit", value="next")
+        self._form_footer( form, director )
         return page 
     
     def kernel_generator(self, director):
@@ -609,8 +619,10 @@ class NeutronExperimentWizard(base):
         action_formfields( action, form )
         # expand the form with fields of the data object that is being edited
         formcomponent.expand( form )
-        submit = form.control(name='submit',type="submit", value="next")
-        return page         
+        next = form.control(name='submit',type="submit", value="next")
+        self._form_footer( form, director )
+        return page     
+
 
     def submit_experiment(self, director, errors = None):
         try:
@@ -656,8 +668,10 @@ class NeutronExperimentWizard(base):
         formcomponent.expand( form, errors = errors )
 
         # run button
-        submit = form.control(name="actor.form-received.submit", type="submit", value="OK")
+        submit = form.control(name="actor.form-received.submit", type="submit", value="Submit")
         #back = form.control(name="actor.form-received.submit", type="submit", value="back")
+
+        self._form_footer( form, director )
         return page
 
 
@@ -719,6 +733,38 @@ class NeutronExperimentWizard(base):
         return page
 
 
+    def save_experiment(self, director):
+        try:
+            page = director.retrieveSecurePage( 'neutronexperimentwizard' )
+        except AuthenticationError, err:
+            return err.page        
+        #nothing need to be done.
+        #just go to the experiment list
+
+        routine = director.routine = 'listall'
+        actor = director.retrieveActor( 'neutronexperiment')
+        director.configureComponent( actor )
+        actor.inventory.id = self.inventory.id
+        return getattr(actor, routine)( director )
+
+
+    def cancel(self, director):
+        try:
+            page = director.retrieveSecurePage( 'neutronexperimentwizard' )
+        except AuthenticationError, err:
+            return err.page        
+
+        # remove this experiment
+        experiment = director.clerk.getNeutronExperiment(
+            self.inventory.id)
+        director.clerk.deleteRecord( experiment )
+
+        # go to greeter
+        actor = director.retrieveActor( 'greet')
+        director.configureComponent( actor )
+        return getattr(actor, 'default')( director )
+
+
     def __init__(self, name=None):
         if name is None:
             name = "neutronexperimentwizard"
@@ -740,6 +786,24 @@ class NeutronExperimentWizard(base):
         return
 
 
+    def _form_footer(self, form, director):
+        #
+        form.paragraph()
+
+        p = form.paragraph(align = 'right')
+        action = actionRequireAuthentication(
+            label = 'Cancel',
+            actor = 'neutronexperimentwizard',
+            routine = 'cancel',
+            id = self.inventory.id,
+            sentry = director.sentry)
+        link = action_link( action, director.cgihome )
+        p.text = [
+            '%s this experiment planning.' % link,
+            ]
+        return
+
+    
     def _showstatus(self, director):
         try:
             page = director.retrieveSecurePage( 'neutronexperimentwizard' )

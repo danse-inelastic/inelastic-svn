@@ -34,7 +34,8 @@ routine2menu = {
 def portlet(app):
     import opal.content
     portlet = opal.content.portlet(
-        title="wizard steps", id="portlet-neutronexperimentwizard-tree")
+        title="Set up your experiment",
+        id="portlet-neutronexperimentwizard-tree")
 
     start = portlet.item(description="Start")
     action = actionRequireAuthentication(
@@ -105,6 +106,16 @@ def portlet(app):
     submit_experiment.target = action_href(action, app.cgihome)
     submit_experiment.icon = "images/link_icon.gif"
     submit_experiment.type = "navItem"
+
+    save_experiment = portlet.item(description="Save for later submission")
+    action = actionRequireAuthentication(
+        actor = 'neutronexperimentwizard', sentry = app.sentry,
+        routine = 'save_experiment',
+        id = app.actor.inventory.id,
+        )
+    save_experiment.target = action_href(action, app.cgihome)
+    save_experiment.icon = "images/link_icon.gif"
+    save_experiment.type = "navItem"
 
     routine = app.routine
     menu = routine2menu.get( routine )
