@@ -37,7 +37,10 @@ class TreeViewMill:
                     continue
                 return
             def onElement(self, element):
-                element.action_href = element.action.identify(hrefer)
+                action = element.action
+                if action: href = action.identify(hrefer)
+                else: href = ''
+                element.action_href = href
                 return
             onTreeView = onBranch = onContainer
             onLeaf = onElement

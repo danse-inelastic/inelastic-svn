@@ -99,6 +99,39 @@ class NeutronExperiment(base):
         return page
 
 
+    def view(self, director):
+        try:
+            page = director.retrieveSecurePage( 'neutronexperiment' )
+        except AuthenticationError, err:
+            return err.page
+
+        # the record we are working on
+        id = self.inventory.id
+        experiment = director.clerk.getNeutronExperiment( id )
+
+        #see if the experiment is constructed or not. if not
+        #ask the wizard to do the editing.
+        if experiment.status not in ['constructed', 'running', 'finished']:
+            director.routine = 'submit_experiment'
+            actor = director.retrieveActor( 'neutronexperimentwizard')
+            director.configureComponent( actor )
+            actor.inventory.id = self.inventory.id
+            return actor.submit_experiment( director )
+
+        main = page._body._content._main
+        # populate the main column
+        document = main.document(
+            title='Experiment %r' % experiment.short_description )
+        document.description = ( '')
+        document.byline = 'byline?'
+
+        status = experiment.status
+        method = '_view_%s' % status
+        method = getattr(self, method)
+        method( experiment, document, director )
+        return page
+
+
     def edit(self, director):
         try:
             page, document = self._head( director )
@@ -189,6 +222,32 @@ class NeutronExperiment(base):
         return
 
 
+    def _view_constructed(self, experiment, document, director):
+        p = document.paragraph()
+        action = actionRequireAuthentication(
+            label = 'start running',
+            actor = 'neutronexperimentwizard',
+            routine = 'submit_experiment',
+            sentry = director.sentry,
+            id = self.inventory.id)
+        link = action_link( action, director.cgihome )
+        p.text = [
+            'Experiment %r has been constructed.' % experiment.short_description,
+            'You can get it %s.' % link,
+            ]
+
+        p = document.paragraph()
+        p.text = [
+            'Details of configuration of this experiment can be',
+            'found out in the following tree view.',
+            ]
+        experiment = director.clerk.getHierarchy( experiment )
+        from TreeViewCreator import create
+        view = create( experiment )
+        document.contents.append( view )
+        return
+
+
     def _head(self, director):
         page = director.retrieveSecurePage( 'neutronexperiment' )
         
@@ -228,7 +287,7 @@ def listexperiments( experiments, document, director ):
                (present_be(n), n, plural(n))
                 ]
 
-    formatstr = '%(index)s: %(editlink)s (%(status)s) (%(deletelink)s)'
+    formatstr = '%(index)s: %(viewlink)s (%(status)s) (%(deletelink)s)'
     actor = 'neutronexperiment'
     container = experiments
 
@@ -239,11 +298,11 @@ def listexperiments( experiments, document, director ):
         if name in ['', None, 'None'] : name = 'undefined'
         action = actionRequireAuthentication(
             actor, director.sentry,
-            routine = 'edit',
+            routine = 'view',
             label = name,
             id = element.id,
             )
-        editlink = action_link( action,  director.cgihome )
+        viewlink = action_link( action,  director.cgihome )
 
         action = actionRequireAuthentication(
             actor, director.sentry,
@@ -254,7 +313,7 @@ def listexperiments( experiments, document, director ):
         deletelink = action_link( action,  director.cgihome )
 
         subs = {'index': i+1,
-                'editlink': editlink,
+                'viewlink': viewlink,
                 'deletelink': deletelink,
                 'status': element.status,
                 }
@@ -266,6 +325,78 @@ def listexperiments( experiments, document, director ):
     return
 
 
+def view_instrument(instrument, form):
+    p = form.paragraph()
+    p.text = [
+        'This experiment is to be performed in instrument %s' % instrument.short_description,
+        ]
+    
+    from TreeViewCreator import create
+    view = create( instrument )
+    form.contents.append( view )
+    return
+
+
+def view_sampleassembly(sampleassembly, form):
+    p = form.paragraph()
+    p.text = [
+        'The sample to study: %s' % sampleassembly.short_description,
+        ]
+
+    from TreeViewCreator import create
+    view = create( sampleassembly )
+    form.contents.append( view )
+    return
+
+
+def view_instrument_plain(instrument, form):
+    p = form.paragraph()
+    p.text = [
+        'This experiment is to be performed in instrument %s' % instrument.short_description,
+        ]
+    
+    p = form.paragraph()
+    geometer = instrument.geometer
+    components = instrument.componentsequence
+    p.text = [
+        'Instrument %r has %s components: %s' % (
+        instrument.short_description, len(components),
+        ', '.join( [ comp for comp in components ] ) ),
+        ]
+    
+    excluded_cols = [
+        'id', 'creator', 'date', 'short_description',
+        ]
+    p = form.paragraph()
+    p.text = [ '<UL>' ]
+    for component in components:
+        if component != 'sample': 
+            component_record = getattr( instrument, component ).realcomponent
+            component_type = component_record.__class__.__name__
+        else:
+            component_type = ''
+            pass # endif
+        p.text.append( '<li>%s: %s' % (component, component_type) )
+        p.text.append( '<UL>' )
+        record = geometer[ component ]
+        p.text.append( '<li>Position: %s' % (record.position,) )
+        p.text.append( '<li>Orientation: %s' % (record.orientation,) )
+        
+        if component == 'sample':
+            p.text.append( '</UL>' )
+            continue
+        
+        columns = component_record.getColumnNames()
+        for col in columns:
+            if col in excluded_cols: continue
+            value = getattr( component_record, col )
+            p.text.append('<li>%s: %s' % (col, value) )
+            continue
+        
+        p.text.append( '</UL>' )
+        continue
+    p.text.append( '</UL>' )
+    return
 
 # version
 __id__ = "$Id$"

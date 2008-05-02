@@ -39,8 +39,8 @@ def page(app):
     wizardportlet = app.retrievePortlet("neutronexperimentwizard")
     left.add(wizardportlet)
 
-    nav = app.retrievePortlet("navigation")
-    left.add(nav)
+    #nav = app.retrievePortlet("navigation")
+    #left.add(nav)
 
     # build the footer
     footer = body.pageFooter()

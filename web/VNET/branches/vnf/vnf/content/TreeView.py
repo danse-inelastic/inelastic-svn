@@ -12,7 +12,7 @@
 
 class Node:
 
-    def __init__(self, label, action):
+    def __init__(self, label, action = None):
         self.label = label
         self.action = action
         return
@@ -31,8 +31,8 @@ class Leaf(Node):
 
 class Branch(Node):
 
-    def __init__(self, label, action, children = None):
-        Node.__init__(self, label, action)
+    def __init__(self, label, action = None, children = None):
+        Node.__init__(self, label, action = action)
         if children is None: children = []
         self.children = children
         return
