@@ -16,17 +16,19 @@ debug = journal.debug( 'treeviewcreator' )
 
 
 
-def create( instrument ):
+def create( instrument, actor, director ):
     '''given the db hierarchy of instrument, render a teeview
     '''
-    return TreeViewCreator( ).render( instrument )
+    return TreeViewCreator( director, actor ).render( instrument )
 
 
 import vnf.content as factory
 class TreeViewCreator:
 
 
-    def __init__(self):
+    def __init__(self, director, actor):
+        self.director = director
+        self.actor = actor
         return
     
 
@@ -41,20 +43,6 @@ class TreeViewCreator:
         return method(node)
 
 
-    def onNeutronExperiment(self, experiment):
-        elements = [ experiment.instrument, experiment.sampleassembly ]
-        return self.onContainer( experiment, elements )
-
-
-    def onConfiguredInstrument(self, configured_instrument):
-        # apply instrument configuration to instrument
-        instrument = configured_instrument.instrument
-        configuration = configured_instrument.configuration
-        from InstrumentConfigurationApplyer import applyer
-        applyer(instrument).apply(configuration)
-        return self.onInstrument(instrument)
-    
-
     def onInstrument(self, instrument):
         return self.onContainer(instrument, instrument.components )
     
@@ -64,15 +52,14 @@ class TreeViewCreator:
 
 
     def onConfiguredScatterer(self, configured):
-        scatterer = configured.scatterer
+        elements = [ configured.scatterer ]
         configuration = configured.configuration
-        from ScattererConfigurationApplyer import applyer
-        applyer( scatterer ).apply( configuration )
-        return self.onScatterer( scatterer )
-
-
-    def onScatterer(self, scatterer):
-        elements = [ scatterer.matter, scatterer.shape ] + scatterer.kernels
+        if configuration: elements.append( configuration )
+        return self.onContainer( configured, elements )
+        
+        
+    def onPolyXtalScatterer(self, scatterer):
+        elements = [ scatterer.crystal, scatterer.shape ] + scatterer.kernels
         return self.onContainer( scatterer, elements )
 
 
@@ -97,25 +84,8 @@ class TreeViewCreator:
 
 
     def onElement(self, element):
-
-        label = '%s (%s)' % (
-            element.short_description, element.__class__.__name__ )
-        branch = factory.treeview.branch( label )
-        
-        excluded_cols = [
-            'id', 'creator', 'date', 'short_description',
-            ]
-        columns = element.getColumnNames()
-        for col in columns:
-            if col in excluded_cols: continue
-            value = getattr( element, col )
-
-            leaf = factory.treeview.leaf( '%s: %s' % (
-                col, value) )
-            branch.addChild( leaf )
-            continue
-        
-        return branch
+        node =  self.leafNode( element )
+        return node
 
 
     def onAbstractElement(self, element):
@@ -126,12 +96,24 @@ class TreeViewCreator:
         except:
             import traceback
             debug.log( traceback.format_exc() )
-            return factory.treeview.leaf('Not Yet Established')
+            
+            director = self.director
+            actor = self.actor
+            return factory.treeview.leaf(
+                'Not Yet Established', 
+                factory.actionRequireAuthentication(
+                    actor,
+                    director.sentry,
+                    routine='edit',
+                    id = self._rootcontainer.id,
+                    editee = "%s,%s" % (typename, element.id)
+                    )
+                )
         raise RuntimeError, "should not reach here"
 
 
-    onPolyCrystal = onIDFPhononDispersion = onMonochromaticSource = onIQEMonitor = onCrystal = onBlock = onElement
-    onMatter = onPhononDispersion = onScatteringKernel = onComponent = onShape = onAbstractElement
+    onIDFPhononDispersion = onMonochromaticSource = onIQEMonitor = onCrystal = onBlock = onElement
+    onPhononDispersion = onScatteringKernel = onComponent = onScatterer = onShape = onAbstractElement
     
 
     def rootNode(self, container):
@@ -147,10 +129,21 @@ class TreeViewCreator:
     
     
     def _node(self, record, nodefactory):
+        director = self.director
+        actor = self.actor
+        
         type = record.__class__.__name__
         
         node = nodefactory(
             '%s (%s)' % (record.short_description, type),
+            factory.actionRequireAuthentication(
+            actor,
+            director.sentry,
+            routine='edit',
+            editee = '%s,%s' % (type.lower(), record.id),
+            id = self._rootcontainer.id,
+            arguments = { '%s.id' % type.lower(): record.id },
+            )
             )
         return node
         

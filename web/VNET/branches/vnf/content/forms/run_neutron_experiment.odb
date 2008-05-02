@@ -51,16 +51,16 @@ class Form(base):
         record = self.getRecord()
 
         instrument_id = record.instrument_id
-        instrument = director.clerk.getInstrument( instrument_id )
+        configured = director.clerk.getConfiguredInstrument( instrument_id )
         
         p = form.paragraph()
         edit_link = action_link(
             actionRequireAuthentication(
             'instrument',
             director.sentry,
-            label = instrument.short_description,
+            label = configured.short_description,
             routine = 'edit',
-            id = instrument.id,
+            id = configured.id,
             ),  director.cgihome
             )
         change_link = action_link(
