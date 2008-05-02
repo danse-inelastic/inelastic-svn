@@ -38,7 +38,7 @@ class Builder:
             continue
 
         # other data files
-        from McvineDatafilesCollector import Collector
+        from McvineSampleAssemblyDatafilesCollector import Collector
         collector = Collector(self.path)
         collector.render( sampleassembly )
 

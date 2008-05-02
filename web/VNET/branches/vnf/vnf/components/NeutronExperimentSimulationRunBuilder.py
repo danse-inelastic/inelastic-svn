@@ -52,9 +52,10 @@ class Builder:
             ['--%s="%s"' % (item, options.get(item))
              for item in options ] ) )
 
-        ########
-        # this is for debuggiing purpose:
+        #######################
+        # this is only for debuggiing purpose:
         # command = 'ls'
+        #######################
 
         shscriptname = self.shscriptname
         files = [ (pyscriptname, pyscriptconents),
@@ -66,7 +67,7 @@ class Builder:
 
     def onConfiguredInstrument(self, instrument):
         from InstrumentSimulationAppBuilder import Builder
-        return Builder().render( instrument )
+        return Builder( self.path ).render( instrument )
 
 
     def onSampleAssembly(self, sampleassembly):
