@@ -305,12 +305,12 @@ class Clerk(Component):
             continue
         return geometer
 
-    def getPolyXtalKernels(self, id):
+    def getScatteringKernels(self, id):
         '''retrieve kernels in the scatterer of given id'''
-        from vnf.dom.PolyXtalScatterer import PolyXtalScatterer
+        from vnf.dom.Scatterer import Scatterer
         from vnf.dom.ScatteringKernel import ScatteringKernel
         return self._getElements(
-            id, PolyXtalScatterer.Kernels, ScatteringKernel)
+            id, Scatterer.Kernels, ScatteringKernel)
 
 
     def getServer(self, id):
@@ -967,6 +967,10 @@ class HierarchyRetriever:
         shape = self(shape)
         scatterer.shape = shape
         scatterer.matter = matter
+    
+        kernels = self.clerk.getScatteringKernels( scatterer.id )
+        kernels = [ self(kernel) for kernel in kernels ]
+        scatterer.kernels = kernels
         return scatterer
     
     
@@ -984,28 +988,6 @@ class HierarchyRetriever:
     def onDisordered(self, record):
         return record
     
-    
-    def onPolyXtalScatterer(self, scatterer):
-        shape_id = scatterer.shape_id
-        shape = self.clerk.getShape( shape_id )
-        shape = self(shape)
-        scatterer.shape = shape
-        
-        crystal_id = scatterer.crystal_id
-        try:
-            crystal = self.clerk.getCrystal( crystal_id )
-            crystal = self(crystal)
-        except:
-            crystal = None
-            pass
-        scatterer.crystal = crystal
-
-        kernels = self.clerk.getPolyXtalKernels( scatterer.id )
-        kernels = [ self(kernel) for kernel in kernels ]
-        scatterer.kernels = kernels
-
-        return scatterer
-
 
     def onScatteringKernel(self, kernel):
         realkernel = self.clerk.getRealScatteringKernel( kernel.id )

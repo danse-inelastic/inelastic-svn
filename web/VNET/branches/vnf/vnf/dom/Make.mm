@@ -51,7 +51,6 @@ EXPORT_PYTHON_MODULES = \
 	OwnedObject.py \
 	PhononDispersion.py \
 	PolyCrystal.py \
-	PolyXtalScatterer.py \
 	PolyXtalCoherentPhononScatteringKernel.py \
 	PositionOrientationRegistry.py \
 	ReferenceSet.py \

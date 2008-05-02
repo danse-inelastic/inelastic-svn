@@ -34,7 +34,7 @@ class Builder:
         builder = Builder(self.path)
         scatterers = sampleassembly.scatterers
         for scatterer in scatterers:
-            builder.render( scatterer.realscatterer )
+            builder.render( scatterer )
             continue
 
         # other data files

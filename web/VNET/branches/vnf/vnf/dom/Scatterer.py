@@ -30,7 +30,12 @@ class Scatterer(base):
         'Is this scatterer basic? basic scatterers are presented to novice users'
         )
 
-    
+    from ReferenceSet import ReferenceSet
+    class Kernels( ReferenceSet ):
+        name = 'kernelsforscatterer'
+        pass
+
+    pass # end of Scatterer
 
 
 # version

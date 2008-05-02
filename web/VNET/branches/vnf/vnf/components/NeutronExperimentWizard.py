@@ -14,15 +14,6 @@ from Actor import actionRequireAuthentication, action_link, AuthenticationError
 from FormActor import FormActor as base, InputProcessingError
 
 
-states = [
-    'started',
-    'name assigned',
-    'instrument configured',
-    'sample environment configuerd',
-    'sample prepared',
-    'constructed',
-    ]
-
 
 class NeutronExperimentWizard(base):
     
@@ -34,7 +25,7 @@ class NeutronExperimentWizard(base):
         id = pyre.inventory.str("id", default='')
         id.meta['tip'] = "the unique identifier of the experiment"
         
-        ncount = pyre.inventory.float( 'ncount', default = 1e6 )
+        ncount = pyre.inventory.str( 'ncount', default = 1e6 )
         ncount.meta['tip'] = 'number of neutrons'
         
         pass # end of Inventory
