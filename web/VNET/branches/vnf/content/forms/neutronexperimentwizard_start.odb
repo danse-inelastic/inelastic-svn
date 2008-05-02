@@ -29,7 +29,7 @@ class Form( base ):
 
     def legend(self):
         'return a legend string'
-        return '' 
+        return ''
 
 
     def expand(self, form, errors = None, advanced = False):
