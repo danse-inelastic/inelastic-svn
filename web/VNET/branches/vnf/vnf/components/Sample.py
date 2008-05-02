@@ -39,8 +39,11 @@ class Sample(Actor):
         document.byline = 'byline?'
 
         # retrieve id:record dictionary from db
+        
         clerk = director.clerk
-        samples = clerk.getSamples()
+        scatterers = clerk.indexScatterers().values()
+        scatterers = [ clerk.getHierarchy(scatterer) for scatterer in scatterers]
+        samples = scatterers
             
         p = document.paragraph()
         numSamples = len(samples)

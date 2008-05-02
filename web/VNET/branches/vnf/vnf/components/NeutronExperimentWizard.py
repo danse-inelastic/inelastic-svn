@@ -525,28 +525,14 @@ class NeutronExperimentWizard(base):
         main = page._body._content._main
         # populate the main column
         document = main.document(
-            title='Neutron Experiment Wizard: scattering kernels')
+            title='Neutron Experiment Wizard: Kernel origin selection')
         document.description = ''
-        document.byline = 'byline?'
-
-        self.processFormInputs(director)
-        
-        return page
-
-    def kernel_origin(self, director):
-        try:
-            page = director.retrieveSecurePage( 'neutronexperimentwizard' )
-        except AuthenticationError, err:
-            return err.page
-        
-        main = page._body._content._main
-        document = main.document(title='Kernel origin selection' )
         document.byline = '<a href="http://danse.us">DANSE</a>'        
         
         formcomponent = self.retrieveFormToShow( 'selectkernel')
         formcomponent.director = director
-        # build the SKChoice form
-        SKChoice = document.form(name='', action=director.cgihome)
+        # build the form 
+        form = document.form(name='', action=director.cgihome)
         # specify action
         action = actionRequireAuthentication(          
             actor = 'neutronexperimentwizard', 
@@ -556,10 +542,12 @@ class NeutronExperimentWizard(base):
             arguments = {'form-received': formcomponent.name },
             )
         from vnf.weaver import action_formfields
-        action_formfields( action, SKChoice )
+        action_formfields( action, form )
         # expand the form with fields of the data object that is being edited
-        formcomponent.expand( SKChoice )
-        submit = SKChoice.control(name='submit',type="submit", value="next")
+        formcomponent.expand( form )
+        submit = form.control(name='submit',type="submit", value="next")
+        
+        #self.processFormInputs(director)
         return page   
     
     def onSelect(self, director):
@@ -579,7 +567,7 @@ class NeutronExperimentWizard(base):
         
         formcomponent = self.retrieveFormToShow( 'gulp')
         formcomponent.director = director
-        # build the SKChoice form
+        # build the form form
         form = document.form(name='', action=director.cgihome)
         # specify action
         action = actionRequireAuthentication(          
@@ -608,7 +596,7 @@ class NeutronExperimentWizard(base):
         
         formcomponent = self.retrieveFormToShow( 'inelasticScatteringIntensity')
         formcomponent.director = director
-        # build the SKChoice form
+        # build the form form
         SKChoice = document.form(name='', action=director.cgihome)
         # specify action
         action = actionRequireAuthentication(          
@@ -637,7 +625,7 @@ class NeutronExperimentWizard(base):
         
         formcomponent = self.retrieveFormToShow( 'gulp')
         formcomponent.director = director
-        # build the SKChoice form
+        # build the form form
         form = document.form(name='', action=director.cgihome)
         # specify action
         action = actionRequireAuthentication(          
