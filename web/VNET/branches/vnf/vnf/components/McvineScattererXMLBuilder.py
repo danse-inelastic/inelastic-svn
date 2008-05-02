@@ -43,7 +43,22 @@ class Builder(XMLMill):
         return f( something )
 
 
-    def onPolyXtalScatterer(self, scatterer):
+    def onConfiguredScatterer(self, configured ):
+        prototype = configured.scatterer
+        configuration = configured.configuration
+        from ScattererConfigurationApplyer import applyer
+        applyer( prototype ).apply( configuration )
+        return self.dispatch( prototype )
+
+
+    def onScatterer(self, scatterer):
+        matter = scatterer.matter.realmatter
+        mattertype = matter.__class__.__name__
+        handler = 'on%sScatterer' % mattertype
+        return getattr(self, handler)( scatterer )
+
+
+    def onPolyCrystalScatterer(self, scatterer):
         name = scatterer.short_description.replace( ' ', '_' )
 
         self._write( '<!DOCTYPE scatterer>' )

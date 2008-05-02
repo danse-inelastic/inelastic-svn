@@ -39,9 +39,23 @@ class Collector:
         return 
 
 
+    def onConfiguredScatterer(self, configured ):
+        prototype = configured.scatterer
+        configuration = configured.configuration
+        from ScattererConfigurationApplyer import applyer
+        applyer( prototype ).apply( configuration )
+        return self.dispatch( prototype )
+
+
     def onScatterer(self, scatterer):
-        realscatterer = scatterer.realscatterer
-        return self.dispatch( realscatterer )
+        matter = scatterer.matter.realmatter
+        self.dispatch( matter )
+        shape = scatterer.shape
+        self.dispatch( shape )
+        for kernel in scatterer.kernels:
+            self.dispatch( kernel )
+            continue
+        return
 
 
     def onShape(self, shape):
@@ -50,20 +64,8 @@ class Collector:
         return
 
 
-    def onCrystal(self, crystal):
-        datafile = crystal.datafile
-        datapath = os.path.join( self._datadir( crystal ), datafile )
-        link = os.path.join( self.path, datafile )
-        self._link( datapath, link )
-        return
-
-
-    def onPolyXtalScatterer(self, scatterer):
-        self.dispatch(scatterer.shape)
-        self.dispatch( scatterer.crystal )
-        for kernel in scatterer.kernels:
-            self.dispatch( kernel )
-            continue
+    def onPolyCrystal(self, polycrystal):
+        self._create_xyzfile( polycrystal )
         return
 
 
@@ -110,10 +112,45 @@ class Collector:
             )
         return path
 
+
+    def _create_xyzfile(self, crystal):
+        import os
+        filename = '%s.xyz' % crystal.id
+        filepath = os.path.join( self.path, filename )
+
+        contents = crystal2xyz( crystal )
+
+        open( filepath, 'w' ).write( '\n'.join( contents ) )
+        return filename
+
+
     pass # end of Builder
 
 
+def crystal2xyz( crystal ):
+    # convert a crystal db record to a xyz file
+    lattice = crystal.cartesian_lattice
+    coords= crystal.fractional_coordinates
+    atoms = crystal.atom_symbols
+    
+    from numpy import array
+    coords = array(coords)
+    coords.shape = -1,3
+    
+    assert len(atoms) == len(coords)
+
+    contents = []
+    contents.append( '%d' % len(atoms) )
+    contents.append( str( lattice ) )
+    for atom, coord in zip( atoms, coords):
+        contents.append( '%s %s' % (atom, coord) )
+        continue
+    
+    return contents
+
+
 import os
+
 
 # version
 __id__ = "$Id$"

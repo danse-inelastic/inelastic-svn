@@ -175,7 +175,9 @@ class Builder:
 
         self.cmdline_opts.update( opts )
         return
-
+    detectorsystem_xmlfile = 'detectorsystem.xml'
+    detectorsystem_output_eventfile = 'detectorsystem-events.dat'
+    
 
     def onComponent(self, component):
         realcomponent = component.realcomponent

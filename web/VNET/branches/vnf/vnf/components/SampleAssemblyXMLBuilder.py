@@ -55,7 +55,7 @@ class Builder(ShapeRenderer, XMLMill):
         self._write( '<LocalGeometer registry-coordinate-system="InstrumentScientist">' )
         self._indent()
         for scatterer in sampleassembly.scatterers:
-            name = scatterer.realscatterer.short_description.replace( ' ', '_' )
+            name = scatterer.short_description.replace( ' ', '_' )
             attrs = {
                 'name': name,
                 'position': (0,0,0),
@@ -67,15 +67,25 @@ class Builder(ShapeRenderer, XMLMill):
         self._write( '</LocalGeometer>' )
 
         self._postElement( sampleassembly )
-        return 
+        return
+
+
+    def onConfiguredScatterer(self, configured):
+        prototype = configured.scatterer
+        configuration = configured.configuration
+        from ScattererConfigurationApplyer import applyer
+        applyer( prototype ).apply( configuration )
+        return self.dispatch( prototype )
 
 
     def onScatterer(self, scatterer):
-        realscatterer = scatterer.realscatterer
-        return self.dispatch( realscatterer )
+        matter = scatterer.matter.realmatter
+        mattertype = matter.__class__.__name__
+        handler = 'on%sScatterer' % mattertype
+        return getattr(self, handler)( scatterer )
 
 
-    def onPolyXtalScatterer(self, scatterer):
+    def onPolyCrystalScatterer(self, scatterer):
         name = scatterer.short_description.replace( ' ', '_' )
         attrs = {
             'name': name,
@@ -85,12 +95,16 @@ class Builder(ShapeRenderer, XMLMill):
         
         self.dispatch(scatterer.shape)
 
+        # now need to create a xyz file
+        polyxtal = scatterer.matter.realmatter
+        xyzfilename = '%s.xyz' % polyxtal.id
+
         self._write('')
         self._write( '<Phase type="crystal">' )
         self._indent()
-        crystal = scatterer.crystal
-        self._write( '<ChemicalFormula>%s</ChemicalFormula>' % crystal.chemical_formula)
-        self._write( '<xyzfile>%s</xyzfile>' % crystal.datafile )
+        self._write( '<ChemicalFormula>%s</ChemicalFormula>' % (
+            polyxtal.chemical_formula,) )
+        self._write( '<xyzfile>%s</xyzfile>' % xyzfilename )
         self._outdent()
         self._write( '</Phase>' )
         self._write('')
