@@ -80,10 +80,9 @@ class Sample(Actor):
         p = document.paragraph()
         p.text = [action_link(
         actionRequireAuthentication(
-        'materialInput', director.sentry,
+        'sampleInput', director.sentry,
         label = 'Add a new sample'),  director.cgihome
-        )]#,
-#        '<br>',
+        )'<br>']
 #        action_link(
 #        actionRequireAuthentication(
 #        'shapeInput', director.sentry,
@@ -98,6 +97,11 @@ class Sample(Actor):
             arguments = {'form-received': formcomponent.name },
             )
 
+        p.text = [action_link(
+        actionRequireAuthentication(
+        'sampleInput', director.sentry,
+        label = 'Add a new sample'),  director.cgihome
+        )]
 
         return page  
 
