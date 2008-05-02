@@ -618,6 +618,7 @@ class NeutronExperimentWizard(base):
             sentry = director.sentry,
             routine = 'submit_experiment',
             label = '',
+            id = self.inventory.id,
             arguments = {'form-received': formcomponent.name },
             )
         from vnf.weaver import action_formfields
