@@ -141,9 +141,11 @@ def crystal2xyz( crystal ):
 
     contents = []
     contents.append( '%d' % len(atoms) )
-    contents.append( str( lattice ) )
+    contents.append( ' '.join( [ '%s' % a for a in lattice ] ) )
     for atom, coord in zip( atoms, coords):
-        contents.append( '%s %s' % (atom, coord) )
+        contents.append(
+            '%s %s' % (atom, ' '.join( [ '%s' % x for x in coords] ) )
+            )
         continue
     
     return contents

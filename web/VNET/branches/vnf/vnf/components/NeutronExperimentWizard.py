@@ -560,7 +560,7 @@ class NeutronExperimentWizard(base):
         submit = form.control(name='submit',type="submit", value="next")
         
         #self.processFormInputs(director)
-        self._form_footer( form, director )
+        self._footer( form, director )
         return page   
     
     def onSelect(self, director):
@@ -714,6 +714,31 @@ class NeutronExperimentWizard(base):
         director.clerk.updateRecord( experiment )
         
         return self.showExperimentStatusPage(director)
+
+
+    def submit_job(self, job, director):
+        #not yet implemented correctly
+        server = job.server
+        server_record = director.clerk.getServer( server )
+
+        try:
+            schedule(job, director)
+        except Exception, err:
+            import traceback
+            self._debug.log( traceback.format_exc() )
+            document = main.document( title = 'Job not submitted' )
+            p = document.paragraph()
+            p.text = [
+                'Failed to submit job %s to %s' % (
+                job.id, server_record.server, ),
+                ]
+            return page
+
+        job.status = 'submitted'
+        director.clerk.updateRecord( job )
+        # check status of job
+        check( job, director )
+        return
 
 
     def showExperimentStatusPage(self,director):

@@ -12,6 +12,13 @@
 
 class Builder:
 
+
+    def __init__(self, path):
+        'path: path in which data files are generated'
+        self.path = path
+        return
+    
+
     def render(self, instrument):
         self.appscript = []
         self.cmdline_opts = {}
@@ -157,6 +164,13 @@ class Builder:
 
 
     def onDetectorSystem_fromXML(self, ds):
+        # first we need to get the detector system xml file
+        xmlfile_source = os.path.join(
+            self._datadir( ds ), self.detectorsystem_xmlfile)
+        xmlfile_target = os.path.join( self.path, self.detectorsystem_xmlfile)
+        self._link( xmlfile_source, xmlfile_target )
+
+        # then we need to build the options ( odb?)
         kwds = {
             'name': ds.label,
             'category': 'detectors',
@@ -202,8 +216,28 @@ class Builder:
         return
 
 
+    def _link(self, linked, link):
+        cmd = 'ln -s %s %s' % (linked, link )
+        from spawn import spawn
+        spawn( cmd )
+        return
+
+
+    def _datadir(self, obj):
+        from misc import datadir
+        datadir = os.path.abspath( datadir() )
+        path = os.path.join(
+            datadir,
+            obj.__class__.__name__.lower(),
+            obj.id,
+            )
+        return path
+
+
     pass # end of Builder
 
+
+import os
 
 # version
 __id__ = "$Id$"
