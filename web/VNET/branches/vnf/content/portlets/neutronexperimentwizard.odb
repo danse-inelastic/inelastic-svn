@@ -80,7 +80,7 @@ def portlet(app):
     kernel_origin = portlet.item(description="Scattering kernel")
     action = actionRequireAuthentication(
         actor = 'neutronexperimentwizard', sentry = app.sentry,
-        routine = 'kernel_origin',
+        routine = 'configure_scatteringkernels',
         id = app.actor.inventory.id,
         )
     kernel_origin.target = action_href(action, app.cgihome)
