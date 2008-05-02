@@ -98,7 +98,7 @@ class NeutronExperimentWizard(base):
         # run button
         submit = form.control(name="actor.form-received.submit", type="submit", value="Continue")
 
-        self._form_footer( form, director )
+        self._footer( document, director )
         return page
 
 
@@ -162,7 +162,7 @@ class NeutronExperimentWizard(base):
         # run button
         submit = form.control(name="submit", type="submit", value="Continue")
             
-        self._form_footer( form, director )
+        self._footer( document, director )
         return page
 
 
@@ -223,7 +223,7 @@ class NeutronExperimentWizard(base):
         # run button
         submit = form.control(name="submit", type="submit", value="Continue")
         
-        self._form_footer( form, director )
+        self._footer( document, director )
         return page
     
     
@@ -311,7 +311,7 @@ class NeutronExperimentWizard(base):
         # run button
         submit = form.control(name="submit", type="submit", value="Continue")
         
-        self._form_footer( form, director )
+        self._footer( document, director )
         return page
 
 
@@ -386,7 +386,7 @@ class NeutronExperimentWizard(base):
         # run button
         submit = form.control(name="submit", type="submit", value="Continue")
         
-        self._form_footer( form, director )
+        self._footer( document, director )
         return page
 
     
@@ -480,7 +480,7 @@ class NeutronExperimentWizard(base):
         # run button
         submit = form.control(name="submit", type="submit", value="Continue")
         
-        self._form_footer( form, director )
+        self._footer( document, director )
         return page
 
 
@@ -590,7 +590,7 @@ class NeutronExperimentWizard(base):
         # expand the form with fields of the data object that is being edited
         formcomponent.expand( form )
         next = form.control(name='submit',type="submit", value="next")
-        self._form_footer( form, director )
+        self._footer( document, director )
         return page 
     
     def kernel_generator(self, director):
@@ -620,7 +620,7 @@ class NeutronExperimentWizard(base):
         # expand the form with fields of the data object that is being edited
         formcomponent.expand( form )
         next = form.control(name='submit',type="submit", value="next")
-        self._form_footer( form, director )
+        self._footer( document, director )
         return page     
 
 
@@ -671,7 +671,7 @@ class NeutronExperimentWizard(base):
         submit = form.control(name="actor.form-received.submit", type="submit", value="Submit")
         #back = form.control(name="actor.form-received.submit", type="submit", value="back")
 
-        self._form_footer( form, director )
+        self._footer( document, director )
         return page
 
 
@@ -786,11 +786,11 @@ class NeutronExperimentWizard(base):
         return
 
 
-    def _form_footer(self, form, director):
+    def _footer(self, document, director):
         #
-        form.paragraph()
+        document.paragraph()
 
-        p = form.paragraph(align = 'right')
+        p = document.paragraph(align = 'right')
         action = actionRequireAuthentication(
             label = 'Cancel',
             actor = 'neutronexperimentwizard',
