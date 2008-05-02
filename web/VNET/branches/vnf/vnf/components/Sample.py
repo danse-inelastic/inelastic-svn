@@ -63,7 +63,6 @@ class Sample(Actor):
 #            for name in samples[row].getColumnNames():
         for row, sample in enumerate( samples ):
             for colNum, colName in enumerate( columns ):
-                
                 value = sample.getColumnValue(colName)
                 if colName == 'short_description':
                     link = action_link(
@@ -75,22 +74,30 @@ class Sample(Actor):
                         ),  director.cgihome
                         )
                     value = link
-                t.setc(row,colNum,value)
-                colNum+=1
+                t.setc(row+1,colNum,value)
         p.text = [t.return_html()]
         
         p = document.paragraph()
         p.text = [action_link(
         actionRequireAuthentication(
         'materialInput', director.sentry,
-        label = 'Add a new type of material'),  director.cgihome
-        ),
-        '<br>',
-        action_link(
-        actionRequireAuthentication(
-        'shapeInput', director.sentry,
-        label = 'Add a new sample shape'),  director.cgihome
-        )]
+        label = 'Add a new sample'),  director.cgihome
+        )]#,
+#        '<br>',
+#        action_link(
+#        actionRequireAuthentication(
+#        'shapeInput', director.sentry,
+#        label = 'Add a new sample shape'),  director.cgihome
+#        )]
+
+        action = actionRequireAuthentication(          
+            actor = 'neutronexperimentwizard', 
+            sentry = director.sentry,
+            routine = 'onSelect',
+            label = '',
+            arguments = {'form-received': formcomponent.name },
+            )
+
 
         return page  
 

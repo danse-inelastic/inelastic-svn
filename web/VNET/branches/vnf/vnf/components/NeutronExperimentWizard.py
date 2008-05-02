@@ -395,15 +395,12 @@ class NeutronExperimentWizard(base):
         try:
             page = director.retrieveSecurePage( 'neutronexperimentwizard' )
         except AuthenticationError, err:
-            return err.page        
-        main = page._body._content._main
-        # populate the main column
-        document = main.document(
-            title='Neutron Experiment Wizard: select sample from sample library')
-        document.description = ''
-        document.byline = 'byline?'
-
-        return page
+            return err.page             
+        routine = director.routine = 'default'
+        actor = director.retrieveActor( 'sample')
+        director.configureComponent( actor )
+        #actor.inventory.id = self.inventory.id
+        return getattr(actor, routine)( director )
     
 
     def create_new_sample(self, director):
