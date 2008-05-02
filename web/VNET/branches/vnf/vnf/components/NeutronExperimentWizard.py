@@ -519,8 +519,7 @@ class NeutronExperimentWizard(base):
         except AuthenticationError, err:
             return err.page
 
-        experiment = director.clerk.getNeutronExperiment(
-            self.inventory.id)
+#        experiment = director.clerk.getNeutronExperiment(self.inventory.id)
 
         main = page._body._content._main
         # populate the main column
@@ -573,7 +572,7 @@ class NeutronExperimentWizard(base):
         action = actionRequireAuthentication(          
             actor = 'neutronexperimentwizard', 
             sentry = director.sentry,
-            routine = 'edit',
+            routine = 'kernel_generator',
             label = '',
             arguments = {'form-received': formcomponent.name },
             )
@@ -581,7 +580,7 @@ class NeutronExperimentWizard(base):
         action_formfields( action, form )
         # expand the form with fields of the data object that is being edited
         formcomponent.expand( form )
-        next = form.control(name='submit',type="submit", value="submit job")
+        next = form.control(name='submit',type="submit", value="next")
         return page 
     
     def kernel_generator(self, director):
@@ -597,7 +596,7 @@ class NeutronExperimentWizard(base):
         formcomponent = self.retrieveFormToShow( 'inelasticScatteringIntensity')
         formcomponent.director = director
         # build the form form
-        SKChoice = document.form(name='', action=director.cgihome)
+        form = document.form(name='', action=director.cgihome)
         # specify action
         action = actionRequireAuthentication(          
             actor = 'neutronexperimentwizard', 
@@ -607,41 +606,11 @@ class NeutronExperimentWizard(base):
             arguments = {'form-received': formcomponent.name },
             )
         from vnf.weaver import action_formfields
-        action_formfields( action, SKChoice )
-        # expand the form with fields of the data object that is being edited
-        formcomponent.expand( SKChoice )
-        submit = SKChoice.control(name='submit',type="submit", value="next")
-        return page       
-    
-    def submitJob(self, director):
-        try:
-            page = director.retrieveSecurePage( 'neutronexperimentwizard' )
-        except AuthenticationError, err:
-            return err.page
-        
-        main = page._body._content._main
-        document = main.document(title='Classical atomistics kernel' )
-        document.byline = '<a href="http://danse.us">DANSE</a>'    
-        
-        formcomponent = self.retrieveFormToShow( 'gulp')
-        formcomponent.director = director
-        # build the form form
-        form = document.form(name='', action=director.cgihome)
-        # specify action
-        action = actionRequireAuthentication(          
-            actor = 'job', 
-            sentry = director.sentry,
-            routine = 'edit',
-            label = '',
-            arguments = {'form-received': formcomponent.name },
-            )
-        from vnf.weaver import action_formfields
         action_formfields( action, form )
         # expand the form with fields of the data object that is being edited
         formcomponent.expand( form )
-        next = form.control(name='submit',type="submit", value="submit job")
-        return page     
-
+        submit = form.control(name='submit',type="submit", value="next")
+        return page         
 
     def submit_experiment(self, director, errors = None):
         try:
@@ -657,8 +626,7 @@ class NeutronExperimentWizard(base):
         
         main = page._body._content._main
         # populate the main column
-        document = main.document(
-            title='Neutron Experiment Wizard: submit')
+        document = main.document(title='Neutron Experiment Wizard: submit')
         document.description = ''
         document.byline = 'byline?'
 

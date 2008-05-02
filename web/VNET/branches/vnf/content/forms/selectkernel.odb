@@ -33,7 +33,7 @@ class Form( base ):
         abInitioHarmonic = form.radio(id='radio4', name=name, label = 'AbInitio Energies, Phon Harmonic Motion', value = 'abInitioHarmonic')
         phononDispersions = form.radio(id='radio6', name=name, label = "Phonon Dispersions", value = 'phononDispersions')
 
-    def processUserInputs(self,director):
+    def processUserInputs(self):
         'process user input '
         return self.inventory.kernel
 

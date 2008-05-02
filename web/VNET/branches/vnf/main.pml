@@ -15,7 +15,7 @@
 
   <component name='main'>
     <property name='actor'>neutronexperimentwizard</property>  
-    <property name="routine">start</property>   
+    <property name="routine">configure_scatteringkernels</property>   
     <component name='sentry'>
     	<property name='username'>demo</property>
     	<property name='passwd'>demo</property>
