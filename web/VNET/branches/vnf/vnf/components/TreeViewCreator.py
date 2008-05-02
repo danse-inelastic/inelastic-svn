@@ -88,6 +88,8 @@ class TreeViewCreator:
             node = self.branchNode( container )
             pass
 
+        self._add_props( container, node )
+
         for element in elements:
             childnode = self( element )
             node.addChild( childnode )
@@ -101,20 +103,8 @@ class TreeViewCreator:
         label = '%s (%s)' % (
             element.short_description, element.__class__.__name__ )
         branch = factory.treeview.branch( label )
-        
-        excluded_cols = [
-            'id', 'creator', 'date', 'short_description',
-            ]
-        columns = element.getColumnNames()
-        for col in columns:
-            if col in excluded_cols: continue
-            value = getattr( element, col )
 
-            leaf = factory.treeview.leaf( '%s: %s' % (
-                col, value) )
-            branch.addChild( leaf )
-            continue
-        
+        self._add_props( element, branch )
         return branch
 
 
@@ -153,6 +143,30 @@ class TreeViewCreator:
             '%s (%s)' % (record.short_description, type),
             )
         return node
+
+
+    def _add_props(self, element, branch, props = None):
+        'add properties of element to the given tree view branch'
+        excluded_cols = [
+            'id', 'creator', 'date', 'short_description',
+            ]
+        if props is None:
+            props = []
+            columns = element.getColumnNames()
+            for col in columns:
+                if col in excluded_cols: continue
+                props.append( col )
+                continue
+            pass # endif
+
+        for prop in props:
+            value = getattr( element, prop )
+
+            leaf = factory.treeview.leaf( '%s: %s' % (
+                prop, value) )
+            branch.addChild( leaf )
+            continue
+        return
         
     pass # end of TreeViewCreator
 
