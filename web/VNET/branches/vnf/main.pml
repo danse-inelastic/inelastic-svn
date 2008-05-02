@@ -14,8 +14,8 @@
 <inventory>
 
   <component name='main'>
-    <property name='actor'>neutronexperimentwizard</property>  
-    <property name="routine">select_sample_from_sample_library</property>  
+    <property name='actor'>scatteringKernel</property>  
+    <property name="routine">default</property>  
     <component name='sentry'>
     	<property name='username'>demo</property>
     	<property name='passwd'>demo</property>

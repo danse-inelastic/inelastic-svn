@@ -55,7 +55,7 @@ class WebApplication(Base):
         csaccessor = pyre.inventory.facility( name='csaccessor', factory = vnf.components.ssher)
         csaccessor.meta['tip'] = 'computing server accessor'
 
-        debug = pyre.inventory.bool(name="debug", default=False)
+        debug = pyre.inventory.bool(name="debug", default=True)
         debug.meta['tip'] = "suppress some html output for debugging purposes"
 
         imagepath = pyre.inventory.str(name='imagepath', default = '/vnf/images' )
@@ -66,8 +66,9 @@ class WebApplication(Base):
     def main(self, *args, **kwds):
         if self.debug:
             from configurationSaver import toPml
-            toPml( self, '/tmp/main-debug.pml' )
-            pass # end if
+            from os import environ
+            user = environ['USER']
+            toPml(self, '/tmp/main-debug-%s.pml' % user)
         super(WebApplication, self).main(*args, **kwds)
         return
 
