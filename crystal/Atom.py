@@ -183,6 +183,8 @@ class Atom(object):
 
     # states
     velocity = State('velocity', 'velocity of the atom')
+    displacement = State('displacement', 'displacement vector of atom')
+    force = State('force', 'force on atom (vector)')
     ### should add all possible states here including but
     ### not limit to:
     ###   position( displacement ), pseudopotential, force
