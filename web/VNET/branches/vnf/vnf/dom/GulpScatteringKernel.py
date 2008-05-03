@@ -12,9 +12,9 @@
 
 
 from OwnedObject import OwnedObject
-class GulpDynamics(OwnedObject):
+class GulpScatteringKernel(OwnedObject):
 
-    name = 'gulpscatteringkernels'
+    name = 'gulpScatteringKernels'
     
     import pyre.db
 
