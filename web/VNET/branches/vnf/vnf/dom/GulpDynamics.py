@@ -12,7 +12,7 @@
 
 
 from OwnedObject import OwnedObject
-class GulpDynamicsKernel(OwnedObject):
+class GulpDynamics(OwnedObject):
 
     name = 'gulpscatteringkernels'
     
