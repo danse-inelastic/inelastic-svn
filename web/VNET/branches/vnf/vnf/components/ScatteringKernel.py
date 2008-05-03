@@ -39,21 +39,22 @@ class ScatteringKernel(Actor):
 
         # retrieve id:record dictionary from db
         clerk = director.clerk
-        scatteringKernels = clerk.getScatteringKernels().values()
+        scatteringKernels = clerk.indexScatteringKernels().values()
         scatteringKernels = [ clerk.getHierarchy(scatteringKernel) for scatteringKernel in scatteringKernels]
             
         p = document.paragraph()
         numScatteringKernels = len(scatteringKernels)
-        columns = ['description', 'texture','id']
+        columns = ['id','short_description', 'creator', 'date', 'inputFile']
+        columnTitles = ['do not show', 'Short description', 'Owner', 'Date of creation', 'Input file']
         numColumns=len(columns)#scatteringKernels[0].getNumColumns()
 
         from PyHtmlTable import PyHtmlTable
         t=PyHtmlTable(numScatteringKernels,numColumns, {'width':'400','border':2,'bgcolor':'white'})
-        for colNum, col in enumerate(columns):
+        for colNum, col in enumerate(columnTitles):
             t.setc(0,colNum,col)
             
         for row, job in enumerate(scatteringKernels):
-            for colNum, colName in enumerate( columns ):           
+            for colNum, colName in enumerate( columns[1:] ):           
                 value = job.getColumnValue(colName)
                 if colName == 'description':
                     link = action_link(
