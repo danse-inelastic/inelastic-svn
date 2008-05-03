@@ -1,51 +1,43 @@
-#!/usr/bin/env python
+# -*- Python -*-
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
-#                                  Jiao Lin
-#                     California Institute of Technology
-#                       (C) 2007  All Rights Reserved
+#                                   Jiao Lin
+#                      California Institute of Technology
+#                        (C) 2007  All Rights Reserved
+#
+# {LicenseText}
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
 
-from Actor import Actor, action_link, action, actionRequireAuthentication
-from vnf.weaver import action_href
+from vnf.components.Form import Form as base
+from vnf.components.PyHtmlTable import PyHtmlTable
+from vnf.components.Actor import actionRequireAuthentication, action_link
 
-class Sample(Actor):
 
-    class Inventory(Actor.Inventory):
+class Form( base ):
 
-        import time
-        import pyre.inventory
+    class Inventory( base.Inventory ):
 
-        id = pyre.inventory.str("id", default=None)
-        id.meta['tip'] = "the unique identifier for a given search"
+        import pyre.inventory as inv
+#        kernel = inv.str('kernel',default='gulp')
+#        kernel.meta['tip'] = 'type of kernel'
         
-        page = pyre.inventory.str('page', default='empty')
+        selected_kernel_id = inv.str( 'kernel_id' )
 
-    def default(self, director):
-        return self.listall( director )
+    def expand(self, form):
+        '''expand an existing form with fields from this component'''
+        prefix = formactor_action_prefix
 
-    def listall(self, director):
-        page = director.retrievePage( 'sample' )
-        
-        main = page._body._content._main
-        
-        # populate the main column
-        document = main.document(title='List of samples')
-        document.description = ''
-        document.byline = 'byline?'
-
-        # retrieve id:record dictionary from db
-        
+        director = self.director
         clerk = director.clerk
         scatterers = clerk.indexScatterers().values()
         scatterers = [ clerk.getHierarchy(scatterer) for scatterer in scatterers]
         samples = scatterers
             
-        p = document.paragraph()
+        p = form.paragraph()
         numSamples = len(samples)
         columns = ['Id', 'Short description','Cartesian lattice', 'Fractional coordinates',        
         'Atom symbols', 'Shape name', 'Shape parameters']
@@ -54,7 +46,6 @@ class Sample(Actor):
 #        shapeColumns=['Shape Description','Cartesian Lattice','Atom Positions']
         numColumns=len(columns)#scatteringKernels[0].getNumColumns()
 
-        from PyHtmlTable import PyHtmlTable
         t=PyHtmlTable(numSamples,numColumns, {'width':'400','border':2,'bgcolor':'white'})
         for colNum, col in enumerate(columns):
             t.setc(0,colNum,col)
@@ -62,6 +53,9 @@ class Sample(Actor):
 #            colNum=0
 #            for name in samples[row].getColumnNames():
         for row, sample in enumerate( samples ):
+            #first put in the radio button
+            selection = "<input type='radio' name='actor.form-received.kernel_id' value="+sample.id+" id='radio'/>"
+            t.setc(row+1, 0, selection)
             for colNum, colName in enumerate( columns ):
                 value = sample.getColumnValue(colName)
                 if colName == 'short_description':
@@ -74,36 +68,26 @@ class Sample(Actor):
                         ),  director.cgihome
                         )
                     value = link
-                t.setc(row+1,colNum,value)
+                t.setc(row+1,colNum+1,value)
         p.text = [t.return_html()]
         
-        p = document.paragraph()
+        p = form.paragraph()
         p.text = [action_link(
         actionRequireAuthentication(
         'sampleInput', director.sentry,
         label = 'Add a new sample'),  director.cgihome),'<br>']
-#        action_link(
-#        actionRequireAuthentication(
-#        'shapeInput', director.sentry,
-#        label = 'Add a new sample shape'),  director.cgihome
-#        )]
+        
 
-#        action = actionRequireAuthentication(          
-#            actor = 'neutronexperimentwizard', 
-#            sentry = director.sentry,
-#            routine = 'onSelect',
-#            label = '',
-#            arguments = {'form-received': formcomponent.name },
-#            )
-
-        return page  
+    def processUserInputs(self):
+        'process user input '
+        return self.inventory.kernel
 
 
-    def __init__(self, name=None):
-        if name is None:
-            name = "sample"
-        super(Sample, self).__init__(name)
-        return
+#formactor_action_prefix = 'actor.form-received' # assumed actor is a form actor
+from vnf.components.DBObjectForm import formactor_action_prefix
+
+def form(): return Form( 'selectkernel' )
+
 
 # version
 __id__ = "$Id$"

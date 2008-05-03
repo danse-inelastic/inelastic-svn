@@ -40,7 +40,10 @@ class Form( base ):
     def expand(self, form):
         '''expand an existing form with fields from this component'''
         prefix = formactor_action_prefix
-        
+        p = form.paragraph()
+        p.text = ['''To use the output from a dynamics calculation, choose settings to
+calculate the inelastic scattering intensity.''']
+ 
         choices=['Incoherent', 'Coherent', 'Both']
         entries=enumerate(choices)
         typeOfScattering = form.selector(id='selector1',

@@ -28,6 +28,8 @@ class Form( base ):
 
     def expand(self, form):
         '''expand an existing form with fields from this component'''
+        p = form.paragraph()
+        p.text = ['To begin the creation of a scattering kernel, select an energetics/dynamics engine or a set of phonon dispersions.']
         prefix = formactor_action_prefix
         
 #        experiment_id_field = form.hidden(

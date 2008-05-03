@@ -42,6 +42,8 @@ EXPORT_PYTHON_MODULES = \
 	Instrument.py \
 	Component.py \
 	DetectorSystem_fromXML.py \
+	Disordered.py \
+	GulpScatteringKernel.py \
 	IQEMonitor.py \
 	Job.py \
 	Matter.py \
