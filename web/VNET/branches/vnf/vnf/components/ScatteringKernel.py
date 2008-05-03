@@ -44,26 +44,25 @@ class ScatteringKernel(Actor):
             
         p = document.paragraph()
         numScatteringKernels = len(scatteringKernels)
-        columns = ['id','short_description', 'creator', 'date', 'inputFile']
-        columnTitles = ['do not show', 'Short description', 'Owner', 'Date of creation', 'Input file']
-        numColumns=len(columns)#scatteringKernels[0].getNumColumns()
+        columns = ['id', 'reference', 'short_description', 'type', 'creator', 'date' ]
+        columnTitles = ['Short description', 'Type of scattering kernel', 'Creator', 'Date of creation']
 
         from PyHtmlTable import PyHtmlTable
-        t=PyHtmlTable(numScatteringKernels,numColumns, {'width':'400','border':2,'bgcolor':'white'})
+        t = PyHtmlTable(numScatteringKernels, len(columnTitles), {'width':'400','border':2,'bgcolor':'white'})
         for colNum, col in enumerate(columnTitles):
             t.setc(0,colNum,col)
             
-        for row, job in enumerate(scatteringKernels):
-            for colNum, colName in enumerate( columns[1:] ):           
-                value = job.getColumnValue(colName)
-                if colName == 'description':
+        for row, sk in enumerate(scatteringKernels):
+            for colNum, colName in enumerate( columns[2:] ):           
+                value = sk.getColumnValue(colName)
+                if colName == 'short_description':
                     link = action_link(
                         actionRequireAuthentication(
                         'scatteringKernel',
                         director.sentry,
                         label = value,
                         routine = 'show',
-                        id = job.id,
+                        id = sk.id,
                         ),  director.cgihome
                         )
                     value = link

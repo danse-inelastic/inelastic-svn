@@ -14,12 +14,12 @@
 from OwnedObject import OwnedObject
 class GulpScatteringKernel(OwnedObject):
 
-    name = 'gulpScatteringKernels'
+    name = 'gulpscatteringkernels'
     
     import pyre.db
 
-    inputFile = pyre.db.varcharArray( name = 'inputFile', length = 256 )
-    inputFile.meta['tip'] = 'input file to run gulp'
+    inputfile = pyre.db.varcharArray( name = 'inputfile', length = 256 )
+    inputfile.meta['tip'] = 'input file to run gulp'
 
 
 

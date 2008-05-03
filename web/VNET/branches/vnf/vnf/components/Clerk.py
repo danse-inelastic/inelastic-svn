@@ -986,6 +986,10 @@ class HierarchyRetriever:
         return matter
     
     
+    def onGulpScatteringKernel(self, gulpScatteringKernel):
+        return gulpScatteringKernel
+    
+    
     def onPolyCrystal(self, record):
         return record
     
