@@ -96,12 +96,6 @@ class Sample(Actor):
 #            arguments = {'form-received': formcomponent.name },
 #            )
 
-        p.text = [action_link(
-        actionRequireAuthentication(
-        'sampleInput', director.sentry,
-        label = 'Add a new sample'),  director.cgihome
-        )]
-
         return page  
 
 

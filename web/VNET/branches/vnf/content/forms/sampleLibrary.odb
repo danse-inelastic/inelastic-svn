@@ -1,0 +1,95 @@
+# -*- Python -*-
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                   Jiao Lin
+#                      California Institute of Technology
+#                        (C) 2007  All Rights Reserved
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+
+from vnf.components.Form import Form as base
+from vnf.components.PyHtmlTable import PyHtmlTable
+from vnf.components.Actor import actionRequireAuthentication, action_link
+
+
+class Form( base ):
+
+    class Inventory( base.Inventory ):
+
+        import pyre.inventory as inv
+#        kernel = inv.str('kernel',default='gulp')
+#        kernel.meta['tip'] = 'type of kernel'
+        
+        selected_kernel_id = inv.str( 'kernel_id' )
+
+    def expand(self, form):
+        '''expand an existing form with fields from this component'''
+        prefix = formactor_action_prefix
+
+        director = self.director
+        clerk = director.clerk
+        scatterers = clerk.indexScatterers().values()
+        scatterers = [ clerk.getHierarchy(scatterer) for scatterer in scatterers]
+        samples = scatterers
+            
+        p = form.paragraph()
+        numSamples = len(samples)
+        columns = ['Id', 'Short description','Cartesian lattice', 'Fractional coordinates',        
+        'Atom symbols', 'Shape name', 'Shape parameters']
+#        columns = ['Sample Name', 'Texture','Creator','Date Created','Id']
+#        matterColumns=['Matter Description','Cartesian Lattice','Atom Positions']
+#        shapeColumns=['Shape Description','Cartesian Lattice','Atom Positions']
+        numColumns=len(columns)#scatteringKernels[0].getNumColumns()
+
+        t=PyHtmlTable(numSamples,numColumns, {'width':'400','border':2,'bgcolor':'white'})
+        for colNum, col in enumerate(columns):
+            t.setc(0,colNum,col)
+#        for row in range(numSamples):
+#            colNum=0
+#            for name in samples[row].getColumnNames():
+        for row, sample in enumerate( samples ):
+            #first put in the radio button
+            selection = "<input type='radio' name='actor.form-received.kernel_id' value="+sample.id+" id='radio'/>"
+            t.setc(row+1, 0, selection)
+            for colNum, colName in enumerate( columns ):
+                value = sample.getColumnValue(colName)
+                if colName == 'short_description':
+                    link = action_link(
+                        actionRequireAuthentication(
+                        'sample',
+                        director.sentry,
+                        label = value,
+                        routine = 'sampleInput'
+                        ),  director.cgihome
+                        )
+                    value = link
+                t.setc(row+1,colNum+1,value)
+        p.text = [t.return_html()]
+        
+        p = form.paragraph()
+        p.text = [action_link(
+        actionRequireAuthentication(
+        'sampleInput', director.sentry,
+        label = 'Add a new sample'),  director.cgihome),'<br>']
+        
+
+    def processUserInputs(self):
+        'process user input '
+        return self.inventory.kernel
+
+
+#formactor_action_prefix = 'actor.form-received' # assumed actor is a form actor
+from vnf.components.DBObjectForm import formactor_action_prefix
+
+def form(): return Form( 'selectkernel' )
+
+
+# version
+__id__ = "$Id$"
+
+# End of file 

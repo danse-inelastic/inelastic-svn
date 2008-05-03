@@ -50,7 +50,6 @@ class Form( base ):
         t = PyHtmlTable(numScatteringKernels, len(columnTitles), {'width':'400','border':2,'bgcolor':'white'})
         for colNum, col in enumerate(columnTitles):
             t.setc(0,colNum,col)
-            
         #name = '%s.%s' % (formactor_action_prefix, 'kernel_id')    
         for row, sk in enumerate(scatteringKernels):
             #first put in the radio button
@@ -85,7 +84,7 @@ class Form( base ):
         'neutronexperimentwizard', 
         director.sentry,
         label = 'Add a new scattering kernel',  
-        routine=''),
+        routine='selectkernel'),
         director.cgihome
         ),
         '<br>']
