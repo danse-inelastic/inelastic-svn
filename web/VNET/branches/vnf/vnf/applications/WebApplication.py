@@ -67,7 +67,7 @@ class WebApplication(Base):
         if self.debug:
             from configurationSaver import toPml
             from os import environ
-            user = environ['USER']
+            user = environ.get('USER') or 'webserver'
             toPml(self, '/tmp/main-debug-%s.pml' % user)
         super(WebApplication, self).main(*args, **kwds)
         return
