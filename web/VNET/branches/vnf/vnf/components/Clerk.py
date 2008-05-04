@@ -231,6 +231,39 @@ class Clerk(Component):
         return self._getRecordByID( table, id )
 
 
+    def makeShape(self, type):
+        '''create a shape pointer db record and a solid shape instance
+        shape pointer --> solid shape instance
+        type is the type of the solid shape instance
+        return the shape pointer
+        '''
+        #create the solid shape instance
+        module = __import__( 'vnf.dom.%s' % type, {}, {}, [''] )
+        table = getattr( module, type )
+        shape = self.new_dbobject( table )
+
+        #create the pointer
+        from vnf.dom.Shape import Shape
+        shapeptr = self.new_dbobject( Shape )
+        shapeptr.type = type
+        shapeptr.reference = shape.id
+        self.updateRecord( shapeptr )
+        
+        return shapeptr
+
+
+    def destroyShape(self, shape):
+        '''destroy a shape pointer
+
+        It not only delete the pointer record, but also the
+        db record of the solid shape that this pointer points to.
+        '''
+        shape = self.getHierarchy( shape )
+        self.deleteRecord( shape.realshape )
+        self.deleteRecord( shape )
+        return
+
+
     def newInstrumentConfiguration(self, name):
         '''create new instrument configuration
         name: name of instrument
@@ -835,45 +868,58 @@ class HierarchyRetriever:
 
     def onNeutronExperiment(self, experiment):
         instrument_id = experiment.instrument_id
-        configured_instrument = self.clerk.getConfiguredInstrument( instrument_id )
-        configure_instrument = self(configured_instrument)
-        experiment.instrument = configured_instrument
+        if empty_id( instrument_id ):
+            instrument = None
+        else:
+            configured_instrument = self.clerk.getConfiguredInstrument(
+                instrument_id )
+            configure_instrument = self(configured_instrument)
+            instrument = configured_instrument
+            pass # endif
 
         sampleassembly_id = experiment.sampleassembly_id
-        if sampleassembly_id == '' or sampleassembly_id == 'None':
-            experiment.sampleassembly = None
-            return experiment
-        
-        sampleassembly = self.clerk.getSampleAssembly( sampleassembly_id )
-        sampleassembly = self(sampleassembly)
+        if empty_id(sampleassembly_id):
+            sampleassembly = None
+        else:        
+            sampleassembly = self.clerk.getSampleAssembly( sampleassembly_id )
+            sampleassembly = self(sampleassembly)
+            pass # endif
+
+        experiment.instrument = instrument
         experiment.sampleassembly = sampleassembly
         return experiment
 
 
     def onConfiguredInstrument(self, configured):
         instrument_id = configured.instrument_id
+        if empty_id(instrument_id):
+            # if instrument is not specified, configuration is not
+            # meaningful
+            configured.instrument = None
+            configured.configuration = None
+            return configured
+
         instrument = self.clerk.getInstrument( instrument_id )
         instrument = self(instrument)
 
         configuration_id = configured.configuration_id
-        if configuration_id in ['None', None, '']:
+        if empty_id(configuration_id):
             # if configuration is not explicit,
             # it will be explicitly stored in the instrument table.
             # be sure that this 'instrument' (actually configuration)
             # could contain
             # less components than the original template instrument.
             # it could contain no component too.
-            
+            configuration = None
             # create a new instrument record
-            from vnf.dom.Instrument import Instrument
-            instrument = self.clerk.new_ownedobject( Instrument )
-            configuration_id = configured.configuration_id = instrument.id
-            self.clerk.updateRecord( configured )
-            pass # endif
-
-        configuration = self.clerk.getInstrumentConfiguration(
-            instrument_id, configuration_id )
-        configuration = self(configuration)
+            #from vnf.dom.Instrument import Instrument
+            #instrument = self.clerk.new_ownedobject( Instrument )
+            #configuration_id = configured.configuration_id = instrument.id
+            #self.clerk.updateRecord( configured )
+        else:
+            configuration = self.clerk.getInstrumentConfiguration(
+                instrument_id, configuration_id )
+            configuration = self(configuration)
 
         configured.instrument = instrument
         configured.configuration = configuration
@@ -938,17 +984,17 @@ class HierarchyRetriever:
 
     def onConfiguredScatterer(self, configured):
         scatterer_id = configured.scatterer_id
-        scatterer = self.clerk.getScatterer( scatterer_id )
-        scatterer = self(scatterer)
+        if empty_id(scatterer_id):
+            scatterer = None
+        else:
+            scatterer = self.clerk.getScatterer( scatterer_id )
+            scatterer = self(scatterer)
         configured.scatterer = scatterer
 
         configuration_id = configured.configuration_id
         if empty_id( configuration_id ): configuration = None
         else:
-            #configuration table is that of the real scatterer
-            realscatterer = scatterer.realscatterer
-            table = realscatterer.__class__
-            configuration = self.clerk._getRecordByID( table, configuration_id )
+            configuration = self.clerk.getScatterer( configuration_id )
             configuration = self(configuration)
             pass # endif
         configured.configuration = configuration
@@ -966,10 +1012,20 @@ class HierarchyRetriever:
 #        return scatterer
 
     def onScatterer(self, scatterer):
-        matter = self.clerk.getMatter(scatterer.matter_id )
-        matter = self(matter)
-        shape = self.clerk.getShape(scatterer.shape_id)
-        shape = self(shape)
+        matter_id =  scatterer.matter_id
+        if empty_id( matter_id ):
+            matter = None
+        else:
+            matter = self.clerk.getMatter(matter_id )
+            matter = self(matter)
+
+        shape_id = scatterer.shape_id
+        if empty_id(shape_id):
+            shape = None
+        else:
+            shape = self.clerk.getShape(shape_id)
+            shape = self(shape)
+        
         scatterer.shape = shape
         scatterer.matter = matter
     

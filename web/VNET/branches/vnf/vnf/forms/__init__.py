@@ -11,9 +11,16 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
-def form():
-    import vnf.forms
-    return vnf.forms.block()
+
+def block():
+    from Block import Block
+    return Block()
+
+
+def configureneutronscatterer( formname, mattertype, shapetype ):
+    from ConfigureNeutronScatterer import form
+    return form( formname, mattertype, shapetype )
+
 
 # version
 __id__ = "$Id$"

@@ -34,7 +34,7 @@ class ScattererConfigurationApplyer:
         # if it exists
         if configuration is None: return
 
-        matter = configuration.matter_id
+        matter_id = configuration.matter_id
         if not empty_id(matter_id):
             # need implementation here
             pass
@@ -48,6 +48,7 @@ class ScattererConfigurationApplyer:
 default_applyer = ScattererConfigurationApplyer
 
 
+from misc import empty_id
 
 # version
 __id__ = "$Id$"

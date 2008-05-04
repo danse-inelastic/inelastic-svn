@@ -11,9 +11,9 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
-def form():
-    import vnf.forms
-    return vnf.forms.block()
+
+from vnf.components.DBObjectForm import DBObjectForm, InputProcessingError, formactor_action_prefix
+
 
 # version
 __id__ = "$Id$"

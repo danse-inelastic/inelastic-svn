@@ -11,9 +11,12 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
+
 def form():
     import vnf.forms
-    return vnf.forms.block()
+    return vnf.forms.configureneutronscatterer(
+        'configurepolycrystalblock', 'PolyCrystal', 'Block' )
+
 
 # version
 __id__ = "$Id$"

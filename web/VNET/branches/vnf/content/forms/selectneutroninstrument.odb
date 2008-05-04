@@ -67,10 +67,8 @@ class Form( base ):
             value = self.inventory.experiment_id )
         instruments = director.clerk.indexInstruments()
         instruments = instruments.itervalues()
-        username = director.sentry.username
         instrument_templates = filter(
-            lambda instrument:
-            instrument.template and instrument.creator == username,
+            lambda instrument: instrument.template,
             instruments )
         
         entries = [

@@ -459,7 +459,7 @@ class NeutronExperimentWizard(base):
 #        document.description = ''
 #        document.byline = 'byline?'
 
-    def configure_sample(self, director):
+    def configure_sample(self, director, errors = None):
         try:
             page = director.retrieveSecurePage( 'neutronexperimentwizard' )
         except AuthenticationError, err:
@@ -488,12 +488,16 @@ class NeutronExperimentWizard(base):
         assert len(samples)==1, 'there should be only 1 sample in sample assembly %r' % sampleassembly.short_description
         sample = samples[0]
 
-        #
-        assert not empty_id(sample.scatterer_id)
+        #get descendennts
+        sample = director.clerk.getHierarchy( sample )
+        assert sample.scatterer is not None
 
         #In this step we obtain configuration of sample
-        
-        formcomponent = self.retrieveFormToShow( 'configureneutronscatterer' )
+        formname = 'configure%s%s' % (
+            sample.scatterer.matter.realmatter.__class__.__name__.lower(),
+            sample.scatterer.shape.realshape.__class__.__name__.lower(),
+            )
+        formcomponent = self.retrieveFormToShow(formname)
         formcomponent.inventory.id = sample.id
         formcomponent.director = director
         
@@ -514,7 +518,7 @@ class NeutronExperimentWizard(base):
         action_formfields( action, form )
 
         # expand the form with fields of the data object that is being edited
-        formcomponent.expand( form )
+        formcomponent.expand( form, errors = errors )
 
         # run button
         submit = form.control(name="submit", type="submit", value="Continue")
@@ -529,7 +533,13 @@ class NeutronExperimentWizard(base):
         except AuthenticationError, err:
             return err.page
 
-        self.processFormInputs(director)
+        try:
+            self.processFormInputs(director)
+        except InputProcessingError, err:
+            errors = err.errors
+            self.form_received = None
+            director.routine = 'configure_sample'
+            return self.configure_sample( director, errors = errors )            
 
         experiment = director.clerk.getNeutronExperiment(
             self.inventory.id )
@@ -815,6 +825,11 @@ class NeutronExperimentWizard(base):
         except AuthenticationError, err:
             return err.page        
         
+        routine = director.routine = 'view'
+        actor = director.retrieveActor( 'neutronexperiment')
+        director.configureComponent( actor )
+        actor.inventory.id = self.inventory.id
+        return getattr(actor, routine)( director )
         return page
     
 

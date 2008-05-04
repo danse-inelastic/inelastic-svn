@@ -48,7 +48,7 @@ class Form( base ):
         if errors:
             p = form.paragraph( cls = 'error' )
             p.text = [
-                'The form you filled out contained some errros.',
+                'The form you filled out contained some errors.',
                 'Please look through the values you have entered',
                 'and correct any mistakes.',
                 ]
