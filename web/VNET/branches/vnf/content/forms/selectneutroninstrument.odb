@@ -106,7 +106,6 @@ class Form( base ):
         configured_instrument.instrument_id = self.inventory.instrument_id
         director.clerk.updateRecord( configured_instrument )
 
-        experiment.status = 'instrument selected'
         director.clerk.updateRecord( experiment )
         return
 

@@ -115,8 +115,9 @@ class NeutronExperimentWizard(base):
         if experiment.short_description in ['', None, 'None']:
             return self.start( director )
 
-        experiment.status = 'name assigned'
-        director.clerk.updateRecord( experiment )
+        if experiment.status == 'started':
+            experiment.status = 'partially configured'
+            director.clerk.updateRecord( experiment )
         return self.select_instrument( director )
     
 
@@ -257,7 +258,6 @@ class NeutronExperimentWizard(base):
             return self.select_instrument( director )
 
         # update experiment status
-        experiment.status = 'instrument configured'
         director.clerk.updateRecord( experiment )
         
         director.routine = 'sample_environment'
@@ -336,7 +336,6 @@ class NeutronExperimentWizard(base):
             director.clerk.updateRecord( experiment )
         else:
             assert experiment.sampleenvironment_id == sampleenvironment.id
-        experiment.status = 'sample environment configured'
         director.clerk.updateRecord( experiment )
 
         director.routine = 'sample_preparation'
@@ -564,7 +563,6 @@ class NeutronExperimentWizard(base):
         
         sample_prototype = director.clerk.getScatterer(prototype_id)
         
-        experiment.status = 'sample prepared'
         director.clerk.updateRecord( experiment )
 
         return self.configure_scatteringkernels(director)
@@ -791,46 +789,21 @@ class NeutronExperimentWizard(base):
         experiment.status = 'constructed'
         director.clerk.updateRecord( experiment )
         
-        return self.showExperimentStatusPage(director)
+        return self.showExperimentStatus(director)
 
 
-    def submit_job(self, job, director):
-        #not yet implemented correctly
-        server = job.server
-        server_record = director.clerk.getServer( server )
-
-        try:
-            schedule(job, director)
-        except Exception, err:
-            import traceback
-            self._debug.log( traceback.format_exc() )
-            document = main.document( title = 'Job not submitted' )
-            p = document.paragraph()
-            p.text = [
-                'Failed to submit job %s to %s' % (
-                job.id, server_record.server, ),
-                ]
-            return page
-
-        job.status = 'submitted'
-        director.clerk.updateRecord( job )
-        # check status of job
-        check( job, director )
-        return
-
-
-    def showExperimentStatusPage(self,director):
+    def showExperimentStatus(self,director):
         try:
             page = director.retrieveSecurePage( 'neutronexperimentwizard' )
         except AuthenticationError, err:
             return err.page        
-        
+
+        # just a redirection
         routine = director.routine = 'view'
         actor = director.retrieveActor( 'neutronexperiment')
         director.configureComponent( actor )
         actor.inventory.id = self.inventory.id
         return getattr(actor, routine)( director )
-        return page
     
 
     def verify_experiment_submission1(self, director):
@@ -967,6 +940,7 @@ class NeutronExperimentWizard(base):
                 pass # endif
             continue
 
+        self._footer( document, director )
         return page
         
 
