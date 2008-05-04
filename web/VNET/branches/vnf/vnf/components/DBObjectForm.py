@@ -58,7 +58,7 @@ class DBObjectForm( base ):
         if errors:
             p = form.paragraph( cls = 'error' )
             p.text = [
-                'The form you filled out contained some errros.',
+                'The form you filled out contained some errors.',
                 'Please look through the values you have entered',
                 'and correct any mistakes.',
                 ]
@@ -82,23 +82,36 @@ class DBObjectForm( base ):
         return
 
 
-    def processUserInputs(self):
-        'process user inputs and save them to db'
+    def processUserInputs(self, commit = True):
+        '''process user inputs and save them to db
+        commit: if true, commit to database record. 
+        '''
 
+        # prepare a record to accept user inputs
         if self.inventory.id == '':
             record = self.createRecord()
         else:
             record = self.getRecord( )
-        
+
+        # transfer user inputs to db record
         for prop in self.parameters:
             setattr(
                 record, prop,
                 self.inventory.getTraitValue( prop ) )
             continue
 
-        clerk = self.director.clerk
-        clerk.updateRecord( record )
-
+        # commit if requested
+        if commit:
+            director = self.director
+            if empty_id(record.id):
+                #if record is new, create a new db record
+                id = new_id( director )
+                record.id = id
+                director.clerk.newRecord( record )
+            else:
+                #otherwise, update the record
+                director.clerk.updateRecord( record )
+            pass # endif
         return record
 
 
@@ -111,12 +124,10 @@ class DBObjectForm( base ):
 
 
     def createRecord(self):
-        director = self.director
-        id = new_id( director )
-        exec 'from vnf.dom.%s import %s as table' % (self.DBTable, self.DBTable)
+        type = self.DBTable
+        module = __import__( 'vnf.dom.%s' % type, {}, {}, [''] )
+        table = getattr( module, type )
         record = table()
-        record.id = id
-        director.clerk.newRecord( record )
         return record
 
     pass # end of DBObjectForm
@@ -128,7 +139,7 @@ def _combine(text):
         return ' '.join( text )
     raise NotImplementedError, text
 
-from vnf.components.misc import new_id
+from misc import new_id, empty_id
 
 formactor_action_prefix = 'actor.form-received' # assumed actor is a form actor
 
