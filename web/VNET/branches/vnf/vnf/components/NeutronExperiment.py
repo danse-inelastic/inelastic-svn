@@ -86,16 +86,30 @@ class NeutronExperiment(base):
         main = page._body._content._main
 
         # populate the main column
-        document = main.document(title='List of experiments')
+        document = main.document(title='Experiments')
         document.description = ''
         document.byline = 'byline?'
+
+        #
+        p = document.paragraph()
+        action = actionRequireAuthentication(
+            label = 'this wizard',
+            actor = 'neutronexperimentwizard',
+            routine = 'start',
+            sentry = director.sentry,
+            )
+        link = action_link( action, director.cgihome )
+        p.text = [
+            'You can perform various kinds of neutron experiments in',
+            'this virtual neutron facility.',
+            'To start, you can plan a new experiment by following %s.' % link,
+            ]
 
         # retrieve id:record dictionary from db
         clerk = director.clerk
         experiments = clerk.indexNeutronExperiments()
-        
+        # make a list of all experiments
         listexperiments( experiments.values(), document, director )
-        
         return page
 
 
@@ -283,11 +297,10 @@ def listexperiments( experiments, document, director ):
 
     n = len(experiments)
 
-    p.text = [ 'There %s %s experiment%s: ' %
-               (present_be(n), n, plural(n))
-                ]
+    p.text = [ 'Here is a list of experiments you have planned or run:' ]
 
-    formatstr = '%(index)s: %(viewlink)s (%(status)s) (%(deletelink)s)'
+
+    formatstr = '%(index)s: %(viewlink)s (%(status)s) is a measurement of %(sample)r in %(instrument)r (%(deletelink)s)'
     actor = 'neutronexperiment'
     container = experiments
 
@@ -312,10 +325,28 @@ def listexperiments( experiments, document, director ):
             )
         deletelink = action_link( action,  director.cgihome )
 
+        element = director.clerk.getHierarchy( element )
+        if element.instrument is None \
+               or element.instrument.instrument is None:
+            action = actionRequireAuthentication(
+                'neutronexperimentwizard', sentry = director.sentry,
+                label = 'select instrument',
+                routine = 'select_instrument',
+                id = element.id,
+                )
+            link = action_link( action, director.cgihome )
+            instrument = link
+        else:
+            instrument = element.instrument.instrument
+            instrument = instrument.short_description
+            pass # end if
+        
         subs = {'index': i+1,
                 'viewlink': viewlink,
                 'deletelink': deletelink,
                 'status': element.status,
+                'instrument': instrument,
+                'sample': 'sample',
                 }
 
         p.text += [
@@ -397,6 +428,9 @@ def view_instrument_plain(instrument, form):
         continue
     p.text.append( '</UL>' )
     return
+
+
+from misc import empty_id
 
 # version
 __id__ = "$Id$"
