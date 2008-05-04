@@ -424,7 +424,6 @@ class NeutronExperimentWizard(base):
         self._footer( form, director )
         return page           
         
-        
 #        try:
 #            page = director.retrieveSecurePage( 'neutronexperimentwizard' )
 #        except AuthenticationError, err:
@@ -450,7 +449,7 @@ class NeutronExperimentWizard(base):
         document.description = ''
         document.byline = '<a href="http://danse.us">DANSE</a>'        
         
-        formcomponent = self.retrieveFormToShow( 'sampleLibrary')
+        formcomponent = self.retrieveFormToShow( 'sampleInput')
         formcomponent.director = director
         # build the form 
         form = document.form(name='', action=director.cgihome)
@@ -470,18 +469,7 @@ class NeutronExperimentWizard(base):
         #self.processFormInputs(director)
         self._footer( form, director )
         return page   
-    
-    
-#        try:
-#            page = director.retrieveSecurePage( 'neutronexperimentwizard' )
-#        except AuthenticationError, err:
-#            return err.page        
-#        main = page._body._content._main
-#        # populate the main column
-#        document = main.document(
-#            title='Neutron Experiment Wizard: create new sample')
-#        document.description = ''
-#        document.byline = 'byline?'
+
 
     def configure_sample(self, director, errors = None):
         try:
