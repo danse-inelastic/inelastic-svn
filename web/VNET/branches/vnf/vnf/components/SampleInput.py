@@ -32,15 +32,15 @@ class SampleInput(Actor):
         document = main.document(title='Sample input')
     
         # build the sample input form
-        atoms = document.form(name='atoms', action=app.cgihome)
+        form = document.form(name='form', action=director.cgihome)
         
         p = document.paragraph()
 #        p.text = ['''Upload xyz file''']
         
-        name = atoms.text(id='name', name='name', label='Sample Name')
+        name = form.text(id='name', name='name', label='Sample Name')
         name.help = 'An identifying name for this sample.'
         
-#        atomFile = atoms.file(id='atomFile', name='atomFile', label='Xyz file containing atoms')
+#        atomFile = form.file(id='atomFile', name='atomFile', label='Xyz file containing form')
 #        atomFile.help = 'Lattice vectors a,b,c should be on comment line in form a_x a_y a_z b_x b_y b_z c_x c_y c_z'
             
         p = document.paragraph()
@@ -50,7 +50,7 @@ class SampleInput(Actor):
         p.text = ['Input sample shape<br>',
                   'Height, width, depth<label><input name="textfield" type="text" id="textfield" value="1.0 1.0 1.0" /></label>']
         
-        submit = atoms.control(name="submit", type="submit", value="submit")
+        submit = form.control(name="submit", type="submit", value="submit")
         
         
         return page 
