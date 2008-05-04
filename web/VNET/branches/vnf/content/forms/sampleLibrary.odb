@@ -38,16 +38,14 @@ class Form( base ):
         samples = scatterers
             
         p = form.paragraph()
-        numSamples = len(samples)
-        columns = ['Id', 'Short description','Cartesian lattice', 'Fractional coordinates',        
-        'Atom symbols', 'Shape name', 'Shape parameters']
-#        columns = ['Sample Name', 'Texture','Creator','Date Created','Id']
-#        matterColumns=['Matter Description','Cartesian Lattice','Atom Positions']
-#        shapeColumns=['Shape Description','Cartesian Lattice','Atom Positions']
-        numColumns=len(columns)#scatteringKernels[0].getNumColumns()
+        columns = ['matter.realmatter.chemical_formula', 'matter.realmatter.cartesian_lattice', 
+                   'matter.realmatter.atom_symbols','matter.realmatter.fractional_coordinates']#, 
+                   #'shape.realshape.short_description', 'shape.realshape.short_description',]
+        columnTitles = ['Select for neutron experiment', 'Chemical formula', 'Cartesian lattice', 'Atom symbols', 
+                        'Fractional coordinates']#, 'Shape name', 'Shape parameters']
 
-        t=PyHtmlTable(numSamples,numColumns, {'width':'400','border':2,'bgcolor':'white'})
-        for colNum, col in enumerate(columns):
+        t=PyHtmlTable(len(samples), len(columnTitles), {'width':'400','border':2,'bgcolor':'white'})
+        for colNum, col in enumerate(columnTitles):
             t.setc(0,colNum,col)
 #        for row in range(numSamples):
 #            colNum=0
@@ -56,15 +54,16 @@ class Form( base ):
             #first put in the radio button
             selection = "<input type='radio' name='actor.form-received.kernel_id' value="+sample.id+" id='radio'/>"
             t.setc(row+1, 0, selection)
-            for colNum, colName in enumerate( columns ):
-                value = sample.getColumnValue(colName)
-                if colName == 'short_description':
+            for colNum, col in enumerate( columns ):
+                attrs=col.split('.')
+                value = getattr(getattr(getattr(sample, attrs[0]),attrs[1]),attrs[2])
+                if col == 'short_description':
                     link = action_link(
                         actionRequireAuthentication(
-                        'sample',
+                        'neutronexperimentwizard',
                         director.sentry,
                         label = value,
-                        routine = 'sampleInput'
+                        routine = 'create_new_sample'
                         ),  director.cgihome
                         )
                     value = link
@@ -74,8 +73,10 @@ class Form( base ):
         p = form.paragraph()
         p.text = [action_link(
         actionRequireAuthentication(
-        'sampleInput', director.sentry,
-        label = 'Add a new sample'),  director.cgihome),'<br>']
+        'neutronexperimentwizard', director.sentry,
+        label = 'Add a new sample',
+        routine = 'create_new_sample'
+        ),  director.cgihome),'<br>']
         
 
     def processUserInputs(self):
