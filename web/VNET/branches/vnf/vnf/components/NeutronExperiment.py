@@ -191,6 +191,32 @@ class NeutronExperiment(base):
         return page
 
 
+    def run(self, director):
+        
+        #not yet implemented correctly
+        server = job.server
+        server_record = director.clerk.getServer( server )
+
+        try:
+            schedule(job, director)
+        except Exception, err:
+            import traceback
+            self._debug.log( traceback.format_exc() )
+            document = main.document( title = 'Job not submitted' )
+            p = document.paragraph()
+            p.text = [
+                'Failed to submit job %s to %s' % (
+                job.id, server_record.server, ),
+                ]
+            return page
+
+        job.status = 'submitted'
+        director.clerk.updateRecord( job )
+        # check status of job
+        check( job, director )
+        return
+
+
     def selectinstrument(self, director):
         try:
             page, document = self._head( director )
@@ -238,27 +264,57 @@ class NeutronExperiment(base):
 
     def _view_constructed(self, experiment, document, director):
         p = document.paragraph()
-        action = actionRequireAuthentication(
-            label = 'start running',
-            actor = 'neutronexperimentwizard',
-            routine = 'submit_experiment',
-            sentry = director.sentry,
-            id = self.inventory.id)
-        link = action_link( action, director.cgihome )
         p.text = [
             'Experiment %r has been constructed.' % experiment.short_description,
-            'You can get it %s.' % link,
             ]
-
-        p = document.paragraph()
-        p.text = [
-            'Details of configuration of this experiment can be',
+        p.text += [
+            'Configuration details of this experiment can be',
             'found out in the following tree view.',
+            'Please review them before you start the experiment.',
             ]
         experiment = director.clerk.getHierarchy( experiment )
         from TreeViewCreator import create
         view = create( experiment )
         document.contents.append( view )
+
+        p = document.paragraph()
+        action = actionRequireAuthentication(
+            label = 'here',
+            actor = 'neutronexperimentwizard',
+            routine = 'start',
+            sentry = director.sentry,
+            id = self.inventory.id)
+        link = action_link( action, director.cgihome )
+        p.text = [
+            'If you need to make changes to this experiment,',
+            'please click %s.' % link,
+            ]
+
+        p = document.paragraph()
+        action = actionRequireAuthentication(
+            label = 'here',
+            actor = 'neutronexperiment',
+            routine = 'run',
+            sentry = director.sentry,
+            id = self.inventory.id)
+        link = action_link( action, director.cgihome )
+        p.text = [
+            'If you are done with experiment configuration,',
+            'please click %s to start this experiment.' % link,
+            ]
+
+        p = document.paragraph()
+        action = actionRequireAuthentication(
+            label = 'here',
+            actor = 'neutronexperiment',
+            routine = 'delete',
+            sentry = director.sentry,
+            id = self.inventory.id)
+        link = action_link( action, director.cgihome )
+        p.text = [
+            'To delete this experiment, please click %s.' % link,
+            ]
+        
         return
 
 
