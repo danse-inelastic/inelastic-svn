@@ -146,7 +146,7 @@ class UnitCell:
 
     def addSite(self, site, siteId=None):
         """Adds a site to the unit cell."""
-        assert ( isinstance(site, Site) )
+        #assert ( isinstance(site, Site) )
 
         if siteId.__class__ is not "string".__class__ :
             raise ValueError, 'site Id should be a string!'
@@ -346,6 +346,19 @@ class UnitCell:
 ##         if(abs(det) < 1e-6):
 ##             raise ValueError, 'determinant smaller than 1e-6: degenerate reference tetrahedron.'
         
+    def bringFractionalPositionIntoCell(self, fracpos):
+        """Brings a fractional position (x,y,z) 'into' the unit cell,
+        i.e.: (x,y,z)->(x',y',z') such that x,y,z in [0,1( """
+        pos = np.array(fracpos)
+        assert (len(pos) == 3)
+        for i in range(3):
+            if pos[i]<0:
+                while pos[i]<0:
+                    pos[i] += 1
+            if pos[i]>=1:
+                while pos[i]>=1:
+                    pos[i] -= 1
+        return pos
 
     def cartesianPositionInLattice(self, siteId, latticeVector):
         """Returns the cartesian position vector from the origin
