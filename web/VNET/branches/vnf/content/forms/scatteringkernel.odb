@@ -77,7 +77,7 @@ class Form( base ):
                         )
                     value = link
                 t.setc(row+1,colNum+1,value)
-        p.text = [t.return_html()]
+        p.text += [t.return_html()]
         
         p = form.paragraph()
         p.text = [action_link(
