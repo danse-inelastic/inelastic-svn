@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp spec="1.0+"
+      codebase="http://fireball.phys.wvu.edu/cod">
+    <information>
+        <title>j2ssh</title>
+        <vendor>Lewis Group</vendor>
+        <homepage href="http://fireball.phys.wvu.edu/cod" />
+        <description>j2ssh</description>
+    </information>
+    <offline-allowed/>
+    <security>
+    	<all-permissions/>
+	</security>
+    <resources>
+        <j2se version="1.5+" />
+        <jar href="j2ssh.jar" />
+    </resources>
+    <component-desc main-class="com.sshtools.j2ssh.SshClient.class" />
+</jnlp>
