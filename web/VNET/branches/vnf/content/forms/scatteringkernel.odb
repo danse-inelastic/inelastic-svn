@@ -42,6 +42,7 @@ class Form( base ):
         scatteringKernels = [ clerk.getHierarchy(scatteringKernel) for scatteringKernel in scatteringKernels]
             
         p = form.paragraph()
+        p.text = ['Select a scattering kernel from the list below']
         numScatteringKernels = len(scatteringKernels)
         columns = ['id', 'reference', 'short_description', 'type', 'creator', 'date' ]
         columnTitles = ["Select as scattering kernel",'Short description', 'Type of scattering kernel', 'Creator', 'Date of creation']
