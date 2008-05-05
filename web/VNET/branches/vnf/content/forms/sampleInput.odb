@@ -55,10 +55,10 @@ class Form( base ):
 #        atomFile.help = 'Lattice vectors a,b,c should be on comment line in form a_x a_y a_z b_x b_y b_z c_x c_y c_z'
          
         b=form.button(id='cz', name='%s.cod' % prefix, label="Import material from database",
-            embeddedText='<a href="/java/cod.jnlp">Crystallography Open Database</a>')
+            embeddedText='<a href="/java/cod2.jnlp">Crystallography Open Database</a>')
             
         p = form.paragraph()
-        p.text = ['''Download material from <a href="/java/cod.jnlp">Crystallography Open Database</a>''']
+        p.text = ['''Download material from <a href="/java/cod2.jnlp">Crystallography Open Database</a>''']
         
         p = form.paragraph()
         p.text = ['Input sample shape<br>',
