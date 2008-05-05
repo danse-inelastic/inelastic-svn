@@ -36,6 +36,8 @@ class NeutronExperiment(base):
 
     status = pyre.db.varchar( name = 'status', length = 16, default = '' )
 
+    expected_results = pyre.db.varcharArray( name = 'expected_results', length = 128 )
+
 # version
 __id__ = "$Id$"
 

@@ -796,7 +796,8 @@ class NeutronExperimentWizard(base):
         from Job import jobpath
         path = jobpath( experiment.job_id )
         
-        from NeutronExperimentSimulationRunBuilder import Builder
+        #from NeutronExperimentSimulationRunBuilder import Builder
+        from NeutronExperimentSimulationRunBuilder_hack import Builder
         Builder(path).render(experiment)
 
         experiment.status = 'constructed'

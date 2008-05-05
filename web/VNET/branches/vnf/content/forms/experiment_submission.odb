@@ -117,6 +117,7 @@ class Form( base ):
             from vnf.dom.Job import Job
             job = director.clerk.new_dbobject( Job )
             job_id = job.id
+            job.owner = director.sentry.username
             # attach to experiment
             experiment.job_id = job_id
             # update to db

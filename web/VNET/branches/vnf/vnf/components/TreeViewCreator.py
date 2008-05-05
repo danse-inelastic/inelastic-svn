@@ -42,8 +42,17 @@ class TreeViewCreator:
 
 
     def onNeutronExperiment(self, experiment):
-        elements = [ experiment.instrument, experiment.sampleassembly ]
+        elements = [ experiment.instrument, experiment.sampleassembly]#, experiment.job ]
         return self.onContainer( experiment, elements )
+
+
+    def onJob(self, job):
+        #elements = [ job.computation_server ]
+        #return self.onContainer( job, elements )
+        label = '%s (%s)' % (
+            element.short_description, element.__class__.__name__ )
+        branch = factory.treeview.branch( label )
+        return self.onElement( job )
 
 
     def onConfiguredInstrument(self, configured_instrument):

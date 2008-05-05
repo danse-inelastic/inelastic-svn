@@ -64,6 +64,7 @@ EXPORT_PYTHON_MODULES = \
 	ScatteringKernel2.py \
 	Server.py \
 	Shape.py \
+	SimulationResult.py \
 	SingleCrystal.py \
 	Table.py \
 	User.py \
