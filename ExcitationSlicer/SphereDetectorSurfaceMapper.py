@@ -13,7 +13,9 @@ class SphereDetectorSurfaceMapper(DetectorSurfaceMapper):
     def __init__(self, Ei=50, Etransfer=0, sphRadius=4,
                  phiMin=0, phiMax=120,
                  thetaMax=120, thetaMin=60):
-        DetectorSurfaceMapper.__init__(self, Ei=50, Etransfer=0)
+        #DetectorSurfaceMapper.__init__(self, Ei=50, Etransfer=0)
+        self.Ei = Ei
+        self.Etransfer = Etransfer
         self.sphRadius = sphRadius
         self.phiMin = phiMin
         self.phiMax = phiMax
@@ -72,7 +74,8 @@ class SphereDetectorSurfaceMapper(DetectorSurfaceMapper):
 
     def getKi(self):
         """Returns incident neutron wavevector MAGNITUDE k_i (in Angstroems-1 if E_i is in meV)."""
-        ki = np.sqrt(self.getEi() / 2.072)
+        Ei = self.Ei
+        ki = np.sqrt(Ei / 2.072)
         return ki
 
     def getKiVector(self):
