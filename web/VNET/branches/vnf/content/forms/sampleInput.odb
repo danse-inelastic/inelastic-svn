@@ -48,14 +48,14 @@ class Form( base ):
         cx = box.text(id='cx', name='%s.cx' % prefix, label='c: (x)')        
         cy = box.text(id='cy', name='%s.cy' % prefix, label='(y)')   
         cz = box.text(id='cz', name='%s.cz' % prefix, label='(z)')  
-        listOfAtoms=form.textarea(id='listOfAtoms', name='%s.listOfAtoms' % prefix, label='List of atoms (H  0.0  0.0  0.5)',
-                                  rows=40)
+        listOfAtoms=form.textarea(id='listOfAtoms', name='%s.listOfAtoms' % prefix, 
+                                  label='List of atoms (H  0.0  0.0  0.5)',rows=20)
         
 #        atomFile = form.file(id='atomFile', name='atomFile', label='Xyz file containing form')
 #        atomFile.help = 'Lattice vectors a,b,c should be on comment line in form a_x a_y a_z b_x b_y b_z c_x c_y c_z'
          
         b=form.button(id='cz', name='%s.cod' % prefix, label="Import material from database",
-            value='<a href="/java/cod.jnlp">Crystallography Open Database</a>')
+            embeddedText='<a href="/java/cod.jnlp">Crystallography Open Database</a>')
             
         p = form.paragraph()
         p.text = ['''Download material from <a href="/java/cod.jnlp">Crystallography Open Database</a>''']
