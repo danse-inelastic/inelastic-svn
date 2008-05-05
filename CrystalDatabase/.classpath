@@ -3,15 +3,11 @@
 	<classpathentry kind="src" path=""/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="deployable/Jmol.jar"/>
-	<classpathentry kind="lib" path="deployable/Jodaf_1.1.jar"/>
 	<classpathentry kind="lib" path="deployable/pcCommunicate.jar"/>
 	<classpathentry kind="lib" path="deployable/mysql-connector-java-5.0.7-bin.jar"/>
 	<classpathentry kind="lib" path="deployable/j2ssh.jar"/>
-	<classpathentry kind="lib" path="deployable/GULP.jar"/>
-	<classpathentry kind="lib" path="deployable/RB-sharedschema.jar"/>
 	<classpathentry kind="lib" path="deployable/jeplite-0.8.7a-bin.jar"/>
 	<classpathentry kind="lib" path="deployable/commons-logging.jar"/>
-	<classpathentry kind="lib" path="deployable/Fireball.jar"/>
 	<classpathentry kind="lib" path="deployable/J7Zip.jar"/>
 	<classpathentry kind="lib" path="deployable/PeriodicTable.jar"/>
 	<classpathentry kind="output" path=""/>
