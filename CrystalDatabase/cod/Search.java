@@ -18,8 +18,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import javafireball.controller.JavaFireball;
-import javagulp.controller.JavaGULP;
+//import javafireball.controller.JavaFireball;
+//import javagulp.controller.JavaGULP;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -36,7 +36,7 @@ import javax.swing.JTextField;
 
 import org.openscience.jmol.app.Jmol;
 
-import cseo.jodaf.client.FilePackage;
+//import cseo.jodaf.client.FilePackage;
 
 public class Search extends JPanel {
 	private static final long serialVersionUID = 7887252066467721114L;
@@ -66,8 +66,8 @@ public class Search extends JPanel {
 	private JButton btnSave = null;
 	private JButton btnSearch = null;
 	private JButton	btnJmol = new JButton("Export to Jmol");
-	private JButton	btnGULP = new JButton("Export to GULP");
-	private JButton	btnFireball = new JButton("Export to Fireball");
+//	private JButton	btnGULP = new JButton("Export to GULP");
+//	private JButton	btnFireball = new JButton("Export to Fireball");
 	private JScrollPane scrollPane = null;
 	private JTable tblResult = null;
 	private JTextArea txtQuery = null;
@@ -110,10 +110,10 @@ public class Search extends JPanel {
 		btnConstraints.gridx = 6;
 		btnConstraints.gridy = 3;
 		add(btnJmol, btnConstraints);
-		btnConstraints.gridy = 4;
-		add(btnGULP, btnConstraints);
-		btnConstraints.gridy = 5;
-		add(btnFireball, btnConstraints);
+//		btnConstraints.gridy = 4;
+//		add(btnGULP, btnConstraints);
+//		btnConstraints.gridy = 5;
+//		add(btnFireball, btnConstraints);
 		
 		btnJmol.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -175,123 +175,123 @@ public class Search extends JPanel {
 				}
 			}
 		});
-		btnGULP.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				ArrayList<String[]> args = new ArrayList<String[]>();
-
-				int[] indices = tblResult.getSelectedRows();
-				if (indices.length == 0) {
-					JOptionPane.showMessageDialog(null, "Please select one or more structures to export.");
-					return;
-				}
-				String fileName = null;
-				String db = "cod";
-				if (radpcod.isSelected())
-					db = "pcod";
-				
-				ArrayList<ArrayList<String>> species = new ArrayList<ArrayList<String>>();
-				ArrayList<ArrayList<double[]>> coordinates = new ArrayList<ArrayList<double[]>>();
-				ArrayList<String> names = new ArrayList<String>();
-				
-				for (int i=0; i < indices.length; i++) {
-					try {
-						//download file
-						fileName = "http://fireball.phys.wvu.edu/cod/" + db + "/" + fileNumbers[indices[i]] + ".cif";
-						StringBuffer contents=Main.getFileContents(fileName);
-						names.add(fileNumbers[indices[i]]);
-						//System.out.println(fileName);
-						
-						//parse it and generate atoms
-						CifParser cp = new CifParser(contents.toString());
-						cp.parseCoordinates("_atom_site_fract_x");
-						cp.parseOperators();
-						cp.removeDuplicates();
-						
-						//add parameters
-						String[] params = new String[7];
-						for (int j=1; j < params.length; j++)
-							params[j] = "" + tblResult.getValueAt(indices[i], j-1);
-						args.add(params);
-						
-						if (cp.newSpecies.size() == 0)
-							species.add(cp.species);
-						else
-							species.add(cp.newSpecies);
-						if (cp.newCoordinates.size() == 0)
-							coordinates.add(cp.coordinates);
-						else
-							coordinates.add(cp.newCoordinates);
-					} catch (FileNotFoundException e1) {
-						JOptionPane.showMessageDialog(null, db + " does not contain a cif file for this entry (" + fileName+").  Please try another.");
-						e1.printStackTrace();
-					} catch (Exception e2) {
-						JOptionPane.showMessageDialog(null, db + "Error encountered while processing " + fileName);
-						e2.printStackTrace();
-					}
-				}
-				//open GULP
-				JavaGULP.main(species, coordinates, args, names);
-			}
-		});
-		btnFireball.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				ArrayList<String[]> args = new ArrayList<String[]>();
-
-				int[] indices = tblResult.getSelectedRows();
-				if (indices.length == 0) {
-					JOptionPane.showMessageDialog(null, "Please select one or more structures to export.");
-					return;
-				}
-				String fileName = null;
-				String db = "cod";
-				if (radpcod.isSelected())
-					db = "pcod";
-				
-				ArrayList<String> filenames = new ArrayList<String>();
-				ArrayList<ArrayList<String>> species = new ArrayList<ArrayList<String>>();
-				ArrayList<ArrayList<double[]>> coordinates = new ArrayList<ArrayList<double[]>>();
-				
-				for (int i=0; i < indices.length; i++) {
-					try {
-						filenames.add(fileNumbers[indices[i]]);
-						
-						//download file
-						fileName = "http://fireball.phys.wvu.edu/cod/" + db + "/" + fileNumbers[indices[i]] + ".cif";
-						StringBuffer contents=Main.getFileContents(fileName);
-						//System.out.println(fileName);
-						
-						//parse it and generate atoms
-						CifParser cp = new CifParser(contents.toString());
-						cp.parseCoordinates("_atom_site_fract_x");
-						cp.parseOperators();
-						cp.removeDuplicates();
-						
-						//add parameters
-						String[] params = new String[6];
-						for (int j=0; j < params.length; j++)
-							params[j] = "" + tblResult.getValueAt(indices[i], j);
-						args.add(params);
-						
-						if (cp.newSpecies.size() == 0)
-							species.add(cp.species);
-						else
-							species.add(cp.newSpecies);
-						if (cp.newCoordinates.size() == 0)
-							coordinates.add(cp.coordinates);
-						else
-							coordinates.add(cp.newCoordinates);
-					} catch (FileNotFoundException e1) {
-						JOptionPane.showMessageDialog(null, db + " does not contain a cif file for this entry (" + fileName+").  Please try another.");
-						e1.printStackTrace();
-					} catch (Exception e2) {
-						JOptionPane.showMessageDialog(null, db + "Error encountered while processing " + fileName);
-						e2.printStackTrace();
-					}
-				}
-				//open Fireball
-				JavaFireball.main(filenames, species, coordinates, args);
-			}
-		});
+//		btnGULP.addMouseListener(new MouseAdapter() {
+//			public void mouseClicked(MouseEvent e) {
+//				ArrayList<String[]> args = new ArrayList<String[]>();
+//
+//				int[] indices = tblResult.getSelectedRows();
+//				if (indices.length == 0) {
+//					JOptionPane.showMessageDialog(null, "Please select one or more structures to export.");
+//					return;
+//				}
+//				String fileName = null;
+//				String db = "cod";
+//				if (radpcod.isSelected())
+//					db = "pcod";
+//				
+//				ArrayList<ArrayList<String>> species = new ArrayList<ArrayList<String>>();
+//				ArrayList<ArrayList<double[]>> coordinates = new ArrayList<ArrayList<double[]>>();
+//				ArrayList<String> names = new ArrayList<String>();
+//				
+//				for (int i=0; i < indices.length; i++) {
+//					try {
+//						//download file
+//						fileName = "http://fireball.phys.wvu.edu/cod/" + db + "/" + fileNumbers[indices[i]] + ".cif";
+//						StringBuffer contents=Main.getFileContents(fileName);
+//						names.add(fileNumbers[indices[i]]);
+//						//System.out.println(fileName);
+//						
+//						//parse it and generate atoms
+//						CifParser cp = new CifParser(contents.toString());
+//						cp.parseCoordinates("_atom_site_fract_x");
+//						cp.parseOperators();
+//						cp.removeDuplicates();
+//						
+//						//add parameters
+//						String[] params = new String[7];
+//						for (int j=1; j < params.length; j++)
+//							params[j] = "" + tblResult.getValueAt(indices[i], j-1);
+//						args.add(params);
+//						
+//						if (cp.newSpecies.size() == 0)
+//							species.add(cp.species);
+//						else
+//							species.add(cp.newSpecies);
+//						if (cp.newCoordinates.size() == 0)
+//							coordinates.add(cp.coordinates);
+//						else
+//							coordinates.add(cp.newCoordinates);
+//					} catch (FileNotFoundException e1) {
+//						JOptionPane.showMessageDialog(null, db + " does not contain a cif file for this entry (" + fileName+").  Please try another.");
+//						e1.printStackTrace();
+//					} catch (Exception e2) {
+//						JOptionPane.showMessageDialog(null, db + "Error encountered while processing " + fileName);
+//						e2.printStackTrace();
+//					}
+//				}
+//				//open GULP
+//				JavaGULP.main(species, coordinates, args, names);
+//			}
+//		});
+//		btnFireball.addMouseListener(new MouseAdapter() {
+//			public void mouseClicked(MouseEvent e) {
+//				ArrayList<String[]> args = new ArrayList<String[]>();
+//
+//				int[] indices = tblResult.getSelectedRows();
+//				if (indices.length == 0) {
+//					JOptionPane.showMessageDialog(null, "Please select one or more structures to export.");
+//					return;
+//				}
+//				String fileName = null;
+//				String db = "cod";
+//				if (radpcod.isSelected())
+//					db = "pcod";
+//				
+//				ArrayList<String> filenames = new ArrayList<String>();
+//				ArrayList<ArrayList<String>> species = new ArrayList<ArrayList<String>>();
+//				ArrayList<ArrayList<double[]>> coordinates = new ArrayList<ArrayList<double[]>>();
+//				
+//				for (int i=0; i < indices.length; i++) {
+//					try {
+//						filenames.add(fileNumbers[indices[i]]);
+//						
+//						//download file
+//						fileName = "http://fireball.phys.wvu.edu/cod/" + db + "/" + fileNumbers[indices[i]] + ".cif";
+//						StringBuffer contents=Main.getFileContents(fileName);
+//						//System.out.println(fileName);
+//						
+//						//parse it and generate atoms
+//						CifParser cp = new CifParser(contents.toString());
+//						cp.parseCoordinates("_atom_site_fract_x");
+//						cp.parseOperators();
+//						cp.removeDuplicates();
+//						
+//						//add parameters
+//						String[] params = new String[6];
+//						for (int j=0; j < params.length; j++)
+//							params[j] = "" + tblResult.getValueAt(indices[i], j);
+//						args.add(params);
+//						
+//						if (cp.newSpecies.size() == 0)
+//							species.add(cp.species);
+//						else
+//							species.add(cp.newSpecies);
+//						if (cp.newCoordinates.size() == 0)
+//							coordinates.add(cp.coordinates);
+//						else
+//							coordinates.add(cp.newCoordinates);
+//					} catch (FileNotFoundException e1) {
+//						JOptionPane.showMessageDialog(null, db + " does not contain a cif file for this entry (" + fileName+").  Please try another.");
+//						e1.printStackTrace();
+//					} catch (Exception e2) {
+//						JOptionPane.showMessageDialog(null, db + "Error encountered while processing " + fileName);
+//						e2.printStackTrace();
+//					}
+//				}
+//				//open Fireball
+//				JavaFireball.main(filenames, species, coordinates, args);
+//			}
+//		});
 
 		
 		scrollPane = new JScrollPane();
