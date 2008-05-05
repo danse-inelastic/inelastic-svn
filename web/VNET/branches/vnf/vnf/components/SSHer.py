@@ -54,6 +54,28 @@ class SSHer(base):
         return
 
 
+    def getfile( self, server, remotepath, localdir ):
+        'retrieve file from remote server to local path'
+        address = server.server
+        username = server.username
+        known_hosts = self.inventory.known_hosts
+        private_key = self.inventory.private_key
+        
+        cmd = "scp -o 'StrictHostKeyChecking=no' -o 'UserKnownHostsFile=%s' -i %s %s@%s:%s %s" % (
+            known_hosts, private_key, username, address, remotepath, localdir)
+        self._info.log( 'execute: %s' % cmd )
+
+        env = {}
+        failed, output, error = spawn( cmd, env = env )
+        if failed:
+            msg = '%r failed: %s' % (
+                cmd, error )
+            raise RemoteAccessError, msg
+
+        remotedir, filename = os.path.split( remotepath )
+        return os.path.join( localdir, filename )
+
+
     def execute( self, cmd, server, remotepath ):
         'execute command in the given directory of the given server'
 

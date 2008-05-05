@@ -125,7 +125,7 @@ class NeutronExperiment(base):
 
         #see if the experiment is constructed or not. if not
         #ask the wizard to do the editing.
-        if experiment.status not in ['constructed', 'running', 'finished']:
+        if experiment.status in ['started', 'partially configured']:
             director.routine = 'submit_experiment'
             actor = director.retrieveActor( 'neutronexperimentwizard')
             director.configureComponent( actor )
@@ -142,7 +142,7 @@ class NeutronExperiment(base):
         status = experiment.status
         method = '_view_%s' % status
         method = getattr(self, method)
-        method( experiment, document, director )
+        method( document, director )
         return page
 
 
@@ -192,29 +192,36 @@ class NeutronExperiment(base):
 
 
     def run(self, director):
-        
-        #not yet implemented correctly
-        server = job.server
-        server_record = director.clerk.getServer( server )
-
         try:
-            schedule(job, director)
+            page = director.retrieveSecurePage( 'neutronexperiment' )
+        except AuthenticationError, err:
+            return err.page
+        
+        experiment = director.clerk.getNeutronExperiment(
+            self.inventory.id)
+        job_id = experiment.job_id
+        if empty_id(job_id):
+            raise RuntimeError, "job not yet established"
+        
+        job_id  = experiment.job_id
+        job = director.clerk.getJob( job_id )
+        
+        try:
+            Scheduler.schedule(job, director)
+            experiment.status = 'submitted'
         except Exception, err:
             import traceback
-            self._debug.log( traceback.format_exc() )
-            document = main.document( title = 'Job not submitted' )
-            p = document.paragraph()
-            p.text = [
-                'Failed to submit job %s to %s' % (
-                job.id, server_record.server, ),
-                ]
-            return page
+            experiment.status = 'submissionfailed'
+            job.error = traceback.format_exc()
 
-        job.status = 'submitted'
+        # update db
         director.clerk.updateRecord( job )
+        director.clerk.updateRecord( experiment )
+        
         # check status of job
-        check( job, director )
-        return
+        Scheduler.check( job, director )
+
+        return self.view( director )
 
 
     def selectinstrument(self, director):
@@ -262,21 +269,16 @@ class NeutronExperiment(base):
         return
 
 
-    def _view_constructed(self, experiment, document, director):
-        p = document.paragraph()
-        p.text = [
-            'Experiment %r has been constructed.' % experiment.short_description,
-            ]
-        p.text += [
-            'Configuration details of this experiment can be',
-            'found out in the following tree view.',
-            'Please review them before you start the experiment.',
-            ]
+    def _add_review(self, document, director):
+        experiment = director.clerk.getNeutronExperiment(self.inventory.id)
         experiment = director.clerk.getHierarchy( experiment )
         from TreeViewCreator import create
         view = create( experiment )
         document.contents.append( view )
+        return
 
+
+    def _add_revision_sentence(self, document, director):
         p = document.paragraph()
         action = actionRequireAuthentication(
             label = 'here',
@@ -289,7 +291,10 @@ class NeutronExperiment(base):
             'If you need to make changes to this experiment,',
             'please click %s.' % link,
             ]
+        return
 
+
+    def _add_run_sentence(self, document, director):
         p = document.paragraph()
         action = actionRequireAuthentication(
             label = 'here',
@@ -302,7 +307,10 @@ class NeutronExperiment(base):
             'If you are done with experiment configuration,',
             'please click %s to start this experiment.' % link,
             ]
+        return
 
+
+    def _add_delete_sentence(self, document, director):
         p = document.paragraph()
         action = actionRequireAuthentication(
             label = 'here',
@@ -314,7 +322,124 @@ class NeutronExperiment(base):
         p.text = [
             'To delete this experiment, please click %s.' % link,
             ]
+        return
+    
+
+    def _view_constructed(self, document, director):
+        experiment = director.clerk.getNeutronExperiment(self.inventory.id)
+        p = document.paragraph()
+        p.text = [
+            'Experiment %r has been constructed.' % experiment.short_description,
+            ]
+        p.text += [
+            'Configuration details of this experiment can be',
+            'found out in the following tree view.',
+            'Please review them before you start the experiment.',
+            ]
+
+        self._add_review( document, director )
+        self._add_revision_sentence( document, director )
+        self._add_run_sentence( document, director )
+        self._add_delete_sentence( document, director )
+        return
+
+
+    def _view_submissionfailed(self, document, director):
+        p = document.paragraph( )
+        p.text = [
+            'We have tried to start experiment %r for you but failed.' % experiment.short_description,
+            'This could be due to network error.',
+            'The error message returned from computation server is:',
+            ]
+
+        experiment = director.clerk.getNeutronExperiment(self.inventory.id)
+        experiment = director.clerk.getHierarchy( experiment )
+        p = document.paragraph(cls = 'error'  )
+        p.text = [ experiment.job.error ]
+
+        p = document.paragraph()
+        p.text += [
+            'Configuration details of this experiment can be',
+            'found out in the following tree view.',
+            ]
+
+        self._add_review( document, director )
+        self._add_revision_sentence( document, director )
+        self._add_run_sentence( document, director )
+        self._add_delete_sentence( document, director )
+        return 
+
+
+    def _view_submitted(self, document, director):
+        experiment = director.clerk.getNeutronExperiment(self.inventory.id)
+        experiment = director.clerk.getHierarchy( experiment )
+
+        panel = document.form(
+            name='null',
+            legend= 'Summary',
+            action='')
+            
+        p = panel.paragraph()
+        p.text = [
+            'Experiment %r was started %s on server %r, using %s nodes.' % (
+            experiment.short_description, experiment.job.timeStart,
+            experiment.job.computation_server.short_description,
+            experiment.job.numprocessors,
+            ),
+            ]
+        p.text += [
+            'Configuration details of this experiment can be',
+            'found out in the following tree view.',
+            ]
+        self._add_review( panel, director )
+        self._add_results( document, director )
+        return
+
+
+    def _add_results(self, document, director):
+        experiment = director.clerk.getNeutronExperiment( self.inventory.id )
+
+        # data path
+        job_id = experiment.job_id
+        from Job import jobpath
+        path = jobpath( job_id )
+
+        # list entries in the job directory in the remote server
+        job = director.clerk.getJob( job_id )
+        serverid = job.server
+        server = director.clerk.getServer( serverid )
+        remotedir = Scheduler.remote_jobpath(server, job) 
+        failed, output, error = director.csaccessor.execute(
+            'ls', server, remotedir )
+        if failed:
+            raise RuntimeError, 'unable to list directory %s in server %s' % (
+                remotedir, server.server)
+        output_files = output.split()
+
+        document = document.form(
+            name='null',
+            legend= 'Data',
+            action='')
         
+        # loop over expected results and see if any of them is available
+        # and post it
+        expected = experiment.expected_results
+        import os
+        for item in expected:
+            filename = item
+            if filename in output_files:
+                f = os.path.join( path, item )
+                localcopy = director.csaccessor.getfile(
+                    server, os.path.join(remotedir, filename), path)
+                self._post_result( localcopy, document, director )
+            continue
+        return
+
+
+    def _post_result(self, resultfile, document, director):
+        drawer = ResultDrawer( )
+        experiment = director.clerk.getNeutronExperiment( self.inventory.id )
+        drawer.draw( experiment, resultfile, document, director )
         return
 
 
@@ -485,6 +610,61 @@ def view_instrument_plain(instrument, form):
     p.text.append( '</UL>' )
     return
 
+
+
+class ResultDrawer:
+
+    def draw(self, experiment, result, document, director):
+        #special place to save plots
+        plots_path = 'images/plots'
+
+        #
+        results = director.clerk.getSimulationResults( experiment )
+        labels = [ r.label for r in results ]
+
+        if result in labels:
+            #if result already saved, just fetch that
+            id = filter( lambda r: r.label == result, results )[0].id
+        else:
+            #otherwise, we need to have a new record in simulatoinresults table
+            #and also need to save result in the special place
+            src = result
+            #simulationresults record
+            from vnf.dom.SimulationResult import SimulationResult
+            result_record = director.clerk.new_dbobject(SimulationResult)
+            result_record.label = result
+            result_record.simulation_type = 'NeutronExperiment'
+            result_record.simulation_id = experiment.id
+            director.clerk.updateRecord( result_record )
+
+            id = result_record.id
+            # copy file to a special place
+            filepath1 = os.path.join( plots_path, '%s.png' % id )
+            dest = os.path.join( 'html', filepath1 )
+            #copy
+            import shutil
+            shutil.copyfile( src, dest )
+            
+        filepath1 = os.path.join( plots_path, '%s.png' % id )
+            
+        #create view
+        #hack
+        path, name = os.path.split( result )
+        name, ext = os.path.splitext( name )
+        p = document.paragraph()
+        p.text = [
+            name,
+            ]
+        p = document.paragraph()
+        p.text = [
+            '<img src="%s/%s">' % ( director.home, filepath1 ),
+            ]
+        return
+
+
+#switch pylab backend to ps so that it does not need interactivity
+import os, spawn
+import Scheduler
 
 from misc import empty_id
 

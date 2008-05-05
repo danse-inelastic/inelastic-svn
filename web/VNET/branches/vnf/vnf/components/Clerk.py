@@ -196,6 +196,17 @@ class Clerk(Component):
 #        from vnf.dom.ScatteringKernel2 import ScatteringKernel2
 #        return self._getAll( ScatteringKernel2, where )
 
+
+    def getSimulationResults(self, record):
+        type = record.__class__.__name__
+        id = record.id
+        from vnf.dom.SimulationResult import SimulationResult as table
+        records = self.db.fetchall(
+            table, where = "simulation_type='%s' and simulation_id='%s'" % (
+            type, id) )
+        return records
+    
+
     def getUser(self, username):
         '''retrieve user of given username'''
         from vnf.dom.User import User
@@ -875,7 +886,7 @@ class HierarchyRetriever:
                 instrument_id )
             configure_instrument = self(configured_instrument)
             instrument = configured_instrument
-            pass # endif
+        experiment.instrument = instrument
 
         sampleassembly_id = experiment.sampleassembly_id
         if empty_id(sampleassembly_id):
@@ -883,11 +894,34 @@ class HierarchyRetriever:
         else:        
             sampleassembly = self.clerk.getSampleAssembly( sampleassembly_id )
             sampleassembly = self(sampleassembly)
-            pass # endif
-
-        experiment.instrument = instrument
         experiment.sampleassembly = sampleassembly
+
+        job_id = experiment.job_id
+        if empty_id(job_id):
+            job = None
+        else:
+            job = self.clerk.getJob( job_id )
+            job = self(job)
+
+        experiment.job = job
         return experiment
+
+
+    def onJob(self, job):
+        server = job.server
+        if empty_id(server):
+            computation_server= None
+        else:
+            computation_server = self.clerk.getServer( server )
+            computation_server = self(computation_server)
+        job.computation_server = computation_server
+        job.short_description = job.jobName
+        return job
+
+
+    def onServer(self, server):
+        server.short_description = '%s@%s' % (server.server, server.location)
+        return server
 
 
     def onConfiguredInstrument(self, configured):
