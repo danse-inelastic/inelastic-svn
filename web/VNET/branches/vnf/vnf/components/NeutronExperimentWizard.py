@@ -413,6 +413,7 @@ class NeutronExperimentWizard(base):
             sentry = director.sentry,
             routine = 'configure_scatteringkernels',
             label = '',
+            id=self.inventory.id,
             arguments = {'form-received': formcomponent.name },
             )
         from vnf.weaver import action_formfields
@@ -459,6 +460,7 @@ class NeutronExperimentWizard(base):
             sentry = director.sentry,
             routine = 'configure_scatteringkernels',
             label = '',
+            id=self.inventory.id,
             arguments = {'form-received': formcomponent.name },
             )
         from vnf.weaver import action_formfields
@@ -604,6 +606,7 @@ class NeutronExperimentWizard(base):
             sentry = director.sentry,
             routine = 'submit_experiment',
             label = '',
+            id=self.inventory.id,
             arguments = {'form-received': formcomponent.name },
             )
         from vnf.weaver import action_formfields
@@ -640,6 +643,7 @@ class NeutronExperimentWizard(base):
             sentry = director.sentry,
             routine = 'onSelect',
             label = '',
+            id=self.inventory.id,
             arguments = {'form-received': formcomponent.name },
             )
         from vnf.weaver import action_formfields
@@ -676,6 +680,7 @@ class NeutronExperimentWizard(base):
             sentry = director.sentry,
             routine = 'kernel_generator',
             label = '',
+            id=self.inventory.id,
             arguments = {'form-received': formcomponent.name },
             )
         from vnf.weaver import action_formfields
