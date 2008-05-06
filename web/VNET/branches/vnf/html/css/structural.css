@@ -15,6 +15,7 @@
 #body-wrapper { 
     margin: 0;
     padding: 0;
+    /*background: url(../images/arcs.png) bottom right no-repeat;*/
 }
 
 
@@ -131,6 +132,7 @@
 
 #page-content {
     width: 100% !important;
+    background: url(../images/arcs.png) bottom right no-repeat;
 }
 
 #page-columnLeft {
