@@ -33,7 +33,11 @@ def main():
 # main
 if __name__ == '__main__':
     # invoke the application shell
-    main()
+    try: main()
+    except:
+        import traceback
+        f = open( '/tmp/debug-vnf.log', 'w')
+        print >> f, traceback.format_exc()
 
 
 # version
