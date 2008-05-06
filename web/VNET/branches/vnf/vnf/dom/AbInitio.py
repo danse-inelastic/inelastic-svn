@@ -42,12 +42,6 @@ class AbInitio(DbObject):
     qGrid = pyre.db.list('qGrid', default=[1,1,1])
     qGrid.meta['tip'] = 'Q grid for phonon calculation'       
 
-    width = pyre.db.real( name = 'width', default = 0.05 )
-    height = pyre.db.real( name = 'height', default = 0.1 )
-    thickness = pyre.db.real( name = 'thickness', default = 0.002 )
-    
-    pass # end of Block
-
 
 # version
 __id__ = "$Id$"
