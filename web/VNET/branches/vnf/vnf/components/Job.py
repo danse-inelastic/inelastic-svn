@@ -158,7 +158,8 @@ class Job(base):
                 ]
             return page
             
-        if record.status != 'finished': status = check( record, director )
+        if record.status not in ['created', 'finished']:
+            status = check( record, director )
 
         props = record.getColumnNames()
         lines = ['%s=%s' % (prop, getattr(record, prop) ) for prop in props]
