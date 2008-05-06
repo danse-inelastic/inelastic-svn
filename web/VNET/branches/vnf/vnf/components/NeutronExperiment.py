@@ -374,6 +374,47 @@ class NeutronExperiment(base):
         experiment = director.clerk.getNeutronExperiment(self.inventory.id)
         experiment = director.clerk.getHierarchy( experiment )
 
+        #refresh script
+        p = document.paragraph()
+        p.text = [
+            '''
+        <script>
+        <!--
+
+        /*
+        Auto Refresh Page with Time script
+        By JavaScript Kit (javascriptkit.com)
+        Over 200+ free scripts here!
+        */
+
+        //enter refresh time in "minutes:seconds" Minutes should range from 0 to inifinity. Seconds should range from 0 to 59
+        var limit="0:10"
+
+        var parselimit=limit.split(":")
+        parselimit=parselimit[0]*60+parselimit[1]*1
+
+        function beginrefresh(){
+            if (parselimit==1)
+            window.location.reload()
+            else{
+            parselimit-=1
+            curmin=Math.floor(parselimit/60)
+            cursec=parselimit%60
+            if (curmin!=0)
+            curtime=curmin+" minutes and "+cursec+" seconds left until page refresh!"
+            else
+        curtime=cursec+" seconds left until page refresh!"
+        window.status=curtime
+        setTimeout("beginrefresh()",1000)
+        }
+        }
+
+        window.onload=beginrefresh
+        //-->
+        </script>
+        ''',
+            ]
+        
         panel = document.form(
             name='null',
             legend= 'Summary',
@@ -393,6 +434,40 @@ class NeutronExperiment(base):
             ]
         self._add_review( panel, director )
         self._add_results( document, director )
+
+        #update status
+        if experiment.job.status == 'finished': experiment.status = 'finished'
+        director.clerk.updateRecord( experiment )
+        return
+
+
+    def _view_finished(self, document, director):
+        experiment = director.clerk.getNeutronExperiment(self.inventory.id)
+        experiment = director.clerk.getHierarchy( experiment )
+
+        panel = document.form(
+            name='null',
+            legend= 'Summary',
+            action='')
+            
+        p = panel.paragraph()
+        p.text = [
+            'Experiment %r was started %s on server %r, using %s nodes.' % (
+            experiment.short_description, experiment.job.timeStart,
+            experiment.job.computation_server.short_description,
+            experiment.job.numprocessors,
+            ),
+            ]
+        p.text += [
+            'Configuration details of this experiment can be',
+            'found out in the following tree view.',
+            ]
+        self._add_review( panel, director )
+        self._add_results( document, director )
+
+        #update status
+        if experiment.job.status == 'finished': experiment.status = 'finished'
+        director.clerk.updateRecord( experiment )
         return
 
 
