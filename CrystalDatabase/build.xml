@@ -67,13 +67,12 @@
 			<fileset dir="${build}">
 				<include name="cod/**" />
 			</fileset>
-			<fileset dir="." />
 		</jar>
 		<!-- sign all jars -->
-		<signjar jar="deployable/${app-name}.jar" keystore="vnf" alias="vnf" storepass="vnf" keypass="vnf"/>
-		<signjar jar="deployable/jeplite-0.8.7a-bin.jar" keystore="vnf" alias="vnf" storepass="vnf" keypass="vnf"/>
-		<signjar jar="deployable/Jmol.jar" keystore="vnf" alias="vnf" storepass="vnf" keypass="vnf"/>
-		<signjar jar="deployable/mysql-connector-java-5.0.7-bin.jar" keystore="vnf" alias="vnf" storepass="vnf" keypass="vnf"/>
+		<signjar jar="deployable/${app-name}.jar" keystore="/home/jbk/vnf" alias="vnf" storepass="vnf" keypass="vnf"/>
+		<signjar jar="deployable/jeplite-0.8.7a-bin.jar" keystore="/home/jbk/vnf" alias="vnf" storepass="vnf" keypass="vnf"/>
+		<signjar jar="deployable/Jmol.jar" keystore="/home/jbk/vnf" alias="vnf" storepass="vnf" keypass="vnf"/>
+		<signjar jar="deployable/mysql-connector-java-5.0.7-bin.jar" keystore="/home/jbk/vnf" alias="vnf" storepass="vnf" keypass="vnf"/>
 	</target>
 	
 	<target name="deploy-remote-trueblue" depends="package-trueblue">
