@@ -29,50 +29,25 @@ class Form( base ):
 
     def  expand(self, form):
         '''expand an existing form with fields from this component'''
-        prefix = formactor_action_prefix
         p = form.paragraph()
-        p.text = ['''Input a new material by hand or by downloading from the Crystallography Open Database.''']
         
-        name = form.text(id='name', name='name', label='Sample Name')
-        name.help = 'An identifying name for this sample.'
+        p.text = [action_href(actionRequireAuthentication(          
+            actor = 'neutronexperimentwizard', 
+            sentry = director.sentry,
+            routine = 'import_sample_from_db',
+            label = "Import material from the Crystallography Open Database",
+            id=self.inventory.id,
+            arguments = {'form-received': formcomponent.name },
+            ),app.cgihome)]
         
-        box = form.box()
-        ax = box.text(id='ax', name='%s.ax' % prefix, label='a: (x)')        
-        ay = box.text(id='ay', name='%s.ay' % prefix, label='(y)')   
-        az = box.text(id='az', name='%s.az' % prefix, label='(z)')  
-        box = form.box()
-        bx = box.text(id='bx', name='%s.bx' % prefix, label='b: (x)')        
-        by = box.text(id='by', name='%s.by' % prefix, label='(y)')   
-        bz = box.text(id='bz', name='%s.bz' % prefix, label='(z)')  
-        box = form.box()
-        cx = box.text(id='cx', name='%s.cx' % prefix, label='c: (x)')        
-        cy = box.text(id='cy', name='%s.cy' % prefix, label='(y)')   
-        cz = box.text(id='cz', name='%s.cz' % prefix, label='(z)')  
-        listOfAtoms=form.textarea(id='listOfAtoms', name='%s.listOfAtoms' % prefix, 
-                                  label='List of atoms (H  0.0  0.0  0.5)',rows=20)
-        
-#        atomFile = form.file(id='atomFile', name='atomFile', label='Xyz file containing form')
-#        atomFile.help = 'Lattice vectors a,b,c should be on comment line in form a_x a_y a_z b_x b_y b_z c_x c_y c_z'
-         
-        b=form.button(id='cz', name='%s.cod' % prefix, label="Import material from database",
-            embeddedText='<a href="/java/cod2.jnlp">Crystallography Open Database</a>')
-            
-        p = form.paragraph()
-        p.text = ['''Download material from <a href="/java/cod2.jnlp">Crystallography Open Database</a>''']
-        
-        p = form.paragraph()
-        p.text = ['Input sample shape<br>',
-                  'Height, width, depth<label><input name="textfield" type="text" id="textfield" value="1.0 1.0 1.0" /></label>']        
-        
-        
-
-    def processUserInputs(self):
-        'process user input '
-        return self.inventory.kernel
-
-
-#formactor_action_prefix = 'actor.form-received' # assumed actor is a form actor
-from vnf.components.DBObjectForm import formactor_action_prefix
+        p.text += [action_href(actionRequireAuthentication(          
+            actor = 'neutronexperimentwizard', 
+            sentry = director.sentry,
+            routine = 'create_sample_by_hand',
+            label = "Input the material manually",
+            id=self.inventory.id,
+            arguments = {'form-received': formcomponent.name },
+            ),app.cgihome)]   
 
 def form(): return Form( 'sampleInput' )
 
