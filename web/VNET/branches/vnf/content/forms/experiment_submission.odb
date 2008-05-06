@@ -117,7 +117,11 @@ class Form( base ):
             from vnf.dom.Job import Job
             job = director.clerk.new_dbobject( Job )
             job_id = job.id
+            #job's owner should be the submitter
             job.owner = director.sentry.username
+            job.status = 'created'
+            director.clerk.updateRecord( job )
+            
             # attach to experiment
             experiment.job_id = job_id
             # update to db
