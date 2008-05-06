@@ -15,6 +15,7 @@
 from vnf.components.Form import Form as base
 from vnf.components.PyHtmlTable import PyHtmlTable
 from vnf.components.Actor import actionRequireAuthentication, action_link
+from vnf.weaver import action_href
 
 
 class Form( base ):
@@ -27,8 +28,9 @@ class Form( base ):
         
         selected_kernel_id = inv.str( 'kernel_id' )
 
-    def  expand(self, form):
+    def  expand(self, form, experiment_id):
         '''expand an existing form with fields from this component'''
+        director = self.director
         p = form.paragraph()
         
         p.text = [action_href(actionRequireAuthentication(          
@@ -36,18 +38,14 @@ class Form( base ):
             sentry = director.sentry,
             routine = 'import_sample_from_db',
             label = "Import material from the Crystallography Open Database",
-            id=self.inventory.id,
-            arguments = {'form-received': formcomponent.name },
-            ),app.cgihome)]
+            id = self.experiment_id),app.cgihome)]
         
         p.text += [action_href(actionRequireAuthentication(          
             actor = 'neutronexperimentwizard', 
             sentry = director.sentry,
             routine = 'create_sample_by_hand',
             label = "Input the material manually",
-            id=self.inventory.id,
-            arguments = {'form-received': formcomponent.name },
-            ),app.cgihome)]   
+            id = self.experiment_id),app.cgihome)]   
 
 def form(): return Form( 'sampleInput' )
 
