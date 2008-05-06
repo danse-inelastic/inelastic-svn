@@ -13,12 +13,12 @@
 
 input {
     border-color: #8cacbb;  
-    color: Black;
-    background-color: white;
+    color: white;
+    background-color: black;
 }
 
 input.searchButton {
-    background-color: white;
+    background-color: black;
 }
 
 .visualClear {
@@ -37,7 +37,7 @@ input.searchButton {
 }
 
 .portlet h5 { 
-    background: #dee7ec;
+    background: #7777FF;
     border-color: #8cacbb;
 }
 
@@ -188,7 +188,9 @@ input.searchButton {
 }
 
 .formHelp:hover, .formfieldHelp:hover {
-    color: Black;
+    /*color: #7b7beb;*/
+    color: #fc7aee;
+    /*color: black;*/
 }
 
 .formControls {
@@ -196,6 +198,7 @@ input.searchButton {
 
 .error {
     /* Class for error indication in forms */
+    color: black;
     background-color: #ffce7b;
     border-color: #ffa500;
 }

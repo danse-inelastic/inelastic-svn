@@ -62,7 +62,7 @@
 
 #page-personaltools {
     /* Bar with personalized menu (user preferences, favorites etc) */
-    background-color: #dee7ec;
+    background-color: #302c3f;
     border-top-color: #8cacbb;
     border-bottom-color: #8cacbb;
     color: Black;
@@ -109,7 +109,7 @@
 }
 
 #page-footer {
-    background-color: #dee7ec;
+    background-color: #302c3f;
     border-top-color: #8cacbb;
     border-bottom-color: #8cacbb;
 }

@@ -15,7 +15,7 @@
 #body-wrapper { 
     margin: 0;
     padding: 0;
-    /*background: url(../images/arcs.png) bottom right no-repeat;*/
+    background: url(../images/arcs-detsys3.png) black center right no-repeat;
 }
 
 
@@ -95,8 +95,8 @@
     border-top-width: 1px;
     border-bottom-style: solid;
     border-bottom-width: 1px;
-    line-height: 1.3em;
-    padding: 0em 3em 0em 3em;
+    line-height: 0.6em;
+    padding: 0em 1em 0em 1em;
     margin: 0;
     text-align: right;
     text-transform: lowercase;
@@ -132,7 +132,6 @@
 
 #page-content {
     width: 100% !important;
-    background: url(../images/arcs.png) bottom right no-repeat;
 }
 
 #page-columnLeft {
@@ -172,8 +171,13 @@
     border-bottom: 1px solid;
     float: none;
     margin: 0em 0em 0em 0em;
-    padding: 0.5em 0em 1em 0em;
+    padding: 0.0em 0em 0.0em 0em;
     text-align: center;
+}
+
+#page-footer p{
+    font-size: 60%;
+    font-family: Times, "Times New Roman", serif;
 }
 
 #page-credits {

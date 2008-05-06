@@ -12,7 +12,7 @@
  */
 
 a {
-    color: #436976;
+    color: #c7f5d9;
     background-color: transparent;
 }
 
@@ -29,8 +29,8 @@ blockquote {
 }
 
 body {
-    color: Black;
-    background-color: White;
+    color: White;
+    background-color: Black;
 }
 
 code {
@@ -63,7 +63,7 @@ form {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    color: Black;
+    color: White;
     border-bottom-color: #8cacbb;
     background-color: transparent;
     text-shadow: #999999;
@@ -82,9 +82,9 @@ img {
 }
 
 input {
-    color: Black;
+    color: White;
     border-color: #8cacbb;  
-    background-color: white;
+    background-color: Black;
 }
 
 ins {
@@ -92,7 +92,7 @@ ins {
 }
 
 legend {
-    background: White;
+    background: transparent;
 }
 
 li {
@@ -102,9 +102,12 @@ ol {
 }
 
 p {
+    color: #BBBBBB;
 }
 
 p a {
+    /*color: #ac9cc3;*/
+    color: #63a668;
 }
 
 p a:visited {
