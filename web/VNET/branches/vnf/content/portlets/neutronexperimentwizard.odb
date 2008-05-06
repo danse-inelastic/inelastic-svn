@@ -116,6 +116,17 @@ def portlet(app):
     save_experiment.target = action_href(action, app.cgihome)
     save_experiment.icon = "images/link_icon.gif"
     save_experiment.type = "navItem"
+    
+    cancel = portlet.item(description="Cancel")
+    action = actionRequireAuthentication(
+            actor = 'neutronexperimentwizard',
+            routine = 'cancel',
+            id = app.actor.inventory.id,
+            sentry = app.sentry)
+    cancel.target = action_href(action, app.cgihome)
+    cancel.icon = "images/link_icon.gif"
+    cancel.type = "navItem"
+    
 
     routine = app.routine
     menu = routine2menu.get( routine )
