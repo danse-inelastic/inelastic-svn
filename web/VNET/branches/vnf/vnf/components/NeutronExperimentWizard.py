@@ -12,7 +12,7 @@
 
 from Actor import actionRequireAuthentication, action_link, AuthenticationError
 from FormActor import FormActor as base, InputProcessingError
-
+from vnf.weaver import action_href
 
 
 class NeutronExperimentWizard(base):
@@ -360,7 +360,7 @@ class NeutronExperimentWizard(base):
         document.byline = 'byline?'
         
         formcomponent = self.retrieveFormToShow( 'sample_preparation' )
-        formcomponent.inventory.experiment_id = self.inventory.id
+        formcomponent.experiment_id = self.inventory.id
         formcomponent.director = director
         
         # create form
@@ -422,7 +422,7 @@ class NeutronExperimentWizard(base):
         formcomponent.expand( form )
         submit = form.control(name='submit',type="submit", value="next")
         #self.processFormInputs(director)
-        self._footer( form, director )
+#        self._footer( form, director )
         return page           
         
 #        try:
@@ -447,28 +447,44 @@ class NeutronExperimentWizard(base):
         document = main.document(
             title='Neutron Experiment Wizard: Create a new sample')
         document.description = ''
-        document.byline = '<a href="http://danse.us">DANSE</a>'        
+        document.byline = '<a href="http://danse.us">DANSE</a>'   
         
-        formcomponent = self.retrieveFormToShow( 'sampleInput')
-        formcomponent.director = director
-        # build the form 
-        form = document.form(name='', action=director.cgihome)
-        # specify action
-        action = actionRequireAuthentication(          
+        p = document.paragraph()
+        
+        p.text = [action_href(actionRequireAuthentication(          
             actor = 'neutronexperimentwizard', 
             sentry = director.sentry,
-            routine = 'configure_scatteringkernels',
-            label = '',
-            id=self.inventory.id,
-            arguments = {'form-received': formcomponent.name },
-            )
-        from vnf.weaver import action_formfields
-        action_formfields( action, form )
-        # expand the form with fields of the data object that is being edited
-        formcomponent.expand( form )
-        submit = form.control(name='submit',type="submit", value="next")
-        #self.processFormInputs(director)
-        self._footer( form, director )
+            routine = 'import_sample_from_db',
+            label = "Import material from the Crystallography Open Database",
+            id = self.experiment_id), director.cgihome)]
+        
+        p.text += [action_href(actionRequireAuthentication(          
+            actor = 'neutronexperimentwizard', 
+            sentry = director.sentry,
+            routine = 'create_sample_by_hand',
+            label = "Input the material manually",
+            id = self.experiment_id), director.cgihome)]          
+             
+#        formcomponent = self.retrieveFormToShow( 'sampleInput')
+#        formcomponent.director = director
+#        # build the form 
+#        form = document.form(name='', action=director.cgihome)
+#        # specify action
+#        action = actionRequireAuthentication(          
+#            actor = 'neutronexperimentwizard', 
+#            sentry = director.sentry,
+#            routine = 'configure_scatteringkernels',
+#            label = '',
+#            id=self.inventory.id,
+#            arguments = {'form-received': formcomponent.name },
+#            )
+#        from vnf.weaver import action_formfields
+#        action_formfields( action, form )
+#        # expand the form with fields of the data object that is being edited
+#        formcomponent.expand( form ,self.inventory.id)
+#        submit = form.control(name='submit',type="submit", value="next")
+#        #self.processFormInputs(director)
+#        self._footer( form, director )
         return page  
     
     def import_sample_from_db(self, director):
