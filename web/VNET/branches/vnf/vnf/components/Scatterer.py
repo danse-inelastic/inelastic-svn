@@ -49,7 +49,7 @@ class Scatterer(base):
 
         # retrieve id:record dictionary from db
         clerk = director.clerk
-        scatterers = clerk.indexScatterers()
+        scatterers = clerk.indexScatterers( where = 'template="True"' )
         
         listscatterers( scatterers.values(), document, director )
         
