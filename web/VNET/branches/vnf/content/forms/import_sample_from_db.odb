@@ -43,7 +43,7 @@ class Form( base ):
         p.text=['Input the shape parameters for a flat plate sample']
         height = form.text(id='height', name='%s.height' % prefix, label='Height')        
         width = form.text(id='width', name='%s.width' % prefix, label='Width')   
-        thickness = box.text(id='thickness', name='%s.thickness' % prefix, label='Thickness')  
+        thickness = form.text(id='thickness', name='%s.thickness' % prefix, label='Thickness')  
 
     def processUserInputs(self):
         'process user input '

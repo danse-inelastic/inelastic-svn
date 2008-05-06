@@ -33,7 +33,7 @@ class Form( base ):
 
         director = self.director
         clerk = director.clerk
-        scatterers = clerk.indexScatterers().values()
+        scatterers = clerk.indexScatterers(where='template=True').values()
         scatterers = [ clerk.getHierarchy(scatterer) for scatterer in scatterers]
         samples = scatterers
             
@@ -46,7 +46,7 @@ class Form( base ):
                         'Atom symbols', 'Fractional coordinates', 'Shape description', 'Shape height', 'Shape width', 
                         'Shape thickness']
 
-        t=PyHtmlTable(len(samples), len(columnTitles), {'width':'400','border':2,'bgcolor':'white'})
+        t=PyHtmlTable(len(samples), len(columnTitles), {'width':'400','border':2})#,'bgcolor':'white'})
         for colNum, col in enumerate(columnTitles):
             t.setc(0,colNum,col)
 #        for row in range(numSamples):

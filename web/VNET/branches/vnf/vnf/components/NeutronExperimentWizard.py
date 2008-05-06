@@ -690,6 +690,19 @@ class NeutronExperimentWizard(base):
         action_formfields( action, form )
         # expand the form with fields of the data object that is being edited
         formcomponent.expand( form )
+        
+        p = form.paragraph()
+        p.text = [action_link(
+        actionRequireAuthentication(
+        'neutronexperimentwizard', 
+        director.sentry,
+        label = 'Add a new scattering kernel',  
+        routine='selectkernel',
+        id=self.inventory.id),
+        director.cgihome
+        ),
+        '<br>']
+        
         submit = form.control(name='submit',type="submit", value="next")
         
         #self.processFormInputs(director)
@@ -719,7 +732,6 @@ class NeutronExperimentWizard(base):
             actor = 'neutronexperimentwizard', 
             sentry = director.sentry,
             routine = 'onSelect',
-            label = '',
             id=self.inventory.id,
             arguments = {'form-received': formcomponent.name },
             )
@@ -756,7 +768,6 @@ class NeutronExperimentWizard(base):
             actor = 'neutronexperimentwizard', 
             sentry = director.sentry,
             routine = 'kernel_generator',
-            label = '',
             id=self.inventory.id,
             arguments = {'form-received': formcomponent.name },
             )
@@ -787,7 +798,6 @@ class NeutronExperimentWizard(base):
             actor = 'neutronexperimentwizard', 
             sentry = director.sentry,
             routine = 'kernel_generator',
-            label = '',
             id=self.inventory.id,
             arguments = {'form-received': formcomponent.name },
             )

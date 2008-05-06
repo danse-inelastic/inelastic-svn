@@ -48,7 +48,7 @@ class Form( base ):
         columnTitles = ["Select as scattering kernel",'Short description', 'Type of scattering kernel', 'Creator', 'Date of creation']
 
         
-        t = PyHtmlTable(numScatteringKernels, len(columnTitles), {'width':'400','border':2,'bgcolor':'white'})
+        t = PyHtmlTable(numScatteringKernels, len(columnTitles), {'width':'400','border':2})#,'bgcolor':'white'})
         for colNum, col in enumerate(columnTitles):
             t.setc(0,colNum,col)
         #name = '%s.%s' % (formactor_action_prefix, 'kernel_id')    
@@ -78,17 +78,6 @@ class Form( base ):
                     value = link
                 t.setc(row+1,colNum+1,value)
         p.text += [t.return_html()]
-        
-        p = form.paragraph()
-        p.text = [action_link(
-        actionRequireAuthentication(
-        'neutronexperimentwizard', 
-        director.sentry,
-        label = 'Add a new scattering kernel',  
-        routine='selectkernel'),
-        director.cgihome
-        ),
-        '<br>']
         
 
     def processUserInputs(self):
