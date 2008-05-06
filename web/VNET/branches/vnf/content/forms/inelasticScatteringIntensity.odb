@@ -45,14 +45,14 @@ class Form( base ):
 calculate the inelastic scattering intensity.''']
  
         choices=['Incoherent', 'Coherent', 'Both']
-        entries=enumerate(choices)
+        entries= [ (choice, choice) for choice in choices ]
         typeOfScattering = form.selector(id='selector1',
             name = '%s.typeOfScattering' % prefix,
             entries = entries,
             label = 'Type of scattering',
             selected = self.inventory.typeOfScattering)
         choices=['1/Ang', '1/nm']
-        entries=enumerate(choices)
+        entries= [ (choice, choice) for choice in choices ]
         qUnits = form.selector(id='selector2',
             name = '%s.qUnits' % prefix,
             entries = entries,
