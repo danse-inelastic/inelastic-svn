@@ -48,7 +48,7 @@ class ScatteringKernel(Actor):
         columnTitles = ['Short description', 'Type of scattering kernel', 'Creator', 'Date of creation']
 
         from PyHtmlTable import PyHtmlTable
-        t = PyHtmlTable(numScatteringKernels, len(columnTitles), {'width':'400','border':2,'bgcolor':'white'})
+        t = PyHtmlTable(numScatteringKernels, len(columnTitles), {'width':'400','border':2})#,'bgcolor':'white'})
         for colNum, col in enumerate(columnTitles):
             t.setc(0,colNum,col)
             
