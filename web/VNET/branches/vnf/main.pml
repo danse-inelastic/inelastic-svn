@@ -15,10 +15,7 @@
 
   <component name='main'>
     <property name='actor'>neutronexperimentwizard</property>  
-    <property name="routine">create_new_sample</property>  
-    <component name='neutronexperimentwizard'>
-    	<property name="id">4592E3</property>
-    </component>
+    <property name="routine">kernel_generator</property>  
     <component name='sentry'>
     	<property name='username'>demo</property>
     	<property name='passwd'>demo</property>
