@@ -12,7 +12,6 @@
 
 from Actor import actionRequireAuthentication, action_link, AuthenticationError
 from FormActor import FormActor as base, InputProcessingError
-from vnf.weaver import action_href
 
 
 class NeutronExperimentWizard(base):
@@ -360,7 +359,7 @@ class NeutronExperimentWizard(base):
         document.byline = 'byline?'
         
         formcomponent = self.retrieveFormToShow( 'sample_preparation' )
-        formcomponent.experiment_id = self.inventory.id
+        formcomponent.inventory.experiment_id = self.inventory.id
         formcomponent.director = director
         
         # create form
@@ -424,17 +423,6 @@ class NeutronExperimentWizard(base):
         #self.processFormInputs(director)
 #        self._footer( form, director )
         return page           
-        
-#        try:
-#            page = director.retrieveSecurePage( 'neutronexperimentwizard' )
-#        except AuthenticationError, err:
-#            return err.page             
-##        raise RuntimeError, 'are we here?'
-#        routine = director.routine = 'default'
-#        actor = director.retrieveActor( 'sample')
-#        director.configureComponent( actor )
-#        #actor.inventory.id = self.inventory.id
-#        return getattr(actor, routine)( director )
     
     def create_new_sample(self, director):
         try:
@@ -451,19 +439,23 @@ class NeutronExperimentWizard(base):
         
         p = document.paragraph()
         
-        p.text = [action_href(actionRequireAuthentication(          
+        p.text = [action_link(actionRequireAuthentication(          
             actor = 'neutronexperimentwizard', 
             sentry = director.sentry,
             routine = 'import_sample_from_db',
-            label = "Import material from the Crystallography Open Database",
-            id = self.experiment_id), director.cgihome)]
+            label = "Import material from the Crystallography Open Database<br>",
+            id = self.inventory.id#,
+#            arguments = {'form-received': formcomponent.name }
+            ), director.cgihome)]
         
-        p.text += [action_href(actionRequireAuthentication(          
+        p.text += [action_link(actionRequireAuthentication(          
             actor = 'neutronexperimentwizard', 
             sentry = director.sentry,
             routine = 'create_sample_by_hand',
             label = "Input the material manually",
-            id = self.experiment_id), director.cgihome)]          
+            id = self.inventory.id#,
+#           arguments = {'form-received': formcomponent.name }
+            ), director.cgihome)]          
              
 #        formcomponent = self.retrieveFormToShow( 'sampleInput')
 #        formcomponent.director = director
@@ -500,7 +492,7 @@ class NeutronExperimentWizard(base):
         document.description = ''
         document.byline = '<a href="http://danse.us">DANSE</a>'        
         
-        formcomponent = self.retrieveFormToShow( 'sampleInput')
+        formcomponent = self.retrieveFormToShow( 'import_sample_from_db')
         formcomponent.director = director
         # build the form 
         form = document.form(name='', action=director.cgihome)
@@ -535,7 +527,7 @@ class NeutronExperimentWizard(base):
         document.description = ''
         document.byline = '<a href="http://danse.us">DANSE</a>'        
         
-        formcomponent = self.retrieveFormToShow( 'sampleInput')
+        formcomponent = self.retrieveFormToShow( 'create_sample_by_hand')
         formcomponent.director = director
         # build the form 
         form = document.form(name='', action=director.cgihome)
