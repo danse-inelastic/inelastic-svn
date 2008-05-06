@@ -76,23 +76,23 @@ calculate the inelastic scattering intensity.''']
             )   
         vecsPerShell = form.text(
                 id = 'vecsPerShell',
-                name='%s.vecsPerShell' % prefix,
-                label='Q vectors per shell',
+                name = '%s.vecsPerShell' % prefix,
+                label = 'Q vectors per shell',
                 value = self.inventory.vecsPerShell)          
         fourierTransformWindow = form.text(
                 id = 'fourierTransformWindow',
-                name='%s.fourierTransformWindow' % prefix,
-                label='Fourier Transform Window (% Trajectory Length)',
+                name = '%s.fourierTransformWindow' % prefix,
+                label = 'Fourier Transform Window (% Trajectory Length)',
                 value = self.inventory.fourierTransformWindow)   
         numFrequencyPoints = form.text(
                 id = 'numFrequencyPoints',
-                name='%s.numFrequencyPoints' % prefix,
-                label='Number of Frequency Points',
+                name = '%s.numFrequencyPoints' % prefix,
+                label = 'Number of Frequency Points',
                 value = self.inventory.numFrequencyPoints)         
 
     def processUserInputs(self,director):
         'process user input '
-        return self.inventory.kernel
+        return 
 
 
 #formactor_action_prefix = 'actor.form-received' # assumed actor is a form actor

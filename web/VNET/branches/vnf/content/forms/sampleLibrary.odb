@@ -38,11 +38,13 @@ class Form( base ):
         samples = scatterers
             
         p = form.paragraph()
-        columns = ['matter.realmatter.chemical_formula', 'matter.realmatter.cartesian_lattice', 
-                   'matter.realmatter.atom_symbols','matter.realmatter.fractional_coordinates']#, 
-                   #'shape.realshape.short_description', 'shape.realshape.short_description',]
-        columnTitles = ['Select for neutron experiment', 'Chemical formula', 'Cartesian lattice', 'Atom symbols', 
-                        'Fractional coordinates']#, 'Shape name', 'Shape parameters']
+        columns = ['short_description','matter.realmatter.chemical_formula', 'matter.realmatter.cartesian_lattice', 
+                   'matter.realmatter.atom_symbols','matter.realmatter.fractional_coordinates', 
+                   'shape.realshape.short_description', 'shape.realshape.height','shape.realshape.width',
+                   'shape.realshape.thickness',]
+        columnTitles = ['Select for neutron experiment', 'Sample description','Chemical formula', 'Cartesian lattice', 
+                        'Atom symbols', 'Fractional coordinates', 'Shape description', 'Shape height', 'Shape width', 
+                        'Shape thickness']
 
         t=PyHtmlTable(len(samples), len(columnTitles), {'width':'400','border':2,'bgcolor':'white'})
         for colNum, col in enumerate(columnTitles):
@@ -55,19 +57,26 @@ class Form( base ):
             selection = "<input type='radio' name='actor.form-received.kernel_id' value="+sample.id+" id='radio'/>"
             t.setc(row+1, 0, selection)
             for colNum, col in enumerate( columns ):
-                attrs=col.split('.')
-                value = getattr(getattr(getattr(sample, attrs[0]),attrs[1]),attrs[2])
                 if col == 'short_description':
-                    link = action_link(
-                        actionRequireAuthentication(
-                        'neutronexperimentwizard',
-                        director.sentry,
-                        label = value,
-                        routine = 'create_new_sample'
-                        ),  director.cgihome
-                        )
-                    value = link
-                t.setc(row+1,colNum+1,value)
+                    value = sample.getColumnValue(col)
+#                    link = action_link(
+#                        actionRequireAuthentication(
+#                        'neutronexperimentwizard',
+#                        director.sentry,
+#                        label = value,
+#                        routine = 'create_new_sample'
+#                        ),  director.cgihome
+#                        )
+#                    value = link
+                    t.setc(row+1,colNum+1,value)
+                    continue
+                else:
+                    attrs=col.split('.')
+                    try:
+                        value = getattr(getattr(getattr(sample, attrs[0]),attrs[1]),attrs[2])
+                    except:
+                        value=''
+                    t.setc(row+1,colNum+1,value)
         p.text = [t.return_html()]
         
         p = form.paragraph()
@@ -81,7 +90,7 @@ class Form( base ):
 
     def processUserInputs(self):
         'process user input '
-        return self.inventory.kernel
+        return 
 
 
 #formactor_action_prefix = 'actor.form-received' # assumed actor is a form actor
