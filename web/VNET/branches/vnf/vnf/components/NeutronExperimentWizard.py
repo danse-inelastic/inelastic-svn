@@ -691,6 +691,37 @@ class NeutronExperimentWizard(base):
         self._footer( document, director )
         return page 
     
+    def abInitioHarmonic(self, director):
+        try:
+            page = director.retrieveSecurePage( 'neutronexperimentwizard' )
+        except AuthenticationError, err:
+            return err.page
+        
+        main = page._body._content._main
+        document = main.document(title='Ab initio energies, harmonic dynamics kernel' )
+        document.byline = '<a href="http://danse.us">DANSE</a>'    
+        
+        formcomponent = self.retrieveFormToShow( 'abInitioHarmonic')
+        formcomponent.director = director
+        # build the form form
+        form = document.form(name='', action=director.cgihome)
+        # specify action
+        action = actionRequireAuthentication(          
+            actor = 'neutronexperimentwizard', 
+            sentry = director.sentry,
+            routine = 'kernel_generator',
+            label = '',
+            id=self.inventory.id,
+            arguments = {'form-received': formcomponent.name },
+            )
+        from vnf.weaver import action_formfields
+        action_formfields( action, form )
+        # expand the form with fields of the data object that is being edited
+        formcomponent.expand( form )
+        next = form.control(name='submit',type="submit", value="next")
+        self._footer( document, director )
+        return page 
+    
     def kernel_generator(self, director):
         try:
             page = director.retrieveSecurePage( 'neutronexperimentwizard' )

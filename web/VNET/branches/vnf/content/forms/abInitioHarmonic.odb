@@ -50,7 +50,7 @@ class Form( base ):
 
     def expand(self, form):
         '''expand an existing form with fields from this component'''
-              
+        prefix = formactor_action_prefix
 #        for property in self.parameters:
 #        
 #            value = getattr( record, property )
@@ -101,84 +101,74 @@ class Form( base ):
         
         kineticEnergyCutoff = form.text(
                 id = 'text1',
-                name='abInitioHarmonic.kineticEnergyCutoff',
+                name='%s.kineticEnergyCutoff' % prefix,
                 label='Kinetic energy cutoff (eV)',
                 value = str(self.inventory.kineticEnergyCutoff))
         
-        nKx = form.text(
+        box = form.box()
+        nKx = box.text(
                 id = 'text2',
-                name='abInitioHarmonic.nKx',
+                name='%s.nKx' % prefix,
                 label = 'Number of k-points (x-direction)',
                 value = str(self.inventory.monkhorstPackMesh[0]))  
-        nKy = form.text(
+        nKy = box.text(
                 id = 'text3',
-                name='abInitioHarmonic.nKy',
+                name='%s.nKy' % prefix,
                 label = 'Number of k-points (y-direction)',
                 value = str(self.inventory.monkhorstPackMesh[1]))       
-        nKz = form.text(
+        nKz = box.text(
                 id = 'text4',
-                name='abInitioHarmonic.nKz',
+                name='%s.nKz' % prefix,
                 label = 'Number of k-points (z-direction)',
                 value = str(self.inventory.monkhorstPackMesh[2]))     
 
         p = form.paragraph()
         p.text = ['<h2>Phonons</h2>']
 
-        supercellx = form.text(
+        box = form.box()
+        supercellx = box.text(
                 id = 'text5',
-                name='abInitioHarmonic.supercellx',
+                name='%s.supercellx' % prefix,
                 label='Supercell expansion (x-direction)',
                 value = str(self.inventory.supercell[0]))  
-        supercelly = form.text(
+        supercelly = box.text(
                 id = 'text6',
-                name='abInitioHarmonic.supercelly',
+                name='%s.supercelly' % prefix,
                 label='Supercell expansion (y-direction)',
                 value = str(self.inventory.supercell[1]))       
-        supercellz = form.text(
+        supercellz = box.text(
                 id = 'text7',
-                name='abInitioHarmonic.supercellz',
+                name='%s.supercellz' % prefix,
                 label='Supercell expansion (z-direction)',
                 value = str(self.inventory.supercell[2]))   
         displacementAmplitude = form.text(
                 id = 'text8',
-                name='abInitioHarmonic.displacementAmplitude',
+                name='%s.displacementAmplitude' % prefix,
                 label='Displacement amplitude',
                 value = str(self.inventory.displacementAmplitude)) 
-        Qx = form.text(
+        box = form.box()
+        Qx = box.text(
                 id = 'text9',
-                name='abInitioHarmonic.Qx',
+                name='%s.Qx' % prefix,
                 label='Phonon Q-points (x-direction)',
                 value = str(self.inventory.qGrid[0]))  
-        Qy = form.text(
+        Qy = box.text(
                 id = 'text10',
-                name='abInitioHarmonic.Qy',
+                name='%s.Qy' % prefix,
                 label='Phonon Q-points (y-direction)',
                 value = str(self.inventory.qGrid[1]))       
-        Qz = form.text(
+        Qz = box.text(
                 id = 'text11',
-                name='abInitioHarmonic.Qz',
+                name='%s.Qz' % prefix,
                 label='Phonon Q-points (z-direction)',
                 value = str(self.inventory.qGrid[2])) 
         
     def processUserInputs(self):
-        
-        #
-        from vnf.components.Job import new_job, jobpath
-        job=new_job(self.director)
-
-        job.jobName = self.short_description
-        self.director.clerk.updateRecord( job )
-        
-        jobdir = jobpath( job.id )
-        
-        build_run( experiment, path = jobdir )
-
-        return job
+        return 
     
     def getRecord(self):
         'get DB record'
         return self.director.clerk.getRecordByID( self.DBTable, self.inventory.id )
-    
     
 def build_run( experiment, path ):
     from vnf.components.NeutronExperimentSimulationRunBuilder import Builder
