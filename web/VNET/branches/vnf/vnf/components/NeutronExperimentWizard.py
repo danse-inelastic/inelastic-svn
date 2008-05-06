@@ -419,6 +419,17 @@ class NeutronExperimentWizard(base):
         action_formfields( action, form )
         # expand the form with fields of the data object that is being edited
         formcomponent.expand( form )
+        
+                
+        p = form.paragraph()
+        p.text = [action_link(
+        actionRequireAuthentication(
+        'neutronexperimentwizard', director.sentry,
+        label = 'Add a new sample',
+        routine = 'create_new_sample',
+        id=self.inventory.id
+        ),  director.cgihome),'<br>']
+        
         submit = form.control(name='submit',type="submit", value="next")
         #self.processFormInputs(director)
 #        self._footer( form, director )

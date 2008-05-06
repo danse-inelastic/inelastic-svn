@@ -79,14 +79,6 @@ class Form( base ):
                     t.setc(row+1,colNum+1,value)
         p.text = [t.return_html()]
         
-        p = form.paragraph()
-        p.text = [action_link(
-        actionRequireAuthentication(
-        'neutronexperimentwizard', director.sentry,
-        label = 'Add a new sample',
-        routine = 'create_new_sample'
-        ),  director.cgihome),'<br>']
-        
 
     def processUserInputs(self):
         'process user input '
