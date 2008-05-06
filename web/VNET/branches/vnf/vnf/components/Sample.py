@@ -12,6 +12,7 @@
 
 from Actor import Actor, action_link, action, actionRequireAuthentication
 from vnf.weaver import action_href
+from PyHtmlTable import PyHtmlTable
 
 class Sample(Actor):
 
@@ -39,62 +40,61 @@ class Sample(Actor):
         document.byline = 'byline?'
 
         # retrieve id:record dictionary from db
-        
         clerk = director.clerk
         scatterers = clerk.indexScatterers(where='template=True').values()
         scatterers = [ clerk.getHierarchy(scatterer) for scatterer in scatterers]
         samples = scatterers
             
         p = document.paragraph()
-        numSamples = len(samples)
-        columns = ['Id', 'Short description','Cartesian lattice', 'Fractional coordinates',        
-        'Atom symbols', 'Shape name', 'Shape parameters']
-#        columns = ['Sample Name', 'Texture','Creator','Date Created','Id']
-#        matterColumns=['Matter Description','Cartesian Lattice','Atom Positions']
-#        shapeColumns=['Shape Description','Cartesian Lattice','Atom Positions']
-        numColumns=len(columns)#scatteringKernels[0].getNumColumns()
+        columns = ['short_description','matter.realmatter.chemical_formula', 'matter.realmatter.cartesian_lattice', 
+                   'matter.realmatter.atom_symbols','matter.realmatter.fractional_coordinates', 
+                   'shape.realshape.short_description', 'shape.realshape.height','shape.realshape.width',
+                   'shape.realshape.thickness',]
+#        columnTitles = ['Select for neutron experiment', 
+        columnTitles = ['Sample description','Chemical formula', 'Cartesian lattice', 
+                        'Atom symbols', 'Fractional coordinates', 'Shape description', 'Shape height', 'Shape width', 
+                        'Shape thickness']
 
-        from PyHtmlTable import PyHtmlTable
-        t=PyHtmlTable(numSamples,numColumns, {'width':'400','border':2,'bgcolor':'white'})
-        for colNum, col in enumerate(columns):
+        t=PyHtmlTable(len(samples), len(columnTitles), {'width':'400','border':2,'bgcolor':'white'})
+        for colNum, col in enumerate(columnTitles):
             t.setc(0,colNum,col)
 #        for row in range(numSamples):
 #            colNum=0
 #            for name in samples[row].getColumnNames():
         for row, sample in enumerate( samples ):
-            for colNum, colName in enumerate( columns ):
-                value = sample.getColumnValue(colName)
-                if colName == 'short_description':
-                    link = action_link(
-                        actionRequireAuthentication(
-                        'sample',
-                        director.sentry,
-                        label = value,
-                        routine = 'sampleInput'
-                        ),  director.cgihome
-                        )
-                    value = link
-                t.setc(row+1,colNum,value)
+            #first put in the radio button
+#            selection = "<input type='radio' name='actor.form-received.kernel_id' value="+sample.id+" id='radio'/>"
+#            t.setc(row+1, 0, selection)
+            for colNum, col in enumerate( columns ):
+                if col == 'short_description':
+                    value = sample.getColumnValue(col)
+#                    link = action_link(
+#                        actionRequireAuthentication(
+#                        'neutronexperimentwizard',
+#                        director.sentry,
+#                        label = value,
+#                        routine = 'create_new_sample'
+#                        ),  director.cgihome
+#                        )
+#                    value = link
+                    t.setc(row+1,colNum+1,value)
+                    continue
+                else:
+                    attrs=col.split('.')
+                    try:
+                        value = getattr(getattr(getattr(sample, attrs[0]),attrs[1]),attrs[2])
+                    except:
+                        value=''
+                    t.setc(row+1,colNum,value)
         p.text = [t.return_html()]
         
         p = document.paragraph()
         p.text = [action_link(
         actionRequireAuthentication(
         'sampleInput', director.sentry,
-        label = 'Add a new sample'),  director.cgihome),'<br>']
-#        action_link(
-#        actionRequireAuthentication(
-#        'shapeInput', director.sentry,
-#        label = 'Add a new sample shape'),  director.cgihome
-#        )]
-
-#        action = actionRequireAuthentication(          
-#            actor = 'neutronexperimentwizard', 
-#            sentry = director.sentry,
-#            routine = 'onSelect',
-#            label = '',
-#            arguments = {'form-received': formcomponent.name },
-#            )
+        label = 'Add a new sample',
+        routine = 'default'
+        ),  director.cgihome),'<br>']
 
         return page  
 
