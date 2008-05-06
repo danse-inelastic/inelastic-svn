@@ -14,6 +14,7 @@
 from vnf.components.Form import Form as base
 from vnf.components.PyHtmlTable import PyHtmlTable
 from vnf.components.Actor import actionRequireAuthentication, action_link
+from vnf.components.DBObjectForm import formactor_action_prefix
 
 class Form( base ):
 
@@ -76,7 +77,7 @@ class Form( base ):
                 value = self.inventory.short_description)
         
         p = form.paragraph()
-        p.text = ['<h2> VASP Engine</h2>']
+        p.text = ['<h2>Electronic structure settings</h2>']
 
 #drop down menu for abinitio engine: [vasp, (abinit)]
         choices=['vasp','abinit (not completely functional)']
@@ -110,37 +111,37 @@ class Form( base ):
         nKx = box.text(
                 id = 'text2',
                 name='%s.nKx' % prefix,
-                label = 'Number of k-points (x-direction)',
+                label = 'Number of k-points (a*)',
                 value = str(self.inventory.monkhorstPackMesh[0]))  
         nKy = box.text(
                 id = 'text3',
                 name='%s.nKy' % prefix,
-                label = 'Number of k-points (y-direction)',
+                label = 'Number of k-points (b*)',
                 value = str(self.inventory.monkhorstPackMesh[1]))       
         nKz = box.text(
                 id = 'text4',
                 name='%s.nKz' % prefix,
-                label = 'Number of k-points (z-direction)',
+                label = 'Number of k-points (c*)',
                 value = str(self.inventory.monkhorstPackMesh[2]))     
 
         p = form.paragraph()
-        p.text = ['<h2>Phonons</h2>']
+        p.text = ['<h2>Phonon Settings</h2>']
 
         box = form.box()
         supercellx = box.text(
                 id = 'text5',
                 name='%s.supercellx' % prefix,
-                label='Supercell expansion (x-direction)',
+                label='Supercell expansion (a)',
                 value = str(self.inventory.supercell[0]))  
         supercelly = box.text(
                 id = 'text6',
                 name='%s.supercelly' % prefix,
-                label='Supercell expansion (y-direction)',
+                label='Supercell expansion (b)',
                 value = str(self.inventory.supercell[1]))       
         supercellz = box.text(
                 id = 'text7',
                 name='%s.supercellz' % prefix,
-                label='Supercell expansion (z-direction)',
+                label='Supercell expansion (c)',
                 value = str(self.inventory.supercell[2]))   
         displacementAmplitude = form.text(
                 id = 'text8',
@@ -151,17 +152,17 @@ class Form( base ):
         Qx = box.text(
                 id = 'text9',
                 name='%s.Qx' % prefix,
-                label='Phonon Q-points (x-direction)',
+                label='Phonon Q-points (a*)',
                 value = str(self.inventory.qGrid[0]))  
         Qy = box.text(
                 id = 'text10',
                 name='%s.Qy' % prefix,
-                label='Phonon Q-points (y-direction)',
+                label='Phonon Q-points (b*)',
                 value = str(self.inventory.qGrid[1]))       
         Qz = box.text(
                 id = 'text11',
                 name='%s.Qz' % prefix,
-                label='Phonon Q-points (z-direction)',
+                label='Phonon Q-points (c*)',
                 value = str(self.inventory.qGrid[2])) 
         
     def processUserInputs(self):
@@ -177,7 +178,7 @@ def build_run( experiment, path ):
 
 
 
-def form(): return Form( 'gulpNE' )
+def form(): return Form( 'abInitioHarmonic' )
 
 
 # version

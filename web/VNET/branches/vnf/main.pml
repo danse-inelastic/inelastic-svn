@@ -15,7 +15,7 @@
 
   <component name='main'>
     <property name='actor'>neutronexperimentwizard</property>  
-    <property name="routine">kernel_generator</property>  
+    <property name="routine">selectkernel</property>  
     <component name='sentry'>
     	<property name='username'>demo</property>
     	<property name='passwd'>demo</property>
