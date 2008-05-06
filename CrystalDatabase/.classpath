@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path=""/>
+	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="deployable/Jmol.jar"/>
 	<classpathentry kind="lib" path="deployable/pcCommunicate.jar"/>
@@ -10,5 +10,5 @@
 	<classpathentry kind="lib" path="deployable/commons-logging.jar"/>
 	<classpathentry kind="lib" path="deployable/J7Zip.jar"/>
 	<classpathentry kind="lib" path="deployable/PeriodicTable.jar"/>
-	<classpathentry kind="output" path=""/>
+	<classpathentry kind="output" path="bin"/>
 </classpath>
