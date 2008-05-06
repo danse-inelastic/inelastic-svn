@@ -26,6 +26,18 @@ def portlet(app):
     home.icon = "images/link_icon.gif"
     home.type = "navItem"
     
+    startWizard = portlet.item(description="Start Neutron Experiment Wizard")
+    startWizard.target = action_href(
+            actionRequireAuthentication(
+            label = 'Start Neutron Experiment Wizard',
+            actor = 'neutronexperimentwizard',
+            routine = 'start',
+            sentry = app.sentry,
+            ),
+            app.cgihome)
+    startWizard.icon = "images/link_icon.gif"
+    startWizard.type = "navItem"
+    
     experiments = portlet.item(description="Experiments")
     experiments.target = action_href(
         actionRequireAuthentication(
