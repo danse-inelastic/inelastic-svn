@@ -1,11 +1,11 @@
-<project name="CrystalDatabase" default="package-apache" basedir=".">
+<project name="CrystalDatabase" default="package-trueblue" basedir=".">
   <description>Fireball</description>
 
   <property name="src" location=""/>
   <property name="build" location=""/>
   <property name="app-name" value="cod"/>
-  <property name="username" value="jfennick"/>
-  <property name="password" value=""/>
+  <property name="username" value="jbk"/>
+  <property name="password" value="INhbb0g2"/>
 
 	<path id="classpath" path="${classpath}">
 		<fileset dir="${lib}">
@@ -20,6 +20,24 @@
 		</tstamp>
 	</target>
 
+	<target name="package-trueblue" description="build jars for vnf" depends="init">
+		<jar jarfile="deployable/${app-name}.jar" >
+			<fileset dir="${build}">
+				<include name="cod/**" />
+			</fileset>
+			<fileset dir="." />
+		</jar>
+		<signjar jar="deployable/${app-name}.jar" alias="mykey" storepass="chem88"/>
+	</target>
+	
+	<target name="deploy-remote-trueblue" depends="package-trueblue">
+		<scp trust="yes" todir="${username}:${password}@trueblue.caltech.edu:/var/www/java/">
+			<fileset dir="deployable">
+				<include name="**/*"/>
+			</fileset>
+		</scp>
+	</target>
+	
 	<target name="package-apache" description="To Build the jar File" depends="init">
 		<jar jarfile="deployable/${app-name}.jar" >
 			<fileset dir="${build}">
