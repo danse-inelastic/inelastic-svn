@@ -133,6 +133,7 @@ def portlet(app):
     if menu:
         selected_menu = eval( menu )
         selected_menu.icon = "images/selectedlink_icon.gif"
+        selected_menu.type = 'currentNavItem' 
     return portlet
 
 

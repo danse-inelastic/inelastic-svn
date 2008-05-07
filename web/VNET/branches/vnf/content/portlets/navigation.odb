@@ -14,20 +14,35 @@
 from vnf.components.Actor import Actor, action_link, actionRequireAuthentication, AuthenticationError
 from vnf.weaver import action_href
 
+
+actor2menu = {
+    'greet': 'greet',
+    'neutronexperimentwizard': 'neutronexperimentwizard',
+    'neutronexperiment': 'experiments',
+    'sampleassembly': 'sampleAssemblies',
+    'sample': 'samples',
+    'scatteringKernel': 'scatteringKernels',
+    'job': 'jobs',
+    'instrument': 'instruments',
+    'server': 'servers',
+    'supportingCalcs': 'supportingCalcs',
+    'logout': 'logout'
+    }
+
 def portlet(app):
     import opal.content
     portlet = opal.content.portlet(title="main", id="portlet-main--tree")
 
-    home = portlet.item(description="Home")
-    home.target = action_href(
+    greet = portlet.item(description="Home")
+    greet.target = action_href(
             actionRequireAuthentication(
             'greet', app.sentry, 'Greet'),
             app.cgihome)
-    home.icon = "images/link_icon.gif"
-    home.type = "navItem"
+    greet.icon = "images/link_icon.gif"
+    greet.type = "navItem"
     
-    startWizard = portlet.item(description="Start Neutron Experiment Wizard")
-    startWizard.target = action_href(
+    neutronexperimentwizard = portlet.item(description="Start Neutron Experiment Wizard")
+    neutronexperimentwizard.target = action_href(
             actionRequireAuthentication(
             label = 'Start Neutron Experiment Wizard',
             actor = 'neutronexperimentwizard',
@@ -35,8 +50,8 @@ def portlet(app):
             sentry = app.sentry,
             ),
             app.cgihome)
-    startWizard.icon = "images/link_icon.gif"
-    startWizard.type = "navItem"
+    neutronexperimentwizard.icon = "images/link_icon.gif"
+    neutronexperimentwizard.type = "navItem"
     
     experiments = portlet.item(description="Experiments")
     experiments.target = action_href(
@@ -112,7 +127,13 @@ def portlet(app):
             app.cgihome)
     logout.icon = "images/link_icon.gif"
     logout.type = "navItem"
-    
+
+    actor = app.actor.name
+    menu = actor2menu.get( actor )
+    if menu:
+        selected_menu = eval( menu )
+        selected_menu.icon = "images/selectedlink_icon.gif"
+        selected_menu.type = 'currentNavItem' 
     return portlet
 
 

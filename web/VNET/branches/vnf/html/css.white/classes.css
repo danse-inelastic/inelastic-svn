@@ -161,6 +161,7 @@ input.searchButton {
 
 .currentNavItem {
     border: 1px solid;
+    display: block;
 }
 
 .navLevel1 {

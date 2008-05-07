@@ -33,12 +33,13 @@ def main():
 # main
 if __name__ == '__main__':
     # invoke the application shell
-    try: main()
+    try:
+        main()
     except:
         import traceback
-        f = open( '/tmp/debug-vnf.log', 'w')
-        print >> f, traceback.format_exc()
-
+        out = open( '/tmp/debug-linjiao.log', 'w' )
+        print >> out, traceback.format_exc()
+    
 
 # version
 __id__ = "$Id: main.py,v 1.1.1.1 2006-11-27 00:09:14 aivazis Exp $"
