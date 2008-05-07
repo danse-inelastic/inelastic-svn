@@ -37,8 +37,10 @@ if __name__ == '__main__':
         main()
     except:
         import traceback
-        out = open( '/tmp/debug-linjiao.log', 'w' )
-        print >> out, traceback.format_exc()
+        import os
+        user = os.environ.get('USER') or 'webserver'
+        out = open( '/tmp/vnf-error-%s.log' % user, 'w' )
+        out.write( traceback.format_exc() )
     
 
 # version
