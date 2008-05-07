@@ -63,6 +63,7 @@
 #page-personaltools {
     /* Bar with personalized menu (user preferences, favorites etc) */
     background-color: #dee7ec;
+    /*background-color: #999999;*/
     border-top-color: #8cacbb;
     border-bottom-color: #8cacbb;
     color: Black;
@@ -109,9 +110,19 @@
 }
 
 #page-footer {
-    background-color: #dee7ec;
     border-top-color: #8cacbb;
     border-bottom-color: #8cacbb;
+    color: #927620;
+    /*background-color: #dee7ec;*/
+    background: #999999;
+}
+
+#page-footer p{
+    /*background-color: #bbb2c0;*/
+    color: black;
+    background: #999999;
+    /*background-color: #dee7ec*/
+    text-shadow: 0px 1px 1px #fff;
 }
 
 #page-credits {
