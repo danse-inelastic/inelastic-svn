@@ -65,8 +65,8 @@ public class Search extends JPanel {
 
 	private JButton btnSave = null;
 	private JButton btnSearch = null;
-	private JButton	btnJmol = new JButton("Export to Jmol");
-//	private JButton	btnGULP = new JButton("Export to GULP");
+	private JButton	btnJmol = new JButton("Visualize in Jmol");
+	private JButton	btnVnf = new JButton("Export to vnf");
 //	private JButton	btnFireball = new JButton("Export to Fireball");
 	private JScrollPane scrollPane = null;
 	private JTable tblResult = null;
@@ -110,8 +110,8 @@ public class Search extends JPanel {
 		btnConstraints.gridx = 6;
 		btnConstraints.gridy = 3;
 		add(btnJmol, btnConstraints);
-//		btnConstraints.gridy = 4;
-//		add(btnGULP, btnConstraints);
+		btnConstraints.gridy = 4;
+		add(btnVnf, btnConstraints);
 //		btnConstraints.gridy = 5;
 //		add(btnFireball, btnConstraints);
 		
