@@ -951,6 +951,7 @@ class NeutronExperimentWizard(base):
         actor = director.retrieveActor( 'neutronexperiment')
         director.configureComponent( actor )
         actor.inventory.id = self.inventory.id
+        director.actor = actor
         return getattr(actor, routine)( director )
     
 
@@ -996,6 +997,7 @@ class NeutronExperimentWizard(base):
         # go to greeter
         actor = director.retrieveActor( 'greet')
         director.configureComponent( actor )
+        director.actor = actor
         return getattr(actor, 'default')( director )
 
 
