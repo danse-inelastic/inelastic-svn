@@ -66,7 +66,13 @@ h1, h2, h3, h4, h5, h6 {
     color: Black;
     border-bottom-color: #8cacbb;
     background-color: transparent;
-    text-shadow: #999999;
+    text-shadow: #999999 0.2em 0.2em 3px;
+}
+
+h1 {
+    /*color: #85768d;*/
+    /*color: #847e88;*/
+    color: #3e3b40;
 }
 
 h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
@@ -102,9 +108,12 @@ ol {
 }
 
 p {
+    font-family: Times, "Times New Roman", serif;
+    font-size: 105%;
 }
 
 p a {
+    color: #216359;
 }
 
 p a:visited {

@@ -196,8 +196,9 @@ input.searchButton {
 
 .error {
     /* Class for error indication in forms */
-    background-color: #ffce7b;
+    /*background-color: #ffce7b;*/
     border-color: #ffa500;
+    color: red;
 }
 
 .error .formfieldRequired {

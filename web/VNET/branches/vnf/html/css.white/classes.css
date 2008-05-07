@@ -247,11 +247,12 @@ input.searchButton {
     text-decoration: underline;
 }
 
-/*
+
 .document-main {
-    background: url(../images/arcs.png) bottom right no-repeat;
+    /*background: url(../images/arcs.png) bottom right no-repeat;*/
+    text-align: justify;
 }
-*/
+
 
 /* forms and form fields */
 
@@ -276,7 +277,8 @@ input.searchButton {
 } 
 
 .formHelp, .formfieldHelp {
-    font-size: 90%;
+    font-family: Times, "Times New Roman", serif;
+    font-size: 100%;
     margin: 0 0 0.2em 0;
 }
 
@@ -298,6 +300,8 @@ input.searchButton {
     padding: 1em;
     margin: 0 0 1em 0;
     width: 68% !important;
+    font-family: Times, "Times New Roman", serif;
+    font-size: 103%;
 }
 
 .error .formfieldRequired {

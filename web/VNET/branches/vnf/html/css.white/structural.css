@@ -15,7 +15,7 @@
 #body-wrapper { 
     margin: 0;
     padding: 0;
-    /*background: url(../images/arcs.png) bottom right no-repeat;*/
+    background: url(../images/arcs-detsys4-blackonwhite.png)  center right no-repeat;
 }
 
 
@@ -94,9 +94,10 @@
     border-top-style: solid;
     border-top-width: 1px;
     border-bottom-style: solid;
-    border-bottom-width: 1px;
-    line-height: 1.3em;
-    padding: 0em 3em 0em 3em;
+    border-bottom-width: 0px;
+   /* line-height: 1.3em; */
+    line-height: 0.0em; 
+    padding: 0em 0em 0em 0em;
     margin: 0;
     text-align: right;
     text-transform: lowercase;
@@ -132,7 +133,7 @@
 
 #page-content {
     width: 100% !important;
-    background: url(../images/arcs.png) bottom right no-repeat;
+    /* background: url(../images/arcs.png) bottom right no-repeat; */
 }
 
 #page-columnLeft {
@@ -168,12 +169,18 @@
 }
 
 #page-footer {
-    border-top: 1px solid;
-    border-bottom: 1px solid;
+    border-top: 0px solid;
+    border-bottom: 0px solid;
     float: none;
     margin: 0em 0em 0em 0em;
-    padding: 0.5em 0em 1em 0em;
+    padding: 0.0em 0em 0em 0em;
     text-align: center;
+    font-size: 90%;
+}
+
+#page-footer p{
+    text-align: center;
+    border-bottom: 1px solid;
 }
 
 #page-credits {
@@ -190,6 +197,10 @@
     list-style: none;
     display: inline;
     text-decoration: none;
+}
+
+#page-credits p {
+    text-align: center;
 }
 
 #page-credits ul li {
