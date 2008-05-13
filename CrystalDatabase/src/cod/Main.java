@@ -17,8 +17,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 
-import communicate.PhysChemRequestBox;
-
 public class Main {
 	
 //	public static LocalRequestBox reqboxLocal;
