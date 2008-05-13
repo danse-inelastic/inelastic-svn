@@ -19,10 +19,10 @@
 
   <component name='main'>
     <property name='debug'>0</property>
-    <property name='home'>http://trueblue.caltech.edu/vnfLJ/</property>
-    <property name='cgi-home'>http://trueblue.caltech.edu/cgi-bin/vnfLJ/main.sh</property>
-    <property name='imagepath'>/vnfLJ/images</property>
-    <property name='javascriptpath'>/vnfLJ/javascripts</property>
+    <property name='home'>http://trueblue.caltech.edu/vnfBK/</property>
+    <property name='cgi-home'>http://trueblue.caltech.edu/cgi-bin/vnfBK/main.sh</property>
+    <property name='imagepath'>/vnfBK/images</property>
+    <property name='javascriptpath'>/vnfBK/javascripts</property>
   </component>
 
 </inventory>
