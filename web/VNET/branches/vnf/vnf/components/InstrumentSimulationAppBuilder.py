@@ -179,8 +179,13 @@ class Builder:
             }
         self.onNeutronComponent( **kwds )
 
+        #we should use unit to make this automatic
+        tofmin = ds.tofmin / 1e6
+        tofmax = ds.tofmax / 1e6
+        ntofbins = ds.ntofbins
+        
         tofparams = '%s,%s,%s' % (
-            ds.tofmin, ds.tofmax, (ds.tofmax-ds.tofmin)*1./ds.ntofbins )
+            tofmin, tofmax, (tofmax-tofmin)*1./ntofbins )
         opts = {
             '%s.eventsdat' % ds.label: self.detectorsystem_output_eventfile,
             '%s.instrumentxml' % ds.label: self.detectorsystem_xmlfile,

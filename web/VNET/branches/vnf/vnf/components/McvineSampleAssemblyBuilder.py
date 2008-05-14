@@ -55,7 +55,7 @@ class Builder:
             #the next line should be rendered kernel requirements
             'import mccomponents.sample.phonon.xml',
             
-            "def sample(): return componentfactory('samples', 'SampleAssemblyFromXml' )('sample')",
+            "def sample(): return componentfactory('samples', 'SampleAssemblyFromXml' )('sampleassembly')",
             ]
         
         path = self.path
