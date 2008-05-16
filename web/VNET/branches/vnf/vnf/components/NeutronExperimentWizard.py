@@ -956,9 +956,10 @@ class NeutronExperimentWizard(base):
         
         #get full hierarchy
         experiment = director.clerk.getHierarchy( experiment )
-        
-        from Job import jobpath
-        path = jobpath( experiment.job_id )
+
+        job = experiment.job
+        from JobDataManager import JobDataManager
+        path = JobDataManager( job, director ).localpath()
         
         #from NeutronExperimentSimulationRunBuilder import Builder
         from NeutronExperimentSimulationRunBuilder_hack import Builder

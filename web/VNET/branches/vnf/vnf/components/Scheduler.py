@@ -18,15 +18,15 @@ info = journal.info( 'scheduler' )
 
 
 def schedule( job, director ):
-    from Job import jobpath
-    path = jobpath( job.id )
-
-    server_id = job.server
-    server = director.clerk.getServer( server_id )
+    from JobDataManager import JobDataManager
+    manager = JobDataManager( job, director )
 
     # copy local job directory to server
-    director.csaccessor.push( path, server, server.workdir )
-    server_jobpath = remote_jobpath( server, job )
+    manager.initremotedir( )
+    server_jobpath = manager.remotepath()
+
+    # the server
+    server = job.computation_server
 
     scheduler = schedulerfactory( server )
     scheduler = scheduler(
@@ -49,13 +49,20 @@ def check( job, director ):
 
     if job.status == 'finished': return job
 
-    server_id = job.server
-    server = director.clerk.getServer( server_id )
-    scheduler = schedulerfactory( server )
+    from JobDataManager import JobDataManager
+    manager = JobDataManager( job, director )
 
-    server_jobpath = remote_jobpath( server, job )
+    #scheduler
+    scheduler = schedulerfactory( job.computation_server )
+
+    #remote job path
+    server_jobpath = manager.remotepath()
+
+    #
+    server = job.computation_server
     
-    launch = lambda cmd: director.csaccessor.execute( cmd, server, server_jobpath )
+    launch = lambda cmd: director.csaccessor.execute(
+        cmd, server, server_jobpath )
 
     scheduler = scheduler(
         launch,
@@ -69,11 +76,6 @@ def check( job, director ):
 
     director.clerk.updateRecord( job )
     return job
-
-
-def remote_jobpath( server, job ):
-    import os
-    return os.path.join(server.workdir, job.id )    
 
 
 def schedulerfactory( server ):

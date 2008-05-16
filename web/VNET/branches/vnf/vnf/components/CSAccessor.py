@@ -21,11 +21,20 @@ class CSAccessor(Component):
         pass # end of Inventory
     
 
-    def push( self, path, server ):
+    def pushdir( self, path, server ):
         'push a local directory to remote server'
         raise NotImplementedError 
 
 
+    def getfile( self, server, remotepath, localdir ):
+        '''retrieve file from remote server to local path
+        server: a server db record
+        remotepath: path of the file in the remote server
+        localdir: local directory
+        '''
+        raise NotImplementedError
+
+    
 class RemoteAccessError(Exception): pass
 
 

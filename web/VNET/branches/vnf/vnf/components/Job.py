@@ -227,6 +227,18 @@ from Scheduler import schedule, check, RemoteAccessError
 
 
 def new_job( director ):
+    job = new_job_record( director )
+    #create local directory for job
+    data_manager(job, director).initlocaldir()
+    return job
+    
+
+def data_manager( job, director ):
+    from JobDataManager import JobDataManager
+    return JobDataManager(job, director)
+
+
+def new_job_record( director ):
     id = new_jobid( director )
     from vnf.dom.Job import Job
     job = Job()
@@ -250,17 +262,6 @@ def new_job( director ):
 
 from misc import new_id as new_jobid
 
-
-def jobpath( jobid ):
-    #make new run directory
-    import os
-    jobdir = os.path.join( basepath, jobid )
-
-    if not os.path.exists( jobdir ):
-        os.makedirs( jobdir )
-
-    return jobdir
-basepath = 'content/jobs'
 
 
 # version

@@ -196,7 +196,7 @@ class NeutronExperiment(base):
             page = director.retrieveSecurePage( 'neutronexperiment' )
         except AuthenticationError, err:
             return err.page
-        
+
         experiment = director.clerk.getNeutronExperiment(
             self.inventory.id)
         job_id = experiment.job_id
@@ -210,6 +210,7 @@ class NeutronExperiment(base):
             Scheduler.schedule(job, director)
             experiment.status = 'submitted'
         except Exception, err:
+            raise
             import traceback
             experiment.status = 'submissionfailed'
             job.error = traceback.format_exc()
@@ -476,20 +477,16 @@ class NeutronExperiment(base):
 
         # data path
         job_id = experiment.job_id
-        from Job import jobpath
-        path = jobpath( job_id )
+        job = director.clerk.getJob( job_id )
+        
+        from JobDataManager import JobDataManager
+        jobdatamanager = JobDataManager( job, director )
+        
+        path = jobdatamanager.localpath()
+        server = job.computation_server
 
         # list entries in the job directory in the remote server
-        job = director.clerk.getJob( job_id )
-        serverid = job.server
-        server = director.clerk.getServer( serverid )
-        remotedir = Scheduler.remote_jobpath(server, job) 
-        failed, output, error = director.csaccessor.execute(
-            'ls', server, remotedir )
-        if failed:
-            raise RuntimeError, 'unable to list directory %s in server %s' % (
-                remotedir, server.server)
-        output_files = output.split()
+        output_files = jobdatamanager.listremotejobdir()
 
         document = document.form(
             name='null',
@@ -503,9 +500,9 @@ class NeutronExperiment(base):
         for item in expected:
             filename = item
             if filename in output_files:
-                f = os.path.join( path, item )
-                localcopy = director.csaccessor.getfile(
-                    server, os.path.join(remotedir, filename), path)
+                #f = os.path.join( path, item )
+                #retieve file from computation server
+                localcopy = jobdatamanager.makelocalcopy( filename )
                 self._post_result( localcopy, document, director )
             continue
         return

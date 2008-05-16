@@ -114,16 +114,11 @@ class Form( base ):
         job_id = experiment.job_id
         if empty_id(job_id):
             #create new job
-            from vnf.dom.Job import Job
-            job = director.clerk.new_dbobject( Job )
-            job_id = job.id
-            #job's owner should be the submitter
-            job.owner = director.sentry.username
-            job.status = 'created'
-            director.clerk.updateRecord( job )
+            from vnf.components.Job import new_job
+            job = new_job(director)
             
             # attach to experiment
-            experiment.job_id = job_id
+            experiment.job_id = job.id
             # update to db
             director.clerk.updateRecord( experiment )
         else:

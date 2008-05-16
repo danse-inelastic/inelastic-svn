@@ -37,6 +37,7 @@ EXPORT_PYTHON_MODULES = \
 	InstrumentConfigurationApplyer.py \
 	InstrumentSimulationAppBuilder.py \
 	Job.py \
+	JobDataManager.py \
 	McstasSampleBuilder.py \
 	McvineSampleAssemblyDatafilesCollector.py \
 	McvineSampleAssemblyBuilder.py \
