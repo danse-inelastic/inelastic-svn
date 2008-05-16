@@ -24,6 +24,7 @@ def empty_id( id ):
 
 
 def datadir( ):
+    'path where data files are saved (relative to main.py)'
     import os
     return os.path.join( 'content', 'data' )
 

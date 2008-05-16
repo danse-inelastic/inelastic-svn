@@ -111,6 +111,7 @@ class Form(base):
         #create a new job
         from vnf.components.Job import new_job, jobpath
         job = new_job( director )
+        
         job.jobName = experiment.short_description
         director.clerk.updateRecord( job )
         

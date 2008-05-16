@@ -31,7 +31,7 @@ class SSHer(base):
         return
     
 
-    def push( self, path, server, remotepath ):
+    def pushdir( self, path, server, remotepath ):
         'push a local directory to remote server'
         address = server.server
         username = server.username

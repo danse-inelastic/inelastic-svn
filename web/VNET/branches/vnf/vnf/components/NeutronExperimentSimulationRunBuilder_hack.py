@@ -26,6 +26,8 @@ class Builder:
         template = 'content/jobs/SQEtemplate'
         for item in os.listdir( template ):
             source = os.path.join( template, item )
+            #skip directories
+            if os.path.isdir( source ): continue
             shutil.copy( source, self.path )
             continue
         experiment.expected_results = [ 'Eresolution.png', 'IQE.png' ]
