@@ -46,55 +46,44 @@ class Sample(Actor):
         samples = scatterers
             
         p = document.paragraph()
-        columns = ['short_description','matter.realmatter.chemical_formula', 'matter.realmatter.cartesian_lattice', 
-                   'matter.realmatter.atom_symbols','matter.realmatter.fractional_coordinates', 
-                   'shape.realshape.short_description', 'shape.realshape.height','shape.realshape.width',
-                   'shape.realshape.thickness',]
-#        columnTitles = ['Select for neutron experiment', 
-        columnTitles = ['Sample description','Chemical formula', 'Cartesian lattice', 
-                        'Atom symbols', 'Fractional coordinates', 'Shape description', 'Shape height', 'Shape width', 
-                        'Shape thickness']
+        import operator
+        generators = [
+            operator.attrgetter( 'short_description' ),
+            lambda s: s.matter.realmatter.chemical_formula,
+            lambda s: format_lattice_parameters(s.matter.realmatter),
+            lambda s: format_atoms(s.matter.realmatter),
+            lambda s: format_shape(s.shape.realshape),
+            ]
 
-        t=PyHtmlTable(len(samples), len(columnTitles), {'width':'400','border':2,'bgcolor':'white'})
+        columnTitles = [
+            'Sample description','Chemical formula', 'Cartesian lattice', 
+            'Atom positions', 'Shape',]
+
+        t=PyHtmlTable(len(samples), len(columnTitles), {'width':'90%','border':2,'bgcolor':'white'})
+        # first row for labels 
         for colNum, col in enumerate(columnTitles):
             t.setc(0,colNum,col)
-#        for row in range(numSamples):
-#            colNum=0
-#            for name in samples[row].getColumnNames():
+
+        # other rows for values
         for row, sample in enumerate( samples ):
             #first put in the radio button
-#            selection = "<input type='radio' name='actor.form-received.kernel_id' value="+sample.id+" id='radio'/>"
-#            t.setc(row+1, 0, selection)
-            for colNum, col in enumerate( columns ):
-                if col == 'short_description':
-                    value = sample.getColumnValue(col)
-#                    link = action_link(
-#                        actionRequireAuthentication(
-#                        'neutronexperimentwizard',
-#                        director.sentry,
-#                        label = value,
-#                        routine = 'create_new_sample'
-#                        ),  director.cgihome
-#                        )
-#                    value = link
-                    t.setc(row+1,colNum+1,value)
-                    continue
-                else:
-                    attrs=col.split('.')
-                    try:
-                        value = getattr(getattr(getattr(sample, attrs[0]),attrs[1]),attrs[2])
-                    except:
-                        value=''
-                    t.setc(row+1,colNum,value)
+            #selection = "<input type='radio' name='actor.form-received.kernel_id' value="+sample.id+" id='radio'/>"
+            #t.setc(row+1, 0, selection)
+            for colNum, generator in enumerate( generators ):
+                value = generator( sample )
+                t.setc(row+1,colNum,value)
+                continue
+            continue
+        
         p.text = [t.return_html()]
         
         p = document.paragraph()
         p.text = [action_link(
-        actionRequireAuthentication(
-        'sampleInput', director.sentry,
-        label = 'Add a new sample',
-        routine = 'default'
-        ),  director.cgihome),'<br>']
+            actionRequireAuthentication(
+            'sampleInput', director.sentry,
+            label = 'Add a new sample',
+            routine = 'default'
+            ),  director.cgihome),'<br>']
 
         return page  
 
@@ -104,6 +93,53 @@ class Sample(Actor):
             name = "sample"
         super(Sample, self).__init__(name)
         return
+
+
+
+def format_lattice_parameters(matter):
+    lattice = matter.cartesian_lattice
+    import numpy
+    lattice = numpy.array(lattice)
+    lattice.shape = -1,3
+    return '<br>'.join( [ format_vector( vec ) for vec in lattice ] )
+
+
+def format_atoms(matter):
+    coords = matter.fractional_coordinates
+    import numpy
+    coords = numpy.array(coords)
+    coords.shape = -1,3
+    atom_symbols = matter.atom_symbols
+    return '<br>'.join(
+        [ '%s: %s' % (symbol, format_vector(coord) )
+          for symbol, coord in zip(atom_symbols, coords) ]
+        )
+
+
+def format_vector( v ):
+    x,y,z = v
+    return '%.5f, %.5f, %.5f' % (x,y,z)
+
+
+class ShapeFormatter:
+
+    def __call__(self, shape):
+        handler = 'on%s' % shape.__class__.__name__
+        handler = getattr( self, handler )
+        return handler( shape )
+
+
+    def onBlock(self, block):
+        texts = [
+            'Plate',
+            'thickness=%.3fcm' % (block.thickness * 100),
+            'height=%.3fcm' % (block.height * 100),
+            'width=%.3fcm' % (block.width * 100),
+            ]
+        return '<br>'.join( texts )
+
+def format_shape( shape ):
+    return ShapeFormatter()( shape )
 
 # version
 __id__ = "$Id$"
