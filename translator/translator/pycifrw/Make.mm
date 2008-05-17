@@ -10,7 +10,7 @@
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-PROJECT = pycifrw
+PROJECT = translator
 PACKAGE = pycifrw
 
 #--------------------------------------------------------------------------
@@ -26,10 +26,11 @@ all: export
 EXPORT_PYTHON_MODULES = \
     __init__.py \
     CifParser.py \
+    CifRenderer.py \
     DlpolyToNc.py \
 
 
-export:: export-python-modules
+export:: export-package-python-modules
 
 # version
 # $Id$

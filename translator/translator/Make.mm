@@ -16,7 +16,7 @@ PROJECT = translator
 #
 
 BUILD_DIRS = \
-
+	pycifrw \
 	
 OTHER_DIRS = \
 
