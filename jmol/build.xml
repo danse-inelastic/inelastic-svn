@@ -60,16 +60,19 @@
 	</target>
 
 	<target name="package-trueblue" description="build jars for vnf" depends="init">
-		<!-- first unsign external jars 
-		<unsignjar jar="deployable/Jmol.jar"/>-->
+		<!-- first unsign external jars -->
+		<unsignjar jar="deployable/Jmol.jar"/>
 		<jar jarfile="deployable/${app-name}.jar" >
 			<fileset dir="${build}">
 				<include name="sampleViewer/**" />
 			</fileset>
+			<manifest>
+			    <attribute name="Main-Class" value="sampleViewer.Main"/>
+			</manifest>
 		</jar>
 		<!-- sign all jars -->
 		<signjar jar="deployable/${app-name}.jar" keystore="/home/jbk/danse" alias="sampleViewer" storepass="INhbb0g2" keypass="INhbb0g2"/>
-		<signjar jar="deployable/commons-logging.jar" keystore="/home/jbk/danse" alias="sampleViewer" storepass="INhbb0g2" keypass="INhbb0g2"/>
+		<signjar jar="deployable/Jmol.jar" keystore="/home/jbk/danse" alias="sampleViewer" storepass="INhbb0g2" keypass="INhbb0g2"/>
 		<copy todir="/var/www/java">
 			<fileset dir="deployable">
 				<exclude name="**/*.java"/>
