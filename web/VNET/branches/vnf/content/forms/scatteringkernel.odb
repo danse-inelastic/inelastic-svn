@@ -45,7 +45,7 @@ class Form( base ):
         p.text = ['Select a scattering kernel from the list below']
         numScatteringKernels = len(scatteringKernels)
         columns = ['id', 'reference', 'short_description', 'type', 'creator', 'date' ]
-        columnTitles = ["Select as scattering kernel",'Short description', 'Type of scattering kernel', 'Creator', 'Date of creation']
+        columnTitles = ["Select as scattering kernel","S(Q,E)",'Short description', 'Type of scattering kernel', 'Creator', 'Date of creation']
 
         
         t = PyHtmlTable(numScatteringKernels, len(columnTitles), {'width':'400','border':2})#,'bgcolor':'white'})
@@ -62,6 +62,9 @@ class Form( base ):
 #</div>'''
             selection = "<input type='radio' name='actor.form-received.kernel_id' value="+sk.id+" id='radio'/>"
             t.setc(row+1, 0, selection)
+            
+            plot = '<a href="/java/sgt.jnlp">view</a>'
+            t.setc(row+1, 1, plot)
             #then fill out the rest of the columns
             for colNum, colName in enumerate( columns[2:] ):           
                 value = sk.getColumnValue(colName)
@@ -76,7 +79,7 @@ class Form( base ):
                         ),  director.cgihome
                         )
                     value = link
-                t.setc(row+1,colNum+1,value)
+                t.setc(row+1,colNum+2,value)
         p.text += [t.return_html()]
         
 
