@@ -286,7 +286,7 @@ class UnitCell:
         Uses Numpy.linalg."""
         
         recipvectors = 2 * np.pi * la.inv(np.transpose(self._cellvectors))
-        recipUC = UnitCell(recipvectors)
+        recipUC = UnitCell(cellvectors=recipvectors)
         return recipUC
 
     def computeDistances(self, maxdist=30, latticeRange=[2,2,2]):
