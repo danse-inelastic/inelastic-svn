@@ -45,7 +45,7 @@ class Form( base ):
         p.text = ['Select a scattering kernel from the list below']
         numScatteringKernels = len(scatteringKernels)
         columns = ['id', 'reference', 'short_description', 'type', 'creator', 'date' ]
-        columnTitles = ["Select as scattering kernel","S(Q,E)",'Short description', 'Type of scattering kernel', 'Creator', 'Date of creation']
+        columnTitles = ["Select as scattering kernel", "Dynamics", "S(Q,E)", 'Short description', 'Type of scattering kernel', 'Creator', 'Date of creation']
 
         
         t = PyHtmlTable(numScatteringKernels, len(columnTitles), {'width':'400','border':2})#,'bgcolor':'white'})
@@ -64,8 +64,8 @@ class Form( base ):
             t.setc(rowNum+1, 0, selection)
            
             # the lines below are a demo-type hack
-            plot = '<a href="/java/dynamics'+str(rowNum)+'.jnlp">view</a>'
-            t.setc(rowNum+1, 1, plot)
+            dynamics = '<a href="/java/headDynamics'+str(rowNum)+'.jnlp">view</a>'
+            t.setc(rowNum+1, 1, dynamics)
             # what we really need is the 3D (or at least 2D) S(Q,E) data in array form in the db
             # and that to be retrieved now and plotted
             
@@ -90,7 +90,7 @@ class Form( base ):
                         ),  director.cgihome
                         )
                     value = link
-                t.setc(rowNum+1,colNum+2,value)
+                t.setc(rowNum+1,colNum+3,value)
         p.text += [t.return_html()]
         
 
