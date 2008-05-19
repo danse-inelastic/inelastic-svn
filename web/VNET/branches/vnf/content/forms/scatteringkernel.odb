@@ -52,22 +52,33 @@ class Form( base ):
         for colNum, col in enumerate(columnTitles):
             t.setc(0,colNum,col)
         #name = '%s.%s' % (formactor_action_prefix, 'kernel_id')    
-        for row, sk in enumerate(scatteringKernels):
+        for rowNum, scatteringKernel in enumerate(scatteringKernels):
             #first put in the radio button
             #selection = form.radio(id='radio', name=name, label = "", value = 'phononDispersions')
 #            selection = '''<div class='formfield'>
 #<div>
 #</div>
-#<input type='radio' name='actor.form-received.kernel_id' value='''+sk.id+''' id='radio'/>
+#<input type='radio' name='actor.form-received.kernel_id' value='''+scatteringKernel.id+''' id='radio'/>
 #</div>'''
-            selection = "<input type='radio' name='actor.form-received.kernel_id' value="+sk.id+" id='radio'/>"
-            t.setc(row+1, 0, selection)
+            selection = "<input type='radio' name='actor.form-received.kernel_id' value="+scatteringKernel.id+" id='radio'/>"
+            t.setc(rowNum+1, 0, selection)
+           
+            # the lines below are a demo-type hack
+            plot = '<a href="/java/dynamics'+str(rowNum)+'.jnlp">view</a>'
+            t.setc(rowNum+1, 1, plot)
+            # what we really need is the 3D (or at least 2D) S(Q,E) data in array form in the db
+            # and that to be retrieved now and plotted
             
+            # the lines below are a demo-type hack
             plot = '<a href="/java/sgt.jnlp">view</a>'
-            t.setc(row+1, 1, plot)
+            t.setc(rowNum+1, 2, plot)
+            # what we really need is the 3D (or at least 2D) S(Q,E) data in array form in the db
+            # and that to be retrieved now and plotted
+            
+            
             #then fill out the rest of the columns
             for colNum, colName in enumerate( columns[2:] ):           
-                value = sk.getColumnValue(colName)
+                value = scatteringKernel.getColumnValue(colName)
                 if colName == 'short_description':
                     link = action_link(
                         actionRequireAuthentication(
@@ -75,11 +86,11 @@ class Form( base ):
                         director.sentry,
                         label = value,
                         routine = 'show',
-                        id = sk.id,
+                        id = scatteringKernel.id,
                         ),  director.cgihome
                         )
                     value = link
-                t.setc(row+1,colNum+2,value)
+                t.setc(rowNum+1,colNum+2,value)
         p.text += [t.return_html()]
         
 
