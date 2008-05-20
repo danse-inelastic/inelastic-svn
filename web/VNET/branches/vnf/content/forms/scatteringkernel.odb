@@ -70,7 +70,7 @@ class Form( base ):
             # and that to be retrieved now and plotted
             
             # the lines below are a demo-type hack
-            plot = '<a href="/java/sgt.jnlp">view</a>'
+            plot = '<a href="/java/sqeViewer2.jnlp">view</a>'
             t.setc(rowNum+1, 2, plot)
             # what we really need is the 3D (or at least 2D) S(Q,E) data in array form in the db
             # and that to be retrieved now and plotted
