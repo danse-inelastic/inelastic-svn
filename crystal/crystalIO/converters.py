@@ -26,14 +26,17 @@ def listOfAtom2UnitCell(loa):
     return uc
 
 
-def unitCell2ListOfAtom(uc):
+def unitCell2ListOfAtom(uc, makeCartesian=False):
     """Utility to convert a UnitCell instance to a ASE ListOfAtom instance."""
     import ASE.ListOfAtoms
     import ASE.Atom
     loa = ASE.ListOfAtoms([],periodic=True) 
     loa.SetUnitCell(uc._cellvectors, fix=True)
     for site in uc:
-        aseatom = ASE.Atom(site.getAtom().symbol, uc.fractionalToCartesian(site.getPosition().tolist()))
+        if makeCartesian:
+            aseatom = ASE.Atom(site.getAtom().symbol, uc.fractionalToCartesian(site.getPosition().tolist()))
+        else:
+            aseatom = ASE.Atom(site.getAtom().symbol, site.getPosition().tolist())
         loa.append(aseatom)
     return loa
 
