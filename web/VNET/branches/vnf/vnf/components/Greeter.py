@@ -61,8 +61,7 @@ class Greeter(Actor):
         link = action_link( action, director.cgihome )
         p.text = [
             'You can do your experiments on a variety of %s,' % link,
-            'some simulate real instruments ',
-            'and some do not.',
+            'both actual physical instruments and conceptual, nonphysical instruments'
             ]
 
         p = document.paragraph()
@@ -72,7 +71,7 @@ class Greeter(Actor):
             )
         link = action_link( action, director.cgihome )
         p.text = [
-            'You can also create your sample and calculate its neutron',
+            'You can also create your sample and predict its neutron',
             'scattering properties by calculating its structure or dynamics.',
             'For example, the material behaviors calculated by ab initio'
             'or molecular dynamics methods become',
@@ -100,10 +99,7 @@ class Greeter(Actor):
         p.text = [
             'We welcome your comments on this web service, ',
             'suggestions for new features, and reports of',
-            'discrepancies or bugs. ',
-            'We seek real satisfaction for uses of this virtual',
-            'neutron facility.',
-            'Please contact %s.' % email,
+            'discrepancies or bugs.'
             ]
 
         return page
