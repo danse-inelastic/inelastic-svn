@@ -1,0 +1,3 @@
+To create a DANSE 3D Graphics gui, simply replace mayavi_ui_plugin_definition.py
+typically located in enthought/mayavi/ with this one.  Make any changes necessary
+to adjust to new versions of mayavi2.
