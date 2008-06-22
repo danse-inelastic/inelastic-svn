@@ -1,3 +1,7 @@
+// test the following methods:
+//   - table_addrow
+//   - table_addheadrow
+
 $(document).ready(function() {
 
     var table1 = $('#table1');

@@ -38,10 +38,13 @@ $(document).ready(function() {
     thetable.find( ".text" ).dblclick( function () {
 	$(this).enable_cell_editing();
       } );
-    /*
-    thetable.find( ".text").blur( function() {
-	alert( "hello" );
-	$(this).restore_cell_from_editing();
+
+    thetable.find( ".money" ).dblclick( function () {
+	$(this).enable_cell_editing();
       } );
-    */
+
+    thetable.find( ".shipping_time" ).dblclick( function () {
+	$(this).enable_cell_editing();
+      } );
+
   });
