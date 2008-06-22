@@ -1,3 +1,17 @@
+// -*- JavaScript -*-
+//
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//
+//                                   Jiao Lin
+//                      California Institute of Technology
+//                         (C) 2008 All Rights Reserved  
+//
+// {LicenseText}
+//
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//
+
+
 // tabulator
 
 // meta data are saved in cells to allow sorting, formatting.
@@ -42,6 +56,7 @@
 
     // when cell lost focus, we should quit editing mode
     var input = this.children( 'input' );
+    if (input.length == 0) input = this.children( 'select' );
     input.focus();
     var cell  = this;
     input.blur( function() {
@@ -56,6 +71,12 @@
   }
   
 
+  // add decorations to a cell
+  $.fn.format_cell = function() {
+    format_cell_by_class( this );
+  };
+
+  
   // add decorations to cells by cell classes
   $.fn.format_table_cells_by_class = function () {
     format_cells_by_class( this );
@@ -111,6 +132,11 @@
     return Number( cell1text ) - Number( cell2text );
   };
 
+  //  text
+  $.fn.sort_table_by_col.handle_text = function( cell1text, cell2text ) {
+    return cell1text.substring(0,1) < cell2text.substring(0,1)? -1: 1;
+  };
+
   // **** need more compare handlers here
   
 
@@ -126,6 +152,50 @@
     cell.children('input').width( width-1 );
   };
 
+  //  money
+  $.fn.enable_cell_editing.handle_money = function( cell ) {
+    var text = cell.text();
+    if (text.substring(0,1) == '$') text = text.substring(1, text.length);
+
+    var width = cell.width();
+    var html = '<input type="text" value ="' + text + '" />'; 
+    
+    cell.html( html );
+    cell.children('input').width( width-1 );
+  };
+
+  //  shipping_time
+  $.fn.enable_cell_editing.handle_shipping_time = function( cell ) {
+    var text = cell.text();
+    var width = cell.width();
+    var options = 
+    [{ 'value': '1', 'text': '1 Hour'},
+    { 'value': '12', 'text': '12 Hours'},
+    { 'value': '24', 'text': '24 Hours', 'selected': 1},
+    { 'value': '48', 'text': '2 Days'}];
+    
+    var dl = dropdownlist( options );
+
+    cell.html( dl );
+
+    cell.children('input').width( width-1 );
+  };
+
+  // dropdownlist( [ {'value': "volvo", 'text': "Volvo"}, ... ] )
+  function dropdownlist( options ) {
+    var select = document.createElement( 'select' );
+
+    for (var i=0; i<options.length; i++) {
+      var opt = document.createElement( 'option' );
+      var opt_info = options[i];
+      $(opt).attr('value', opt_info.value);
+      $(opt).text(opt_info.text);
+      if (opt_info.selected) $(opt).attr('selected', 'selected');
+      $(select).append( opt );
+    } 
+    
+    return select;
+  }
 
   // --------------------------------------------------------------
   // handlers to restore a cell from editable state to normal state
@@ -135,13 +205,28 @@
     var value = cell.find( "input" ).attr( 'value' );
     cell.text( value );
   };
+  //  money
+  $.fn.restore_cell_from_editing.handle_money = function( cell ) {
+    var value = cell.find( "input" ).attr( 'value' );
+    cell.text( '$' + value );
+  };
+  //  shipping_time
+  $.fn.restore_cell_from_editing.handle_shipping_time = function( cell ) {
+    var value = cell.find( "select" ).attr( 'value' );
+    cell.text( value );
+  };
 
 
   // -------------------------
   // handlers to format a cell
   // -------------------------
+  //  text
+  $.fn.format_cell.handle_text = function( cell ) {
+  };
+
+
   //  boolean
-  $.fn.format_table_cells_by_class.format_boolean_cell = function( cell ) {
+  $.fn.format_cell.handle_boolean = function( cell ) {
     var value = cell.text();
     var checked = Number(value)==0? '':'checked="checked"';
     var html = '<input type="checkbox" ' + checked + ' />';
@@ -149,13 +234,13 @@
   };
   
   //  money
-  $.fn.format_table_cells_by_class.format_money_cell = function( cell ) {
+  $.fn.format_cell.handle_money = function( cell ) {
     if (cell.text().substring(0,1) != '$') cell = cell.prepend( '$' );
     return cell.css("color", "green");
   };
 
   //  updown
-  $.fn.format_table_cells_by_class.format_upanddown_cell = function( cell ) {
+  $.fn.format_cell.handle_upanddown = function( cell ) {
     if (Number(cell.text()) > 0) 
       return cell.css("color", "green").prepend( '^' );
     else
@@ -163,7 +248,7 @@
   };
 
   //  shipping_time
-  $.fn.format_table_cells_by_class.format_shipping_time_cell = function( cell ) {
+  $.fn.format_cell.handle_shipping_time = function( cell ) {
     var text = cell.text();
     if (text == 'na' || text == 'NA') return cell;
     var hours = Number(text);
@@ -173,7 +258,7 @@
   };
 
   //  single choice
-  $.fn.format_table_cells_by_class.format_single_choice_cell = function( cell ) {
+  $.fn.format_cell.handle_single_choice = function( cell ) {
     var value = cell.text();
     var html = '<input type="radio" ';
     var checked = Number(value)==0? '':'checked="checked"';
@@ -189,30 +274,20 @@
   // ********************************************
 
   
+  // format a cell according to its class
+  function format_cell_by_class( cell ) {
+    var klass = cell.attr('class');
+    eval( "var handler = $.fn.format_cell.handle_" + klass + ";" );
+    handler( cell );
+  }
+
+
   // format each cell in a table according to the cell's class
   function format_cells_by_class( table ) {
     var tbody = get_tablebody( table );
-
-    tbody.find( '.boolean' ).each( function(i){ 
-        $.fn.format_table_cells_by_class.format_boolean_cell($(this));
+    $(tbody).find( 'td' ).each( function(i) {
+	$(this).format_cell();
       } );
-
-    tbody.find( '.money' ).each( function(i){
-        $.fn.format_table_cells_by_class.format_money_cell($(this));
-      } );
-
-    tbody.find( '.upanddown' ).each( function(i){
-        $.fn.format_table_cells_by_class.format_upanddown_cell($(this));
-      } );
-
-    tbody.find( '.shipping_time' ).each( function(i){
-        $.fn.format_table_cells_by_class.format_shipping_time_cell($(this));
-      } );
-
-    tbody.find( '.single_choice' ).each( function(i){
-        $.fn.format_table_cells_by_class.format_single_choice_cell($(this));
-      } );
-
   }
 
 
@@ -338,3 +413,9 @@
   }
 
  }) (jQuery);
+
+
+// version
+// $Id$
+
+// End of file 
