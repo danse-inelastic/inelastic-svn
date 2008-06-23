@@ -21,9 +21,9 @@ function make_test_table_1( thetable ) {
       { content: 'Bestseller', klass: 'single_choice_in_one_column'}
       ) ;
 
-  thetable.table_addrow(-1500, "A Time to Kill", 'John Grisham', 
+  thetable.table_addrow(-1500, "abcdefghijk", 'Some author 1', 
 			'$12.99', 1, 3, 0);
-  thetable.table_addrow(1000, "Blood and Smoke", 'Stephen King', 
+  thetable.table_addrow(1000, "QWERCVBF", 'Some author 2', 
 			0, 1, 3, 0);
   thetable.table_addrow(-100, "Boris Godunov", 'Alexandr Pushkin', 
 			7.15, 1, 1, 0);
