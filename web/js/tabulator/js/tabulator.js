@@ -164,22 +164,27 @@
     cell.children('input').width( width-1 );
   };
 
-  //  shipping_time
-  $.fn.enable_cell_editing.handle_shipping_time = function( cell ) {
-    var text = cell.text();
+  //  single_choice
+  $.fn.enable_cell_editing.handle_single_choice = function( cell ) {
+    var value = cell.attr('value');
     var width = cell.width();
-    var options = 
-    [{ 'value': '1', 'text': '1 Hour'},
-    { 'value': '12', 'text': '12 Hours'},
-    { 'value': '24', 'text': '24 Hours', 'selected': 1},
-    { 'value': '48', 'text': '2 Days'}];
+    var choices = cell.data( 'choices' );
     
+    var options = [];
+    
+    for (var index in choices) {
+      var  opt = {'value': index, 'text': choices[ index ]}
+      if (index == value) opt.selected = 'selected';
+      options.push( opt );
+    }
+
     var dl = dropdownlist( options );
 
     cell.html( dl );
 
-    cell.children('input').width( width-1 );
+    cell.children('select').width( width-1 );
   };
+
 
   // dropdownlist( [ {'value': "volvo", 'text': "Volvo"}, ... ] )
   function dropdownlist( options ) {
@@ -210,10 +215,13 @@
     var value = cell.find( "input" ).attr( 'value' );
     cell.text( '$' + value );
   };
-  //  shipping_time
-  $.fn.restore_cell_from_editing.handle_shipping_time = function( cell ) {
+  //  single_choice
+  $.fn.restore_cell_from_editing.handle_single_choice = function( cell ) {
     var value = cell.find( "select" ).attr( 'value' );
-    cell.text( value );
+    var choices = cell.data( 'choices' );
+    var text = choices[ value ];
+    cell.attr('value', value);
+    cell.text( text );
   };
 
 
@@ -247,18 +255,19 @@
       return cell.css("color", "red").prepend( 'v' );
   };
 
-  //  shipping_time
-  $.fn.format_cell.handle_shipping_time = function( cell ) {
-    var text = cell.text();
-    if (text == 'na' || text == 'NA') return cell;
-    var hours = Number(text);
-    if (hours > 24 && hours % 24 == 0) return cell.text( hours/24 + " days" );
-    if (hours == 1) return cell.text( "1 Hour" );
-    return cell.text( hours+" Hours" );
-  };
-
-  //  single choice
+  // single_choice
   $.fn.format_cell.handle_single_choice = function( cell ) {
+    var value = cell.attr('value');
+    //var colname = cell.attr( 'name' );
+    //var table = $(cell.parents( 'table' )[0]);
+    //var colheadcel = get_colheadcell( table, colname );
+    //var choices = $(colheadcel).data( 'choices' );
+    var choices = cell.data( 'choices' );
+    return cell.text( choices[ value ] );
+  };  
+
+  //  single choice in one column
+  $.fn.format_cell.handle_single_choice_in_one_column = function( cell ) {
     var value = cell.text();
     var html = '<input type="radio" ';
     var checked = Number(value)==0? '':'checked="checked"';
@@ -313,6 +322,9 @@
     // new row
     var tr = document.createElement( 'tr' );
 
+    // klasses needs special handling
+    var special_classes = [ 'single_choice' ];
+
     // add all cells. each argument correspond to a cell
     for (i=0; i<cells.length; i++) {
 
@@ -325,7 +337,15 @@
       std = $(td);
       std.addClass( cell.klass );
       std.attr( 'name', cell.name );
-      // may add more props here
+
+      // additional properties
+      for ( var k = 0; k<special_classes.length; k++) {
+	if ( cell.klass == special_classes[k] ) {
+	  var handler = eval( "new_cell_handle_" + cell.klass );
+	  handler( std, cell );
+	  break;
+	}
+      }
 
       $(tr).append(td);
 
@@ -334,6 +354,15 @@
     return $(tr);
   }
 
+  
+  function new_cell_handle_single_choice( jqcell, cellinfo )
+  {
+    //if (cellinfo.choices)
+      jqcell.data( 'choices', cellinfo.choices );
+    jqcell.attr( 'value', cellinfo.content );
+  }
+
+
   function new_row_from_template(template, values) {
 
     if (template.length != values.length) {
@@ -341,17 +370,35 @@
       return;
     }
 
+    var special_classes = [ 'single_choice' ];
+
     var cells = [];
 
     for (var i = 0; i < template.length; i++) {
       var value = values[i];
       var col = $(template[i]);
-      cells.push( { content: value, klass: col.attr('class'), name: col.text() } );
+      cell = { content: value, klass: col.attr('class'), name: col.text() }
+      
+      // additional info to copy from template
+      for (var k=0; k < special_classes.length; k++) {
+	if (cell.klass == special_classes[k]) {
+	  var handler = eval( 'cell_from_template_handle_' + cell.klass );
+	  handler( cell, col );
+	  break;
+	}
+      }
+
+      cells.push( cell );
     }
     
     return new_row_raw( cells );
   }
 
+  
+  function cell_from_template_handle_single_choice( cell, template ) {
+    var choices = template.data( 'choices' );
+    cell.choices = choices;
+  }
   
   function row_template_from_headrow( table ) {
     var theads = table.children( 'thead' );
@@ -386,6 +433,21 @@
       } 
     }
     return "not found";    
+  }
+
+  // get column head cell
+  function get_colheadcell( table, colname ) {
+    var thead = get_tablehead( table );
+    var rows = $(thead).children( 'tr' );
+    var lastrow = rows[ rows.length - 1 ];
+    var cells = $(lastrow).children( 'td' );
+    for (var i = 0; i<cells.length; i++ ) {
+      var cell = cells[i];
+      if ( $(cell).text() == colname ) {
+	return $(cell);
+      } 
+    }
+    return 'not found';
   }
 
   // sort given rows by a column. The column number is given.
