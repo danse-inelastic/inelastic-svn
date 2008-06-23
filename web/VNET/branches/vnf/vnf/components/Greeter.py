@@ -73,7 +73,7 @@ class Greeter(Actor):
         p.text = [
             'You can also create your sample and predict its neutron',
             'scattering properties by calculating its structure or dynamics.',
-            'For example, the material behaviors calculated by ab initio'
+            'For example, the material behaviors calculated by ab initio',
             'or molecular dynamics methods become',
             '%s that can be used in the sample simulation' % link,
             'part of your virtual experiment.',
