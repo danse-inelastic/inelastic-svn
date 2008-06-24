@@ -37,7 +37,7 @@ class Sample(Actor):
         # populate the main column
         document = main.document(title='List of samples')
         document.description = ''
-        document.byline = 'byline?'
+        document.byline = 'byline'
 
         # retrieve id:record dictionary from db
         clerk = director.clerk
@@ -54,6 +54,7 @@ class Sample(Actor):
             lambda s: format_atoms(s.matter.realmatter),
             lambda s: format_shape(s.shape.realshape),
             ]
+        print generators[0](sample)
 
         columnTitles = [
             'Sample description','Chemical formula', 'Cartesian lattice', 
