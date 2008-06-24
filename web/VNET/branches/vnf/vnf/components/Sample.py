@@ -54,13 +54,13 @@ class Sample(Actor):
             lambda s: format_atoms(s.matter.realmatter),
             lambda s: format_shape(s.shape.realshape),
             ]
-        print generators[0](sample)
+        print generators[0](samples[0])
 
         columnTitles = [
             'Sample description','Chemical formula', 'Cartesian lattice', 
             'Atom positions', 'Shape',]
 
-        t=PyHtmlTable(len(samples), len(columnTitles), {'width':'90%','border':2,'bgcolor':'white'})
+        t=PyHtmlTable(len(samples), len(columnTitles), {'width':'90%', 'border':2, 'bgcolor':'white'})
         # first row for labels 
         for colNum, col in enumerate(columnTitles):
             t.setc(0,colNum,col)
@@ -73,8 +73,6 @@ class Sample(Actor):
             for colNum, generator in enumerate( generators ):
                 value = generator( sample )
                 t.setc(row+1,colNum,value)
-                continue
-            continue
         
         p.text = [t.return_html()]
         
