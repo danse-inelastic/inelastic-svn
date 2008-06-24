@@ -24,7 +24,7 @@ routine2menu = {
     'select_sample_from_sample_library': 'sample',
     'create_new_sample': 'sample',
     'sample_environment': 'sample_environment',
-    'scattering_kernel': 'kernel_origin',
+    'configure_scatteringkernels': 'kernel_origin',
 #    'gulp_dynamics': 'gulp_dynamics',
     'submit_experiment': 'submit_experiment',
     #'experiment_parameters': 'experiment_parameters',

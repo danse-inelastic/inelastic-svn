@@ -119,7 +119,6 @@ def portlet(app):
     supportingCalcs.icon = "images/link_icon.gif"
     supportingCalcs.type = "navItem"
 
-    
     logout = portlet.item(description="Logout")
     logout.target = action_href(
             actionRequireAuthentication(
