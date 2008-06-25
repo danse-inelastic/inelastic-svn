@@ -572,9 +572,11 @@ class Clerk(Component):
         record = self._getRecordByID( table, id )
         type = record.type
         id1 = record.reference
+        #import vnf.dom.PolyCrystal
         module = __import__( 'vnf.dom.%s' % type, {}, {}, [''] )
         # "from vnf.dom.%s import %s as RealObj" % (type, type)
-        obj = self._getRecordByID( getattr(module, type), id1 )
+        temp=getattr(module, type)
+        obj = self._getRecordByID( temp, id1 )
         return obj
 
 
