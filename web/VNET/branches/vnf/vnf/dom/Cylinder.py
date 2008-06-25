@@ -20,7 +20,7 @@ class Cylinder(DbObject):
     import pyre.db
 
     height = pyre.db.real( name = 'height', default = 0.1 )
-    radius = pyre.db.real( name = 'thickness', default = 0.002 )
+    radius = pyre.db.real( name = 'radius', default = 0.002 )
 
 
 # version

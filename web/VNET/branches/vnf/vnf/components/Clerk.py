@@ -734,6 +734,19 @@ class DeepCopier:
         #update record to db
         self.clerk.updateRecord( block_copy )
         return block_copy
+    
+    def onCylinder(self, block):
+        #now make a new record
+        from vnf.dom.Cylinder import Cylinder as table
+        cylinder_copy = self.clerk.new_ownedobject( table )
+        
+        #copy some attrs from old record
+        attrs = ['height', 'radius', 'short_description']
+        self._copy_attrs( cylinder, cylinder_copy, attrs )
+
+        #update record to db
+        self.clerk.updateRecord( cylinder_copy )
+        return cylinder_copy
 
 
     def onCrystal(self, crystal):
