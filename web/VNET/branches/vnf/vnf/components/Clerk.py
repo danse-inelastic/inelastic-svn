@@ -735,7 +735,7 @@ class DeepCopier:
         self.clerk.updateRecord( block_copy )
         return block_copy
     
-    def onCylinder(self, block):
+    def onCylinder(self, cylinder):
         #now make a new record
         from vnf.dom.Cylinder import Cylinder as table
         cylinder_copy = self.clerk.new_ownedobject( table )
@@ -1145,6 +1145,9 @@ class HierarchyRetriever:
 
     def onBlock(self, block):
         return block
+    
+    def onCylinder(self, cylinder):
+        return cylinder
 
 
     pass # end of Clerk
