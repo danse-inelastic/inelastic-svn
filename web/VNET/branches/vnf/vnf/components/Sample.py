@@ -57,7 +57,7 @@ class Sample(Actor):
 
         columnTitles = [
             'Sample description','Chemical formula', 'Cartesian lattice', 
-            'Atom positions', 'Shape',]
+            'Atom positions', 'Shape']
 
         t=PyHtmlTable(len(samples), len(columnTitles), {'width':'90%', 'border':2, 'bgcolor':'white'})
         # first row for labels 
@@ -140,7 +140,8 @@ class ShapeFormatter:
         texts = [
             'Cylinder',
             'height=%.3fcm' % (cylinder.height * 100),
-            'radius=%.3fcm' % (cylinder.radius * 100),
+            'inner radius=%.3fcm' % (cylinder.innerRadius * 100),
+            'outer radius=%.3fcm' % (cylinder.outerRadius * 100),
             ]
         return '<br>'.join( texts )
 

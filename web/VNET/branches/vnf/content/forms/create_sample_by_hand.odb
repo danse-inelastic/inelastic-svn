@@ -37,17 +37,24 @@ class Form( base ):
         '''expand an existing form with fields from this component'''
         prefix = formactor_action_prefix
         p = form.paragraph()
-        p.text = ['''Input the sample name, lattice parameters a b c, and a list of atomic 
+        p.text = ['''Input the sample parameters''']
+        
+        name = form.text(id='name', name='name', label='Sample Name')
+        name.help = 'An identifying name for this sample.'
+        
+        
+        p = form.paragraph()
+        p.text = ['''Import the sample from an online database ...''']
+        p.text = ['''<a href="/java/cod2.jnlp">Launch the Crystallography Open Database</a>''']        
+        
+        p = form.paragraph()
+        p.text = ['''... or input lattice parameters a b c, and a list of atomic 
 positions in xyz format such as<br> 
 Fe   0.0 0.0 0.0<br>
 Fe   0.0 0.5 0.5<br>
 Fe   0.5 0.5 0.0<br>
 ...<br>
-''']
-        
-        name = form.text(id='name', name='name', label='Sample Name')
-        name.help = 'An identifying name for this sample.'
-        
+''']        
         box = form.box()
         ax = box.text(id='ax', name='%s.ax' % prefix, label='a: (x)')        
         ay = box.text(id='ay', name='%s.ay' % prefix, label='(y)')   
@@ -66,10 +73,16 @@ Fe   0.5 0.5 0.0<br>
 #        atomFile.help = 'Lattice vectors a,b,c should be on comment line in form a_x a_y a_z b_x b_y b_z c_x c_y c_z'
           
         p = form.paragraph()
-        p.text=['Input the shape parameters for a flat plate sample']
+        p.text=['Input the shape parameters for a flat plate sample ...']
         height = form.text(id='height', name='%s.height' % prefix, label='Height')        
         width = form.text(id='width', name='%s.width' % prefix, label='Width')   
         thickness = form.text(id='thickness', name='%s.thickness' % prefix, label='Thickness')  
+          
+        p = form.paragraph()
+        p.text=['or input the shape parameters for a cylindrical sample.']
+        height = form.text(id='height', name='%s.height' % prefix, label='Height')        
+        innerRadius = form.text(id='innerRadius', name='%s.innerRadius' % prefix, label='innerRadius') 
+        outerRadius = form.text(id='outerRadius', name='%s.outerRadius' % prefix, label='outerRadius')  
           
     def processUserInputs(self):
         'process user input '

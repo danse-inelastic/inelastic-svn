@@ -19,7 +19,6 @@ class Greeter(Actor):
 
         import pyre.inventory
 
-        pass # end of Inventory
 
 
     def default(self, director):
