@@ -54,7 +54,6 @@ class Sample(Actor):
             lambda s: format_atoms(s.matter.realmatter),
             lambda s: format_shape(s.shape.realshape),
             ]
-        print generators[0](samples[0])
 
         columnTitles = [
             'Sample description','Chemical formula', 'Cartesian lattice', 
@@ -134,6 +133,14 @@ class ShapeFormatter:
             'thickness=%.3fcm' % (block.thickness * 100),
             'height=%.3fcm' % (block.height * 100),
             'width=%.3fcm' % (block.width * 100),
+            ]
+        return '<br>'.join( texts )
+    
+    def onCylinder(self, cylinder):
+        texts = [
+            'Cylinder',
+            'height=%.3fcm' % (cylinder.height * 100),
+            'radius=%.3fcm' % (cylinder.radius * 100),
             ]
         return '<br>'.join( texts )
 

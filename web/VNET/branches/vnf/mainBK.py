@@ -44,7 +44,7 @@ if __name__ == '__main__':
     #app.inventory.stream=file('test.html','w')
     app.run()
     import os
-    os.system('firefox ~/test.html')
+    os.system('firefox /home/jbk/ganymede/eclipse/test.html')
 
 # version
 __id__ = "$Id: main.py,v 1.1.1.1 2006-11-27 00:09:14 aivazis Exp $"
