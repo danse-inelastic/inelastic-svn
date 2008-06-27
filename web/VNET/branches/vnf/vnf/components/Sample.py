@@ -42,8 +42,6 @@ class Sample(Actor):
         # retrieve id:record dictionary from db
         clerk = director.clerk
         scatterers = clerk.indexScatterers(where='template=True').values()
-        clerk.getHierarchy(scatterers[0])
-        clerk.getHierarchy(scatterers[1])
         scatterers = [ clerk.getHierarchy(scatterer) for scatterer in scatterers]
         samples = scatterers
             
@@ -80,9 +78,10 @@ class Sample(Actor):
         p = document.paragraph()
         p.text = [action_link(
             actionRequireAuthentication(
-            'sampleInput', director.sentry,
+            'sampleInput', 
+            director.sentry,
             label = 'Add a new sample',
-            routine = 'default'
+            routine = 'default'            
             ),  director.cgihome),'<br>']
 
         return page  

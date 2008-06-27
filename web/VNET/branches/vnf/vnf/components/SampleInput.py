@@ -34,8 +34,7 @@ class SampleInput(FormActor):
 #        experiment = director.clerk.getNeutronExperiment(self.inventory.id)
         main = page._body._content._main
         # populate the main column
-        document = main.document(
-            title='Sample input')
+        document = main.document(title='Sample input')
         document.description = ''
         document.byline = '<a href="http://danse.us">DANSE</a>'        
         

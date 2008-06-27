@@ -37,7 +37,7 @@ class Form( base ):
         '''expand an existing form with fields from this component'''
         prefix = formactor_action_prefix
         p = form.paragraph()
-        p.text = ['''Input the sample parameters''']
+        p.text = ['''Input the sample name''']
         
         name = form.text(id='name', name='name', label='Sample Name')
         name.help = 'An identifying name for this sample.'
@@ -45,6 +45,7 @@ class Form( base ):
         
         p = form.paragraph()
         p.text = ['''Import the sample from an online database ...''']
+        p = document.paragraph()
         p.text = ['''<a href="/java/cod2.jnlp">Launch the Crystallography Open Database</a>''']        
         
         p = form.paragraph()
