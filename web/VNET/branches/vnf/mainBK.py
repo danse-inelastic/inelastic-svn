@@ -42,7 +42,16 @@ if __name__ == '__main__':
     #root='/home/jbk/dv/tools/pythia-0.8'
     #environ['PYTHONPATH']='/home/jbk:'environ['PYTHONPATH']
     #app.inventory.stream=file('test.html','w')
-    app.run()
+    try:
+        app.run()
+    except:    
+        import traceback
+        import os
+        user = os.environ.get('USER') or 'webserver'
+        out = open( '/tmp/vnf-error-%s.log' % user, 'w' )
+        out.write( traceback.format_exc() )
+    
+    
     import os
     os.system('firefox /home/jbk/ganymede/eclipse/test.html')
 

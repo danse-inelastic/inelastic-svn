@@ -1078,7 +1078,12 @@ class HierarchyRetriever:
         scatterer.shape = shape
         scatterer.matter = matter
     
-        kernels = self.clerk.getScatteringKernels( scatterer.id )
+        try:
+            kernels = self.clerk.getScatteringKernels( scatterer.id )
+        except:
+            import traceback
+            self.clerk._debug.log(traceback.format_exc())
+            kernels = []
         kernels = [ self(kernel) for kernel in kernels ]
         scatterer.kernels = kernels
         return scatterer
