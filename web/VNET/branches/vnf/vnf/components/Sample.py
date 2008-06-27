@@ -42,6 +42,8 @@ class Sample(Actor):
         # retrieve id:record dictionary from db
         clerk = director.clerk
         scatterers = clerk.indexScatterers(where='template=True').values()
+        clerk.getHierarchy(scatterers[0])
+        clerk.getHierarchy(scatterers[1])
         scatterers = [ clerk.getHierarchy(scatterer) for scatterer in scatterers]
         samples = scatterers
             
@@ -140,8 +142,8 @@ class ShapeFormatter:
         texts = [
             'Cylinder',
             'height=%.3fcm' % (cylinder.height * 100),
-            'inner radius=%.3fcm' % (cylinder.innerRadius * 100),
-            'outer radius=%.3fcm' % (cylinder.outerRadius * 100),
+            'inner radius=%.3fcm' % (cylinder.innerradius * 100),
+            'outer radius=%.3fcm' % (cylinder.outerradius * 100),
             ]
         return '<br>'.join( texts )
 

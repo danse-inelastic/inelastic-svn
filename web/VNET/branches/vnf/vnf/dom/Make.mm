@@ -31,19 +31,20 @@ all: export
 
 EXPORT_PYTHON_MODULES = \
 	__init__.py \
+	AbInitio.py \
 	ARCSconfiguration.py \
 	Block.py \
+	Component.py \
 	ConfiguredInstrument.py \
 	ConfiguredScatterer.py \
 	Crystal.py \
+	Cylinder.py \
 	DbObject.py \
-	Disordered.py \
-	IDFPhononDispersion.py \
-	Instrument.py \
-	Component.py \
 	DetectorSystem_fromXML.py \
 	Disordered.py \
 	GulpScatteringKernel.py \
+	IDFPhononDispersion.py \
+	Instrument.py \
 	IQEMonitor.py \
 	Job.py \
 	Matter.py \
@@ -61,9 +62,9 @@ EXPORT_PYTHON_MODULES = \
 	SampleEnvironment.py \
 	Scatterer.py \
 	ScatteringKernel.py \
-	ScatteringKernel2.py \
 	Server.py \
 	Shape.py \
+	ShapeBase.py \
 	SimulationResult.py \
 	SingleCrystal.py \
 	Table.py \
