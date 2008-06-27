@@ -50,6 +50,7 @@ EXPORT_PYTHON_MODULES = \
 	Sample.py \
 	SampleAssembly.py \
 	SampleAssemblyXMLBuilder.py \
+	SampleInput.py \
 	SamplePreparation.py \
 	Scatterer.py \
 	ScattererConfigurationApplyer.py \
