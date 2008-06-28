@@ -37,9 +37,7 @@ class Form( base ):
         cz = inv.float('cz',default=1.0)
         
         listOfAtoms = inv.list('List_of_Atoms')
-        
-        sampleShape = inv.str('sampleShape',default='plate')
-        sampleShape.validator=inv.choice(['plate', 'cylinder'])
+
         
     parameters = ['name'] # parameters to edit in the form
 
@@ -104,27 +102,6 @@ Fe   0.5 0.5 0.0<br>
                       value = getattr( configuration, cz ))  
         self.listOfAtoms=form.textarea(id='listOfAtoms', name='%s.listOfAtoms' % prefix, 
                                   label='List of atoms (i.e. H  0.0  0.0  0.5)',rows=20)
-#        atomFile = form.file(id='atomFile', name='atomFile', label='Xyz file containing form')
-#        atomFile.help = 'Lattice vectors a,b,c should be on comment line in form a_x a_y a_z b_x b_y b_z c_x c_y c_z'
-          
-        p = form.paragraph()
-        p.text=['Select sample shape']
-        name = '%s.%s' % (formactor_action_prefix, 'sampleShape')
-        box=form.box()
-        plate=box.radio(id='radio1',name=name, label = "Plate", value = 'plate')       
-        cylinder=box.radio(id='radio2',name=name, label = "Cylinder", value = 'cylinder') 
-      
-        
-        height = form.text(id='height', name='%s.height' % prefix, label='Height')        
-        width = form.text(id='width', name='%s.width' % prefix, label='Width')   
-        thickness = form.text(id='thickness', name='%s.thickness' % prefix, label='Thickness')  
-          
-        p = form.paragraph()
-        p.text=['or input the shape parameters for a cylindrical sample.']
-        height = form.text(id='height', name='%s.height' % prefix, label='Height')        
-        innerRadius = form.text(id='innerradius', name='%s.innerradius' % prefix, label='innerRadius',
-                                value = getattr( configuration, cy ))) 
-        outerRadius = form.text(id='outerradius', name='%s.outerradius' % prefix, label='outerRadius')  
           
     def processUserInputs(self, commit = True):   
         '''process user inputs and save them to db
@@ -174,7 +151,7 @@ Fe   0.5 0.5 0.0<br>
         return record
     
 
-def form(): return Form( 'input_material' )
+def form(): return Form( 'inputMaterial' )
 
 
 # version

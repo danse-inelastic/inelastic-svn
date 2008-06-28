@@ -22,6 +22,8 @@ class Form( base ):
         import pyre.inventory as inv
         sampleShape = inv.str('sampleShape',default='plate')
         sampleShape.validator=inv.choice(['plate', 'cylinder'])
+        
+    routines={'cylinder':'inputCylinder','plate':'inputPlate'}
 
     def expand(self, form):
         '''expand an existing form with fields from this component'''
@@ -40,7 +42,7 @@ class Form( base ):
 
     def processUserInputs(self):
         'process user input '
-        return self.inventory.sampleShape
+        return routines[self.inventory.sampleShape]
 
 
 #formactor_action_prefix = 'actor.form-received' # assumed actor is a form actor
