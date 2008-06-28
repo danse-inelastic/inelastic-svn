@@ -427,7 +427,7 @@ class NeutronExperimentWizard(base):
         'neutronexperimentwizard', director.sentry,
         label = 'Add a new sample',
         #routine = 'create_new_sample',
-        routine = 'create_sample_by_hand',
+        routine = 'input_material',
         id=self.inventory.id
         ),  director.cgihome),'<br>']
         
@@ -463,7 +463,7 @@ class NeutronExperimentWizard(base):
 #        p.text += [action_link(actionRequireAuthentication(          
 #            actor = 'neutronexperimentwizard', 
 #            sentry = director.sentry,
-#            routine = 'create_sample_by_hand',
+#            routine = 'input_material',
 #            label = "Input the material manually",
 #            id = self.inventory.id#,
 ##           arguments = {'form-received': formcomponent.name }
@@ -505,7 +505,7 @@ class NeutronExperimentWizard(base):
 #        self._footer( form, director )
 #        return page   
 
-    def create_sample_by_hand(self, director):
+    def input_material(self, director):
         try:
             page = director.retrieveSecurePage( 'neutronexperimentwizard' )
         except AuthenticationError, err:
@@ -518,7 +518,7 @@ class NeutronExperimentWizard(base):
         document.description = ''
         document.byline = '<a href="http://danse.us">DANSE</a>'        
         
-        formcomponent = self.retrieveFormToShow( 'create_sample_by_hand')
+        formcomponent = self.retrieveFormToShow( 'input_material')
         formcomponent.director = director
         # build the form 
         form = document.form(name='', action=director.cgihome)

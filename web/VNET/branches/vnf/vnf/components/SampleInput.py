@@ -24,9 +24,9 @@ class SampleInput(FormActor):
         page = pyre.inventory.str('page', default='empty')
 
     def default(self, director):
-        return self.create_sample_by_hand(director)
+        return self.input_material(director)
         
-    def create_sample_by_hand(self, director):
+    def input_material(self, director):
         try:
             page = director.retrieveSecurePage( 'sampleInput' )
         except AuthenticationError, err:
@@ -38,13 +38,13 @@ class SampleInput(FormActor):
         document.description = ''
         document.byline = '<a href="http://danse.us">DANSE</a>'        
         
-        formcomponent = self.retrieveFormToShow( 'create_sample_by_hand')
+        formcomponent = self.retrieveFormToShow( 'input_material')
         formcomponent.director = director
         # build the form 
         form = document.form(name='', action=director.cgihome)
         # specify action
         action = actionRequireAuthentication(          
-            actor = 'greeter', 
+            actor = 'sample', 
             sentry = director.sentry,
             routine = 'default',
             label = '',
