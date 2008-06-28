@@ -43,7 +43,7 @@ class Form( base ):
         p.text += [action_href(actionRequireAuthentication(          
             actor = 'neutronexperimentwizard', 
             sentry = director.sentry,
-            routine = 'create_sample_by_hand',
+            routine = 'input_material',
             label = "Input the material manually",
             id = self.experiment_id),app.cgihome)]   
 
