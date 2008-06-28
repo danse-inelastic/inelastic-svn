@@ -17,7 +17,8 @@ from Actor import *
 
 class FormActor(Actor):
 
-    '''A special kind of actor.
+    '''
+    A special kind of actor.
 
     It can accept inputs of a form submitted by the previous
     action, and create a new form.

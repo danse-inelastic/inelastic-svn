@@ -38,15 +38,15 @@ class SampleInput(FormActor):
         document.description = ''
         document.byline = '<a href="http://danse.us">DANSE</a>'        
         
-        formcomponent = self.retrieveFormToShow( 'input_material')
+        formcomponent = self.retrieveFormToShow( 'inputMaterial')
         formcomponent.director = director
         # build the form 
         form = document.form(name='', action=director.cgihome)
         # specify action
         action = actionRequireAuthentication(          
-            actor = 'sample', 
+            actor = 'sampleInput', 
             sentry = director.sentry,
-            routine = 'default',
+            routine = 'selectShape',
             label = '',
             id=self.inventory.id,
             arguments = {'form-received': formcomponent.name },
@@ -59,36 +59,46 @@ class SampleInput(FormActor):
         submit = form.control(name='submit',type="submit", value="submit")
         #self.processFormInputs(director)
         return page  
+    
+    def selectShape(self, director):
+        try:
+            page = director.retrieveSecurePage( 'sampleInput' )
+        except AuthenticationError, err:
+            return err.page
+#        experiment = director.clerk.getNeutronExperiment(self.inventory.id)
+        main = page._body._content._main
+        # populate the main column
+        document = main.document(title='Sample input')
+        document.description = ''
+        document.byline = '<a href="http://danse.us">DANSE</a>'        
         
-#    def default(self, director):
-#        page = director.retrievePage('sampleInput')
-#        main = page._body._content._main
-#        
-#            # populate the main column
-#        document = main.document(title='Sample input')
-#    
-#        # build the sample input form
-#        form = document.form(name='form', action=director.cgihome)
-#        
-#        p = document.paragraph()
-##        p.text = ['''Upload xyz file''']
-#        
-#        name = form.text(id='name', name='name', label='Sample Name')
-#        name.help = 'An identifying name for this sample.'
-#        
-##        atomFile = form.file(id='atomFile', name='atomFile', label='Xyz file containing form')
-##        atomFile.help = 'Lattice vectors a,b,c should be on comment line in form a_x a_y a_z b_x b_y b_z c_x c_y c_z'
-#            
-#        p = document.paragraph()
-#        p.text = ['''Download material from <a href="/java/cod.jnlp">Crystallography Open Database</a>''']
-#        
-#        p = document.paragraph()
-#        p.text = ['Input sample shape<br>',
-#                  'Height, width, depth<label><input name="textfield" type="text" id="textfield" value="1.0 1.0 1.0" /></label>']
-#        
-#        submit = form.control(name="submit", type="submit", value="submit")
-#        
-#        return page 
+        formcomponent = self.retrieveFormToShow( 'selectShape')
+        formcomponent.director = director
+        # build the form 
+        form = document.form(name='', action=director.cgihome)
+        # specify action
+        action = actionRequireAuthentication(          
+            actor = 'sampleInput', 
+            sentry = director.sentry,
+            routine = 'onShapeSelect',
+            label = '',
+            id=self.inventory.id,
+            arguments = {'form-received': formcomponent.name },
+            )
+        from vnf.weaver import action_formfields
+        action_formfields( action, form )
+        
+        # expand the form with fields of the data object that is being edited
+        formcomponent.expand( form )
+        submit = form.control(name='submit',type="submit", value="submit")
+        #self.processFormInputs(director)
+        return page  
+    
+    def onShapeSelect(self, director):
+        selected = self.processFormInputs(director)
+        method = getattr(self, selected )
+        return method( director )
+        
 
 
     def __init__(self, name=None):
