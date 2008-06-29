@@ -26,7 +26,7 @@ class SampleInput(FormActor):
     def default(self, director):
         return self.input_material(director)
         
-    def input_material(self, director):
+    def inputMaterial(self, director):
         try:
             page = director.retrieveSecurePage( 'sampleInput' )
         except AuthenticationError, err:
@@ -56,7 +56,7 @@ class SampleInput(FormActor):
         
         # expand the form with fields of the data object that is being edited
         formcomponent.expand( form )
-        submit = form.control(name='submit',type="submit", value="submit")
+        submit = form.control(name='submit',type="submit", value="next")
         #self.processFormInputs(director)
         return page  
     
@@ -90,7 +90,7 @@ class SampleInput(FormActor):
         
         # expand the form with fields of the data object that is being edited
         formcomponent.expand( form )
-        submit = form.control(name='submit',type="submit", value="submit")
+        submit = form.control(name='submit',type="submit", value="next")
         #self.processFormInputs(director)
         return page  
     
@@ -99,6 +99,73 @@ class SampleInput(FormActor):
         method = getattr(self, selected )
         return method( director )
         
+    def inputPlate(self, director):
+        try:
+            page = director.retrieveSecurePage( 'sampleInput' )
+        except AuthenticationError, err:
+            return err.page
+#        experiment = director.clerk.getNeutronExperiment(self.inventory.id)
+        main = page._body._content._main
+        # populate the main column
+        document = main.document(title='Sample input')
+        document.description = ''
+        document.byline = '<a href="http://danse.us">DANSE</a>'        
+        
+        formcomponent = self.retrieveFormToShow( 'inputPlate')
+        formcomponent.director = director
+        # build the form 
+        form = document.form(name='', action=director.cgihome)
+        # specify action
+        action = actionRequireAuthentication(          
+            actor = 'sample', 
+            sentry = director.sentry,
+            routine = 'default',
+            label = '',
+            id=self.inventory.id,
+            arguments = {'form-received': formcomponent.name },
+            )
+        from vnf.weaver import action_formfields
+        action_formfields( action, form )
+        
+        # expand the form with fields of the data object that is being edited
+        formcomponent.expand( form )
+        submit = form.control(name='submit',type="submit", value="submit")
+        #self.processFormInputs(director)
+        return page
+    
+    def inputCylinder(self, director):
+        try:
+            page = director.retrieveSecurePage( 'sampleInput' )
+        except AuthenticationError, err:
+            return err.page
+#        experiment = director.clerk.getNeutronExperiment(self.inventory.id)
+        main = page._body._content._main
+        # populate the main column
+        document = main.document(title='Sample input')
+        document.description = ''
+        document.byline = '<a href="http://danse.us">DANSE</a>'        
+        
+        formcomponent = self.retrieveFormToShow( 'inputCylinder')
+        formcomponent.director = director
+        # build the form 
+        form = document.form(name='', action=director.cgihome)
+        # specify action
+        action = actionRequireAuthentication(          
+            actor = 'sample', 
+            sentry = director.sentry,
+            routine = 'default',
+            label = '',
+            id=self.inventory.id,
+            arguments = {'form-received': formcomponent.name },
+            )
+        from vnf.weaver import action_formfields
+        action_formfields( action, form )
+        
+        # expand the form with fields of the data object that is being edited
+        formcomponent.expand( form )
+        submit = form.control(name='submit',type="submit", value="submit")
+        #self.processFormInputs(director)
+        return page
 
 
     def __init__(self, name=None):
