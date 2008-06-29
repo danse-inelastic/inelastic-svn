@@ -108,17 +108,24 @@ Fe   0.5 0.5 0.0<br>
         commit: if true, commit to database record. 
         '''
 
-        # prepare a record to accept user inputs
+        # prepare a scatterer record 
+        if self.inventory.id == '':
+            record = self.createRecord()
+        else:
+            record = self.getRecord()
+        setattr(record, prop, self.inventory.getTraitValue( prop ) )
+            
+        # prepare a materials record 
         if self.inventory.id == '':
             record = self.createRecord()
         else:
             record = self.getRecord()
 
+        
+
         # transfer user inputs to db record
         for prop in self.parameters:
-            setattr(
-                record, prop,
-                self.inventory.getTraitValue( prop ) )
+            setattr(record, prop, self.inventory.getTraitValue( prop ) )
 
         # commit if requested
         if commit:
