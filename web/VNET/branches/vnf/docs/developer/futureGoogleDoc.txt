@@ -242,7 +242,7 @@ class Paragraph(Element):
         self.text = []
         return
 
-and the def onParagraph method of opal.weaver.ContentMill.py:
+and the onParagraph method of opal.weaver.ContentMill.py:
 
 class ContentMill(object):
 
