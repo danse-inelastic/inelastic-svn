@@ -45,7 +45,7 @@ EXPORT_PYTHON_MODULES = \
 	NeutronExperiment.py \
 	NeutronExperimentWizard.py \
 	NeutronExperimentSimulationRunBuilder.py \
-	NeutronExperimentSimulationRunBuilder_hack.py \
+	NeutronExperimentSimulationRunBuilder_demo.py \
 	PyHtmlTable.py \
 	Sample.py \
 	SampleAssembly.py \
