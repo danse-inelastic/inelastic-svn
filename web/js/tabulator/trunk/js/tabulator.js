@@ -29,9 +29,7 @@
 
   // sort a table by a column
   // this -> table
-  $.fn.sort_table_by_col = function( column_name, direction ) {
-
-    colno = get_colno( this, column_name );
+  $.fn.sort_table_by_col = function( colno, direction ) {
 
     // save rows before we remove them from the table
     var saverows = [];
@@ -55,9 +53,15 @@
     enable_cell_editing_by_class( this );
 
     // when cell lost focus, we should quit editing mode
+
+    //  "input" or "select"?
     var input = this.children( 'input' );
     if (input.length == 0) input = this.children( 'select' );
+
+    //  focus on input now
     input.focus();
+    
+    //  blur --> quit editing
     var cell  = this;
     input.blur( function() {
 	cell.restore_cell_from_editing();
@@ -91,28 +95,45 @@
   // add a row to table head
   $.fn.table_addheadrow = function () {
     var thead = get_tablehead( this );
-    row = new_row_raw( arguments );
+    nrows = thead.children( 'row' ).length;
+    row = new_row_raw( nrows, arguments );
     $(thead).append( row );
   };
 
+
+  // add column descriptors for a table
+  // a column descriptor describe the properties of a column, such
+  // as name, type, sorting direction? 
+  $.fn.table_addcolumndescriptors = function () {
+    $(this).data( 'column_descriptors', arguments );
+  };
+
+
   // add a row to table body
   $.fn.table_addrow = function () {
-    
-    var tbody = get_tablebody( this );
-
-    // explicitly formatted cells
-    var arg0 = arguments[0];
-    if (arg0.klass != undefined ) {
-      row = new_row_raw( arguments );
-      tbody.append( row );
-    }
-    // implicitly formatted cells
-    else {
-      var template = row_template_from_headrow( this );
-      var row = new_row_from_template( template, arguments );
-      tbody.append( row );
-    }
+    append_row_to_table( arguments, this );
     return this;
+  };
+
+  
+  // add a row to table body. only the data are specified. meta data 
+  // will be obtained from "column_descriptors"
+  $.fn.table_addrow_dataonly = function() {
+    var data = arguments;
+    var tbl = this;
+
+    var cells = [];
+    
+    var column_descriptors = tbl.data( 'column_descriptors' );
+
+    for (var i=0; i<data.length; i++) {
+      var descriptor = column_descriptors[i];
+      var klass = descriptor.klass;
+      var cell = { 'content': data[i], 'klass': klass };
+      cells.push( cell );
+    }
+    
+    append_row_to_table( cells, tbl );
   };
 
 
@@ -166,15 +187,20 @@
 
   //  single_choice
   $.fn.enable_cell_editing.handle_single_choice = function( cell ) {
-    var value = cell.attr('value');
+    var text = cell.text();
     var width = cell.width();
     var choices = cell.data( 'choices' );
+    if (choices == undefined) {
+      descriptor = get_column_descriptor( cell );
+      choices = descriptor.choices;
+    }
     
     var options = [];
     
     for (var index in choices) {
-      var  opt = {'value': index, 'text': choices[ index ]}
-      if (index == value) opt.selected = 'selected';
+      var choice = choices[index];
+      var  opt = {'value': index, 'text': choice}
+      if (choice == text) opt.selected = 'selected';
       options.push( opt );
     }
 
@@ -184,7 +210,6 @@
 
     cell.children('select').width( width-1 );
   };
-
 
   // dropdownlist( [ {'value': "volvo", 'text': "Volvo"}, ... ] )
   function dropdownlist( options ) {
@@ -202,6 +227,7 @@
     return select;
   }
 
+
   // --------------------------------------------------------------
   // handlers to restore a cell from editable state to normal state
   // --------------------------------------------------------------
@@ -210,17 +236,20 @@
     var value = cell.find( "input" ).attr( 'value' );
     cell.text( value );
   };
+
   //  money
   $.fn.restore_cell_from_editing.handle_money = function( cell ) {
     var value = cell.find( "input" ).attr( 'value' );
     cell.text( '$' + value );
   };
+
   //  single_choice
   $.fn.restore_cell_from_editing.handle_single_choice = function( cell ) {
-    var value = cell.find( "select" ).attr( 'value' );
-    var choices = cell.data( 'choices' );
-    var text = choices[ value ];
-    cell.attr('value', value);
+    var select = cell.find( "select" );
+    var value = select.attr('value');
+    column_descriptor = get_column_descriptor( cell );
+    choices = column_descriptor.choices;
+    text = choices[ value ];
     cell.text( text );
   };
 
@@ -231,7 +260,6 @@
   //  text
   $.fn.format_cell.handle_text = function( cell ) {
   };
-
 
   //  boolean
   $.fn.format_cell.handle_boolean = function( cell ) {
@@ -257,13 +285,12 @@
 
   // single_choice
   $.fn.format_cell.handle_single_choice = function( cell ) {
-    var value = cell.attr('value');
-    //var colname = cell.attr( 'name' );
-    //var table = $(cell.parents( 'table' )[0]);
-    //var colheadcel = get_colheadcell( table, colname );
-    //var choices = $(colheadcel).data( 'choices' );
-    var choices = cell.data( 'choices' );
-    return cell.text( choices[ value ] );
+    text = cell.text();
+    column_descriptor = get_column_descriptor( cell );
+    choices = column_descriptor.choices;
+    text = choices[ text ];
+    cell.text( text );
+    return cell;
   };  
 
   //  single choice in one column
@@ -278,15 +305,39 @@
   };
 
   
+
   // ********************************************
   // implementation details
   // ********************************************
 
+
+  // append a row to the table
+  function append_row_to_table( cells, table ) {
+    var tbody = get_tablebody( table );
+
+    nrows = tbody.children( 'row' ).length;
+    row = new_row_raw( nrows, cells );
+    tbody.append( row );
+  }
+
+
+  // find the parent table
+  function find_parent_table( element ) {
+    return $( element.parents( 'table' )[0] );
+  }
+
+
+  // get column descriptor of a cell
+  function get_column_descriptor( cell ) {
+    table = find_parent_table( cell );
+    colno = cell.attr( 'colno' );
+    return table.data('column_descriptors')[ colno ];
+  }
   
   // format a cell according to its class
   function format_cell_by_class( cell ) {
     var klass = cell.attr('class');
-    eval( "var handler = $.fn.format_cell.handle_" + klass + ";" );
+    var handler = eval( "$.fn.format_cell.handle_" + klass );
     handler( cell );
   }
 
@@ -303,7 +354,7 @@
   // enable editing for a cell according to the cell's class
   function enable_cell_editing_by_class( cell ) {
     var klass = cell.attr('class');
-    eval( "var handler = $.fn.enable_cell_editing.handle_" + klass + ";" );
+    var handler = eval( "$.fn.enable_cell_editing.handle_" + klass );
     handler( cell );
   }
 
@@ -311,19 +362,16 @@
   // restore cell from editing status according to the cell's class
   function restore_cell_from_editing_by_class( cell ) {
     var klass = cell.attr('class');
-    eval( "var handler = $.fn.restore_cell_from_editing.handle_" + klass + ";" );
+    var handler = eval( "$.fn.restore_cell_from_editing.handle_" + klass );
     handler( cell );
   }
 
 
   // create a new row with given cells
-  function new_row_raw(cells) {
+  function new_row_raw(rowno, cells) {
     
     // new row
     var tr = document.createElement( 'tr' );
-
-    // klasses needs special handling
-    var special_classes = [ 'single_choice' ];
 
     // add all cells. each argument correspond to a cell
     for (i=0; i<cells.length; i++) {
@@ -336,16 +384,9 @@
       // class
       std = $(td);
       std.addClass( cell.klass );
-      std.attr( 'name', cell.name );
-
-      // additional properties
-      for ( var k = 0; k<special_classes.length; k++) {
-	if ( cell.klass == special_classes[k] ) {
-	  var handler = eval( "new_cell_handle_" + cell.klass );
-	  handler( std, cell );
-	  break;
-	}
-      }
+      //std.attr( 'name', cell.name );
+      std.attr( 'colno', i );
+      std.attr( 'rowno', rowno );
 
       $(tr).append(td);
 
@@ -355,59 +396,6 @@
   }
 
   
-  function new_cell_handle_single_choice( jqcell, cellinfo )
-  {
-    //if (cellinfo.choices)
-      jqcell.data( 'choices', cellinfo.choices );
-    jqcell.attr( 'value', cellinfo.content );
-  }
-
-
-  function new_row_from_template(template, values) {
-
-    if (template.length != values.length) {
-      // how do I throw an error?
-      return;
-    }
-
-    var special_classes = [ 'single_choice' ];
-
-    var cells = [];
-
-    for (var i = 0; i < template.length; i++) {
-      var value = values[i];
-      var col = $(template[i]);
-      cell = { content: value, klass: col.attr('class'), name: col.text() }
-      
-      // additional info to copy from template
-      for (var k=0; k < special_classes.length; k++) {
-	if (cell.klass == special_classes[k]) {
-	  var handler = eval( 'cell_from_template_handle_' + cell.klass );
-	  handler( cell, col );
-	  break;
-	}
-      }
-
-      cells.push( cell );
-    }
-    
-    return new_row_raw( cells );
-  }
-
-  
-  function cell_from_template_handle_single_choice( cell, template ) {
-    var choices = template.data( 'choices' );
-    cell.choices = choices;
-  }
-  
-  function row_template_from_headrow( table ) {
-    var theads = table.children( 'thead' );
-    var lastthead = theads[ theads.length - 1 ];
-    var rows = $(lastthead).children( 'tr' );
-    var lastrow = rows[ rows.length - 1 ];
-    return $(lastrow).children();
-  }
-
   function get_tablehead( table ) {
     var theads = table.children( 'thead' );
     var lastthead = theads[ theads.length - 1 ];
@@ -418,36 +406,6 @@
     var tbodys = table.children( 'tbody' );
     var lasttbody = tbodys[ tbodys.length - 1 ];
     return $(lasttbody);
-  }
-
-  // find out col number given column name
-  function get_colno( table, colname ) {
-    var thead = get_tablehead( table );
-    var rows = $(thead).children( 'tr' );
-    var lastrow = rows[ rows.length - 1 ];
-    var cells = $(lastrow).children( 'td' );
-    for (var i = 0; i<cells.length; i++ ) {
-      var cell = cells[i];
-      if ( $(cell).text() == colname ) {
-	return i;
-      } 
-    }
-    return "not found";    
-  }
-
-  // get column head cell
-  function get_colheadcell( table, colname ) {
-    var thead = get_tablehead( table );
-    var rows = $(thead).children( 'tr' );
-    var lastrow = rows[ rows.length - 1 ];
-    var cells = $(lastrow).children( 'td' );
-    for (var i = 0; i<cells.length; i++ ) {
-      var cell = cells[i];
-      if ( $(cell).text() == colname ) {
-	return $(cell);
-      } 
-    }
-    return 'not found';
   }
 
   // sort given rows by a column. The column number is given.
@@ -465,7 +423,7 @@
       var cell2text = cell2.text();
       
       // ****** shall we assert classes are matched? *******
-      eval( "var handler = $.fn.sort_table_by_col.handle_" + klass1 + ";" );
+      var handler = eval( "$.fn.sort_table_by_col.handle_" + klass1 );
       
       return handler( cell1text, cell2text );
     }
