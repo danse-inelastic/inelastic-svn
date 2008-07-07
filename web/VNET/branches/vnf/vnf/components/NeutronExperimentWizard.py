@@ -872,9 +872,14 @@ class NeutronExperimentWizard(base):
         job = experiment.job
         from JobDataManager import JobDataManager
         path = JobDataManager( job, director ).localpath()
-        
-        #from NeutronExperimentSimulationRunBuilder import Builder
-        from NeutronExperimentSimulationRunBuilder_hack import Builder
+
+        username = director.sentry.username
+        if username in ['demo']:
+            #demo user can not really run simulation#
+            #but they can see a demo
+            from NeutronExperimentSimulationRunBuilder_demo import Builder
+        else:
+            from NeutronExperimentSimulationRunBuilder import Builder
         Builder(path).render(experiment)
 
         experiment.status = 'constructed'
