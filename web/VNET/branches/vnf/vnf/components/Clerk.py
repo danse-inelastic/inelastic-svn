@@ -1155,6 +1155,10 @@ class HierarchyRetriever:
         return cylinder
 
 
+    def onCylinder(self, cylinder):
+        return cylinder
+
+
     pass # end of Clerk
 
 
