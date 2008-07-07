@@ -1,0 +1,131 @@
+# -*- Python -*-
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                   Jiao Lin
+#                      California Institute of Technology
+#                        (C) 2007  All Rights Reserved
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+
+from vnf.components.Form import Form as base
+from vnf.components.Actor import action_link, actionRequireAuthentication
+
+
+class Form( base ):
+
+    shapes = [
+        'plate',
+        ]
+    
+    class Inventory( base.Inventory ):
+        import pyre.inventory
+        id = pyre.inventory.str( 'id', default = '' )
+        name = pyre.inventory.str( 'name' )
+        shape = pyre.inventory.str( 'shape' )
+
+        width = pyre.inventory.str( 'width' )
+        height = pyre.inventory.str( 'height' )
+        thickness = pyre.inventory.str( 'thickness' )
+
+        phase = pyre.inventory.str( 'phase' )
+        chemical_formula = pyre.inventory.str( 'chemical_formula' )
+        crystal_structure = pyre.inventory.str( 'crystal_structure' )
+        pass # end of Inventory
+
+
+    def legend(self):
+        'return a legend string'
+        record = self.getRecord()
+        return 'Edit %r' % record.short_description
+
+
+    def expand(self, form):
+        '''expand an existing form with fields from this component'''
+        
+        record = self.getRecord()
+        
+        prefix = formactor_action_prefix
+        
+        id_field = form.hidden(
+            name = '%s.id' % prefix, value = record.id)
+        
+        field = form.text(
+            id = 'name',
+            name='%s.%s' % (prefix, 'short_description'),
+            label='Name',
+            value = record.short_description)
+
+        from opal.content.Literal import Literal
+        javascript = Literal()
+        javascript.text = [
+            '<script>',
+            'function showshapeform(){',
+            
+            '}',
+            '</script>',
+            ]
+        form.contents.append( javascript )
+
+        shapes = self.shapes
+        entries = enumerate( shapes )
+        import opal.content
+        selector = opal.content.selector(
+            name = '%s.shape' % prefix,
+            entries = entries,
+            label = 'Shape',
+            selected = shapes[0],
+            onclick = 'return showshapeform();',
+            )
+        form.contents.append( selector )
+
+        shapeinputs = form.field(
+            name = 'shapeinputs',
+            id = 'shapeinputs',
+            
+            
+        return
+
+
+    def processUserInputs(self):
+        'process user inputs and save them to db'
+
+        record = self.getRecord( )
+        
+        return
+
+
+    def getRecord(self):
+        'get DB record'
+        id = self.inventory.id
+        director = self.director
+        clerk = director.clerk
+        return clerk.getRecordByID( 'Scatterer', id )
+
+
+    def __init__(self, name = None):
+        if name is None:
+            name = 'newscatterer'
+
+        base.__init__(self, name)
+
+        return
+    
+    pass # end of Form
+
+
+
+formactor_action_prefix = 'actor.form-received' # assumed actor is a form actor
+
+
+def form(): return Form()
+
+
+# version
+__id__ = "$Id$"
+
+# End of file 
