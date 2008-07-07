@@ -11,9 +11,9 @@ $(document).ready(function() {
 
     thetable.format_table_cells_by_class();
     
-    thetable.sort_table_by_col( "Price", 0 );
+    thetable.sort_table_by_col( 3, 0 );
 
     $('#priceup').click( function () {
-	thetable.sort_table_by_col( 'Price', 1 );
+	thetable.sort_table_by_col( 3, 1 );
       } );
   });

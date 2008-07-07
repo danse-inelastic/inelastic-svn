@@ -12,24 +12,34 @@ function make_test_table_2( thetable ) {
   };
 
   thetable.table_addheadrow
-    ( { content: 'Sales', klass: 'upanddown'},
-      { content: 'Book', klass: 'text'},
-      { content: 'Author', klass: 'text'},
-      { content: 'Price', klass: 'money'},
-      { content: 'In Store', klass: 'boolean'},
-      { content: 'Shipping', klass: 'single_choice', choices: shipping_choices},
-      { content: 'Bestseller', klass: 'single_choice_in_one_column'}
+    ( { content: 'Sales'},
+      { content: 'Book'},
+      { content: 'Author'},
+      { content: 'Price'},
+      { content: 'In Store'},
+      { content: 'Shipping'},
+      { content: 'Bestseller'}
+      ) ;
+
+  thetable.table_addcolumndescriptors
+    ( { name: 'Sales', klass: 'upanddown'},
+      { name: 'Book', klass: 'text'},
+      { name: 'Author', klass: 'text'},
+      { name: 'Price', klass: 'money'},
+      { name: 'In Store', klass: 'boolean'},
+      { name: 'Shipping', klass: 'single_choice', choices: shipping_choices},
+      { name: 'Bestseller', klass: 'single_choice_in_one_column'}
       ) ;
 
   var N = 50;
 
   for (var i = 0; i < N; i++ ) {
     
-    var sales = Math.floor( Math.random() * (N+1) ) - Math.floor(N/2);
-    var price = Math.floor( Math.random() * (N+1) ) / 100.;
+    var sales = Math.floor( Math.random() * 100 ) - Math.floor(100/2);
+    var price = Math.floor( Math.random() * 3000 )/100.;
     var shipping = Math.floor( Math.random() * 6 );
     
-    thetable.table_addrow( sales, 'a book', "an author", price, 1, shipping, 0 );
+    thetable.table_addrow_dataonly( sales, 'a book', "an author", price, 1, shipping, 0 );
     ;
   }
 
