@@ -26,6 +26,7 @@ EXPORT_PYTHON_MODULES = \
 	DBObjectForm.py \
 	Block.py \
 	ConfigureNeutronScatterer.py \
+	Cylinder.py \
 	__init__.py \
 
 
