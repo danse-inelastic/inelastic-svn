@@ -168,9 +168,12 @@
   $.fn.enable_cell_editing.handle_text = function( cell ) {
     var text = cell.text();
     var width = cell.width();
+    var height = cell.height();
     var html = '<input type="text" value ="' + text + '" />'; 
     cell.html( html );
-    cell.children('input').width( width-1 );
+    var input = cell.children('input');
+    input.width( width );
+    input.height( height );
   };
 
   //  money
@@ -179,16 +182,20 @@
     if (text.substring(0,1) == '$') text = text.substring(1, text.length);
 
     var width = cell.width();
+    var height = cell.height();
     var html = '<input type="text" value ="' + text + '" />'; 
     
     cell.html( html );
-    cell.children('input').width( width-1 );
+    var input = cell.children('input')
+    input.width( width );
+    input.height( height );
   };
 
   //  single_choice
   $.fn.enable_cell_editing.handle_single_choice = function( cell ) {
     var text = cell.text();
     var width = cell.width();
+    var height = cell.height();
     var choices = cell.data( 'choices' );
     if (choices == undefined) {
       descriptor = get_column_descriptor( cell );
@@ -208,7 +215,9 @@
 
     cell.html( dl );
 
-    cell.children('select').width( width-1 );
+    select = cell.children('select');
+    select.width( width );
+    select.height( height-2 );
   };
 
   // dropdownlist( [ {'value': "volvo", 'text': "Volvo"}, ... ] )
