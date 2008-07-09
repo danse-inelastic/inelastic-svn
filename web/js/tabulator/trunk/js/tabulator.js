@@ -14,14 +14,30 @@
 
 // tabulator
 
-// meta data are saved in cells to allow sorting, formatting.
+
+// some meta data are saved in cells to allow sorting, formatting.
+// some other meta data are stored in table.
+// column_descriptors is a piece of meta data that is saved in table.
+
 
 (function($) {
 
   // ********************************************
   //  public methods added to jQuery
   // ********************************************
-  
+
+  // ---------------------
+  // table meta data setup
+  // ---------------------
+
+  // set column descriptors for a table
+  // a column descriptor describe the properties of a column, such
+  // as name, type, sorting direction? 
+  $.fn.table_setcolumndescriptors = function () {
+    $(this).data( 'column_descriptors', arguments );
+  };
+
+
 
   // ---------------------
   // table manipulations
@@ -50,7 +66,7 @@
 
   // make a cell editable
   $.fn.enable_cell_editing = function () {
-    enable_cell_editing_by_class( this );
+    enable_cell_editing_by_datatype( this );
 
     // when cell lost focus, we should quit editing mode
 
@@ -71,69 +87,63 @@
   
   // restore a cell from editable to normal
   $.fn.restore_cell_from_editing = function () {
-    restore_cell_from_editing_by_class( this );
+    restore_cell_from_editing_by_datatype( this );
   }
   
 
-  // add decorations to a cell
-  $.fn.format_cell = function() {
-    format_cell_by_class( this );
+  // extract data value from a cell
+  $.fn.extract_data_from_cell = function () {
+    cell = this;
+    datatype = cell.attr( 'datatype' );
+    var handler = eval( '$.fn.extract_data_from_cell.handle_' + datatype );
+    return handler( cell );
   };
 
-  
-  // add decorations to cells by cell classes
-  $.fn.format_table_cells_by_class = function () {
-    format_cells_by_class( this );
-    return this;
+
+  // establish a cell given a new value
+  $.fn.establish_cell_from_data = function( data ) {
+    cell = this;
+    datatype = cell.attr( 'datatype' );
+    var handler = eval( '$.fn.establish_cell_from_data.handle_' + datatype );
+    return handler( cell, data );
   };
-  
+
+
+  // get value from an editing widget for a cell
+  $.fn.cell_value_from_editing_widget = function() {
+    cell = this;
+    datatype = cell.attr( 'datatype' );
+    var handler = eval( '$.fn.cell_value_from_editing_widget.handle_' + datatype );
+    return handler( cell );
+  };
+
 
   // ---------------------
   // basic table creation
   // ---------------------
 
-  // add a row to table head
-  $.fn.table_addheadrow = function () {
-    var thead = get_tablehead( this );
-    nrows = thead.children( 'row' ).length;
-    row = new_row_raw( nrows, arguments );
-    $(thead).append( row );
-  };
-
-
-  // add column descriptors for a table
-  // a column descriptor describe the properties of a column, such
-  // as name, type, sorting direction? 
-  $.fn.table_addcolumndescriptors = function () {
-    $(this).data( 'column_descriptors', arguments );
-  };
-
-
-  // add a row to table body
-  $.fn.table_addrow = function () {
-    append_row_to_table( arguments, this );
-    return this;
-  };
-
-  
   // add a row to table body. only the data are specified. meta data 
-  // will be obtained from "column_descriptors"
+  // will be obtained from "column_descriptors" that is attached to the table
   $.fn.table_addrow_dataonly = function() {
     var data = arguments;
     var tbl = this;
 
-    var cells = [];
+    var ncells = data.length;
     
     var column_descriptors = tbl.data( 'column_descriptors' );
 
+    row = append_newrow_to_table( ncells, tbl );
+    cells = row.children( 'td' );
+    
     for (var i=0; i<data.length; i++) {
       var descriptor = column_descriptors[i];
-      var klass = descriptor.klass;
-      var cell = { 'content': data[i], 'klass': klass };
-      cells.push( cell );
+      var datatype = descriptor.datatype;
+      var value = data[i];
+      cell = $(cells[i]);
+      cell.attr( 'datatype', datatype );
+      cell.establish_cell_from_data( value );
     }
-    
-    append_row_to_table( cells, tbl );
+
   };
 
 
@@ -143,19 +153,85 @@
   // behaviors of this tabulator can be changed
   // ********************************************
 
+
+  // --------------------------------------
+  // handlers to extract data from a cell
+  // --------------------------------------
+  // text
+  $.fn.extract_data_from_cell.handle_text = function( cell ) {
+    return cell.text();
+  };
+  
+  // money
+  $.fn.extract_data_from_cell.handle_money = function( cell ) {
+    text = cell.text();
+    if (text.substring(0,1) == '$') text = text.substring(1, text.length);
+    return Number( text );
+  };
+  
+  // --------------------------------------
+  // handlers to establish a cell from data
+  // --------------------------------------
+  //  text
+  $.fn.establish_cell_from_data.handle_text = function( cell, value ) {
+    return cell.text( value ); 
+  };
+  
+  //  boolean
+  $.fn.establish_cell_from_data.handle_boolean = function( cell, value ) {
+    var checked = Number(value)==0? '':'checked="checked"';
+    var html = '<input type="checkbox" ' + checked + ' />';
+    return cell.html( html ); 
+  };
+  
+  //  money
+  $.fn.establish_cell_from_data.handle_money = function( cell, value ) {
+    text = '$ ' + value;
+    cell.text( text );
+    return cell.css("color", "green");
+  };
+
+  //  updown
+  $.fn.establish_cell_from_data.handle_upanddown = function( cell, value ) {
+    cell.text( value );
+    if (value > 0) 
+      return cell.css("color", "green").prepend( '^' );
+    else
+      return cell.css("color", "red").prepend( 'v' );
+  };
+
+  // single_choice
+  $.fn.establish_cell_from_data.handle_single_choice = function( cell, value ) {
+    column_descriptor = get_column_descriptor( cell );
+    choices = column_descriptor.choices;
+    text = choices[ value ];
+    cell.text( text );
+    return cell;
+  };  
+
+  //  single choice in one column
+  $.fn.establish_cell_from_data.handle_single_choice_in_one_column = function( cell, value ) {
+    var html = '<input type="radio" ';
+    var checked = Number(value)==0? '':'checked="checked"';
+    html += checked;
+    html += 'name="' + cell.attr('name') + '"';
+    html += '/>';
+    return cell.html( html ); 
+  };
+
+  
+
   // -----------------------------
   // handlers to compare two cells
   // -----------------------------
   //  money
-  $.fn.sort_table_by_col.handle_money = function( cell1text, cell2text ) {
-    if (cell1text.substring(0,1) == '$') cell1text = cell1text.substring(1, cell1text.length+1);
-    if (cell2text.substring(0,1) == '$') cell2text = cell2text.substring(1, cell2text.length+1);
-    return Number( cell1text ) - Number( cell2text );
+  $.fn.sort_table_by_col.handle_money = function( value1, value2 ) {
+    return value1 - value2;
   };
 
   //  text
-  $.fn.sort_table_by_col.handle_text = function( cell1text, cell2text ) {
-    return cell1text.substring(0,1) < cell2text.substring(0,1)? -1: 1;
+  $.fn.sort_table_by_col.handle_text = function( value1, value2 ) {
+    return value1.substring(0,1) < value2.substring(0,1)? -1: 1;
   };
 
   // **** need more compare handlers here
@@ -237,96 +313,39 @@
   }
 
 
-  // --------------------------------------------------------------
-  // handlers to restore a cell from editable state to normal state
-  // --------------------------------------------------------------
+  // ---------------------------------------------
+  // handlers to extract value from editing widget
+  // ---------------------------------------------
   //  text
-  $.fn.restore_cell_from_editing.handle_text = function( cell ) {
-    var value = cell.find( "input" ).attr( 'value' );
-    cell.text( value );
+  $.fn.cell_value_from_editing_widget.handle_text = function( cell ) {
+    return cell.find( "input" ).attr( 'value' );
   };
 
   //  money
-  $.fn.restore_cell_from_editing.handle_money = function( cell ) {
-    var value = cell.find( "input" ).attr( 'value' );
-    cell.text( '$' + value );
+  $.fn.cell_value_from_editing_widget.handle_money = function( cell ) {
+    return cell.find( "input" ).attr( 'value' );
   };
 
   //  single_choice
-  $.fn.restore_cell_from_editing.handle_single_choice = function( cell ) {
+  $.fn.cell_value_from_editing_widget.handle_single_choice = function( cell ) {
     var select = cell.find( "select" );
-    var value = select.attr('value');
-    column_descriptor = get_column_descriptor( cell );
-    choices = column_descriptor.choices;
-    text = choices[ value ];
-    cell.text( text );
+    return select.attr('value');
   };
 
-
-  // -------------------------
-  // handlers to format a cell
-  // -------------------------
-  //  text
-  $.fn.format_cell.handle_text = function( cell ) {
-  };
-
-  //  boolean
-  $.fn.format_cell.handle_boolean = function( cell ) {
-    var value = cell.text();
-    var checked = Number(value)==0? '':'checked="checked"';
-    var html = '<input type="checkbox" ' + checked + ' />';
-    return cell.html( html ); 
-  };
-  
-  //  money
-  $.fn.format_cell.handle_money = function( cell ) {
-    if (cell.text().substring(0,1) != '$') cell = cell.prepend( '$' );
-    return cell.css("color", "green");
-  };
-
-  //  updown
-  $.fn.format_cell.handle_upanddown = function( cell ) {
-    if (Number(cell.text()) > 0) 
-      return cell.css("color", "green").prepend( '^' );
-    else
-      return cell.css("color", "red").prepend( 'v' );
-  };
-
-  // single_choice
-  $.fn.format_cell.handle_single_choice = function( cell ) {
-    text = cell.text();
-    column_descriptor = get_column_descriptor( cell );
-    choices = column_descriptor.choices;
-    text = choices[ text ];
-    cell.text( text );
-    return cell;
-  };  
-
-  //  single choice in one column
-  $.fn.format_cell.handle_single_choice_in_one_column = function( cell ) {
-    var value = cell.text();
-    var html = '<input type="radio" ';
-    var checked = Number(value)==0? '':'checked="checked"';
-    html += checked;
-    html += 'name="' + cell.attr('name') + '"';
-    html += '/>';
-    return cell.html( html ); 
-  };
-
-  
 
   // ********************************************
   // implementation details
   // ********************************************
 
 
-  // append a row to the table
-  function append_row_to_table( cells, table ) {
+  // append a row with empty cells to the table
+  function append_newrow_to_table( ncells, table ) {
     var tbody = get_tablebody( table );
 
-    nrows = tbody.children( 'row' ).length;
-    row = new_row_raw( nrows, cells );
+    nrows = tbody.children( 'tr' ).length;
+    row = new_row( nrows, ncells );
     tbody.append( row );
+    return row;
   }
 
 
@@ -339,65 +358,40 @@
   // get column descriptor of a cell
   function get_column_descriptor( cell ) {
     table = find_parent_table( cell );
-    colno = cell.attr( 'colno' );
-    return table.data('column_descriptors')[ colno ];
+    colno = Number(cell.attr( 'colno' ));
+    descriptors = table.data('column_descriptors');
+    return descriptors[ colno ];
   }
   
-  // format a cell according to its class
-  function format_cell_by_class( cell ) {
-    var klass = cell.attr('class');
-    var handler = eval( "$.fn.format_cell.handle_" + klass );
+
+  // enable editing for a cell according to the cell's datatype
+  function enable_cell_editing_by_datatype( cell ) {
+    var datatype = cell.attr('datatype');
+    var handler = eval( "$.fn.enable_cell_editing.handle_" + datatype );
     handler( cell );
   }
 
 
-  // format each cell in a table according to the cell's class
-  function format_cells_by_class( table ) {
-    var tbody = get_tablebody( table );
-    $(tbody).find( 'td' ).each( function(i) {
-	$(this).format_cell();
-      } );
+  // restore cell from editing status according to the cell's datatype
+  function restore_cell_from_editing_by_datatype( cell ) {
+    value = cell.cell_value_from_editing_widget();
+    cell.establish_cell_from_data( value );
   }
 
 
-  // enable editing for a cell according to the cell's class
-  function enable_cell_editing_by_class( cell ) {
-    var klass = cell.attr('class');
-    var handler = eval( "$.fn.enable_cell_editing.handle_" + klass );
-    handler( cell );
-  }
-
-
-  // restore cell from editing status according to the cell's class
-  function restore_cell_from_editing_by_class( cell ) {
-    var klass = cell.attr('class');
-    var handler = eval( "$.fn.restore_cell_from_editing.handle_" + klass );
-    handler( cell );
-  }
-
-
-  // create a new row with given cells
-  function new_row_raw(rowno, cells) {
+  // create a new row with empty cells
+  function new_row(rowno, n) {
     
     // new row
     var tr = document.createElement( 'tr' );
 
-    // add all cells. each argument correspond to a cell
-    for (i=0; i<cells.length; i++) {
+    for (i=0; i<n; i++) {
 
-      var cell = cells[i];
+      cell = $( document.createElement( 'td' ) );
+      cell.attr( 'rowno', rowno );
+      cell.attr( 'colno', i );
 
-      var td = document.createElement( 'td' );
-      td.innerHTML = cell.content;
-
-      // class
-      std = $(td);
-      std.addClass( cell.klass );
-      //std.attr( 'name', cell.name );
-      std.attr( 'colno', i );
-      std.attr( 'rowno', rowno );
-
-      $(tr).append(td);
+      $(tr).append(cell);
 
     }
     
@@ -424,17 +418,17 @@
       var cells2 = $(row2).children('td');
 
       var cell1 = $(cells1[colno]);
-      var klass1 = cell1.attr('class');
-      var cell1text = cell1.text();
+      var datatype1 = cell1.attr('datatype');
+      var value1 = cell1.extract_data_from_cell();
 
       var cell2 = $(cells2[colno]);
-      var klass2 = cell2.attr('class');
-      var cell2text = cell2.text();
+      var datatype2 = cell2.attr('datatype');
+      var value2 = cell2.extract_data_from_cell();
       
-      // ****** shall we assert classes are matched? *******
-      var handler = eval( "$.fn.sort_table_by_col.handle_" + klass1 );
+      // ****** shall we assert datatypes are matched? *******
+      var handler = eval( "$.fn.sort_table_by_col.handle_" + datatype1 );
       
-      return handler( cell1text, cell2text );
+      return handler( value1, value2 );
     }
     rows.sort( compare );
     if (direction!=0) rows.reverse();
