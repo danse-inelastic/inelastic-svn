@@ -1,5 +1,10 @@
 // a table example
 
+function headcell( s )
+{
+  return $( '<td>' + s + '</td>' );
+}
+
 function make_test_table_1( thetable ) {
   
   var shipping_choices =  {
@@ -11,28 +16,30 @@ function make_test_table_1( thetable ) {
   5: "1 week"
   };
 
-  thetable.table_addheadrow
-    ( { content: 'Sales' },
-      { content: 'Book' },
-      { content: 'Author' },
-      { content: 'Price' },
-      { content: 'In Store' },
-      { content: 'Shipping' }, 
-      { content: 'Bestseller' }
-      ) ;
+  thead = $(thetable.children( 'thead' )[0]);
+  headrow = $(thead.children( 'tr' )[0]);
+  
+  headrow.append( headcell( 'Sales' ) );
+  headrow.append( headcell( 'Book' ) );
+  headrow.append( headcell( 'Author' ) );
+  headrow.append( headcell( 'Price' ) );
+  headrow.append( headcell( 'In Store' ) );
+  headrow.append( headcell( 'Shipping' ) ); 
+  headrow.append( headcell( 'Bestseller' ) );
 
-  thetable.table_addcolumndescriptors
-    ( { name: 'Sales', klass: 'upanddown'},
-      { name: 'Book', klass: 'text'},
-      { name: 'Author', klass: 'text'},
-      { name: 'Price', klass: 'money'},
-      { name: 'In Store', klass: 'boolean'},
-      { name: 'Shipping', klass: 'single_choice', choices: shipping_choices},
-      { name: 'Bestseller', klass: 'single_choice_in_one_column'}
+  thetable.table_setcolumndescriptors
+    ( { name: 'Sales', datatype: 'upanddown'},
+      { name: 'Book', datatype: 'text'},
+      { name: 'Author', datatype: 'text'},
+      { name: 'Price', datatype: 'money'},
+      { name: 'In Store', datatype: 'boolean'},
+      { name: 'Shipping', datatype: 'single_choice', choices: shipping_choices},
+      { name: 'Bestseller', datatype: 'single_choice_in_one_column'}
       ) ;
+  descriptors = thetable.data('column_descriptors');
 
   thetable.table_addrow_dataonly
-    (-1500, "abcdefghijk", 'Some author 1', '$12.99', 1, 3, 0);
+    (-1500, "abcdefghijk", 'Some author 1', 12.99, 1, 3, 0);
   thetable.table_addrow_dataonly
     (1000, "QWERCVBF", 'Some author 2', 0, 1, 3, 0);
   thetable.table_addrow_dataonly
@@ -51,4 +58,5 @@ function make_test_table_1( thetable ) {
     (500, "It", 'Stephen King', 9.70, 0, 0, 0);
   thetable.table_addrow_dataonly
     (400, "Cousin Bette", 'Honore de Balzac', 0, 1, 1, 0);  
+
 }

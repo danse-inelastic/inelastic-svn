@@ -4,9 +4,6 @@ $(document).ready(function() {
 
     make_test_table_2( thetable );
 
-    // format table
-    thetable.format_table_cells_by_class();
-
     // make some cols sortable
     var thead = thetable.find( 'thead' );
     

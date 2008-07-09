@@ -4,17 +4,15 @@ $(document).ready(function() {
 
     make_test_table_1( thetable );
 
-    thetable.format_table_cells_by_class();
-    
-    thetable.find( 'tbody' ).find( ".text" ).dblclick( function () {
+    thetable.find( 'tbody' ).find( "td[datatype=text]" ).dblclick( function () {
 	$(this).enable_cell_editing();
       } );
 
-    thetable.find( 'tbody' ).find( ".money" ).dblclick( function () {
+    thetable.find( 'tbody' ).find( "td[datatype=money]" ).dblclick( function () {
 	$(this).enable_cell_editing();
       } );
 
-    thetable.find( 'tbody' ).find( ".single_choice" ).dblclick( function () {
+    thetable.find( 'tbody' ).find( "td[datatype=single_choice]" ).dblclick( function () {
 	$(this).enable_cell_editing();
       } );
 

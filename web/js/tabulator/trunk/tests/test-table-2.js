@@ -6,18 +6,19 @@ $(document).ready(function() {
 
     var table1 = $('#table1');
 
-    table1.table_addheadrow
-      ( { content: 'name'},
-	{ content: 'salary'} 
-	) ;
+    thead = $(table1.children( 'thead' )[0]);
+    headrow = $(thead.children( 'tr' )[0]);
 
-    table1.table_addcolumndescriptors
-      ( { name: 'name', klass: 'identifier'},
-	{ name: 'salary', klass: 'money'} 
+    headrow.append('<td>name</td>');
+    headrow.append('<td>salary</td>');
+
+    table1.table_setcolumndescriptors
+      ( { name: 'name', datatype: 'text'},
+	{ name: 'salary', datatype: 'money'} 
 	) ;
 
     table1.table_addrow_dataonly( 'williams', 50000.00 );
 
-    $(".money").css("background", "lightgreen");
+    $("td[datatype=money]").css("background", "#AAFFFF");
 
   });
