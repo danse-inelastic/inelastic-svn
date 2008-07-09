@@ -65,7 +65,7 @@
   
 
   // make a cell editable
-  $.fn.enable_cell_editing = function () {
+  $.fn.enable_cell_editing = function ( callback ) {
     enable_cell_editing_by_datatype( this );
 
     // when cell lost focus, we should quit editing mode
@@ -81,6 +81,7 @@
     var cell  = this;
     input.blur( function() {
 	cell.restore_cell_from_editing();
+	if (callback) callback( cell );
       } );
   };
 
