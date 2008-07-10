@@ -30,10 +30,10 @@ $(document).ready(function() {
 
 
     thetable.sort_table_by_col( 1, 0 );
-    var book = thead.find( 'td:contains("Book")' );
-    book.attr( 'direction', 0 );
+    var booktitle = thead.find( 'td:contains("Title")' );
+    booktitle.attr( 'direction', 0 );
 
-    book.click( function () {
+    booktitle.click( function () {
 	$this = $(this);
 	direction = $this.attr( 'direction' );
 	direction = direction == 0? 1:0;
@@ -42,4 +42,6 @@ $(document).ready(function() {
 
 	$this.attr('direction', direction);
       } );
+
+    $('.red').css( 'color', 'red' );
   });

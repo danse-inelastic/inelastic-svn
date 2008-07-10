@@ -10,4 +10,5 @@ $(document).ready(function() {
 
     thetable.find( "td:contains('Honore')" ).enable_cell_editing( );
 
+    $(".red").css( 'color', 'red' );
   });
