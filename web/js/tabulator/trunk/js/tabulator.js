@@ -118,7 +118,7 @@
     return handler( cell );
   };
 
-
+  
   // ---------------------
   // basic table creation
   // ---------------------
@@ -182,14 +182,16 @@
   $.fn.establish_cell_from_data.handle_boolean = function( cell, value ) {
     var checked = Number(value)==0? '':'checked="checked"';
     var html = '<input type="checkbox" ' + checked + ' />';
+    cell.css( 'text-align', 'center' );
     return cell.html( html ); 
   };
   
   //  money
   $.fn.establish_cell_from_data.handle_money = function( cell, value ) {
-    text = '$ ' + value;
-    cell.text( text );
-    return cell.css("color", "green");
+    html = '<span class="moneyCurrencySymbol">$ </span>';
+    html += '<span class="moneyAmount">' + value + '</span>';
+    cell.css( 'text-align', 'right' );
+    cell.html( html );
   };
 
   //  updown
@@ -217,6 +219,7 @@
     html += checked;
     html += 'name="' + cell.attr('name') + '"';
     html += '/>';
+    cell.css( 'text-align', 'center' );
     return cell.html( html ); 
   };
 
@@ -384,7 +387,10 @@
   function new_row(rowno, n) {
     
     // new row
-    var tr = document.createElement( 'tr' );
+    var tr = $(document.createElement( 'tr' ));
+
+    odd = rowno % 2;
+    tr.addClass( odd?'odd':'even' );
 
     for (i=0; i<n; i++) {
 
@@ -392,11 +398,11 @@
       cell.attr( 'rowno', rowno );
       cell.attr( 'colno', i );
 
-      $(tr).append(cell);
+      tr.append(cell);
 
     }
     
-    return $(tr);
+    return tr;
   }
 
   
