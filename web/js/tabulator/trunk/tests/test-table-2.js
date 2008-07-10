@@ -9,12 +9,12 @@ $(document).ready(function() {
     thead = $(table1.children( 'thead' )[0]);
     headrow = $(thead.children( 'tr' )[0]);
 
-    headrow.append('<td>name</td>');
-    headrow.append('<td>salary</td>');
+    headrow.append('<td id="name">name</td>');
+    headrow.append('<td id="salary">salary</td>');
 
     table1.table_setcolumndescriptors
-      ( { name: 'name', datatype: 'text'},
-	{ name: 'salary', datatype: 'money'} 
+      ( { name: { id: 'name', datatype: 'text'},
+	  salary: { id: 'salary', datatype: 'money'} }
 	) ;
 
     table1.table_addrow_dataonly( 'williams', 50000.00 );

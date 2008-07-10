@@ -18,6 +18,10 @@
 // some meta data are saved in cells to allow sorting, formatting.
 // some other meta data are stored in table.
 // column_descriptors is a piece of meta data that is saved in table.
+// 
+// columns are identified by their ids (string).
+// rows are identified by their ids (number).
+// if order of rows are changed, rowid should be updated.
 
 
 (function($) {
@@ -33,8 +37,8 @@
   // set column descriptors for a table
   // a column descriptor describe the properties of a column, such
   // as name, type, sorting direction? 
-  $.fn.table_setcolumndescriptors = function () {
-    $(this).data( 'column_descriptors', arguments );
+  $.fn.table_setcolumndescriptors = function ( descriptors ) {
+    $(this).data( 'column_descriptors', descriptors );
   };
 
 
@@ -118,7 +122,7 @@
     return handler( cell );
   };
 
-  
+
   // ---------------------
   // basic table creation
   // ---------------------
@@ -133,14 +137,14 @@
     
     var column_descriptors = tbl.data( 'column_descriptors' );
 
-    row = append_newrow_to_table( ncells, tbl );
+    row = append_newrow_to_table( tbl );
     cells = row.children( 'td' );
     
     for (var i=0; i<data.length; i++) {
-      var descriptor = column_descriptors[i];
+      cell = $(cells[i]);
+      var descriptor = column_descriptors[cell.attr( 'colid' )];
       var datatype = descriptor.datatype;
       var value = data[i];
-      cell = $(cells[i]);
       cell.attr( 'datatype', datatype );
       cell.establish_cell_from_data( value );
     }
@@ -235,7 +239,7 @@
 
   //  text
   $.fn.sort_table_by_col.handle_text = function( value1, value2 ) {
-    return value1.substring(0,1) < value2.substring(0,1)? -1: 1;
+    return value1.substring(0,1).toLowerCase() < value2.substring(0,1).toLowerCase()? -1: 1;
   };
 
   // **** need more compare handlers here
@@ -343,11 +347,13 @@
 
 
   // append a row with empty cells to the table
-  function append_newrow_to_table( ncells, table ) {
+  function append_newrow_to_table( table ) {
+    var column_ids = get_column_ids( table );
+
     var tbody = get_tablebody( table );
 
     nrows = tbody.children( 'tr' ).length;
-    row = new_row( nrows, ncells );
+    row = new_row( nrows, column_ids );
     tbody.append( row );
     return row;
   }
@@ -359,12 +365,17 @@
   }
 
 
+  // get column id of a cell
+  function get_column_id( cell ) {
+    return cell.attr( 'colid' );
+  }
+
   // get column descriptor of a cell
   function get_column_descriptor( cell ) {
     table = find_parent_table( cell );
-    colno = Number(cell.attr( 'colno' ));
+    colid = get_column_id( cell );
     descriptors = table.data('column_descriptors');
-    return descriptors[ colno ];
+    return descriptors[ colid ];
   }
   
 
@@ -384,19 +395,20 @@
 
 
   // create a new row with empty cells
-  function new_row(rowno, n) {
+    function new_row(rowno, columnids) {
     
     // new row
     var tr = $(document.createElement( 'tr' ));
+    var n = columnids.length;
 
     odd = rowno % 2;
     tr.addClass( odd?'odd':'even' );
+    tr.attr( 'rowid', rowno );
 
     for (i=0; i<n; i++) {
-
+      
       cell = $( document.createElement( 'td' ) );
-      cell.attr( 'rowno', rowno );
-      cell.attr( 'colno', i );
+      cell.attr( 'colid', columnids[i]);
 
       tr.append(cell);
 
@@ -410,6 +422,19 @@
     var theads = table.children( 'thead' );
     var lastthead = theads[ theads.length - 1 ];
     return $(lastthead);
+  }
+    
+  function get_column_ids( table ) {
+    thead = get_tablehead( table );
+    rows = thead.children( 'tr' );
+    lastrow = $( rows[ rows.length -1 ] );
+    cols = lastrow.children();
+    ids = [];
+    for (i=0; i<cols.length; i++) {
+      id = $(cols[i]).attr( 'id' );
+      ids.push( id );
+    }
+    return ids;
   }
 
   function get_tablebody( table ) {

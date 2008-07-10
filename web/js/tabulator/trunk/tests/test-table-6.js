@@ -16,4 +16,6 @@ $(document).ready(function() {
 	$(this).enable_cell_editing();
       } );
 
+    $(".red").css( 'color', 'red' );
+
   });

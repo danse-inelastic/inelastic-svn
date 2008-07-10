@@ -1,28 +1,40 @@
 // a table example
 
-function headcell( s )
+function add_headcell( descriptor, headrow, descriptors )
 {
-  return $( '<td>' + s + '</td>' );
+  id = descriptor.id;
+  text = descriptor.text;
+  
+  cell = $( '<td id="' + id + '">' + text + '</td>' );
+  headrow.append( cell );
+  descriptors[ id ] = descriptor;
+}
+
+function make_table_head( thetable ) {
+
+  thead = $(thetable.children( 'thead' )[0]);
+  thead.append( $( '<tr></tr>' ) );
+  headrow = $(thead.children( 'tr' )[0]);
+  
+  descriptors = {};
+  add_headcell
+    ( { id: 'columnA', text: 'A', datatype: 'money' }, 
+      headrow, descriptors );
+  add_headcell
+    ( { id: 'columnB', text: 'B', datatype: 'money' }, 
+      headrow, descriptors );
+  add_headcell
+    ( { id: 'columnC', text: 'C', datatype: 'money' }, 
+      headrow, descriptors );
+
+  thetable.table_setcolumndescriptors( descriptors );
+
 }
 
 
 function make_test_table_3( thetable ) {
   
-  thead = $(thetable.children( 'thead' )[0]);
-  thead.append( $( '<tr></tr>' ) );
-
-  headrow = $(thead.children( 'tr' )[0]);
-  
-  headrow.append( headcell( 'A' ) );
-  headrow.append( headcell( 'B' ) );
-  headrow.append( headcell( 'C' ) );
-
-
-  thetable.table_setcolumndescriptors
-    ( { name: 'A', datatype: 'money'},
-      { name: 'B', datatype: 'money'},
-      { name: 'C', datatype: 'money'}
-      ) ;
+  make_table_head( thetable );
 
   for (var i=0; i<10; i++) {
     var a = Math.floor( Math.random() * 3000 )/100.;
