@@ -332,12 +332,10 @@
     input.height( height );
     cell.data( 'saved-value', amount );
 
-    /*
     input.bind( 'blur',  function () {
 	cell = $(this).parent();
 	cell.trigger( 'restore_from_editing' );
       } )
-    */
     input.bind( 'keydown',  function (e) {
 	input = $(this);
 	if (e.which != 13 && e.which != 10 ) return true;
