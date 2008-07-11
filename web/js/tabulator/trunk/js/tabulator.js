@@ -368,16 +368,15 @@
 
     cell.html( dl );
 
-    select = cell.children('select');
-    select.width( width );
-    select.height( height-2 );
+    dl.width( width );
+    dl.height( height-2 );
 
-    select.blur( function () {
+    dl.blur( function () {
 	cell = $(this).parent();
 	cell.trigger( 'restore_from_editing' );
       } )
 
-    select.change( function () {
+    dl.change( function () {
 	cell = $(this).parent();
 	cell.trigger( 'restore_from_editing' );
       } )
@@ -386,18 +385,23 @@
 
   // dropdownlist( [ {'value': "volvo", 'text': "Volvo"}, ... ] )
   function dropdownlist( options ) {
-    var select = document.createElement( 'select' );
+    var html = '<select>';
 
     for (var i=0; i<options.length; i++) {
-      var opt = document.createElement( 'option' );
       var opt_info = options[i];
-      $(opt).attr('value', opt_info.value);
-      $(opt).text(opt_info.text);
-      if (opt_info.selected) $(opt).attr('selected', 'selected');
-      $(select).append( opt );
+      var tmp = '<option value="' + opt_info.value + '" ';
+
+      if (opt_info.selected) tmp += 'selected="selected"';
+      
+      tmp += '>' ;
+      tmp += opt_info.text + '</option>';
+      
+      html += tmp;
     } 
     
-    return select;
+    html += '</select>';
+    
+    return $(html);
   }
 
 
