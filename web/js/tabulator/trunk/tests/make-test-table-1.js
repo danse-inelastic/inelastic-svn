@@ -46,6 +46,9 @@ function make_table_head( thetable ) {
   add_headcell
     ( { id: 'bestseller_col', text: 'Bestseller', datatype: 'single_choice_in_one_column' }, 
       headrow, descriptors );
+  add_headcell
+    ( { id: 'date_col', text: 'Date of Publication', datatype: 'date', valid_range: [ '01/01/1970', '01/01/2010' ] }, 
+      headrow, descriptors );
 
   thetable.table_setcolumndescriptors( descriptors );
 
@@ -56,24 +59,24 @@ function make_test_table_1( thetable ) {
   make_table_head( thetable );
 
   thetable.table_addrow_dataonly
-    (-1500, "abcdefghijk", 'Some author 1', 12.99, 1, 3, 0);
+    (-1500, "abcdefghijk", 'Some author 1', 12.99, 1, 3, 0, "12/01/1991");
   thetable.table_addrow_dataonly
-    (1000, "QWERCVBF", 'Some author 2', 0, 1, 3, 0);
+    (1000, "QWERCVBF", 'Some author 2', 0, 1, 3, 0, "01/01/1992");
   thetable.table_addrow_dataonly
-    (-100, "Boris Godunov", 'Alexandr Pushkin', 7.15, 1, 1, 0);
+    (-100, "Boris Godunov", 'Alexandr Pushkin', 7.15, 1, 1, 0, "10/30/1995");
   thetable.table_addrow_dataonly
-    (-200, "The Rainmaker", 'John Grisham', 7.99, 0, 4, 0);
+    (-200, "The Rainmaker", 'John Grisham', 7.99, 0, 4, 0, "01/01/2005");
   thetable.table_addrow_dataonly
-    (350, "The Green Mile", 'Stephen King', 11.10, 1, 3, 0);
+    (350, "The Green Mile", 'Stephen King', 11.10, 1, 3, 0, "12/01/2001");
   thetable.table_addrow_dataonly
-    (700, "Misery", 'Stephen King', 7.70, 0, 0, 1);
+    (700, "Misery", 'Stephen King', 7.70, 0, 0, 1, "10/15/2001");
   thetable.table_addrow_dataonly
-    (-1200, "The Dark Half", 'Stephen King', 0, 0, 4, 0);
+    (-1200, "The Dark Half", 'Stephen King', 0, 0, 4, 0, "05/01/1998");
   thetable.table_addrow_dataonly
-    (1500, "The Partner", 'John Grisham', 12.99, 1, 4, 0);
+    (1500, "The Partner", 'John Grisham', 12.99, 1, 4, 0, "01/01/1999");
   thetable.table_addrow_dataonly
-    (500, "It", 'Stephen King', 9.70, 0, 0, 0);
+    (500, "It", 'Stephen King', 9.70, 0, 0, 0, "03/15/1980");
   thetable.table_addrow_dataonly
-    (400, "Cousin Bette", 'Honore de Balzac', 0, 1, 1, 0);  
+    (400, "Cousin Bette", 'Honore de Balzac', 0, 1, 1, 0, "04/01/2007");  
 
 }

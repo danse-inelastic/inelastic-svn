@@ -14,6 +14,10 @@
 .moneyCurrencySymbol {
 }
 
+.date {
+    text-align: center;
+}
+
 table {
     border-spacing: 0pt;
     border-left: 1px solid #6c6f76;
@@ -43,6 +47,31 @@ thead td {
 }
 
 
+
+/* calendar */
+a.dp-choose-date {
+    float: left;
+    width: 16px;
+    height: 16px;
+    padding: 0;
+    margin: 5px 3px 0;
+    display: block;
+    text-indent: -2000px;
+    overflow: hidden;
+    background: url(../css/images/calendar.png) no-repeat; 
+}
+a.dp-choose-date.dp-disabled {
+    background-position: 0 -20px;
+    cursor: default;
+}
+
+/* makes the input field shorter once the date picker code
+ * has run (to allow space for the calendar icon
+ */
+input.dp-applied {
+    width: 140px;
+    float: left;
+}
 
 /* version */
 /* $Id$ */
