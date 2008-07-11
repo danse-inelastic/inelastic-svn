@@ -70,6 +70,7 @@
 
   // make a cell editable
   $.fn.enable_cell_editing = function ( callback ) {
+    
     enable_cell_editing_by_datatype( this );
 
     // when cell lost focus, we should quit editing mode
@@ -81,11 +82,12 @@
     //  focus on input now
     input.focus();
     
-    //  blur --> quit editing
+    //  
     var cell  = this;
-    input.blur( function() {
+    cell.bind( "restore_from_editing", function() {
 	cell.restore_cell_from_editing();
 	if (callback) callback( cell );
+	cell.unbind( "restore_from_editing" );
       } );
   };
 
@@ -169,9 +171,9 @@
   
   // money
   $.fn.extract_data_from_cell.handle_money = function( cell ) {
-    text = cell.text();
-    if (text.substring(0,1) == '$') text = text.substring(1, text.length);
-    return Number( text );
+    $amount = $(cell.children( 'span.moneyAmount' )[0]);
+    amount = $amount.text();
+    return Number( amount );
   };
   
   // --------------------------------------
@@ -180,6 +182,11 @@
   //  text
   $.fn.establish_cell_from_data.handle_text = function( cell, value ) {
     return cell.text( value ); 
+  };
+  
+  //  date
+  $.fn.establish_cell_from_data.handle_date = function( cell, value ) {
+    return cell.text( value ).addClass( "date" );
   };
   
   //  boolean
@@ -258,21 +265,85 @@
     var input = cell.children('input');
     input.width( width );
     input.height( height );
+
+    input.blur( function () {
+	cell = $(this).parent();
+	cell.trigger( 'restore_from_editing' );
+      } )
+
+    input.bind( 'keydown',  function (e) {
+	input = $(this);
+	if (e.which != 13 && e.which != 10 ) return true;
+	cell = $(this).parent();
+	cell.trigger( 'restore_from_editing' );
+      } )
+
+  };
+
+  //  date
+  $.fn.enable_cell_editing.handle_date = function( cell ) {
+    colid = get_column_id( cell );
+    var text = cell.text();
+    var width = cell.width();
+    var height = cell.height();
+    input = $('<input class="date-pick"/>');
+    cell.html( input );
+
+    descriptor = get_column_descriptor( cell );
+    range = descriptor.valid_range;
+    startDate = range[0]; endDate = range[1]
+
+    input
+    .datePicker( {createButton:false, startDate: startDate, endDate: endDate } )
+    .data( 'saved-date', text )
+    .dpSetSelected( text )
+    .bind( 'dateSelected', function(e, selected) {
+	$this = $(this);
+	date = selected.asString();
+	$this.attr( 'value', date );
+	parent = $this.parent();
+	parent.trigger( 'restore_from_editing');
+      } )
+    .bind( 'dpClosed', function( ) {
+	$this = $(this);
+	date = $this.data( 'saved-date' );
+	$this.attr( 'value', date );
+	parent = $this.parent();
+	parent.trigger( 'restore_from_editing');
+      } )
+    .dpDisplay()
+    ;
+
+    input.width( width );
+    input.height( height );
   };
 
   //  money
   $.fn.enable_cell_editing.handle_money = function( cell ) {
-    var text = cell.text();
-    if (text.substring(0,1) == '$') text = text.substring(1, text.length);
+    var amount = cell.extract_data_from_cell();
 
     var width = cell.width();
     var height = cell.height();
-    var html = '<input type="text" value ="' + text + '" />'; 
+    var html = '<input type="text" value ="' + amount + '" />'; 
     
     cell.html( html );
     var input = cell.children('input')
     input.width( width );
     input.height( height );
+    cell.data( 'saved-value', amount );
+
+    /*
+    input.bind( 'blur',  function () {
+	cell = $(this).parent();
+	cell.trigger( 'restore_from_editing' );
+      } )
+    */
+    input.bind( 'keydown',  function (e) {
+	input = $(this);
+	if (e.which != 13 && e.which != 10 ) return true;
+	cell = $(this).parent();
+	cell.trigger( 'restore_from_editing' );
+      } )
   };
 
   //  single_choice
@@ -302,6 +373,17 @@
     select = cell.children('select');
     select.width( width );
     select.height( height-2 );
+
+    select.blur( function () {
+	cell = $(this).parent();
+	cell.trigger( 'restore_from_editing' );
+      } )
+
+    select.change( function () {
+	cell = $(this).parent();
+	cell.trigger( 'restore_from_editing' );
+      } )
+
   };
 
   // dropdownlist( [ {'value': "volvo", 'text': "Volvo"}, ... ] )
@@ -329,9 +411,19 @@
     return cell.find( "input" ).attr( 'value' );
   };
 
+  //  date
+  $.fn.cell_value_from_editing_widget.handle_date = function( cell ) {
+    input = cell.find( "input ");
+    value = input.attr('value');
+    return value;
+  };
+
   //  money
   $.fn.cell_value_from_editing_widget.handle_money = function( cell ) {
-    return cell.find( "input" ).attr( 'value' );
+    input = cell.find( "input" )
+    value = input.attr( 'value' );
+    if (value != undefined && value != '' && value != 'undefined' ) return value;
+    return cell.data( 'saved-value' );
   };
 
   //  single_choice
@@ -389,7 +481,7 @@
 
   // restore cell from editing status according to the cell's datatype
   function restore_cell_from_editing_by_datatype( cell ) {
-    value = cell.cell_value_from_editing_widget();
+    value = cell.cell_value_from_editing_widget( );
     cell.establish_cell_from_data( value );
   }
 
