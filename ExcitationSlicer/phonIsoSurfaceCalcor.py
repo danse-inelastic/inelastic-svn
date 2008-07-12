@@ -292,6 +292,28 @@ class phonIsoSurfaceCalcor(Component):
         self._kpts = data[1]
         return
 
+    def setKptGrid(self, dims=None):
+        """Sets the k-point grid from a list of k-points parsed from IDF.
+        dims:
+              3-tuple of dimensions along each direction."""
+        if dims is None:
+            kgriddims = (int(round(nkpt ** (1./3.),3)),
+                         int(round(nkpt ** (1./3.),3)),
+                         int(round(nkpt ** (1./3.),3)))
+            print "k-grid dimensions = ", kgriddims
+        else:
+            kgriddims = dims
+
+        recipvectors = self._uc.getRecipVectors()
+        space = VectorSpaces.VectorSpaceWithBasis(recipvectors.tolist())
+        origin = Vector(np.array([0,0,0]))
+        kptgrid = Grid(space=space, origin=origin)
+        kptgrid.SetArray(self._kpts.reshape(dims))
+        self._kptGrid = kptgrid
+        return
+
+    ### need to have setPolsGrid and setEnergyGrid the same way...
+
 
 ########################
 
