@@ -15,14 +15,14 @@
 def main():
 
 
-    from vnf.applications.WebApplication import WebApplication
+    from vnf.applications.VnfWebApplication import VnfWebApplication
 
 
-    class MainApp(WebApplication):
+    class MainApp(VnfWebApplication):
 
 
         def __init__(self):
-            WebApplication.__init__(self, name='main')#, asCGI=True)
+            VnfWebApplication.__init__(self, name='main')#, asCGI=True)
             return
 
 

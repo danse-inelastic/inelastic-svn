@@ -33,8 +33,8 @@
 
 # main
 if __name__ == '__main__':
-    from vnf.applications.WebApplication import WebApplication
-    app=WebApplication(name='main')
+    from vnf.applications.VnfWebApplication import VnfWebApplication
+    app=VnfWebApplication(name='main')
     #import opal.inventory
     #app.actor='job'#'job'
     #app.actor=opal.inventory.actor(default="greet")
@@ -53,7 +53,6 @@ if __name__ == '__main__':
     
     
     import os
-    os.system('mv test.html html')
     os.system('firefox /home/jbk/DANSE/inelastic/web/VNET/branches/vnf/html/test.html')
 
 # version
