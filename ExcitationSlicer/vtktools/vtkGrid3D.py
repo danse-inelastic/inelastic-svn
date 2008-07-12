@@ -1,12 +1,12 @@
 # Written by Mikkel Bollinger (email:mbolling@fysik.dtu.dk)
 """Module containing classes for visualizing a 3D grid"""
 
-from vtktools.Avatars.vtkAvatar import vtkAvatar
-from vtktools.Avatars.vtkOutline import vtkOutline
-from vtktools.IsoSurfaceSource import IsoSurfaceSource
-from vtktools.PlaneSource import PlaneSource
-from vtktools.vtkDataFromObject import vtkStructuredGridFromGrid3D
-from vtktools.ColorTableSource import ColorTableSource
+from Avatars.vtkAvatar import vtkAvatar
+from Avatars.vtkOutline import vtkOutline
+from IsoSurfaceSource import IsoSurfaceSource
+from PlaneSource import PlaneSource
+from vtkDataFromObject import vtkStructuredGridFromGrid3D
+from ColorTableSource import ColorTableSource
 
 class _vtkGrid3DParent_:
 	"""Mix-in class for parent avatars

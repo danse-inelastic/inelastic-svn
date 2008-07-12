@@ -8,7 +8,7 @@ except ImportError:
     if not sys.modules.has_key('pythondoc'):
 	#  No, this was a real error, reraise the exception
 	raise  
-from vtktools.ColorTableSource import ColorTableSource
+from ColorTableSource import ColorTableSource
 from Numeric import array,asarray
 
 class _IsoSurfaceSource_:
