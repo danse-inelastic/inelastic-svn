@@ -269,6 +269,32 @@ class phonIsoSurfaceCalcor(Component):
 
         return
 
+########################
+    
+    def loadIDFPolarizations(self, filename='Polarizations.idf'):
+        """Loads the phonon polarizations in IDF format."""
+        from inelastic.idf.Polarizations import read as idfpolread
+        data = idfpolread(filename=filename)
+        self._pols = data[1]
+        return
+
+    def loadIDFEnergies(self, filename='Energies.idf'):
+        """Loads the phonon energies in IDF format."""
+        from inelastic.idf.Omega2 import read as idfom2read
+        data = idfom2read(filename=filename)
+        self._enes = data[1]
+        return
+
+    def loadIDFkpts(self, filename='Kpoints.idf'):
+        """Loads the k-points from an IDF-format file."""
+        from inelastic.idf.FractionalQs import read as idfkptread
+        data = idfkptread(filename=filename)
+        self._kpts = data[1]
+        return
+
+
+########################
+
     def calcIntensityGrid(self, tau=None):
         """This is a helper function to calculate the scattering intensity,
         from the polarization vectors and the scattering vector Q = q + tau.
