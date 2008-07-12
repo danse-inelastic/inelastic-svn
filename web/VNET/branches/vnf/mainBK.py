@@ -53,7 +53,8 @@ if __name__ == '__main__':
     
     
     import os
-    os.system('firefox test.html')
+    os.system('mv test.html html')
+    os.system('firefox /home/jbk/DANSE/inelastic/web/VNET/branches/vnf/html/test.html')
 
 # version
 __id__ = "$Id: main.py,v 1.1.1.1 2006-11-27 00:09:14 aivazis Exp $"
