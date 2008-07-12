@@ -24,11 +24,11 @@ class SampleInput(FormActor):
         page = pyre.inventory.str('page', default='empty')
 
     def default(self, director):
-        return self.input_material(director)
+        return self.inputMaterial(director)
         
     def inputMaterial(self, director):
         try:
-            page = director.retrieveSecurePage( 'sampleInput' )
+            page = director.retrievePage( 'sampleInput' )
         except AuthenticationError, err:
             return err.page
 #        experiment = director.clerk.getNeutronExperiment(self.inventory.id)

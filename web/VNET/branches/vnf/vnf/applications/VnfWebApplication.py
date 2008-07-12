@@ -22,7 +22,7 @@ class AuthenticationError(Exception):
 from opal.applications.WebApplication import WebApplication as Base
 
 
-class WebApplication(Base):
+class VnfWebApplication(Base):
 
 
     class Inventory(Base.Inventory):
