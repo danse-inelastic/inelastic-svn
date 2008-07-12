@@ -1,8 +1,8 @@
-from vtktools.Avatars.vtkAvatar import vtkAvatar
-from vtktools.Avatars.vtkOutline import vtkOutline
-from vtktools.IsoSurfaceSource import IsoSurfaceProbeSource
-from vtktools.vtkDataFromObject import vtkStructuredGridsFromGrid3DProbeArray
-from vtktools.Avatars.vtkGrid3D import _vtkGrid3DChild_,_vtkGrid3DParent_
+from Avatars.vtkAvatar import vtkAvatar
+from Avatars.vtkOutline import vtkOutline
+from IsoSurfaceSource import IsoSurfaceProbeSource
+from vtkDataFromObject import vtkStructuredGridsFromGrid3DProbeArray
+from Avatars.vtkGrid3D import _vtkGrid3DChild_,_vtkGrid3DParent_
 
 from Numeric import pi
 
@@ -443,7 +443,7 @@ class vtkSTM(vtkAvatar,_vtkGrid3DParent_):
 		self._SetIsoSurface2(isosurface2)
 
 	def AddPlane(self,origin):
-		from vtktools.Avatars.vtkGrid3D import vtkGrid3DPlane
+		from Avatars.vtkGrid3D import vtkGrid3DPlane
 		from Numeric import identity
 		# Does the plane avatar already exist ?
 		if hasattr(self,'plane'):

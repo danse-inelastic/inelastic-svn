@@ -24,8 +24,8 @@ Other methods:
 
 import copy
 from Numeric import asarray
-from vtktools.Vector import Vector
-from vtktools.VectorSpaces import TheCartesianSpace
+from Vector import Vector
+from VectorSpaces import TheCartesianSpace
 
 # Uses:	Numeric
 #	Utilities.ArrayTools
@@ -280,7 +280,7 @@ class Grid:
 		Note that 'None' implies that all the values along the given 
 		axis are retained. 
 		"""
-		from vtktools.ArrayTools import SliceArray
+		from ArrayTools import SliceArray
 		return SliceArray(self.GetArray(),slicelist).flat
 
 	def GridCoordinatesFromCoordinates(self,scaledcoor):
@@ -316,7 +316,7 @@ class Grid:
 		(< *dim*>,< *N1* , *N2* ,..., *Ndim* >) where *dim* is the 
 		dimension of the space.
 		"""
-		from vtktools.ArrayTools import CoordinateArrayFromUnitVectors
+		from ArrayTools import CoordinateArrayFromUnitVectors
 		from Numeric import identity,Float
 		
 		shape=self.GetSpatialShape()
@@ -330,7 +330,7 @@ class Grid:
 		(< *dim*>,< *N1* , *N2* ,..., *Ndim* >),
 		where *dim* is the dimension of the space.
 		"""
-		from vtktools.ArrayTools import CoordinateArrayFromUnitVectors
+		from ArrayTools import CoordinateArrayFromUnitVectors
 		return CoordinateArrayFromUnitVectors(shape=self.GetSpatialShape(),gridunitvectors=self.GetGridUnitVectors(),origin=self.GetOrigin().GetCartesianCoordinates())
 
 	def GetGridUnitVectors(self):
@@ -361,9 +361,9 @@ class Grid:
 		the grid coordinates and for this reason 'translation' should
 		be specified in terms of these coordinates.
 		"""
-		from vtktools import ArrayTools
+		import ArrayTools
 		from Numeric import asarray
-		from vtktools.Vector import Vector
+		from Vector import Vector
 		import copy
 
 		# finding the output grid
@@ -398,7 +398,7 @@ class Grid:
  		cell in the returned grid will also be expanded according to 
 		'periods' . 
 		"""
-		from vtktools.ArrayTools import RepeatArray
+		from ArrayTools import RepeatArray
 		from Numeric import transpose,asarray
 		a=copy.copy(self)
 		# Finding the new grid
@@ -422,7 +422,7 @@ class Grid:
 		"""
 
 		from Numeric import add
-		from vtktools.grid import RealFunction
+		from grid import RealFunction
 
 		integratefunc=RealFunction(lambda grid,xyz,func=integralfunction : grid*func(xyz))
 		integrategrid=self.Map(integratefunc)
@@ -438,7 +438,7 @@ class Grid:
 		is a NumPy array containing the Cartesian coordinates 
 		corresponding to the grid point.
 		"""
-		from vtktools import ArrayTools
+		import ArrayTools
 		return ArrayTools.Map(mapfunction,self.GetArray(),self.GetCartesianCoordinates())
 
 	def _GetTruncatedTranslation(self,translation):

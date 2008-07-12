@@ -29,11 +29,11 @@ from IsoSurfacePlotter import VTKIsoSurfacePlotter
 from IsoSurfacePlotter import VTKIsoSurfaceIntensityPlotter
 from DataSlicer import VTKPlaneSlicer
 
-# Load VTK stuff up here for now, but maybe should only load pieces needed in specific methods
+# load VTK stuff
 from vtk import *
 # load VTK extensions
-from libvtkCommonPython import *
-from libvtkGraphicsPython import *
+from vtk.libvtkCommonPython import *
+from vtk.libvtkGraphicsPython import *
 
 
 from pyre.components.Component import Component
@@ -268,33 +268,6 @@ class phonIsoSurfaceCalcor(Component):
         self._polarizationGrid = polgrid
 
         return
-
-########################
-    
-    def loadIDFPolarizations(self, filename='Polarizations.idf'):
-        """Loads the phonon polarizations in IDF format."""
-        from inelastic.idf.Polarizations import read as idfpolread
-        data = idfpolread(filename=filename)
-        self._pols = data[1]
-        return
-
-    def loadIDFEnergies(self, filename='Energies.idf'):
-        """Loads the phonon energies in IDF format."""
-        from inelastic.idf.Omega2 import read as idfom2read
-        data = idfom2read(filename=filename)
-        self._enes = data[1]
-        return
-
-    def loadIDFkpts(self, filename='Kpoints.idf'):
-        """Loads the k-points from an IDF-format file."""
-        from inelastic.idf.FractionalQs import read as idfkptread
-        data = idfkptread(filename=filename)
-        self._kpts = data[1]
-        return
-
-
-########################
-
 
     def calcIntensityGrid(self, tau=None):
         """This is a helper function to calculate the scattering intensity,
