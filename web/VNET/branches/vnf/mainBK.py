@@ -33,8 +33,8 @@
 
 # main
 if __name__ == '__main__':
-    from vnf.applications.VnfWebApplication import VnfWebApplication
-    app=VnfWebApplication(name='main')
+    from vnf.applications.WebApplication import WebApplication
+    app=WebApplication(name='main')
     #import opal.inventory
     #app.actor='job'#'job'
     #app.actor=opal.inventory.actor(default="greet")
