@@ -38,7 +38,7 @@ class SampleInput(FormActor):
         document.description = ''
         document.byline = '<a href="http://danse.us">DANSE</a>'        
         
-        formcomponent = self.retrieveFormToShow( 'inputMaterial')
+        formcomponent = self.retrieveFormToShow('inputMaterial')
         formcomponent.director = director
         # build the form 
         form = document.form(name='', action=director.cgihome)
