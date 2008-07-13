@@ -22,8 +22,8 @@ class Form( base ):
     class Inventory( base.Inventory ):
 
         import pyre.inventory as inv
-        id = pyre.inventory.str( 'id', default = '' )
-        short_description = pyre.inventory.str('short_description', default = '' )
+        id = inv.str( 'id', default = '' )
+        short_description = inv.str('short_description', default = '' )
         short_description.meta['tip'] = 'A short description'
         
         ax = inv.float('ax',default=1.0)
