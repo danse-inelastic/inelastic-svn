@@ -64,7 +64,7 @@ class phonIsoSurfaceCalcor(Component):
         self._uc = unitcell
         if phonondatasource is not None:
             self._phonondatasource = phonondatasource
-        self._nkts = None
+        self._nkpts = None
         self._tau = tau
         self._phonondata = None
         self._kptGrid = None
@@ -107,7 +107,7 @@ class phonIsoSurfaceCalcor(Component):
                 file = open(self._phonondatasource, "r")
             except: print "Could not open Phon output pickle file: ", self._phonondatasource
             self._phonondata = cPickle.load(file)
-            self._nkpt = len(self._phonondata)
+            self._nkpts = len(self._phonondata)
             self._setPhonyKptGrid()
 
         else: pass
@@ -138,7 +138,7 @@ class phonIsoSurfaceCalcor(Component):
         origin = Vector(np.array([0,0,0]))
         kptgrid = Grid(space=space, origin=origin)
 
-        nkpt = self._nkpt
+        nkpt = self._nkpts
         print "Number of k-points:", nkpt
         
         # we assume that the kpt-grid is a Monkhorst-Pack
@@ -290,16 +290,18 @@ class phonIsoSurfaceCalcor(Component):
         from inelastic.idf.FractionalQs import read as idfkptread
         data = idfkptread(filename=filename)
         self._kpts = data[1]
+        self._nkpts = len(data[1])
         return
 
     def setKptGrid(self, dims=None):
         """Sets the k-point grid from a list of k-points parsed from IDF.
         dims:
               3-tuple of dimensions along each direction."""
+        nkpts = self._nkpts
         if dims is None:
-            kgriddims = (int(round(nkpt ** (1./3.),3)),
-                         int(round(nkpt ** (1./3.),3)),
-                         int(round(nkpt ** (1./3.),3)))
+            kgriddims = (int(round(nkpts ** (1./3.),3)),
+                         int(round(nkpts ** (1./3.),3)),
+                         int(round(nkpts ** (1./3.),3)))
             print "k-grid dimensions = ", kgriddims
         else:
             kgriddims = dims
@@ -311,6 +313,27 @@ class phonIsoSurfaceCalcor(Component):
         kptgrid.SetArray(self._kpts.reshape(dims))
         self._kptGrid = kptgrid
         return
+
+    def setPolarizationGrid(self, branchindex, atomindex, dims=None):
+        """This is a helper function to build the grid of polarization vectors,
+        corresponding to a certain branch index and a certain atom index."""
+        nkpts = self._nkpts
+        if dims is None:
+            kgriddims = (int(round(nkpts ** (1./3.),3)),
+                         int(round(nkpts ** (1./3.),3)),
+                         int(round(nkpts ** (1./3.),3)))
+            print "k-grid dimensions = ", kgriddims
+        else:
+            kgriddims = dims
+
+        recipvectors = self._uc.getRecipVectors()
+        space = VectorSpaces.VectorSpaceWithBasis(recipvectors.tolist())
+        origin = Vector(np.array([0,0,0]))
+        polgrid = Grid(space=space, origin=origin)
+
+        # select the polarizations for a given atom/branch here...
+
+         return
 
     ### need to have setPolsGrid and setEnergyGrid the same way...
 
