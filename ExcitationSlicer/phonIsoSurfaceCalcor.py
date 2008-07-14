@@ -332,8 +332,54 @@ class phonIsoSurfaceCalcor(Component):
         polgrid = Grid(space=space, origin=origin)
 
         # select the polarizations for a given atom/branch here...
+        polarization = np.array(self._pols[:,branchindex,atomindex, :,:])
 
-         return
+        dim0 = kgriddims[0] ; dim1 = kgriddims[1] ; dim2 = kgriddims[2]
+        polarization.shape = (dim0, dim1, dim2, 3, 2)
+
+        polgrid.SetArray(polarization)
+        self._polarizationGrid = polgrid
+        
+        return
+
+    def setEnergyGrid(self, branchindex, thz2tomev=True, dims=None):
+        """This is a helper function to build the grid of eigenvalues,
+        corresponding to a certain branch index.
+        thz2tomev is a flag:
+        set it to True to convert the data from Thz^2 to meV (data from Phon),
+        set it to False otherwise.
+        """
+        THztomeV = 4.1357
+        recipvectors = self._uc.getRecipVectors()
+        space = VectorSpaces.VectorSpaceWithBasis(recipvectors.tolist())
+        origin = Vector(np.array([0,0,0]))
+        egrid = Grid(space=space, origin=origin)
+
+        nkpts = self._nkpts
+        if dims is None:
+            kgriddims = (int(round(nkpts ** (1./3.),3)),
+                         int(round(nkpts ** (1./3.),3)),
+                         int(round(nkpts ** (1./3.),3)))
+            print "k-grid dimensions = ", kgriddims
+        else:
+            kgriddims = dims
+        
+        if thz2mev:
+            earray = THztomeV*np.sqrt(np.abs(self._enes[:, branchindex]))
+        else:
+            earray = self._enes[:, branchindex]
+
+        earray.shape = kgriddims
+        egrid.SetArray(earray)
+        print "grid shape: ", egrid.GetShape()
+        print "grid values range: ", egrid.GetValueRange()
+        print "grid average value: ", egrid.GetAverage()
+
+        self._energyGrid = egrid
+
+        return
+
+
 
     ### need to have setPolsGrid and setEnergyGrid the same way...
 
