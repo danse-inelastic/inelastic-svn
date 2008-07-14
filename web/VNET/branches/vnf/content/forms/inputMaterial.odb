@@ -26,6 +26,8 @@ class Form( base ):
         short_description = inv.str('short_description', default = '' )
         short_description.meta['tip'] = 'A short description'
         
+        listOfAtoms = inv.list('List_of_Atoms')
+        
         ax = inv.float('ax',default=1.0)
         ay = inv.float('ay',default=0.0)
         az = inv.float('az',default=0.0)
@@ -36,7 +38,7 @@ class Form( base ):
         cy = inv.float('cy',default=0.0)
         cz = inv.float('cz',default=1.0)
         
-        listOfAtoms = inv.list('List_of_Atoms')
+        
 
         
     parameters = ['name'] # parameters to edit in the form
@@ -80,26 +82,46 @@ Fe   0.5 0.5 0.0<br>
 ...<br>
 ''']        
         box = form.box()
+#        self.ax = box.text(id='ax', name='%s.ax' % prefix, label='a: (x)', 
+#                      value = getattr( configuration, ax ))        
+#        self.ay = box.text(id='ay', name='%s.ay' % prefix, label='(y)', 
+#                      value = getattr( configuration, ay ))   
+#        self.az = box.text(id='az', name='%s.az' % prefix, label='(z)', 
+#                      value = getattr( configuration, az ))  
+#        box = form.box()
+#        self.bx = box.text(id='bx', name='%s.bx' % prefix, label='b: (x)', 
+#                      value = getattr( configuration, bx ))        
+#        self.by = box.text(id='by', name='%s.by' % prefix, label='(y)', 
+#                      value = getattr( configuration, by ))   
+#        self.bz = box.text(id='bz', name='%s.bz' % prefix, label='(z)', 
+#                      value = getattr( configuration, bz ))  
+#        box = form.box()
+#        self.cx = box.text(id='cx', name='%s.cx' % prefix, label='c: (x)', 
+#                      value = getattr( configuration, cx ))        
+#        self.cy = box.text(id='cy', name='%s.cy' % prefix, label='(y)', 
+#                      value = getattr( configuration, cy ))   
+#        self.cz = box.text(id='cz', name='%s.cz' % prefix, label='(z)', 
+#                      value = getattr( configuration, cz )) 
         self.ax = box.text(id='ax', name='%s.ax' % prefix, label='a: (x)', 
-                      value = getattr( configuration, ax ))        
+                      value = configuration.ax)        
         self.ay = box.text(id='ay', name='%s.ay' % prefix, label='(y)', 
-                      value = getattr( configuration, ay ))   
+                      value = configuration.ay)   
         self.az = box.text(id='az', name='%s.az' % prefix, label='(z)', 
-                      value = getattr( configuration, az ))  
+                      value = configuration.az)  
         box = form.box()
         self.bx = box.text(id='bx', name='%s.bx' % prefix, label='b: (x)', 
-                      value = getattr( configuration, bx ))        
+                      value = configuration.bx)        
         self.by = box.text(id='by', name='%s.by' % prefix, label='(y)', 
-                      value = getattr( configuration, by ))   
+                      value = configuration.by)   
         self.bz = box.text(id='bz', name='%s.bz' % prefix, label='(z)', 
-                      value = getattr( configuration, bz ))  
+                      value = configuration.bz)  
         box = form.box()
         self.cx = box.text(id='cx', name='%s.cx' % prefix, label='c: (x)', 
-                      value = getattr( configuration, cx ))        
+                      value = configuration.cx)        
         self.cy = box.text(id='cy', name='%s.cy' % prefix, label='(y)', 
-                      value = getattr( configuration, cy ))   
+                      value = configuration.cy)   
         self.cz = box.text(id='cz', name='%s.cz' % prefix, label='(z)', 
-                      value = getattr( configuration, cz ))  
+                      value = configuration.cz)  
         self.listOfAtoms=form.textarea(id='listOfAtoms', name='%s.listOfAtoms' % prefix, 
                                   label='List of atoms (i.e. H  0.0  0.0  0.5)',rows=20)
           

@@ -16,3 +16,4 @@ add a database "vnf"
 add a role (user name) to postgre. It should be the same as
 the user name of your apache server.
 
+start journald first, then idd, then ipad
