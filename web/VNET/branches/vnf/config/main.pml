@@ -18,7 +18,7 @@
 <inventory>
 
   <component name='main'>
-    <property name='debug'>0</property>
+    <property name='debug'>1</property>
     <property name='home'>http://trueblue.caltech.edu/vnfBK/</property>
     <property name='cgi-home'>http://trueblue.caltech.edu/cgi-bin/vnfBK/main.sh</property>
     <property name='imagepath'>/vnfBK/images</property>
