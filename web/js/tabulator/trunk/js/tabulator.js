@@ -16,12 +16,16 @@
 
 
 // some meta data are saved in cells to allow sorting, formatting.
-// some other meta data are stored in table.
-// column_descriptors is a piece of meta data that is saved in table.
+// some other meta data are stored in table.data('column_descriptors')
 // 
 // columns are identified by their ids (string).
-// rows are identified by their ids (number).
-// if order of rows are changed, rowid should be updated.
+// rows are identified by their ids (usually numbers).
+//
+// Right now, there is no way to know "row number" given a row.
+// This might cause trouble if you need to know, for example, what is
+// the cell above or below a given cell.
+// But, what would be the use case? Running balance could be one, but
+// do we really care?
 
 
 (function($) {
@@ -49,7 +53,7 @@
 
   // sort a table by a column
   // this -> table
-  $.fn.sort_table_by_col = function( colno, direction ) {
+  $.fn.sort_table_by_col = function( colid, direction ) {
 
     // save rows before we remove them from the table
     var saverows = [];
@@ -60,7 +64,9 @@
       saverows.push( row );
     }
     body.empty();
-    var newrows = sort_rows_by_col( saverows, colno, direction );
+    
+    column_descriptors = this.data('column_descriptors');
+    var newrows = sort_rows_by_col( saverows, colid, column_descriptors, direction );
     
     for (var i=0; i<newrows.length; i++) {
       body.append( newrows[i] );
@@ -538,24 +544,37 @@
   }
 
   // sort given rows by a column. The column number is given.
-  function sort_rows_by_col( rows, colno, direction ) {
+  function sort_rows_by_col( rows, column_id, column_descriptors, direction ) {
+
+    descriptor = column_descriptors[ column_id ];
+    datatype = descriptor.datatype;
+
+    function find_column_no( column_id, cells ) {
+      for (i=0; i<cells.length; i++) {
+	cell = cells[i];
+	if ($(cell).attr('colid') == column_id ) return i;
+      }
+      return undefined;
+    }
+
+    colno = find_column_no( column_id, $( rows[0] ).children() );
+    var compare_handler = eval( "$.fn.sort_table_by_col.handle_" + datatype );
+
     function compare (row1, row2) {
       var cells1 = $(row1).children('td');
       var cells2 = $(row2).children('td');
 
       var cell1 = $(cells1[colno]);
-      var datatype1 = cell1.attr('datatype');
       var value1 = cell1.extract_data_from_cell();
 
       var cell2 = $(cells2[colno]);
-      var datatype2 = cell2.attr('datatype');
       var value2 = cell2.extract_data_from_cell();
       
       // ****** shall we assert datatypes are matched? *******
-      var handler = eval( "$.fn.sort_table_by_col.handle_" + datatype1 );
       
-      return handler( value1, value2 );
+      return compare_handler( value1, value2 );
     }
+
     rows.sort( compare );
     if (direction!=0) rows.reverse();
     return rows;
