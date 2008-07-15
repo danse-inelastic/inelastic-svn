@@ -9,10 +9,10 @@ $(document).ready(function() {
 
     make_test_table_1( thetable );
 
-    thetable.sort_table_by_col( 3, 1 );
+    thetable.sort_table_by_col( 'price_col', 1 );
 
     $('#priceup').click( function () {
-	thetable.sort_table_by_col( 3, 0 );
+	thetable.sort_table_by_col( 'price_col', 0 );
       } );
     
     $(".red").css( 'color', 'red' );

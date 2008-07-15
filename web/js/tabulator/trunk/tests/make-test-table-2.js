@@ -56,7 +56,7 @@ function make_test_table_2( thetable ) {
   
   make_table_head( thetable );
 
-  var N = 30;
+  var N = 100;
   var BestSeller = Math.floor( Math.random() * N );
 
   for (var i = 0; i < N; i++ ) {
