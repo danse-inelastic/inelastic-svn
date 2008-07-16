@@ -40,7 +40,7 @@ function make_test_table_3( thetable ) {
     var a = Math.floor( Math.random() * 3000 )/100.;
     var b = Math.floor( Math.random() * 3000 )/100.;
     var c = a+b;
-    thetable.table_addrow_dataonly (a,b,c);
+    thetable.table_appendrow_dataonly (i, [a,b,c]);
   }
   
 }

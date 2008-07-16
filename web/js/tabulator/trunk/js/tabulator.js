@@ -20,12 +20,28 @@
 // 
 // columns are identified by their ids (string).
 // rows are identified by their ids (usually numbers).
+// 
+// The last row in the table head is regarded as the row that 
+// describes the columns in the table. 
+// The attribute 'id' of a cell in that row is regarded as the
+// id of the column.
+// A cell in that column will have an attribute "colid" and
+// it should be the same as the column id.
 //
 // Right now, there is no way to know "row number" given a row.
 // This might cause trouble if you need to know, for example, what is
 // the cell above or below a given cell.
 // But, what would be the use case? Running balance could be one, but
 // do we really care?
+
+// todo:
+//  UI 
+//   1. add a new row, delete existing row ( google map for example )
+//   2. resizable columns (less important)
+//   3. numeric cell should allow calculator
+//   4. locale ( for calendar and money, for example )
+//  talking to server
+//   1. ajax?
 
 
 (function($) {
@@ -135,26 +151,32 @@
   // basic table creation
   // ---------------------
 
-  // add a row to table body. only the data are specified. meta data 
+  // append a row to the end of the table body. 
+  // only the data are specified. meta data 
   // will be obtained from "column_descriptors" that is attached to the table
-  $.fn.table_addrow_dataonly = function() {
-    var data = arguments;
+  //
+  //   table_appendrow_dataonly( rowid, [cell0, cell1, ...] )
+  //
+  $.fn.table_appendrow_dataonly = function(rowid, datalist) {
+
     var tbl = this;
 
-    var ncells = data.length;
+    var ncells = datalist.length;
     
     var column_descriptors = tbl.data( 'column_descriptors' );
 
     row = append_newrow_to_table( tbl );
     cells = row.children( 'td' );
     
-    for (var i=0; i<data.length; i++) {
+    for (var i=0; i<datalist.length; i++) {
+
       cell = $(cells[i]);
       var descriptor = column_descriptors[cell.attr( 'colid' )];
       var datatype = descriptor.datatype;
-      var value = data[i];
+      var value = datalist[i];
       cell.attr( 'datatype', datatype );
       cell.establish_cell_from_data( value );
+
     }
 
   };
@@ -430,6 +452,7 @@
   $.fn.cell_value_from_editing_widget.handle_money = function( cell ) {
     input = cell.find( "input" )
     value = input.attr( 'value' );
+    value = Number(value);
     if (value != undefined && value != '' && value != 'undefined' ) return value;
     return cell.data( 'saved-value' );
   };
@@ -523,7 +546,8 @@
     var lastthead = theads[ theads.length - 1 ];
     return $(lastthead);
   }
-    
+  
+  
   function get_column_ids( table ) {
     thead = get_tablehead( table );
     rows = thead.children( 'tr' );

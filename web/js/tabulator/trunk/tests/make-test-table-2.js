@@ -67,8 +67,8 @@ function make_test_table_2( thetable ) {
     var title = randSentence( 3, 10 );
     var author = randSentence( 2, 8 );
     var instore = Math.floor( Math.random() * 2 );
-    thetable.table_addrow_dataonly
-      ( sales, title, author, price, instore, shipping, i==BestSeller );
+    thetable.table_appendrow_dataonly
+      ( i, [sales, title, author, price, instore, shipping, i==BestSeller] );
     ;
   }
 

@@ -1,5 +1,4 @@
 // test the following methods:
-//   - table_addrow
 //   - enable_cell_editing
 
 $(document).ready(function() {

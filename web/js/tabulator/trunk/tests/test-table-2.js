@@ -1,6 +1,5 @@
 // test the following methods:
-//   - table_addrow
-//   - table_addheadrow
+//   - table_appendrow
 
 $(document).ready(function() {
 
@@ -17,7 +16,7 @@ $(document).ready(function() {
 	  salary: { id: 'salary', datatype: 'money'} }
 	) ;
 
-    table1.table_addrow_dataonly( 'williams', 50000.00 );
+    table1.table_appendrow_dataonly( 0, ['williams', 50000.00] );
 
     $("td[datatype=money]").css("background", "#AAFFFF");
 

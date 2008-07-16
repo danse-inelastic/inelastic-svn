@@ -1,5 +1,4 @@
-// test the following methods:
-//   - table_addrow
+// simple jquery test
 
 $(document).ready(function() {
 

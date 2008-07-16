@@ -1,5 +1,4 @@
 // test the following methods:
-//   - table_addrow
 //   - sort_table_by_col
 
 
