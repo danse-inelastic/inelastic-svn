@@ -1,6 +1,5 @@
 // test the following methods:
-//   - table_addrow
-//   - format_table_cells_by_class
+//   - table_appendrow
 
 
 $(document).ready(function() {
@@ -9,6 +8,5 @@ $(document).ready(function() {
 
     make_test_table_1( thetable );
 
-    //    thetable.format_table_cells_by_class();
-    
   });
+

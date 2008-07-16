@@ -58,25 +58,25 @@ function make_test_table_1( thetable ) {
   
   make_table_head( thetable );
 
-  thetable.table_addrow_dataonly
-    (-1500, "abcdefghijk", 'Some author 1', 12.99, 1, 3, 0, "12/01/1991");
-  thetable.table_addrow_dataonly
-    (1000, "QWERCVBF", 'Some author 2', 0, 1, 3, 0, "01/01/1992");
-  thetable.table_addrow_dataonly
-    (-100, "Boris Godunov", 'Alexandr Pushkin', 7.15, 1, 1, 0, "10/30/1995");
-  thetable.table_addrow_dataonly
-    (-200, "The Rainmaker", 'John Grisham', 7.99, 0, 4, 0, "01/01/2005");
-  thetable.table_addrow_dataonly
-    (350, "The Green Mile", 'Stephen King', 11.10, 1, 3, 0, "12/01/2001");
-  thetable.table_addrow_dataonly
-    (700, "Misery", 'Stephen King', 7.70, 0, 0, 1, "10/15/2001");
-  thetable.table_addrow_dataonly
-    (-1200, "The Dark Half", 'Stephen King', 0, 0, 4, 0, "05/01/1998");
-  thetable.table_addrow_dataonly
-    (1500, "The Partner", 'John Grisham', 12.99, 1, 4, 0, "01/01/1999");
-  thetable.table_addrow_dataonly
-    (500, "It", 'Stephen King', 9.70, 0, 0, 0, "03/15/1980");
-  thetable.table_addrow_dataonly
-    (400, "Cousin Bette", 'Honore de Balzac', 0, 1, 1, 0, "04/01/2007");  
+  thetable.table_appendrow_dataonly
+    (0, [-1500, "abcdefghijk", 'Some author 1', 12.99, 1, 3, 0, "12/01/1991"]);
+  thetable.table_appendrow_dataonly
+    (1, [1000, "QWERCVBF", 'Some author 2', 0, 1, 3, 0, "01/01/1992"]);
+  thetable.table_appendrow_dataonly
+    (2, [-100, "Boris Godunov", 'Alexandr Pushkin', 7.15, 1, 1, 0, "10/30/1995"]);
+  thetable.table_appendrow_dataonly
+    (3, [-200, "The Rainmaker", 'John Grisham', 7.99, 0, 4, 0, "01/01/2005"]);
+  thetable.table_appendrow_dataonly
+    (4, [350, "The Green Mile", 'Stephen King', 11.10, 1, 3, 0, "12/01/2001"]);
+  thetable.table_appendrow_dataonly
+    (5, [700, "Misery", 'Stephen King', 7.70, 0, 0, 1, "10/15/2001"]);
+  thetable.table_appendrow_dataonly
+    (6, [-1200, "The Dark Half", 'Stephen King', 0, 0, 4, 0, "05/01/1998"]);
+  thetable.table_appendrow_dataonly
+    (7, [1500, "The Partner", 'John Grisham', 12.99, 1, 4, 0, "01/01/1999"]);
+  thetable.table_appendrow_dataonly
+    (8, [500, "It", 'Stephen King', 9.70, 0, 0, 0, "03/15/1980"]);
+  thetable.table_appendrow_dataonly
+    (9, [400, "Cousin Bette", 'Honore de Balzac', 0, 1, 1, 0, "04/01/2007"]);  
 
 }
