@@ -165,21 +165,32 @@
     
     var column_descriptors = tbl.data( 'column_descriptors' );
 
-    row = append_newrow_to_table( tbl );
-    cells = row.children( 'td' );
-    
-    for (var i=0; i<datalist.length; i++) {
+    row = append_newrow_to_table( tbl, rowid );
 
-      cell = $(cells[i]);
-      var descriptor = column_descriptors[cell.attr( 'colid' )];
-      var datatype = descriptor.datatype;
-      var value = datalist[i];
-      cell.attr( 'datatype', datatype );
-      cell.establish_cell_from_data( value );
-
-    }
-
+    fill_row_with_data( row, datalist, column_descriptors );
   };
+
+
+  // insert a row to the table body after the row for which the row id is given.
+  // only the data are specified. meta data 
+  // will be obtained from "column_descriptors" that is attached to the table
+  //
+  //   table_insertrowafter_dataonly( 'row2a', 'row2', [cell0, cell1, ...] )
+  //
+  // newrowid: id of the  row to be inserted
+  // rowid: id of the row after which the new row will be inserted
+  $.fn.table_insertrowafter_dataonly = function(newrowid, rowid, datalist) {
+
+    var tbl = this;
+
+    var column_descriptors = tbl.data( 'column_descriptors' );
+
+    row = insert_newrowafter_to_table( tbl, newrowid, rowid );
+    if (row == undefined) return;
+    
+    fill_row_with_data( row, datalist );
+  };
+
 
 
   // ********************************************
@@ -469,17 +480,68 @@
   // ********************************************
 
 
-  // append a row with empty cells to the table
-  function append_newrow_to_table( table ) {
+  // append a row with empty cells to the table and assign an id
+  function append_newrow_to_table( table, rowid ) {
+    var column_ids = get_column_ids( table );
+
+    var tbody = get_tablebody( table );
+    rowindex = tbody.children( 'tr' ).length;
+
+    row = new_row( rowid, rowindex, column_ids );
+    tbody.append( row );
+    return row;
+  }
+
+
+  // insert a row with empty cells to the table
+  // newrowid: the id of the new row 
+  // rowid: the id of the row after which the new row will be inserted
+  function insert_newrowafter_to_table( table, newrowid, rowid ) {
+
     var column_ids = get_column_ids( table );
 
     var tbody = get_tablebody( table );
 
-    nrows = tbody.children( 'tr' ).length;
-    row = new_row( nrows, column_ids );
+    rows = tbody.children( 'tr' );
+    rowindex = find_row_index( rowid, rows );
+
+    // "after"
+    rowindex += 1;
+
+    row = new_row( newrowid, rowindex, column_ids );
     tbody.append( row );
     return row;
   }
+
+
+  // find row given row id and return row index
+  function find_row_index( rowid, rows ) {
+    for (i = 0; i<rows.length; i++) {
+      row = rows[i];
+      if (row.attr('rowid') == rowid) return i;
+    }
+    return undefined;
+  }
+
+
+  // fill a row of cells with given data.
+  // descriptors for every columns are given as well.
+  function fill_row_with_data( row, datalist, column_descriptors ) {
+    
+    cells = row.children( 'td' );
+    
+    for (var i=0; i<datalist.length; i++) {
+
+      cell = $(cells[i]);
+      var descriptor = column_descriptors[cell.attr( 'colid' )];
+      var datatype = descriptor.datatype;
+      var value = datalist[i];
+      cell.attr( 'datatype', datatype );
+      cell.establish_cell_from_data( value );
+
+    }
+
+  };
 
 
   // find the parent table
@@ -518,15 +580,15 @@
 
 
   // create a new row with empty cells
-    function new_row(rowno, columnids) {
+  function new_row(rowid, rowindex, columnids) {
     
     // new row
     var tr = $(document.createElement( 'tr' ));
     var n = columnids.length;
 
-    odd = rowno % 2;
-    tr.addClass( odd?'odd':'even' );
-    tr.attr( 'rowid', rowno );
+    odd = rowindex % 2;
+    tr.addClass( odd? 'odd':'even' );
+    tr.attr( 'rowid', rowid );
 
     for (i=0; i<n; i++) {
       
