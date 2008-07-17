@@ -54,8 +54,37 @@ function make_table_head( thetable ) {
 
 }
 
-function make_test_table_1( thetable ) {
+function make_table_skeleton( ) {
   
+  table = $( '<table border="1"></table>' );
+  
+  thead = $( '<thead></thead' );
+  table.append(thead);
+  
+  headrow = $( '<tr></tr>' );
+  thead.append( headrow );
+
+  tbody = $( '<tbody></tbody>' );
+  table.append( tbody );
+  
+  return table;
+}
+
+
+function make_form() {
+  return $( '<form> </form>' );
+}
+
+
+function make_test_table_1( div ) {
+  
+  thetable = make_table_skeleton();
+
+  form = make_form();
+  form.append( thetable );
+
+  div.append( form );
+	     
   make_table_head( thetable );
 
   thetable.table_appendrow_dataonly

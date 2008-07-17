@@ -1,10 +1,11 @@
 $(document).ready(function() {
 
-    var thetable = $('#thetable');
+    var div = $('#table');
+    make_test_table_3( div );
 
-    make_test_table_3( thetable );
-
-
+    
+    thetable = div.find( 'table' );
+    
     var callback = function (cell) {
       
       colAid = 'columnA';

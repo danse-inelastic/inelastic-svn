@@ -1,8 +1,9 @@
 $(document).ready(function() {
 
-    var thetable = $('#thetable');
+    var div = $('#table');
+    make_test_table_1( div );
 
-    make_test_table_1( thetable );
+    thetable = div.find( 'table' );
 
     thetable.find( 'tbody' ).find( "td[datatype=text]" ).dblclick( function () {
 	$(this).enable_cell_editing();

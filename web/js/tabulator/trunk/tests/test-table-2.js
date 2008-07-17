@@ -1,13 +1,30 @@
 // test the following methods:
 //   - table_appendrow
 
+function make_table_skeleton( ) {
+  
+  table = $( '<table border="1"></table>' );
+  
+  thead = $( '<thead></thead' );
+  table.append(thead);
+  
+  headrow = $( '<tr></tr>' );
+  thead.append( headrow );
+
+  tbody = $( '<tbody></tbody>' );
+  table.append( tbody );
+  
+  return table;
+}
+
 $(document).ready(function() {
 
-    var table1 = $('#table1');
-
-    thead = $(table1.children( 'thead' )[0]);
-    headrow = $(thead.children( 'tr' )[0]);
-
+    div = $( '#table' );
+    
+    table1 = make_table_skeleton();
+    div.append( table1 );
+    
+    headrow = $(table1.children( 'thead' ).children('tr')[0] ); 
     headrow.append('<td id="name">name</td>');
     headrow.append('<td id="salary">salary</td>');
 

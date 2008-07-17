@@ -13,7 +13,6 @@ function add_headcell( descriptor, headrow, descriptors )
 function make_table_head( thetable ) {
 
   thead = $(thetable.children( 'thead' )[0]);
-  thead.append( $( '<tr></tr>' ) );
   headrow = $(thead.children( 'tr' )[0]);
   
   descriptors = {};
@@ -32,8 +31,41 @@ function make_table_head( thetable ) {
 }
 
 
-function make_test_table_3( thetable ) {
+function make_table_skeleton( ) {
   
+  table = $( '<table border="1"></table>' );
+  
+  thead = $( '<thead></thead' );
+  table.append(thead);
+  
+  headrow = $( '<tr></tr>' );
+  thead.append( headrow );
+
+  tbody = $( '<tbody></tbody>' );
+  table.append( tbody );
+  
+  return table;
+}
+
+
+function make_form() {
+  return $( '<form> </form>' );
+}
+
+
+function make_test_table_3( div ) {
+  
+  // make the table skeleton
+  thetable = make_table_skeleton();
+
+  form = make_form();
+  form.append( thetable );
+
+  // add table skeleton to div
+  div.append( form );
+
+  
+  // table contents
   make_table_head( thetable );
 
   for (var i=0; i<10; i++) {
