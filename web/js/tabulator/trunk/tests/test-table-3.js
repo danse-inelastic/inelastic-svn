@@ -4,9 +4,9 @@
 
 $(document).ready(function() {
 
-    var thetable = $('#thetable');
+    var div = $('#table');
 
-    make_test_table_1( thetable );
+    make_test_table_1( div );
 
   });
 

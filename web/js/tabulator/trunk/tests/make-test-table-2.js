@@ -52,17 +52,49 @@ function make_table_head( thetable ) {
 }
 
 
-function make_test_table_2( thetable ) {
+function make_table_skeleton( ) {
   
+  table = $( '<table border="1"></table>' );
+  
+  thead = $( '<thead></thead' );
+  table.append(thead);
+  
+  headrow = $( '<tr></tr>' );
+  thead.append( headrow );
+
+  tbody = $( '<tbody></tbody>' );
+  table.append( tbody );
+  
+  return table;
+}
+
+
+function make_form() {
+  return $( '<form> </form>' );
+}
+
+
+function make_test_table_2( div ) {
+
+  // make the table skeleton
+  thetable = make_table_skeleton();
+
+  form = make_form();
+  form.append( thetable );
+
+  // add table skeleton to div
+  div.append( form );
+
+  // table contents
   make_table_head( thetable );
 
-  var N = 100;
+  var N = 50;
   var BestSeller = Math.floor( Math.random() * N );
 
   for (var i = 0; i < N; i++ ) {
     
     var sales = Math.floor( Math.random() * 100 ) - Math.floor(100/2);
-    var price = Math.floor( Math.random() * 3000 )/100.;
+    var price = Math.floor( Math.random() * 3000 ) / 100.;
     var shipping = Math.floor( Math.random() * 6 );
     var title = randSentence( 3, 10 );
     var author = randSentence( 2, 8 );

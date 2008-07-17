@@ -1,8 +1,9 @@
 $(document).ready(function() {
 
-    var thetable = $('#thetable');
+    var div = $('#table');
+    make_test_table_2( div );
 
-    make_test_table_2( thetable );
+    thetable = div.find( 'table' );
 
     // make some cols sortable
     var thead = thetable.find( 'thead' );
