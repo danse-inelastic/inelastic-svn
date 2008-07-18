@@ -24,31 +24,36 @@ function make_table_head( thetable ) {
   thead = $(thetable.children( 'thead' )[0]);
   headrow = $(thead.children( 'tr' )[0]);
   
-  descriptors = {};
-  add_headcell
-    ( { id: 'sales_col', text: 'Sales', datatype: 'upanddown' }, 
-      headrow, descriptors );
-  add_headcell
-    ( { id: 'title_col', text: 'Title', datatype: 'text' }, 
-      headrow, descriptors );
-  add_headcell
-    ( { id: 'author_col', text: 'Author', datatype: 'text' }, 
-      headrow, descriptors );
-  add_headcell
-    ( { id: 'price_col', text: 'Price', datatype: 'money' }, 
-      headrow, descriptors );
-  add_headcell
-    ( { id: 'in_store_col', text: 'In Store', datatype: 'boolean' }, 
-      headrow, descriptors );
-  add_headcell
-    ( { id: 'shipping_col', text: 'Shipping', datatype: 'single_choice', choices: shipping_choices }, 
-      headrow, descriptors );
-  add_headcell
-    ( { id: 'bestseller_col', text: 'Bestseller', datatype: 'single_choice_in_one_column' }, 
-      headrow, descriptors );
+  descriptors = {
+    'sales_col': { text: 'Sales', datatype: 'upanddown' }, 
+    'title_col': { text: 'Title', datatype: 'text' }, 
+    'author_col': { text: 'Author', datatype: 'text' }, 
+    'price_col': { text: 'Price', datatype: 'money' }, 
+    'in_store_col': { text: 'In Store', datatype: 'boolean' },
+    'shipping_col': { text: 'Shipping', datatype: 'single_choice', choices: shipping_choices },
+    'bestseller_col': { text: 'Bestseller', datatype: 'single_choice_in_one_column' }, 
+    'date_col': { text: 'Date of Publication', datatype: 'date', valid_range: [ '01/01/1970', '01/01/2010' ] }
+  }
 
+  establish_headrow_from_column_descriptors( headrow, descriptors );
   thetable.table_setcolumndescriptors( descriptors );
 
+}
+
+
+function add_headcell( id, text, headrow )
+{
+  cell = $( '<td id="' + id + '">' + text + '</td>' );
+  headrow.append( cell );
+}
+
+
+function establish_headrow_from_column_descriptors( headrow, descriptors )
+{
+  for (var colid in descriptors) {
+    descriptor = descriptors[ colid ];
+    add_headcell( colid, descriptor.text, headrow );
+  }
 }
 
 
@@ -74,7 +79,7 @@ function make_form() {
 }
 
 
-function make_test_table_2( div ) {
+function make_test_table( div ) {
 
   // make the table skeleton
   thetable = make_table_skeleton();

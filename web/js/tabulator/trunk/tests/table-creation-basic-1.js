@@ -1,5 +1,5 @@
 // test the following methods:
-//   - table_appendrow
+//   - table_appendrow_dataonly
 
 function make_table_skeleton( ) {
   
