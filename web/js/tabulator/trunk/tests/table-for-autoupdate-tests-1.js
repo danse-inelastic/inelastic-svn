@@ -1,34 +1,37 @@
 // a table example
 
-function add_headcell( descriptor, headrow, descriptors )
-{
-  id = descriptor.id;
-  text = descriptor.text;
-  
-  cell = $( '<td id="' + id + '">' + text + '</td>' );
-  headrow.append( cell );
-  descriptors[ id ] = descriptor;
-}
-
 function make_table_head( thetable ) {
 
   thead = $(thetable.children( 'thead' )[0]);
   headrow = $(thead.children( 'tr' )[0]);
   
-  descriptors = {};
-  add_headcell
-    ( { id: 'columnA', text: 'A', datatype: 'money' }, 
-      headrow, descriptors );
-  add_headcell
-    ( { id: 'columnB', text: 'B', datatype: 'money' }, 
-      headrow, descriptors );
-  add_headcell
-    ( { id: 'columnC', text: 'C', datatype: 'money' }, 
-      headrow, descriptors );
+  descriptors = { 
+    'columnA': {text: 'A', datatype: 'money' }, 
+    'columnB': {text: 'B', datatype: 'money' }, 
+    'columnC': {text: 'C', datatype: 'money' }
+  }
 
+  establish_headrow_from_column_descriptors( headrow, descriptors );
   thetable.table_setcolumndescriptors( descriptors );
 
 }
+
+
+function add_headcell( id, text, headrow )
+{
+  cell = $( '<td id="' + id + '">' + text + '</td>' );
+  headrow.append( cell );
+}
+
+
+function establish_headrow_from_column_descriptors( headrow, descriptors )
+{
+  for (var colid in descriptors) {
+    descriptor = descriptors[ colid ];
+    add_headcell( colid, descriptor.text, headrow );
+  }
+}
+
 
 
 function make_table_skeleton( ) {
@@ -53,7 +56,7 @@ function make_form() {
 }
 
 
-function make_test_table_3( div ) {
+function make_test_table( div ) {
   
   // make the table skeleton
   thetable = make_table_skeleton();

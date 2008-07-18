@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
     var div = $('#table');
-    make_test_table_3( div );
+    make_test_table( div );
 
     
     thetable = div.find( 'table' );
