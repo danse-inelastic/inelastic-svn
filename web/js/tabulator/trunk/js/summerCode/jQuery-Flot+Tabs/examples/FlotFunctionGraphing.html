@@ -1,0 +1,95 @@
+<html>
+ <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Demo-Manual</title>
+    <link href="layout.css" rel="stylesheet" type="text/css"></link>
+    <!--[if IE]><script language="javascript" type="text/javascript" src="../excanvas.pack.js"></script><![endif]-->
+    <script language="javascript" type="text/javascript" src="../jquery.js"></script>
+    <script language="javascript" type="text/javascript" src="../jquery.flot.js"></script>
+ </head>
+    <body>
+    <h1>Demo of Zoom and Point Selection-Data is Nathan's brain functions in an 9 hour time frame</h1>
+
+    <div style="float:left">
+      <div id="placeholder" style="width:500px;height:300px"></div>
+    </div>
+    
+    <div id="miniature" style="float:left;margin-left:20px;margin-top:50px">
+      <div id="overview" style="width:166px;height:100px"></div>
+
+      <p id="overviewLegend" style="margin-left:10px"></p>
+    </div>
+
+<script id="source" language="javascript" type="text/javascript">
+//This section plots the function or data points.  This version, the imput of data is completely manual, for larger data points, I suggest plotting a regression.
+$(function () {
+    function getData(x1, x2) {
+        var d = [];
+        for (var i = x1; i < x2; i += (x2 - x1) / 100)
+            d.push([i, Math.cos(i * Math.tan(i))]);
+//Below is the "legend" it is the colored box on the right hand side that displays the function and the corresponding color.
+        return [
+            { label: "cos(x tan(x))", data: d }
+        ];
+    }
+//The options for the plot.
+    var options = {
+        legend: { show: false },
+        lines: { show: true },
+        points: { show: true },
+        yaxis: { ticks: 10 },
+        selection: { mode: "xy" }
+    };
+
+    var startData = getData(0, 3 * Math.PI);
+    
+    var plot = $.plot($("#placeholder"), startData, options);
+
+    // Setup overview below.  It is the general appearance of the graph, color, size, mode of grahing, etc.
+    var overview = $.plot($("#overview"), startData, {
+        legend: { show: true, container: $("#overviewLegend") },
+        lines: { show: true, lineWidth: 1 },
+        shadowSize: 0,
+        xaxis: { ticks: 4 },
+        yaxis: { ticks: 3, min: -2, max: 2 },
+        grid: { color: "#999" },
+        selection: { mode: "xy" }
+    });
+
+    // Connect the two to complete the formats.
+    var internalSelection = false;
+    
+    $("#placeholder").bind("selected", function (event, area) {
+        // The function below prevents the zoom from happening forever-(necessary)
+        if (area.x2 - area.x1 < 0.00001)
+            area.x2 = area.x1 + 0.00001;
+        if (area.y2 - area.y1 < 0.00001)
+            area.y2 = area.y1 + 0.00001;
+        
+        // This does the actual zooming
+        plot = $.plot($("#placeholder"), getData(area.x1, area.x2),
+                      $.extend(true, {}, options, {
+                          xaxis: { min: area.x1, max: area.x2 },
+                          yaxis: { min: area.y1, max: area.y2 }
+                      }));
+        
+        if (internalSelection)
+            return; 
+//The "return" prevents the entire operation from going into an infinity loop.
+        internalSelection = true;
+        overview.setSelection(area);
+        internalSelection = false;
+    });
+    $("#overview").bind("selected", function (event, area) {
+        if (internalSelection)
+            return;
+        internalSelection = true;
+        plot.setSelection(area);
+        internalSelection = false;
+    });
+});
+//Below, under the "</script" is the comments section.  Currently I have it set up to appear in the white space on the right.
+</script>
+The spikes up reflect the times where I drank coffee or energy drinks.  The sudden drops down reflect the times where my brain died (thats why it is negative).  This version has full support for zoom, point selection, and data plotting.  It also features a legend, full color support, and full HTML support.  In future versions, the data will be auto imputed if given an xml document or raw text.
+ </body>
+</html>
