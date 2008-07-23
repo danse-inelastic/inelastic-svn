@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Flot Examples</title>
+    <link href="layout.css" rel="stylesheet" type="text/css"></link>
+    <!--[if IE]><script language="javascript" type="text/javascript" src="../excanvas.pack.js"></script><![endif]-->
+    <script language="javascript" type="text/javascript" src="jquery.js"></script>
+    <script language="javascript" type="text/javascript" src="jquery.flot.js"></script>
+
+ </head>
+    <body>
+    <h1>Flot Examples</h1>
+
+    <div id="placeholder" style="width:600px;height:300px;"></div>
+
+    <div id="overview" style="margin-left:50px;margin-top:20px;width:400px;height:50px"></div>
+
+<script id="source" language="javascript" type="text/javascript">
+var xmlDoc=document.implementation.createDocument("","",null);
+xmlDoc.async=false;
+xmlDoc.load("columns.xml");
+
+var x=xmlDoc.getElementsByTagName("to");
+
+
+var txt = x[0].childNodes[0].nodeValue;
+
+var counter=0;
+var x_array_count=0;
+var y_array_count=0;
+var x_array = new Array();
+
+var y_array = new Array();
+
+for (i=0;i<=txt.length;i++)
+{
+if (counter == 0){
+	if (txt.charAt(i)==" " || txt.charAt(i) == "\n"){
+	counter = 1;
+	parseFloat(x_array[x_array_count]);
+	x_array_count++; 
+
+	}
+	else {
+
+		if (x_array[x_array_count] != null){
+		x_array[x_array_count] = x_array[x_array_count].concat(txt.charAt(i));
+
+		}
+		else{
+		x_array[x_array_count] = txt.charAt(i); 
+		}
+	}
+}
+else{
+
+	if (txt.charAt(i)==" "|| txt.charAt(i) == "\n"){
+				counter = 0;
+				parseFloat(y_array[y_array_count]);
+				y_array_count++;
+				}
+	else {
+		if (y_array[y_array_count] != null){
+		y_array[y_array_count] = y_array[y_array_count].concat(txt.charAt(i));
+
+		}
+		else{
+		y_array[y_array_count] = txt.charAt(i); 
+
+		}
+	}
+}
+}
+window.alert(x_array[34]);
+
+function set_d() {
+	var d_temp = [];
+    for (var i = 0; i < 100; i ++)
+        {d_temp.push([x_array[i], y_array[i]]);}
+	return d_temp;
+}
+var g = set_d();
+
+$(function () {
+var d = g;
+    var options = {
+        selection: { mode: "x" },
+    };
+    
+    var plot = $.plot($("#placeholder"), [d], options);
+    
+    var overview = $.plot($("#overview"), [d], {
+        lines: { show: true, lineWidth: 1 },
+        shadowSize: 0,
+        xaxis: { ticks: []},
+        yaxis: { ticks: []},
+        selection: { mode: "x" }
+    });
+
+    // now connect the two
+    var internalSelection = false;
+    
+    $("#placeholder").bind("selected", function (event, area) {
+        // do the zooming
+        plot = $.plot($("#placeholder"), [d],
+                      $.extend(true, {}, options, {
+                          xaxis: { min: area.x1, max: area.x2 }
+                      }));
+        
+        if (internalSelection)
+            return; // prevent eternal loop
+        internalSelection = true;
+        overview.setSelection(area);
+        internalSelection = false;
+    });
+    
+    $("#overview").bind("selected", function (event, area) {
+        if (internalSelection)
+            return;
+        internalSelection = true;
+        plot.setSelection(area);
+        internalSelection = false;
+    });
+});
+</script>
+
+ </body>
+</html>
+
