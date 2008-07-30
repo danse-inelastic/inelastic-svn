@@ -5,4 +5,5 @@ there are two flot zoom documents.
 one contains the array of points from the xml inside of it already, and has zoom functionality.  
 the other one does not have embedded arrays, and instead reads from the xml.  this one doesn't have zoom capabilities, and is being worked on.
 
-flot_adjustable_ticks is designed to have customizable amounts of ticks on a graph, but at the moment also doesn't work.  the ticks may only be set at the beginning.  all .js files are either jquery or flot files that have been unedited.
+flot_adjustable_ticks is designed to have customizable amounts of ticks on a graph, but at the moment also doesn't work.  
+the ticks may only be set at the beginning.  all .js files are either jquery or flot files that have been unedited.
