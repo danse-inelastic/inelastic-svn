@@ -1,0 +1,83 @@
+<html>
+ <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Flot Test</title>
+    <link href="layout.css" rel="stylesheet" type="text/css"></link>
+    <!--[if IE]><script language="javascript" type="text/javascript" src="../excanvas.pack.js"></script><![endif]-->
+    <script language="javascript" type="text/javascript" src="jquery.js"></script>
+    <script language="javascript" type="text/javascript" src="jquery.flot.js"></script>
+ </head>
+
+
+<body>
+
+    <div id="placeholder" style="width:900px;height:450px;"></div>
+
+<script id="source" language="javascript" type="text/javascript">
+var xmlDoc=document.implementation.createDocument("","",null);
+xmlDoc.async=false;
+xmlDoc.load("columns.xml");
+
+var x=xmlDoc.getElementsByTagName("to");
+
+
+var txt = x[0].childNodes[0].nodeValue;
+
+
+var counter=0;
+var x_array_count=0;
+var y_array_count=0;
+var x_array = new Array();
+
+var y_array = new Array();
+
+for (i=0;i<=txt.length;i++)
+{
+if (counter == 0){
+	if (txt.charAt(i)==" " || txt.charAt(i) == "\n"){
+	counter = 1;
+	parseFloat(x_array[x_array_count]);
+	x_array_count++; 
+
+	}
+	else {
+
+		if (x_array[x_array_count] != null){
+		x_array[x_array_count] = x_array[x_array_count].concat(txt.charAt(i));
+
+		}
+		else{
+		x_array[x_array_count] = txt.charAt(i); 
+		}
+	}
+}
+else{
+
+	if (txt.charAt(i)==" "|| txt.charAt(i) == "\n"){
+				counter = 0;
+				parseFloat(y_array[y_array_count]);
+				y_array_count++;
+				}
+	else {
+		if (y_array[y_array_count] != null){
+		y_array[y_array_count] = y_array[y_array_count].concat(txt.charAt(i));
+
+		}
+		else{
+		y_array[y_array_count] = txt.charAt(i); 
+
+		}
+	}
+}
+}
+
+$(function () {
+    for (var i = 0; i < y_array.length; i ++)
+        document.write("[" + x_array[i] + "," + y_array[i] + "],");
+    
+});
+
+</script>
+</body>
+</html>
+
