@@ -1,0 +1,70 @@
+
+                           CASSANDRA
+              VTK/Java based 3D Scientific Data Viewer
+                  (c) Artenum, Paris, France, 2005
+                  http://www.artenum.com/cassandra
+                 
+                      Version 2.2 (July 2006)
+
+Initial authors: 
+    - Sebastien Jourdain (Artenum), contact: sebastien.Jourdain@artenum.com
+    - Julien Forest (Artenum), contact: j.forest@artenum.com
+    - Artenum SARL, Paris, France. 
+
+1) Introduction / Purpose
+
+   Cassandra is a modular and advanced 3D scientific data viewer.
+   Cassandra is written in Java and based on the Visualisation Tool Kit, 
+   VTK. 
+
+   Like in OpenDX, Cassandra includes a graphical visualisation pipeline 
+   editor based on the DedalEgraph library.
+
+   Data processing are performed through an extensive set of dynamical and
+   independent plug-ins. An advanced Python/Jython console, JyConsole, 
+   complete the system and allows the direct manipulation of all objects 
+   used in the system, independently of their initial language (C++/Java/
+   Python). JyConsole includes an object oriented completion. 
+
+   Thanks to this modular approach, Cassandra is highly adaptable and
+   extensible to specific and tailored data processing and should simplify 
+   the learning curve of the VTK library by non-specialists. 
+
+2) Build
+
+   To build Cassabdra to your computer you will have to download the 
+   thirdpart libraries and update a configuration file where you will have 
+   to specify the path of those library.
+
+   See the "THIRDPART.txt" for more details. (Could be in the provided thirdpart 
+   directory)
+
+   The configuration file to update is "config.properties" that you must 
+   create from the "config.sample" file which is the base of the properties
+   needed for the compilation and the packaging process.
+
+   Then use ANT in order to generate the engine components.
+
+   => Ant task available:
+       - clean   : remove all builded documents. (class, jar, javadoc)
+       - jar     : generate the jar file for the Cassandra framework
+                   and place it in the binary-package directory
+       - javadoc : generate the javadoc of the source code and place in 
+                   the Doc/API directory
+       - exec    : generate the script for the code execution and place 
+                   them in the binary-package directory
+       - make    : execute jar and exec and remove the build directory
+
+3) Contact
+
+    E-mail: jourdain@artenum.com
+
+    Mail: Artenum SARL
+          101-103, Bd Mac Donald
+          75019 PARIS, FRANCE
+
+    Phone: +33(0)1 44 89 45 15
+    Fax:   +33(0)1 44 89 45 17
+
+
+
