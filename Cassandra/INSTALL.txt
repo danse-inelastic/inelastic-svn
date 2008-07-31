@@ -1,0 +1,94 @@
+
+                           CASSANDRA
+              VTK/Java based 3D Scientific Data Viewer
+                  (c) Artenum, Paris, France, 2005
+                  http://www.artenum.com/cassandra
+                 
+                      Version 2.2 (July 2006)
+
+Initial authors: 
+    - Sebastien Jourdain (Artenum), contact: sebastien.Jourdain@artenum.com
+    - Julien Forest (Artenum), contact: j.forest@artenum.com
+    - Artenum SARL, Paris, France. 
+
+1) Introduction / Purpose
+
+   Cassandra is a modular and advanced 3D scientific data viewer.
+   Cassandra is written in Java and based on the Visualisation Tool Kit, 
+   VTK. 
+
+   Like in OpenDX, Cassandra includes a graphical visualisation pipeline 
+   editor based on the DedalEgraph library.
+
+   Data processing are performed through an extensive set of dynamical and
+   independent plug-ins. An advanced Python/Jython console, JyConsole, 
+   complete the system and allows the direct manipulation of all objects 
+   used in the system, independently of their initial language (C++/Java/
+   Python). JyConsole includes an object oriented completion. 
+
+   Thanks to this modular approach, Cassandra is highly adaptable and
+   extensible to specific and tailored data processing and should simplify 
+   the learning curve of the VTK library by non-specialists. 
+
+2) Install and use
+
+   As Cassandra is fully written in Java, the standard binary package is 
+   fully supported by any operating system that support a Java Virtual Machine
+   1.4.x or 1.5.x. Therefore, you will have to download and install first 
+   a JRE and the Visualization Toolkit (VTK) with the Java wrapping.
+   
+   Caution: A JRE 1.5.x is required to use the Cassandra package made 
+           for VTK 5.x.
+   
+   To install a JRE:
+      You can download Java Virtual Machine on the Sun Web site available 
+      at this URL: http://java.sun.com/javase/downloads/index.jsp
+      
+   To install VTK:
+      You can donwload the source code of VTK at this URL: http://www.vtk.org/
+      Or you can get pre-compiled VTK version from the Cassandra project 
+      download page available at this URL: 
+      http://dev.artenum.com/projects/cassandra/downloadPage
+      
+   To configure Cassandra:
+      1) If your java installation didn't set the JAVA_HOME system property, 
+         edit the Cassandra launching script to make it point to your JRE.
+         
+         - For Windows edit: Cassandra.bat
+             replace: %JAVA_HOME%\jre\bin\java
+             by     : c:\Prog....\Java\jdk1.5.x\jre\bin\java
+             or by  : c:\Prog....\Java\jre1.5.x\bin\java
+
+         - For Linux edit: Cassandra.sh
+             replace: $JAVA_HOME/jre/bin/java
+             by     : /opt/jdk1.5.x/jre/bin/java
+             or by  : /opt/jre1.5.x/bin/java
+         
+      2) The VTK configuration
+        a) Download a binary package of VTK with the Java wrapping.
+        b) Unpack it in the thirdpart directory (or somewhere else if you prefere)
+        c) Edit the first line of Cassandra.sh or Cassandra.bat to make it point 
+           to the library directory of VTK. (*.so or *.dll)
+           => For windows (Cassandra.bat): set PATH=../thirdpart/VTK5.0_Suse10_32bits/lib:%PATH%
+           => For Linux   (Cassandra.sh) : export LD_LIBRARY_PATH=../thirdpart/VTK5.0_Suse10_32bits/lib
+        d) Edit the cassandra.propertie file and update the last line in order to fix the path to the 
+           vtk.jar file.
+           => java.class.path=../thirdpart/VTK5.0_Suse10_32bits/bin/vtk.jar;...
+
+      3) Update the python path regarding your OS
+          Uncomment one of the python.path property line in the cassandra.properties 
+          file regarding your OS.
+         
+3) Contact
+
+    E-mail: jourdain@artenum.com
+
+    Mail: Artenum SARL
+          101-103, Bd Mac Donald
+          75019 PARIS, FRANCE
+
+    Phone: +33(0)1 44 89 45 15
+    Fax:   +33(0)1 44 89 45 17
+
+
+

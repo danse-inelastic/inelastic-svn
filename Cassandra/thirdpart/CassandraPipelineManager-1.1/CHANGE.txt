@@ -1,0 +1,7 @@
+Cassandra Pipeline Manager 1.1
+  - Support concurrent registration of VTK object
+  - Improvement of the Cassandra package
+
+Cassandra Pipeline Manager 1.0
+  - First implementation of Cassandra Pipeline Manager
+

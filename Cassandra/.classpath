@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="src-launch"/>
+	<classpathentry kind="src" path="vtk-src"/>
+	<classpathentry kind="lib" path="plugin/2DInfosPlugin.jar"/>
+	<classpathentry kind="lib" path="plugin/ClippingPlugin.jar"/>
+	<classpathentry kind="lib" path="plugin/CutterPlugin.jar"/>
+	<classpathentry kind="lib" path="plugin/CuttingPlanePlugin.jar"/>
+	<classpathentry kind="lib" path="plugin/DefaultPlugin.jar"/>
+	<classpathentry kind="lib" path="plugin/DynamicDatasetPlugin.jar"/>
+	<classpathentry kind="lib" path="plugin/IsoLevelPlugin.jar"/>
+	<classpathentry kind="lib" path="plugin/ProbingLinePlugin.jar"/>
+	<classpathentry kind="lib" path="plugin/ThresholdPlugin.jar"/>
+	<classpathentry kind="lib" path="plugin/WarpScalarPlugin.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="thirdpart/vtk5/vtk.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
