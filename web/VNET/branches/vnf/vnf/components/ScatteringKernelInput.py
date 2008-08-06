@@ -47,7 +47,7 @@ class ScatteringKernelInput(base):
 
     def gulp(self, director):
         try:
-            page = director.retrieveSecurePage( 'gulp' )
+            page = director.retrieveSecurePage( 'scatteringKernelInput' )
         except AuthenticationError, err:
             return err.page
         main = page._body._content._main
@@ -73,32 +73,64 @@ class ScatteringKernelInput(base):
         submit = form.control(name='submit',type="submit", value="next")
         return page 
     
-    def abInitioHarmonic(self, director):
+    def localOrbitalHarmonic(self, director):
         try:
-            page = director.retrieveSecurePage( 'abInitioHarmonic' )
+            page = director.retrieveSecurePage( 'scatteringKernelInput' )
         except AuthenticationError, err:
             return err.page
+        
         main = page._body._content._main
-        document = main.document(title="")
-        document.byline = '<a href="http://danse.us">DANSE</a>'
+        document = main.document(title='Local orbital DFT energies, harmonic dynamics kernel' )
+        document.byline = '<a href="http://danse.us">DANSE</a>'    
         
         formcomponent = self.retrieveFormToShow( 'abInitioHarmonic')
         formcomponent.director = director
-        # build the SKChoice form
-        form = document.form(name='scatteringKernelInput', action=director.cgihome)
+        # build the form form
+        form = document.form(name='', action=director.cgihome)
         # specify action
         action = actionRequireAuthentication(          
-            actor = 'job', 
+            actor = 'neutronexperimentwizard', 
             sentry = director.sentry,
-            routine = 'edit',
-            label = '',
+            routine = 'kernel_generator',
+            id=self.inventory.id,
             arguments = {'form-received': formcomponent.name },
             )
         from vnf.weaver import action_formfields
         action_formfields( action, form )
         # expand the form with fields of the data object that is being edited
         formcomponent.expand( form )
-        submit = form.control(name='scatteringKernelInput.submit',type="submit", value="next")
+        next = form.control(name='submit',type="submit", value="next")
+#        self._footer( document, director )
+        return page 
+    
+    def planeWaveHarmonic(self, director):
+        try:
+            page = director.retrieveSecurePage( 'scatteringKernelInput' )
+        except AuthenticationError, err:
+            return err.page
+        
+        main = page._body._content._main
+        document = main.document(title='Plane wave DFT energies, harmonic dynamics kernel' )
+        document.byline = '<a href="http://danse.us">DANSE</a>'    
+        
+        formcomponent = self.retrieveFormToShow( 'abInitioHarmonic')
+        formcomponent.director = director
+        # build the form form
+        form = document.form(name='', action=director.cgihome)
+        # specify action
+        action = actionRequireAuthentication(          
+            actor = 'scatteringKernelInput', 
+            sentry = director.sentry,
+            routine = 'kernel_generator',
+            id=self.inventory.id,
+            arguments = {'form-received': formcomponent.name },
+            )
+        from vnf.weaver import action_formfields
+        action_formfields( action, form )
+        # expand the form with fields of the data object that is being edited
+        formcomponent.expand( form )
+        next = form.control(name='submit',type="submit", value="next")
+#        self._footer( document, director )
         return page 
         
     def __init__(self, name=None):
