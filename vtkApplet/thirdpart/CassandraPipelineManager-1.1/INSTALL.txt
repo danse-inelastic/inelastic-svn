@@ -1,0 +1,41 @@
+
+                       CASSANDRA PIPELINE MANAGER
+              VTK/Java based 3D Scientific Data Viewer
+                  (c) Artenum, Paris, France, 2005
+                  http://www.artenum.com/cassandra
+                 
+                      Version 1.1 (July 2006)
+
+Initial authors: 
+    - Sebastien Jourdain (Artenum), contact: sebastien.Jourdain@artenum.com
+    - Julien Forest (Artenum), contact: j.forest@artenum.com
+    - Artenum SARL, Paris, France. 
+
+1) Introduction / Purpose
+
+   Cassandra is a modular and advanced 3D scientific data viewer.
+   Cassandra is written in Java and based on the Visualisation Tool Kit, 
+   VTK. 
+
+   The Cassandra pipeline manager is an implementation of the Cassandra 
+   PipelineManager that take care of the VTK object management.
+
+2) Install and use
+
+   To install Cassandra PipelineManager just link it with 
+   the CassandraFramework. For that update the CassandraFramework
+   ClassPath.
+         
+3) Contact
+
+    E-mail: jourdain@artenum.com
+
+    Mail: Artenum SARL
+          101-103, Bd Mac Donald
+          75019 PARIS, FRANCE
+
+    Phone: +33(0)1 44 89 45 15
+    Fax:   +33(0)1 44 89 45 17
+
+
+
