@@ -90,6 +90,22 @@ else{
 	}
 }
 }
+
+function getXTicks()
+{var xticks_string = prompt("Please enter how many ticks");
+var xticks_temp = parseInt(xticks_string);
+xticks = xticks_temp;
+doGraph();
+}
+function getYTicks()
+{var yticks_string = prompt("Please enter how many ticks");
+var yticks_temp = parseInt(yticks_string);
+yticks = yticks_temp;
+doGraph();
+}
+
+
+function doGraph(){
 var d = g;
 var options = {
         legend: { show: false },
@@ -99,30 +115,16 @@ var options = {
         yaxis: { ticks: yticks },
         selection: { mode: "xy" }
     };
-var plot;
 
 plot = $.plot($("#placeholder"), [d], options);
-getXTicks();
-window.alert("new ticks " + xticks);
-$(placeholder).removeData(plot);
- plot = $.plot($("#placeholder"), [d],options);
-window.alert("new graph made");
-
-function getXTicks()
-{var xticks_string = prompt("Please enter how many ticks");
-var xticks_temp = parseInt(xticks_string);
-xticks = xticks_temp;
 }
 
-function getYTicks()
-{var yticks_string = prompt("Please enter how many ticks");
-var yticks_temp = parseInt(yticks_string);
-yticks = yticks_temp;
-}
+doGraph();
+
 
 
 </script>
- <button onclick="getXTicks(); draw(); window.alert('hi'); ">Set X Ticks</button>
- <button onclick="getYTicks(); showGraph();">Set Y Ticks</button>
+ <button onclick="getXTicks();">Set X Ticks</button>
+ <button onclick="getYTicks();">Set Y Ticks</button>
 </body>
 </html>
