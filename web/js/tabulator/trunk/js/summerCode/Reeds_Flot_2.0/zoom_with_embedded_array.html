@@ -10,12 +10,11 @@
 
  </head>
     <body>
-    <h1>Flot Examples</h1>
+    <h1>Flot Graph With Custom Settings</h1>
 
     <div id="placeholder" style="width:600px;height:300px;"></div>
 
-    <p>Visitors per day to the Flot homepage. Weekends are colored. Try zooming.
-      The plot below shows an overview.</p>
+    <p>A basic graph which reads in a stream of numbers and plots them, with customizable settings on page load.</p>
 
     <div id="overview" style="margin-left:50px;margin-top:20px;width:400px;height:50px"></div>
 
@@ -28,6 +27,8 @@ var y_array_count=0;
 var x_array = new Array();
 var y_array = new Array();
 
+//old system for gathering data from XML.  No longer used in embedded version
+/*
 $(function () {
 var xmlDoc=document.implementation.createDocument("","",null);
 xmlDoc.async=false;
@@ -80,14 +81,14 @@ else{
 	}
 }
 }
-});
-
+});*/
     
 
 
-for (i=0; i< 300; i++){
-document.write(g[i] + "<br />");}
+//for (i=0; i< 300; i++){
+//document.write(g[i] + "<br />");}
 
+//graphing functions using flot
 $(function () {
 var d = g;
     
@@ -134,4 +135,3 @@ var d = g;
 
  </body>
 </html>
-
