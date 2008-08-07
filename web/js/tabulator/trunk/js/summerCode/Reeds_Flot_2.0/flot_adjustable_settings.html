@@ -1,0 +1,209 @@
+<html>
+ <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Flot Test</title>
+    <link href="layout.css" rel="stylesheet" type="text/css"></link>
+    <!--[if IE]><script language="javascript" type="text/javascript" src="../excanvas.pack.js"></script><![endif]-->
+    <script language="javascript" type="text/javascript" src="jquery.js"></script>
+    <script language="javascript" type="text/javascript" src="jquery.flot.js"></script>
+ </head>
+<h1>
+
+<script id="source" language="javascript" type="text/javascript">
+var header = "hi";
+function show_header()
+{document.write(header);}
+function set_header()
+{header = prompt("Please enter a header","XML Chart");
+show_header();}
+set_header();
+
+
+</script>
+</h1>
+
+
+<body>
+   <div style="float:left">
+    <div id="placeholder" style="width:600px;height:300px;"></div>
+   </div>
+
+<div id="option_panel" style="float:left;margin-left:20px;margin-top:50px">
+
+ <input type="checkBox" onclick="if (this.checked) {toggle_legend();} if (this.checked == false) {toggle_legend();}" checked = "checked">Legend</br>
+ <input type="checkBox" onclick="if (this.checked) {toggle_lines();} if (this.checked == false) {toggle_lines();}" checked = "checked">Lines(May only be removed if points are on)</br>
+<input type="checkBox" onclick="if (this.checked) {toggle_points();} if (this.checked == false) {toggle_points();}">Points</br>
+</br>
+</br>
+<p>Tick Options</p>
+<button onclick="getXTicks();">Set Amount of X Ticks</button>
+<button onclick="get_xtick_size();">Set X Tick Size</button>
+</br>
+ <button onclick="getYTicks();">Set Amount of Y Ticks</button>
+<button onclick="get_ytick_size();">Set Y Tick Size</button>
+</br> 
+<button onclick="default_ticks();">Reset Ticks</button>
+   </div>
+
+<p style = "clear:left">Flot graph imported from an XML file</p>
+<script id="source" language="javascript" type="text/javascript">
+var x_ticks;
+var y_ticks;
+var custom_color;
+var show_legend = true;
+var custom_label = "XML Graph";
+var show_lines = true;
+var show_points = false;
+var ytick_size;
+var xtick_size;
+
+var xmlDoc=document.implementation.createDocument("","",null);
+xmlDoc.async=false;
+xmlDoc.load("columns.xml");
+
+var x=xmlDoc.getElementsByTagName("to");
+
+
+var txt = x[0].childNodes[0].nodeValue;
+
+
+var counter=0;
+var x_array_count=0;
+var y_array_count=0;
+var x_array = new Array();
+var y_array = new Array();
+
+for (i=0;i<=txt.length;i++)
+{
+if (counter == 0){
+	if (txt.charAt(i)==" " || txt.charAt(i) == "\n"){
+	counter = 1;
+	parseFloat(x_array[x_array_count]);
+	x_array_count++; 
+
+	}
+	else {
+
+		if (x_array[x_array_count] != null){
+		x_array[x_array_count] = x_array[x_array_count].concat(txt.charAt(i));
+
+		}
+		else{
+		x_array[x_array_count] = txt.charAt(i); 
+		}
+	}
+}
+else{
+
+	if (txt.charAt(i)==" "|| txt.charAt(i) == "\n"){
+				counter = 0;
+				parseFloat(y_array[y_array_count]);
+				y_array_count++;
+				}
+	else {
+		if (y_array[y_array_count] != null){
+		y_array[y_array_count] = y_array[y_array_count].concat(txt.charAt(i));
+
+		}
+		else{
+		y_array[y_array_count] = txt.charAt(i); 
+
+		}
+	}
+}
+}
+
+function disp_graph(){
+var d = [];
+    for (var i = 0; i < y_array.length; i ++)
+        d.push([x_array[i], y_array[i]]);
+
+var dataset = {
+		label: custom_label, 
+		data: d,
+		color: custom_color}
+
+var options = {
+	legend: {show:show_legend, position:"ne"},
+        lines: { show: show_lines },
+        points: { show: show_points },
+	xaxis: {ticks: x_ticks,
+		tickSize: xtick_size},
+        yaxis: { ticks: y_ticks, 
+		tickSize: ytick_size}
+    };
+
+plot = $.plot($("#placeholder"), [dataset], options);
+}
+
+disp_graph();
+
+function getXTicks()
+{var xticks_string = prompt("Please enter how many ticks");
+var xticks_temp = parseInt(xticks_string);
+x_ticks = xticks_temp;
+disp_graph();
+}
+
+function get_xtick_size()
+{var xtick_size_string = prompt("Please enter how large you would like the x interval to be");
+var xtick_size_temp = parseInt(xtick_size_string);
+xtick_size = xtick_size_temp;
+disp_graph();
+}
+
+function getYTicks()
+{var yticks_string = prompt("Please enter how many ticks");
+var yticks_temp = parseInt(yticks_string);
+y_ticks = yticks_temp;
+disp_graph();
+}
+
+function get_ytick_size()
+{var ytick_size_string = prompt("Please enter how large you would like the y interval to be");
+var ytick_size_temp = parseInt(ytick_size_string);
+ytick_size = ytick_size_temp;
+disp_graph();
+}
+
+function toggle_legend()
+{if (show_legend == true) {show_legend = false;}
+else {show_legend = true;}
+disp_graph();
+}
+
+function set_color()
+{var new_color = prompt("Please enter a color.\nStill in testing, make sure you enter a basic color\nor program may crash.");
+custom_color = new_color;
+disp_graph();
+}
+
+function toggle_lines()
+{if (show_lines == true) {show_lines = false;}
+else {show_lines = true;}
+disp_graph();
+}
+
+function toggle_points()
+{if (show_points == true) {show_points = false;}
+else {show_points = true;}
+disp_graph();
+}
+
+function set_label()
+{var new_label = prompt("Please enter a name for your graph");
+custom_label= new_label;
+disp_graph();
+}
+
+function default_ticks()
+{xtick_size=null; ytick_size=null; x_ticks = null; y_ticks=null;
+disp_graph();}
+</script>
+   
+
+ <button onclick="set_color();">Set Color</button>
+ <button onclick="set_label();">Set Graph Name</button>
+
+</body>
+</html>
