@@ -12,7 +12,7 @@
 //
 
 
-// productSlider
+// slidableGallery
 
 // Developed from jquery ui example: http://jqueryfordesigners.com/slider-gallery/
 // Convert a list (<li>) of items to be contained in a slider
@@ -41,7 +41,7 @@
   //                 <span class="slider-lbl4">Applications</span>
   //                 <span class="slider-lbl5">Servers</span>
   //             </div>
-  $.fn.productSlider = function () {
+  $.fn.slidableGallery = function () {
 
     container = this;
 
