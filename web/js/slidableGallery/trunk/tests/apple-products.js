@@ -7,6 +7,6 @@ $(document).ready(function() {
 	       {'text': 'Applications', 'position': 0.6},
 	       {'text': 'Servers', 'position': 0.8}
 	       ];
-    $('div.slidableGallery').slidableGallery( labels );
+    $('#abcd').slidableGallery( labels );
 
   });
