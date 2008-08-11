@@ -54,6 +54,8 @@
     spacer = 3;  // space between ul and slider
 	
     container = this;
+    //
+    container.addClass( 'slidableGallery' );
     container.width( width );
 
     // everytime an item loaded, check whether all items are loaded
