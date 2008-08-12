@@ -50,8 +50,10 @@
     sliderwidth = 542;
 
     // 
+    containerheight = 160;
     sliderheight = 17; // should be adjustable?
     spacer = 3;  // space between ul and slider
+    slidery = 140; // slider position relative to the container
 	
     container = this;
     //
@@ -85,13 +87,15 @@
 	var itemsWidth = ul.innerWidth() - container.outerWidth();
 	var ulheight = ul.height();
 
-	container.height( ulheight + sliderheight + spacer );
+	//container.height( ulheight + sliderheight + spacer );
+	container.height( containerheight );
 	
 	// add slider and labels
 	sliderdiv = $( '<div class="slider"/>' );
 	sliderdiv.width( sliderwidth );
 	sliderdiv.height( sliderheight );
-	sliderdiv.css( 'margin-top', ulheight + spacer );
+	//sliderdiv.css( 'margin-top', ulheight + spacer );
+	sliderdiv.css( 'margin-top', slidery );
 
 	sliderhandle = $( '<div class="handle"/>' ) ;
 	sliderhandle.height( sliderheight );

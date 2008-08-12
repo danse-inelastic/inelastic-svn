@@ -19,6 +19,7 @@
 
 .slidableGallery UL LI {
     display: inline;
+    //padding: 0;
 }
 
 .slider {
