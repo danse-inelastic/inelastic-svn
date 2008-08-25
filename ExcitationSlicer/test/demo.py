@@ -28,17 +28,20 @@ calc.loadPhononData()
 
 
 # Plot energy iso-surface for a particular "branch" of phonon dataset:
-calc.plotEnergyIsoSurface(branchtoplot=3, energyvalues=[30.0])
+print "Plot energy iso-surface for a particular branch of phonon dataset"
+calc.plotEnergyIsoSurface(branchtoplot=3, energyvalues=[25.0])
 calc.plotEnergyIsoSurface(branchtoplot=3, energyvalues=[10.0, 20.0, 30.0, 40.0])
 
 # Plot the scattering intensity for that branch on a plane detector surface:
+print "Plot the scattering intensity for that branch on a plane detector surface"
 calc.plotIntensityPlaneCut(branchtoplot=3, atomtoplot=0)
 
 # Map the phonon scattering intensity onto an iso-surface of given energy:
+print "Map the phonon scattering intensity onto an iso-surface of given energy"
 newplotter = VTKIsoSurfaceIntensityPlotter()
 calc.setPlotter(newplotter)
-calc.plotIsoSurfaceIntensity(branchtoplot=3, atomtoplot=0, energyvalues=[35.0])
+calc.plotIsoSurfaceIntensity(branchtoplot=3, atomtoplot=0, energyvalues=[22.0])
 
-calc.plotIsoSurfaceIntensity(branchtoplot=3, atomtoplot=0, energyvalues=[10.0, 40.0])
+calc.plotIsoSurfaceIntensity(branchtoplot=3, atomtoplot=0, energyvalues=[25.0])
 
 
