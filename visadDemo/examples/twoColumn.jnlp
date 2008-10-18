@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jnlp spec="1.0+" codebase="http://trueblue.caltech.edu/java">
+<jnlp spec="1.0+" codebase="file:///home/jbk/DANSE/visadDemo/examples">
     <information>
-        <title></title>
-        <vendor></vendor>
+        <title>twoColumnPlotter</title>
+        <vendor>Danse</vendor>
         <homepage href="http://danse.us" />
         <description></description>
     </information>
@@ -13,9 +13,6 @@
     <resources>
         <j2se version="1.5+" java-vm-args="-Xmx512m"/>
         <jar href="cod.jar"/>
-	<jar href="mysql-connector-java-5.0.7-bin.jar" />
-	<jar href="jeplite-0.8.7a-bin.jar" />
-	<extension name="Jmol" href="Jmol.jnlp"/>
     </resources>
     <application-desc main-class="cod.Main" />
 </jnlp>
