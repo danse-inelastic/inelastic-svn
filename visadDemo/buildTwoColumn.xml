@@ -1,4 +1,4 @@
-<project name="visadDemo" default="package-trueblue" basedir="..">
+<project name="visadDemo" default="package-trueblue" basedir=".">
 	
 	<macrodef name="unsignjar">
 		
@@ -41,7 +41,7 @@
 
   <property name="src" location="examples"/>
   <property name="build" location="bin"/>
-  <property name="app-name" value="Two Column Plotter"/>
+  <property name="app-name" value="TwoColumnPlotter"/>
   <property name="username" value="jbk"/>
   <property name="password" value=""/>
 
@@ -60,50 +60,24 @@
 
 	<target name="package-trueblue" description="build jars for Plotter" depends="init">
 		<!-- first unsign all external jars 
-		<unsignjar jar="deployable/jeplite-0.8.7a-bin.jar"/>
-		<unsignjar jar="deployable/Jmol.jar"/>-->
-		<unsignjar jar="lib/visad.jar"/>
-		<unsignjar jar="Plotter/Plotter.jar"/>
-		<!--<jar jarfile="PlotterAll/Plotter.jar" >
+		<unsignjar jar="${app-name}.jar"/>-->
+		<jar jarfile="deploy/${app-name}.jar" >
 			<fileset dir="${build}">
-				<include name="Plotter.class" />
+				<include name="vnf/**" />
 			</fileset>
-		</jar>-->
+		</jar>
 		<!-- sign all jars -->
-		<signjar jar="Plotter/${app-name}.jar" keystore="/home/jbk" alias="Plotter" storepass="vnfvnf" keypass="vnfvnf"/>
-		<signjar jar="lib/visad.jar" keystore="/home/jbk" alias="Plotter" storepass="vnfvnf" keypass="vnfvnf"/>
-		<!--<signjar jar="deployable/Jmol.jar" keystore="/home/jbk/vnf" alias="vnf" storepass="vnf" keypass="vnf"/>
-		<signjar jar="deployable/mysql-connector-java-5.0.7-bin.jar" keystore="/home/jbk/vnf" alias="vnf" storepass="vnf" keypass="vnf"/>-->
+		<signjar jar="deploy/${app-name}.jar" keystore="/home/jbk/DanseKeystore" alias="Plotter" storepass="danse" keypass="danse"/>
 	</target>
 	
 	<target name="deploy-remote-trueblue" depends="package-trueblue">
 		<scp trust="yes" todir="${username}:${password}@trueblue.caltech.edu:/var/www/java/">
-			<fileset dir="Plotter">
-				<include name="Plotter.jar"/>
-			</fileset>
 			<fileset dir="lib">
 				<include name="visad.jar"/>
 			</fileset>
 		</scp>
 	</target>
-	
-	<target name="package-apache" description="To Build the jar File" depends="init">
-		<jar jarfile="deployable/${app-name}.jar" >
-			<fileset dir="${build}">
-				<include name="cod/**" />
-			</fileset>
-			<fileset dir="." includes="OPENARCH-INF/**" />
-		</jar>
-		<signjar jar="deployable/${app-name}.jar" alias="mykey" storepass="fireball"/>
-	</target>
 
-	<target name="deploy-remote-fireball-apache" depends="package-apache">
-		<scp trust="yes" todir="${username}:${password}@fireball.phys.wvu.edu:/var/www/html/cod/test/">
-			<fileset dir="deployable">
-				<include name="**/*"/>
-			</fileset>
-		</scp>
-	</target>
 
 	<target name="clean">
 		<delete dir="jar" />
