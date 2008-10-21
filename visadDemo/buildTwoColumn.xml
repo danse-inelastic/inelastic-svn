@@ -61,7 +61,7 @@
 	<target name="package-trueblue" description="build jars for Plotter" depends="init">
 		<!-- first unsign all external jars 
 		<unsignjar jar="${app-name}.jar"/>-->
-		<jar jarfile="deploy/${app-name}.jar" >
+		<jar jarfile="deploy/${app-name}.jar" manifest="jee/MANIFEST.MF">
 			<fileset dir="${build}">
 				<include name="vnf/**" />
 			</fileset>
