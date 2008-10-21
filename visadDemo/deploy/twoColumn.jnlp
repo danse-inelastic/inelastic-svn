@@ -12,7 +12,7 @@
     </security>
     <resources>
         <j2se version="1.5+" java-vm-args="-Xmx512m"/>
-        <jar href="cod.jar"/>
+        <jar href="TwoColumn.jar"/>
     </resources>
     <application-desc main-class="cod.Main" />
 </jnlp>

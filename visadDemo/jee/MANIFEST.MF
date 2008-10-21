@@ -1,1 +1,1 @@
-Main-Class: vnf.controller.JavaGULP
+Main-Class: vnf.TwoColumnPlotter
