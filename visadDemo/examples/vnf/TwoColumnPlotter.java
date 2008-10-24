@@ -12,7 +12,13 @@ import visad.util.*;
 import visad.java2d.DisplayImplJ2D;
 import java.rmi.RemoteException;
 import java.awt.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
 import javax.swing.*;
+
 
 /**
   VisAD Tutorial example 2_11
@@ -29,12 +35,12 @@ public class TwoColumnPlotter{
   // The quantities to be displayed in x- and y-axes: time and height, respectively
   // Our index is also a RealType
 
-  private RealType time, height, index;
+  private RealType x, y, index;
 
 
   // A Tuple, to pack time and height together
 
-  private RealTupleType t_h_tuple;
+  private RealTupleType x_y_tuple;
 
 
   // The function ( elevation(i), height(i) ), where i = index,
@@ -42,13 +48,13 @@ public class TwoColumnPlotter{
   // ( elevation, height) are a Tuple, so we have a FunctionType
   // from index to a tuple
 
-  private FunctionType func_i_tuple,  func_time_height;
+  private FunctionType func_i_tuple,  func_x_y;
 
 
   // Our Data values: the domain Set time_set for ( time -> height )
   // and the Set index_set for the indexed points
 
-  private Set time_set, index_set;
+  private Set x_set, index_set;
 
 
   // The Data class FlatField, which will hold time and height data.
@@ -66,7 +72,7 @@ public class TwoColumnPlotter{
   // The 2D display, and its the maps
 
   private DisplayImpl display;
-  private ScalarMap timeMap, heightMap, timeRangeMap;
+  private ScalarMap xMap, yMap, xRangeMap;
 
   // The RangeWidget
 
@@ -85,14 +91,14 @@ public class TwoColumnPlotter{
     // x and y are measured in SI meters
     // Use RealType(String name, Unit u,  Set set), set is null
 
-    time = RealType.getRealType("time", SI.second, null);
-    height = RealType.getRealType("height", SI.meter, null);
+    x = RealType.getRealType("x", null, null);
+    y = RealType.getRealType("y", null, null);
 
    // Code for setting POINT data
 
     // Organize time and height in a Tuple
 
-    t_h_tuple = new RealTupleType( time, height);
+    x_y_tuple = new RealTupleType( x, y);
 
     // Index has no unit, just a name
 
@@ -101,7 +107,7 @@ public class TwoColumnPlotter{
     // Create a FunctionType ( index -> ( time, height) ), for points
     // Use FunctionType(MathType domain, MathType range)
 
-    func_i_tuple = new FunctionType( index, t_h_tuple);
+    func_i_tuple = new FunctionType( index, x_y_tuple);
 
     // Create index_set, but this time using a
     // Integer1DSet(MathType type, int length)
@@ -137,12 +143,12 @@ public class TwoColumnPlotter{
 
     // the FunctionType for the line, function ( time -> height)
 
-    func_time_height = new FunctionType(time, height);
+    func_x_y = new FunctionType(x, y);
 
     // Create a time_set, with LENGTH = 25 values, for continuous line
 
     int LENGTH = 25;
-    time_set = new Linear1DSet(time, -3.0, 3.0, LENGTH );
+    x_set = new Linear1DSet(x, -3.0, 3.0, LENGTH );
 
     // Generate some (25) points with a for-loop for the line
     // Note that we have the parabola height = 45 - 5 * time^2
@@ -154,7 +160,7 @@ public class TwoColumnPlotter{
     // this call will get the time values
     // "true" means we get a copy from the samples
 
-    float[][] d_vals  = time_set.getSamples( true);
+    float[][] d_vals  = x_set.getSamples( true);
 
     for(int i = 0; i < LENGTH; i++)
       h_vals[0][i] =  45.0f - 5.0f * (float) (d_vals[0][i]*d_vals[0][i]);
@@ -163,7 +169,7 @@ public class TwoColumnPlotter{
     // Use FlatField(FunctionType type, Set domain_set)
     // for the line
 
-    line_ff = new FlatField( func_time_height, time_set);
+    line_ff = new FlatField( func_x_y, x_set);
 
     // and finally put the points and height values into the line FlatField
 
@@ -187,18 +193,18 @@ public class TwoColumnPlotter{
     // and height along YAxis
     // Use ScalarMap(ScalarType scalar, DisplayRealType display_scalar)
 
-    timeMap = new ScalarMap( time, Display.XAxis );
-    heightMap = new ScalarMap( height,   Display.YAxis );
+    xMap = new ScalarMap( x, Display.XAxis );
+    yMap = new ScalarMap( y,   Display.YAxis );
 
     // We create a new ScalarMap, with time as RealType and SelectRange as DisplayRealType
 
-    timeRangeMap = new ScalarMap( time, Display.SelectRange );
+    xRangeMap = new ScalarMap( x, Display.SelectRange );
 
     // Add maps to display
 
-    display.addMap( timeMap );
-    display.addMap( heightMap );
-    display.addMap( timeRangeMap );
+    display.addMap( xMap );
+    display.addMap( yMap );
+    display.addMap( xRangeMap );
 
 
     // Create a data reference and set the FlatField as our data
@@ -226,11 +232,11 @@ public class TwoColumnPlotter{
 
     // Create a RangeWidget with the ScalarMap timeMap
 
-    ranWid = new RangeWidget( timeMap );
+    ranWid = new RangeWidget( xMap );
 
     // Create a SelectRangeWidget with the ScalarMap timeRangeMap
 
-    selRanWid = new SelectRangeWidget( timeRangeMap );
+    selRanWid = new SelectRangeWidget( xRangeMap );
 
     // Add reference to display, and link DataReference to ConstantMap
 
@@ -256,10 +262,23 @@ public class TwoColumnPlotter{
 
 
   }
+  
+//  void readData(String path){
+//	    try {
+//	        BufferedReader in = new BufferedReader(new FileReader(path));
+//	        String str;
+//	        while ((str = in.readLine()) != null) {
+//	            process(str);
+//	        }
+//	        in.close();
+//	    } catch (IOException e) {
+//	    }
+	  
+	  
+  
 
   // The main function
-
-  public static void main(String[] args)
+public static void main(String[] args)
     throws RemoteException, VisADException
   {
     new TwoColumnPlotter(args);
