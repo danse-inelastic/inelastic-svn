@@ -30,7 +30,7 @@ public class TwoColumnPlotter2{
   // Declare variables
   // The quantities to be displayed in x- and y-axes
 
-  private RealType time,height,speed;
+  private RealType time,height;
 
 
   // The functions ( time -> height )
@@ -78,15 +78,10 @@ public class TwoColumnPlotter2{
 
     mps = SI.meter.divide( SI.second );
 
-    speed = RealType.getRealType("speed", mps, null);
-
-
    // Create a FunctionType, that is the class which represents the function y = f(x)
    // Use FunctionType(MathType domain, MathType range)
 
     func_t_h = new FunctionType( time, height );
-    func_t_s = new FunctionType( time, speed );
-
 
     // Create the time_set, with 5 values, but this time using a
     // Linear1DSet(MathType type, double first, double last, int length)
@@ -154,15 +149,10 @@ public class TwoColumnPlotter2{
 
     heightYMap = new ScalarMap( height, Display.YAxis );
 
-    speedYMap = new ScalarMap( speed, Display.YAxis );
-
-
     // Add maps to display
 
     display.addMap( timeMap );
     display.addMap( heightYMap );
-    display.addMap( speedYMap );
-
 
     // Scale heightYMap
     // we simply choose the range from 0.0 to 50.0
