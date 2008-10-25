@@ -3,7 +3,6 @@
 	<classpathentry kind="src" path="visadSrc"/>
 	<classpathentry kind="src" path="examples"/>
 	<classpathentry kind="src" path="appletTutorial"/>
-	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="vnfSrc"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/ext/j3dcore.jar">

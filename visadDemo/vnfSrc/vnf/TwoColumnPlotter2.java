@@ -1,7 +1,7 @@
 /*
 VisAD Tutorial
 Copyright (C) 2000 Ugo Taddei
-*/
+ */
 
 package vnf;
 
@@ -11,211 +11,235 @@ import visad.*;
 import visad.java2d.DisplayImplJ2D;
 import java.rmi.RemoteException;
 import java.awt.*;
+
 import javax.swing.*;
 
 /**
-  Somewhat different version of program P2_07
-  We reorganize the MathType of example P2_07 ( time -> (height, speed) )
-  as
-   ( time -> height )
-  and
-   ( time -> speed )
-  When then plot time (along x-axis) against height and speed, both (along y-axis)
-  The color of speed display is changed to match the line color os speed
+ * Somewhat different version of program P2_07 We reorganize the MathType of
+ * example P2_07 ( time -> (height, speed) ) as ( time -> height ) and ( time ->
+ * speed ) When then plot time (along x-axis) against height and speed, both
+ * (along y-axis) The color of speed display is changed to match the line color
+ * os speed
  */
 
+public class TwoColumnPlotter2 {
 
-public class TwoColumnPlotter2{
+	// Declare variables
+	// The quantities to be displayed in x- and y-axes
 
-  // Declare variables
-  // The quantities to be displayed in x- and y-axes
+	private RealType time, height;
+	private RealType black;
 
-  private RealType time,height;
+	// The functions ( time -> height )
+	// and ( time -> speed )
 
+	private FunctionType func_t_h;
 
-  // The functions ( time -> height )
-  // and ( time -> speed )
+	// Our Data values for x are represented by the set
 
-  private FunctionType func_t_h, func_t_s;
+	private Set time_set;
 
+	// The Data class FlatField, which will hold time and height data
+	// and the same for speed
 
-  // Our Data values for x are represented by the set
+	private FlatField height_ff;
 
-  private Set time_set;
+	// The DataReference from the data to display
 
+	private DataReferenceImpl t_h_ref;
 
-  // A new unit, to measure speed
+	// The 2D display, and its the maps
 
-  private Unit mps;
+	private DisplayImpl display;
+	private ScalarMap blackXMap, blackYMap;
+	private ScalarMap blackMap;
+	private ScalarMap timeMap, heightYMap;
 
+	public TwoColumnPlotter2(String[] args) throws RemoteException,
+			VisADException {
 
-  // The Data class FlatField, which will hold time and height data
-  // and the same for speed
+		// Create the quantities
+		// x and y are measured in SI meters
+		// Use RealType(String name, Unit u, Set set), set is null
 
-  private FlatField height_ff, speed_ff;
+		time = RealType.getRealType("time", SI.second, null);
+		height = RealType.getRealType("height", SI.meter, null);
 
-  // The DataReference from the data to display
+		// Create a FunctionType, that is the class which represents the
+		// function y = f(x)
+		// Use FunctionType(MathType domain, MathType range)
 
-  private DataReferenceImpl t_h_ref, t_s_ref;
+		func_t_h = new FunctionType(time, height);
 
-  // The 2D display, and its the maps
+		// Create the time_set, with 5 values, but this time using a
+		// Linear1DSet(MathType type, double first, double last, int length)
 
-  private DisplayImpl display;
-  private ScalarMap timeMap, heightYMap, hcMap, speedYMap, scMap;
+		int LENGTH = 32;
+		time_set = new Linear1DSet(time, -3.0, 3.0, LENGTH);
 
+		// Generate some points with a for-loop for the line
+		// Note that we have the parabola height = 45 - 5 * time^2
+		// But first we create a float array for the values
 
-  public TwoColumnPlotter2 (String []args)
-    throws RemoteException, VisADException {
+		float[][] h_vals = new float[1][LENGTH];
+		float[][] s_vals = new float[1][LENGTH];
 
-    // Create the quantities
-    // x and y are measured in SI meters
-    // Use RealType(String name, Unit u,  Set set), set is null
+		// ...then we use a method of Set to get the samples from time_set;
+		// this call will get the time values
+		// "true" means we get a copy from the samples
 
-    time = RealType.getRealType("time", SI.second, null);
-    height = RealType.getRealType("height", SI.meter, null);
+		float[][] t_vals = time_set.getSamples(true);
 
-    // Create a new unit for speed, meters per seconds
+		// finally generate height and speed values
+		// height is given by the parabola height = 45 - 5 * time^2
+		// and speed by its first derivative speed = -10 * time
 
-    mps = SI.meter.divide( SI.second );
+		for (int i = 0; i < LENGTH; i++) {
 
-   // Create a FunctionType, that is the class which represents the function y = f(x)
-   // Use FunctionType(MathType domain, MathType range)
+			// height values...
+			h_vals[0][i] = 45.0f - 5.0f * (float) (t_vals[0][i] * t_vals[0][i]);
 
-    func_t_h = new FunctionType( time, height );
+			// ...and speed values: the derivative of the above function
+			s_vals[0][i] = -10.0f * (float) t_vals[0][i];
+		}
 
-    // Create the time_set, with 5 values, but this time using a
-    // Linear1DSet(MathType type, double first, double last, int length)
+		// Create the FlatFields
+		// Use FlatField(FunctionType type, Set domain_set)
 
-    int LENGTH = 32;
-    time_set = new Linear1DSet(time, -3.0, 3.0, LENGTH);
+		height_ff = new FlatField(func_t_h, time_set);
 
-        // Generate some points with a for-loop for the line
-    // Note that we have the parabola height = 45 - 5 * time^2
-    // But first we create a float array for the values
+		// and put the y values above in it
 
-    float[][] h_vals = new float[1][LENGTH];
-    float[][] s_vals = new float[1][LENGTH];
+		height_ff.setSamples(h_vals);
 
-    // ...then we use a method of Set to get the samples from time_set;
-    // this call will get the time values
-    // "true" means we get a copy from the samples
+		// Create Display and its maps
 
-    float[][] t_vals  = time_set.getSamples( true);
+		// A 2D display
 
+		display = new DisplayImplJ2D("display1");
 
-    // finally generate height and speed values
-    // height is given by the parabola height = 45 - 5 * time^2
-    // and speed by its first derivative speed = -10 * time
+		// Get the display renderer
+		DisplayRenderer dRenderer = display.getDisplayRenderer();
 
-    for(int i = 0; i < LENGTH; i++){
+		// Set the display background color
+		dRenderer.setBackgroundColor(Color.white);
 
-     // height values...
-      h_vals[0][i] =  45.0f - 5.0f * (float) (t_vals[0][i]*t_vals[0][i]);
+		// Create the quantities
+		// Use RealType(String name, Unit unit, Set set);
 
-     // ...and speed values: the derivative of the above function
-      s_vals[0][i] =  - 10.0f * (float) t_vals[0][i];
-    }
+		black = RealType.getRealType("BLACK", null, null);
 
+		// Create the ScalarMaps: latitude to XAxis, longitude to YAxis and
+		// rgbVal to ZAxis and to RGB
+		// Use ScalarMap(ScalarType scalar, DisplayRealType display_scalar)
 
-    // Create the FlatFields
-    // Use FlatField(FunctionType type, Set domain_set)
+		blackXMap = new ScalarMap(black, Display.XAxis);
+		blackYMap = new ScalarMap(black, Display.YAxis);
+		blackXMap.setScalarName("x");
+		blackYMap.setScalarName("y");
 
-     height_ff = new FlatField( func_t_h, time_set);
-     speed_ff = new FlatField( func_t_s, time_set);
+		blackMap = new ScalarMap(black, Display.Red);
 
+		// Add maps to display
 
-     // and put the y values above in it
+		display.addMap(blackXMap);
+		display.addMap(blackYMap);
+		display.addMap(blackMap);
 
-    height_ff.setSamples( h_vals );
-    speed_ff.setSamples( s_vals );
+		// Set axes colors
 
-    // Create Display and its maps
+		float[] b1 = colorToFloats(Color.black);
+		blackXMap.setScaleColor(b1);
+		float[] b2 = colorToFloats(Color.black);
+		blackYMap.setScaleColor(b2);
 
-    // A 2D display
+		// Get display's graphics mode control and draw scales
 
-    display = new DisplayImplJ2D("display1");
+		GraphicsModeControl dispGMC = (GraphicsModeControl) display
+				.getGraphicsModeControl();
+		dispGMC.setScaleEnable(true);
+		dispGMC.setLineWidth(2.0f);
 
-    // Get display's graphics mode control and draw scales
+		// Create the ScalarMaps: quantity time is to be displayed along XAxis,
+		// and height and speed along YAxis
+		// Use ScalarMap(ScalarType scalar, DisplayRealType display_scalar)
 
-    GraphicsModeControl dispGMC = (GraphicsModeControl) display.getGraphicsModeControl();
-    dispGMC.setScaleEnable(true);
-    dispGMC.setLineWidth( 2.0f );
+		timeMap = new ScalarMap(time, Display.XAxis);
 
-    // Create the ScalarMaps: quantity time is to be displayed along XAxis,
-    // and height and speed along YAxis
-    // Use ScalarMap(ScalarType scalar, DisplayRealType display_scalar)
+		heightYMap = new ScalarMap(height, Display.YAxis);
 
-    timeMap = new ScalarMap( time, Display.XAxis );
+		// Add maps to display
 
-    heightYMap = new ScalarMap( height, Display.YAxis );
+		display.addMap(timeMap);
+		display.addMap(heightYMap);
 
-    // Add maps to display
+		// Scale heightYMap
+		// we simply choose the range from 0.0 to 50.0
 
-    display.addMap( timeMap );
-    display.addMap( heightYMap );
+		heightYMap.setRange(0.0, 50.0);
+		
+	    // Choose yellow as the color for the speed curve
 
-    // Scale heightYMap
-    // we simply choose the range from 0.0 to 50.0
+	    float heightRed = 1.0f;
+	    float heightGreen = 1.0f;
+	    float heightBlue = 0.0f;
 
-    heightYMap.setRange( 0.0, 50.0);
 
-    // Choose yellow as the color for the speed curve
+	    float[] heightColor = new float[]{heightRed, heightGreen, heightBlue};
 
-    float speedRed = 1.0f;
-    float speedGreen = 1.0f;
-    float speedBlue = 0.0f;
+	    // ...and color the axis with the same yellow
 
+	    heightYMap.setScaleColor( heightColor );
 
-    float[] speedColor = new float[]{speedRed, speedGreen, speedBlue};
+		// Create a data reference and set the FlatField as our data
 
-    // ...and color the axis with the same yellow
+		t_h_ref = new DataReferenceImpl("t_h_ref");
 
-    speedYMap.setScaleColor( speedColor );
+		t_h_ref.setData(height_ff);
+		
+	    // Create Constantmaps for speed and add its reference to display
 
-    // uncomment the following line if you don't want speed axis to be drawn
+	    ConstantMap[] heightCMap = {  new ConstantMap( heightRed, Display.Red),
+	        		        new ConstantMap( heightGreen, Display.Green),
+	        		        new ConstantMap( heightBlue, Display.Blue),
+	        		        new ConstantMap( 1.50f, Display.LineWidth)};
 
-    // speedYMap.setScaleEnable(false);
+		// Add reference to display
 
-    // Create a data reference and set the FlatField as our data
+		display.addReference(t_h_ref, heightCMap);
 
-    t_h_ref = new DataReferenceImpl("t_h_ref");
-    t_s_ref = new DataReferenceImpl("t_s_ref");
+		// Create application window, put display into it
 
-    t_h_ref.setData( height_ff );
-    t_s_ref.setData( speed_ff );
+		JFrame jframe = new JFrame("VisAD Tutorial example 2_08");
+		jframe.getContentPane().add(display.getComponent());
 
-    // Add reference to display
+		// Set window size and make it visible
 
-    display.addReference( t_h_ref );
+		jframe.setSize(300, 300);
+		jframe.setVisible(true);
 
-    // Create Constantmaps for speed and add its reference to display
+	}
 
-    ConstantMap[] speedCMap = {  new ConstantMap( speedRed, Display.Red),
-        		        new ConstantMap( speedGreen, Display.Green),
-        		        new ConstantMap( speedBlue, Display.Blue),
-        		        new ConstantMap( 1.50f, Display.LineWidth)};
+	/*
+	 * Utility method to transform a Java color in an array of rgb components
+	 * between 0 and 1
+	 */
+	private float[] colorToFloats(Color c) {
 
-    display.addReference( t_s_ref, speedCMap );
+		float[] rgb = new float[] { 0.5f, 0.5f, 0.5f }; // init with gray
+		if (c != null) {
+			rgb[0] = (float) c.getRed() / 255.0f;
+			rgb[1] = (float) c.getGreen() / 255.0f;
+			rgb[2] = (float) c.getBlue() / 255.0f;
 
+		}
 
-    // Create application window, put display into it
+		return rgb;
+	}
 
-    JFrame jframe = new JFrame("VisAD Tutorial example 2_08");
-    jframe.getContentPane().add(display.getComponent());
+	public static void main(String[] args) throws RemoteException,
+			VisADException {
+		new TwoColumnPlotter2(args);
+	}
 
-    // Set window size and make it visible
-
-    jframe.setSize(300, 300);
-    jframe.setVisible(true);
-
-
-  }
-
-
-  public static void main(String[] args)
-    throws RemoteException, VisADException
-  {
-    new TwoColumnPlotter2(args);
-  }
-
-} //end of Visad Tutorial Program 2_08
+} // end of Visad Tutorial Program 2_08
