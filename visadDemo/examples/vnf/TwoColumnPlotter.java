@@ -1,7 +1,7 @@
 /*
 VisAD Tutorial
 Copyright (C) 2000 Ugo Taddei
-*/
+ */
 
 package vnf;
 
@@ -19,269 +19,233 @@ import java.io.IOException;
 
 import javax.swing.*;
 
-
 /**
-  VisAD Tutorial example 2_11
-  Same as program P2_05, but introduce the RangeWidget
-  height = 45 - 5 * time^2 as a green line and the point of
-  example 2_04 as red dots. The line values are generated with a for-loop
-  Run program with java P2_11
+ * VisAD Tutorial example 2_11 Same as program P2_05, but introduce the
+ * RangeWidget height = 45 - 5 * time^2 as a green line and the point of example
+ * 2_04 as red dots. The line values are generated with a for-loop Run program
+ * with java P2_11
  */
 
+public class TwoColumnPlotter {
 
-public class TwoColumnPlotter{
+	// Declare variables
+	// The quantities to be displayed in x- and y-axes: time and height,
+	// respectively
+	// Our index is also a RealType
 
-// Declare variables
-  // The quantities to be displayed in x- and y-axes: time and height, respectively
-  // Our index is also a RealType
+	private RealType x, y, index;
 
-  private RealType x, y, index;
+	// A Tuple, to pack time and height together
 
+	private RealTupleType x_y_tuple;
 
-  // A Tuple, to pack time and height together
+	// The function ( elevation(i), height(i) ), where i = index,
+	// represented by ( index -> ( elevation, height) )
+	// ( elevation, height) are a Tuple, so we have a FunctionType
+	// from index to a tuple
 
-  private RealTupleType x_y_tuple;
+	private FunctionType func_i_tuple, func_x_y;
 
+	// Our Data values: the domain Set time_set for ( time -> height )
+	// and the Set index_set for the indexed points
 
-  // The function ( elevation(i), height(i) ), where i = index,
-  // represented by ( index -> ( elevation, height) )
-  // ( elevation, height) are a Tuple, so we have a FunctionType
-  // from index to a tuple
+	private Set x_set, index_set;
 
-  private FunctionType func_i_tuple,  func_x_y;
+	// The Data class FlatField, which will hold time and height data.
+	// time Data for line is implicitly given by the Set time_set
+	// point_vals_ff holds the point values
 
+	private FlatField line_ff, points_ff;
 
-  // Our Data values: the domain Set time_set for ( time -> height )
-  // and the Set index_set for the indexed points
+	// The DataReference from the data to display
 
-  private Set x_set, index_set;
+	private DataReferenceImpl points_ref, line_ref;
 
+	// The 2D display, and its the maps
 
-  // The Data class FlatField, which will hold time and height data.
-  // time Data for line is implicitly given by the Set time_set
-  // point_vals_ff holds the point values
+	private DisplayImpl display;
+	private ScalarMap xMap, yMap, xRangeMap;
 
-  private FlatField line_ff, points_ff;
 
+	// The constructor of example P2_10
 
-  // The DataReference from the data to display
+	public TwoColumnPlotter(String[] args) throws RemoteException,
+			VisADException {
 
-  private DataReferenceImpl points_ref, line_ref;
+		// Create the quantities
+		// x and y are measured in SI meters
+		// Use RealType(String name, Unit u, Set set), set is null
 
+		x = RealType.getRealType("x", null, null);
+		y = RealType.getRealType("y", null, null);
 
-  // The 2D display, and its the maps
+		// Code for setting POINT data
 
-  private DisplayImpl display;
-  private ScalarMap xMap, yMap, xRangeMap;
+		// Organize time and height in a Tuple
 
-  // The RangeWidget
+		x_y_tuple = new RealTupleType(x, y);
 
-  private RangeWidget ranWid;
+		// Index has no unit, just a name
 
-  // ...and the SelectRangeWidget
+		index = RealType.getRealType("index");
 
-  private SelectRangeWidget selRanWid;
+		// Create a FunctionType ( index -> ( time, height) ), for points
+		// Use FunctionType(MathType domain, MathType range)
 
-  // The constructor of example P2_10
+		func_i_tuple = new FunctionType(index, x_y_tuple);
 
-  public TwoColumnPlotter (String []args)
-    throws RemoteException, VisADException {
+	    index_set = new Linear1DSet(index, -3.0, 3.0, 32);
 
-    // Create the quantities
-    // x and y are measured in SI meters
-    // Use RealType(String name, Unit u,  Set set), set is null
+		// These are our actual data values for time and height
+		// Note that these values correspond to the parabola of the
+		// previous examples. The y (height) values are the same, but the x
+		// (time)
+		// values are explicitly given.
 
-    x = RealType.getRealType("x", null, null);
-    y = RealType.getRealType("y", null, null);
+		float[][] point_vals = new float[][] {
+				{ -3.0f, -1.5f, 0.0f, 1.5f, 3.0f, },
+				{ 0.0f, 33.75f, 45.0f, 33.75f, 0.0f, } };
 
-   // Code for setting POINT data
+		// Create a FlatField, that is the Data class for the samples
+		// Use FlatField(FunctionType type, Set domain_set)
 
-    // Organize time and height in a Tuple
+		// for the (time, height) points
 
-    x_y_tuple = new RealTupleType( x, y);
+		points_ff = new FlatField(func_i_tuple, index_set);
 
-    // Index has no unit, just a name
+		// and finally put the points and height values above into the points
+		// FlatField
 
-    index = RealType.getRealType("index");
+		points_ff.setSamples(point_vals);
 
-    // Create a FunctionType ( index -> ( time, height) ), for points
-    // Use FunctionType(MathType domain, MathType range)
+		// Code for setting LINE data
 
-    func_i_tuple = new FunctionType( index, x_y_tuple);
+		// the FunctionType for the line, function ( time -> height)
 
-    // Create index_set, but this time using a
-    // Integer1DSet(MathType type, int length)
+		func_x_y = new FunctionType(x, y);
 
-    index_set = new Integer1DSet(index, 5);
+		// Create a time_set, with LENGTH = 25 values, for continuous line
 
+		int LENGTH = 25;
+		x_set = new Linear1DSet(x, -3.0, 3.0, LENGTH);
 
-    // These are our actual data values for time and height
-    // Note that these values correspond to the parabola of the
-    // previous examples. The y (height) values are the same, but the x (time)
-    // values are explicitely given.
+		// Generate some (25) points with a for-loop for the line
+		// Note that we have the parabola height = 45 - 5 * time^2
+		// But first we create a float array for the values
 
-    float[][] point_vals = new float[][]{{-3.0f, -1.5f, 0.0f, 1.5f, 3.0f,},
-                                         {0.0f, 33.75f, 45.0f, 33.75f, 0.0f,} };
+		float[][] h_vals = new float[1][LENGTH];
 
+		// ...then we use a method of Set to get the samples from time_set;
+		// this call will get the time values
+		// "true" means we get a copy from the samples
 
-    // Create a FlatField, that is the Data class for the samples
-    // Use FlatField(FunctionType type, Set domain_set)
+		float[][] d_vals = x_set.getSamples(true);
 
-    // for the (time, height) points
+		for (int i = 0; i < LENGTH; i++)
+			h_vals[0][i] = 45.0f - 5.0f * (float) (d_vals[0][i] * d_vals[0][i]);
 
-    points_ff = new FlatField( func_i_tuple, index_set);
+		// Create a FlatField, that is the Data class for the samples
+		// Use FlatField(FunctionType type, Set domain_set)
+		// for the line
 
+		line_ff = new FlatField(func_x_y, x_set);
 
-    // and finally put the points and height values above into the points FlatField
+		// and finally put the points and height values into the line FlatField
 
-    points_ff.setSamples( point_vals );
+		line_ff.setSamples(h_vals);
 
+		// Create Display and its maps
 
+		// A 2D display
 
-   // Code for setting LINE data
+		display = new DisplayImplJ2D("display1");
+		
+		// General settings
+		// Get the display renderer
+		DisplayRenderer dRenderer = display.getDisplayRenderer();
 
+		// Set the display background color
+		dRenderer.setBackgroundColor(Color.white);
 
-    // the FunctionType for the line, function ( time -> height)
+		// Get display's graphics mode control and draw scales
 
-    func_x_y = new FunctionType(x, y);
+		GraphicsModeControl dispGMC = (GraphicsModeControl) display
+				.getGraphicsModeControl();
+		dispGMC.setScaleEnable(true);
 
-    // Create a time_set, with LENGTH = 25 values, for continuous line
+		// Create the ScalarMaps: quantity time is to be displayed along XAxis
+		// and height along YAxis
+		// Use ScalarMap(ScalarType scalar, DisplayRealType display_scalar)
 
-    int LENGTH = 25;
-    x_set = new Linear1DSet(x, -3.0, 3.0, LENGTH );
+		xMap = new ScalarMap(x, Display.XAxis);
+		yMap = new ScalarMap(y, Display.YAxis);
 
-    // Generate some (25) points with a for-loop for the line
-    // Note that we have the parabola height = 45 - 5 * time^2
-    // But first we create a float array for the values
+		// We create a new ScalarMap, with time as RealType and SelectRange as
+		// DisplayRealType
 
-    float[][] h_vals = new float[1][LENGTH];
+		xRangeMap = new ScalarMap(x, Display.SelectRange);
 
-    // ...then we use a method of Set to get the samples from time_set;
-    // this call will get the time values
-    // "true" means we get a copy from the samples
+		// Add maps to display
 
-    float[][] d_vals  = x_set.getSamples( true);
+		display.addMap(xMap);
+		display.addMap(yMap);
+		display.addMap(xRangeMap);
 
-    for(int i = 0; i < LENGTH; i++)
-      h_vals[0][i] =  45.0f - 5.0f * (float) (d_vals[0][i]*d_vals[0][i]);
+		// Create a data reference and set the FlatField as our data
 
-    // Create a FlatField, that is the Data class for the samples
-    // Use FlatField(FunctionType type, Set domain_set)
-    // for the line
+		points_ref = new DataReferenceImpl("points_ref");
+		line_ref = new DataReferenceImpl("line_ref");
 
-    line_ff = new FlatField( func_x_y, x_set);
+		points_ref.setData(points_ff);
+		line_ref.setData(line_ff);
 
-    // and finally put the points and height values into the line FlatField
+		// Only change from the previous version
+		// Define a ConstantMap to draw large red points
 
-    line_ff.setSamples( h_vals );
+		ConstantMap[] pointsCMap = { new ConstantMap(1.0f, Display.Red),
+				new ConstantMap(0.0f, Display.Green),
+				new ConstantMap(0.0f, Display.Blue),
+				new ConstantMap(4.50f, Display.PointSize) };
 
+		ConstantMap[] lineCMap = { new ConstantMap(0.0f, Display.Red),
+				new ConstantMap(0.8f, Display.Green),
+				new ConstantMap(0.0f, Display.Blue),
+				new ConstantMap(1.50f, Display.LineWidth) };
 
-    // Create Display and its maps
 
-    // A 2D display
+		// Add reference to display, and link DataReference to ConstantMap
 
-    display = new DisplayImplJ2D("display1");
+		display.addReference(points_ref, pointsCMap);
+		display.addReference(line_ref, lineCMap);
 
+		// Create application window, put display into it
 
-    // Get display's graphics mode control and draw scales
+		JFrame jframe = new JFrame("VisAD Tutorial example 2_11");
+		jframe.getContentPane().setLayout(new FlowLayout());
+		jframe.getContentPane().add(display.getComponent());
 
-    GraphicsModeControl dispGMC = (GraphicsModeControl) display.getGraphicsModeControl();
-    dispGMC.setScaleEnable(true);
+		// Set window size and make it visible
 
+		jframe.setSize(310, 375);
+		jframe.setVisible(true);
 
-    // Create the ScalarMaps: quantity time is to be displayed along XAxis
-    // and height along YAxis
-    // Use ScalarMap(ScalarType scalar, DisplayRealType display_scalar)
+	}
 
-    xMap = new ScalarMap( x, Display.XAxis );
-    yMap = new ScalarMap( y,   Display.YAxis );
+	// void readData(String path){
+	// try {
+	// BufferedReader in = new BufferedReader(new FileReader(path));
+	// String str;
+	// while ((str = in.readLine()) != null) {
+	// process(str);
+	// }
+	// in.close();
+	// } catch (IOException e) {
+	// }
 
-    // We create a new ScalarMap, with time as RealType and SelectRange as DisplayRealType
+	// The main function
+	public static void main(String[] args) throws RemoteException,
+			VisADException {
+		new TwoColumnPlotter(args);
+	}
 
-    xRangeMap = new ScalarMap( x, Display.SelectRange );
-
-    // Add maps to display
-
-    display.addMap( xMap );
-    display.addMap( yMap );
-    display.addMap( xRangeMap );
-
-
-    // Create a data reference and set the FlatField as our data
-
-    points_ref = new DataReferenceImpl("points_ref");
-    line_ref = new DataReferenceImpl("line_ref");
-
-    points_ref.setData( points_ff );
-    line_ref.setData( line_ff );
-
-
-    // Only change from the previous version
-    // Define a ConstantMap to draw large red points
-
-    ConstantMap[] pointsCMap = {     new ConstantMap( 1.0f, Display.Red),
-        			     new ConstantMap( 0.0f, Display.Green),
-        			     new ConstantMap( 0.0f, Display.Blue),
-        			     new ConstantMap( 4.50f, Display.PointSize)};
-
-    ConstantMap[] lineCMap = {       new ConstantMap( 0.0f, Display.Red),
-        			     new ConstantMap( 0.8f, Display.Green),
-        			     new ConstantMap( 0.0f, Display.Blue),
-        			     new ConstantMap( 1.50f, Display.LineWidth)};
-
-
-    // Create a RangeWidget with the ScalarMap timeMap
-
-    ranWid = new RangeWidget( xMap );
-
-    // Create a SelectRangeWidget with the ScalarMap timeRangeMap
-
-    selRanWid = new SelectRangeWidget( xRangeMap );
-
-    // Add reference to display, and link DataReference to ConstantMap
-
-    display.addReference( points_ref, pointsCMap );
-    display.addReference( line_ref , lineCMap);
-
-
-    // Create application window, put display into it
-
-    JFrame jframe = new JFrame("VisAD Tutorial example 2_11");
-    jframe.getContentPane().setLayout(new FlowLayout());
-    jframe.getContentPane().add(display.getComponent());
-
-    // Add the RangeWidget and the SelectRangeWidget to the frame
-
-    jframe.getContentPane().add( ranWid );
-    jframe.getContentPane().add( selRanWid );
-
-    // Set window size and make it visible
-
-    jframe.setSize(310, 375);
-    jframe.setVisible(true);
-
-
-  }
-  
-//  void readData(String path){
-//	    try {
-//	        BufferedReader in = new BufferedReader(new FileReader(path));
-//	        String str;
-//	        while ((str = in.readLine()) != null) {
-//	            process(str);
-//	        }
-//	        in.close();
-//	    } catch (IOException e) {
-//	    }
-	  
-	  
-  
-
-  // The main function
-public static void main(String[] args)
-    throws RemoteException, VisADException
-  {
-    new TwoColumnPlotter(args);
-  }
-
-} //end of Visad Tutorial example 2_11
+} // end of Visad Tutorial example 2_11
