@@ -11,8 +11,12 @@ import visad.*;
 import visad.java2d.DisplayImplJ2D;
 import java.rmi.RemoteException;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 
 /**
  * Somewhat different version of program P2_07 We reorganize the MathType of
@@ -208,10 +212,39 @@ public class TwoColumnPlotter2 {
 
 		display.addReference(t_h_ref, heightCMap);
 
+		final JMenuBar menuBar = new JMenuBar();
+		
+
 		// Create application window, put display into it
 
 		JFrame jframe = new JFrame("VisAD Tutorial example 2_08");
+		jframe.setJMenuBar(menuBar);
 		jframe.getContentPane().add(display.getComponent());
+		
+		//Build the first menu.
+		JMenu menu;
+		menu = new JMenu("File");
+		//menu.setMnemonic(KeyEvent.VK_A);
+		//menu.getAccessibleContext().setAccessibleDescription("The only menu in this program that has menu items");
+		menuBar.add(menu);
+
+		final JMenuItem newItemMenuItem = new JMenuItem();
+		newItemMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {
+				openTwoColumn()
+			}
+		});
+		newItemMenuItem.setText("Open");
+		menu.add(newItemMenuItem);
+
+		final JMenuItem newItemMenuItem_1 = new JMenuItem();
+		newItemMenuItem_1.setText("Save");
+		menu.add(newItemMenuItem_1);
+
+		final JMenuItem newItemMenuItem_2 = new JMenuItem();
+		newItemMenuItem_2.setText("Exit");
+		menu.add(newItemMenuItem_2);
+
 
 		// Set window size and make it visible
 
@@ -235,6 +268,44 @@ public class TwoColumnPlotter2 {
 		}
 
 		return rgb;
+	}
+	
+	private void openTwoColumn() {
+		
+		int returnVal = fc.showOpenDialog(FileChooserDemo.this);
+
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = fc.getSelectedFile();
+            //This is where a real application would open the file.
+            log.append("Opening: " + file.getName() + "." + newline);
+        } else {
+            log.append("Open command cancelled by user." + newline);
+        }
+
+		String base = "http://trueblue.caltech.edu/java";//System.getProperty("user.dir");
+		String[] args = new String[10];
+		String atomsContent = getURLContentAsString(base + File.separatorChar
+				+ "atoms.html");
+		String latticeContent = getURLContentAsString(base + File.separatorChar
+				+ "lattice.html");
+		//put atoms in args
+		args[0] = atomsContent;
+		//put lattice in args
+		Pattern p = Pattern.compile("\n");
+		String[] coordLines = p.split(latticeContent);
+		p = Pattern.compile("\\s");
+		String[] coords = p.split(coordLines[0]);
+		args[1] = coords[0];
+		args[2] = coords[1];
+		args[3] = coords[2];
+		coords = p.split(coordLines[1]);
+		args[4] = coords[0];
+		args[5] = coords[1];
+		args[6] = coords[2];
+		coords = p.split(coordLines[2]);
+		args[7] = coords[0];
+		args[8] = coords[1];
+		args[9] = coords[2];
 	}
 
 	public static void main(String[] args) throws RemoteException,
