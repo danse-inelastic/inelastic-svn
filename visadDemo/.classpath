@@ -20,5 +20,7 @@
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="visadDemo/lib/amd64"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/VFSJFileChooser"/>
+	<classpathentry kind="lib" path="/VFSJFileChooser/lib/commons-vfs-2.0-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

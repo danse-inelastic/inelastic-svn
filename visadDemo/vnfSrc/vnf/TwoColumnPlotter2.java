@@ -7,16 +7,46 @@ package vnf;
 
 // Import needed classes
 
-import visad.*;
+
+import visad.ConstantMap;
+import visad.DataReferenceImpl;
+import visad.Display;
+import visad.DisplayImpl;
+import visad.DisplayRenderer;
+import visad.FlatField;
+import visad.FunctionType;
+import visad.GraphicsModeControl;
+import visad.Linear1DSet;
+import visad.RealType;
+import visad.SI;
+import visad.ScalarMap;
+import visad.Set;
+import visad.VisADException;
 import visad.java2d.DisplayImplJ2D;
+
 import java.rmi.RemoteException;
-import java.awt.*;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+
+import net.sf.vfsjfilechooser.VFSJFileChooser;
+import net.sf.vfsjfilechooser.VFSJFileChooser.RETURN_TYPE;
+import net.sf.vfsjfilechooser.VFSJFileChooser.SELECTION_MODE;
+import net.sf.vfsjfilechooser.accessories.DefaultAccessoriesPanel;
+import net.sf.vfsjfilechooser.utils.VFSUtils;
+
+import org.apache.commons.vfs.FileObject;
+import org.apache.commons.vfs.FileSystemException;
+
 
 /**
  * Somewhat different version of program P2_07 We reorganize the MathType of
@@ -59,8 +89,11 @@ public class TwoColumnPlotter2 {
 	private ScalarMap blackMap;
 	private ScalarMap timeMap, heightYMap;
 
+	//private JFileChooser fc;
+	private static JFrame jframe;
+
 	public TwoColumnPlotter2(String[] args) throws RemoteException,
-			VisADException {
+	VisADException {
 
 		// Create the quantities
 		// x and y are measured in SI meters
@@ -101,10 +134,10 @@ public class TwoColumnPlotter2 {
 		for (int i = 0; i < LENGTH; i++) {
 
 			// height values...
-			h_vals[0][i] = 45.0f - 5.0f * (float) (t_vals[0][i] * t_vals[0][i]);
+			h_vals[0][i] = 45.0f - 5.0f * (t_vals[0][i] * t_vals[0][i]);
 
 			// ...and speed values: the derivative of the above function
-			s_vals[0][i] = -10.0f * (float) t_vals[0][i];
+			s_vals[0][i] = -10.0f * t_vals[0][i];
 		}
 
 		// Create the FlatFields
@@ -159,8 +192,7 @@ public class TwoColumnPlotter2 {
 
 		// Get display's graphics mode control and draw scales
 
-		GraphicsModeControl dispGMC = (GraphicsModeControl) display
-				.getGraphicsModeControl();
+		GraphicsModeControl dispGMC = display.getGraphicsModeControl();
 		dispGMC.setScaleEnable(true);
 		dispGMC.setLineWidth(2.0f);
 
@@ -181,46 +213,46 @@ public class TwoColumnPlotter2 {
 		// we simply choose the range from 0.0 to 50.0
 
 		heightYMap.setRange(0.0, 50.0);
-		
-	    // Choose yellow as the color for the speed curve
 
-	    float heightRed = 1.0f;
-	    float heightGreen = 1.0f;
-	    float heightBlue = 0.0f;
+		// Choose yellow as the color for the speed curve
+
+		float heightRed = 0.0f;
+		float heightGreen = 0.0f;
+		float heightBlue = 0.0f;
 
 
-	    float[] heightColor = new float[]{heightRed, heightGreen, heightBlue};
+		float[] heightColor = new float[]{heightRed, heightGreen, heightBlue};
 
-	    // ...and color the axis with the same yellow
+		// ...and color the axis with the same yellow
 
-	    heightYMap.setScaleColor( heightColor );
+		heightYMap.setScaleColor( heightColor );
 
 		// Create a data reference and set the FlatField as our data
 
 		t_h_ref = new DataReferenceImpl("t_h_ref");
 
 		t_h_ref.setData(height_ff);
-		
-	    // Create Constantmaps for speed and add its reference to display
 
-	    ConstantMap[] heightCMap = {  new ConstantMap( heightRed, Display.Red),
-	        		        new ConstantMap( heightGreen, Display.Green),
-	        		        new ConstantMap( heightBlue, Display.Blue),
-	        		        new ConstantMap( 1.50f, Display.LineWidth)};
+		// Create Constantmaps for speed and add its reference to display
+
+		ConstantMap[] heightCMap = {  new ConstantMap( heightRed, Display.Red),
+				new ConstantMap( heightGreen, Display.Green),
+				new ConstantMap( heightBlue, Display.Blue),
+				new ConstantMap( 1.50f, Display.LineWidth)};
 
 		// Add reference to display
 
 		display.addReference(t_h_ref, heightCMap);
 
 		final JMenuBar menuBar = new JMenuBar();
-		
+
 
 		// Create application window, put display into it
 
-		JFrame jframe = new JFrame("VisAD Tutorial example 2_08");
+		jframe = new JFrame("VisAD Tutorial example 2_08");
 		jframe.setJMenuBar(menuBar);
 		jframe.getContentPane().add(display.getComponent());
-		
+
 		//Build the first menu.
 		JMenu menu;
 		menu = new JMenu("File");
@@ -228,10 +260,46 @@ public class TwoColumnPlotter2 {
 		//menu.getAccessibleContext().setAccessibleDescription("The only menu in this program that has menu items");
 		menuBar.add(menu);
 
+		// create a file chooser
+		final VFSJFileChooser fileChooser = new VFSJFileChooser();
 		final JMenuItem newItemMenuItem = new JMenuItem();
 		newItemMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent arg0) {
-				openTwoColumn()
+				// configure the file dialog
+				fileChooser.setAccessory(new DefaultAccessoriesPanel(fileChooser));
+				fileChooser.setFileHidingEnabled(false);
+				fileChooser.setMultiSelectionEnabled(false);
+				fileChooser.setFileSelectionMode(SELECTION_MODE.FILES_ONLY);
+
+				// show the file dialog
+				RETURN_TYPE answer = fileChooser.showOpenDialog(TwoColumnPlotter2.jframe);
+
+				// check if a file was selected
+				if (answer == RETURN_TYPE.APPROVE){
+					final FileObject aFileObject = fileChooser.getSelectedFile();
+
+					// retrieve an input stream and read in all of the file contents at once
+					String fileContents;
+					try {
+						InputStream is = VFSUtils.getInputStream(aFileObject);
+						fileContents = convertStreamToString(is);
+						//process file contents
+						
+						//assign as plot data object
+						
+						//replot
+					} catch (FileSystemException e) {
+						e.printStackTrace();
+					}
+
+
+					// remove authentication credentials from the file path
+					//final String safeName = VFSUtils.getFriendlyName(aFileObject.toString());
+				}
+
+
+
+				//openTwoColumn();
 			}
 		});
 		newItemMenuItem.setText("Open");
@@ -248,7 +316,7 @@ public class TwoColumnPlotter2 {
 
 		// Set window size and make it visible
 
-		jframe.setSize(300, 300);
+		jframe.setSize(500, 500);
 		jframe.setVisible(true);
 
 	}
@@ -258,58 +326,103 @@ public class TwoColumnPlotter2 {
 	 * between 0 and 1
 	 */
 	private float[] colorToFloats(Color c) {
-
 		float[] rgb = new float[] { 0.5f, 0.5f, 0.5f }; // init with gray
 		if (c != null) {
-			rgb[0] = (float) c.getRed() / 255.0f;
-			rgb[1] = (float) c.getGreen() / 255.0f;
-			rgb[2] = (float) c.getBlue() / 255.0f;
-
+			rgb[0] = c.getRed() / 255.0f;
+			rgb[1] = c.getGreen() / 255.0f;
+			rgb[2] = c.getBlue() / 255.0f;
 		}
-
 		return rgb;
 	}
 	
-	private void openTwoColumn() {
-		
-		int returnVal = fc.showOpenDialog(FileChooserDemo.this);
-
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File file = fc.getSelectedFile();
-            //This is where a real application would open the file.
-            log.append("Opening: " + file.getName() + "." + newline);
-        } else {
-            log.append("Open command cancelled by user." + newline);
+    public String convertStreamToString(InputStream is) {
+        /*
+         * To convert the InputStream to String we use the BufferedReader.readLine()
+         * method. We iterate until the BufferedReader return null which means
+         * there's no more data to read. Each line will appended to a StringBuilder
+         * and returned as String.
+         */
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        StringBuilder sb = new StringBuilder();
+ 
+        String line = null;
+        try {
+            while ((line = reader.readLine()) != null) {
+                sb.append(line + "\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                is.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+ 
+        return sb.toString();
+    }
 
-		String base = "http://trueblue.caltech.edu/java";//System.getProperty("user.dir");
-		String[] args = new String[10];
-		String atomsContent = getURLContentAsString(base + File.separatorChar
-				+ "atoms.html");
-		String latticeContent = getURLContentAsString(base + File.separatorChar
-				+ "lattice.html");
-		//put atoms in args
-		args[0] = atomsContent;
-		//put lattice in args
-		Pattern p = Pattern.compile("\n");
-		String[] coordLines = p.split(latticeContent);
-		p = Pattern.compile("\\s");
-		String[] coords = p.split(coordLines[0]);
-		args[1] = coords[0];
-		args[2] = coords[1];
-		args[3] = coords[2];
-		coords = p.split(coordLines[1]);
-		args[4] = coords[0];
-		args[5] = coords[1];
-		args[6] = coords[2];
-		coords = p.split(coordLines[2]);
-		args[7] = coords[0];
-		args[8] = coords[1];
-		args[9] = coords[2];
-	}
+
+	//	private void openTwoColumn() {
+	//		String fileName;
+	//		
+	//		
+	//		int returnVal = fc.showOpenDialog(jframe);
+	//		//int returnVal = fc.showOpenDialog(display.getComponent());
+	//
+	//        if (returnVal == JFileChooser.APPROVE_OPTION) {
+	//            fileName = fc.getSelectedFile().getAbsolutePath();
+	//        }
+	//
+	//		String atomsContent = getURLContentAsString("file://"+fileName);
+	//	}
+
+	//	public void importCoordinates(String fileContents) {
+	//		// this method expects coordinates to be in xyz format!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	//		Scanner in = new Scanner(fileContents);
+	//		int numOfLines = in.nextInt();
+	//		in.nextLine();
+	//		in.nextLine();
+	//		data.clear();
+	//		data.ensureCapacity(numOfLines);
+	//
+	//		// add rows manually for speed
+	//		for (int i = 0; i < numOfLines; i++) {
+	//			String[] row = new String[COLUMN_NAMES.length];
+	//			for (int j = 0; j < row.length; j++)
+	//				row[j] = "";
+	//			row[indices[0]] = in.next();
+	//			row[indices[2]] = in.next();
+	//			row[indices[3]] = in.next();
+	//			row[indices[4]] = in.next();
+	//			data.add(row);
+	//		}
+	//		in.close();
+	//	}
+
+	//	public String getURLContentAsString(String urlString) {
+	//		String content = "";
+	//	    try {
+	//	        // Create a URL for the desired page
+	//	        URL url = new URL(urlString);
+	//	        // Read all the text returned by the server
+	//	        BufferedReader in = new BufferedReader(new InputStreamReader(file.url.openStream()));
+	//	        String str;
+	//	        while ((str = in.readLine()) != null) {
+	//	            // str is one line of text; readLine() strips the newline character(s)
+	//	        	content+=str;
+	//	        	content+=System.getProperty("line.separator");
+	//	        }
+	//	        in.close();
+	//	    } catch (MalformedURLException e) {
+	//	    } catch (IOException e) {
+	//	    }
+	//		return content;
+	//	}
 
 	public static void main(String[] args) throws RemoteException,
-			VisADException {
+	VisADException {
 		new TwoColumnPlotter2(args);
 	}
 

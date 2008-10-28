@@ -3,6 +3,7 @@
 	<name>visadDemo</name>
 	<comment></comment>
 	<projects>
+		<project>VFSJFileChooser</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
