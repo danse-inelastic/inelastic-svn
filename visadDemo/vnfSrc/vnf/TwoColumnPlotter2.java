@@ -16,6 +16,7 @@ import visad.DisplayRenderer;
 import visad.FlatField;
 import visad.FunctionType;
 import visad.GraphicsModeControl;
+import visad.Gridded1DSet;
 import visad.Linear1DSet;
 import visad.RealType;
 import visad.SI;
@@ -73,7 +74,7 @@ public class TwoColumnPlotter2 {
 
 	// Our Data values for x are represented by the set
 
-	private Set x_set;
+	private Gridded1DSet x_set;
 
 	// The Data class FlatField, which will hold time and height data
 	// and the same for speed
@@ -89,7 +90,7 @@ public class TwoColumnPlotter2 {
 	private DisplayImpl display;
 	private ScalarMap blackXMap, blackYMap;
 	private ScalarMap blackMap;
-	private ScalarMap xMap, yYMap;
+	private ScalarMap xMap, yMap;
 
 	//private JFileChooser fc;
 	private static JFrame jframe;
@@ -113,38 +114,23 @@ public class TwoColumnPlotter2 {
 		// Create the time_set, with 5 values, but this time using a
 		// Linear1DSet(MathType type, double first, double last, int length)
 
-		int LENGTH = 32;
-		x_set = new Linear1DSet(x, -3.0, 3.0, LENGTH);
+		float[][] x_vals = new float[][]{{0}};
+		x_set = new Gridded1DSet(x, x_vals, x_vals.length);
 
 		// Generate some points with a for-loop for the line
 		// Note that we have the parabola height = 45 - 5 * time^2
 		// But first we create a float array for the values
 
-		float[][] y_vals = new float[1][LENGTH];
-
-		// ...then we use a method of Set to get the samples from time_set;
-		// this call will get the time values
-		// "true" means we get a copy from the samples
-
-		float[][] x_vals = x_set.getSamples(true);
-
-		// finally generate height and speed values
-		// height is given by the parabola height = 45 - 5 * time^2
-		// and speed by its first derivative speed = -10 * time
-
-		for (int i = 0; i < LENGTH; i++) {
-			// height values...
-			y_vals[0][i] = 45.0f - 5.0f * (x_vals[0][i] * x_vals[0][i]);
-		}
+		//		float[][] y_vals = new float[1][LENGTH];
 
 		// Create the FlatFields
 		// Use FlatField(FunctionType type, Set domain_set)
 
 		y_ff = new FlatField(func_x_y, x_set);
 
-		// and put the y values above in it
-
-		y_ff.setSamples(y_vals);
+		//		// and put the y values above in it
+		//
+		//		y_ff.setSamples(y_vals);
 
 		// Create Display and its maps
 
@@ -198,17 +184,17 @@ public class TwoColumnPlotter2 {
 
 		xMap = new ScalarMap(x, Display.XAxis);
 
-		yYMap = new ScalarMap(y, Display.YAxis);
+		yMap = new ScalarMap(y, Display.YAxis);
 
 		// Add maps to display
 
 		display.addMap(xMap);
-		display.addMap(yYMap);
+		display.addMap(yMap);
 
 		// Scale heightYMap
 		// we simply choose the range from 0.0 to 50.0
 
-		yYMap.setRange(0.0, 50.0);
+		yMap.setRange(0.0, 50.0);
 
 		// Choose yellow as the color for the speed curve
 
@@ -221,7 +207,7 @@ public class TwoColumnPlotter2 {
 
 		// ...and color the axis with the same yellow
 
-		yYMap.setScaleColor( yColor );
+		yMap.setScaleColor( yColor );
 
 		// Create a data reference and set the FlatField as our data
 
@@ -229,16 +215,16 @@ public class TwoColumnPlotter2 {
 
 		x_y_ref.setData(y_ff);
 
-//		// Create Constantmaps for speed and add its reference to display
-//
-//		ConstantMap[] heightCMap = {  new ConstantMap( yRed, Display.Red),
-//				new ConstantMap( yGreen, Display.Green),
-//				new ConstantMap( yBlue, Display.Blue),
-//				new ConstantMap( 1.50f, Display.LineWidth)};
-//
-//		// Add reference to display
-//
-//		display.addReference(x_y_ref, heightCMap);
+		//		// Create Constantmaps for speed and add its reference to display
+		//
+		//		ConstantMap[] heightCMap = {  new ConstantMap( yRed, Display.Red),
+		//				new ConstantMap( yGreen, Display.Green),
+		//				new ConstantMap( yBlue, Display.Blue),
+		//				new ConstantMap( 1.50f, Display.LineWidth)};
+		//
+		//		// Add reference to display
+		//
+		//		display.addReference(x_y_ref, heightCMap);
 
 		final JMenuBar menuBar = new JMenuBar();
 
@@ -279,42 +265,44 @@ public class TwoColumnPlotter2 {
 					try {
 						InputStream is = VFSUtils.getInputStream(aFileObject);
 						fileContents = convertStreamToString(is);
-						
+
 						//process file contents
-						
+
 						//split by newlines
 						Pattern newLinePattern = Pattern.compile("\n");
 						String[] dataLines = newLinePattern.split(fileContents);
 						int numDataPoints = dataLines.length;
 						float[][] x_vals = new float[1][numDataPoints];
 						float[][] y_vals = new float[1][numDataPoints];
-						
+
 						//split the lines by white space
-						
 						Pattern whitespacePattern = Pattern.compile("\\s"); 
-				        for (int i=0; i<numDataPoints; i++){ //(String dataLine : dataLines) {
-				        	String[] data = whitespacePattern.split(dataLines[i]);
-				    		x_vals[0][i] = Float.valueOf(data[0].trim()).floatValue();
-				    		y_vals[0][i] = Float.valueOf(data[1].trim()).floatValue();
-				        }
-				        x_vals = x_set.setSamples(true);
-				        Gridded1DSet Gridded1DSet(MathType type, float[][] samples, int lengthX)
-				        y_ff.setSamples(y_vals);
-						
-//						  private static final String ID = TwoColumnPlotter2.class.getName();
-//
-//						  private static DefaultFamily form = new DefaultFamily(ID);
-						  
-						//assign as plot data object
-						
-						//replot
+						for (int i=0; i<numDataPoints; i++){ //(String dataLine : dataLines) {
+							String[] data = whitespacePattern.split(dataLines[i]);
+							x_vals[0][i] = Float.valueOf(data[0].trim()).floatValue();
+							y_vals[0][i] = Float.valueOf(data[1].trim()).floatValue();
+						}
+						x_set = new Gridded1DSet(x, x_vals, x_vals[0].length);
+						y_ff = new FlatField( func_x_y, x_set);
+						// and put the y values above in it
+						y_ff.setSamples( y_vals );
+
+						//						  private static final String ID = TwoColumnPlotter2.class.getName();
+						//
+						//						  private static DefaultFamily form = new DefaultFamily(ID);
+
 					} catch (FileSystemException e) {
 						e.printStackTrace();
+					}  catch (VisADException e) {
+						e.printStackTrace();
+					} catch (RemoteException e) {
+						e.printStackTrace();
 					}
+					//replot
+					jframe.repaint();
 					// remove authentication credentials from the file path
 					//final String safeName = VFSUtils.getFriendlyName(aFileObject.toString());
 				}
-				//openTwoColumn();
 			}
 		});
 		newItemMenuItem.setText("Open");
@@ -372,32 +360,32 @@ public class TwoColumnPlotter2 {
 		}
 		return rgb;
 	}
-	
-    public String convertStreamToString(InputStream is) {
-        /*
-         * To convert the InputStream to String we use the BufferedReader.readLine()
-         * method. We iterate until the BufferedReader return null which means
-         * there's no more data to read. Each line will appended to a StringBuilder
-         * and returned as String.
-         */
-        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-        StringBuilder sb = new StringBuilder();
-        String line = null;
-        try {
-            while ((line = reader.readLine()) != null) {
-                sb.append(line + "\n");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                is.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } 
-        return sb.toString();
-    }
+
+	public String convertStreamToString(InputStream is) {
+		/*
+		 * To convert the InputStream to String we use the BufferedReader.readLine()
+		 * method. We iterate until the BufferedReader return null which means
+		 * there's no more data to read. Each line will appended to a StringBuilder
+		 * and returned as String.
+		 */
+		BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+		StringBuilder sb = new StringBuilder();
+		String line = null;
+		try {
+			while ((line = reader.readLine()) != null) {
+				sb.append(line + "\n");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				is.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} 
+		return sb.toString();
+	}
 
 	//	private void openTwoColumn() {
 	//		String fileName;
