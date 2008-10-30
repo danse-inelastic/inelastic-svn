@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.1/notation" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="_SVDSAKZUEd2NgtWPeGOuww" type="UMLClass" name="visad.umlclass" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_TexTIKZUEd2NgtWPeGOuww" type="2014">
+    <children xmi:type="notation:Node" xmi:id="_Tex6MKZUEd2NgtWPeGOuww" type="5020"/>
+    <children xmi:type="notation:Node" xmi:id="_Tex6MaZUEd2NgtWPeGOuww" type="7032">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_Tex6MqZUEd2NgtWPeGOuww" collapsed="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_Tex6M6ZUEd2NgtWPeGOuww"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_Tex6NKZUEd2NgtWPeGOuww"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_TexTIaZUEd2NgtWPeGOuww" fontName="Sans"/>
+    <element xmi:type="uml:Package" href="visad.uml#_SO1VQaZUEd2NgtWPeGOuww"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TexTIqZUEd2NgtWPeGOuww"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_SVDSAaZUEd2NgtWPeGOuww"/>
+  <styles xmi:type="notation:FilteringStyle" xmi:id="_SVDSAqZUEd2NgtWPeGOuww"/>
+  <element xmi:type="uml:Package" href="visad.uml#_SO1VQaZUEd2NgtWPeGOuww"/>
+</notation:Diagram>
