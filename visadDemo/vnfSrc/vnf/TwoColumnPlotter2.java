@@ -299,7 +299,11 @@ public class TwoColumnPlotter2 {
 						e.printStackTrace();
 					}
 					//replot
-					jframe.repaint();
+					//jframe.repaint();
+
+					display.reDisplayAll();
+					jframe.setVisible(true);
+				    jframe.toFront();
 					// remove authentication credentials from the file path
 					//final String safeName = VFSUtils.getFriendlyName(aFileObject.toString());
 				}
