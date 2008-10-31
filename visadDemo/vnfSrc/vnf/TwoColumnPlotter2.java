@@ -24,6 +24,7 @@ import visad.ScalarMap;
 import visad.Set;
 import visad.VisADException;
 import visad.java2d.DisplayImplJ2D;
+import visad.java2d.DisplayRendererJ2D;
 
 import java.rmi.RemoteException;
 import java.util.regex.Pattern;
@@ -63,85 +64,53 @@ public class TwoColumnPlotter2 {
 
 	// Declare variables
 	// The quantities to be displayed in x- and y-axes
-
 	private RealType x, y;
 	private RealType black;
 
 	// The functions ( time -> height )
 	// and ( time -> speed )
-
 	private FunctionType func_x_y;
 
 	// Our Data values for x are represented by the set
-
 	private Gridded1DSet x_set;
 
 	// The Data class FlatField, which will hold time and height data
 	// and the same for speed
-
 	private FlatField y_ff;
-
 	// The DataReference from the data to display
-
 	private DataReferenceImpl x_y_ref;
 
 	// The 2D display, and its the maps
-
 	private DisplayImpl display;
 	private ScalarMap blackXMap, blackYMap;
 	private ScalarMap blackMap;
 	private ScalarMap xMap, yMap;
-
 	//private JFileChooser fc;
 	private static JFrame jframe;
 
 	public TwoColumnPlotter2(String[] args) throws RemoteException,
 	VisADException {
-
 		// Create the quantities
-		// x and y are measured in SI meters
 		// Use RealType(String name, Unit u, Set set), set is null
-
 		x = RealType.getRealType("x", null, null);
 		y = RealType.getRealType("y", null, null);
-
-		// Create a FunctionType, that is the class which represents the
-		// function y = f(x)
-		// Use FunctionType(MathType domain, MathType range)
-
 		func_x_y = new FunctionType(x, y);
-
-		// Create the time_set, with 5 values, but this time using a
-		// Linear1DSet(MathType type, double first, double last, int length)
-
-		float[][] x_vals = new float[][]{{0}};
+		//float[][] x_vals = new float[][]{{0}};
+		float[][] x_vals = new float[][]{{1,2,3}};
 		x_set = new Gridded1DSet(x, x_vals, x_vals.length);
-
-		// Generate some points with a for-loop for the line
-		// Note that we have the parabola height = 45 - 5 * time^2
-		// But first we create a float array for the values
-
-		//		float[][] y_vals = new float[1][LENGTH];
-
-		// Create the FlatFields
-		// Use FlatField(FunctionType type, Set domain_set)
-
+		float[][] y_vals = new float[][]{{1,1,1}};
+		// Create the FlatField
 		y_ff = new FlatField(func_x_y, x_set);
-
-		//		// and put the y values above in it
-		//
-		//		y_ff.setSamples(y_vals);
+		// and put the y values above in it
+		y_ff.setSamples(y_vals);
 
 		// Create Display and its maps
 
 		// A 2D display
 
 		display = new DisplayImplJ2D("display1");
-
-		// Get the display renderer
+		// change default settings of display
 		DisplayRenderer dRenderer = display.getDisplayRenderer();
-
-		// Set the display background color
 		dRenderer.setBackgroundColor(Color.white);
 
 		// Create the quantities
@@ -191,49 +160,11 @@ public class TwoColumnPlotter2 {
 		display.addMap(xMap);
 		display.addMap(yMap);
 
-		// Scale heightYMap
-		// we simply choose the range from 0.0 to 50.0
-
-		yMap.setRange(0.0, 50.0);
-
-		// Choose yellow as the color for the speed curve
-
-		float yRed = 0.0f;
-		float yGreen = 0.0f;
-		float yBlue = 0.0f;
-
-
-		float[] yColor = new float[]{yRed, yGreen, yBlue};
-
-		// ...and color the axis with the same yellow
-
-		yMap.setScaleColor( yColor );
-
-		// Create a data reference and set the FlatField as our data
-
 		x_y_ref = new DataReferenceImpl("x_y_ref");
 
 		x_y_ref.setData(y_ff);
 
-		//		// Create Constantmaps for speed and add its reference to display
-		//
-		//		ConstantMap[] heightCMap = {  new ConstantMap( yRed, Display.Red),
-		//				new ConstantMap( yGreen, Display.Green),
-		//				new ConstantMap( yBlue, Display.Blue),
-		//				new ConstantMap( 1.50f, Display.LineWidth)};
-		//
-		//		// Add reference to display
-		//
-		//		display.addReference(x_y_ref, heightCMap);
-
 		final JMenuBar menuBar = new JMenuBar();
-
-
-		// Create application window, put display into it
-
-		jframe = new JFrame("Danse Plotter");
-		jframe.setJMenuBar(menuBar);
-		jframe.getContentPane().add(display.getComponent());
 
 		//Build the first menu.
 		JMenu menu;
@@ -247,66 +178,7 @@ public class TwoColumnPlotter2 {
 		final JMenuItem newItemMenuItem = new JMenuItem();
 		newItemMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent arg0) {
-				// configure the file dialog
-				fileChooser.setAccessory(new DefaultAccessoriesPanel(fileChooser));
-				fileChooser.setFileHidingEnabled(false);
-				fileChooser.setMultiSelectionEnabled(false);
-				fileChooser.setFileSelectionMode(SELECTION_MODE.FILES_ONLY);
-
-				// show the file dialog
-				RETURN_TYPE answer = fileChooser.showOpenDialog(TwoColumnPlotter2.jframe);
-
-				// check if a file was selected
-				if (answer == RETURN_TYPE.APPROVE){
-					final FileObject aFileObject = fileChooser.getSelectedFile();
-
-					// retrieve an input stream and read in all of the file contents at once
-					String fileContents;
-					try {
-						InputStream is = VFSUtils.getInputStream(aFileObject);
-						fileContents = convertStreamToString(is);
-
-						//process file contents
-
-						//split by newlines
-						Pattern newLinePattern = Pattern.compile("\n");
-						String[] dataLines = newLinePattern.split(fileContents);
-						int numDataPoints = dataLines.length;
-						float[][] x_vals = new float[1][numDataPoints];
-						float[][] y_vals = new float[1][numDataPoints];
-
-						//split the lines by white space
-						Pattern whitespacePattern = Pattern.compile("\\s"); 
-						for (int i=0; i<numDataPoints; i++){ //(String dataLine : dataLines) {
-							String[] data = whitespacePattern.split(dataLines[i]);
-							x_vals[0][i] = Float.valueOf(data[0].trim()).floatValue();
-							y_vals[0][i] = Float.valueOf(data[1].trim()).floatValue();
-						}
-						x_set = new Gridded1DSet(x, x_vals, x_vals[0].length);
-						y_ff = new FlatField( func_x_y, x_set);
-						// and put the y values above in it
-						y_ff.setSamples( y_vals );
-
-						//						  private static final String ID = TwoColumnPlotter2.class.getName();
-						//
-						//						  private static DefaultFamily form = new DefaultFamily(ID);
-
-					} catch (FileSystemException e) {
-						e.printStackTrace();
-					}  catch (VisADException e) {
-						e.printStackTrace();
-					} catch (RemoteException e) {
-						e.printStackTrace();
-					}
-					//replot
-					//jframe.repaint();
-
-					display.reDisplayAll();
-					jframe.setVisible(true);
-				    jframe.toFront();
-					// remove authentication credentials from the file path
-					//final String safeName = VFSUtils.getFriendlyName(aFileObject.toString());
-				}
+				openTwoColumnAscii(fileChooser);
 			}
 		});
 		newItemMenuItem.setText("Open");
@@ -315,27 +187,7 @@ public class TwoColumnPlotter2 {
 		final JMenuItem newItemMenuItem_1 = new JMenuItem();
 		newItemMenuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent arg0) {
-				// configure the file dialog
-				fileChooser.setAccessory(new DefaultAccessoriesPanel(fileChooser));
-				fileChooser.setFileHidingEnabled(false);
-				fileChooser.setMultiSelectionEnabled(false);
-				fileChooser.setFileSelectionMode(SELECTION_MODE.FILES_ONLY);
-				// show the file dialog
-				RETURN_TYPE answer = fileChooser.showOpenDialog(TwoColumnPlotter2.jframe);
-				// check if a file was selected
-				if (answer == RETURN_TYPE.APPROVE){
-					final FileObject aFileObject = fileChooser.getSelectedFile();
-					// retrieve an input stream and read in all of the file contents at once
-					String fileContents;
-					try {
-						// get an output stream and buffer it
-						OutputStream os = VFSUtils.getOutputStream(aFileObject);	
-					} catch (FileSystemException e) {
-						e.printStackTrace();
-					}
-					// remove authentication credentials from the file path
-					//final String safeName = VFSUtils.getFriendlyName(aFileObject.toString());
-				}
+				saveTwoColumnAscii(fileChooser);
 			}
 		});
 		newItemMenuItem_1.setText("Save");
@@ -345,6 +197,12 @@ public class TwoColumnPlotter2 {
 		newItemMenuItem_2.setText("Exit");
 		menu.add(newItemMenuItem_2);
 
+		// Create application window, put display into it
+
+		jframe = new JFrame("Danse Plotter");
+		jframe.setJMenuBar(menuBar);
+		jframe.getContentPane().add(display.getComponent());
+		
 		// Set window size and make it visible
 		jframe.setSize(700, 700);
 		jframe.setVisible(true);
@@ -365,6 +223,103 @@ public class TwoColumnPlotter2 {
 		return rgb;
 	}
 
+	private void openTwoColumnAscii(final VFSJFileChooser fileChooser) {
+		// configure the file dialog
+		fileChooser.setAccessory(new DefaultAccessoriesPanel(fileChooser));
+		fileChooser.setFileHidingEnabled(false);
+		fileChooser.setMultiSelectionEnabled(false);
+		fileChooser.setFileSelectionMode(SELECTION_MODE.FILES_ONLY);
+
+		// show the file dialog
+		RETURN_TYPE answer = fileChooser.showOpenDialog(TwoColumnPlotter2.jframe);
+
+		// check if a file was selected
+		if (answer == RETURN_TYPE.APPROVE){
+			final FileObject aFileObject = fileChooser.getSelectedFile();
+
+			// retrieve an input stream and read in all of the file contents at once
+			String fileContents;
+			try {
+				InputStream is = VFSUtils.getInputStream(aFileObject);
+				fileContents = convertStreamToString(is);
+
+				//process file contents
+
+				//split by newlines
+				Pattern newLinePattern = Pattern.compile("\n");
+				String[] dataLines = newLinePattern.split(fileContents);
+				int numDataPoints = dataLines.length;
+				float[][] x_vals = new float[1][numDataPoints];
+				float[][] y_vals = new float[1][numDataPoints];
+
+				//split the lines by white space
+				Pattern whitespacePattern = Pattern.compile("\\s"); 
+				for (int i=0; i<numDataPoints; i++){ //(String dataLine : dataLines) {
+					String[] data = whitespacePattern.split(dataLines[i]);
+					x_vals[0][i] = Float.valueOf(data[0].trim()).floatValue();
+					y_vals[0][i] = Float.valueOf(data[1].trim()).floatValue();
+				}
+				x_set = new Gridded1DSet(x, x_vals, x_vals[0].length);
+				y_ff = new FlatField( func_x_y, x_set);
+				// and put the y values above in it
+				y_ff.setSamples( y_vals );
+				//x_y_ref = new DataReferenceImpl("data_ref");
+				// set the display with the new data
+				x_y_ref.setData( y_ff );
+				// Add reference to display
+				display.addReference(x_y_ref);
+				//						  private static final String ID = TwoColumnPlotter2.class.getName();
+				//
+				//						  private static DefaultFamily form = new DefaultFamily(ID);
+
+			} catch (FileSystemException e) {
+				e.printStackTrace();
+			}  catch (VisADException e) {
+				e.printStackTrace();
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+			//replot
+			//jframe.repaint();
+			// Get the display renderer
+//			DisplayRendererJ2D dRenderer = (DisplayRendererJ2D)display.getDisplayRenderer();
+//			// render again
+//			dRenderer.render_trigger();
+		    
+			jframe.setVisible(true);
+		    jframe.toFront();
+			// remove authentication credentials from the file path
+			//final String safeName = VFSUtils.getFriendlyName(aFileObject.toString());
+		}
+	}
+	
+	/**
+	 * @param fileChooser
+	 */
+	private void saveTwoColumnAscii(final VFSJFileChooser fileChooser) {
+		// configure the file dialog
+		fileChooser.setAccessory(new DefaultAccessoriesPanel(fileChooser));
+		fileChooser.setFileHidingEnabled(false);
+		fileChooser.setMultiSelectionEnabled(false);
+		fileChooser.setFileSelectionMode(SELECTION_MODE.FILES_ONLY);
+		// show the file dialog
+		RETURN_TYPE answer = fileChooser.showOpenDialog(TwoColumnPlotter2.jframe);
+		// check if a file was selected
+		if (answer == RETURN_TYPE.APPROVE){
+			final FileObject aFileObject = fileChooser.getSelectedFile();
+			// retrieve an input stream and read in all of the file contents at once
+			String fileContents;
+			try {
+				// get an output stream and buffer it
+				OutputStream os = VFSUtils.getOutputStream(aFileObject);	
+			} catch (FileSystemException e) {
+				e.printStackTrace();
+			}
+			// remove authentication credentials from the file path
+			//final String safeName = VFSUtils.getFriendlyName(aFileObject.toString());
+		}
+	}
+	
 	public String convertStreamToString(InputStream is) {
 		/*
 		 * To convert the InputStream to String we use the BufferedReader.readLine()
