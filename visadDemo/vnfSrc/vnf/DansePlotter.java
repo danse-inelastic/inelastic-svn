@@ -60,7 +60,9 @@ import org.apache.commons.vfs.FileSystemException;
  * os speed
  */
 
-public class TwoColumnPlotter2 {
+//TODO: create an openFile method that takes the type of file as argument.  Instantiate file chooser inside of it and get rid of passing reference.
+
+public class DansePlotter {
 
 	// Declare variables
 	// The quantities to be displayed in x- and y-axes
@@ -88,84 +90,61 @@ public class TwoColumnPlotter2 {
 	//private JFileChooser fc;
 	private static JFrame jframe;
 
-	public TwoColumnPlotter2(String[] args) throws RemoteException,
+	public DansePlotter(String[] args) throws RemoteException,
 	VisADException {
 		// Create the quantities
 		// Use RealType(String name, Unit u, Set set), set is null
 		x = RealType.getRealType("x", null, null);
 		y = RealType.getRealType("y", null, null);
 		func_x_y = new FunctionType(x, y);
-		//float[][] x_vals = new float[][]{{0}};
-		float[][] x_vals = new float[][]{{1,2,3}};
-		x_set = new Gridded1DSet(x, x_vals, x_vals.length);
-		float[][] y_vals = new float[][]{{1,1,1}};
+		float[][] x_vals = new float[][]{{0}};
+		//float[][] x_vals = new float[][]{{1.0f, 2.0f, 3.0f}};
+		x_set = new Gridded1DSet(x, x_vals, x_vals[0].length);
+		float[][] y_vals = new float[][]{{1.0f, 1.0f, 1.0f}};
 		// Create the FlatField
 		y_ff = new FlatField(func_x_y, x_set);
 		// and put the y values above in it
-		y_ff.setSamples(y_vals);
-
+		//y_ff.setSamples(y_vals);
 		// Create Display and its maps
-
-		// A 2D display
-
 		display = new DisplayImplJ2D("display1");
+
 		// change default settings of display
-		DisplayRenderer dRenderer = display.getDisplayRenderer();
-		dRenderer.setBackgroundColor(Color.white);
+//		DisplayRenderer dRenderer = display.getDisplayRenderer();
+//		dRenderer.setBackgroundColor(Color.white);
 
-		// Create the quantities
-		// Use RealType(String name, Unit unit, Set set);
-
-		black = RealType.getRealType("BLACK", null, null);
-
-		// Create the ScalarMaps: latitude to XAxis, longitude to YAxis and
-		// rgbVal to ZAxis and to RGB
-		// Use ScalarMap(ScalarType scalar, DisplayRealType display_scalar)
-
-		blackXMap = new ScalarMap(black, Display.XAxis);
-		blackYMap = new ScalarMap(black, Display.YAxis);
-		blackXMap.setScalarName("x");
-		blackYMap.setScalarName("y");
-
-		blackMap = new ScalarMap(black, Display.Red);
-
-		// Add maps to display
-
-		display.addMap(blackXMap);
-		display.addMap(blackYMap);
-		display.addMap(blackMap);
-
-		// Set axes colors
-		float[] b1 = colorToFloats(Color.black);
-		blackXMap.setScaleColor(b1);
-		float[] b2 = colorToFloats(Color.black);
-		blackYMap.setScaleColor(b2);
-
+		//		// Create the quantities
+//		black = RealType.getRealType("BLACK", null, null);
+//		// Create the ScalarMaps: latitude to XAxis, longitude to YAxis
+//		blackXMap = new ScalarMap(x, Display.XAxis);
+//		blackYMap = new ScalarMap(y, Display.YAxis);
+//		blackXMap.setScalarName("x");
+//		blackYMap.setScalarName("y");
+//		blackMap = new ScalarMap(black, Display.Red);
+//		// Add maps to display
+//		display.addMap(blackXMap);
+//		display.addMap(blackYMap);
+//		display.addMap(blackMap);
+//		// Set axes colors
+//		float[] b1 = colorToFloats(Color.black);
+//		blackXMap.setScaleColor(b1);
+//		float[] b2 = colorToFloats(Color.black);
+//		blackYMap.setScaleColor(b2);
 		// Get display's graphics mode control and draw scales
-
 		GraphicsModeControl dispGMC = display.getGraphicsModeControl();
 		dispGMC.setScaleEnable(true);
 		dispGMC.setLineWidth(2.0f);
-
-		// Create the ScalarMaps: quantity time is to be displayed along XAxis,
-		// and height and speed along YAxis
-		// Use ScalarMap(ScalarType scalar, DisplayRealType display_scalar)
-
+		// Create the ScalarMaps: 
 		xMap = new ScalarMap(x, Display.XAxis);
-
 		yMap = new ScalarMap(y, Display.YAxis);
-
 		// Add maps to display
-
 		display.addMap(xMap);
 		display.addMap(yMap);
-
-		x_y_ref = new DataReferenceImpl("x_y_ref");
-
-		x_y_ref.setData(y_ff);
-
+		// create reference and add it to display
+//		x_y_ref = new DataReferenceImpl("x_y_ref");
+//		x_y_ref.setData(y_ff);
+//		display.addReference(x_y_ref);
+		
 		final JMenuBar menuBar = new JMenuBar();
-
 		//Build the first menu.
 		JMenu menu;
 		menu = new JMenu("File");
@@ -181,8 +160,17 @@ public class TwoColumnPlotter2 {
 				openTwoColumnAscii(fileChooser);
 			}
 		});
-		newItemMenuItem.setText("Open");
+		newItemMenuItem.setText("Open Two Column Ascii");
 		menu.add(newItemMenuItem);
+		
+		final JMenuItem newItemMenuItem_3 = new JMenuItem();
+		newItemMenuItem_3.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {
+				openImage(fileChooser);
+			}
+		});
+		newItemMenuItem_3.setText("Open Image");
+		menu.add(newItemMenuItem_3);
 
 		final JMenuItem newItemMenuItem_1 = new JMenuItem();
 		newItemMenuItem_1.addActionListener(new ActionListener() {
@@ -209,21 +197,7 @@ public class TwoColumnPlotter2 {
 
 	}
 
-	/*
-	 * Utility method to transform a Java color in an array of rgb components
-	 * between 0 and 1
-	 */
-	private float[] colorToFloats(Color c) {
-		float[] rgb = new float[] { 0.5f, 0.5f, 0.5f }; // init with gray
-		if (c != null) {
-			rgb[0] = c.getRed() / 255.0f;
-			rgb[1] = c.getGreen() / 255.0f;
-			rgb[2] = c.getBlue() / 255.0f;
-		}
-		return rgb;
-	}
-
-	private void openTwoColumnAscii(final VFSJFileChooser fileChooser) {
+	private void openImage(VFSJFileChooser fileChooser) {
 		// configure the file dialog
 		fileChooser.setAccessory(new DefaultAccessoriesPanel(fileChooser));
 		fileChooser.setFileHidingEnabled(false);
@@ -231,7 +205,7 @@ public class TwoColumnPlotter2 {
 		fileChooser.setFileSelectionMode(SELECTION_MODE.FILES_ONLY);
 
 		// show the file dialog
-		RETURN_TYPE answer = fileChooser.showOpenDialog(TwoColumnPlotter2.jframe);
+		RETURN_TYPE answer = fileChooser.showOpenDialog(DansePlotter.jframe);
 
 		// check if a file was selected
 		if (answer == RETURN_TYPE.APPROVE){
@@ -242,7 +216,6 @@ public class TwoColumnPlotter2 {
 			try {
 				InputStream is = VFSUtils.getInputStream(aFileObject);
 				fileContents = convertStreamToString(is);
-
 				//process file contents
 
 				//split by newlines
@@ -265,6 +238,87 @@ public class TwoColumnPlotter2 {
 				y_ff.setSamples( y_vals );
 				//x_y_ref = new DataReferenceImpl("data_ref");
 				// set the display with the new data
+				display.removeReference(x_y_ref);
+				x_y_ref.setData( y_ff );
+				// Add reference to display
+				display.addReference(x_y_ref);
+				//						  private static final String ID = TwoColumnPlotter2.class.getName();
+				//
+				//						  private static DefaultFamily form = new DefaultFamily(ID);
+
+			} catch (FileSystemException e) {
+				e.printStackTrace();
+			}  catch (VisADException e) {
+				e.printStackTrace();
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+			//replot
+			//jframe.repaint();
+			// Get the display renderer
+//			DisplayRendererJ2D dRenderer = (DisplayRendererJ2D)display.getDisplayRenderer();
+//			// render again
+//			dRenderer.render_trigger();
+		    
+			jframe.setVisible(true);
+		    jframe.toFront();
+			// remove authentication credentials from the file path
+			//final String safeName = VFSUtils.getFriendlyName(aFileObject.toString());
+		}
+	}
+
+	private float[] colorToFloats(Color c) {
+		float[] rgb = new float[] { 0.5f, 0.5f, 0.5f }; // init with gray
+		if (c != null) {
+			rgb[0] = c.getRed() / 255.0f;
+			rgb[1] = c.getGreen() / 255.0f;
+			rgb[2] = c.getBlue() / 255.0f;
+		}
+		return rgb;
+	}
+
+	private void openTwoColumnAscii(final VFSJFileChooser fileChooser) {
+		// configure the file dialog
+		fileChooser.setAccessory(new DefaultAccessoriesPanel(fileChooser));
+		fileChooser.setFileHidingEnabled(false);
+		fileChooser.setMultiSelectionEnabled(false);
+		fileChooser.setFileSelectionMode(SELECTION_MODE.FILES_ONLY);
+
+		// show the file dialog
+		RETURN_TYPE answer = fileChooser.showOpenDialog(DansePlotter.jframe);
+
+		// check if a file was selected
+		if (answer == RETURN_TYPE.APPROVE){
+			final FileObject aFileObject = fileChooser.getSelectedFile();
+
+			// retrieve an input stream and read in all of the file contents at once
+			String fileContents;
+			try {
+				InputStream is = VFSUtils.getInputStream(aFileObject);
+				fileContents = convertStreamToString(is);
+				//process file contents
+
+				//split by newlines
+				Pattern newLinePattern = Pattern.compile("\n");
+				String[] dataLines = newLinePattern.split(fileContents);
+				int numDataPoints = dataLines.length;
+				float[][] x_vals = new float[1][numDataPoints];
+				float[][] y_vals = new float[1][numDataPoints];
+
+				//split the lines by white space
+				Pattern whitespacePattern = Pattern.compile("\\s"); 
+				for (int i=0; i<numDataPoints; i++){ //(String dataLine : dataLines) {
+					String[] data = whitespacePattern.split(dataLines[i]);
+					x_vals[0][i] = Float.valueOf(data[0].trim()).floatValue();
+					y_vals[0][i] = Float.valueOf(data[1].trim()).floatValue();
+				}
+				x_set = new Gridded1DSet(x, x_vals, x_vals[0].length);
+				y_ff = new FlatField( func_x_y, x_set);
+				// and put the y values above in it
+				y_ff.setSamples( y_vals );
+				//x_y_ref = new DataReferenceImpl("data_ref");
+				// set the display with the new data
+				display.removeReference(x_y_ref);
 				x_y_ref.setData( y_ff );
 				// Add reference to display
 				display.addReference(x_y_ref);
@@ -303,7 +357,7 @@ public class TwoColumnPlotter2 {
 		fileChooser.setMultiSelectionEnabled(false);
 		fileChooser.setFileSelectionMode(SELECTION_MODE.FILES_ONLY);
 		// show the file dialog
-		RETURN_TYPE answer = fileChooser.showOpenDialog(TwoColumnPlotter2.jframe);
+		RETURN_TYPE answer = fileChooser.showOpenDialog(DansePlotter.jframe);
 		// check if a file was selected
 		if (answer == RETURN_TYPE.APPROVE){
 			final FileObject aFileObject = fileChooser.getSelectedFile();
@@ -386,7 +440,7 @@ public class TwoColumnPlotter2 {
 
 	public static void main(String[] args) throws RemoteException,
 	VisADException {
-		new TwoColumnPlotter2(args);
+		new DansePlotter(args);
 	}
 
 } // end of Visad Tutorial Program 2_08
