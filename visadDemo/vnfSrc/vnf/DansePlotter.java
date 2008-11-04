@@ -100,7 +100,8 @@ public class DansePlotter {
 		float[][] x_vals = new float[][]{{0}};
 		//float[][] x_vals = new float[][]{{1.0f, 2.0f, 3.0f}};
 		x_set = new Gridded1DSet(x, x_vals, x_vals[0].length);
-		float[][] y_vals = new float[][]{{1.0f, 1.0f, 1.0f}};
+		//float[][] y_vals = new float[][]{{1.0f, 1.0f, 1.0f}};
+		//float[][] y_vals = new float[][]{{}};
 		// Create the FlatField
 		y_ff = new FlatField(func_x_y, x_set);
 		// and put the y values above in it
@@ -140,9 +141,9 @@ public class DansePlotter {
 		display.addMap(xMap);
 		display.addMap(yMap);
 		// create reference and add it to display
-//		x_y_ref = new DataReferenceImpl("x_y_ref");
-//		x_y_ref.setData(y_ff);
-//		display.addReference(x_y_ref);
+		x_y_ref = new DataReferenceImpl("x_y_ref");
+		x_y_ref.setData(y_ff);
+		display.addReference(x_y_ref);
 		
 		final JMenuBar menuBar = new JMenuBar();
 		//Build the first menu.
@@ -238,7 +239,9 @@ public class DansePlotter {
 				y_ff.setSamples( y_vals );
 				//x_y_ref = new DataReferenceImpl("data_ref");
 				// set the display with the new data
-				display.removeReference(x_y_ref);
+				if (display.findReference(x_y_ref)){
+					display.removeReference(x_y_ref);
+				}
 				x_y_ref.setData( y_ff );
 				// Add reference to display
 				display.addReference(x_y_ref);
