@@ -53,11 +53,7 @@ import org.apache.commons.vfs.FileSystemException;
 
 
 /**
- * Somewhat different version of program P2_07 We reorganize the MathType of
- * example P2_07 ( time -> (height, speed) ) as ( time -> height ) and ( time ->
- * speed ) When then plot time (along x-axis) against height and speed, both
- * (along y-axis) The color of speed display is changed to match the line color
- * os speed
+ * Danse Plotter
  */
 
 //TODO: create an openFile method that takes the type of file as argument.  Instantiate file chooser inside of it and get rid of passing reference.
@@ -101,11 +97,11 @@ public class DansePlotter {
 		//float[][] x_vals = new float[][]{{1.0f, 2.0f, 3.0f}};
 		x_set = new Gridded1DSet(x, x_vals, x_vals[0].length);
 		//float[][] y_vals = new float[][]{{1.0f, 1.0f, 1.0f}};
-		//float[][] y_vals = new float[][]{{}};
+		float[][] y_vals = new float[][]{{0.0f}};
 		// Create the FlatField
 		y_ff = new FlatField(func_x_y, x_set);
 		// and put the y values above in it
-		//y_ff.setSamples(y_vals);
+		y_ff.setSamples(y_vals);
 		// Create Display and its maps
 		display = new DisplayImplJ2D("display1");
 
@@ -239,9 +235,7 @@ public class DansePlotter {
 				y_ff.setSamples( y_vals );
 				//x_y_ref = new DataReferenceImpl("data_ref");
 				// set the display with the new data
-				if (display.findReference(x_y_ref)){
-					display.removeReference(x_y_ref);
-				}
+				display.removeReference(x_y_ref);
 				x_y_ref.setData( y_ff );
 				// Add reference to display
 				display.addReference(x_y_ref);
