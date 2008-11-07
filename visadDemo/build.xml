@@ -37,11 +37,11 @@
 	</macrodef>
 
 	
-  <description>Two Column Plotter</description>
+  <description>DansePlotter</description>
 
   <property name="src" location="examples"/>
   <property name="build" location="bin"/>
-  <property name="app-name" value="TwoColumnPlotter"/>
+  <property name="app-name" value="DansePlotter"/>
   <property name="username" value="jbk"/>
   <property name="password" value=""/>
 
