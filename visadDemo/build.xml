@@ -67,7 +67,9 @@
 			</fileset>
 		</jar>
 		<!-- sign all jars -->
-		<signjar jar="deploy/${app-name}.jar" keystore="/home/jbk/DanseKeystore" alias="Plotter" storepass="danse" keypass="danse"/>
+		<signjar jar="deploy/${app-name}.jar" keystore="/home/jbk/DanseKeystore" alias="Plotter" storepass="inelastic" keypass=""/>
+		<!-- copy the jar to the vnf project, assuming it is in the same workspace as this project -->
+		<cp>
 	</target>
 	
 	<target name="deploy-remote-trueblue" depends="package-trueblue">
