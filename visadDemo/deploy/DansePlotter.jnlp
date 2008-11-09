@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jnlp spec="1.0+" codebase="file:///home/jbk/DANSE/visadDemo/examples">
+<jnlp spec="1.0+" codebase="file:///home/jbk/DANSE/visadDemo">
     <information>
-        <title>twoColumnPlotter</title>
+        <title>DansePlotter</title>
         <vendor>Danse</vendor>
         <homepage href="http://danse.us" />
         <description></description>
@@ -12,7 +12,7 @@
     </security>
     <resources>
         <j2se version="1.5+" java-vm-args="-Xmx512m"/>
-        <jar href="TwoColumn.jar"/>
+        <jar href="DansePlotter.jar"/>
     </resources>
-    <application-desc main-class="cod.Main" />
+    <application-desc main-class="vnf.DansePlotter" />
 </jnlp>
