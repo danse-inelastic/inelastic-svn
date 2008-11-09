@@ -42,6 +42,7 @@
   <property name="src" location="examples"/>
   <property name="build" location="bin"/>
   <property name="app-name" value="DansePlotter"/>
+  <property name="vnfDeploy" value="../vnf/html/java"/>
   <property name="username" value="jbk"/>
   <property name="password" value=""/>
 
@@ -59,15 +60,34 @@
 	</target>
 
 	<target name="package-vnf" description="build jars for Plotter" depends="init">
-		<!-- first unsign all external jars 
-		<unsignjar jar="${app-name}.jar"/>-->
-		<jar jarfile="../vnf/html/java/${app-name}.jar" manifest="jee/MANIFEST.MF">
+		<!-- first unsign all external jars -->
+		<unsignjar jar="${vnfDeploy}/visad.jar"/>
+		<unsignjar jar="${vnfDeploy}/VFSJFileChooser-0.0.3.jar"/>
+		<jar jarfile="${vnfDeploy}/${app-name}.jar" manifest="jee/MANIFEST.MF">
 			<fileset dir="${build}">
 				<include name="vnf/**" />
 			</fileset>
 		</jar>
 		<!-- sign all jars -->
-		<signjar jar="../vnf/html/java/${app-name}.jar" keystore="/home/jbk/DanseKeystore" alias="Plotter" storepass="inelastic" keypass=""/>
+		<signjar jar="${vnfDeploy}/${app-name}.jar" keystore="/home/jbk/DanseKeystore" alias="Plotter" storepass="inelastic" keypass="inelastic"/>
+		<signjar jar="${vnfDeploy}/visad.jar" keystore="/home/jbk/DanseKeystore" alias="Plotter" storepass="inelastic" keypass="inelastic"/>
+		<signjar jar="${vnfDeploy}/VFSJFileChooser-0.0.3.jar" keystore="/home/jbk/DanseKeystore" alias="Plotter" storepass="inelastic" keypass="inelastic"/>
+		<signjar jar="${vnfDeploy}/commons-collections-3.2.1.jar" keystore="/home/jbk/DanseKeystore" alias="Plotter" storepass="inelastic" keypass="inelastic"/>
+		<signjar jar="${vnfDeploy}/commons-compress-20050911.jar" keystore="/home/jbk/DanseKeystore" alias="Plotter" storepass="inelastic" keypass="inelastic"/>
+		<signjar jar="${vnfDeploy}/commons-httpclient-3.1.jar" keystore="/home/jbk/DanseKeystore" alias="Plotter" storepass="inelastic" keypass="inelastic"/>
+		<signjar jar="${vnfDeploy}/commons-lang-2.4.jar" keystore="/home/jbk/DanseKeystore" alias="Plotter" storepass="inelastic" keypass="inelastic"/>
+		<signjar jar="${vnfDeploy}/commons-logging-1.1.1.jar" keystore="/home/jbk/DanseKeystore" alias="Plotter" storepass="inelastic" keypass="inelastic"/>
+		<signjar jar="${vnfDeploy}/commons-net-1.4.0.jar" keystore="/home/jbk/DanseKeystore" alias="Plotter" storepass="inelastic" keypass="inelastic"/>
+		<signjar jar="${vnfDeploy}/commons-vfs-2.0-SNAPSHOT.jar" keystore="/home/jbk/DanseKeystore" alias="Plotter" storepass="inelastic" keypass="inelastic"/>
+		<signjar jar="${vnfDeploy}/commons-vfs-sandbox-2.0-SNAPSHOT.jar" keystore="/home/jbk/DanseKeystore" alias="Plotter" storepass="inelastic" keypass="inelastic"/>
+		<signjar jar="${vnfDeploy}/jcifs-1.2.9.jar" keystore="/home/jbk/DanseKeystore" alias="Plotter" storepass="inelastic" keypass="inelastic"/>
+		<signjar jar="${vnfDeploy}/jsch-0.1.31.jar" keystore="/home/jbk/DanseKeystore" alias="Plotter" storepass="inelastic" keypass="inelastic"/>
+		<signjar jar="${vnfDeploy}/junit.jar" keystore="/home/jbk/DanseKeystore" alias="Plotter" storepass="inelastic" keypass="inelastic"/>
+		<signjar jar="${vnfDeploy}/oro-2.0.8.jar" keystore="/home/jbk/DanseKeystore" alias="Plotter" storepass="inelastic" keypass="inelastic"/>
+		<signjar jar="${vnfDeploy}/webdavclient4j-cmd-0.92.jar" keystore="/home/jbk/DanseKeystore" alias="Plotter" storepass="inelastic" keypass="inelastic"/>
+		<signjar jar="${vnfDeploy}/webdavclient4j-core-0.92.jar" keystore="/home/jbk/DanseKeystore" alias="Plotter" storepass="inelastic" keypass="inelastic"/>
+		<signjar jar="${vnfDeploy}/webdavclient4j-jca-0.92.jar" keystore="/home/jbk/DanseKeystore" alias="Plotter" storepass="inelastic" keypass="inelastic"/>
+		<signjar jar="${vnfDeploy}/webdavclient4j-vfs-0.92.jar" keystore="/home/jbk/DanseKeystore" alias="Plotter" storepass="inelastic" keypass="inelastic"/>
 		<!-- copy the jar to the vnf project, assuming it is in the same workspace as this project 
 		<copy file="deploy/${app-name}.jar" todir="../vnf/html/java"/> -->
 	</target>
