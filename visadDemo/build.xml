@@ -1,4 +1,4 @@
-<project name="visadDemo" default="package-trueblue" basedir=".">
+<project name="visadDemo" default="package-vnf" basedir=".">
 	
 	<macrodef name="unsignjar">
 		
@@ -58,21 +58,21 @@
 		</tstamp>
 	</target>
 
-	<target name="package-trueblue" description="build jars for Plotter" depends="init">
+	<target name="package-vnf" description="build jars for Plotter" depends="init">
 		<!-- first unsign all external jars 
 		<unsignjar jar="${app-name}.jar"/>-->
-		<jar jarfile="deploy/${app-name}.jar" manifest="jee/MANIFEST.MF">
+		<jar jarfile="../vnf/html/java/${app-name}.jar" manifest="jee/MANIFEST.MF">
 			<fileset dir="${build}">
 				<include name="vnf/**" />
 			</fileset>
 		</jar>
 		<!-- sign all jars -->
-		<signjar jar="deploy/${app-name}.jar" keystore="/home/jbk/DanseKeystore" alias="Plotter" storepass="inelastic" keypass=""/>
-		<!-- copy the jar to the vnf project, assuming it is in the same workspace as this project -->
-		<cp>
+		<signjar jar="../vnf/html/java/${app-name}.jar" keystore="/home/jbk/DanseKeystore" alias="Plotter" storepass="inelastic" keypass=""/>
+		<!-- copy the jar to the vnf project, assuming it is in the same workspace as this project 
+		<copy file="deploy/${app-name}.jar" todir="../vnf/html/java"/> -->
 	</target>
 	
-	<target name="deploy-remote-trueblue" depends="package-trueblue">
+	<target name="deploy-remote-trueblue" depends="package-vnf">
 		<scp trust="yes" todir="${username}:${password}@trueblue.caltech.edu:/var/www/java/">
 			<fileset dir="lib">
 				<include name="visad.jar"/>
