@@ -212,85 +212,56 @@ public class DansePlotter {
 				Pattern newLinePattern = Pattern.compile("\n");
 				String[] dataLines = newLinePattern.split(fileContents);
 				int numDataPoints = dataLines.length;
-				float[][] x_vals = new float[1][numDataPoints];
-				float[][] y_vals = new float[1][numDataPoints];
+				float[][] xy_vals = new float[2][numDataPoints];
 				float[][] z_vals = new float[1][numDataPoints];
 				//split the lines by white space
 				Pattern whitespacePattern = Pattern.compile("\\s"); 
 				for (int i=0; i<numDataPoints; i++){ //(String dataLine : dataLines) {
 					String[] data = whitespacePattern.split(dataLines[i]);
-					x_vals[0][i] = Float.valueOf(data[0].trim()).floatValue();
-					y_vals[0][i] = Float.valueOf(data[1].trim()).floatValue();
+					// read the x val and put it on row 1
+					xy_vals[1][i] = Float.valueOf(data[0].trim()).floatValue();
+					// read the y val and put it on row 0
+					xy_vals[0][i] = Float.valueOf(data[1].trim()).floatValue();
+					z_vals[0][i] = Float.valueOf(data[2].trim()).floatValue();
 				}
 
 				// Create the domain tuple
 				domain_tuple = new RealTupleType(x, y);				
 				z = RealType.getRealType("z");
 				func_domain_range = new FunctionType( domain_tuple, z);
-				// Create the domain Set
-				// Use LinearDSet(MathType type, double first1, double last1, int lengthX,
-				//		s		     double first2, double last2, int lengthY)
+				domain_set = new Gridded2DSet(domain_tuple, xy_vals, xy_vals[0].length);
 
-				domain_set = new Gridded2DSet(domain_tuple,);
-				x_set = new Gridded1DSet(x, x_vals, x_vals[0].length);
+				// Create a FlatField
+				// Use FlatField(FunctionType type, Set domain_set)
 
-				    // Get the Set samples to facilitate the calculations
+				vals_ff = new FlatField( func_domain_range, domain_set);
 
-				    float[][] set_samples = domain_set.getSamples( true );
+				// ...and put the temperature values above into it
 
+				// Note the argument false, meaning that the array won't be copied
 
-				    // We create a samples array, with NCOLS * NROWS elements for
-				    // temperature, pressure and precipitation values,  organized as
-				    // float[3][ number_of_samples ]
+				vals_ff.setSamples( flat_samples , false );
 
-				    float[][] flat_samples = new float[3][NCOLS * NROWS];
+				// Create Display and its maps
 
-				    // ...and then we fill our 'flat' array with the generated values
-				    // by looping over NCOLS and NROWS
+				// A 2D display
 
-				    for(int c = 0; c < NCOLS; c++)
+				display = new DisplayImplJ2D("display1");
 
-				      for(int r = 0; r < NROWS; r++){
+				// Get display's graphics mode control and draw scales
 
-					// ...temperature
-					flat_samples[0][ c * NROWS + r ] = (float) (Math.sin( 0.350 * (double)
-					                                            set_samples[0][ c * NROWS + r ])  );
-				    }
-
-
-				    // Create a FlatField
-				    // Use FlatField(FunctionType type, Set domain_set)
-
-				    vals_ff = new FlatField( func_domain_range, domain_set);
-
-				    // ...and put the temperature values above into it
-
-				    // Note the argument false, meaning that the array won't be copied
-
-				    vals_ff.setSamples( flat_samples , false );
-
-				    // Create Display and its maps
-
-				    // A 2D display
-
-				    display = new DisplayImplJ2D("display1");
-
-				    // Get display's graphics mode control and draw scales
-
-				    GraphicsModeControl dispGMC = (GraphicsModeControl) display.getGraphicsModeControl();
-				    dispGMC.setScaleEnable(true);
+				GraphicsModeControl dispGMC = (GraphicsModeControl) display.getGraphicsModeControl();
+				dispGMC.setScaleEnable(true);
 
 
 				    // Create the ScalarMaps: latitude to YAxis, longitude to XAxis and
 				    // temperature to  to Red, pressure to green and precipitation to blue
 				    // Use ScalarMap(ScalarType scalar, DisplayRealType display_scalar)
 
-				    latMap = new ScalarMap( latitude,    Display.YAxis );
-				    lonMap = new ScalarMap( longitude, Display.XAxis );
+				latMap = new ScalarMap( y,    Display.YAxis );
+				lonMap = new ScalarMap( x, Display.XAxis );
 
-				    tempMap = new ScalarMap( temperature,  Display.Red );
-				    pressMap = new ScalarMap( pressure,  Display.Green );
-				    precipMap = new ScalarMap( precipitation,  Display.Blue );
+				    tempMap = new ScalarMap( z,  Display.Red );
 
 
 				    // Add maps to display
