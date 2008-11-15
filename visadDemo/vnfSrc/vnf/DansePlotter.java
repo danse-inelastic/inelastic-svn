@@ -236,17 +236,11 @@ public class DansePlotter {
 
 				vals_ff = new FlatField( func_domain_range, domain_set);
 
-				// ...and put the temperature values above into it
+				// ...and put the z values above into it
 
 				// Note the argument false, meaning that the array won't be copied
+				vals_ff.setSamples( z_vals, false );
 
-				vals_ff.setSamples( flat_samples , false );
-
-				// Create Display and its maps
-
-				// A 2D display
-
-				display = new DisplayImplJ2D("display1");
 
 				// Get display's graphics mode control and draw scales
 
