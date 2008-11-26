@@ -27,8 +27,8 @@ class UnitCellBuilder(Component):
         import pyre.inventory as inv  
 #        filename = inv.str('Atomic List', default='atoms.in')
 #        filename.meta['tip'] = 'The file containing atoms, their type, and positions (i.e. C core/shell 0.0 1.0 2.1)'
-        atoms = inv.facility('Atomic/Species information',default=AtomLoader())
-        #atoms = inv.str('Atomic/Species information',default='')
+        #atoms = inv.facility('Atomic/Species information',default=AtomLoader())
+        atoms = inv.str('Atomic/Species information',default='')
         atoms.meta['tip'] = '''i.e. H core  0.0  0.0  0.0
 O shell  1.0  0.0  0.0'''
         unitCell = inv.facility('Unit Cell', default=UnitCell())
