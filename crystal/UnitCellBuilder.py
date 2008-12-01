@@ -31,7 +31,7 @@ class UnitCellBuilder(Component):
         atoms = inv.str('Atomic/Species information',default='')
         atoms.meta['tip'] = '''i.e. H core  0.0  0.0  0.0
 O shell  1.0  0.0  0.0'''
-        unitCell = inv.facility('Unit Cell', default=UnitCell())
+        unitCell = inv.facility('unitCell', default=UnitCell())
         unitCell.meta['tip'] = 'Set the unit cell parameters.'
         #unitCell.validator=inv.choice(["UnitCell", None])
         #b = inv.str('b', default='0.0 1.0 0.0')
