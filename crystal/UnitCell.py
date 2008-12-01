@@ -85,13 +85,13 @@ class UnitCell(Component):
 # Eventually this should be depyrized
     class Inventory(Component.Inventory):
         import pyre.inventory as inv  
-        a = inv.str('a Vector', default='1.0 0.0 0.0')
+        a = inv.str('a', default='1.0 0.0 0.0')
         a.meta['tip'] = 'the a unit cell vector'
         a.meta['importance'] = 10
-        b = inv.str('b Vector', default='0.0 1.0 0.0')
+        b = inv.str('b', default='0.0 1.0 0.0')
         b.meta['tip'] = 'the b unit cell vector'
         b.meta['importance'] = 9
-        c = inv.str('c Vector', default='0.0 0.0 1.0')
+        c = inv.str('c', default='0.0 0.0 1.0')
         c.meta['tip'] = 'the c unit cell vector'  
         c.meta['importance'] = 8
         spaceGroup = inv.str('Space Group', default='1')
@@ -125,14 +125,14 @@ class UnitCell(Component):
 
     def __getitem__(self, i): return self._sites[i]
 
-    def __str__(self):
-        rt = "UnitCell a=%s, b=%s, c=%s\n" % tuple(self._cellvectors)
-        for siteId in self._siteIds.keys():
-            rt += "\n%s\n" % siteId
-            rt += "\n position: %s\n" % (self._siteIds[siteId].getPosition()) 
-            rt += "\n%s \n" % (self._siteIds[siteId].getAtom())
-            continue
-        return rt
+#    def __str__(self):
+#        rt = "UnitCell a=%s, b=%s, c=%s\n" % tuple(self._cellvectors)
+#        for siteId in self._siteIds.keys():
+#            rt += "\n%s\n" % siteId
+#            rt += "\n position: %s\n" % (self._siteIds[siteId].getPosition()) 
+#            rt += "\n%s \n" % (self._siteIds[siteId].getAtom())
+#            continue
+#        return rt
     
     def __len__(self):
         return self.getNumAtoms()
