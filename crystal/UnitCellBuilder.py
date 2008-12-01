@@ -103,6 +103,7 @@ O shell  1.0  0.0  0.0'''
         """returns a string containing atoms in xyz format, one per line"""
         return self.i.atoms
         
+    def getCellVectors(self):
+        return self.i.unitCell.getCellVectors()
 
-    pass # end of class UnitCellBuilder
 
