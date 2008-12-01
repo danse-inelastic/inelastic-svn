@@ -109,7 +109,8 @@ class UnitCell(Component):
         Component.__init__(self, name, facility='facility')
         self.i=self.inventory
         if cellvectors is None:
-            cellvectors = np.array( [ (1.0,0.0,0.0),(0.0,1.0,0.0),(0.0,0.0,1.0) ] )
+            cellvectors = np.array( [ map(float, self.i.a.split()),map(float, self.i.b.split()),map(float, self.i.c.split()) ] )
+            #cellvectors = np.array( [ (1.0,0.0,0.0),(0.0,1.0,0.0),(0.0,0.0,1.0) ] )
 
         self._cellvectors = np.array(cellvectors)
         self._spaceGroup = spaceGroup
