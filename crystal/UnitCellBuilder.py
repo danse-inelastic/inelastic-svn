@@ -98,6 +98,11 @@ O shell  1.0  0.0  0.0'''
     def gulpFormatUcNAtoms(self):
         uc=self._uc
         atoms=s
+        
+    def getAtomsAsString(self):
+        """returns a string containing atoms in xyz format, one per line"""
+        return self.i.atoms
+        
 
     pass # end of class UnitCellBuilder
 
