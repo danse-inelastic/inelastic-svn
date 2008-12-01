@@ -420,8 +420,19 @@ class UnitCell(Component):
         frackpts.shape=(size[0], size[1], size[2], 3)
         return frackpts
         
+    def _defaults(self):
+        Component._defaults(self)
+        return
 
-    pass # end of UnitCell
+    def _configure(self):
+        Component._configure(self)
+        return
+
+    def _init(self):
+        Component._init(self)
+        return
+
+
 
 ##########################################################
 
