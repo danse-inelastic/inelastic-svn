@@ -78,6 +78,7 @@ class Site:
 from pyre.components.Component import Component
 class UnitCell(Component):  
     """Representation of a crystal unit cell."""
+    #TODO: do not make this a pyre component but rather keep it as a clean data object.  Make Structure Manipulator a pyre component
 #    unitCellWrapper=uniCellWrapper
 
 # We do not want to make UnitCell a component,
