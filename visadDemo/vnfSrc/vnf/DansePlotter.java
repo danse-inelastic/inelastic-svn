@@ -82,9 +82,9 @@ public class DansePlotter {
 	private ScalarMap blackXMap, blackYMap;
 	private ScalarMap blackMap;
 	private ScalarMap xMap, yMap;
-	
-	
-	
+
+
+
 	// Declare additional variables for "image" plotter 
 	private RealType z;
 	private RealTupleType domain_tuple;
@@ -96,7 +96,7 @@ public class DansePlotter {
 	// The 2D display, and its the maps
 	private ScalarMap latMap, lonMap;
 	private ScalarMap tempMap, pressMap, precipMap;
-	
+
 	//private JFileChooser fc;
 	private static JFrame jframe;
 
@@ -133,7 +133,7 @@ public class DansePlotter {
 		x_y_ref = new DataReferenceImpl("x_y_ref");
 		x_y_ref.setData(y_ff);
 		display.addReference(x_y_ref);
-		
+
 		final JMenuBar menuBar = new JMenuBar();
 		//Build the first menu.
 		JMenu menu;
@@ -152,7 +152,7 @@ public class DansePlotter {
 		});
 		newItemMenuItem.setText("Open Two Column Ascii");
 		menu.add(newItemMenuItem);
-		
+
 		final JMenuItem newItemMenuItem_3 = new JMenuItem();
 		newItemMenuItem_3.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent arg0) {
@@ -180,7 +180,7 @@ public class DansePlotter {
 		jframe = new JFrame("Danse Plotter");
 		jframe.setJMenuBar(menuBar);
 		jframe.getContentPane().add(display.getComponent());
-		
+
 		// Set window size and make it visible
 		jframe.setSize(700, 700);
 		jframe.setVisible(true);
@@ -247,37 +247,33 @@ public class DansePlotter {
 				GraphicsModeControl dispGMC = (GraphicsModeControl) display.getGraphicsModeControl();
 				dispGMC.setScaleEnable(true);
 
-
-				    // Create the ScalarMaps: latitude to YAxis, longitude to XAxis and
-				    // temperature to  to Red, pressure to green and precipitation to blue
-				    // Use ScalarMap(ScalarType scalar, DisplayRealType display_scalar)
-
-				latMap = new ScalarMap( y,    Display.YAxis );
+				display = new DisplayImplJ2D("display1");
+				// Create the ScalarMaps: latitude to YAxis, longitude to XAxis and
+				// temperature to  to Red, pressure to green and precipitation to blue
+				// Use ScalarMap(ScalarType scalar, DisplayRealType display_scalar)
+				latMap = new ScalarMap( y, Display.YAxis );
 				lonMap = new ScalarMap( x, Display.XAxis );
+				tempMap = new ScalarMap( z, Display.RGB );
 
-				    tempMap = new ScalarMap( z,  Display.Red );
+				// Add maps to display
+				display.addMap( latMap );
+				display.addMap( lonMap );
+
+				display.addMap( tempMap );
+				display.addMap( pressMap );
+				display.addMap( precipMap );
+
+				// Create a data reference and set the FlatField as our data
+
+				data_ref = new DataReferenceImpl("data_ref");
+
+				data_ref.setData( vals_ff );
+
+				// Add reference to display
+
+				display.addReference( data_ref );
 
 
-				    // Add maps to display
-
-				    display.addMap( latMap );
-				    display.addMap( lonMap );
-
-				    display.addMap( tempMap );
-				    display.addMap( pressMap );
-				    display.addMap( precipMap );
-
-				    // Create a data reference and set the FlatField as our data
-
-				    data_ref = new DataReferenceImpl("data_ref");
-
-				    data_ref.setData( vals_ff );
-
-				    // Add reference to display
-
-				    display.addReference( data_ref );
-
-				
 
 			} catch (FileSystemException e) {
 				e.printStackTrace();
@@ -289,12 +285,12 @@ public class DansePlotter {
 			//replot
 			//jframe.repaint();
 			// Get the display renderer
-//			DisplayRendererJ2D dRenderer = (DisplayRendererJ2D)display.getDisplayRenderer();
-//			// render again
-//			dRenderer.render_trigger();
-		    
+			//			DisplayRendererJ2D dRenderer = (DisplayRendererJ2D)display.getDisplayRenderer();
+			//			// render again
+			//			dRenderer.render_trigger();
+
 			jframe.setVisible(true);
-		    jframe.toFront();
+			jframe.toFront();
 			// remove authentication credentials from the file path
 			//final String safeName = VFSUtils.getFriendlyName(aFileObject.toString());
 		}
@@ -369,17 +365,17 @@ public class DansePlotter {
 			//replot
 			//jframe.repaint();
 			// Get the display renderer
-//			DisplayRendererJ2D dRenderer = (DisplayRendererJ2D)display.getDisplayRenderer();
-//			// render again
-//			dRenderer.render_trigger();
-		    
+			//			DisplayRendererJ2D dRenderer = (DisplayRendererJ2D)display.getDisplayRenderer();
+			//			// render again
+			//			dRenderer.render_trigger();
+
 			jframe.setVisible(true);
-		    jframe.toFront();
+			jframe.toFront();
 			// remove authentication credentials from the file path
 			//final String safeName = VFSUtils.getFriendlyName(aFileObject.toString());
 		}
 	}
-	
+
 	/**
 	 * @param fileChooser
 	 */
@@ -406,7 +402,7 @@ public class DansePlotter {
 			//final String safeName = VFSUtils.getFriendlyName(aFileObject.toString());
 		}
 	}
-	
+
 	public String convertStreamToString(InputStream is) {
 		/*
 		 * To convert the InputStream to String we use the BufferedReader.readLine()
