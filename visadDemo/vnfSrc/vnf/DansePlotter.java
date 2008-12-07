@@ -73,9 +73,9 @@ public class DansePlotter {
 
 	// The Data class FlatField, which will hold time and height data
 	// and the same for speed
-	private FlatField y_ff;
+	private FlatField data_ff;
 	// The DataReference from the data to display
-	private DataReferenceImpl x_y_ref;
+	private DataReferenceImpl data_ref;
 
 	// The 2D display, and its the maps
 	private DisplayImpl display;
@@ -89,13 +89,8 @@ public class DansePlotter {
 	private RealType z;
 	private RealTupleType domain_tuple;
 	private Set domain_set;
-	// The Data class FlatField
-	private FlatField vals_ff;
-	// The DataReference from data to display
-	private DataReferenceImpl data_ref;
 	// The 2D display, and its the maps
-	private ScalarMap latMap, lonMap;
-	private ScalarMap tempMap, pressMap, precipMap;
+	private ScalarMap imageMap;
 
 	//private JFileChooser fc;
 	private static JFrame jframe;
@@ -113,9 +108,9 @@ public class DansePlotter {
 		//float[][] y_vals = new float[][]{{1.0f, 1.0f, 1.0f}};
 		float[][] y_vals = new float[][]{{0.0f}};
 		// Create the FlatField
-		y_ff = new FlatField(func_domain_range, x_set);
+		data_ff = new FlatField(func_domain_range, x_set);
 		// and put the y values above in it
-		y_ff.setSamples(y_vals);
+		data_ff.setSamples(y_vals);
 		// Create Display and its maps
 		display = new DisplayImplJ2D("display1");
 
@@ -130,9 +125,9 @@ public class DansePlotter {
 		display.addMap(xMap);
 		display.addMap(yMap);
 		// create reference and add it to display
-		x_y_ref = new DataReferenceImpl("x_y_ref");
-		x_y_ref.setData(y_ff);
-		display.addReference(x_y_ref);
+		data_ref = new DataReferenceImpl("x_y_ref");
+		data_ref.setData(data_ff);
+		display.addReference(data_ref);
 
 		final JMenuBar menuBar = new JMenuBar();
 		//Build the first menu.
@@ -156,11 +151,20 @@ public class DansePlotter {
 		final JMenuItem newItemMenuItem_3 = new JMenuItem();
 		newItemMenuItem_3.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent arg0) {
+				openTrajectory(fileChooser);
+			}
+		});
+		newItemMenuItem_3.setText("Open Trajectory");
+		menu.add(newItemMenuItem_3);
+		
+		final JMenuItem newItemMenuItem_3p5 = new JMenuItem();
+		newItemMenuItem_3p5.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {
 				openImage(fileChooser);
 			}
 		});
-		newItemMenuItem_3.setText("Open Image");
-		menu.add(newItemMenuItem_3);
+		newItemMenuItem_3p5.setText("Open Image");
+		menu.add(newItemMenuItem_3p5);
 
 		final JMenuItem newItemMenuItem_1 = new JMenuItem();
 		newItemMenuItem_1.addActionListener(new ActionListener() {
@@ -186,8 +190,10 @@ public class DansePlotter {
 		jframe.setVisible(true);
 
 	}
-
+	
 	private void openImage(VFSJFileChooser fileChooser) {
+		// reads a set of values from a file in grid formation
+		
 		// configure the file dialog
 		fileChooser.setAccessory(new DefaultAccessoriesPanel(fileChooser));
 		fileChooser.setFileHidingEnabled(false);
@@ -230,50 +236,125 @@ public class DansePlotter {
 				z = RealType.getRealType("z");
 				func_domain_range = new FunctionType( domain_tuple, z);
 				domain_set = new Gridded2DSet(domain_tuple, xy_vals, xy_vals[0].length);
-
-				// Create a FlatField
+				// redo the flatfield to contain image data
 				// Use FlatField(FunctionType type, Set domain_set)
-
-				vals_ff = new FlatField( func_domain_range, domain_set);
+				data_ff = new FlatField( func_domain_range, domain_set);
 
 				// ...and put the z values above into it
-
 				// Note the argument false, meaning that the array won't be copied
-				vals_ff.setSamples( z_vals, false );
+				data_ff.setSamples( z_vals);
 
-
+				//TODO: not sure if these next lines necessary
 				// Get display's graphics mode control and draw scales
-
 				GraphicsModeControl dispGMC = (GraphicsModeControl) display.getGraphicsModeControl();
 				dispGMC.setScaleEnable(true);
-
-				display = new DisplayImplJ2D("display1");
-				// Create the ScalarMaps: latitude to YAxis, longitude to XAxis and
-				// temperature to  to Red, pressure to green and precipitation to blue
-				// Use ScalarMap(ScalarType scalar, DisplayRealType display_scalar)
-				latMap = new ScalarMap( y, Display.YAxis );
-				lonMap = new ScalarMap( x, Display.XAxis );
-				tempMap = new ScalarMap( z, Display.RGB );
-
-				// Add maps to display
-				display.addMap( latMap );
-				display.addMap( lonMap );
-
-				display.addMap( tempMap );
-				display.addMap( pressMap );
-				display.addMap( precipMap );
-
-				// Create a data reference and set the FlatField as our data
-
-				data_ref = new DataReferenceImpl("data_ref");
-
-				data_ref.setData( vals_ff );
-
+				
+				// fix display to show new type of data
+				display.removeReference(data_ref);
+				imageMap = new ScalarMap( z, Display.RGB );
+				//display.addMap(xMap);
+				//display.addMap(yMap);
+				display.addMap( imageMap );
+				
+				//set the new FlatField as our data
+				//TODO check that this is the right way to update the display by comparing
+				//with the first animation example
+				data_ref.setData( data_ff );
+				
 				// Add reference to display
+				display.addReference(data_ref);
 
-				display.addReference( data_ref );
+			} catch (FileSystemException e) {
+				e.printStackTrace();
+			}  catch (VisADException e) {
+				e.printStackTrace();
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+			//replot
+			//jframe.repaint();
+			// Get the display renderer
+			//			DisplayRendererJ2D dRenderer = (DisplayRendererJ2D)display.getDisplayRenderer();
+			//			// render again
+			//			dRenderer.render_trigger();
 
+			jframe.setVisible(true);
+			jframe.toFront();
+			// remove authentication credentials from the file path
+			//final String safeName = VFSUtils.getFriendlyName(aFileObject.toString());
+		}
+	}
 
+	private void openTrajectory(VFSJFileChooser fileChooser) {
+		// configure the file dialog
+		fileChooser.setAccessory(new DefaultAccessoriesPanel(fileChooser));
+		fileChooser.setFileHidingEnabled(false);
+		fileChooser.setMultiSelectionEnabled(false);
+		fileChooser.setFileSelectionMode(SELECTION_MODE.FILES_ONLY);
+
+		// show the file dialog
+		RETURN_TYPE answer = fileChooser.showOpenDialog(DansePlotter.jframe);
+
+		// check if a file was selected
+		if (answer == RETURN_TYPE.APPROVE){
+			final FileObject aFileObject = fileChooser.getSelectedFile();
+
+			// retrieve an input stream and read in all of the file contents at once
+			String fileContents;
+			try {
+				InputStream is = VFSUtils.getInputStream(aFileObject);
+				fileContents = convertStreamToString(is);
+				//process file contents
+
+				//split by newlines
+				Pattern newLinePattern = Pattern.compile("\n");
+				String[] dataLines = newLinePattern.split(fileContents);
+				int numDataPoints = dataLines.length;
+				float[][] xy_vals = new float[2][numDataPoints];
+				float[][] z_vals = new float[1][numDataPoints];
+				//split the lines by white space
+				Pattern whitespacePattern = Pattern.compile("\\s"); 
+				for (int i=0; i<numDataPoints; i++){ //(String dataLine : dataLines) {
+					String[] data = whitespacePattern.split(dataLines[i]);
+					// read the x val and put it on row 1
+					xy_vals[1][i] = Float.valueOf(data[0].trim()).floatValue();
+					// read the y val and put it on row 0
+					xy_vals[0][i] = Float.valueOf(data[1].trim()).floatValue();
+					z_vals[0][i] = Float.valueOf(data[2].trim()).floatValue();
+				}
+
+				// Create the domain tuple
+				domain_tuple = new RealTupleType(x, y);				
+				z = RealType.getRealType("z");
+				func_domain_range = new FunctionType( domain_tuple, z);
+				domain_set = new Gridded2DSet(domain_tuple, xy_vals, xy_vals[0].length);
+				// redo the flatfield to contain image data
+				// Use FlatField(FunctionType type, Set domain_set)
+				data_ff = new FlatField( func_domain_range, domain_set);
+
+				// ...and put the z values above into it
+				// Note the argument false, meaning that the array won't be copied
+				data_ff.setSamples( z_vals);
+
+				//TODO: not sure if these next lines necessary
+				// Get display's graphics mode control and draw scales
+				GraphicsModeControl dispGMC = (GraphicsModeControl) display.getGraphicsModeControl();
+				dispGMC.setScaleEnable(true);
+				
+				// fix display to show new type of data
+				display.removeReference(data_ref);
+				imageMap = new ScalarMap( z, Display.RGB );
+				//display.addMap(xMap);
+				//display.addMap(yMap);
+				display.addMap( imageMap );
+				
+				//set the new FlatField as our data
+				//TODO check that this is the right way to update the display by comparing
+				//with the first animation example
+				data_ref.setData( data_ff );
+				
+				// Add reference to display
+				display.addReference(data_ref);
 
 			} catch (FileSystemException e) {
 				e.printStackTrace();
@@ -342,18 +423,18 @@ public class DansePlotter {
 					y_vals[0][i] = Float.valueOf(data[1].trim()).floatValue();
 				}
 				x_set = new Gridded1DSet(x, x_vals, x_vals[0].length);
-				y_ff = new FlatField( func_domain_range, x_set);
+				data_ff = new FlatField( func_domain_range, x_set);
 				// and put the y values above in it
-				y_ff.setSamples( y_vals );
+				data_ff.setSamples( y_vals );
 				//x_y_ref = new DataReferenceImpl("data_ref");
 				// set the display with the new data
-				display.removeReference(x_y_ref);
-				x_y_ref.setData( y_ff );
+				display.removeReference(data_ref);
+				data_ref.setData( data_ff );
 				// Add reference to display
-				display.addReference(x_y_ref);
-				//						  private static final String ID = TwoColumnPlotter2.class.getName();
+				display.addReference(data_ref);
+				//	private static final String ID = TwoColumnPlotter2.class.getName();
 				//
-				//						  private static DefaultFamily form = new DefaultFamily(ID);
+				//	private static DefaultFamily form = new DefaultFamily(ID);
 
 			} catch (FileSystemException e) {
 				e.printStackTrace();
