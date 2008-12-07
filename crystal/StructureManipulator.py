@@ -1,4 +1,4 @@
-# UnitCellBuilder -- Olivier Delaire June 2007
+# StructureManipulator 
 
 from pyre.components.Component import Component
 from UnitCell import UnitCell
@@ -20,7 +20,7 @@ class AtomLoader(Component):
     
 
 
-class UnitCellBuilder(Component):  
+class StructureManipulator(Component):  
     """UnitCell facility with convenience functions for IO."""
     
     class Inventory(Component.Inventory):
@@ -42,7 +42,7 @@ O shell  1.0  0.0  0.0'''
         #atomFile = inv.str('atom and position file',defa)
         #atomFile
     
-    def __init__(self, name='UnitCellBuilder', unitcell=None, cellvectors=None, filename='atoms.xyz'):
+    def __init__(self, name='StructureManipulator', unitcell=None, cellvectors=None, filename='atoms.xyz'):
         Component.__init__(self, name, facility='facility')
         self.i=self.inventory
 #        if unitcell is None:
