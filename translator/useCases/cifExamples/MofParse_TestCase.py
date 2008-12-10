@@ -13,7 +13,7 @@
 
 
 import unittest  
-from pycifrw.CifParser import CifParser
+from translator.pycifrw.CifParser import CifParser
 from sample.sampleCreation.supercell.Supercell import Supercell
 
 appName = "CifParser"
