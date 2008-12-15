@@ -18,6 +18,7 @@ import visad.FunctionType;
 import visad.GraphicsModeControl;
 import visad.Gridded1DSet;
 import visad.Gridded2DSet;
+import visad.Integer2DSet;
 import visad.Linear1DSet;
 import visad.RealTupleType;
 import visad.RealType;
@@ -29,6 +30,7 @@ import visad.java2d.DisplayImplJ2D;
 import visad.java2d.DisplayRendererJ2D;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -212,30 +214,32 @@ public class DansePlotter {
 			try {
 				InputStream is = VFSUtils.getInputStream(aFileObject);
 				fileContents = convertStreamToString(is);
-				//process file contents
-
-				//split by newlines
-				Pattern newLinePattern = Pattern.compile("\n");
-				String[] dataLines = newLinePattern.split(fileContents);
-				int numDataPoints = dataLines.length;
-				float[][] xy_vals = new float[2][numDataPoints];
-				float[][] z_vals = new float[1][numDataPoints];
 				//split the lines by white space
 				Pattern whitespacePattern = Pattern.compile("\\s"); 
-				for (int i=0; i<numDataPoints; i++){ //(String dataLine : dataLines) {
-					String[] data = whitespacePattern.split(dataLines[i]);
-					// read the x val and put it on row 1
-					xy_vals[1][i] = Float.valueOf(data[0].trim()).floatValue();
-					// read the y val and put it on row 0
-					xy_vals[0][i] = Float.valueOf(data[1].trim()).floatValue();
-					z_vals[0][i] = Float.valueOf(data[2].trim()).floatValue();
+				BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+				String line = null;
+				ArrayList<float[]> rawData = new ArrayList<float[]>();
+				try {
+					while ((line = reader.readLine()) != null) {
+						String[] splitLine = whitespacePattern.split(line);
+						float[] lineNumbers = new float[splitLine.length];
+						for(int i=0; i< splitLine.length; i++){
+							lineNumbers[i] = Float.valueOf(splitLine[i].trim()).floatValue();
+						}
+						rawData.add(lineNumbers);
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
+				float[][] z_vals = (float[][])rawData.toArray();
+
 
 				// Create the domain tuple
 				domain_tuple = new RealTupleType(x, y);				
 				z = RealType.getRealType("z");
 				func_domain_range = new FunctionType( domain_tuple, z);
-				domain_set = new Gridded2DSet(domain_tuple, xy_vals, xy_vals[0].length);
+				//domain_set = new Gridded2DSet(domain_tuple, xy_vals, xy_vals[0].length);
+				domain_set = new Integer2DSet(domain_tuple, xy_vals[0].length, xy_vals[0].length);
 				// redo the flatfield to contain image data
 				// Use FlatField(FunctionType type, Set domain_set)
 				data_ff = new FlatField( func_domain_range, domain_set);
@@ -509,6 +513,33 @@ public class DansePlotter {
 		} 
 		return sb.toString();
 	}
+	
+	public String getLine(InputStream is) {
+		/*
+		 * To get a line of data we use the BufferedReader.readLine()
+		 * method. We iterate until the BufferedReader return null which means
+		 * there's no more data to read. Each line will appended to a StringBuilder
+		 * and returned as String.
+		 */
+		BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+		StringBuilder sb = new StringBuilder();
+		String line = null;
+		try {
+			while ((line = reader.readLine()) != null) {
+				sb.append(line + "\n");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				is.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} 
+		return sb.toString();
+	}
+	
 
 	//	private void openTwoColumn() {
 	//		String fileName;
