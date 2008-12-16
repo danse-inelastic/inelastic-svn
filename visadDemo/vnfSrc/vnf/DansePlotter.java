@@ -232,6 +232,17 @@ public class DansePlotter {
 					e.printStackTrace();
 				}
 				float[][] z_vals = (float[][])rawData.toArray();
+				
+			    float[][] flat_samples = new float[1][z_vals[0].length*z_vals[0][0].length];
+
+			    // ...and then we fill our 'flat' array with the original values
+			    // Note that the pixel values indicate the order in which these values
+			    // are stored in flat_samples
+
+			    for(int c = 0; c < NCOLS; c++)
+			      for(int r = 0; r < NROWS; r++)
+
+				flat_samples[0][ c * NROWS + r ] = pixel_vals[r][c];
 
 
 				// Create the domain tuple
