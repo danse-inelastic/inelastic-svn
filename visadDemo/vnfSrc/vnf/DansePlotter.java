@@ -213,7 +213,8 @@ public class DansePlotter {
 			String fileContents;
 			try {
 				InputStream is = VFSUtils.getInputStream(aFileObject);
-				fileContents = convertStreamToString(is);
+				//fileContents = convertStreamToString(is);
+				
 				//split the lines by white space
 				Pattern whitespacePattern = Pattern.compile("\\s"); 
 				BufferedReader reader = new BufferedReader(new InputStreamReader(is));
@@ -231,33 +232,32 @@ public class DansePlotter {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				float[][] z_vals = (float[][])rawData.toArray();
+				int numXData = rawData.get(0).length;
+				int numYData = rawData.size();
+				float[][] zRaw = (float[][])rawData.toArray();
 				
-			    float[][] flat_samples = new float[1][z_vals[0].length*z_vals[0][0].length];
+			    float[][] flat_samples = new float[1][numXData*numYData];
 
 			    // ...and then we fill our 'flat' array with the original values
 			    // Note that the pixel values indicate the order in which these values
 			    // are stored in flat_samples
-
-			    for(int c = 0; c < NCOLS; c++)
-			      for(int r = 0; r < NROWS; r++)
-
-				flat_samples[0][ c * NROWS + r ] = pixel_vals[r][c];
-
-
-				// Create the domain tuple
-				domain_tuple = new RealTupleType(x, y);				
-				z = RealType.getRealType("z");
-				func_domain_range = new FunctionType( domain_tuple, z);
-				//domain_set = new Gridded2DSet(domain_tuple, xy_vals, xy_vals[0].length);
-				domain_set = new Integer2DSet(domain_tuple, xy_vals[0].length, xy_vals[0].length);
-				// redo the flatfield to contain image data
-				// Use FlatField(FunctionType type, Set domain_set)
+			    for(int c = 0; c < numXData; c++)
+			      for(int r = 0; r < numYData; r++)
+			    	  
+			    	  flat_samples[0][ c * numYData + r ] = zRaw[r][c];
+//				// Create the domain tuple
+//				domain_tuple = new RealTupleType(x, y);				
+//				z = RealType.getRealType("z");
+//				func_domain_range = new FunctionType( domain_tuple, z);
+//				//domain_set = new Gridded2DSet(domain_tuple, xy_vals, xy_vals[0].length);
+//				domain_set = new Integer2DSet(domain_tuple, xy_vals[0].length, xy_vals[0].length);
+//				// redo the flatfield to contain image data
+//				// Use FlatField(FunctionType type, Set domain_set)
 				data_ff = new FlatField( func_domain_range, domain_set);
 
 				// ...and put the z values above into it
 				// Note the argument false, meaning that the array won't be copied
-				data_ff.setSamples( z_vals);
+				data_ff.setSamples(flat_samples);
 
 				//TODO: not sure if these next lines necessary
 				// Get display's graphics mode control and draw scales
