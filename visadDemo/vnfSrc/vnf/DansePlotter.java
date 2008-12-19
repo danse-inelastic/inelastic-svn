@@ -234,23 +234,25 @@ public class DansePlotter {
 				}
 				int numXData = rawData.get(0).length;
 				int numYData = rawData.size();
-				float[][] zRaw = (float[][])rawData.toArray();
+				//float[][] zRaw = (float[][])rawData.toArray();
 				
 			    float[][] flat_samples = new float[1][numXData*numYData];
 
 			    // ...and then we fill our 'flat' array with the original values
 			    // Note that the pixel values indicate the order in which these values
 			    // are stored in flat_samples
-			    for(int c = 0; c < numXData; c++)
-			      for(int r = 0; r < numYData; r++)
-			    	  
-			    	  flat_samples[0][ c * numYData + r ] = zRaw[r][c];
+			    float[] row;
+			    for(int r = 0; r < numYData; r++){
+			    	row = rawData.get(r);
+			    	for(int c = 0; c < numXData; c++)
+			    		flat_samples[0][ c * numYData + r ] = row[c];
+				}
 //				// Create the domain tuple
-//				domain_tuple = new RealTupleType(x, y);				
-//				z = RealType.getRealType("z");
-//				func_domain_range = new FunctionType( domain_tuple, z);
+				domain_tuple = new RealTupleType(y, x);				
+				z = RealType.getRealType("z");
+				func_domain_range = new FunctionType( domain_tuple, z);
 //				//domain_set = new Gridded2DSet(domain_tuple, xy_vals, xy_vals[0].length);
-//				domain_set = new Integer2DSet(domain_tuple, xy_vals[0].length, xy_vals[0].length);
+				domain_set = new Integer2DSet(domain_tuple, numYData, numXData);
 //				// redo the flatfield to contain image data
 //				// Use FlatField(FunctionType type, Set domain_set)
 				data_ff = new FlatField( func_domain_range, domain_set);
