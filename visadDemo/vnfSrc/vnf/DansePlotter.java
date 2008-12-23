@@ -74,7 +74,7 @@ public class DansePlotter {
 
 	// The Data class FlatField, which will hold time and height data
 	// and the same for speed
-	private FlatField data_ff;
+	static FlatField data_ff;
 	// The DataReference from the data to display
 	private DataReferenceImpl data_ref;
 
@@ -94,8 +94,7 @@ public class DansePlotter {
 	//private JFileChooser fc;
 	static JFrame jframe;
 
-	public DansePlotter(String[] args) throws RemoteException,
-	VisADException {
+	public DansePlotter(String[] args) throws RemoteException,VisADException {
 		// Create the quantities
 		// Use RealType(String name, Unit u, Set set), set is null
 		x = RealType.getRealType("x", null, null);
@@ -134,6 +133,7 @@ public class DansePlotter {
 
 		jframe = new JFrame("Danse Plotter");
 		jframe.setJMenuBar(menuBar);
+		jframe.getContentPane().removeAll();
 		jframe.getContentPane().add(display.getComponent());
 
 		// Set window size and make it visible
