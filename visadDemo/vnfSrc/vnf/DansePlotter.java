@@ -82,8 +82,6 @@ public class DansePlotter {
 	private DisplayImpl display;
 	private ScalarMap xMap, yMap;
 
-
-
 	// Declare additional variables for "image" plotter 
 	private RealType z;
 	private RealTupleType domain_tuple;
