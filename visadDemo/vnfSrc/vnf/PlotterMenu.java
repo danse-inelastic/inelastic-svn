@@ -12,7 +12,6 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
-import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -33,12 +32,10 @@ import visad.FlatField;
 import visad.FunctionType;
 import visad.GraphicsModeControl;
 import visad.Gridded1DSet;
-import visad.Gridded2DSet;
 import visad.Integer2DSet;
 import visad.RealTupleType;
 import visad.RealType;
 import visad.ScalarMap;
-import visad.Set;
 import visad.VisADException;
 import visad.java2d.DisplayImplJ2D;
 
@@ -93,9 +90,6 @@ public class PlotterMenu extends JMenuBar {
 		final JMenuItem newItemMenuItem_2 = new JMenuItem();
 		newItemMenuItem_2.setText("Exit");
 		menu.add(newItemMenuItem_2);
-
-
-
 	}
 
 	private void openImage(VFSJFileChooser fileChooser) {
@@ -115,7 +109,7 @@ public class PlotterMenu extends JMenuBar {
 			final FileObject aFileObject = fileChooser.getSelectedFile();
 
 			// retrieve an input stream and read in all of the file contents at once
-			String fileContents;
+			//String fileContents;
 			try {
 				InputStream is = VFSUtils.getInputStream(aFileObject);
 				//fileContents = convertStreamToString(is);
@@ -140,7 +134,6 @@ public class PlotterMenu extends JMenuBar {
 				int numXData = rawData.get(0).length;
 				int numYData = rawData.size();
 				//float[][] zRaw = (float[][])rawData.toArray();
-				
 			    float[][] flat_samples = new float[1][numXData*numYData];
 
 			    // ...and then we fill our 'flat' array with the original values
@@ -152,51 +145,45 @@ public class PlotterMenu extends JMenuBar {
 			    	for(int c = 0; c < numXData; c++)
 			    		flat_samples[0][ c * numYData + r ] = row[c];
 				}
-			    
 				// Declare variables for 1D Plotter
-				RealType x = RealType.getRealType("ROW");
-				RealType y = RealType.getRealType("COLUMN");
-
-//				// Our Data values for x are represented by the set
-//				Gridded1DSet x_set;
-
-				// The Data class FlatField, which will hold time and height data
-				// and the same for speed
-				FlatField data_ff;
-				
-				// The 2D display, and its the maps
-				ScalarMap xMap, yMap;
+				RealType x = RealType.getRealType("x");
+				RealType y = RealType.getRealType("y");
 			    
 //				// Create the domain tuple
 			    RealTupleType domain_tuple = new RealTupleType(y, x);				
 			    RealType z = RealType.getRealType("z");
 			    FunctionType func_domain_range = new FunctionType( domain_tuple, z);
-//				//domain_set = new Gridded2DSet(domain_tuple, xy_vals, xy_vals[0].length);
+//				//Gridded2DSet domain_set = new Gridded2DSet(domain_tuple, xy_vals, xy_vals[0].length);
 				Integer2DSet domain_set = new Integer2DSet(domain_tuple, numYData, numXData);
 //				// redo the flatfield to contain image data
 //				// Use FlatField(FunctionType type, Set domain_set)				
-				data_ff = new FlatField( func_domain_range, domain_set);
+				FlatField data_ff = new FlatField( func_domain_range, domain_set);
 
 				// ...and put the z values above into it
 				// Note the argument false, meaning that the array won't be copied
 				data_ff.setSamples(flat_samples);
 
 				// fix display to show new type of data
-				Display display = new DisplayImplJ2D("display1");
+				DisplayImpl display = new DisplayImplJ2D("display1");
 				DataReferenceImpl data_ref = new DataReferenceImpl("data_ref");
-				display.removeReference(data_ref);
+
+				// Get display's graphics mode control and draw scales
+				GraphicsModeControl dispGMC = display.getGraphicsModeControl();
+				dispGMC.setScaleEnable(true);
+				dispGMC.setLineWidth(2.0f);
+				// Create the ScalarMaps: 
+				ScalarMap xMap = new ScalarMap(x, Display.XAxis);
+				ScalarMap yMap = new ScalarMap(y, Display.YAxis);
 				ScalarMap imageMap = new ScalarMap( z, Display.RGB );
-				//display.addMap(xMap);
-				//display.addMap(yMap);
+				display.addMap(xMap);
+				display.addMap(yMap);
 				display.addMap( imageMap );
-
 				//set the new FlatField as our data
-				//TODO check that this is the right way to update the display by comparing
-				//with the first animation example
 				data_ref.setData( data_ff );
-
 				// Add reference to display
 				display.addReference(data_ref);
+				DansePlotter.jframe.getContentPane().removeAll();
+				DansePlotter.jframe.getContentPane().add(display.getComponent());
 
 			} catch (FileSystemException e) {
 				e.printStackTrace();
@@ -371,7 +358,7 @@ public class PlotterMenu extends JMenuBar {
 				float[][] y_vals = new float[1][numDataPoints];
 
 				//split the lines by white space
-				Pattern whitespacePattern = Pattern.compile("\\s"); 
+				Pattern whitespacePattern = Pattern.compile("\\s");
 				for (int i=0; i<numDataPoints; i++){ //(String dataLine : dataLines) {
 					String[] data = whitespacePattern.split(dataLines[i]);
 					x_vals[0][i] = Float.valueOf(data[0].trim()).floatValue();
@@ -391,9 +378,20 @@ public class PlotterMenu extends JMenuBar {
 				data_ff.setSamples(y_vals);
 				// Create Display and its maps
 				DisplayImpl display = new DisplayImplJ2D("display1");
+				// Get display's graphics mode control and draw scales
+				GraphicsModeControl dispGMC = display.getGraphicsModeControl();
+				dispGMC.setScaleEnable(true);
+				dispGMC.setLineWidth(2.0f);
+				
+				
 				// The DataReference from the data to display
 				DataReferenceImpl data_ref = new DataReferenceImpl("data_ref");
-
+				// Create the ScalarMaps: 
+				ScalarMap xMap = new ScalarMap(x, Display.XAxis);
+				ScalarMap yMap = new ScalarMap(y, Display.YAxis);
+				// Add maps to display
+				display.addMap(xMap);
+				display.addMap(yMap);
 				// set the display with the new data
 				//display.removeReference(data_ref);
 				data_ref.setData( data_ff );
@@ -401,7 +399,6 @@ public class PlotterMenu extends JMenuBar {
 				display.addReference(data_ref);
 				DansePlotter.jframe.getContentPane().removeAll();
 				DansePlotter.jframe.getContentPane().add(display.getComponent());
-
 			} catch (FileSystemException e) {
 				e.printStackTrace();
 			}  catch (VisADException e) {
