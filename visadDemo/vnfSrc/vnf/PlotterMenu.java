@@ -32,6 +32,7 @@ import visad.FlatField;
 import visad.FunctionType;
 import visad.GraphicsModeControl;
 import visad.Gridded1DSet;
+import visad.Gridded2DSet;
 import visad.Integer2DSet;
 import visad.RealTupleType;
 import visad.RealType;
@@ -206,118 +207,95 @@ public class PlotterMenu extends JMenuBar {
 		}
 	}
 
-//	private void openTrajectory(VFSJFileChooser fileChooser) {
-//		// configure the file dialog
-//		fileChooser.setAccessory(new DefaultAccessoriesPanel(fileChooser));
-//		fileChooser.setFileHidingEnabled(false);
-//		fileChooser.setMultiSelectionEnabled(false);
-//		fileChooser.setFileSelectionMode(SELECTION_MODE.FILES_ONLY);
-//
-//		// show the file dialog
-//		RETURN_TYPE answer = fileChooser.showOpenDialog(DansePlotter.jframe);
-//
-//		// check if a file was selected
-//		if (answer == RETURN_TYPE.APPROVE){
-//			final FileObject aFileObject = fileChooser.getSelectedFile();
-//
-//			// retrieve an input stream and read in all of the file contents at once
-//			String fileContents;
-//			try {
-//				InputStream is = VFSUtils.getInputStream(aFileObject);
-//				fileContents = convertStreamToString(is);
-//				//process file contents
-//
-//				//split by newlines
-//				Pattern newLinePattern = Pattern.compile("\n");
-//				String[] dataLines = newLinePattern.split(fileContents);
-//				int numDataPoints = dataLines.length;
-//				float[][] xy_vals = new float[2][numDataPoints];
-//				float[][] z_vals = new float[1][numDataPoints];
-//				//split the lines by white space
-//				Pattern whitespacePattern = Pattern.compile("\\s"); 
-//				for (int i=0; i<numDataPoints; i++){ //(String dataLine : dataLines) {
-//					String[] data = whitespacePattern.split(dataLines[i]);
-//					// read the x val and put it on row 1
-//					xy_vals[1][i] = Float.valueOf(data[0].trim()).floatValue();
-//					// read the y val and put it on row 0
-//					xy_vals[0][i] = Float.valueOf(data[1].trim()).floatValue();
-//					z_vals[0][i] = Float.valueOf(data[2].trim()).floatValue();
-//				}
-//
-//				// Declare variables for 1D Plotter
-//				RealType x, y;
-//				FunctionType func_domain_range;
-//
-//				// Our Data values for x are represented by the set
-//				Gridded1DSet x_set;
-//
-//				// The Data class FlatField, which will hold time and height data
-//				// and the same for speed
-//				FlatField data_ff;
-//				// The DataReference from the data to display
-//				DataReferenceImpl data_ref;
-//
-//				// The 2D display, and its the maps
-//				DisplayImpl display;
-//				ScalarMap xMap, yMap;
-//				RealType z;
-//				RealTupleType domain_tuple;
-//				Set domain_set;
-//				// The 2D display, and its the maps
-//				ScalarMap imageMap;
-//				// Create the domain tuple
-//				domain_tuple = new RealTupleType(x, y);				
-//				z = RealType.getRealType("z");
-//				func_domain_range = new FunctionType( domain_tuple, z);
-//				domain_set = new Gridded2DSet(domain_tuple, xy_vals, xy_vals[0].length);
-//				// redo the flatfield to contain image data
-//				// Use FlatField(FunctionType type, Set domain_set)
-//				data_ff = new FlatField( func_domain_range, domain_set);
-//
-//				// ...and put the z values above into it
-//				// Note the argument false, meaning that the array won't be copied
-//				data_ff.setSamples( z_vals);
-//
-//				//TODO: not sure if these next lines necessary
-//				// Get display's graphics mode control and draw scales
-//				GraphicsModeControl dispGMC = (GraphicsModeControl) display.getGraphicsModeControl();
-//				dispGMC.setScaleEnable(true);
-//
-//				// fix display to show new type of data
-//				display.removeReference(data_ref);
-//				imageMap = new ScalarMap( z, Display.RGB );
-//				//display.addMap(xMap);
-//				//display.addMap(yMap);
-//				display.addMap( imageMap );
-//
-//				//set the new FlatField as our data
-//				//TODO check that this is the right way to update the display by comparing
-//				//with the first animation example
-//				data_ref.setData( data_ff );
-//
-//				// Add reference to display
-//				display.addReference(data_ref);
-//
-//			} catch (FileSystemException e) {
-//				e.printStackTrace();
-//			}  catch (VisADException e) {
-//				e.printStackTrace();
-//			} catch (RemoteException e) {
-//				e.printStackTrace();
-//			}
-//			//replot
-//			//jframe.repaint();
-//			// Get the display renderer
-//			//			DisplayRendererJ2D dRenderer = (DisplayRendererJ2D)display.getDisplayRenderer();
-//			//			// render again
-//			//			dRenderer.render_trigger();
-//
-//			DansePlotter.jframe.setVisible(true);
-//			DansePlotter.jframe.toFront();
-//			// remove authentication credentials from the file path
-//			//final String safeName = VFSUtils.getFriendlyName(aFileObject.toString());
-//		}
-//	}
+	private void openTrajectory(VFSJFileChooser fileChooser) {
+		// configure the file dialog
+		fileChooser.setAccessory(new DefaultAccessoriesPanel(fileChooser));
+		fileChooser.setFileHidingEnabled(false);
+		fileChooser.setMultiSelectionEnabled(false);
+		fileChooser.setFileSelectionMode(SELECTION_MODE.FILES_ONLY);
+
+		// show the file dialog
+		RETURN_TYPE answer = fileChooser.showOpenDialog(DansePlotter.jframe);
+
+		// check if a file was selected
+		if (answer == RETURN_TYPE.APPROVE){
+			final FileObject aFileObject = fileChooser.getSelectedFile();
+
+			// retrieve an input stream and read in all of the file contents at once
+			String fileContents;
+			try {
+				InputStream is = VFSUtils.getInputStream(aFileObject);
+				fileContents = convertStreamToString(is);
+				//process file contents
+
+				//split by newlines
+				Pattern newLinePattern = Pattern.compile("\n");
+				String[] dataLines = newLinePattern.split(fileContents);
+				int numDataPoints = dataLines.length;
+				float[][] xy_vals = new float[2][numDataPoints];
+				float[][] z_vals = new float[1][numDataPoints];
+				//split the lines by white space
+				Pattern whitespacePattern = Pattern.compile("\\s"); 
+				for (int i=0; i<numDataPoints; i++){ //(String dataLine : dataLines) {
+					String[] data = whitespacePattern.split(dataLines[i]);
+					// read the x val and put it on row 1
+					xy_vals[1][i] = Float.valueOf(data[0].trim()).floatValue();
+					// read the y val and put it on row 0
+					xy_vals[0][i] = Float.valueOf(data[1].trim()).floatValue();
+					z_vals[0][i] = Float.valueOf(data[2].trim()).floatValue();
+				}
+
+				// The 2D display, and its the maps
+				RealType x = RealType.getRealType("x");
+				RealType y = RealType.getRealType("y");			
+			    RealType path = RealType.getRealType("path");
+				
+				// Create the domain tuple
+				RealTupleType domain_tuple = new RealTupleType(y, x);				
+				FunctionType func_domain_range = new FunctionType( domain_tuple, path);
+				Gridded2DSet domain_set = new Gridded2DSet(domain_tuple, xy_vals, xy_vals[0].length);
+				// redo the flatfield to contain image data
+				// Use FlatField(FunctionType type, Set domain_set)
+				FlatField data_ff = new FlatField( func_domain_range, domain_set);
+
+				// ...and put the z values above into it
+				// Note the argument false, meaning that the array won't be copied
+				data_ff.setSamples( z_vals);
+
+				// The DataReference from the data to display
+				DataReferenceImpl data_ref = new DataReferenceImpl("data_ref");
+				
+				DisplayImpl display = new DisplayImplJ2D("display1");
+				GraphicsModeControl dispGMC = (GraphicsModeControl) display.getGraphicsModeControl();
+				dispGMC.setScaleEnable(true);
+				// Create the ScalarMaps: 
+				ScalarMap xMap = new ScalarMap(x, Display.XAxis);
+				ScalarMap yMap = new ScalarMap(y, Display.YAxis);
+				ScalarMap trajectoryMap = new ScalarMap( path, Display.RGB );
+				display.addMap( trajectoryMap );
+
+				display.addMap(xMap);
+				display.addMap(yMap);
+				// set the display with the new data
+				//display.removeReference(data_ref);
+				data_ref.setData( data_ff );
+				// Add reference to display
+				display.addReference(data_ref);
+				DansePlotter.jframe.getContentPane().removeAll();
+				DansePlotter.jframe.getContentPane().add(display.getComponent());
+				
+			} catch (FileSystemException e) {
+				e.printStackTrace();
+			}  catch (VisADException e) {
+				e.printStackTrace();
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+
+			DansePlotter.jframe.setVisible(true);
+			DansePlotter.jframe.toFront();
+		}
+	}
 
 	private float[] colorToFloats(Color c) {
 		float[] rgb = new float[] { 0.5f, 0.5f, 0.5f }; // init with gray
