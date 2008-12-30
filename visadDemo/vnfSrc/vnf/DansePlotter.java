@@ -61,7 +61,6 @@ import org.apache.commons.vfs.FileSystemException;
  */
 
 //TODO: create an openFile method that takes the type of file as argument.  Instantiate file chooser inside of it and get rid of passing reference.
-//TODO: break the menu bar out into a separate class
 
 public class DansePlotter {
 

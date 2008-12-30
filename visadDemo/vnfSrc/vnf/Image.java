@@ -9,6 +9,7 @@ import visad.FlatField;
 import visad.FunctionType;
 import visad.GraphicsModeControl;
 import visad.Integer2DSet;
+import visad.Linear2DSet;
 import visad.RealTupleType;
 import visad.RealType;
 import visad.ScalarMap;
@@ -30,7 +31,9 @@ public class Image {
 	    RealType z = RealType.getRealType("z");
 	    FunctionType func_domain_range = new FunctionType( domain_tuple, z);
 //		//Gridded2DSet domain_set = new Gridded2DSet(domain_tuple, xy_vals, xy_vals[0].length);
-		Integer2DSet domain_set = new Integer2DSet(domain_tuple, numYData, numXData);
+		//Integer2DSet domain_set = new Integer2DSet(domain_tuple, numYData, numXData);
+	    Linear2DSet domain_set = new Linear2DSet(domain_tuple, 0.0, (double)(numXData-1), 
+	    		numXData, 0.0, (double)(numYData), numYData);
 //		// redo the flatfield to contain image data
 //		// Use FlatField(FunctionType type, Set domain_set)				
 		FlatField data_ff = new FlatField( func_domain_range, domain_set);
