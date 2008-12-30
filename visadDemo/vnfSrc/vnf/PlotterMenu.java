@@ -25,20 +25,8 @@ import net.sf.vfsjfilechooser.utils.VFSUtils;
 import org.apache.commons.vfs.FileObject;
 import org.apache.commons.vfs.FileSystemException;
 
-import visad.DataReferenceImpl;
-import visad.Display;
 import visad.DisplayImpl;
-import visad.FlatField;
-import visad.FunctionType;
-import visad.GraphicsModeControl;
-import visad.Gridded1DSet;
-import visad.Gridded2DSet;
-import visad.Integer2DSet;
-import visad.RealTupleType;
-import visad.RealType;
-import visad.ScalarMap;
 import visad.VisADException;
-import visad.java2d.DisplayImplJ2D;
 
 public class PlotterMenu extends JMenuBar {
 
