@@ -135,8 +135,7 @@ public class DansePlotter {
 
 		// Set window size and make it visible
 		jframe.setSize(700, 700);
-		jframe.setVisible(true);
-		
+		jframe.setVisible(true);		
 	}
 
 
