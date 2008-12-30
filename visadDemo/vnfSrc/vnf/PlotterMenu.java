@@ -64,7 +64,7 @@ public class PlotterMenu extends JMenuBar {
 		final JMenuItem newItemMenuItem_3 = new JMenuItem();
 		newItemMenuItem_3.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent arg0) {
-				//openTrajectory(fileChooser);
+				openTrajectory(fileChooser);
 			}
 		});
 		newItemMenuItem_3.setText("Open Trajectory");
@@ -78,6 +78,24 @@ public class PlotterMenu extends JMenuBar {
 		});
 		newItemMenuItem_3p5.setText("Open Image");
 		menu.add(newItemMenuItem_3p5);
+		
+		final JMenuItem newItemMenuItem_3p6 = new JMenuItem();
+		newItemMenuItem_3p6.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {
+				open3DSurface(fileChooser);
+			}
+		});
+		newItemMenuItem_3p6.setText("Open 3DSurface");
+		menu.add(newItemMenuItem_3p6);
+		
+		final JMenuItem newItemMenuItem_3p7 = new JMenuItem();
+		newItemMenuItem_3p7.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {
+				open3DSurface(fileChooser);
+			}
+		});
+		newItemMenuItem_3p7.setText("Open Netcdf file");
+		menu.add(newItemMenuItem_3p7);
 
 		final JMenuItem newItemMenuItem_1 = new JMenuItem();
 		newItemMenuItem_1.addActionListener(new ActionListener() {
@@ -136,7 +154,6 @@ public class PlotterMenu extends JMenuBar {
 				int numYData = rawData.size();
 				//float[][] zRaw = (float[][])rawData.toArray();
 			    float[][] flat_samples = new float[1][numXData*numYData];
-
 			    // ...and then we fill our 'flat' array with the original values
 			    // Note that the pixel values indicate the order in which these values
 			    // are stored in flat_samples
@@ -146,46 +163,10 @@ public class PlotterMenu extends JMenuBar {
 			    	for(int c = 0; c < numXData; c++)
 			    		flat_samples[0][ c * numYData + r ] = row[c];
 				}
-				// Declare variables for 1D Plotter
-				RealType x = RealType.getRealType("x");
-				RealType y = RealType.getRealType("y");
-			    
-//				// Create the domain tuple
-			    RealTupleType domain_tuple = new RealTupleType(y, x);				
-			    RealType z = RealType.getRealType("z");
-			    FunctionType func_domain_range = new FunctionType( domain_tuple, z);
-//				//Gridded2DSet domain_set = new Gridded2DSet(domain_tuple, xy_vals, xy_vals[0].length);
-				Integer2DSet domain_set = new Integer2DSet(domain_tuple, numYData, numXData);
-//				// redo the flatfield to contain image data
-//				// Use FlatField(FunctionType type, Set domain_set)				
-				FlatField data_ff = new FlatField( func_domain_range, domain_set);
-
-				// ...and put the z values above into it
-				// Note the argument false, meaning that the array won't be copied
-				data_ff.setSamples(flat_samples);
-
-				// fix display to show new type of data
-				DisplayImpl display = new DisplayImplJ2D("display1");
-				DataReferenceImpl data_ref = new DataReferenceImpl("data_ref");
-
-				// Get display's graphics mode control and draw scales
-				GraphicsModeControl dispGMC = display.getGraphicsModeControl();
-				dispGMC.setScaleEnable(true);
-				dispGMC.setLineWidth(2.0f);
-				// Create the ScalarMaps: 
-				ScalarMap xMap = new ScalarMap(x, Display.XAxis);
-				ScalarMap yMap = new ScalarMap(y, Display.YAxis);
-				ScalarMap imageMap = new ScalarMap( z, Display.RGB );
-				display.addMap(xMap);
-				display.addMap(yMap);
-				display.addMap( imageMap );
-				//set the new FlatField as our data
-				data_ref.setData( data_ff );
-				// Add reference to display
-				display.addReference(data_ref);
+			    Image image = new Image(flat_samples, numXData, numYData);
+				DisplayImpl display = image.getDisplay();
 				DansePlotter.jframe.getContentPane().removeAll();
 				DansePlotter.jframe.getContentPane().add(display.getComponent());
-
 			} catch (FileSystemException e) {
 				e.printStackTrace();
 			}  catch (VisADException e) {
@@ -193,19 +174,79 @@ public class PlotterMenu extends JMenuBar {
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
-			//replot
-			//jframe.repaint();
-			// Get the display renderer
-			//			DisplayRendererJ2D dRenderer = (DisplayRendererJ2D)display.getDisplayRenderer();
-			//			// render again
-			//			dRenderer.render_trigger();
-
 			DansePlotter.jframe.setVisible(true);
 			DansePlotter.jframe.toFront();
-			// remove authentication credentials from the file path
-			//final String safeName = VFSUtils.getFriendlyName(aFileObject.toString());
 		}
 	}
+	
+	private void open3DSurface(VFSJFileChooser fileChooser) {
+		// reads a set of values from a file in grid formation
+
+		// configure the file dialog
+		fileChooser.setAccessory(new DefaultAccessoriesPanel(fileChooser));
+		fileChooser.setFileHidingEnabled(false);
+		fileChooser.setMultiSelectionEnabled(false);
+		fileChooser.setFileSelectionMode(SELECTION_MODE.FILES_ONLY);
+
+		// show the file dialog
+		RETURN_TYPE answer = fileChooser.showOpenDialog(DansePlotter.jframe);
+
+		// check if a file was selected
+		if (answer == RETURN_TYPE.APPROVE){
+			final FileObject aFileObject = fileChooser.getSelectedFile();
+
+			// retrieve an input stream and read in all of the file contents at once
+			//String fileContents;
+			try {
+				InputStream is = VFSUtils.getInputStream(aFileObject);
+				//fileContents = convertStreamToString(is);
+
+				//split the lines by white space
+				Pattern whitespacePattern = Pattern.compile("\\s"); 
+				BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+				String line = null;
+				ArrayList<float[]> rawData = new ArrayList<float[]>();
+				try {
+					while ((line = reader.readLine()) != null) {
+						String[] splitLine = whitespacePattern.split(line);
+						float[] lineNumbers = new float[splitLine.length];
+						for(int i=0; i< splitLine.length; i++){
+							lineNumbers[i] = Float.valueOf(splitLine[i].trim()).floatValue();
+						}
+						rawData.add(lineNumbers);
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				int numXData = rawData.get(0).length;
+				int numYData = rawData.size();
+				//float[][] zRaw = (float[][])rawData.toArray();
+			    float[][] flat_samples = new float[1][numXData*numYData];
+			    // ...and then we fill our 'flat' array with the original values
+			    // Note that the pixel values indicate the order in which these values
+			    // are stored in flat_samples
+			    float[] row;
+			    for(int r = 0; r < numYData; r++){
+			    	row = rawData.get(r);
+			    	for(int c = 0; c < numXData; c++)
+			    		flat_samples[0][ c * numYData + r ] = row[c];
+				}
+			    ThreeDSurface threeDSurface = new ThreeDSurface(flat_samples, numXData, numYData);
+				DisplayImpl display = threeDSurface.getDisplay();
+				DansePlotter.jframe.getContentPane().removeAll();
+				DansePlotter.jframe.getContentPane().add(display.getComponent());
+			} catch (FileSystemException e) {
+				e.printStackTrace();
+			}  catch (VisADException e) {
+				e.printStackTrace();
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+			DansePlotter.jframe.setVisible(true);
+			DansePlotter.jframe.toFront();
+		}
+	}
+
 
 	private void openTrajectory(VFSJFileChooser fileChooser) {
 		// configure the file dialog
@@ -233,7 +274,7 @@ public class PlotterMenu extends JMenuBar {
 				String[] dataLines = newLinePattern.split(fileContents);
 				int numDataPoints = dataLines.length;
 				float[][] xy_vals = new float[2][numDataPoints];
-				float[][] z_vals = new float[1][numDataPoints];
+				//float[][] z_vals = new float[1][numDataPoints];
 				//split the lines by white space
 				Pattern whitespacePattern = Pattern.compile("\\s"); 
 				for (int i=0; i<numDataPoints; i++){ //(String dataLine : dataLines) {
@@ -242,45 +283,11 @@ public class PlotterMenu extends JMenuBar {
 					xy_vals[1][i] = Float.valueOf(data[0].trim()).floatValue();
 					// read the y val and put it on row 0
 					xy_vals[0][i] = Float.valueOf(data[1].trim()).floatValue();
-					z_vals[0][i] = Float.valueOf(data[2].trim()).floatValue();
+					//z_vals[0][i] = Float.valueOf(data[2].trim()).floatValue();
 				}
+				Trajectory trajectory = new Trajectory(xy_vals);
+				DisplayImpl display = trajectory.getDisplay();
 
-				// The 2D display, and its the maps
-				RealType x = RealType.getRealType("x");
-				RealType y = RealType.getRealType("y");			
-			    RealType path = RealType.getRealType("path");
-				
-				// Create the domain tuple
-				RealTupleType domain_tuple = new RealTupleType(y, x);				
-				FunctionType func_domain_range = new FunctionType( domain_tuple, path);
-				Gridded2DSet domain_set = new Gridded2DSet(domain_tuple, xy_vals, xy_vals[0].length);
-				// redo the flatfield to contain image data
-				// Use FlatField(FunctionType type, Set domain_set)
-				FlatField data_ff = new FlatField( func_domain_range, domain_set);
-
-				// ...and put the z values above into it
-				// Note the argument false, meaning that the array won't be copied
-				data_ff.setSamples( z_vals);
-
-				// The DataReference from the data to display
-				DataReferenceImpl data_ref = new DataReferenceImpl("data_ref");
-				
-				DisplayImpl display = new DisplayImplJ2D("display1");
-				GraphicsModeControl dispGMC = (GraphicsModeControl) display.getGraphicsModeControl();
-				dispGMC.setScaleEnable(true);
-				// Create the ScalarMaps: 
-				ScalarMap xMap = new ScalarMap(x, Display.XAxis);
-				ScalarMap yMap = new ScalarMap(y, Display.YAxis);
-				ScalarMap trajectoryMap = new ScalarMap( path, Display.RGB );
-				display.addMap( trajectoryMap );
-
-				display.addMap(xMap);
-				display.addMap(yMap);
-				// set the display with the new data
-				//display.removeReference(data_ref);
-				data_ref.setData( data_ff );
-				// Add reference to display
-				display.addReference(data_ref);
 				DansePlotter.jframe.getContentPane().removeAll();
 				DansePlotter.jframe.getContentPane().add(display.getComponent());
 				
@@ -342,39 +349,8 @@ public class PlotterMenu extends JMenuBar {
 					x_vals[0][i] = Float.valueOf(data[0].trim()).floatValue();
 					y_vals[0][i] = Float.valueOf(data[1].trim()).floatValue();
 				}
-
-				// Declare variables for 1D Plotters
-				RealType x = RealType.getRealType("x", null, null);
-				RealType y = RealType.getRealType("y", null, null);
-				FunctionType func_domain_range = new FunctionType(x, y);
-				// Our Data values for x are represented by the set
-				Gridded1DSet x_set = new Gridded1DSet(x, x_vals, numDataPoints);
-				// The Data class FlatField, which will hold time and height data
-				// and the same for speed
-				FlatField data_ff = new FlatField(func_domain_range, x_set);
-				// and put the y values above in it
-				data_ff.setSamples(y_vals);
-				// Create Display and its maps
-				DisplayImpl display = new DisplayImplJ2D("display1");
-				// Get display's graphics mode control and draw scales
-				GraphicsModeControl dispGMC = display.getGraphicsModeControl();
-				dispGMC.setScaleEnable(true);
-				dispGMC.setLineWidth(2.0f);
-				
-				
-				// The DataReference from the data to display
-				DataReferenceImpl data_ref = new DataReferenceImpl("data_ref");
-				// Create the ScalarMaps: 
-				ScalarMap xMap = new ScalarMap(x, Display.XAxis);
-				ScalarMap yMap = new ScalarMap(y, Display.YAxis);
-				// Add maps to display
-				display.addMap(xMap);
-				display.addMap(yMap);
-				// set the display with the new data
-				//display.removeReference(data_ref);
-				data_ref.setData( data_ff );
-				// Add reference to display
-				display.addReference(data_ref);
+				Line line = new Line(x_vals, y_vals);
+				DisplayImpl display = line.getDisplay();
 				DansePlotter.jframe.getContentPane().removeAll();
 				DansePlotter.jframe.getContentPane().add(display.getComponent());
 			} catch (FileSystemException e) {
@@ -387,8 +363,6 @@ public class PlotterMenu extends JMenuBar {
 			
 			DansePlotter.jframe.toFront();
 			DansePlotter.jframe.setVisible(true);
-			// remove authentication credentials from the file path
-			//final String safeName = VFSUtils.getFriendlyName(aFileObject.toString());
 		}
 	}
 
