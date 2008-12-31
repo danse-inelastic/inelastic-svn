@@ -4,6 +4,7 @@
 	<classpathentry kind="src" path="examples"/>
 	<classpathentry kind="src" path="appletTutorial"/>
 	<classpathentry kind="src" path="vnfSrc"/>
+	<classpathentry kind="src" path="resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/ext/j3dcore.jar">
 		<attributes>
@@ -22,5 +23,6 @@
 	</classpathentry>
 	<classpathentry combineaccessrules="false" kind="src" path="/VFSJFileChooser"/>
 	<classpathentry kind="lib" path="/VFSJFileChooser/lib/commons-vfs-2.0-SNAPSHOT.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/netcdfJavaLib"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

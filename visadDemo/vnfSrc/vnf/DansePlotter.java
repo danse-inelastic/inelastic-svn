@@ -8,52 +8,28 @@ package vnf;
 // Import needed classes
 
 
-import visad.ConstantMap;
-import visad.DataReferenceImpl;
-import visad.Display;
-import visad.DisplayImpl;
-import visad.DisplayRenderer;
-import visad.FlatField;
-import visad.FunctionType;
-import visad.GraphicsModeControl;
-import visad.Gridded1DSet;
-import visad.Gridded2DSet;
-import visad.Integer2DSet;
-import visad.Linear1DSet;
-import visad.RealTupleType;
-import visad.RealType;
-import visad.SI;
-import visad.ScalarMap;
-import visad.Set;
-import visad.VisADException;
-import visad.java2d.DisplayImplJ2D;
-import visad.java2d.DisplayRendererJ2D;
-
-import java.rmi.RemoteException;
-import java.util.ArrayList;
-import java.util.regex.Pattern;
-import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.BufferedReader;
+import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.rmi.RemoteException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
+import javax.swing.JLabel;
 
-import net.sf.vfsjfilechooser.VFSJFileChooser;
-import net.sf.vfsjfilechooser.VFSJFileChooser.RETURN_TYPE;
-import net.sf.vfsjfilechooser.VFSJFileChooser.SELECTION_MODE;
-import net.sf.vfsjfilechooser.accessories.DefaultAccessoriesPanel;
-import net.sf.vfsjfilechooser.utils.VFSUtils;
-
-import org.apache.commons.vfs.FileObject;
-import org.apache.commons.vfs.FileSystemException;
+import thredds.ui.Resource;
+import ucar.nc2.NetcdfFileCache;
+import ucar.nc2.dataset.NetcdfDatasetCache;
+import ucar.util.prefs.PreferencesExt;
+import ucar.util.prefs.XMLStore;
+import ucar.util.prefs.ui.Debug;
+import visad.DisplayImpl;
+import visad.VisADException;
 
 
 /**
@@ -63,85 +39,154 @@ import org.apache.commons.vfs.FileSystemException;
 //TODO: create an openFile method that takes the type of file as argument.  Instantiate file chooser inside of it and get rid of passing reference.
 
 public class DansePlotter {
+	static private final String FRAME_SIZE = "FrameSize";
 
-	// Declare variables for 1D Plotter
-	private RealType x, y;
-	private FunctionType func_domain_range;
+	//private ucar.util.prefs.PreferencesExt mainPrefs;
 
-	// Our Data values for x are represented by the set
-	private Gridded1DSet x_set;
 
-	// The Data class FlatField, which will hold time and height data
-	// and the same for speed
-	static FlatField data_ff;
-	// The DataReference from the data to display
-	private DataReferenceImpl data_ref;
-
-	// The 2D display, and its the maps
-	private DisplayImpl display;
-	private ScalarMap xMap, yMap;
-
-	// Declare additional variables for "image" plotter 
-	private RealType z;
-	private RealTupleType domain_tuple;
-	private Set domain_set;
-	// The 2D display, and its the maps
-	private ScalarMap imageMap;
-
-	//private JFileChooser fc;
-	static JFrame jframe;
-
-	public DansePlotter(String[] args) throws RemoteException,VisADException {
-		// Create the quantities
-		// Use RealType(String name, Unit u, Set set), set is null
-		x = RealType.getRealType("x", null, null);
-		y = RealType.getRealType("y", null, null);
-		func_domain_range = new FunctionType(x, y);
-		float[][] x_vals = new float[][]{{0}};
-		//float[][] x_vals = new float[][]{{1.0f, 2.0f, 3.0f}};
-		x_set = new Gridded1DSet(x, x_vals, x_vals[0].length);
-		//float[][] y_vals = new float[][]{{1.0f, 1.0f, 1.0f}};
-		float[][] y_vals = new float[][]{{0.0f}};
-		// Create the FlatField
-		data_ff = new FlatField(func_domain_range, x_set);
-		// and put the y values above in it
-		data_ff.setSamples(y_vals);
-		// Create Display and its maps
-		display = new DisplayImplJ2D("display1");
-
-		// Get display's graphics mode control and draw scales
-		GraphicsModeControl dispGMC = display.getGraphicsModeControl();
-		dispGMC.setScaleEnable(true);
-		dispGMC.setLineWidth(2.0f);
-		// Create the ScalarMaps: 
-		xMap = new ScalarMap(x, Display.XAxis);
-		yMap = new ScalarMap(y, Display.YAxis);
-		// Add maps to display
-		display.addMap(xMap);
-		display.addMap(yMap);
-		// create reference and add it to display
-		data_ref = new DataReferenceImpl("x_y_ref");
-		data_ref.setData(data_ff);
-		display.addReference(data_ref);
-
-		final PlotterMenu menuBar = new PlotterMenu();
+	public DansePlotter(ucar.util.prefs.PreferencesExt prefs, JFrame parentFrame) 
+	throws RemoteException,VisADException {
 		
-		// Create application window, put display into it
-
-		jframe = new JFrame("Danse Plotter");
-		jframe.setJMenuBar(menuBar);
-		jframe.getContentPane().removeAll();
-		jframe.getContentPane().add(display.getComponent());
-
-		// Set window size and make it visible
-		jframe.setSize(700, 700);
-		jframe.setVisible(true);		
+		float[][] x_vals = new float[][]{{0}};
+		float[][] y_vals = new float[][]{{0.0f}};
+		Line line = new Line(x_vals, y_vals);
+		DisplayImpl display = line.getDisplay();
+		
+		final PlotterMenu menuBar = new PlotterMenu(parentFrame);
+		parentFrame.setJMenuBar(menuBar);
+		parentFrame.getContentPane().removeAll();
+		parentFrame.getContentPane().add(display.getComponent());
+		
 	}
+	
+	  // Splash Window
+	  private static class SplashScreen extends javax.swing.JWindow {
+	    public SplashScreen() {
+	      Image image = Resource.getImage("/resources/danseLogo.JPG");
+	      ImageIcon icon = new ImageIcon(image);
+	      JLabel lab = new JLabel(icon);
+	      getContentPane().add(lab);
+	      pack();
+
+	      //show();
+	      java.awt.Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	      int width = image.getWidth(null);
+	      int height = image.getHeight(null);
+	      setLocation(screenSize.width / 2 - (width / 2), screenSize.height / 2 - (height / 2));
+	      addMouseListener(new MouseAdapter() {
+	        public void mousePressed(MouseEvent e) {
+	          setVisible(false);
+	        }
+	      });
+	      setVisible(true);
+	    }
+	  }
+	  
+	  static private void exit() {
+		    //dansePlotter.save();
+		    Rectangle bounds = frame.getBounds();
+		    prefs.putBeanObject(FRAME_SIZE, bounds);
+		    try {
+		      store.save();
+		    } catch (IOException ioe) {
+		      ioe.printStackTrace();
+		    }
+
+		    done = true; // on some systems, still get a window close event
+		    NetcdfFileCache.exit(); // kill the timer thread
+		    NetcdfDatasetCache.exit(); // kill the timer thread
+		    System.exit(0);
+		  }
+	  
+	  // handle messages
+	  private static DansePlotter dansePlotter;
+	  private static JFrame frame;
+	  private static PreferencesExt prefs;
+	  private static XMLStore store;
+	  private static boolean done = false;
+
+	  private static String wantDataset = null;
+
+	  private static void setDataset() {
+//	    SwingUtilities.invokeLater(new Runnable() { // do it in the swing event thread
+
+//	      public void run() {
+//	        dansePlotter.makeComponent("THREDDS");
+//	        dansePlotter.threddsUI.setDataset(wantDataset);
+//	        dansePlotter.tabbedPane.setSelectedComponent(dansePlotter.threddsUI);
+//	      }
+//	    });
+	  }
+	  
+	  
 
 
 	public static void main(String[] args) throws RemoteException,
 	VisADException {
-		new DansePlotter(args);
+		final SplashScreen splash = new SplashScreen();
+		
+	    // prefs storage
+	    try {
+	      String prefStore = ucar.util.prefs.XMLStore.makeStandardFilename(".unidata", "NetcdfUI22.xml");
+	      store = ucar.util.prefs.XMLStore.createFromFile(prefStore, null);
+	      prefs = store.getPreferences();
+	      Debug.setStore(prefs.node("Debug"));
+	    } catch (IOException e) {
+	      System.out.println("XMLStore Creation failed " + e);
+	    }
+
+	    // initializations
+	    //BAMutil.setResourcePath("/resources/nj22/ui/icons/");
+	    // initCaches();
+
+	    // for efficiency, persist aggregations. every hour, delete stuff older than 30 days
+	    //Aggregation.setPersistenceCache(new DiskCache2("/.unidata/cachePersist", true, 60 * 24 * 30, 60));
+	    //DqcFactory.setPersistenceCache(new DiskCache2("/.unidata/dqc", true, 60 * 24 * 365, 60));
+
+	    // test
+	    // java.util.logging.Logger.getLogger("ucar.nc2").setLevel( java.util.logging.Level.SEVERE);
+
+	    // put UI in a JFrame
+	    frame = new JFrame("Danse Plotter 0.1");
+	    dansePlotter = new DansePlotter(prefs, frame);
+
+	    //frame.setIconImage(BAMutil.getImage("netcdfUI"));
+
+	    frame.addWindowListener(new WindowAdapter() {
+	      public void windowActivated(WindowEvent e) {
+	        splash.setVisible(false);
+	        splash.dispose();
+	      }
+
+	      public void windowClosing(WindowEvent e) {
+	        if (!done) exit();
+	      }
+	    });
+
+	    Rectangle bounds = (Rectangle) prefs.getBean(FRAME_SIZE, new Rectangle(50, 50, 800, 450));
+	    frame.setBounds(bounds);
+
+	    frame.pack();
+	    frame.setBounds(bounds);
+	    frame.setVisible(true);
+
+//	    // set Authentication for accessing passsword protected services like TDS PUT
+//	    java.net.Authenticator.setDefault(new thredds.ui.UrlAuthenticatorDialog(frame));
+//
+//	    // use HTTPClient
+//	    CredentialsProvider provider = new thredds.ui.UrlAuthenticatorDialog(frame);
+//	    ucar.nc2.dataset.HttpClientManager.init(provider, "ToolsUI");
+//	    ucar.nc2.dods.DODSNetcdfFile.setAllowSessions(false);
+//
+//	    // load protocol for ADDE URLs
+//	    URLStreamHandlerFactory.install();
+//	    URLStreamHandlerFactory.register("adde", new edu.wisc.ssec.mcidas.adde.AddeURLStreamHandler());
+//
+//	    // in case a dataset was on the command line
+//	    if (wantDataset != null)
+//	      setDataset();
+//	  }
+
 	}
 
-} // end of Visad Tutorial Program 2_08
+} 

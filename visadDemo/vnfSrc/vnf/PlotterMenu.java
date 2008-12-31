@@ -1,6 +1,5 @@
 package vnf;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -12,6 +11,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
+import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -29,8 +29,10 @@ import visad.DisplayImpl;
 import visad.VisADException;
 
 public class PlotterMenu extends JMenuBar {
+	JFrame parentFrame;
 
-	public PlotterMenu() {
+	public PlotterMenu(JFrame parentFrame) {
+		this.parentFrame = parentFrame;
 		//Build the first menu.
 		JMenu menu;
 		menu = new JMenu("File");
@@ -66,7 +68,7 @@ public class PlotterMenu extends JMenuBar {
 		});
 		newItemMenuItem_3p5.setText("Open Image");
 		menu.add(newItemMenuItem_3p5);
-		
+
 		final JMenuItem newItemMenuItem_3p6 = new JMenuItem();
 		newItemMenuItem_3p6.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent arg0) {
@@ -75,7 +77,7 @@ public class PlotterMenu extends JMenuBar {
 		});
 		newItemMenuItem_3p6.setText("Open 3DSurface");
 		menu.add(newItemMenuItem_3p6);
-		
+
 		final JMenuItem newItemMenuItem_3p7 = new JMenuItem();
 		newItemMenuItem_3p7.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent arg0) {
@@ -109,7 +111,7 @@ public class PlotterMenu extends JMenuBar {
 		fileChooser.setFileSelectionMode(SELECTION_MODE.FILES_ONLY);
 
 		// show the file dialog
-		RETURN_TYPE answer = fileChooser.showOpenDialog(DansePlotter.jframe);
+		RETURN_TYPE answer = fileChooser.showOpenDialog(parentFrame);
 
 		// check if a file was selected
 		if (answer == RETURN_TYPE.APPROVE){
@@ -141,20 +143,20 @@ public class PlotterMenu extends JMenuBar {
 				int numXData = rawData.get(0).length;
 				int numYData = rawData.size();
 				//float[][] zRaw = (float[][])rawData.toArray();
-			    float[][] flat_samples = new float[1][numXData*numYData];
-			    // ...and then we fill our 'flat' array with the original values
-			    // Note that the pixel values indicate the order in which these values
-			    // are stored in flat_samples
-			    float[] row;
-			    for(int r = 0; r < numYData; r++){
-			    	row = rawData.get(r);
-			    	for(int c = 0; c < numXData; c++)
-			    		flat_samples[0][ c * numYData + r ] = row[c];
+				float[][] flat_samples = new float[1][numXData*numYData];
+				// ...and then we fill our 'flat' array with the original values
+				// Note that the pixel values indicate the order in which these values
+				// are stored in flat_samples
+				float[] row;
+				for(int r = 0; r < numYData; r++){
+					row = rawData.get(r);
+					for(int c = 0; c < numXData; c++)
+						flat_samples[0][ c * numYData + r ] = row[c];
 				}
-			    Image image = new Image(flat_samples, numXData, numYData);
+				Image image = new Image(flat_samples, numXData, numYData);
 				DisplayImpl display = image.getDisplay();
-				DansePlotter.jframe.getContentPane().removeAll();
-				DansePlotter.jframe.getContentPane().add(display.getComponent());
+				parentFrame.getContentPane().removeAll();
+				parentFrame.getContentPane().add(display.getComponent());
 			} catch (FileSystemException e) {
 				e.printStackTrace();
 			}  catch (VisADException e) {
@@ -162,11 +164,11 @@ public class PlotterMenu extends JMenuBar {
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
-			DansePlotter.jframe.setVisible(true);
-			DansePlotter.jframe.toFront();
+			//			parentFrame.setVisible(true);
+			//			parentFrame.toFront();
 		}
 	}
-	
+
 	private void open3DSurface(VFSJFileChooser fileChooser) {
 		// reads a set of values from a file in grid formation
 
@@ -177,7 +179,7 @@ public class PlotterMenu extends JMenuBar {
 		fileChooser.setFileSelectionMode(SELECTION_MODE.FILES_ONLY);
 
 		// show the file dialog
-		RETURN_TYPE answer = fileChooser.showOpenDialog(DansePlotter.jframe);
+		RETURN_TYPE answer = fileChooser.showOpenDialog(parentFrame);
 
 		// check if a file was selected
 		if (answer == RETURN_TYPE.APPROVE){
@@ -209,20 +211,20 @@ public class PlotterMenu extends JMenuBar {
 				int numXData = rawData.get(0).length;
 				int numYData = rawData.size();
 				//float[][] zRaw = (float[][])rawData.toArray();
-			    float[][] flat_samples = new float[1][numXData*numYData];
-			    // ...and then we fill our 'flat' array with the original values
-			    // Note that the pixel values indicate the order in which these values
-			    // are stored in flat_samples
-			    float[] row;
-			    for(int r = 0; r < numYData; r++){
-			    	row = rawData.get(r);
-			    	for(int c = 0; c < numXData; c++)
-			    		flat_samples[0][ c * numYData + r ] = row[c];
+				float[][] flat_samples = new float[1][numXData*numYData];
+				// ...and then we fill our 'flat' array with the original values
+				// Note that the pixel values indicate the order in which these values
+				// are stored in flat_samples
+				float[] row;
+				for(int r = 0; r < numYData; r++){
+					row = rawData.get(r);
+					for(int c = 0; c < numXData; c++)
+						flat_samples[0][ c * numYData + r ] = row[c];
 				}
-			    ThreeDSurface threeDSurface = new ThreeDSurface(flat_samples, numXData, numYData);
+				ThreeDSurface threeDSurface = new ThreeDSurface(flat_samples, numXData, numYData);
 				DisplayImpl display = threeDSurface.getDisplay();
-				DansePlotter.jframe.getContentPane().removeAll();
-				DansePlotter.jframe.getContentPane().add(display.getComponent());
+				parentFrame.getContentPane().removeAll();
+				parentFrame.getContentPane().add(display.getComponent());
 			} catch (FileSystemException e) {
 				e.printStackTrace();
 			}  catch (VisADException e) {
@@ -230,8 +232,8 @@ public class PlotterMenu extends JMenuBar {
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
-			DansePlotter.jframe.setVisible(true);
-			DansePlotter.jframe.toFront();
+			//			parentFrame.setVisible(true);
+			//			parentFrame.toFront();
 		}
 	}
 
@@ -244,7 +246,7 @@ public class PlotterMenu extends JMenuBar {
 		fileChooser.setFileSelectionMode(SELECTION_MODE.FILES_ONLY);
 
 		// show the file dialog
-		RETURN_TYPE answer = fileChooser.showOpenDialog(DansePlotter.jframe);
+		RETURN_TYPE answer = fileChooser.showOpenDialog(parentFrame);
 
 		// check if a file was selected
 		if (answer == RETURN_TYPE.APPROVE){
@@ -276,9 +278,9 @@ public class PlotterMenu extends JMenuBar {
 				Trajectory trajectory = new Trajectory(xy_vals);
 				DisplayImpl display = trajectory.getDisplay();
 
-				DansePlotter.jframe.getContentPane().removeAll();
-				DansePlotter.jframe.getContentPane().add(display.getComponent());
-				
+				parentFrame.getContentPane().removeAll();
+				parentFrame.getContentPane().add(display.getComponent());
+
 			} catch (FileSystemException e) {
 				e.printStackTrace();
 			}  catch (VisADException e) {
@@ -287,19 +289,9 @@ public class PlotterMenu extends JMenuBar {
 				e.printStackTrace();
 			}
 
-			DansePlotter.jframe.setVisible(true);
-			DansePlotter.jframe.toFront();
+			//			parentFrame.setVisible(true);
+			//			parentFrame.toFront();
 		}
-	}
-
-	private float[] colorToFloats(Color c) {
-		float[] rgb = new float[] { 0.5f, 0.5f, 0.5f }; // init with gray
-		if (c != null) {
-			rgb[0] = c.getRed() / 255.0f;
-			rgb[1] = c.getGreen() / 255.0f;
-			rgb[2] = c.getBlue() / 255.0f;
-		}
-		return rgb;
 	}
 
 	private void openTwoColumnAscii(final VFSJFileChooser fileChooser) {
@@ -310,7 +302,7 @@ public class PlotterMenu extends JMenuBar {
 		fileChooser.setFileSelectionMode(SELECTION_MODE.FILES_ONLY);
 
 		// show the file dialog
-		RETURN_TYPE answer = fileChooser.showOpenDialog(DansePlotter.jframe);
+		RETURN_TYPE answer = fileChooser.showOpenDialog(parentFrame);
 
 		// check if a file was selected
 		if (answer == RETURN_TYPE.APPROVE){
@@ -339,8 +331,8 @@ public class PlotterMenu extends JMenuBar {
 				}
 				Line line = new Line(x_vals, y_vals);
 				DisplayImpl display = line.getDisplay();
-				DansePlotter.jframe.getContentPane().removeAll();
-				DansePlotter.jframe.getContentPane().add(display.getComponent());
+				parentFrame.getContentPane().removeAll();
+				parentFrame.getContentPane().add(display.getComponent());
 			} catch (FileSystemException e) {
 				e.printStackTrace();
 			}  catch (VisADException e) {
@@ -348,9 +340,7 @@ public class PlotterMenu extends JMenuBar {
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
-			
-			DansePlotter.jframe.toFront();
-			DansePlotter.jframe.setVisible(true);
+
 		}
 	}
 
@@ -364,7 +354,7 @@ public class PlotterMenu extends JMenuBar {
 		fileChooser.setMultiSelectionEnabled(false);
 		fileChooser.setFileSelectionMode(SELECTION_MODE.FILES_ONLY);
 		// show the file dialog
-		RETURN_TYPE answer = fileChooser.showOpenDialog(DansePlotter.jframe);
+		RETURN_TYPE answer = fileChooser.showOpenDialog(parentFrame);
 		// check if a file was selected
 		if (answer == RETURN_TYPE.APPROVE){
 			final FileObject aFileObject = fileChooser.getSelectedFile();
@@ -432,44 +422,5 @@ public class PlotterMenu extends JMenuBar {
 		} 
 		return sb.toString();
 	}
-
-
-	//	private void openTwoColumn() {
-	//		String fileName;
-	//		
-	//		
-	//		int returnVal = fc.showOpenDialog(jframe);
-	//		//int returnVal = fc.showOpenDialog(display.getComponent());
-	//
-	//        if (returnVal == JFileChooser.APPROVE_OPTION) {
-	//            fileName = fc.getSelectedFile().getAbsolutePath();
-	//        }
-	//
-	//		String atomsContent = getURLContentAsString("file://"+fileName);
-	//	}
-
-	//	public void importCoordinates(String fileContents) {
-	//		// this method expects coordinates to be in xyz format!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	//		Scanner in = new Scanner(fileContents);
-	//		int numOfLines = in.nextInt();
-	//		in.nextLine();
-	//		in.nextLine();
-	//		data.clear();
-	//		data.ensureCapacity(numOfLines);
-	//
-	//		// add rows manually for speed
-	//		for (int i = 0; i < numOfLines; i++) {
-	//			String[] row = new String[COLUMN_NAMES.length];
-	//			for (int j = 0; j < row.length; j++)
-	//				row[j] = "";
-	//			row[indices[0]] = in.next();
-	//			row[indices[2]] = in.next();
-	//			row[indices[3]] = in.next();
-	//			row[indices[4]] = in.next();
-	//			data.add(row);
-	//		}
-	//		in.close();
-	//	}
-
 
 }

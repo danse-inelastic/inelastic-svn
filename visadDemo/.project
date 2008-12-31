@@ -3,6 +3,7 @@
 	<name>visadDemo</name>
 	<comment></comment>
 	<projects>
+		<project>netcdfJavaLib</project>
 		<project>VFSJFileChooser</project>
 	</projects>
 	<buildSpec>
