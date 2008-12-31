@@ -34,14 +34,14 @@ public class PlotterMenu extends JMenuBar {
 	public PlotterMenu(JFrame parentFrame) {
 		this.parentFrame = parentFrame;
 		//Build the first menu.
-		JMenu menu;
-		menu = new JMenu("File");
+		JMenu fileMenu = new JMenu("File");
 		//menu.setMnemonic(KeyEvent.VK_A);
 		//menu.getAccessibleContext().setAccessibleDescription("The only menu in this program that has menu items");
-		this.add(menu);
+		this.add(fileMenu);
 
 		// create a file chooser
 		final VFSJFileChooser fileChooser = new VFSJFileChooser();
+		//create menu items
 		final JMenuItem newItemMenuItem = new JMenuItem();
 		newItemMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent arg0) {
@@ -49,7 +49,7 @@ public class PlotterMenu extends JMenuBar {
 			}
 		});
 		newItemMenuItem.setText("Open Two Column Ascii");
-		menu.add(newItemMenuItem);
+		fileMenu.add(newItemMenuItem);
 
 		final JMenuItem newItemMenuItem_3 = new JMenuItem();
 		newItemMenuItem_3.addActionListener(new ActionListener() {
@@ -58,7 +58,7 @@ public class PlotterMenu extends JMenuBar {
 			}
 		});
 		newItemMenuItem_3.setText("Open Trajectory");
-		menu.add(newItemMenuItem_3);
+		fileMenu.add(newItemMenuItem_3);
 
 		final JMenuItem newItemMenuItem_3p5 = new JMenuItem();
 		newItemMenuItem_3p5.addActionListener(new ActionListener() {
@@ -67,7 +67,7 @@ public class PlotterMenu extends JMenuBar {
 			}
 		});
 		newItemMenuItem_3p5.setText("Open Image");
-		menu.add(newItemMenuItem_3p5);
+		fileMenu.add(newItemMenuItem_3p5);
 
 		final JMenuItem newItemMenuItem_3p6 = new JMenuItem();
 		newItemMenuItem_3p6.addActionListener(new ActionListener() {
@@ -76,7 +76,7 @@ public class PlotterMenu extends JMenuBar {
 			}
 		});
 		newItemMenuItem_3p6.setText("Open 3DSurface");
-		menu.add(newItemMenuItem_3p6);
+		fileMenu.add(newItemMenuItem_3p6);
 
 		final JMenuItem newItemMenuItem_3p7 = new JMenuItem();
 		newItemMenuItem_3p7.addActionListener(new ActionListener() {
@@ -85,7 +85,7 @@ public class PlotterMenu extends JMenuBar {
 			}
 		});
 		newItemMenuItem_3p7.setText("Open Netcdf file");
-		menu.add(newItemMenuItem_3p7);
+		fileMenu.add(newItemMenuItem_3p7);
 
 		final JMenuItem newItemMenuItem_1 = new JMenuItem();
 		newItemMenuItem_1.addActionListener(new ActionListener() {
@@ -94,11 +94,27 @@ public class PlotterMenu extends JMenuBar {
 			}
 		});
 		newItemMenuItem_1.setText("Save");
-		menu.add(newItemMenuItem_1);
+		fileMenu.add(newItemMenuItem_1);
 
 		final JMenuItem newItemMenuItem_2 = new JMenuItem();
 		newItemMenuItem_2.setText("Exit");
-		menu.add(newItemMenuItem_2);
+		fileMenu.add(newItemMenuItem_2);
+		
+		JMenu inspectMenu = new JMenu("Inspect");
+		//menu.setMnemonic(KeyEvent.VK_A);
+		//menu.getAccessibleContext().setAccessibleDescription("The only menu in this program that has menu items");
+		this.add(inspectMenu);
+
+		// create other inspect menu items
+		final JMenuItem inspectMenuItem = new JMenuItem();
+		inspectMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {
+				openTwoColumnAscii(fileChooser);
+			}
+		});
+		inspectMenuItem.setText("Inspect Netcdf/Hdf File");
+		inspectMenu.add(inspectMenuItem);
+		
 	}
 
 	private void openImage(VFSJFileChooser fileChooser) {

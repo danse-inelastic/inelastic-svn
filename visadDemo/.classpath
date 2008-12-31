@@ -23,6 +23,6 @@
 	</classpathentry>
 	<classpathentry combineaccessrules="false" kind="src" path="/VFSJFileChooser"/>
 	<classpathentry kind="lib" path="/VFSJFileChooser/lib/commons-vfs-2.0-SNAPSHOT.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/netcdfJavaLib"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/cdmInspector"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
