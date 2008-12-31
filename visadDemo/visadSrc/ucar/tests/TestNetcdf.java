@@ -190,7 +190,6 @@ main(String[] args) {
 			 new NetcdfFile(fname, false);
 	System.out.println(nc);
 
-	
 		Variable ma = nc.get("Float");
 		int [] origin = {1, 1, 1};
 		int [] extent = {2, 3, 6};
