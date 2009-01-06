@@ -2,5 +2,5 @@
 
 print "Content-type: text/html"
 print
-print '{ "hello": 1 }'
+print '{ "text": "Hello" }'
 
