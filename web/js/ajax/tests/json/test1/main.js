@@ -1,9 +1,14 @@
 $(document).ready(function() {
     var button = $("#clickme");
-    
-    button.click( function () {
-	$.getJSON("main.cgi", function(json){
-	    alert("JSON Data: " + json.hello);
-	  })
-	  });
+    var textfield = $("#textfield");
+
+    button.click
+      (function () 
+       {
+	 $.getJSON
+	   ("main.cgi", 
+	    function(json) {textfield.text(json.text);}
+	    );
+       }
+       );
   });
