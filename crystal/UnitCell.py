@@ -11,7 +11,8 @@ class Site:
     A site corresponds to a position in fractional coordinates.
     It also may have an atom associated with it."""
 
-    def __init__(self, position=(0.0,0.0,0.0), atom=None, occproba=1.0):
+    def __init__(self, position='', atom=None, occproba=1.0):
+
         for x in position:
             if (x < 0) or (x > 1):
                 raise ValueError, "Site coordinates must be fractional positions."
@@ -33,7 +34,7 @@ class Site:
         
     def getPosition(self):
         """Get the position (in fractional coordinates) of a site."""
-        return np.array(self._position)
+        return self._position
 
     def setAtom(self, atom):
         """Set an atom at a site."""
@@ -61,20 +62,6 @@ class Site:
         
     pass # end of class site
 
-##########################################################
-
-
-#from pyre.components.Component import Component
-
-#class UnitCellWrapper(Component):
-#    
-#    def __init__(self,numAtoms):
-#        self.numAtoms=numAtoms
-#
-#def whatever(numAtoms):
-
-
-##########################################################
 #from pyre.components.Component import Component
 #class UnitCell(Component):  
 class UnitCell:
@@ -113,14 +100,14 @@ class UnitCell:
             lattice = np.array( [ map(float, self.i.a.split()),map(float, self.i.b.split()),map(float, self.i.c.split()) ] )
             #lattice = np.array( [ (1.0,0.0,0.0),(0.0,1.0,0.0),(0.0,0.0,1.0) ] )
 
-        self._cellvectors = np.array(lattice)
+        self._lattice = np.array(lattice)
         self._spaceGroup = spaceGroup
         self._sites = []  # list of sites
         self._siteIds = {}  # dictionary {siteId : site }   
         self._n = 0
         self._numAtoms = 0
         self._numSites = 0
-        self.base=self._cellvectors
+        self.base=self._lattice
         return
 
     def __iter__(self): return self._sites.__iter__()
@@ -128,7 +115,7 @@ class UnitCell:
     def __getitem__(self, i): return self._sites[i]
 
 #    def __str__(self):
-#        rt = "UnitCell a=%s, b=%s, c=%s\n" % tuple(self._cellvectors)
+#        rt = "UnitCell a=%s, b=%s, c=%s\n" % tuple(self._lattice)
 #        for siteId in self._siteIds.keys():
 #            rt += "\n%s\n" % siteId
 #            rt += "\n position: %s\n" % (self._siteIds[siteId].getPosition()) 
@@ -141,7 +128,7 @@ class UnitCell:
 
     def __copy__(self):
         new = UnitCell()
-        new._cellvectors = self._cellvectors
+        new._lattice = self._lattice
         for siteId in self._siteIds.keys():
             newsite = Site(self._siteIds[siteId].getPosition(),
                            Atom(Z=self._siteIds[siteId].getAtom().Z))
@@ -166,17 +153,22 @@ class UnitCell:
             self._numAtoms +=1
         return
 
-    def addAtom(self, atom, position, siteId=None):
-        """add( Fe_atom,  np.array((0.25,0,0)) ) --> adds atom Fe_atom to UnitCell
-        add(Atom(Z=26), (0.25, 0, 0)) --> adds atom Fe_atom to UnitCell
+    def addAtom(self, atom, position=None, siteId=None, cartesianPosition=None):
+        """addAtom( Fe_atom,  np.array((0.25,0,0)) ) --> adds atom Fe_atom to UnitCell
+        addAtom(Atom(Z=26), (0.25, 0, 0)) --> adds atom Fe_atom to UnitCell
         """
         assert ( isinstance(atom, Atom) )
 
-        if siteId.__class__ is not "string".__class__ :
-            raise ValueError, 'site Id should be a string!'
-        pass
+#        if siteId.__class__ is not "string".__class__ :
+#            raise ValueError, 'site Id should be a string!'
+#        pass
         
         if siteId is None or siteId is "": siteId= "Id%s" % (self._uniqueID() )
+
+        if cartesianPosition:
+            vec = np.array(cartesianPosition)
+            mat = np.linalg.inv(self._lattice)
+            position = np.dot(vec,mat).tolist()
 
         newSite = Site(position, atom)
         self._sites.append( newSite )
@@ -230,11 +222,11 @@ class UnitCell:
 
     def fractionalToCartesian(self, fracpos):
         """Converts a coordinate from fractional to cartesian.""" 
-        return (fracpos * self._cellvectors).sum(0)  # should be double-checked
+        return (fracpos * self._lattice).sum(0)  # should be double-checked
 
     def cartesianToFractional(self, cartpos):
         """Converts a coordinate from cartesian to fractional."""
-        return (cartpos * la.inv(self._cellvectors)).sum(0)  # should be double-checked
+        return (cartpos * la.inv(self._lattice)).sum(0)  # should be double-checked
     
     def getIds(self):
         """Returns the list of Ids for sites in the unit cell."""
@@ -264,23 +256,23 @@ class UnitCell:
 
     def getCellVectors(self):
         """Returns the UnitCell cell vectors."""
-        return self._cellvectors
+        return self._lattice
 
     def setCellVectors(self, cellvecs):
         """Set the unit cell vectors (lattice vectors)."""
         # should add some checking here
-        self._cellvectors = np.array(cellvecs)
+        self._lattice = np.array(cellvecs)
         return
 
     def getVolume(self):
         """
         Returns the volume of the unit cell: |det(a1, a2, a3)|.
         Uses Numpy.linalg."""
-        return abs(la.det(self._cellvectors))
+        return abs(la.det(self._lattice))
 
     def getRecipVectors(self):
         """Returns the reciprocal lattice vectors (with the 2pi factors)."""
-        recipvectors = 2 * np.pi * la.inv(np.transpose(self._cellvectors))
+        recipvectors = 2 * np.pi * la.inv(np.transpose(self._lattice))
         # this needs to be checked
         return recipvectors
 
@@ -290,7 +282,7 @@ class UnitCell:
         crystallographic sense (i.e. with the 2pi factors).
         Uses Numpy.linalg."""
         
-        recipvectors = 2 * np.pi * la.inv(np.transpose(self._cellvectors))
+        recipvectors = 2 * np.pi * la.inv(np.transpose(self._lattice))
         recipUC = UnitCell(cellvectors=recipvectors)
         return recipUC
 
@@ -313,7 +305,7 @@ class UnitCell:
                     for ty in range(-latticeRange[1],latticeRange[1]+1):
                         for tz in range(-latticeRange[2],latticeRange[2]+1):
                             posA = self.getCartesianPosition(idA)
-                            posB = self.getCartesianPosition(idB) + np.dot([tx,ty,tz], self._cellvectors)
+                            posB = self.getCartesianPosition(idB) + np.dot([tx,ty,tz], self._lattice)
                             dist = np.sqrt(np.sum( (posB-posA) * (posB-posA) ))
                             if(dist<maxdist):
                                 distances[idA][idB][(tx,ty,tz)] = dist
@@ -376,7 +368,7 @@ class UnitCell:
         try:
             posincell = self.getCartesianPosition(siteId)
         except KeyError: raise KeyError, 'Invalid site Id'
-        pos = np.array(posincell) + np.dot(latticeVector, self._cellvectors)
+        pos = np.array(posincell) + np.dot(latticeVector, self._lattice)
         return pos
 
 ##     def findConstraints(self, list4ids, latticeVectors=[(0,0,0),(0,0,0),(0,0,0),(0,0,0)]):
@@ -401,7 +393,7 @@ class UnitCell:
         scaled by the reciprocal space unit cell.
         The shift is an optional vector shift to all points in the grid."""
 
-        recipvectors = 2 * np.pi * la.inv(np.transpose(self._cellvectors))
+        recipvectors = 2 * np.pi * la.inv(np.transpose(self._lattice))
         frackpts = MonkhorstPack(size)
         frackpts += np.array(shift)
         # this applies scaling of MP grid by reciprocal cell vectors:
@@ -415,7 +407,7 @@ class UnitCell:
         in fractional coordinates of the reciprocal space unit cell.
         The shift is an optional vector shift to all points in the grid."""
 
-        recipvectors = 2 * np.pi * la.inv(np.transpose(self._cellvectors))
+        recipvectors = 2 * np.pi * la.inv(np.transpose(self._lattice))
         frackpts = MonkhorstPack(size)
         frackpts += np.array(shift)
         frackpts.shape=(size[0], size[1], size[2], 3)
