@@ -75,28 +75,28 @@ class Site:
 
 
 ##########################################################
-from pyre.components.Component import Component
-class UnitCell(Component):  
+#from pyre.components.Component import Component
+#class UnitCell(Component):  
+class UnitCell:
     """Representation of a crystal unit cell."""
-    #TODO: do not make this a pyre component but rather keep it as a clean data object.  Make Structure Manipulator a pyre component
 #    unitCellWrapper=uniCellWrapper
 
 # We do not want to make UnitCell a component,
 # since it represents data, rather than a process.
 # Eventually this should be depyrized
-    class Inventory(Component.Inventory):
-        import pyre.inventory as inv  
-        a = inv.str('a', default='1.0 0.0 0.0')
-        a.meta['tip'] = 'the a unit cell vector'
-        a.meta['importance'] = 10
-        b = inv.str('b', default='0.0 1.0 0.0')
-        b.meta['tip'] = 'the b unit cell vector'
-        b.meta['importance'] = 9
-        c = inv.str('c', default='0.0 0.0 1.0')
-        c.meta['tip'] = 'the c unit cell vector'  
-        c.meta['importance'] = 8
-        spaceGroup = inv.str('Space Group', default='1')
-        spaceGroup.meta['tip'] = 'space group of the unit cell'
+#    class Inventory(Component.Inventory):
+#        import pyre.inventory as inv  
+#        a = inv.str('a', default='1.0 0.0 0.0')
+#        a.meta['tip'] = 'the a unit cell vector'
+#        a.meta['importance'] = 10
+#        b = inv.str('b', default='0.0 1.0 0.0')
+#        b.meta['tip'] = 'the b unit cell vector'
+#        b.meta['importance'] = 9
+#        c = inv.str('c', default='0.0 0.0 1.0')
+#        c.meta['tip'] = 'the c unit cell vector'  
+#        c.meta['importance'] = 8
+#        spaceGroup = inv.str('Space Group', default='1')
+#        spaceGroup.meta['tip'] = 'space group of the unit cell'
         #atoms = multiLineStr('Atoms',default='''"H" 0.0 0.0 0.0\n"H" 1.0 0.0 0.0''')  
         #atomFile = inv.str('atom and position file',defa)
         #atomFile
@@ -106,14 +106,14 @@ class UnitCell(Component):
 #            exec line1 in locals()
 #            exec line2 in locals()    
     
-    def __init__(self, name='UnitCell',cellvectors=None, spaceGroup=None):
-        Component.__init__(self, name, facility='facility')
-        self.i=self.inventory
-        if cellvectors is None:
-            cellvectors = np.array( [ map(float, self.i.a.split()),map(float, self.i.b.split()),map(float, self.i.c.split()) ] )
-            #cellvectors = np.array( [ (1.0,0.0,0.0),(0.0,1.0,0.0),(0.0,0.0,1.0) ] )
+    def __init__(self, name='UnitCell',lattice=None, spaceGroup=None):
+        #Component.__init__(self, name, facility='facility')
+        #self.i=self.inventory
+        if lattice is None:
+            lattice = np.array( [ map(float, self.i.a.split()),map(float, self.i.b.split()),map(float, self.i.c.split()) ] )
+            #lattice = np.array( [ (1.0,0.0,0.0),(0.0,1.0,0.0),(0.0,0.0,1.0) ] )
 
-        self._cellvectors = np.array(cellvectors)
+        self._cellvectors = np.array(lattice)
         self._spaceGroup = spaceGroup
         self._sites = []  # list of sites
         self._siteIds = {}  # dictionary {siteId : site }   

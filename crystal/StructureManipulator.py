@@ -31,8 +31,19 @@ class StructureManipulator(Component):
         atoms = inv.str('Atomic/Species information',default='')
         atoms.meta['tip'] = '''i.e. H core  0.0  0.0  0.0
 O shell  1.0  0.0  0.0'''
-        unitCell = inv.facility('unitCell', default=UnitCell())
-        unitCell.meta['tip'] = 'Set the unit cell parameters.'
+#        unitCell = inv.facility('unitCell', default=UnitCell())
+#        unitCell.meta['tip'] = 'Set the unit cell parameters.'
+        a = inv.str('a', default='1.0 0.0 0.0')
+        a.meta['tip'] = 'the a unit cell vector'
+        a.meta['importance'] = 10
+        b = inv.str('b', default='0.0 1.0 0.0')
+        b.meta['tip'] = 'the b unit cell vector'
+        b.meta['importance'] = 9
+        c = inv.str('c', default='0.0 0.0 1.0')
+        c.meta['tip'] = 'the c unit cell vector'  
+        c.meta['importance'] = 8
+        spaceGroup = inv.str('Space Group', default='1')
+        spaceGroup.meta['tip'] = 'space group of the unit cell'
         #unitCell.validator=inv.choice(["UnitCell", None])
         #b = inv.str('b', default='0.0 1.0 0.0')
         #b.meta['tip'] = 'the b unit cell vector'
