@@ -197,6 +197,11 @@ class UnitCell:
         """Returns a list of atoms for all sites in the unit cell.
         Sites with no atom return none."""
         return [s.getAtom() for s in self._sites]
+    
+    def getAtomSymbols(self):
+        """Returns a list of atom symbols for all sites in the unit cell.
+        Sites with no atom return none."""
+        return [s.getAtom().symbol for s in self._sites]
 
     def getPositions(self):
         """Returns a list of positions for all sites in the unit cell."""
@@ -412,18 +417,6 @@ class UnitCell:
         frackpts += np.array(shift)
         frackpts.shape=(size[0], size[1], size[2], 3)
         return frackpts
-        
-    def _defaults(self):
-        Component._defaults(self)
-        return
-
-    def _configure(self):
-        Component._configure(self)
-        return
-
-    def _init(self):
-        Component._init(self)
-        return
 
 
 
