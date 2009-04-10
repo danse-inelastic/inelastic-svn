@@ -432,6 +432,38 @@ def create_unitcell( cellvectors, atomList, positionList):
     return rt
 
 
+def positive_volume_unitcell(uc):
+    '''create a unitcell with basis vectors cover a positive volume
+    according to right hand rule.
+    '''
+    cellvectors = uc._cellvectors
+    if _volume(cellvectors) > 0:
+        return uc
+
+    newuc = UnitCell()
+    
+    v1,v2,v3 = cellvectors
+    cellvectors = v1,v3,v2
+    newuc.setCellVectors(cellvectors)
+
+    for site in uc:
+        atom = site.getAtom()
+        x,y,z = site.getPosition().tolist()
+        newpos = x,z,y
+        newuc.addAtom(atom, newpos, '')
+        continue
+    return newuc
+
+
+
+# helpers
+def _volume(vectors):
+    import numpy.linalg
+    v1,v2,v3 = vectors
+    return numpy.dot(v1, numpy.cross(v2,v3))
+
+
+
 # Here are some tests:
 
 def uc_test1():
