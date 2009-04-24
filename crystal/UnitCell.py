@@ -93,13 +93,9 @@ class UnitCell:
 #            exec line1 in locals()
 #            exec line2 in locals()    
     
-    def __init__(self, name='UnitCell',lattice=None, spaceGroup=None):
+    def __init__(self, lattice=[ (1.0,0.0,0.0),(0.0,1.0,0.0),(0.0,0.0,1.0) ],
+                  spaceGroup=None):
         #Component.__init__(self, name, facility='facility')
-        #self.i=self.inventory
-        if lattice is None:
-            lattice = np.array( [ map(float, self.i.a.split()),map(float, self.i.b.split()),map(float, self.i.c.split()) ] )
-            #lattice = np.array( [ (1.0,0.0,0.0),(0.0,1.0,0.0),(0.0,0.0,1.0) ] )
-
         self._lattice = np.array(lattice)
         self._spaceGroup = spaceGroup
         self._sites = []  # list of sites
