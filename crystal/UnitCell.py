@@ -421,7 +421,7 @@ class UnitCell:
 
 def create_unitcell( cellvectors, atomList, positionList):
     """Helper function to create a unit cell."""
-    rt = UnitCell( cellvectors = cellvectors )
+    rt = UnitCell( lattice = cellvectors )
     for a, p in zip( atomList, positionList ):
         site = Site(p,a)
         rt.addSite(site, '')
