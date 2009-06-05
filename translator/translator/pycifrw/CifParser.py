@@ -51,9 +51,17 @@ class CifParser:
 #        return [ma,mb,mc,al,be,ga]
 
     def _removeParens(self,numString):
-        numString=numString.replace('(','')
-        numString=numString.replace(')','')
-        return numString
+        if False:
+            numString=numString.replace('(','')
+            numString=numString.replace(')','')
+            return numString
+        if True:
+            try:
+                num,uncertainNum = numString.split('(')
+            except:
+                return numString
+            else:
+                return num
     
     def _removeLabels(self,listOAtomLabels):
         '''takes a list of atom labels and extracts a list of atoms'''
