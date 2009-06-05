@@ -13,11 +13,15 @@
 
 
 import unittest  
-from pycifrw.CifParser import CifParser
+from translator.pycifrw.CifParser import CifParser
 from sample.sampleCreation.supercell.Supercell import Supercell
 
 import unittest
 import os
+
+def pprintCoords(coords):
+    for c in coords:
+        print c[0], c[1], c[2], c[3]
 
 class LiBH4OrthoParse_TestCase(unittest.TestCase):
 
@@ -28,12 +32,15 @@ class LiBH4OrthoParse_TestCase(unittest.TestCase):
         
     def testCoords(self):
         coords = self.cifParser.cifToAtomAndCoordinateList()
+        print "cif coords:"
+        pprintCoords(coords)
 
     def testAllCoords(self):
         coords=self.cifParser.generateAllCoordinates()
         cell=self.cifParser.getUnitCellAsVectors()
         #this is risky because of round off error problems
-        print coords 
+        print "all coords:"
+        pprintCoords(coords)
         print len(coords)
         print cell
         sc = Supercell(coords, cell, 1, 1, 1)#, coordType='cartesian')
@@ -54,7 +61,8 @@ class LiBH4HexParse_TestCase(unittest.TestCase):
     def testAllCoords(self):
         coords = self.cifParser.generateAllCoordinates()
         cell = self.cifParser.getUnitCellAsVectors()
-        print coords 
+        print 'hexagonal'
+        pprintCoords(coords)
         print len(coords)
         print cell
         sc = Supercell(coords, cell, 1, 1, 1)
@@ -74,7 +82,8 @@ class Li2B12H12Parse_TestCase(unittest.TestCase):
     def testAllCoords(self):
         coords = self.cifParser.generateAllCoordinates()
         cell = self.cifParser.getUnitCellAsVectors()
-        print coords 
+        print 'li2b12h12' 
+        pprintCoords(coords)
         print len(coords)
         print cell
         sc = Supercell(coords, cell, 1, 1, 1)
