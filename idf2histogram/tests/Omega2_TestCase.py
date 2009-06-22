@@ -28,6 +28,18 @@ class TestCase(unittest.TestCase):
         hh.dump(h, out, '/', 'c')
         return
         
+    def test2(self):
+        from idf2histogram.Omega2 import read
+        material = 'fccNi-phonondisp-from-phon-N10'
+        h = read(material)
+
+        out = '%s-omega2.h5' % material
+        import os
+        if os.path.exists(out): os.remove(out)
+        import histogram.hdf as hh
+        hh.dump(h, out, '/', 'c')
+        return
+        
     pass # end of TestCase
 
     
