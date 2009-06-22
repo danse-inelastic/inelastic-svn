@@ -1,0 +1,17 @@
+Unlike other idf data files, this file is a plain text file.
+This file describes a regularly spaced grid in Q space.
+
+Example:
+b1 = 2.23, 0, 0
+n1 = 10
+b2 = 0, 2.23, 0
+n2 = 10
+b3 = 0, 0, 2.23
+n3 = 10
+
+The {bi} are reciprocal lattice vectors.
+The {ni} are number of grid points along each direction. 
+  PLEASE NOTE:
+    This is not the number of steps, it is the number of vertexes. 
+    So, if you have grid points from -0.5, -0.4, ..., 0.4, 0.5 along b1, you have n1 = 11.
+
