@@ -46,6 +46,7 @@ EXPORT_PYTHON_MODULES = \
 	Omega2.py \
 	Polarizations.py \
 	Q.py \
+	Qgridinfo.py \
 	Sq.py \
 	Sqe.py \
 	WeightedQ.py \
