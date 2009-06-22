@@ -11,13 +11,14 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
-# read omega2 data file in idf format
-# nD is the dimension of the qgrid.
-# it is assumed that the qgrid is regular, and is defined in qgridinfo_file
-# The qgridinfo_file is a python file that defines vars bi, {i=1..nD} and ni, {i=1..nD}
 def read(directory,
          omega2_idf_file='Omega2', qgridinfo_file='Qgridinfo', weightedq_file='WeightedQ',
          nD=3):
+    ''' read omega2 data file in idf format
+    nD is the dimension of the qgrid.
+    it is assumed that the qgrid is regular, and is defined in qgridinfo_file
+    The qgridinfo_file is a python file that defines vars bi, {i=1..nD} and ni, {i=1..nD}
+    '''
     
     import os
     
@@ -30,7 +31,9 @@ def read(directory,
     nQ, nbXnD = omega2.shape
     #
     import operator
-    assert nQ == reduce(operator.__mul__, [qgridinfo['n'+str(i)] for i in range(1, nD+1)])
+    nis = [qgridinfo['n'+str(i)] for i in range(1, nD+1)]
+    assert nQ == reduce(operator.__mul__, nis),\
+           "Q points mismatch: nQ=%s, {ni}=%s" % (nQ, nis)
 
     # number of basis
     nb = nbXnD / nD
@@ -71,7 +74,10 @@ def _retrieveQgridinfo(directory, qgridinfo_file, weightedq_file, nD=3):
 
     # try to match qgridinfo from weightedq
     f = os.path.join(directory, weightedq_file)
-    if not os.path.exists(f): raise RuntimeError, 'missing file: %s' % f
+    if not os.path.exists(f):
+        # WeightedQ does not exist
+        return qgridinfo
+    
     from idf.WeightedQ import read
     info, Qs, Ws = read(f)
     N_q, D = Qs.shape
