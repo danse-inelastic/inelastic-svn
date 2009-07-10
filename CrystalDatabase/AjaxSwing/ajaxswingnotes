@@ -1,0 +1,56 @@
+Notes on Turning Java to Webpage with Ajaxswing
+
+Setup
+-----
+Download:
+http://www.creamtec.com/products/ajaxswing/install/index.html
+Directions:
+http://www.creamtec.com/products/ajaxswing/doc/setup.html
+
+Summary of their setup directions, for unix:
+~ Download the zip file, unzip it, and cd into bin/setup. Type:
+$chmod 777 setup.sh
+$./setup.sh 
+~ set JAVA_HOME path to the jdk (example:
+$export JAVA_HOME=/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.0)
+~ in the bin directory, type:
+$./startServer.sh 
+It may take some time for the server to start (3 minutes?)
+~ Go to http://localhost:8040/ajaxswing/ and test their demo.
+(You might have to enable the right JDK. Follow their directions.)
+
+Making Crystal Database Work
+----------------------------
+~ As the instructions say, cd into conf directory and copy default properties file:
+$cd conf
+$cp WindowsThemeDemo.properties crystaldatabase.properties
+~ edit crystaldatabase.properties and change the entrypoint class to:
+agent.appStartClass=cod.Main
+~ copy .class files (from svn repository danse.us/inelastic/CrystalDatabase/AjaxSwing/bin/cod) into /wcapps/lib/classes/cod (make a directory called cod), and .jar files (under CrystalDatabase/deployable) into wcapps/lib
+~ Stop the server and start the server (have to wait ~3 minutes):
+$./stopServer.sh
+$./startServer.sh
+~ open a browser and go to http://localhost:8040/ajaxswing/apps/crystaldatabase
+
+To make edits to the java code and see them work on the browser:
+~ The modified java files are in the svn repository under CrystalDatabase/AjaxSwing/src/cod. Edit these and compile/run, then copy the resulting .class files into /wcapps/lib/classes/cod.
+~ Stop and start the server, then go to the url mentioned above to see your changes.
+
+Problems with AjaxSwing
+-----------------------
+~ MouseListener doesn't work, but ActionListener does, so replace
+all MouseListener stuff with ActionListener.
+~ JOptionPane.showMessageDialog does not work.
+~ FileChooser for saving files refuses to work, even for the demos. 
+
+Changes Made to Crystal Database to Work with AjaxSwing
+-------------------------------------------------------
+~ Modified Main.java and Search.java:
+~ Made the table 100 instead of 1000.
+~ Replaced MouseListeners with ActionListeners
+~ Replaced KeyAdapter with method that updates query when the search button is pressed
+
+Remaining Issues for Crystal Database
+-------------------------------------
+~ "Save", "Visualize with Jmol", and "Export to vnf" buttons don't work
+~ How do you link to other webpages? Their instructions on making button links are confusing/don't work.
