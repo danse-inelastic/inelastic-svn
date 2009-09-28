@@ -43,8 +43,8 @@
   <property name="build" location="bin"/>
   <property name="app-name" value="cod"/>
   <property name="username" value="jbk"/>
-  <property name="password" value="INhbb0g2"/>
-
+  <property name="keystore" location="../vnf/html/java/vnfKeys" />
+	
 	<path id="classpath" path="${classpath}">
 		<fileset dir="${lib}">
 			<include name="**/*.jar" />
@@ -69,7 +69,7 @@
 			</fileset>
 		</jar>
 		<!-- sign all jars -->
-		<signjar jar="deployable/${app-name}.jar" keystore="/home/jbk/vnf" alias="vnf" storepass="vnf" keypass="vnf"/>
+		<signjar jar="deployable/${app-name}.jar" keystore="${keystore}" alias="vnf" storepass="purpl3" keypass="purpl3"/>
 		<!--<signjar jar="deployable/jeplite-0.8.7a-bin.jar" keystore="/home/jbk/vnf" alias="vnf" storepass="vnf" keypass="vnf"/>
 		<signjar jar="deployable/Jmol.jar" keystore="/home/jbk/vnf" alias="vnf" storepass="vnf" keypass="vnf"/>
 		<signjar jar="deployable/mysql-connector-java-5.0.7-bin.jar" keystore="/home/jbk/vnf" alias="vnf" storepass="vnf" keypass="vnf"/>-->
