@@ -93,9 +93,13 @@ class UnitCell:
 #            exec line1 in locals()
 #            exec line2 in locals()    
     
-    def __init__(self, lattice=[ (1.0,0.0,0.0),(0.0,1.0,0.0),(0.0,0.0,1.0) ],
-                  spaceGroup=None):
+    def __init__(self, name='UnitCell',lattice=None, spaceGroup=None):
         #Component.__init__(self, name, facility='facility')
+        #self.i=self.inventory
+        if lattice is None:
+            lattice = np.array( [ map(float, self.i.a.split()),map(float, self.i.b.split()),map(float, self.i.c.split()) ] )
+            #lattice = np.array( [ (1.0,0.0,0.0),(0.0,1.0,0.0),(0.0,0.0,1.0) ] )
+
         self._lattice = np.array(lattice)
         self._spaceGroup = spaceGroup
         self._sites = []  # list of sites
@@ -421,43 +425,11 @@ class UnitCell:
 
 def create_unitcell( cellvectors, atomList, positionList):
     """Helper function to create a unit cell."""
-    rt = UnitCell( lattice = cellvectors )
+    rt = UnitCell( cellvectors = cellvectors )
     for a, p in zip( atomList, positionList ):
         site = Site(p,a)
         rt.addSite(site, '')
     return rt
-
-
-def positive_volume_unitcell(uc):
-    '''create a unitcell with basis vectors cover a positive volume
-    according to right hand rule.
-    '''
-    cellvectors = uc._cellvectors
-    if _volume(cellvectors) > 0:
-        return uc
-
-    newuc = UnitCell()
-    
-    v1,v2,v3 = cellvectors
-    cellvectors = v1,v3,v2
-    newuc.setCellVectors(cellvectors)
-
-    for site in uc:
-        atom = site.getAtom()
-        x,y,z = site.getPosition().tolist()
-        newpos = x,z,y
-        newuc.addAtom(atom, newpos, '')
-        continue
-    return newuc
-
-
-
-# helpers
-def _volume(vectors):
-    import numpy.linalg
-    v1,v2,v3 = vectors
-    return numpy.dot(v1, numpy.cross(v2,v3))
-
 
 
 # Here are some tests:
