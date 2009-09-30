@@ -138,7 +138,7 @@ class Structure(list):
         Return instance of data Parser used to process file.  This
         can be inspected for information related to particular format.
         """
-        from diffpy.Structure.Parsers import getParser
+        from Parsers import getParser
         p = getParser(format)
         new_structure = p.parseFile(filename)
         # reinitialize data after successful parsing
@@ -164,7 +164,7 @@ class Structure(list):
         Return instance of data Parser used to process input string.  This
         can be inspected for information related to particular format.
         """
-        from diffpy.Structure.Parsers import getParser
+        from Parsers import getParser
         p = getParser(format)
         new_structure = p.parse(s)
         # reinitialize data after successful parsing
@@ -183,7 +183,7 @@ class Structure(list):
         Note: available structure formats can be obtained by:
             from Parsers import formats
         """
-        from diffpy.Structure.Parsers import getParser
+        from Parsers import getParser
         p = getParser(format)
         p.filename = filename
         s = p.tostring(self)
@@ -198,7 +198,7 @@ class Structure(list):
         Note: available structure formats can be obtained by:
             from Parsers import formats
         """
-        from diffpy.Structure.Parsers import getParser
+        from Parsers import getParser
         p = getParser(format)
         s = p.tostring(self)
         return s
