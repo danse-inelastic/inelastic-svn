@@ -25,9 +25,9 @@ thisfile = locals().get('__file__', 'TestStructure.py')
 tests_dir = os.path.dirname(os.path.abspath(thisfile))
 testdata_dir = os.path.join(tests_dir, 'testdata')
 
-from diffpy.Structure import Structure, StructureFormatError
-from diffpy.Structure import Lattice
-from diffpy.Structure import Atom
+from crystal.Structure import Structure#, StructureFormatError
+from crystal.UnitCell import UnitCell
+from crystal.Atom import Atom
 
 ##############################################################################
 class TestStructure(unittest.TestCase):
@@ -35,7 +35,7 @@ class TestStructure(unittest.TestCase):
 
     def setUp(self):
         self.stru = Structure( [ Atom('C', [0,0,0]), Atom('C', [1,1,1]) ],
-                lattice=Lattice(1, 1, 1, 90, 90, 120) )
+                lattice=UnitCell(1, 1, 1, 90, 90, 120) )
         self.places = 12
 
     def assertListAlmostEqual(self, l1, l2, places=None):
