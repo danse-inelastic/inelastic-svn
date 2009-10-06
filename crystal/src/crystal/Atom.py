@@ -73,36 +73,75 @@ def collectProperties( klass ):
     return ctorargs, inferred, states
 
 
+class CartesianCoordinatesArray(numpy.ndarray):
+    """Helper array for accessing Cartesian coordinates.
+    Converts and updates related array of corresponding fractional
+    coordinates.
+
+    Data members:
+        lattice -- instance of Lattice defining fractional coordinates
+        xyz     -- instance of numpy.array storing fractional coordinates
+    """
+
+    def __new__(self, lattice, xyz):
+        return numpy.zeros(3, dtype=float).view(self)
+
+    def __init__(self, lattice, xyz):
+        self.lattice = lattice
+        self.xyz = xyz
+        self[:] = self.lattice.cartesian(self.xyz)
+        pass
+
+    def __setitem__(self, idx, value):
+        """Set idx-th coordinate and update linked self.xyz
+
+        idx     -- index in xyz array
+        value   -- new value of x, y or z
+        """
+        numpy.ndarray.__setitem__(self, idx, value)
+        self.xyz[:] = self.lattice.fractional(self)
+        return
 
 
 # Atom class
 class Atom(object):
 
-    def __init__(self, Z=None, symbol=None, mass=None):
+    def __init__(self, symbol=None, xyz=None, Z=None, mass=None, name=None, occupancy=None):
+        """Create atom of a specified type at given lattice coordinates.
+        Atom(a) creates a copy of Atom instance a.
 
-        if Z is None and symbol is None:
-            raise AttributeError, 'Cannot have both Z and symbol undefined for Atom.'
-            
-        if Z is not None:
-            # Should Z be checked for valid value (i.e.  0 <= Z <= 103 or None) ?
-            self.__dict__['Z'] = Z
-            if symbol is not None and symbol != self.symbol:
-                raise AttributeError, 'Incompatible Z number and symbol for Atom.'
-            pass
-        
-        else:
-            #Z is not specified, so symbol must be specified
-            # We should check that the symbol passed is a valid chemical element symbol
-            self.__dict__['symbol'] = symbol
-            try:
-                Z = self.atomic_number
-            except KeyError:
-                raise AttributeError, 'Invalid chemical element symbol.'
-            self.__dict__['Z'] = Z
-            pass 
+        atype       -- element symbol string or Atom instance
+        xyz         -- fractional coordinates
+        name        -- atom label
+        occupancy   -- fractional occupancy
+        anisotropy  -- flag for anisotropic thermal displacements
+        U           -- anisotropic thermal displacement tensor, property
+        Uisoequiv   -- isotropic thermal displacement or equivalent value,
+                       property
+        lattice     -- coordinate system for fractional coordinates
+        """
+        # declare data members
+        self.symbol = None
+        self.xyz = numpy.zeros(3, dtype=float)
+        self.name = ''
+        self.occupancy = 1.0
+
+        #Z is not specified, so symbol must be specified
+        # We should check that the symbol passed is a valid chemical element symbol
+        self.__dict__['symbol'] = symbol
+#        try:
+#            Z = self.atomic_number
+#        except KeyError:
+#            raise AttributeError, 'Invalid chemical element symbol.'
+#        self.__dict__['Z'] = Z
             
         if mass is None: mass = self.average_mass
         self.__dict__['mass'] = mass
+        
+        # take care of remaining arguments
+        if xyz is not None:         self.xyz[:] = xyz
+        if name is not None:        self.name = name
+        if occupancy is not None:   self.occupancy = float(occupancy)
         
         return
 
@@ -126,8 +165,38 @@ class Atom(object):
 
         rt = ','.join( ['%s=%s' % (name, value) for name,value in l ] )
         return "Atom " + rt
+    
+    def __repr__(self):
+        """simple string representation"""
+        xyz = self.xyz
+        s = "%-4s %8.6f %8.6f %8.6f %6.4f" % \
+                (self.element, xyz[0], xyz[1], xyz[2], self.occupancy)
+        return s
+    
+    ####################################################################
+    # property handlers
+    ####################################################################
 
+    # xyz_cartn
 
+    def _get_xyz_cartn(self):
+        if not self.lattice:
+            rv = self.xyz
+        else:
+            rv = CartesianCoordinatesArray(self.lattice, self.xyz)
+        return rv
+
+    def _set_xyz_cartn(self, value):
+        if not self.lattice:
+            self.xyz[:] = value
+        else:
+            self.xyz = self.lattice.fractional(value)
+        return
+
+    xyz_cartn = property(_get_xyz_cartn, _set_xyz_cartn, doc =
+        """absolute Cartesian coordinates of an atom
+        """ )
+    
     # properties 
     
     # Z and mass
@@ -165,8 +234,62 @@ class Atom(object):
 
     __metaclass__ = AtomPropertyCurator
     
-    pass
+# this class does not really seem to be necessary with lattice
+class Site:
+    """Representation of a crystallographic site.
+    A site corresponds to a position in fractional coordinates.
+    It also may have an atom associated with it."""
 
+    def __init__(self, position='', atom=None, occproba=1.0):
+
+        for x in position:
+            if (x < 0) or (x > 1):
+                raise ValueError, "Site coordinates must be fractional positions."
+        self._position = np.array( position )
+        self._atom = atom
+        self._occproba = occproba
+        self.xyz=self._position
+
+    def __str__(self):
+        rt = str(self._position) + ":" + str(self._atom)
+        return rt
+
+    def setPosition(self, position):
+        """Sets the position (in fractional coordinates) of a site.""" 
+        for x in position:
+            if (x < 0) or (x > 1):
+                raise ValueError, "Site coordinates must be fractional positions."
+        self._position = np.array(position)
+        
+    def getPosition(self):
+        """Get the position (in fractional coordinates) of a site."""
+        return self._position
+
+    def setAtom(self, atom):
+        """Set an atom at a site."""
+        self._atom = atom
+
+    def getAtom(self):
+        """Returns the atom at a site."""
+        return self._atom
+
+    def getOccProba(self):
+        """Returns the occupation probability for the atom at this site."""
+        return self._occproba
+
+    def setOccProba(self,p):
+        """Sets the occupation probability for the atom at this site."""
+        try:
+            proba = float(p)
+        except:
+            raise ValueError, 'Probability should be a number in [0,1].'
+        if proba <= 1.0 and proba >= 0.0:
+            self.__occproba = proba
+        else:
+            raise ValueError, 'Probability should be a number in [0,1].'
+            
+        
+    pass # end of class site
 
 
 

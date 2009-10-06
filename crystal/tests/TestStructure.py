@@ -26,7 +26,7 @@ tests_dir = os.path.dirname(os.path.abspath(thisfile))
 testdata_dir = os.path.join(tests_dir, 'testdata')
 
 from crystal.Structure import Structure#, StructureFormatError
-from crystal.UnitCell import UnitCell
+#from crystal.UnitCell import UnitCell
 from crystal.Lattice import Lattice
 from crystal.Atom import Atom
 
