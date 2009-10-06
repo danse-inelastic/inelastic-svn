@@ -1,97 +1,13 @@
 import numpy as np
 import numpy.linalg as la
-from Atom import Atom
-from crystalUtils.MonkhorstPack import MonkhorstPack
+from crystal.Atom import Atom
+from crystal.crystalUtils.MonkhorstPack import MonkhorstPack
 
 
-##########################################################
 
-class Site:
-    """Representation of a crystallographic site.
-    A site corresponds to a position in fractional coordinates.
-    It also may have an atom associated with it."""
-
-    def __init__(self, position='', atom=None, occproba=1.0):
-
-        for x in position:
-            if (x < 0) or (x > 1):
-                raise ValueError, "Site coordinates must be fractional positions."
-        self._position = np.array( position )
-        self._atom = atom
-        self._occproba = occproba
-        self.xyz=self._position
-
-    def __str__(self):
-        rt = str(self._position) + ":" + str(self._atom)
-        return rt
-
-    def setPosition(self, position):
-        """Sets the position (in fractional coordinates) of a site.""" 
-        for x in position:
-            if (x < 0) or (x > 1):
-                raise ValueError, "Site coordinates must be fractional positions."
-        self._position = np.array(position)
-        
-    def getPosition(self):
-        """Get the position (in fractional coordinates) of a site."""
-        return self._position
-
-    def setAtom(self, atom):
-        """Set an atom at a site."""
-        self._atom = atom
-
-    def getAtom(self):
-        """Returns the atom at a site."""
-        return self._atom
-
-    def getOccProba(self):
-        """Returns the occupation probability for the atom at this site."""
-        return self._occproba
-
-    def setOccProba(self,p):
-        """Sets the occupation probability for the atom at this site."""
-        try:
-            proba = float(p)
-        except:
-            raise ValueError, 'Probability should be a number in [0,1].'
-        if proba <= 1.0 and proba >= 0.0:
-            self.__occproba = proba
-        else:
-            raise ValueError, 'Probability should be a number in [0,1].'
-            
-        
-    pass # end of class site
-
-#from pyre.components.Component import Component
-#class UnitCell(Component):  
 class UnitCell:
     """Representation of a crystal unit cell."""
-#    unitCellWrapper=uniCellWrapper
-
-# We do not want to make UnitCell a component,
-# since it represents data, rather than a process.
-# Eventually this should be depyrized
-#    class Inventory(Component.Inventory):
-#        import pyre.inventory as inv  
-#        a = inv.str('a', default='1.0 0.0 0.0')
-#        a.meta['tip'] = 'the a unit cell vector'
-#        a.meta['importance'] = 10
-#        b = inv.str('b', default='0.0 1.0 0.0')
-#        b.meta['tip'] = 'the b unit cell vector'
-#        b.meta['importance'] = 9
-#        c = inv.str('c', default='0.0 0.0 1.0')
-#        c.meta['tip'] = 'the c unit cell vector'  
-#        c.meta['importance'] = 8
-#        spaceGroup = inv.str('Space Group', default='1')
-#        spaceGroup.meta['tip'] = 'space group of the unit cell'
-        #atoms = multiLineStr('Atoms',default='''"H" 0.0 0.0 0.0\n"H" 1.0 0.0 0.0''')  
-        #atomFile = inv.str('atom and position file',defa)
-        #atomFile
-#        for i in range(UnitCell.numAtoms):
-#            line1 = '''atom%s=pinv.list( atom%s, default = "'H' 0.0 0.0 0.0")''' % (i,i)
-#            line2 = "atom%s.meta['tip'] = 'species and position of atom %s'" % (i,i)
-#            exec line1 in locals()
-#            exec line2 in locals()    
+ 
     
     def __init__(self, name='UnitCell',lattice=None, spaceGroup=None):
         #Component.__init__(self, name, facility='facility')
