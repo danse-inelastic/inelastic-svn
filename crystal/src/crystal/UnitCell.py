@@ -246,7 +246,6 @@ class UnitCell:
         return self._siteIds[siteId]
 
 
-
 #    def _setProperty(self, atom, type, value):
 #        i = self._atoms.index( atom )
 #        p = self._properties[i]
