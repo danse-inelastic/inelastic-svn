@@ -1,5 +1,5 @@
 from properties import *
-
+import numpy
 
 # atom property curator
 
@@ -8,11 +8,10 @@ doc = """Atom class
 
 An object of this Atom class represent an atom in a (crystal) structure.
 
-An atom can be created by its atomic number and optionally its atomic
-mass number:
+An atom can be created by its symbol and optionally its position:
 
->>> Fe57 = Atom( 26, 57 )
->>> Fe = Atom( 26 )
+>>> Fe57 = Atom( 'Fe', [0,0,0] )
+>>> Fe = Atom( 'Fe' )
 
 You can obtain its property (for example, scattering length) in a similar
 way one accesses a property of a normal python object:
@@ -120,8 +119,7 @@ class Atom(object):
                        property
         lattice     -- coordinate system for fractional coordinates
         """
-        # declare data members
-        self.symbol = None
+        # declare non-singleton data members
         self.xyz = numpy.zeros(3, dtype=float)
         self.name = ''
         self.occupancy = 1.0
@@ -129,11 +127,11 @@ class Atom(object):
         #Z is not specified, so symbol must be specified
         # We should check that the symbol passed is a valid chemical element symbol
         self.__dict__['symbol'] = symbol
-#        try:
-#            Z = self.atomic_number
-#        except KeyError:
-#            raise AttributeError, 'Invalid chemical element symbol.'
-#        self.__dict__['Z'] = Z
+        try:
+            Z = self.atomic_number
+        except KeyError:
+            raise AttributeError, 'Invalid chemical element symbol.'
+        self.__dict__['Z'] = Z
             
         if mass is None: mass = self.average_mass
         self.__dict__['mass'] = mass
@@ -146,10 +144,10 @@ class Atom(object):
         return
 
 
-    def __setattr__(self, name, value):
-        if name not in Atom._setable:
-            raise AttributeError, "Unknown attribute %s" % name
-        return object.__setattr__(self, name, value)
+#    def __setattr__(self, name, value):
+#        if name not in Atom._setable:
+#            raise AttributeError, "Unknown attribute %s" % name
+#        return object.__setattr__(self, name, value)
         
 
     def __str__(self):
@@ -200,7 +198,7 @@ class Atom(object):
     # properties 
     
     # Z and mass
-    Z = CtorArg( 'Z', 'atomic number' )
+#    Z = CtorArg( 'Z', 'atomic number' )
     symbol = CtorArg( 'symbol', 'chemical symbol' )
     mass = CtorArg( 'mass', 'atomic mass number' )
 

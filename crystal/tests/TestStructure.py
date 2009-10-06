@@ -35,8 +35,9 @@ class TestStructure(unittest.TestCase):
     """test methods of Structure class"""
 
     def setUp(self):
-        self.stru = Structure( [ Atom('C', [0,0,0]), Atom('C', [1,1,1]) ],
-                lattice=Lattice(1, 1, 1, 90, 90, 120) )
+        at1 = Atom('C', [0,0,0])
+        at2 = Atom('C', [1,1,1])
+        self.stru = Structure( [ at1, at2], lattice=Lattice(1, 1, 1, 90, 90, 120) )
         self.places = 12
 
     def assertListAlmostEqual(self, l1, l2, places=None):
