@@ -105,7 +105,7 @@ class CartesianCoordinatesArray(numpy.ndarray):
 # Atom class
 class Atom(object):
 
-    def __init__(self, symbol=None, xyz=None, Z=None, mass=None, name=None, occupancy=None):
+    def __init__(self, atype=None, xyz=None, Z=None, mass=None, name=None, occupancy=None):
         """Create atom of a specified type at given lattice coordinates.
         Atom(a) creates a copy of Atom instance a.
 
@@ -113,10 +113,6 @@ class Atom(object):
         xyz         -- fractional coordinates
         name        -- atom label
         occupancy   -- fractional occupancy
-        anisotropy  -- flag for anisotropic thermal displacements
-        U           -- anisotropic thermal displacement tensor, property
-        Uisoequiv   -- isotropic thermal displacement or equivalent value,
-                       property
         lattice     -- coordinate system for fractional coordinates
         """
         # declare non-singleton data members
@@ -124,14 +120,19 @@ class Atom(object):
         self.name = ''
         self.occupancy = 1.0
 
-        #Z is not specified, so symbol must be specified
-        # We should check that the symbol passed is a valid chemical element symbol
-        self.__dict__['symbol'] = symbol
-        try:
-            Z = self.atomic_number
-        except KeyError:
-            raise AttributeError, 'Invalid chemical element symbol.'
-        self.__dict__['Z'] = Z
+        # assign them as needed
+        if isinstance(atype, Atom):
+            atype_dup = atype.__copy__()
+            self.__dict__.update(atype_dup.__dict__)
+        else:
+            #Z is not specified, so symbol must be specified
+            # We should check that the symbol passed is a valid chemical element symbol
+            self.__dict__['symbol'] = atype
+            try:
+                Z = self.atomic_number
+            except KeyError:
+                raise AttributeError, 'Invalid chemical element symbol.'
+            self.__dict__['Z'] = Z
             
         if mass is None: mass = self.average_mass
         self.__dict__['mass'] = mass
@@ -168,8 +169,17 @@ class Atom(object):
         """simple string representation"""
         xyz = self.xyz
         s = "%-4s %8.6f %8.6f %8.6f %6.4f" % \
-                (self.element, xyz[0], xyz[1], xyz[2], self.occupancy)
+                (self.symbol, xyz[0], xyz[1], xyz[2], self.occupancy)
         return s
+    
+    def __copy__(self):
+        """Return a copy of this instance.
+        """
+        adup = Atom(self.symbol)
+        adup.__dict__.update(self.__dict__)
+        # create copies for what should be copied
+        adup.xyz = numpy.array(self.xyz)
+        return adup
     
     ####################################################################
     # property handlers
