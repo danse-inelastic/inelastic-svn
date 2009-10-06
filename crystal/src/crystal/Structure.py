@@ -11,13 +11,10 @@
 """This module defines class Structure.
 """
 
-__id__ = "$Id: structure.py 1638 2007-11-05 17:05:10Z juhas $"
-
 import copy
 import math
 import numpy
 import numpy.linalg as numalg
-from UnitCell import UnitCell
 from Atom import Atom
 
 ##############################################################################
@@ -33,12 +30,12 @@ class Structure(list):
         lattice -- coordinate system (instance of Lattice)
     """
 
-    def __init__(self, atoms=None, unitCell=None, title="", filename=None):
+    def __init__(self, atoms=[], lattice=None, title="", filename=None):
         """define group of atoms in a specified lattice.
 
         atoms    -- list of Atom instances to be included in this Structure.
                     When atoms argument is an existing Structure instance,
-                    the new Structure is its deep copy.
+                    the new Structure is its copy.
         lattice  -- instance of Lattice defining coordinate systems, property.
         title    -- string description of the structure
         filename -- optional, name of a file to load the structure from.
@@ -53,18 +50,22 @@ class Structure(list):
         """
         self.title = ""
         self._lattice = None
-        if isinstance(unitCell, Structure):
-            # copy lattice and title
-            stru = unitCell
-            self.lattice = UnitCell(stru.lattice)
-            self.title = stru.title
+        self._labels = {}
+        self._labels_cached = False
+        if isinstance(atoms, Structure):
+            stru = atoms
+            # create a shallow copy of all source attributes
+            self.__dict__.update(stru.__dict__)
+            # make a deep copy of source lattice
+            self.lattice = Lattice(stru.lattice)
         # override from lattice argument
-        if unitCell is None:
-            if not self.lattice:    self.lattice = UnitCell()
-        elif not isinstance(unitCell, UnitCell):
-            raise TypeError, "expected instance of UnitCell"
+        if lattice is None:
+            if not self.lattice:    self.lattice = Lattice()
+        elif not isinstance(lattice, Lattice):
+            emsg = "expected instance of Lattice"
+            raise TypeError(emsg)
         else:
-            self.lattice = unitCell
+            self.lattice = lattice
         # override from title argument
         if title:
             self.title = title
@@ -74,7 +75,6 @@ class Structure(list):
         # otherwise assign list of atoms to self
         else:
             self[:] = atoms
-            #self[:] = unitCell.getAtoms()
         return
 
     def __str__(self):
@@ -93,6 +93,7 @@ class Structure(list):
         kwargs['lattice'] = self.lattice
         a = Atom(*args, **kwargs)
         list.append(self, a)
+        self._uncache('labels')
         return
 
     def getLastAtom(self):
@@ -101,32 +102,84 @@ class Structure(list):
         last_atom = self[-1]
         return last_atom
 
-    def dist(self, a0, a1):
-        """distance of 2 atoms"""
+
+    def getAtom(self, id):
+        """Reference to internal Atom specified by the identifier.
+
+        id  -- zero based index or a string label formatted as
+               "%(element)s%(order)i", for example "Na1", "Cl1"
+
+        Return Atom instance.
+        Raise ValueError for invalid id.
+
+        See also getLabels().
+        """
+        try:
+            if type(id) is int:
+                rv = self[id]
+            else:
+                if not self._labels_cached or id not in self._labels:
+                    self._update_labels()
+                rv = self._labels[id]
+        except (IndexError, KeyError):
+            emsg = "Invalid atom identifier %r." % id
+            raise ValueError(emsg)
+        return rv
+
+
+    def getLabels(self):
+        """List of unique string labels for all atoms in this structure.
+
+        Return a list.
+        """
+        elnum = {}
+        labels = []
+        for a in self:
+            elnum[a.element] = elnum.get(a.element, 0) + 1
+            alabel = a.element + str(elnum[a.element])
+            labels.append(alabel)
+        return labels
+
+
+    def distance(self, id0, id1):
+        """Distance between 2 atoms, no periodic boundary conditions.
+
+        id0 -- zero based index of the first atom or a string label
+               such as "Na1"
+        id1 -- zero based index or string label of the second atom.
+
+        Return float.
+        Raise ValueError for invalid arguments.
+        """
+        a0 = self.getAtom(id0)
+        a1 = self.getAtom(id1)
         return self.lattice.dist(a0.xyz, a1.xyz)
+
 
     def angle(self, a0, a1, a2):
         """angle at atom a1 in degrees"""
-        u10 = [ (d[1]-d[0]) for d in zip(a0.xyz, a1.xyz) ]
-        u12 = [ (d[1]-d[0]) for d in zip(a2.xyz, a1.xyz) ]
+        u10 = a0.xyz - a1.xyz
+        u12 = a2.xyz - a1.xyz
         return self.lattice.angle(u10, u12)
 
-#    def placeInLattice(self, new_lattice):
-#        """place structure into new_lattice coordinate system
-#
-#        sets lattice to new_lattice and recalculate fractional coordinates
-#        of all atoms so their absolute positions remain the same
-#
-#        return self
-#        """
-#        Tx = numpy.dot(self.lattice.base, new_lattice.recbase)
-#        Tu = numpy.dot(self.lattice.normbase, new_lattice.recnormbase)
-#        for a in self:
-#            a.xyz = numpy.dot(a.xyz, Tx)
-#            if a.anisotropy:
-#                a.U = numpy.dot(numpy.transpose(Tu), numpy.dot(a.U, Tu))
-#        self.lattice = new_lattice
-#        return self
+
+    def placeInLattice(self, new_lattice):
+        """place structure into new_lattice coordinate system
+
+        sets lattice to new_lattice and recalculate fractional coordinates
+        of all atoms so their absolute positions remain the same
+
+        return self
+        """
+        Tx = numpy.dot(self.lattice.base, new_lattice.recbase)
+        Tu = numpy.dot(self.lattice.normbase, new_lattice.recnormbase)
+        for a in self:
+            a.xyz = numpy.dot(a.xyz, Tx)
+            if a.anisotropy:
+                a.U = numpy.dot(numpy.transpose(Tu), numpy.dot(a.U, Tu))
+        self.lattice = new_lattice
+        return self
+
 
     def read(self, filename, format='auto'):
         """Load structure from a file, any original data become lost.
@@ -211,11 +264,12 @@ class Structure(list):
         """Append atom to a structure and update its lattice attribute.
 
         a    -- instance of Atom
-        copy -- flag for appending a copy of a.  
+        copy -- flag for appending a copy of a.
                 When False, append a and update a.owner.
 
         No return value.
         """
+        self._uncache('labels')
         adup = copy and Atom(a) or a
         adup.lattice = self.lattice
         list.append(self, adup)
@@ -226,14 +280,15 @@ class Structure(list):
 
         idx  -- position in atom list
         a    -- instance of Atom
-        copy -- flag for inserting a copy of a.  
+        copy -- flag for inserting a copy of a.
                 When False, append a and update a.lattice.
 
         No return value.
         """
+        self._uncache('labels')
         adup = copy and Atom(a) or a
         adup.lattice = self.lattice
-        list.insert(idx, adup)
+        list.insert(self, idx, adup)
         return
 
     def extend(self, atoms, copy=True):
@@ -246,6 +301,7 @@ class Structure(list):
 
         No return value.
         """
+        self._uncache('labels')
         if copy:    adups = [Atom(a) for a in atoms]
         else:       adups = atoms
         for a in adups: a.lattice = self.lattice
@@ -257,17 +313,18 @@ class Structure(list):
 
         idx  -- index of atom in this Structure
         a    -- instance of Atom
-        copy -- flag for setting to a copy of a.  
+        copy -- flag for setting to a copy of a.
                 When False, set to a and update a.lattice.
 
         No return value.
         """
+        self._uncache('labels')
         adup = copy and Atom(a) or a
         adup.lattice = self.lattice
         list.__setitem__(self, idx, adup)
         return
 
-    def __setslice__(self, lo, hi, atoms):
+    def __setslice__(self, lo, hi, atoms, copy=True):
         """Set Structure slice from lo to hi-1 to the sequence of atoms.
 
         lo    -- low index for the slice
@@ -278,6 +335,7 @@ class Structure(list):
 
         No return value.
         """
+        self._uncache('labels')
         if copy:    adups = [Atom(a) for a in atoms]
         else:       adups = atoms
         for a in adups: a.lattice = self.lattice
@@ -301,6 +359,35 @@ class Structure(list):
 
     lattice = property(_get_lattice, _set_lattice, doc =
         "Coordinate system for this Structure.")
+
+
+    ####################################################################
+    # protected methods
+    ####################################################################
+
+    def _update_labels(self):
+        """Update the _labels dictionary of unique string labels of atoms.
+
+        No return value.
+        """
+        kv = zip(self.getLabels(), self[:])
+        self._labels = dict(kv)
+        self._labels_cached = True
+        return
+
+
+    def _uncache(self, *args):
+        """Reset cached flag for a list of internal attributes.
+
+        *args -- list of strings, currently supported are "labels"
+
+        No return value.
+        Raise AttributeError for any invalid args.
+        """
+        for a in args:
+            attrname = "_" + a + "_cached"
+            setattr(self, attrname, False)
+        return
 
 
 # End of class Structure
