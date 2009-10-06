@@ -25,7 +25,9 @@ import re
 import copy
 import numpy
 
-from diffpy.Structure import Structure, Lattice, Atom
+from matter.Structure import Structure
+from matter.Lattice import Lattice
+from matter.Atom import Atom
 from diffpy.Structure import StructureFormatError
 from diffpy.Structure.Parsers import StructureParser
 

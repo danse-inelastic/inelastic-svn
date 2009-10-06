@@ -16,6 +16,7 @@ import math
 import numpy
 import numpy.linalg as numalg
 from Atom import Atom
+from Lattice import Lattice
 
 ##############################################################################
 class Structure(list):
@@ -135,8 +136,8 @@ class Structure(list):
         elnum = {}
         labels = []
         for a in self:
-            elnum[a.element] = elnum.get(a.element, 0) + 1
-            alabel = a.element + str(elnum[a.element])
+            elnum[a.symbol] = elnum.get(a.symbol, 0) + 1
+            alabel = a.symbol + str(elnum[a.symbol])
             labels.append(alabel)
         return labels
 
@@ -175,8 +176,6 @@ class Structure(list):
         Tu = numpy.dot(self.lattice.normbase, new_lattice.recnormbase)
         for a in self:
             a.xyz = numpy.dot(a.xyz, Tx)
-            if a.anisotropy:
-                a.U = numpy.dot(numpy.transpose(Tu), numpy.dot(a.U, Tu))
         self.lattice = new_lattice
         return self
 
@@ -336,8 +335,10 @@ class Structure(list):
         No return value.
         """
         self._uncache('labels')
-        if copy:    adups = [Atom(a) for a in atoms]
-        else:       adups = atoms
+        if copy:    
+            adups = [Atom(a) for a in atoms]
+        else:       
+            adups = atoms
         for a in adups: a.lattice = self.lattice
         list.__setslice__(self, lo, hi, adups)
         return
