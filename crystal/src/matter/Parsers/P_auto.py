@@ -1,12 +1,5 @@
 ##############################################################################
 #
-# Structure         by DANSE Diffraction group
-#                   Simon J. L. Billinge
-#                   (c) 2007 trustees of the Michigan State University.
-#                   All rights reserved.
-#
-# File coded by:    Pavol Juhas
-#
 # See AUTHORS.txt for a list of people who contributed.
 # See LICENSE.txt for license information.
 #
@@ -22,6 +15,7 @@ __id__ = "$Id: P_auto.py 2825 2009-03-09 04:33:12Z juhas $"
 from matter import Structure, Lattice, Atom
 from matter import StructureFormatError
 from matter.Parsers import StructureParser
+from matter.Parsers import parser_index
 
 class P_auto(StructureParser):
     """Parser with automatic detection of structure format.
@@ -40,7 +34,7 @@ class P_auto(StructureParser):
         This only works when self.filename has a known extension.
         """
         import os.path
-        from diffpy.Structure.Parsers import inputFormats
+        from matter.Parsers import inputFormats
         ofmts = [fmt for fmt in inputFormats() if fmt != 'auto']
         if not self.filename:   return ofmts
         # filename is defined here

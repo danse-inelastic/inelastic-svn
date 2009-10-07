@@ -69,28 +69,28 @@ class TestStructure(unittest.TestCase):
 #       """
 #       return
 
-    def test_getAtom(self):
-        """check Structure.getAtom()
-        """
-        a0 = self.stru[0]
-        a1 = self.stru[1]
-        # check execeptions for invalid arguments
-        self.assertRaises(ValueError, self.stru.getAtom, 300)
-        self.assertRaises(ValueError, self.stru.getAtom, -44)
-        self.assertRaises(ValueError, self.stru.getAtom, "Na")
-        # check returned values
-        self.failUnless(a0 is self.stru.getAtom(0))
-        self.failUnless(a1 is self.stru.getAtom(1))
-        self.failUnless(a0 is self.stru.getAtom("C1"))
-        self.failUnless(a1 is self.stru.getAtom("C2"))
-        # check if labels get properly updated
-        cdsefile = os.path.join(testdata_dir, 'CdSe_bulk.stru')
-        cdse = Structure(filename=cdsefile)
-        self.stru[1:1] = cdse
-        self.failUnless(a0 is self.stru.getAtom("C1"))
-        self.failUnless(a1 is self.stru.getAtom("C2"))
-        self.failUnless(self.stru[1] is self.stru.getAtom("Cd1"))
-        return
+#    def test_getAtom(self):
+#        """check Structure.getAtom()
+#        """
+#        a0 = self.stru[0]
+#        a1 = self.stru[1]
+#        # check execeptions for invalid arguments
+#        self.assertRaises(ValueError, self.stru.getAtom, 300)
+#        self.assertRaises(ValueError, self.stru.getAtom, -44)
+#        self.assertRaises(ValueError, self.stru.getAtom, "Na")
+#        # check returned values
+#        self.failUnless(a0 is self.stru.getAtom(0))
+#        self.failUnless(a1 is self.stru.getAtom(1))
+#        self.failUnless(a0 is self.stru.getAtom("C1"))
+#        self.failUnless(a1 is self.stru.getAtom("C2"))
+#        # check if labels get properly updated
+#        cdsefile = os.path.join(testdata_dir, 'CdSe_bulk.stru')
+#        cdse = Structure(filename=cdsefile)
+#        self.stru[1:1] = cdse
+#        self.failUnless(a0 is self.stru.getAtom("C1"))
+#        self.failUnless(a1 is self.stru.getAtom("C2"))
+#        self.failUnless(self.stru[1] is self.stru.getAtom("Cd1"))
+#        return
 
 
     def test_getLabels(self):

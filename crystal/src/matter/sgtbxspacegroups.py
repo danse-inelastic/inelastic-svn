@@ -25,8 +25,8 @@ sgtbxSpaceGroupList -- list of space group instances defined in this module
 __id__ = "$Id: sgtbxspacegroups.py 3519 2009-08-19 18:18:45Z juhas $"
 
 
-from diffpy.Structure.SpaceGroups import SpaceGroup, SymOp
-from diffpy.Structure.SpaceGroups import \
+from matter.SpaceGroups import SpaceGroup, SymOp
+from matter.SpaceGroups import \
         Rot_X_Y_Z, Rot_X_mY_mZ, Rot_mX_Y_mZ, Rot_mX_mY_Z, Rot_mX_Y_Z, \
         Rot_X_mY_Z, Rot_X_Y_mZ, Rot_mX_mY_mZ, \
         Tr_0_0_0, Tr_12_0_0, Tr_0_12_12, Tr_12_12_12, Tr_12_0_12, \
