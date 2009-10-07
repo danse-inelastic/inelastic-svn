@@ -23,7 +23,7 @@ import sys
 import re
 import numpy
 
-from diffpy.Structure.StructureErrors import SymmetryError
+from matter.StructureErrors import SymmetryError
 
 # Constants:
 
