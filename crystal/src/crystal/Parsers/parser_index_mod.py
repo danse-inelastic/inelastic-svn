@@ -48,24 +48,6 @@ parser_index = {
         'has_output' : True,
         },
 
-    # Discus structure format
-    'discus' : {
-        'module' : 'P_discus',
-        'file_extension' : '.stru',
-        'file_pattern' : '*.stru|*.rstr',
-        'has_input' : True,
-        'has_output' : True,
-        },
-
-    # PDFfit structure format
-    'pdffit' : {
-        'module' : 'P_pdffit',
-        'file_extension' : '.stru',
-        'file_pattern' : '*.stru|*.rstr',
-        'has_input' : True,
-        'has_output' : True,
-        },
-
     # standard xyz file
     'xyz' : {
         'module' : 'P_xyz',
@@ -89,15 +71,6 @@ parser_index = {
         'module' : 'P_xcfg',
         'file_extension' : '',
         'file_pattern' : '*.xcfg|*.eye|*.cfg',
-        'has_input' : True,
-        'has_output' : True,
-        },
-
-    # Bruce Ravel's atoms format
-    'bratoms' : {
-        'module' : 'P_bratoms',
-        'file_extension' : '.inp',
-        'file_pattern' : '*.inp',
         'has_input' : True,
         'has_output' : True,
         },

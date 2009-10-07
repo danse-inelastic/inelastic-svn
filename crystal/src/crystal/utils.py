@@ -1,4 +1,14 @@
 
+def isfloat(s):
+    """True if argument can be converted to float"""
+    try:
+        x = float(s)
+        return True
+    except ValueError:
+        pass
+    return False
+
+
 def getModules( package ):
     "get and import a list of python modules under given python package"
     packagename = package.__name__

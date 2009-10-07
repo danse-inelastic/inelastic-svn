@@ -22,9 +22,9 @@ __id__ = "$Id: P_xyz.py 2825 2009-03-09 04:33:12Z juhas $"
 
 import sys
 
-from diffpy.Structure import Structure, Lattice, Atom
-from diffpy.Structure import StructureFormatError
-from diffpy.Structure.Parsers import StructureParser
+from matter import Structure, Lattice, Atom
+from matter import StructureFormatError
+from matter.Parsers import StructureParser
 
 class P_xyz(StructureParser):
     """Parser for standard XYZ structure format.

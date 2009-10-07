@@ -1,12 +1,5 @@
 ##############################################################################
 #
-# Structure         by DANSE Diffraction group
-#                   Simon J. L. Billinge
-#                   (c) 2007 trustees of the Michigan State University.
-#                   All rights reserved.
-#
-# File coded by:    Pavol Juhas
-#
 # See AUTHORS.txt for a list of people who contributed.
 # See LICENSE.txt for license information.
 #
@@ -25,11 +18,9 @@ import re
 import copy
 import numpy
 
-from matter.Structure import Structure
-from matter.Lattice import Lattice
-from matter.Atom import Atom
-from diffpy.Structure import StructureFormatError
-from diffpy.Structure.Parsers import StructureParser
+from matter import Structure, Lattice, Atom
+from matter import StructureFormatError
+from matter.Parsers import StructureParser
 
 
 ##############################################################################
@@ -396,8 +387,8 @@ class P_cif(StructureParser):
 
         No return value.
         """
-        from diffpy.Structure.SpaceGroups import IsSpaceGroupIdentifier
-        from diffpy.Structure.SpaceGroups import SpaceGroup, GetSpaceGroup
+        from matter.SpaceGroups import IsSpaceGroupIdentifier
+        from matter.SpaceGroups import SpaceGroup, GetSpaceGroup
         self.asymmetric_unit = list(self.stru)
         sym_synonyms = ('_space_group_symop_operation_xyz',
                         '_symmetry_equiv_pos_as_xyz')
@@ -450,7 +441,7 @@ class P_cif(StructureParser):
 
         No return value.
         """
-        from diffpy.Structure.SymmetryUtilities import ExpandAsymmetricUnit
+        from matter.SymmetryUtilities import ExpandAsymmetricUnit
         # get reverse-ordered unique indices
         corepos = [a.xyz for a in self.stru]
         coreUijs = [a.U for a in self.stru]
@@ -599,7 +590,7 @@ def getSymOp(s):
 
     Return instance of SymOp.
     """
-    from diffpy.Structure.SpaceGroups import SymOp
+    from matter.SpaceGroups import SymOp
     snoblanks = s.replace(' ','')
     eqlist = snoblanks.split(',')
     R = numpy.zeros((3,3), dtype=float)

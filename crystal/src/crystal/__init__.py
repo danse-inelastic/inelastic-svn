@@ -27,10 +27,10 @@ def atom( *args ):
 
     return Atom( Z = Z, symbol = symbol, mass = A )
 
-from matter.Structure.StructureErrors import *
-from matter.Structure.atom import Atom
-from matter.Structure.lattice import Lattice
-from matter.Structure.structure import Structure
+from matter.StructureErrors import *
+from matter.Atom import Atom
+from matter.Lattice import Lattice
+from matter.Structure import Structure
 
 # obtain version information
-from matter.Structure.version import __version__
+from matter.version import __version__

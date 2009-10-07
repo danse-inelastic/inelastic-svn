@@ -20,10 +20,10 @@ import sys
 import re
 import numpy
 
-from diffpy.Structure import Structure, Lattice, Atom
-from diffpy.Structure import StructureFormatError
-from diffpy.Structure.utils import isfloat
-from diffpy.Structure.Parsers import StructureParser
+from matter import Structure, Lattice, Atom
+from matter import StructureFormatError
+from matter.Parsers import StructureParser
+from matter.utils import isfloat
 
 
 ##############################################################################
