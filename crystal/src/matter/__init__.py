@@ -1,4 +1,6 @@
 #from ASE.ChemicalElements.ChemicalElements import Element, numbers
+__import__('pkg_resources').declare_namespace(__name__)
+
 import crystalIO
 import atomic_properties
 
