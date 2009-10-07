@@ -25,6 +25,7 @@ way one accesses a property of a normal python object:
 #  - Atom class's docstring
 #  - a list of names of properties
 #  - the list of setable attributes, "_setable", (to be used in method __setattr__ of Atom class).
+# NOTE: Brandon doesn't like this third one...programmers should be able to set whatever they want...why limit them?
 class AtomPropertyCurator(type):
     
 
@@ -40,7 +41,7 @@ class AtomPropertyCurator(type):
 
         global doc
         doc += """
-Here is a list of possible properties:
+Here is a list of properties:
 
 %s
 
@@ -48,7 +49,7 @@ Here is a list of possible properties:
 
         AtomClass.__doc__ = doc
         
-        AtomClass._setable = [ state.name for state in states ]
+        #AtomClass._setable = [ state.name for state in states ]
         
         pass # end of Atom
 
@@ -105,7 +106,8 @@ class CartesianCoordinatesArray(numpy.ndarray):
 # Atom class
 class Atom(object):
 
-    def __init__(self, atype=None, xyz=None, Z=None, mass=None, name=None, occupancy=None):
+    def __init__(self, atype=None, xyz=None, Z=None, mass=None, name=None, 
+                 occupancy=None, lattice=None):
         """Create atom of a specified type at given lattice coordinates.
         Atom(a) creates a copy of Atom instance a.
 
@@ -119,28 +121,27 @@ class Atom(object):
         self.xyz = numpy.zeros(3, dtype=float)
         self.name = ''
         self.occupancy = 1.0
+        self.lattice = None
 
         # assign them as needed
         if isinstance(atype, Atom):
             atype_dup = atype.__copy__()
             self.__dict__.update(atype_dup.__dict__)
+        #elif isinstance(atype, str):
         else:
-            #Z is not specified, so symbol must be specified
-            # We should check that the symbol passed is a valid chemical element symbol
-            self.__dict__['symbol'] = atype
-            try:
-                Z = self.atomic_number
-            except KeyError:
-                raise AttributeError, 'Invalid chemical element symbol.'
-            self.__dict__['Z'] = Z
+            self.initializeProperties(atype, mass)
+        #else:
+            # just leave symbol unspecified for now
+            #pass
+         #   self.__dict__['symbol'] = None
             
-        if mass is None: mass = self.average_mass
-        self.__dict__['mass'] = mass
+        
         
         # take care of remaining arguments
         if xyz is not None:         self.xyz[:] = xyz
         if name is not None:        self.name = name
         if occupancy is not None:   self.occupancy = float(occupancy)
+        if lattice is not None:     self.lattice = lattice
         
         return
 
@@ -150,6 +151,17 @@ class Atom(object):
 #            raise AttributeError, "Unknown attribute %s" % name
 #        return object.__setattr__(self, name, value)
         
+    def initializeProperties(self, atype, mass):
+        # if symbol is specified we should check that the symbol passed is a valid chemical element symbol
+        self.__dict__['symbol'] = atype
+        try:
+            Z = self.atomic_number
+            self.__dict__['Z'] = Z
+            if mass is None: mass = self.average_mass
+            self.__dict__['mass'] = mass
+        except KeyError:
+            #raise AttributeError, 'Invalid chemical element symbol.'
+            pass
 
     def __str__(self):
         l = []
@@ -208,7 +220,7 @@ class Atom(object):
     # properties 
     
     # Z and mass
-#    Z = CtorArg( 'Z', 'atomic number' )
+    Z = CtorArg( 'Z', 'atomic number' )
     symbol = CtorArg( 'symbol', 'chemical symbol' )
     mass = CtorArg( 'mass', 'atomic mass number' )
 

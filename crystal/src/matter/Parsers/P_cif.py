@@ -68,30 +68,31 @@ class P_cif(StructureParser):
         '_tr_atom_site_cartn_x',
         '_tr_atom_site_cartn_y',
         '_tr_atom_site_cartn_z',
-        '_tr_atom_site_U_iso_or_equiv',
-        '_tr_atom_site_B_iso_or_equiv',
-        '_tr_atom_site_adp_type', '_tr_atom_site_thermal_displace_type',
         '_tr_atom_site_occupancy',
-        '_tr_atom_site_aniso_U_11',
-        '_tr_atom_site_aniso_U_22',
-        '_tr_atom_site_aniso_U_33',
-        '_tr_atom_site_aniso_U_12',
-        '_tr_atom_site_aniso_U_13',
-        '_tr_atom_site_aniso_U_23',
-        '_tr_atom_site_aniso_B_11',
-        '_tr_atom_site_aniso_B_22',
-        '_tr_atom_site_aniso_B_33',
-        '_tr_atom_site_aniso_B_12',
-        '_tr_atom_site_aniso_B_13',
-        '_tr_atom_site_aniso_B_23',
+#        '_tr_atom_site_U_iso_or_equiv',
+#        '_tr_atom_site_B_iso_or_equiv',
+#        '_tr_atom_site_adp_type', 
+#        '_tr_atom_site_thermal_displace_type',
+#        '_tr_atom_site_aniso_U_11',
+#        '_tr_atom_site_aniso_U_22',
+#        '_tr_atom_site_aniso_U_33',
+#        '_tr_atom_site_aniso_U_12',
+#        '_tr_atom_site_aniso_U_13',
+#        '_tr_atom_site_aniso_U_23',
+#        '_tr_atom_site_aniso_B_11',
+#        '_tr_atom_site_aniso_B_22',
+#        '_tr_atom_site_aniso_B_33',
+#        '_tr_atom_site_aniso_B_12',
+#        '_tr_atom_site_aniso_B_13',
+#        '_tr_atom_site_aniso_B_23',
         ))
 
     BtoU = 1.0/(8 * numpy.pi**2)
 
     def _tr_atom_site_label(a, value):
         a.name = value
-        # set element when not specified by _atom_site_type_symbol
-        if a.element is None:
+        # set symbol when not specified by _atom_site_type_symbol
+        if a.symbol is None:
             P_cif._tr_atom_site_type_symbol(a, value)
     _tr_atom_site_label = staticmethod(_tr_atom_site_label)
 
@@ -101,7 +102,7 @@ class P_cif(StructureParser):
     def _tr_atom_site_type_symbol(a, value):
         rx = P_cif._psymb.match(value)
         smbl = rx and rx.group(0) or value
-        a.element = smbl[:1].upper() + smbl[1:].lower()
+        a.__dict__['symbol'] = smbl[:1].upper() + smbl[1:].lower()
     _tr_atom_site_type_symbol = staticmethod(_tr_atom_site_type_symbol)
 
     def _tr_atom_site_fract_x(a, value):
@@ -302,7 +303,7 @@ class P_cif(StructureParser):
         # execute specialized block parsers
         self._parse_lattice(block)
         self._parse_atom_site_label(block)
-        self._parse_atom_site_aniso_label(block)
+        #self._parse_atom_site_aniso_label(block)
         self._parse_space_group_symop_operation_xyz(block)
         return
 
@@ -350,12 +351,25 @@ class P_cif(StructureParser):
         for values in atom_site_loop:
             curlabel = values['_atom_site_label']
             self.labelindex[curlabel] = len(self.stru)
-            self.stru.addNewAtom()
+            atomSiteType = values['_atom_site_type_symbol'] # have to add this in at the start for inelastic Atoms to get all inferred properties
+            atomSymbol = self.firstOneOrTwoLetters(atomSiteType)
+            self.stru.addNewAtom(atomSymbol)
             a = self.stru.getLastAtom()
             for prop, fset in prop_fset.iteritems():
                 fset(a, values[prop])
         return
-
+    
+    def firstOneOrTwoLetters(self, atomSiteType):
+        # removes trailing numbers, +/- symbols, etc.
+        firstTwo = atomSiteType[:2]
+        uppers = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        lowers = 'abcdefghijklmnopqrstuvwxyz'
+        ans = ''
+        for i in range(2):
+            if firstTwo[i] in uppers or firstTwo[i] in lowers:
+                ans += firstTwo[i]
+        return ans
+    
     def _parse_atom_site_aniso_label(self, block):
         """Obtain value of anisotropic thermal displacements from a CifBlock.
         This method updates U members of Atom instances in self.stru.
