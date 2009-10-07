@@ -1,12 +1,5 @@
 ##############################################################################
 #
-# Structure         by DANSE Diffraction group
-#                   Simon J. L. Billinge
-#                   (c) 2006 trustees of the Michigan State University.
-#                   All rights reserved.
-#
-# File coded by:    Pavol Juhas
-#
 # See AUTHORS.txt for a list of people who contributed.
 # See LICENSE.txt for license information.
 #
@@ -25,10 +18,7 @@ thisfile = locals().get('__file__', 'TestStructure.py')
 tests_dir = os.path.dirname(os.path.abspath(thisfile))
 testdata_dir = os.path.join(tests_dir, 'testdata')
 
-from crystal.Structure import Structure#, StructureFormatError
-#from crystal.UnitCell import UnitCell
-from crystal.Lattice import Lattice
-from crystal.Atom import Atom
+from matter import Structure, Lattice, Atom#, StructureFormatError
 
 ##############################################################################
 class TestStructure(unittest.TestCase):
