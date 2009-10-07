@@ -26,9 +26,9 @@ import sys
 import numpy
 from numpy import pi
 
-from diffpy.Structure import Structure, Lattice, Atom
-from diffpy.Structure import StructureFormatError
-from diffpy.Structure.Parsers import StructureParser
+from matter import Structure, Lattice, Atom
+from matter import StructureFormatError
+from matter.Parsers import StructureParser
 
 class P_pdb(StructureParser):
     """Simple parser for PDB format.

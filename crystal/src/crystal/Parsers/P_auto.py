@@ -19,9 +19,9 @@ This Parser does not provide the the toLines() method.
 
 __id__ = "$Id: P_auto.py 2825 2009-03-09 04:33:12Z juhas $"
 
-from diffpy.Structure import StructureFormatError
-from diffpy.Structure.Parsers import StructureParser
-from diffpy.Structure.Parsers import parser_index
+from matter import Structure, Lattice, Atom
+from matter import StructureFormatError
+from matter.Parsers import StructureParser
 
 class P_auto(StructureParser):
     """Parser with automatic detection of structure format.
@@ -62,7 +62,7 @@ class P_auto(StructureParser):
 
         Return Structure instance, or raise StructureFormatError.
         """
-        from diffpy.Structure.Parsers import getParser
+        from matter.Parsers import getParser
         ofmts = self.getOrderedFormats()
         stru = None
         # try all parsers in sequence

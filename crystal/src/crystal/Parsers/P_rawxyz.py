@@ -21,10 +21,10 @@ __id__ = "$Id: P_rawxyz.py 2825 2009-03-09 04:33:12Z juhas $"
 
 import sys
 
-from diffpy.Structure import Structure, Lattice, Atom
-from diffpy.Structure import StructureFormatError
-from diffpy.Structure.utils import isfloat
-from diffpy.Structure.Parsers import StructureParser
+from matter import Structure, Lattice, Atom
+from matter import StructureFormatError
+from matter.Parsers import StructureParser
+from matter.utils import isfloat
 
 class P_rawxyz(StructureParser):
     """Parser --> StructureParser subclass for RAWXYZ format"""
