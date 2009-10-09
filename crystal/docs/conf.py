@@ -22,7 +22,13 @@ import sys, os
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ['sphinx.ext.autodoc', 'sphinx.ext.doctest', 'sphinx.ext.intersphinx', 'sphinx.ext.todo', 'sphinx.ext.coverage', 'sphinx.ext.pngmath', 'sphinx.ext.ifconfig']
+extensions = ['sphinx.ext.autodoc', 
+              'sphinx.ext.doctest', 
+              'sphinx.ext.intersphinx', 
+              'sphinx.ext.todo', 
+              'sphinx.ext.coverage', 
+              'sphinx.ext.pngmath', 
+              'sphinx.ext.ifconfig']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -37,7 +43,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Material Data Objects'
+project = u'Matter data objects'
 copyright = u'2009, J. Brandon Keith, Olivier Delaire, Jiao Lin'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -172,7 +178,7 @@ htmlhelp_basename = 'MaterialDataObjectsdoc'
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'MaterialDataObjects.tex', u'Material Data Objects Documentation',
+  ('index', 'MatterDataObjects.tex', u'Matter Data Objects Documentation',
    u'J. Brandon Keith, Olivier Delaire, Jiao Lin', 'manual'),
 ]
 

@@ -3,34 +3,17 @@ import numpy
 
 from matter.Lattice import cartesian as cartesian_lattice
 from matter import IsotropyError
-
-# atom property curator
-
-#static part of docstring of Atom class
-doc = """Atom class
-
-An object of this Atom class represent an atom in a (crystal) structure.
-
-An atom can be created by its symbol and optionally its position:
-
->>> Fe57 = Atom( 'Fe', [0,0,0] )
->>> Fe = Atom( 'Fe' )
-
-You can obtain its property (for example, scattering length) in a similar
-way one accesses a property of a normal python object:
-
->>> print Fe.scattering_length
-"""        
-
-#meta class for Atom class to collect all properties and set up
-#some class constants.
-#It establishes:
-#  - Atom class's docstring
-#  - a list of names of properties
-#  - the list of setable attributes, "_setable", (to be used in method __setattr__ of Atom class).
-# NOTE: Brandon doesn't like this third one...programmers should be able to set whatever they want...why limit them?
+     
 class AtomPropertyCurator(type):
     
+    """meta class for Atom class to collect all properties and set up
+    some class constants.
+    It establishes:
+      - Atom class's docstring
+      - a list of names of properties
+    #  - the list of setable attributes, "_setable", (to be used in method __setattr__ of Atom class).
+    NOTE: Brandon doesn't like this third one...programmers should be able to set whatever they want...why limit them?
+    """
 
     def __init__(AtomClass, name, bases, dict):
         type.__init__(name, bases, dict)
@@ -116,7 +99,9 @@ class Atom(object):
 
     def __init__(self, atype=None, xyz=None, Z=None, mass=None, name=None, 
                  occupancy=None, anisotropy=None, U=None, Uisoequiv=None, lattice=None):
-        """Create atom of a specified type at given lattice coordinates.
+        """Create atom of a specified type at given lattice coordinates:
+        >>> Fe57 = Atom( 'Fe', [0,0,0] )
+        >>> Fe = Atom( 'Fe' )
         Atom(a) creates a copy of Atom instance a.
 
         atype       -- element symbol string or Atom instance
@@ -128,6 +113,11 @@ class Atom(object):
         Uisoequiv   -- isotropic thermal displacement or equivalent value,
                        property
         lattice     -- coordinate system for fractional coordinates
+        
+        You can obtain its property (for example, scattering length) in a similar
+        way one accesses a property of a normal python object:
+
+        >>> print Fe.scattering_length
         """
         # declare non-singleton data members
         self.xyz = numpy.zeros(3, dtype=float)
