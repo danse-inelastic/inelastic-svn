@@ -13,7 +13,7 @@ setup(
         name = "matter",
         version = "1.0",
         #namespace_packages = ['matter'],
-        packages = find_packages('src/matter'),#exclude=['tests']),
+        packages = find_packages(),#exclude=['tests']),
         test_suite = 'tests',
         install_requires = [
             'PyCifRW',
