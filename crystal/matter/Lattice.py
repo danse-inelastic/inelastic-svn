@@ -3,12 +3,6 @@
 #
 ##############################################################################
 
-"""class Lattice stores properites and provides simple operations in lattice
-coordinate system.
-
-Module variables:
-    cartesian   -- constant instance of Lattice, default Cartesian system
-"""
 
 __id__ = "$Id: lattice.py 2825 2009-03-09 04:33:12Z juhas $"
 
@@ -17,9 +11,7 @@ import math
 import types
 import numpy
 import numpy.linalg as numalg
-#from diffpy.Structure import LatticeError
 
-##############################################################################
 # helper functions
 
 # cache of exact values of cosd
@@ -45,7 +37,8 @@ def sind(x):
 
 ##############################################################################
 class Lattice:
-    """Lattice --> general coordinate system
+    """Lattice --> stores properites and provides simple operations in lattice
+    coordinate system.
 
     Data members:
 

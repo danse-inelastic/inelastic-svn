@@ -1,15 +1,10 @@
 ########################################################################
 #
-#
-# File coded by:   Big Brain
-#
 # See AUTHORS.txt for a list of people who contributed.
 # See LICENSE.txt for license information.
 #
 ########################################################################
 
-"""This module defines class Structure.
-"""
 
 import copy
 import math
@@ -390,5 +385,3 @@ class Structure(list):
             setattr(self, attrname, False)
         return
 
-
-# End of class Structure
