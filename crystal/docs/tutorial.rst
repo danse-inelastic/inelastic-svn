@@ -1,2 +1,2 @@
-Lattices
+Tutorial
 ========
