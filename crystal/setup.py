@@ -10,10 +10,10 @@ import fix_setuptools_chmod
 
 # define distribution
 setup(
-        name = "diffpy.Structure",
+        name = "matter",
         version = "1.0",
-        namespace_packages = ['matter'],
-        packages = find_packages(exclude=['tests']),
+        #namespace_packages = ['matter'],
+        packages = find_packages('src/matter'),#exclude=['tests']),
         test_suite = 'tests',
         install_requires = [
             'PyCifRW',
