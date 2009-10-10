@@ -32,6 +32,8 @@ extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.pngmath', 
               'sphinx.ext.ifconfig']
 
+doctest_test_doctest_blocks = True
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
@@ -166,7 +168,7 @@ html_static_path = ['_static']
 #html_file_suffix = ''
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'MaterialDataObjectsdoc'
+htmlhelp_basename = 'MatterDataObjectsdoc'
 
 
 # -- Options for LaTeX output --------------------------------------------------
