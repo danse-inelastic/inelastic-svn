@@ -35,6 +35,8 @@ usually only writeable by the root.  See the usage info
 different location.  Note that installation to non-standard directories you may
 require adjustments to the PATH and PYTHONPATH environment variables.
 
+Note: Make.mm files are included but are not currently being maintained...
+
 The Python setuptools library provides "easy_install" script, which can
 be used to update diffpy.Structure installation or even to perform a new
 install without explicit need to download and unzip the code:
