@@ -1,7 +1,7 @@
 Tutorial
 ========
 
-Here is a brief tutorial to get up and running with the structure classes::  
+Here are a set of operations one might try::  
 
 	>>>from matter import Structure, Lattice, Atom
 	>>>at1 = Atom('Fe', [0, 0, 0])
