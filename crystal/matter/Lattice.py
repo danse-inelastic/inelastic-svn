@@ -11,6 +11,7 @@ import math
 import types
 import numpy
 import numpy.linalg as numalg
+from StructureErrors import LatticeError
 
 # helper functions
 
