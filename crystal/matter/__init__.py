@@ -1,5 +1,5 @@
 #from ASE.ChemicalElements.ChemicalElements import Element, numbers
-__import__('pkg_resources').declare_namespace(__name__)
+#__import__('pkg_resources').declare_namespace(__name__)
 
 import crystalIO
 import atomic_properties
@@ -29,7 +29,7 @@ def atom( *args ):
 
     return Atom( Z = Z, symbol = symbol, mass = A )
 
-from matter.StructureErrors import *
+from matter.StructureErrors import StructureFormatError,LatticeError,SymmetryError,IsotropyError
 from matter.Atom import Atom
 from matter.Lattice import Lattice
 from matter.Structure import Structure
