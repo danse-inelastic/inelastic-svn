@@ -3,6 +3,13 @@
 
 import crystalIO
 import atomic_properties
+from matter.StructureErrors import StructureFormatError,LatticeError,SymmetryError,IsotropyError
+from matter.Atom import Atom
+from matter.Lattice import Lattice
+from matter.Structure import Structure
+
+# obtain version information
+from matter.version import __version__
 
 def atom( *args ):
     """create an atom
@@ -29,10 +36,4 @@ def atom( *args ):
 
     return Atom( Z = Z, symbol = symbol, mass = A )
 
-from matter.StructureErrors import StructureFormatError,LatticeError,SymmetryError,IsotropyError
-from matter.Atom import Atom
-from matter.Lattice import Lattice
-from matter.Structure import Structure
 
-# obtain version information
-from matter.version import __version__
