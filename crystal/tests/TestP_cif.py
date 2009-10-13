@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-"""Unit tests for diffpy.Structure.Parsers.P_cif module
+"""Unit tests for matter.Parsers.P_cif module
 """
 
 # version
@@ -14,9 +14,9 @@ thisfile = locals().get('__file__', 'TestP_cif.py')
 tests_dir = os.path.dirname(os.path.abspath(thisfile))
 testdata_dir = os.path.join(tests_dir, 'testdata')
 
-from diffpy.Structure.Parsers.P_cif import *
-from diffpy.Structure import Structure
-from diffpy.Structure import StructureFormatError
+from matter.Parsers.P_cif import *
+from matter import Structure
+from matter import StructureFormatError
 
 ##############################################################################
 class TestRoutines(unittest.TestCase):
@@ -38,12 +38,12 @@ class TestRoutines(unittest.TestCase):
     def test_getSymOp(self):
         """check getSymOp()
         """
-        from diffpy.Structure.SpaceGroups import SymOp
-        from diffpy.Structure.SpaceGroups import Rot_X_mY_Z, Tr_0_12_12
+        from matter.SpaceGroups import SymOp
+        from matter.SpaceGroups import Rot_X_mY_Z, Tr_0_12_12
         op = getSymOp('x,1/2-y,1/2+z')
         op_std = SymOp(Rot_X_mY_Z, Tr_0_12_12)
         self.assertEqual(str(op_std), str(op))
-        from diffpy.Structure.SpaceGroups import Rot_mX_mXY_Z, Tr_0_0_12
+        from matter.SpaceGroups import Rot_mX_mXY_Z, Tr_0_0_12
         op1 = getSymOp('-x,-x+y,1/2+z')
         op1_std = SymOp(Rot_mX_mXY_Z, Tr_0_0_12)
         self.assertEqual(str(op1_std), str(op1))

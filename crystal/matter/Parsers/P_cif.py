@@ -68,23 +68,22 @@ class P_cif(StructureParser):
         '_tr_atom_site_cartn_x',
         '_tr_atom_site_cartn_y',
         '_tr_atom_site_cartn_z',
+        '_tr_atom_site_U_iso_or_equiv',
+        '_tr_atom_site_B_iso_or_equiv',
+        '_tr_atom_site_adp_type', '_tr_atom_site_thermal_displace_type',
         '_tr_atom_site_occupancy',
-#        '_tr_atom_site_U_iso_or_equiv',
-#        '_tr_atom_site_B_iso_or_equiv',
-#        '_tr_atom_site_adp_type', 
-#        '_tr_atom_site_thermal_displace_type',
-#        '_tr_atom_site_aniso_U_11',
-#        '_tr_atom_site_aniso_U_22',
-#        '_tr_atom_site_aniso_U_33',
-#        '_tr_atom_site_aniso_U_12',
-#        '_tr_atom_site_aniso_U_13',
-#        '_tr_atom_site_aniso_U_23',
-#        '_tr_atom_site_aniso_B_11',
-#        '_tr_atom_site_aniso_B_22',
-#        '_tr_atom_site_aniso_B_33',
-#        '_tr_atom_site_aniso_B_12',
-#        '_tr_atom_site_aniso_B_13',
-#        '_tr_atom_site_aniso_B_23',
+        '_tr_atom_site_aniso_U_11',
+        '_tr_atom_site_aniso_U_22',
+        '_tr_atom_site_aniso_U_33',
+        '_tr_atom_site_aniso_U_12',
+        '_tr_atom_site_aniso_U_13',
+        '_tr_atom_site_aniso_U_23',
+        '_tr_atom_site_aniso_B_11',
+        '_tr_atom_site_aniso_B_22',
+        '_tr_atom_site_aniso_B_33',
+        '_tr_atom_site_aniso_B_12',
+        '_tr_atom_site_aniso_B_13',
+        '_tr_atom_site_aniso_B_23',
         ))
 
     BtoU = 1.0/(8 * numpy.pi**2)
@@ -303,7 +302,7 @@ class P_cif(StructureParser):
         # execute specialized block parsers
         self._parse_lattice(block)
         self._parse_atom_site_label(block)
-        #self._parse_atom_site_aniso_label(block)
+        self._parse_atom_site_aniso_label(block)
         self._parse_space_group_symop_operation_xyz(block)
         return
 
