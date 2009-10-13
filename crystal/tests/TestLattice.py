@@ -1,12 +1,5 @@
 ##############################################################################
 #
-# Structure         by DANSE Diffraction group
-#                   Simon J. L. Billinge
-#                   (c) 2006 trustees of the Michigan State University.
-#                   All rights reserved.
-#
-# File coded by:    Pavol Juhas
-#
 # See AUTHORS.txt for a list of people who contributed.
 # See LICENSE.txt for license information.
 #
@@ -19,7 +12,7 @@ __id__ = "$Id: TestLattice.py 2825 2009-03-09 04:33:12Z juhas $"
 
 import unittest
 
-from diffpy.Structure import Lattice, LatticeError
+from matter import Lattice, LatticeError
 
 ##############################################################################
 class TestLattice(unittest.TestCase):
