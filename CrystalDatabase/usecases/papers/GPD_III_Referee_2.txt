@@ -24,7 +24,16 @@ authors' procedure themselves.
 
 Response:
 ---------
-First, we apologize for the reviewers not getting access to GPD II--our intention was to specify that the manuscripts be reviewed together, or at least that the reviewers of GPD III be given a copy of GPD II.  Unfortunately such specifications sometimes are "lost in translation" while transmitting the papers to various staff members.  And yes, originally this work and GPD II were together, but the resulting length of each manuscript (and its supplementary material) was such that a division was absolutely necessary (GPD II and its supplementary material are 63 pages).  We apologize again for reviewer 2 not having direct access to GPD II.
+Note: the following shorthand will be used:
+-----
+GPD I: Molecular crystal global phase diagrams I: Method of construction, (with J.A. Mettes and R.B. McClurg), Acta Cryst. A 60, 621-636, 2004 
+
+GPD II: Molecular crystal global phase diagrams II: Reference lattices (with R.B. McClurg), submitted to Acta Crystallographica A, 2009
+
+GPD III: this work
+
+First, we apologize for reviewer 2 not getting access to GPD II--our intention was to specify that the manuscripts be reviewed together, or at least that the reviewers of GPD III be given a copy of GPD II.  Unfortunately such specifications sometimes are "lost in translation" while transmitting the papers to various staff members.  And yes, originally this work and GPD II were together, but the resulting length of each manuscript (and its supplementary material) was such that a division was absolutely necessary (GPD II and its supplementary material are 63 pages).  We apologize again for reviewer 2 not having direct access to GPD II.
+
 
 1. Quite generally, the authors should explain what they mean by "global
 phase diagrams", even though this is the third paper in a sequence. Here
@@ -47,14 +56,14 @@ this regard?
 
 Response:
 ---------
-Yes, that is one of the purposes of GPDs in general.  They allow one to classify polymorphs and help elucidate whether a given structure is metastable or not.  This can be done by examinging the vicinity in parameter space of other crystallographic phases. 
+Yes, that is one of the purposes of GPDs in general.  They allow one to classify polymorphs and help elucidate whether a given structure is metastable or not.  This can be done by examining the vicinity in parameter space of other crystallographic phases. 
 
 
 3. Equation 1: Where is "l" in the formula, and what is its meaning?
 
 Response:
 ---------
-The "l" is a parameter that indexes the spherical harmonics intervening the Wigner functions.  It ranges from |li - lj| to li+ lj and is essentially a product of the mathematics--forming a complete basis set over SO3 x S2 x SO3.  As a complete basis set, these functions have been used extensively in the quantum chemistry literature (see the paper by van der Avoird referenced on page 8), and this has allowed some physical insight into the meaning of "l".  For instance, all electrostatic forces are present in the nu_{li,l,lj} where l = li + lj.  
+The "l" is a parameter that indexes the spherical harmonics intervening the Wigner functions.  It ranges from |li - lj| to li + lj and is essentially a product of the mathematics--forming a complete basis set over SO3 x S2 x SO3.  As a complete set, these functions have been used extensively in the quantum chemistry literature (see the paper by van der Avoird referenced on page 8), and this has allowed some physical insight into the meaning of "l".  For instance, all electrostatic forces are present in the nu_{li,l,lj} where l = li + lj.  
 
 
 4. Equation 2: If someone wants to follow the authors prescription in
@@ -64,7 +73,8 @@ summation.
 
 Response:
 ---------
-We completely agree and would wholeheartedly encourage reading GPD I at least.  However, a better explanation would be convenient as well so it has been appendixed as indicated.  However, we also would encourage the reviewer to wait for a much better thermodynamic treatment (to replace the mean field approach of GPD I).
+   We completely agree and would wholeheartedly encourage reading GPD I at least.  However, a better explanation would be convenient as well so it has been appendicized as indicated.  
+   However, if reviewer 2 wants to understand this work well enough in order to reproduce it, we suggest the following.  First, understand that GPD I contains an exposition of the core concepts such as we also would encourage the reviewer to wait for a much better thermodynamic treatment (to replace the mean field approach of GPD I).
 
 
 5. Page 10, top: Is the assumption justified that including only pairwise
@@ -72,7 +82,7 @@ interactions among nearest neighbors is sufficient?
 
 Response:
 ---------
-This is an assumption which, to a first approximation, is probably adequate for most van der Waals crystals (the majority of molecular crystals).  It would be good to include second-neighbor interactions, particularly when starting from reference lattices which are not a sphere packing as discussed in GPD II.  However, this of course leads to greater computational cost.  Thus we feel the current approach is adequate, but subsequent studies including more complex potentials such as second-neighbor interactions or many-body effects would certainly be interesting.  
+This is an assumption which, to a first approximation, is probably adequate for most van der Waals crystals (the majority of molecular crystals).  It would be good to include second-neighbor interactions, particularly when starting from reference lattices which are not a sphere packing as discussed in GPD II.  However, this of course leads to greater computational cost and worse, more axes on the GPD!  Thus we feel the current approach is adequate, but subsequent studies including more rich potentials such as second-neighbor or many-body effects would certainly be interesting.  
 
 
 Page 11: Equation 5: What is A, what is V? (A = free energy at T = 0?, V =
@@ -80,7 +90,7 @@ potential energy / total energy?)
 
 Response:
 ---------
-Yes, that is more or less right..."A" is the free energy (at any temperature) and V is the potential energy (since kinetic energy would be 0 at T=0).  Thus the zero point energy is implicitely included in V, etc.  
+Yes, that is more or less right..."A" is the free energy (at any temperature) and V is the potential energy (since kinetic energy would be 0 at T=0).  Thus the zero point energy is implicitly included in V, etc.  
 
 
 Page 13: First paragraph: There are very many paths between two space
@@ -90,7 +100,7 @@ pick the ones they present?
 
 Response:
 ---------
-Yes, that is more or less right..."A" is the free energy (at any temperature) and V is the potential energy (since kinetic energy would be 0 at T=0).  Thus the zero point energy is implicitely included in V, etc.  
+Well, if one supposes that symmetry can be "added" (i.e. molecules suddenly arrange to a *more* symmetrical structure) as well as lost (molecules continue to lose entropy and break their high-symmetry state)
 
 
 Page 15, top: The restrictions in the allowed ISs appear rather strong - even
@@ -99,7 +109,7 @@ structures.
 
 Response:
 ---------
-Yes, that is more or less right..."A" is the free energy (at any temperature) and V is the potential energy (since kinetic energy would be 0 at T=0).  Thus the zero point energy is implicitely included in V, etc.  
+They are excessively strong and could be extended to Z' > 1
 
 
 Page 16, beginning section 2.2.4: I really have a hard time following what
@@ -110,7 +120,7 @@ those which are dimensionless!)?
 
 Response:
 ---------
-Yes, that is more or less right..."A" is the free energy (at any temperature) and V is the potential energy (since kinetic energy would be 0 at T=0).  Thus the zero point energy is implicitely included in V, etc.  
+
 
 
 Page 17, equation 8: What are the units of the various potential
@@ -118,7 +128,7 @@ parameters?
 
 Response:
 ---------
-Yes, that is more or less right..."A" is the free energy (at any temperature) and V is the potential energy (since kinetic energy would be 0 at T=0).  Thus the zero point energy is implicitely included in V, etc.  
+
 
 
 Page 17, right after equation 8: The authors state that MEZDIE01
@@ -127,7 +137,7 @@ this used as input to their calculations?
 
 Response:
 ---------
-Yes, that is more or less right..."A" is the free energy (at any temperature) and V is the potential energy (since kinetic energy would be 0 at T=0).  Thus the zero point energy is implicitely included in V, etc.  
+
 
 
 Page 17, section 2.2.5: Where do the authors get the target structure and its
@@ -139,7 +149,7 @@ application of the authors' rules afterwards.
 
 Response:
 ---------
-Yes, that is more or less right..."A" is the free energy (at any temperature) and V is the potential energy (since kinetic energy would be 0 at T=0).  Thus the zero point energy is implicitely included in V, etc.  
+
 
 
 Page 18: A citation for genetic algorithms is Holland's work in the mid-
@@ -147,7 +157,7 @@ seventies.
 
 Response:
 ---------
-Yes, that is more or less right..."A" is the free energy (at any temperature) and V is the potential energy (since kinetic energy would be 0 at T=0).  Thus the zero point energy is implicitely included in V, etc.  
+
 
 
 Page 20, second paragraph: Is there a connection to "real" energies of solids
@@ -155,7 +165,7 @@ or liquids? If so, how are these energies computed?
 
 Response:
 ---------
-Yes, that is more or less right..."A" is the free energy (at any temperature) and V is the potential energy (since kinetic energy would be 0 at T=0).  Thus the zero point energy is implicitely included in V, etc.  
+
 
 
 Page 21: The authors refer to free energy calculations. I do not see any "free
@@ -164,7 +174,7 @@ proxy for the energy or a cost function.
 
 Response:
 ---------
-Yes, that is more or less right..."A" is the free energy (at any temperature) and V is the potential energy (since kinetic energy would be 0 at T=0).  Thus the zero point energy is implicitely included in V, etc.  
+Our apologies again for omm
 
 
 Page 27: I realize that the authors imagine readers reading all their papers

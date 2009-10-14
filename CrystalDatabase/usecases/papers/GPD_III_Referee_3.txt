@@ -21,8 +21,8 @@ Consequently it does not seem that there is viability in the phase diagrams that
 various physical conditions,
 
 Response:
-    With all due respect for an educated referee that has invested time to give constructive feedback, it seems there may be a misunderstanding.  The potential is not based on a "microscopic director" description with only 2 degrees of freedom, but as stated on page 4, it is based on a complete set of basis functions over SO3 x S2 x SO3 and so has 8 degrees of freedom.  However, since the positions of the molecules are fixed (for now) in their set of reference lattices, the S2 part of the potential has *no* degrees of freedom.  Also, the orbital orientations have no association to this part (S2), or with each other ("spin balance"), but each molecule is free to rotate in whatever way it chooses.  Thus local orientational "balances of momentum" between molecules are unrelated to each molecule's angular momentum.  According to the partition function, in fact, angular momemtum for each molecule "integrates out", leaving only a temperature-dependent factor.
-    Additionally, in the first Global Phase Diagrams paper (GPD I) we discussed the full model which begins from elementary principles of statistical mechanics with free energetic (and entropic) effects fully included.  It particularly focuses on the first set of phases forming after the initial symmetry is broken at higher temperatures.  In the second paper (GPD II) we discuss the set of reference lattices appropriate to tetrahedral molecules, and in this work (GPD III), we discuss the low-temperature phases and as such, entropic effects are mild and so are not included.  Also, unlike liquid crystals, long-range alignment tensors are not necessary to describe most molecular crystals, which generally are fairly rigid, despite a certain amount of thermal disorder.  Thus long range order is always present and material-wide strains do not influence the equilibrium thermodynamics or the applications of molecular crystals like they do to liquid crystals. 
+    With all due respect for an educated referee that has invested time to give constructive feedback, it seems there may be a misunderstanding.  The potential is not based on a "microscopic director" description with only 2 degrees of freedom, but as discussed in more detail on page 4, is based on a complete set of basis functions over SO3 x S2 x SO3 and so has 8 degrees of freedom.  However, since the positions of the molecules are fixed (for now) in their set of reference lattices, the S2 part of the potential has *no* degrees of freedom.  Also, the orbital orientations have no association to this part (S2), or with each other ("spin balance"), but each molecule is free to rotate in whatever way it chooses.  Thus local orientational "balances of momentum" between molecules are unrelated to each molecule's angular momentum.  According to the partition function, in fact, angular momentum for each molecule "integrates out", leaving only a temperature-dependent factor.
+    We thank the reviewer for pointing out the ommision of entropic effects--many studies on crystalline packing ignore these, even though they are typically highly non-negligible in molecular crystals which frequently have melting points near room temperature.  It is for this reason that in the first Global Phase Diagrams paper (GPD I) we introduced the full model which begins from elementary principles of statistical mechanics with free energetic/entropic effects fully included.  It particularly focuses on the first set of phases forming after the initial symmetry is broken at higher temperatures.  In the second paper (GPD II) we discuss the set of reference lattices appropriate to tetrahedral molecules, and in this work (GPD III), we discuss the low-temperature phases and as such, entropic effects are mild and so are not included.  Also, unlike liquid crystals, long-range alignment tensors are not necessary to describe most molecular crystals, which generally are fairly rigid, despite a certain amount of thermal disorder.  Thus long range order is always present and material-wide strains do not influence the equilibrium thermodynamics or the applications of molecular crystals like they do to liquid crystals. 
 
 GPD I: Molecular crystal global phase diagrams I: Method of construction, (with J.A. Mettes and R.B. McClurg), Acta Cryst. A 60, 621-636, 2004 
 
@@ -45,6 +45,7 @@ dimensional exercise. The conclusions of the present authors could be compared w
 the ANNNI models, for example.
 
 Response:
+---------
 This is a very good point and we thank the reviewer for pointing it out, but there is one less-obvious problem with a direct comparison: the extra degree of freedom that a tetahedron has compared to a line changes everything--the potential (and phase diagram) are completely different).  The
 
 
@@ -53,6 +54,16 @@ readership of the journal is the relation between the global phase diagram of es
 and that of the bulk molecular crystals especially in the context and as reflected in the local critical
 behavior of surfaceswith or without defectsseparating the liquid and solid phase. Some
 mention of these aspects would be useful.
+
+Response:
+---------
+This is a very good point and we thank the reviewer for pointing it out, but there is one less-obvious problem with a direct comparison: the extra degree of freedom that a tetahedron has compared to a line changes everything--the potential (and phase diagram) are completely different).  The
+
+
 In my opinion, the advantages of methodology of the authors using interaction potentials obtained
 from orbital orientations, has to be examined in the context of those already available in the
 literature.
+
+Response:
+---------
+This is a very good point and we thank the reviewer for pointing it out, but there is one less-obvious problem with a direct comparison: the extra degree of freedom that a tetahedron has compared to a line changes everything--the potential (and phase diagram) are completely different).  The
