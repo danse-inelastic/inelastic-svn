@@ -1,0 +1,64 @@
+Der ovjour.sty wurde entwickelt, um ein gemeinsames
+Style-File für alle Zeitschriften des Oldenbourg 
+Wissenschaftsverlags zur Verfügung zu stellen.
+
+Der Hauptaugenmerk ist darauf gerichtet, eine einheitliche
+und komfortable Erfassung der Metadaten eines Beitrags
+zu ermöglichen, um eine weitgehend automatisierte
+Übernahme in die Datenbank des Verlages zu gewährleisten.
+Bitte unterstützen Sie eine schnelle und reibungslose
+Verarbeitung Ihres Beitrags, indem Sie die dafür vorgesehenen
+Felder sorgfältig ausfüllen. In der Datei "article.tex" in
+diesem Verzeichnis sind diese Felder aufgeführt und
+beschrieben. Es ist sinvoll, diese Datei als Hauptdatei
+für Ihren Beitrag zu verwenden, und die entsprechenden
+Informationen einzutragen.
+
+Nicht alle Felder werden für jede Zeitschrift
+benötigt. Bitte entnehmen Sie nachfolgender Tabelle
+welche Felder für Ihren Beitrag obligatorisch (o),
+fakultativ (f) bzw. überflüssig (u) sind und vergessen 
+Sie nicht, die Autorenbilder beizulegen.
+
+                   an  at  ic  it  rc  sd  tm  zk  zp
+\journalname        o   o   o   o   o   o   o   o   o
+\title[de]          u   f   o   o   u   u   o   u   u
+\title[en]          o   o   f   o   o   o   o   o   o
+\corresponding      o   o   o   o   o   o   o   o   o
+\abstract           o   o   f   o   o   o   o   o   o
+\zusammenfassung    o   o   f   o   u   u   o   u   u
+\keywords           u   o   u   o   o   o   o   o   o
+\schlagwort         u   o   f   u   o   u   o   o   u
+\dedication         f   f   f   f   f   f   f   f   f
+\vita               u   o   f   o   u   u   f   u   u
+
+Eine Besonderheit stellt das Makro \title dar. Da es sowohl
+Beiträge mit deutschem als auch englischem Titel und solche
+mit beiden gibt, muss hier die Spache mit angegeben werden
+(\title[de]{...}, \title[en]{...}).
+
+Der eigentliche Artikel wird mit der Standard LaTeX-Klasse
+"article" übersetzt. ovjour.sty passt demgegenüber
+lediglich die Textbreite an, um Ihnen zu ermöglichen,
+umfangreichere freistehende Formeln entsprechend
+aufzubereiten. Bitte ignorieren Sie überstehende Textzeilen,
+unschöne Seitenumbrüche etc. Bitte fügen Sie Bilder und Tabellen
+am Ende des Beitrags nach \end{thebibliography} ein. Sie werden
+sonst bei Zeitschriften mit mehrspaltigem Layout nicht ausgegeben.
+Sollte Ihr Beitrag keine Bibliography enthalten, fügen Sie bitte
+am Ende "\nobibliography" ein und danach die Bilder und Tabellen.
+Für die Festlegung der Bildbreiten stehen die Maße
+\colwidth, \halfwidth und \fullwidth zur Verfügung.
+Sie sollen es Ihnen ermöglichen, Ihre Bilder auf eine
+von drei festen Größen zu skalieren (z.B. 
+\includegraphics[width=\halfwidth]{fig1.eps}). 
+\colwidth ist dabei die Breite der Textspalte,
+\fullwidth die Gesamtbreite des Textes (bei einspaltigen
+Zeitschriften irrelevant), \halfwidth ein Zwischenmaß.
+
+Die Formatierung Ihres Beitrags erfolgt im Verlag. Es ist
+deshalb hilfreich, wenn Sie ausschließlich Makros zur
+inhaltlichen Auszeichnung des Textes verwenden.
+
+Im Verzeichnis "example" finden Sie ein Beispiel eines
+vollständigen Artikels.

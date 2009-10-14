@@ -1,0 +1,46 @@
+This is BibTeX, Version 0.99c (Web2C 7.5.4)
+The top-level auxiliary file: SecondPaperRev.aux
+The style file: apsrev.bst
+Database file #1: thesisbib.bib
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+You've used 28 entries,
+            3411 wiz_defined-function locations,
+            1333 strings with 14386 characters,
+and the built_in function-call counts, 19957 in all, are:
+= -- 1085
+> -- 707
+< -- 105
++ -- 583
+- -- 173
+* -- 2767
+:= -- 2114
+add.period$ -- 28
+call.type$ -- 28
+change.case$ -- 115
+chr.to.int$ -- 27
+cite$ -- 28
+duplicate$ -- 1825
+empty$ -- 1690
+format.name$ -- 442
+if$ -- 3734
+int.to.chr$ -- 2
+int.to.str$ -- 29
+missing$ -- 282
+newline$ -- 99
+num.names$ -- 86
+pop$ -- 498
+preamble$ -- 1
+purify$ -- 112
+quote$ -- 0
+skip$ -- 726
+stack$ -- 0
+substring$ -- 584
+swap$ -- 1473
+text.length$ -- 91
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 156
+warning$ -- 0
+while$ -- 80
+width$ -- 0
+write$ -- 287

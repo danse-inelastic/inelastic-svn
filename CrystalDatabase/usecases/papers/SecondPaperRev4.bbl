@@ -1,0 +1,354 @@
+\begin{thebibliography}{43}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\expandafter\ifx\csname bibnamefont\endcsname\relax
+  \def\bibnamefont#1{#1}\fi
+\expandafter\ifx\csname bibfnamefont\endcsname\relax
+  \def\bibfnamefont#1{#1}\fi
+\expandafter\ifx\csname citenamefont\endcsname\relax
+  \def\citenamefont#1{#1}\fi
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\providecommand{\bibinfo}[2]{#2}
+\providecommand{\eprint}[2][]{\url{#2}}
+
+\bibitem[{\citenamefont{Mettes et~al.}(2004)\citenamefont{Mettes, Keith, and
+  McClurg}}]{Mettes04}
+\bibinfo{author}{\bibfnamefont{J.~A.} \bibnamefont{Mettes}},
+  \bibinfo{author}{\bibfnamefont{J.~B.} \bibnamefont{Keith}}, \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{R.~B.} \bibnamefont{McClurg}},
+  \bibinfo{journal}{Acta Cryst. A} \textbf{\bibinfo{volume}{60}},
+  \bibinfo{pages}{621} (\bibinfo{year}{2004}).
+
+\bibitem[{\citenamefont{McClurg and Keith}(2008)}]{McClurg08}
+\bibinfo{author}{\bibfnamefont{R.~B.} \bibnamefont{McClurg}} \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{J.~B.} \bibnamefont{Keith}}
+  (\bibinfo{year}{2008}), \bibinfo{note}{submitted}.
+
+\bibitem[{\citenamefont{Desiraju}(1989)}]{Desiraju89}
+\bibinfo{author}{\bibfnamefont{G.~R.} \bibnamefont{Desiraju}},
+  \emph{\bibinfo{title}{Crystal Engineering: The Design of Organic Solids}}
+  (\bibinfo{publisher}{Elsevier}, \bibinfo{address}{New York},
+  \bibinfo{year}{1989}).
+
+\bibitem[{\citenamefont{Braga et~al.}(1999)\citenamefont{Braga, Grepioni, and
+  Orpen}}]{Braga99}
+\bibinfo{editor}{\bibfnamefont{D.}~\bibnamefont{Braga}},
+  \bibinfo{editor}{\bibfnamefont{F.}~\bibnamefont{Grepioni}}, \bibnamefont{and}
+  \bibinfo{editor}{\bibfnamefont{A.~G.} \bibnamefont{Orpen}}, eds.,
+  \emph{\bibinfo{title}{Crystal Engineering: From Molecules and Crystals to
+  Materials}} (\bibinfo{publisher}{Kluwer Academic}, \bibinfo{address}{Boston},
+  \bibinfo{year}{1999}).
+
+\bibitem[{\citenamefont{Simon}(2000)}]{Bassoul00}
+\bibinfo{author}{\bibfnamefont{P.}~\bibnamefont{Simon},
+  \bibfnamefont{J.~Bassoul}}, \emph{\bibinfo{title}{Design of Molecular
+  Materials: Supramolecular Engineering}} (\bibinfo{publisher}{John Wiley and
+  Sons}, \bibinfo{address}{New York}, \bibinfo{year}{2000}).
+
+\bibitem[{\citenamefont{Lommerse et~al.}(2000)\citenamefont{Lommerse,
+  Motherwell, Ammon, Dunitz, Gavezzotti, Hofmann, Leusen, Mooij, Price,
+  Schweizer et~al.}}]{Lommerse00}
+\bibinfo{author}{\bibfnamefont{J.~P.~M.} \bibnamefont{Lommerse}},
+  \bibinfo{author}{\bibfnamefont{W.~D.~S.} \bibnamefont{Motherwell}},
+  \bibinfo{author}{\bibfnamefont{H.~L.} \bibnamefont{Ammon}},
+  \bibinfo{author}{\bibfnamefont{J.~D.} \bibnamefont{Dunitz}},
+  \bibinfo{author}{\bibfnamefont{A.}~\bibnamefont{Gavezzotti}},
+  \bibinfo{author}{\bibfnamefont{D.~W.~M.} \bibnamefont{Hofmann}},
+  \bibinfo{author}{\bibfnamefont{F.~J.~J.} \bibnamefont{Leusen}},
+  \bibinfo{author}{\bibfnamefont{W.~T.~M.} \bibnamefont{Mooij}},
+  \bibinfo{author}{\bibfnamefont{S.~L.} \bibnamefont{Price}},
+  \bibinfo{author}{\bibfnamefont{B.}~\bibnamefont{Schweizer}},
+  \bibnamefont{et~al.}, \bibinfo{journal}{Acta Crystallogr. B}
+  \textbf{\bibinfo{volume}{56}}, \bibinfo{pages}{697} (\bibinfo{year}{2000}).
+
+\bibitem[{\citenamefont{Holman et~al.}(2001)\citenamefont{Holman, Pivovar,
+  Swift, and Ward}}]{Holman01b}
+\bibinfo{author}{\bibfnamefont{K.~T.} \bibnamefont{Holman}},
+  \bibinfo{author}{\bibfnamefont{A.~M.} \bibnamefont{Pivovar}},
+  \bibinfo{author}{\bibfnamefont{J.~A.} \bibnamefont{Swift}}, \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{M.~D.} \bibnamefont{Ward}},
+  \bibinfo{journal}{Acc. Chem. Res.} \textbf{\bibinfo{volume}{34}},
+  \bibinfo{pages}{107} (\bibinfo{year}{2001}).
+
+\bibitem[{\citenamefont{Moulton and Zaworotko}(2001)}]{Moulton01}
+\bibinfo{author}{\bibfnamefont{B.}~\bibnamefont{Moulton}} \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{M.~J.} \bibnamefont{Zaworotko}},
+  \bibinfo{journal}{Chem. Rev.} \textbf{\bibinfo{volume}{101}},
+  \bibinfo{pages}{1629} (\bibinfo{year}{2001}).
+
+\bibitem[{\citenamefont{Motherwell et~al.}(2002)\citenamefont{Motherwell,
+  Ammon, Dunitz, Dzyabchenko, Erk, Gavezzotti, Hofmann, Leusen, Lommerse, Mooij
+  et~al.}}]{Motherwell02}
+\bibinfo{author}{\bibfnamefont{W.~D.~S.} \bibnamefont{Motherwell}},
+  \bibinfo{author}{\bibfnamefont{H.~L.} \bibnamefont{Ammon}},
+  \bibinfo{author}{\bibfnamefont{J.~D.} \bibnamefont{Dunitz}},
+  \bibinfo{author}{\bibfnamefont{A.}~\bibnamefont{Dzyabchenko}},
+  \bibinfo{author}{\bibfnamefont{P.}~\bibnamefont{Erk}},
+  \bibinfo{author}{\bibfnamefont{A.}~\bibnamefont{Gavezzotti}},
+  \bibinfo{author}{\bibfnamefont{D.~W.~M.} \bibnamefont{Hofmann}},
+  \bibinfo{author}{\bibfnamefont{F.~J.~J.} \bibnamefont{Leusen}},
+  \bibinfo{author}{\bibfnamefont{J.~P.~M.} \bibnamefont{Lommerse}},
+  \bibinfo{author}{\bibfnamefont{W.~T.~M.} \bibnamefont{Mooij}},
+  \bibnamefont{et~al.}, \bibinfo{journal}{Acta Cryst. B}
+  \textbf{\bibinfo{volume}{58}}, \bibinfo{pages}{647} (\bibinfo{year}{2002}).
+
+\bibitem[{\citenamefont{Neumann et~al.}(2003)\citenamefont{Neumann, Press,
+  Noldeke, Asmussen, Prager, and Ibberson}}]{Neumann03}
+\bibinfo{author}{\bibfnamefont{M.~A.} \bibnamefont{Neumann}},
+  \bibinfo{author}{\bibfnamefont{W.}~\bibnamefont{Press}},
+  \bibinfo{author}{\bibfnamefont{C.}~\bibnamefont{Noldeke}},
+  \bibinfo{author}{\bibfnamefont{B.}~\bibnamefont{Asmussen}},
+  \bibinfo{author}{\bibfnamefont{M.}~\bibnamefont{Prager}}, \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{R.~M.} \bibnamefont{Ibberson}},
+  \bibinfo{journal}{J. Chem. Phys.} \textbf{\bibinfo{volume}{119}},
+  \bibinfo{pages}{1586} (\bibinfo{year}{2003}).
+
+\bibitem[{\citenamefont{van Konynenburg and Scott}(1980)}]{vanKonynenburg80}
+\bibinfo{author}{\bibfnamefont{P.~H.} \bibnamefont{van Konynenburg}}
+  \bibnamefont{and} \bibinfo{author}{\bibfnamefont{R.~L.} \bibnamefont{Scott}},
+  \bibinfo{journal}{Philos. Trans. R. Soc. London, Ser. A}
+  \textbf{\bibinfo{volume}{298}}, \bibinfo{pages}{495} (\bibinfo{year}{1980}).
+
+\bibitem[{\citenamefont{Bolz et~al.}(1998)\citenamefont{Bolz, Deiters, Peters,
+  and de~Loos}}]{Bolz98}
+\bibinfo{author}{\bibfnamefont{A.}~\bibnamefont{Bolz}},
+  \bibinfo{author}{\bibfnamefont{U.~K.} \bibnamefont{Deiters}},
+  \bibinfo{author}{\bibfnamefont{C.~J.} \bibnamefont{Peters}},
+  \bibnamefont{and} \bibinfo{author}{\bibfnamefont{T.~W.}
+  \bibnamefont{de~Loos}}, \bibinfo{journal}{Pure Appl. Chem.}
+  \textbf{\bibinfo{volume}{70}}, \bibinfo{pages}{2233} (\bibinfo{year}{1998}).
+
+\bibitem[{\citenamefont{Aparicio-Martinez and
+  Hall}({\natexlab{a}})}]{AparicioMartinez07a}
+\bibinfo{author}{\bibfnamefont{S.}~\bibnamefont{Aparicio-Martinez}}
+  \bibnamefont{and} \bibinfo{author}{\bibfnamefont{K.~R.} \bibnamefont{Hall}},
+  \bibinfo{journal}{Ind. Eng. Chem. Res.}  (????{\natexlab{a}}).
+
+\bibitem[{\citenamefont{Aparicio-Martinez and
+  Hall}({\natexlab{b}})}]{AparicioMartinez07b}
+\bibinfo{author}{\bibfnamefont{S.}~\bibnamefont{Aparicio-Martinez}}
+  \bibnamefont{and} \bibinfo{author}{\bibfnamefont{K.~R.} \bibnamefont{Hall}},
+  \bibinfo{journal}{Ind. Eng. Chem. Res.}  (????{\natexlab{b}}).
+
+\bibitem[{\citenamefont{Cismondi and Michelsen}()}]{Cismondi07}
+\bibinfo{author}{\bibfnamefont{M.}~\bibnamefont{Cismondi}} \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{M.~L.} \bibnamefont{Michelsen}},
+  \bibinfo{journal}{J. Supercrit. Fluid.}  (????).
+
+\bibitem[{\citenamefont{I. et~al.}()\citenamefont{I., J., H., V., and
+  T.}}]{Polishuk00}
+\bibinfo{author}{\bibfnamefont{P.}~\bibnamefont{I.}},
+  \bibinfo{author}{\bibfnamefont{W.}~\bibnamefont{J.}},
+  \bibinfo{author}{\bibfnamefont{S.}~\bibnamefont{H.}},
+  \bibinfo{author}{\bibfnamefont{Y.~L.} \bibnamefont{V.}}, \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{K.}~\bibnamefont{T.}}, \bibinfo{journal}{Fluid
+  Phase Equilib.}  (????).
+
+\bibitem[{\citenamefont{Polishuk et~al.}(2002)\citenamefont{Polishuk, Wisniak,
+  and Segura}}]{Polishuk02}
+\bibinfo{author}{\bibfnamefont{I.}~\bibnamefont{Polishuk}},
+  \bibinfo{author}{\bibfnamefont{J.}~\bibnamefont{Wisniak}}, \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{H.}~\bibnamefont{Segura}},
+  \bibinfo{journal}{Phys. Chem. Chem. Phys.} \textbf{\bibinfo{volume}{4}},
+  \bibinfo{pages}{879} (\bibinfo{year}{2002}).
+
+\bibitem[{\citenamefont{van Pelt et~al.}(1995)\citenamefont{van Pelt, Peters,
+  Swaan-Arons, and Dieters}}]{vanPelt95}
+\bibinfo{author}{\bibfnamefont{A.}~\bibnamefont{van Pelt}},
+  \bibinfo{author}{\bibfnamefont{C.~J.} \bibnamefont{Peters}},
+  \bibinfo{author}{\bibfnamefont{J.}~\bibnamefont{Swaan-Arons}},
+  \bibnamefont{and} \bibinfo{author}{\bibfnamefont{U.~K.}
+  \bibnamefont{Dieters}}, \bibinfo{journal}{J. Phys. Chem.}
+  \textbf{\bibinfo{volume}{102}}, \bibinfo{pages}{3361} (\bibinfo{year}{1995}).
+
+\bibitem[{\citenamefont{Michel et~al.}(1992)\citenamefont{Michel, Copley, and
+  Neumann}}]{Michel92}
+\bibinfo{author}{\bibfnamefont{K.~H.} \bibnamefont{Michel}},
+  \bibinfo{author}{\bibfnamefont{J.~R.~D.} \bibnamefont{Copley}},
+  \bibnamefont{and} \bibinfo{author}{\bibfnamefont{D.~A.}
+  \bibnamefont{Neumann}}, \bibinfo{journal}{Phys. Rev. Lett.}
+  \textbf{\bibinfo{volume}{68}}, \bibinfo{pages}{2929} (\bibinfo{year}{1992}).
+
+\bibitem[{\citenamefont{Lamoen and Michel}(1999)}]{Lamoen99}
+\bibinfo{author}{\bibfnamefont{D.}~\bibnamefont{Lamoen}} \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{K.~H.} \bibnamefont{Michel}},
+  \bibinfo{journal}{Phase Transitions} \textbf{\bibinfo{volume}{67}},
+  \bibinfo{pages}{789} (\bibinfo{year}{1999}).
+
+\bibitem[{\citenamefont{Allen and Motherwell}(2002)}]{Allen02}
+\bibinfo{author}{\bibfnamefont{F.~H.} \bibnamefont{Allen}} \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{W.~D.~S.} \bibnamefont{Motherwell}},
+  \bibinfo{journal}{Acta Cryst. B} \textbf{\bibinfo{volume}{58}},
+  \bibinfo{pages}{407} (\bibinfo{year}{2002}).
+
+\bibitem[{\citenamefont{Briels}(1980)}]{Briels80}
+\bibinfo{author}{\bibfnamefont{W.~J.} \bibnamefont{Briels}},
+  \bibinfo{journal}{J. Chem. Phys.} \textbf{\bibinfo{volume}{73}},
+  \bibinfo{pages}{1850} (\bibinfo{year}{1980}).
+
+\bibitem[{\citenamefont{van~der Avoird et~al.}(1994)\citenamefont{van~der
+  Avoird, Wormer, and Moszynski}}]{Avoird94}
+\bibinfo{author}{\bibfnamefont{A.}~\bibnamefont{van~der Avoird}},
+  \bibinfo{author}{\bibfnamefont{P.~E.~S.} \bibnamefont{Wormer}},
+  \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{R.}~\bibnamefont{Moszynski}},
+  \bibinfo{journal}{Chem. Rev.} \textbf{\bibinfo{volume}{94}},
+  \bibinfo{pages}{1931} (\bibinfo{year}{1994}).
+
+\bibitem[{\citenamefont{Varshalovich et~al.}(1988)\citenamefont{Varshalovich,
+  Moskalev, and Khersonskii}}]{Varshalovich88}
+\bibinfo{author}{\bibfnamefont{D.~A.} \bibnamefont{Varshalovich}},
+  \bibinfo{author}{\bibfnamefont{A.~N.} \bibnamefont{Moskalev}},
+  \bibnamefont{and} \bibinfo{author}{\bibfnamefont{V.~K.}
+  \bibnamefont{Khersonskii}}, \emph{\bibinfo{title}{Quantum Theory of Angular
+  Momentum}} (\bibinfo{publisher}{World Scientific}, \bibinfo{address}{Teaneck,
+  NJ}, \bibinfo{year}{1988}).
+
+\bibitem[{\citenamefont{Bradley and Cracknell}(1972)}]{Bradley72}
+\bibinfo{author}{\bibfnamefont{C.~J.} \bibnamefont{Bradley}} \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{A.~P.} \bibnamefont{Cracknell}},
+  \emph{\bibinfo{title}{The Mathematical Theory of Symmetry in Solids}}
+  (\bibinfo{publisher}{Oxford University Press}, \bibinfo{address}{New York},
+  \bibinfo{year}{1972}).
+
+\bibitem[{\citenamefont{van~der Avoird et~al.}(1980)\citenamefont{van~der
+  Avoird, Wormer, Mulder, and Berns}}]{Avoird80}
+\bibinfo{author}{\bibfnamefont{A.}~\bibnamefont{van~der Avoird}},
+  \bibinfo{author}{\bibfnamefont{P.~E.~S.} \bibnamefont{Wormer}},
+  \bibinfo{author}{\bibfnamefont{F.}~\bibnamefont{Mulder}}, \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{R.~M.} \bibnamefont{Berns}},
+  \bibinfo{journal}{Topics in Current Chemistry} \textbf{\bibinfo{volume}{93}},
+  \bibinfo{pages}{1} (\bibinfo{year}{1980}).
+
+\bibitem[{\citenamefont{Keith et~al.}(2004)\citenamefont{Keith, Mettes, and
+  McClurg}}]{Keith04c}
+\bibinfo{author}{\bibfnamefont{J.~B.} \bibnamefont{Keith}},
+  \bibinfo{author}{\bibfnamefont{J.~A.} \bibnamefont{Mettes}},
+  \bibnamefont{and} \bibinfo{author}{\bibfnamefont{R.~B.}
+  \bibnamefont{McClurg}}, \bibinfo{journal}{Crystal Growth and Design}
+  \textbf{\bibinfo{volume}{4}}, \bibinfo{pages}{1009} (\bibinfo{year}{2004}).
+
+\bibitem[{\citenamefont{Verwer and Leusen}(1998)}]{Verwer98}
+\bibinfo{author}{\bibfnamefont{P.}~\bibnamefont{Verwer}} \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{F.~J.~J.} \bibnamefont{Leusen}}, in
+  \emph{\bibinfo{booktitle}{Reviews in Computational Chemistry}}, edited by
+  \bibinfo{editor}{\bibfnamefont{K.~B.} \bibnamefont{Lipkowitz}}
+  \bibnamefont{and} \bibinfo{editor}{\bibfnamefont{D.~B.} \bibnamefont{Boyd}}
+  (\bibinfo{publisher}{Wiley-VCH}, \bibinfo{address}{New York},
+  \bibinfo{year}{1998}), vol.~\bibinfo{volume}{12}, pp.
+  \bibinfo{pages}{327--366}.
+
+\bibitem[{\citenamefont{Stokes and Hatch}(2002{\natexlab{a}})}]{Stokes02b}
+\bibinfo{author}{\bibfnamefont{H.~T.} \bibnamefont{Stokes}} \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{D.~M.} \bibnamefont{Hatch}},
+  \emph{\bibinfo{title}{Isotropy}},
+  \bibinfo{howpublished}{stokes.byu.edu/isotropy.html}
+  (\bibinfo{year}{2002}{\natexlab{a}}).
+
+\bibitem[{\citenamefont{Stokes et~al.}(1991)\citenamefont{Stokes, Hatch, and
+  Wells}}]{Stokes91}
+\bibinfo{author}{\bibfnamefont{H.~T.} \bibnamefont{Stokes}},
+  \bibinfo{author}{\bibfnamefont{D.~M.} \bibnamefont{Hatch}}, \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{J.~D.} \bibnamefont{Wells}},
+  \bibinfo{journal}{Phys. Rev. B.} \textbf{\bibinfo{volume}{43}},
+  \bibinfo{pages}{11010} (\bibinfo{year}{1991}).
+
+\bibitem[{\citenamefont{Lynden-Bell and Michel}(1994)}]{LyndenBell94}
+\bibinfo{author}{\bibfnamefont{R.~M.} \bibnamefont{Lynden-Bell}}
+  \bibnamefont{and} \bibinfo{author}{\bibfnamefont{K.~H.}
+  \bibnamefont{Michel}}, \bibinfo{journal}{Rev. Mod. Phys.}
+  \textbf{\bibinfo{volume}{66}}, \bibinfo{pages}{721} (\bibinfo{year}{1994}).
+
+\bibitem[{\citenamefont{Hloucha et~al.}(2001)\citenamefont{Hloucha, Lodge,
+  Lenhoff, and Sandler}}]{Hloucha01}
+\bibinfo{author}{\bibfnamefont{M.}~\bibnamefont{Hloucha}},
+  \bibinfo{author}{\bibfnamefont{J.}~\bibnamefont{Lodge}},
+  \bibinfo{author}{\bibfnamefont{A.}~\bibnamefont{Lenhoff}}, \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{S.}~\bibnamefont{Sandler}},
+  \bibinfo{journal}{Cryst.} \textbf{\bibinfo{volume}{64}},
+  \bibinfo{pages}{060104(R)} (\bibinfo{year}{2001}).
+
+\bibitem[{\citenamefont{Stokes and Hatch}(1988)}]{Stokes88}
+\bibinfo{author}{\bibfnamefont{H.~T.} \bibnamefont{Stokes}} \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{D.~M.} \bibnamefont{Hatch}},
+  \emph{\bibinfo{title}{Isotropy Subgroups of the 230 Crystallographic Space
+  Groups}} (\bibinfo{publisher}{World Scientific}, \bibinfo{address}{Teaneck,
+  NJ}, \bibinfo{year}{1988}).
+
+\bibitem[{\citenamefont{Padmaja et~al.}(1990)\citenamefont{Padmaja, Ramakumar,
+  and Viswamitra}}]{Padmaja90}
+\bibinfo{author}{\bibfnamefont{N.}~\bibnamefont{Padmaja}},
+  \bibinfo{author}{\bibfnamefont{S.}~\bibnamefont{Ramakumar}},
+  \bibnamefont{and} \bibinfo{author}{\bibfnamefont{M.~A.}
+  \bibnamefont{Viswamitra}}, \bibinfo{journal}{Acta Cryst. A}
+  \textbf{\bibinfo{volume}{46}}, \bibinfo{pages}{725} (\bibinfo{year}{1990}).
+
+\bibitem[{\citenamefont{Gdanitz}(1997)}]{Gdanitz97}
+\bibinfo{author}{\bibfnamefont{R.~J.} \bibnamefont{Gdanitz}}, in
+  \emph{\bibinfo{booktitle}{Theoretical Aspects and Computer Modeling of the
+  Molecular Solid State}}, edited by
+  \bibinfo{editor}{\bibfnamefont{A.}~\bibnamefont{Gavezzotti}}
+  (\bibinfo{publisher}{Wiley}, \bibinfo{address}{New York},
+  \bibinfo{year}{1997}), pp. \bibinfo{pages}{185--201}.
+
+\bibitem[{\citenamefont{Kirkpatrick et~al.}(1983)\citenamefont{Kirkpatrick,
+  Gelatt~Jr, and Vecchi}}]{Kirkpatrick83}
+\bibinfo{author}{\bibfnamefont{S.}~\bibnamefont{Kirkpatrick}},
+  \bibinfo{author}{\bibfnamefont{C.}~\bibnamefont{Gelatt~Jr}},
+  \bibnamefont{and} \bibinfo{author}{\bibfnamefont{M.}~\bibnamefont{Vecchi}},
+  \bibinfo{journal}{Science} \textbf{\bibinfo{volume}{220}},
+  \bibinfo{pages}{671 } (\bibinfo{year}{1983}).
+
+\bibitem[{\citenamefont{Schmalzried}(2003)}]{Schmalzried03}
+\bibinfo{author}{\bibfnamefont{H.}~\bibnamefont{Schmalzried}},
+  \bibinfo{journal}{Zeit. fur Physik. Chem.} \textbf{\bibinfo{volume}{217}},
+  \bibinfo{pages}{1281} (\bibinfo{year}{2003}).
+
+\bibitem[{\citenamefont{Missaghi et~al.}(2005)\citenamefont{Missaghi, Mettes,
+  and McClurg}}]{Missaghi04}
+\bibinfo{author}{\bibfnamefont{M.~N.} \bibnamefont{Missaghi}},
+  \bibinfo{author}{\bibfnamefont{J.~A.} \bibnamefont{Mettes}},
+  \bibnamefont{and} \bibinfo{author}{\bibfnamefont{R.~B.}
+  \bibnamefont{McClurg}} (\bibinfo{year}{2005}), \bibinfo{note}{in
+  Preparation}.
+
+\bibitem[{\citenamefont{Lang}(2003)}]{ggobi03}
+\bibinfo{author}{\bibfnamefont{D.~T.} \bibnamefont{Lang}},
+  \emph{\bibinfo{title}{Ggobi}}, \bibinfo{howpublished}{www.ggobi.org}
+  (\bibinfo{year}{2003}).
+
+\bibitem[{\citenamefont{Stone and Tough}(1984)}]{Stone84}
+\bibinfo{author}{\bibfnamefont{A.~J.} \bibnamefont{Stone}} \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{R.~J.~A.} \bibnamefont{Tough}},
+  \bibinfo{journal}{Chem. Phys. Lett.} \textbf{\bibinfo{volume}{110}},
+  \bibinfo{pages}{123} (\bibinfo{year}{1984}).
+
+\bibitem[{\citenamefont{Kovalev et~al.}(1993)\citenamefont{Kovalev, Worthey,
+  Stokes, and Hatch}}]{Kovalev93}
+\bibinfo{author}{\bibfnamefont{O.~V.} \bibnamefont{Kovalev}},
+  \bibinfo{author}{\bibfnamefont{G.~C.} \bibnamefont{Worthey}},
+  \bibinfo{author}{\bibfnamefont{H.~T.} \bibnamefont{Stokes}},
+  \bibnamefont{and} \bibinfo{author}{\bibfnamefont{D.~M.} \bibnamefont{Hatch}},
+  \emph{\bibinfo{title}{Representation of Crystallographic Space Groups:
+  Irreducible Representations, Induced Representation and Corepresentations}}
+  (\bibinfo{publisher}{Gordon and Breach Science Publishers},
+  \bibinfo{address}{Berkshire, Great Britian}, \bibinfo{year}{1993}).
+
+\bibitem[{\citenamefont{Zak et~al.}(1969)\citenamefont{Zak, Casher, Gluck, and
+  Gur}}]{Zak69}
+\bibinfo{author}{\bibfnamefont{J.}~\bibnamefont{Zak}},
+  \bibinfo{author}{\bibfnamefont{H.}~\bibnamefont{Casher}},
+  \bibinfo{author}{\bibfnamefont{H.}~\bibnamefont{Gluck}}, \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{Y.}~\bibnamefont{Gur}},
+  \emph{\bibinfo{title}{The Irreducible Representations of Space Groups}}
+  (\bibinfo{publisher}{Benjamin}, \bibinfo{address}{New York},
+  \bibinfo{year}{1969}).
+
+\bibitem[{\citenamefont{Stokes and Hatch}(2002{\natexlab{b}})}]{Stokes02a}
+\bibinfo{author}{\bibfnamefont{H.~T.} \bibnamefont{Stokes}} \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{D.~M.} \bibnamefont{Hatch}},
+  \bibinfo{journal}{Phys. Rev. B} \textbf{\bibinfo{volume}{65}},
+  \bibinfo{pages}{144114} (\bibinfo{year}{2002}{\natexlab{b}}).
+
+\end{thebibliography}
