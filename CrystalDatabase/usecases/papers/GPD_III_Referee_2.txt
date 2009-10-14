@@ -47,52 +47,126 @@ this regard?
 
 Response:
 ---------
-Yes, that is one of the functions of GPDs in general.  From
+Yes, that is one of the purposes of GPDs in general.  They allow one to classify polymorphs and help elucidate whether a given structure is metastable or not.  This can be done by examinging the vicinity in parameter space of other crystallographic phases. 
+
 
 3. Equation 1: Where is "l" in the formula, and what is its meaning?
 
 Response:
 ---------
-This is a very good point.  We explained this in some detail in GPD I and thoroughly explained and illustrated it with binary  in GPD II, but there is not much of explanation here in GPD III.  We have remedied this by reviewing the discussion from GPD II here and also augmenting with a d
+The "l" is a parameter that indexes the spherical harmonics intervening the Wigner functions.  It ranges from |li - lj| to li+ lj and is essentially a product of the mathematics--forming a complete basis set over SO3 x S2 x SO3.  As a complete basis set, these functions have been used extensively in the quantum chemistry literature (see the paper by van der Avoird referenced on page 8), and this has allowed some physical insight into the meaning of "l".  For instance, all electrostatic forces are present in the nu_{li,l,lj} where l = li + lj.  
+
 
 4. Equation 2: If someone wants to follow the authors prescription in
 practice, more information is necessary. Please, give a more complete
 version of this equation in the appendix including ranges for mi, ni in the
 summation.
+
+Response:
+---------
+We completely agree and would wholeheartedly encourage reading GPD I at least.  However, a better explanation would be convenient as well so it has been appendixed as indicated.  However, we also would encourage the reviewer to wait for a much better thermodynamic treatment (to replace the mean field approach of GPD I).
+
+
 5. Page 10, top: Is the assumption justified that including only pairwise
 interactions among nearest neighbors is sufficient?
+
+Response:
+---------
+This is an assumption which, to a first approximation, is probably adequate for most van der Waals crystals (the majority of molecular crystals).  It would be good to include second-neighbor interactions, particularly when starting from reference lattices which are not a sphere packing as discussed in GPD II.  However, this of course leads to greater computational cost.  Thus we feel the current approach is adequate, but subsequent studies including more complex potentials such as second-neighbor interactions or many-body effects would certainly be interesting.  
+
+
 Page 11: Equation 5: What is A, what is V? (A = free energy at T = 0?, V =
 potential energy / total energy?)
+
+Response:
+---------
+Yes, that is more or less right..."A" is the free energy (at any temperature) and V is the potential energy (since kinetic energy would be 0 at T=0).  Thus the zero point energy is implicitely included in V, etc.  
+
+
 Page 13: First paragraph: There are very many paths between two space
 groups (probably infinitely many for a macroscopic system, where one can
 play with reducing/adding translational symmetry). Why did the authors
 pick the ones they present?
+
+Response:
+---------
+Yes, that is more or less right..."A" is the free energy (at any temperature) and V is the potential energy (since kinetic energy would be 0 at T=0).  Thus the zero point energy is implicitely included in V, etc.  
+
+
 Page 15, top: The restrictions in the allowed ISs appear rather strong - even
 if Z' «= 1 for many structures, one should allow for a richer sample space of
 structures.
+
+Response:
+---------
+Yes, that is more or less right..."A" is the free energy (at any temperature) and V is the potential energy (since kinetic energy would be 0 at T=0).  Thus the zero point energy is implicitely included in V, etc.  
+
+
 Page 16, beginning section 2.2.4: I really have a hard time following what
 the authors are trying to do here. Please clarify and elaborate. Why do they
 minimize atomic distances with respect to fractional coordinates (there
 appears to be a comparison between quantities measured in Angstroms and
 those which are dimensionless!)?
+
+Response:
+---------
+Yes, that is more or less right..."A" is the free energy (at any temperature) and V is the potential energy (since kinetic energy would be 0 at T=0).  Thus the zero point energy is implicitely included in V, etc.  
+
+
 Page 17, equation 8: What are the units of the various potential
 parameters?
+
+Response:
+---------
+Yes, that is more or less right..."A" is the free energy (at any temperature) and V is the potential energy (since kinetic energy would be 0 at T=0).  Thus the zero point energy is implicitely included in V, etc.  
+
+
 Page 17, right after equation 8: The authors state that MEZDIE01
 crystallizes in space group 2. Is that the outcome of their calculations, or is
 this used as input to their calculations?
+
+Response:
+---------
+Yes, that is more or less right..."A" is the free energy (at any temperature) and V is the potential energy (since kinetic energy would be 0 at T=0).  Thus the zero point energy is implicitely included in V, etc.  
+
+
 Page 17, section 2.2.5: Where do the authors get the target structure and its
 energy from? What is general, what is specific about the procedure
 described in this section? What is really the predictive power of this
 method? Please, make a clear list of the information that is used to derive
 the parameters, and of the information one can deduce by a strict
 application of the authors' rules afterwards.
+
+Response:
+---------
+Yes, that is more or less right..."A" is the free energy (at any temperature) and V is the potential energy (since kinetic energy would be 0 at T=0).  Thus the zero point energy is implicitely included in V, etc.  
+
+
 Page 18: A citation for genetic algorithms is Holland's work in the mid-
 seventies.
+
+Response:
+---------
+Yes, that is more or less right..."A" is the free energy (at any temperature) and V is the potential energy (since kinetic energy would be 0 at T=0).  Thus the zero point energy is implicitely included in V, etc.  
+
+
 Page 20, second paragraph: Is there a connection to "real" energies of solids
 or liquids? If so, how are these energies computed?
+
+Response:
+---------
+Yes, that is more or less right..."A" is the free energy (at any temperature) and V is the potential energy (since kinetic energy would be 0 at T=0).  Thus the zero point energy is implicitely included in V, etc.  
+
+
 Page 21: The authors refer to free energy calculations. I do not see any "free
 energies" in their description: everthing seems to be just energy or some
 proxy for the energy or a cost function.
+
+Response:
+---------
+Yes, that is more or less right..."A" is the free energy (at any temperature) and V is the potential energy (since kinetic energy would be 0 at T=0).  Thus the zero point energy is implicitely included in V, etc.  
+
+
 Page 27: I realize that the authors imagine readers reading all their papers
 in sequence, but that is not necessarily so. Thus, they should include at
 least one generic phase diagram, at least in projection if the number of
@@ -100,4 +174,6 @@ parameters needed to describe it is too large. The number of parameters
 might appear modest to the authors, but it still appears to be rather large.
 How close are we to reality concerning the actual energies?
 
-Responses:
+Response:
+---------
+Yes, that is more or less right..."A" is the free energy (at any temperature) and V is the potential energy (since kinetic energy would be 0 at T=0).  Thus the zero point energy is implicitely included in V, etc.  
