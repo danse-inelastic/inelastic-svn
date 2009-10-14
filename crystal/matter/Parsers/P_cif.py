@@ -517,8 +517,8 @@ class P_cif(StructureParser):
         a_site_label = []
         a_adp_type = []
         for a in stru:
-            cnt = element_count[a.element] = element_count.get(a.element,0)+1
-            a_site_label.append( "%s%i" % (a.element, cnt) )
+            cnt = element_count[a.symbol] = element_count.get(a.symbol,0)+1
+            a_site_label.append( "%s%i" % (a.symbol, cnt) )
             if numpy.all(a.U == a.U[0,0]*numpy.identity(3)):
                 a_adp_type.append("Uiso")
             else:
@@ -537,7 +537,7 @@ class P_cif(StructureParser):
         for i in range(len(stru)):
             a = stru[i]
             line = "  %-5s %-3s %11.6f %11.6f %11.6f %11.6f %-5s %.4f" % (
-                    a_site_label[i], a.element, a.xyz[0], a.xyz[1], a.xyz[2],
+                    a_site_label[i], a.symbol, a.xyz[0], a.xyz[1], a.xyz[2],
                     a.Uisoequiv, a_adp_type[i], a.occupancy  )
             lines.append(line)
         # find anisotropic atoms
