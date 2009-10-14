@@ -1,4 +1,4 @@
-﻿Referee's comments:
+﻿Reviewer 2's comments:
 
 Comments to manuscript Ms.No. pz5072; "Molecular Crystal Global Phase
 Diagram III ..." by AJ. B. Keith and R. B. McClurg
@@ -22,7 +22,9 @@ III-manuscript reviewed here to a large technical supplementary material,
 while including more details for those readers who want to implement the
 authors' procedure themselves.
 
-
+Response:
+---------
+First, we apologize for the reviewers not getting access to GPD II--our intention was to specify that the manuscripts be reviewed together, or at least that the reviewers of GPD III be given a copy of GPD II.  Unfortunately such specifications sometimes are "lost in translation" while transmitting the papers to various staff members.  And yes, originally this work and GPD II were together, but the resulting length of each manuscript (and its supplementary material) was such that a division was absolutely necessary (GPD II and its supplementary material are 63 pages).  We apologize again for reviewer 2 not having direct access to GPD II.
 
 1. Quite generally, the authors should explain what they mean by "global
 phase diagrams", even though this is the third paper in a sequence. Here
@@ -34,11 +36,25 @@ derived, and where both the general topology of the phase diagram and the
 quantitative values of the various critical points are correlated with the
 region of parameter space chosen.
 
-This is a very good point.  We explained this in some detail in GPD I and thoroughly explained it in GPD II, but there is not much of explanation here.  We have remedied
+Response:
+---------
+This is a very good point.  We explained this in some detail in GPD I and thoroughly explained and illustrated it with binary  in GPD II, but there is not much of explanation here in GPD III.  We have remedied this by reviewing the discussion from GPD II about GPDs in general.  It discusses binary mixture GPDs originally proposed by Konynenburg and Scott compared to molecular crystal GPDs.  It also augments it with a new discussion aimed more at the physics community, comparing it with these Ising-type models, particularly the Axial Nearest-Neighbor  and particularly withere and also augmenting with a dis
+
+
 
 2. What about metastable compounds? Can the authors deduce anything in
 this regard?
+
+Response:
+---------
+Yes, that is one of the functions of GPDs in general.  From
+
 3. Equation 1: Where is "l" in the formula, and what is its meaning?
+
+Response:
+---------
+This is a very good point.  We explained this in some detail in GPD I and thoroughly explained and illustrated it with binary  in GPD II, but there is not much of explanation here in GPD III.  We have remedied this by reviewing the discussion from GPD II here and also augmenting with a d
+
 4. Equation 2: If someone wants to follow the authors prescription in
 practice, more information is necessary. Please, give a more complete
 version of this equation in the appendix including ranges for mi, ni in the
