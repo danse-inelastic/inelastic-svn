@@ -1,4 +1,4 @@
-﻿GPD III: REFEREE 1
+﻿Referee's comments:
 
 Title: Molecular Crystal Global Phase Diagrams III: Sufficient parameter
 space determination
@@ -67,3 +67,8 @@ ommitted or moved to the supplementary material; another reviewer might be
 able to accomplish this.  Based on the novelty of the application and the
 correctness of the analysis, the work appears to be suitable for
 publication in Acta Cryst A in its current form.
+
+Response:
+---------
+This is a fairly accurate assessment and we thank the referee for taking time to review it.
+ 
