@@ -128,12 +128,12 @@ class P_pdb(StructureParser):
                         U = numpy.identity(3)*B/(8*pi**2)
                     except ValueError:
                         U = numpy.zeros((3,3), dtype=float)
-                    element = line[76:78].strip()
-                    if element == "":
-                        # get element from the first 2 characters of name
-                        element = line[12:14].strip()
-                        element = element[0].upper() + element[1:].lower()
-                    stru.addNewAtom(element,
+                    symbol = line[76:78].strip()
+                    if symbol == "":
+                        # get symbol from the first 2 characters of name
+                        symbol = line[12:14].strip()
+                        symbol = symbol[0].upper() + symbol[1:].lower()
+                    stru.addNewAtom(symbol,
                             occupancy=occupancy, name=name, U=U)
                     last_atom = stru.getLastAtom()
                     last_atom.xyz_cartn = rc
@@ -229,14 +229,14 @@ class P_pdb(StructureParser):
                      "%(occupancy)6.2f" +               # 55-60
                      "%(tempFactor)6.2f      " +        # 61-66, 67-72
                      "%(segID)-4s" +                    # 73-76
-                     "%(element)2s" +                   # 77-78
+                     "%(symbol)2s" +                   # 77-78
                      "%(charge)-2s"                     # 79-80
                    ) % {
-                  "serial" : idx+1,  "name" : a.element,  "altLoc" : " ",
+                  "serial" : idx+1,  "name" : a.symbol,  "altLoc" : " ",
                   "resName" : "",  "chainID" : " ",  "resSeq" : 1,
                   "iCode" : " ",  "x" : rc[0],  "y" : rc[1],  "z" : rc[2],
                   "occupancy" : a.occupancy,  "tempFactor" : B,  "segID" : "",
-                  "element" : a.element,  "charge" : "" }
+                  "symbol" : a.symbol,  "charge" : "" }
         lines.append(atomline)
         isotropic = numpy.all(a.U == a.U[0,0]*numpy.identity(3))
         if not isotropic:

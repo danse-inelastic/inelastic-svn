@@ -82,11 +82,11 @@ class P_rawxyz(StructureParser):
                     emsg = ('%d: all lines must have ' +
                             'the same number of columns') % p_nl
                     raise StructureFormatError, emsg
-                element = el_idx is not None and fields[el_idx] or ""
+                symbol = el_idx is not None and fields[el_idx] or ""
                 xyz = [ float(f) for f in fields[x_idx:x_idx+3] ]
                 if len(xyz) == 2:
                     xyz.append(0.0)
-                stru.addNewAtom(element, xyz=xyz)
+                stru.addNewAtom(symbol, xyz=xyz)
         except ValueError:
             emsg = "%d: invalid number" % p_nl
             exc_type, exc_value, exc_traceback = sys.exc_info()
@@ -102,7 +102,7 @@ class P_rawxyz(StructureParser):
         lines = []
         for a in stru:
             rc = a.xyz_cartn
-            s = "%s %g %g %g" % (a.element, rc[0], rc[1], rc[2])
+            s = "%s %g %g %g" % (a.symbol, rc[0], rc[1], rc[2])
             lines.append(s.lstrip())
         return lines
     # End of toLines

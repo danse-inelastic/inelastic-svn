@@ -350,15 +350,21 @@ class P_cif(StructureParser):
         for values in atom_site_loop:
             curlabel = values['_atom_site_label']
             self.labelindex[curlabel] = len(self.stru)
-            atomSiteType = values['_atom_site_type_symbol'] # have to add this in at the start for inelastic Atoms to get all inferred properties
-            atomSymbol = self.firstOneOrTwoLetters(atomSiteType)
+            atomSymbol = self.getAtomSymbol(values)
             self.stru.addNewAtom(atomSymbol)
             a = self.stru.getLastAtom()
             for prop, fset in prop_fset.iteritems():
                 fset(a, values[prop])
         return
     
-    def firstOneOrTwoLetters(self, atomSiteType):
+    def getAtomSymbol(self, values):
+        try:
+            atomSiteType = values['_atom_site_type_symbol'] # have to add this in at the start for inelastic Atoms to get all inferred properties
+        except:
+            try:
+                atomSiteType = values['_atom_site_label'] # have to add this in at the start for inelastic Atoms to get all inferred properties
+            except:
+                raise "cannot find atom symbol"
         # removes trailing numbers, +/- symbols, etc.
         firstTwo = atomSiteType[:2]
         uppers = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
