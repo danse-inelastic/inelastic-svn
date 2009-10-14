@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99c (Web2C 7.5.6)
+The top-level auxiliary file: SecondPaperRev5.aux
+The style file: iucr.bst
+Database file #1: thesisbib.bib
+Warning--empty title in Keith09b
+Warning--empty title in Missaghi09
+You've used 51 entries,
+            2962 wiz_defined-function locations,
+            968 strings with 12923 characters,
+and the built_in function-call counts, 29652 in all, are:
+= -- 2901
+> -- 1781
+< -- 53
++ -- 552
+- -- 486
+* -- 2632
+:= -- 4694
+add.period$ -- 151
+call.type$ -- 51
+change.case$ -- 375
+chr.to.int$ -- 50
+cite$ -- 53
+duplicate$ -- 1207
+empty$ -- 1850
+format.name$ -- 739
+if$ -- 6003
+int.to.chr$ -- 2
+int.to.str$ -- 1
+missing$ -- 55
+newline$ -- 221
+num.names$ -- 258
+pop$ -- 817
+preamble$ -- 1
+purify$ -- 365
+quote$ -- 0
+skip$ -- 1115
+stack$ -- 0
+substring$ -- 1563
+swap$ -- 273
+text.length$ -- 5
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 572
+warning$ -- 2
+while$ -- 219
+width$ -- 0
+write$ -- 605
+(There were 2 warnings)

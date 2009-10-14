@@ -1,0 +1,69 @@
+﻿GPD III: REFEREE 1
+
+Title: Molecular Crystal Global Phase Diagrams III: Sufficient parameter
+space determination
+Author(s): J.B. Keith,a+ and R.B. McClurg
+
+This manuscript comprises part III of a multi-article series by the
+authors. The first paper was published in Acta Cryst. A60, pp 621-636 (2004),
+and the second is currently under review.
+
+If we place center of mass of a single molecule at the origin, a pair of
+molecules have a total of nine positional and orientational degrees of
+freedom.  Ignoring their separation distance, eight of these dofs are
+orientational.  In summarizing the relevant portion of the 2004 Acta Cryst
+A paper, they demonstrated the utility of expressing the intermolecular
+potential (IP) as a linear combination of triple products of two Wigner
+functions (one for each molecule) and one spherical harmonic.  The Wigner
+functions form an orthogonal basis for expanding the single-molecule
+potential and the spherical harmonics form an orthogonal basis for
+expanding the intermolecular-orientational components of the IP.  The
+expansion coefficients of the total expansion are considered to be
+functions of the intermolecular distance.  The authors further argue that
+when working with a molecule of a specific point symmetry, it greatly
+simplifies the expansion if we work with symmetry-adapted linear
+combinations of Wigner functions.
+
+In this context, the authors then ask the question, how many expansion
+coefficients does one need to achieve a sufficiently rich parameter space
+for stabilizing all of the observed molecular structures studied in their
+previous manuscript (part II of the series)?  Because the IP expansion is
+infinite over the manifold (i.e. L) indices of the Wigner functions that
+span the SO(3) space, this question seems impossible to answer at first.
+But the authors point out that distortions of the molecular structures
+relative to the idealized references lattices can be decomposed into
+symmetry-adapted order parameters that are classified according to the
+point-group irreps involved in breaking the molecular site symmetry.  For
+each structure of interest, they identified the relevant molecular
+point-group irreps involved in the distortion.  They also point out that
+for a given manifold of SO(3) and a given point group G, there will be
+specific irreps of G capable of producing a distortion with the same
+symmetry as the basis functions of the the selected manifold.  Inspecting
+each manifold one at a time, one eventually reaches a minimum manifold
+that contains one of the point-group irreps involved in the distorted
+molecular structure.  For each distortion of interest, the authors authors
+identified the minimal manifold that contains at least one route to
+stabilizing the observed distortion.  This is a very clever simplifying
+assumption, though we are not able to verify that this minimal manifold
+will be sufficient in practice to realize real distortions in a wide-range
+of molecular crystals.  Using these arguments, the authors find that their
+test structures never require more than L «= 4, which requires only 15
+symmetry-unique expansion coefficients as opposed to thousands.  This is
+their main result.  Thankfully, they stopped at 39 pages and did not
+actually generate a 15-parameter global phase diagram!
+
+We took point-group-irrep decompositions of SO(3) in Table 1 at face value
+and checked the minimal manifold results in Table 2, which was computed
+correctly.  We assume that the results in Tables 5-7 were also computed
+correctly, but did not check.
+
+The basic approach taken by the authors appears to be technically sound
+and innovative.  The selection of cited literature is adequate and the
+choice of journal is probably OK.  Being unfamiliar with the molecular
+packing literature, we are not in a position to assess the relative
+importance of this work.  While the manuscript feels very long, we were
+unable to identify a section or sections that could be conveniently
+ommitted or moved to the supplementary material; another reviewer might be
+able to accomplish this.  Based on the novelty of the application and the
+correctness of the analysis, the work appears to be suitable for
+publication in Acta Cryst A in its current form.

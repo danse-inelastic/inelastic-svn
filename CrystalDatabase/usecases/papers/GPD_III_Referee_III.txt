@@ -1,0 +1,58 @@
+﻿Referee's comments:
+
+The paper has a very desirable aim of obtaining a global phase diagram for molecular crystals using
+a small number of reference lattices and a “modest number” of interaction potential parameters. As
+such a more general discussion (sec 3) and condensed account of potential determination (sec 2)
+would have been useful to the general reader. There exists a large volume of experimental crystal
+structure data along with a large number of theoretical models. It is attractive to judge these models
+after assessing their merits to find a classification that gives an hierarchy of their usefulness.
+The authors use a small number of parameters to describe intermolecular potentials for constructing
+the GPDs thereby aiming to enhance the utility of GPDs for materials design. The authors start from
+a given lattice of a plastically crystalline, rotationally disordered state and examine the evolution of
+the space groups of the new phases that appear as the temperature is changed for a fixed
+intermolecular potential when single molecules are reduced to spheres. Such structures are
+necessarily a subgroup of on of the reference lattices. The potential itself is obtained from
+interaction between molecular orbitals of different molecules which are used as microscopic
+director belonging to S2 with two degrees of freedom. If one associates the orbital orientation with a
+spin, then this approach is concerned only with local orientational spin balance. Neither local
+orientational balances of momentum and angular momentum nor entropy nor long-range alignment
+tensor balances seem to be considered, as they have been done in the theory of liquid crystals.
+Consequently it does not seem that there is viability in the phase diagrams that are obtained for the
+various physical conditions,
+
+Response:
+    With all due respect for an educated referee that has sacrificed a good deal of time to pour over this rather long manuscript, it seems there may be a misunderstanding.  The potential is not based on a "microscopic director" description with only 2 degrees of freedom, but as stated on page 4, it is based on a complete set of basis functions over SO3 x S2 x SO3 and so has 8 degrees of freedom.  However, since the positions of the molecules are fixed (for now) in their set of reference lattices, the S2 part of the potential has *no* degrees of freedom.  Also, the orbital orientations have no association to this part (S2), or with each other ("spin balance"), but each molecule is free to rotate in whatever way it may.  Thus local orientational "balances of momentum" between molecules are unrelated to each molecule's angular momentum.  According to the partition function, in fact, angular momemtum for each molecule "integrates out", leaving only a temperature-dependent factor.
+    Additionally, in the first Global Phase Diagrams paper (GPD I) we discussed the full model which begins from elementary principles of statistical mechanics with free energetic (and entropic) effects fully included.  It particularly focuses on the first set of phases forming after the initial symmetry is broken at higher temperatures.  In the second paper (GPD II) we discuss the set of reference lattices appropriate to tetrahedral molecules, and in this work (GPD III), we discuss the low-temperature phases and as such, entropic effects are mild and so are not included.  Also, unlike liquid crystals, long-range alignment tensors are not necessary to describe most molecular crystals, which generally are fairly rigid, despite a certain amount of thermal disorder.  Thus long range order is always present and material-wide strains do not influence the equilibrium thermodynamics or the applications of molecular crystals like they do to liquid crystals. 
+
+GPD I: Molecular crystal global phase diagrams I: Method of construction, (with J.A. Mettes and R.B. McClurg), Acta Cryst. A 60, 621-636, 2004 
+
+GPD II: Molecular crystal global phase diagrams II: Reference lattices (with R.B. McClurg), submitted to Acta Crystallographica A, 2009
+
+GPD III: this work
+
+
+
+The effort of the authors in sec 2.2 for determining potential parameters to reproduce experimental
+structures may benefit from considerations of other models, notably the ANNNI (axial Next-
+Nearest-Neighbour Ising) which have rich phase diagrams including commensurate and
+incommensurate phases. By choosing a molecular orientation as the Ising spin the authors may
+compare their predictions with that from the ANNNI model. From the viewpoint of an emphasis as
+a review article it could perhaps be mandatory to make this comparison. The additional time spent
+could be worth the effort. One recognizes that the final space-group-determining step involves weak
+interactions that are many time within the error limits of the usual calculations. The mock version of
+the ANNNI model has the advantage that it is completely solvable when reduced to a one-
+dimensional exercise. The conclusions of the present authors could be compared with those from
+the ANNNI models, for example.
+
+Response:
+This is a very good point and we thank the reviewer for pointing it out, but there is one less-obvious problem with a direct comparison: the extra degree of freedom that a tetahedron has compared to a line changes everything--the potential (and phase diagram) are completely different).  The
+
+
+Another point that requires mention/deliberation in the context of the focus of the general
+readership of the journal is the relation between the global phase diagram of essentially 3D liquids
+and that of the bulk molecular crystals especially in the context and as reflected in the local critical
+behavior of surfaceswith or without defectsseparating the liquid and solid phase. Some
+mention of these aspects would be useful.
+In my opinion, the advantages of methodology of the authors using interaction potentials obtained
+from orbital orientations, has to be examined in the context of those already available in the
+literature.

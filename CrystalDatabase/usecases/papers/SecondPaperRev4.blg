@@ -1,0 +1,81 @@
+This is BibTeX, Version 0.99c (Web2C 7.5.6)
+The top-level auxiliary file: SecondPaperRev4.aux
+The style file: apsrev.bst
+Database file #1: thesisbib.bib
+I was expecting a `,' or a `}'---line 51 of file thesisbib.bib
+ :     
+ :     VOLUME  = {46},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 69 of file thesisbib.bib
+ :     
+ :     VOLUME  = {46},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 87 of file thesisbib.bib
+ :     
+ :     VOLUME  = {39},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 585 of file thesisbib.bib
+ :     
+ :     NOTE      = {Sec. 9.2}
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 993 of file thesisbib.bib
+ :     
+ :     VOLUME  = {172},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Repeated entry---line 2609 of file thesisbib.bib
+ : @article{vanKonynenburg80
+ :                          ,
+I'm skipping whatever remains of this entry
+Warning--I didn't find a database entry for "James95"
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Warning--empty year in AparicioMartinez07a; set to ????
+Warning--empty year in AparicioMartinez07b; set to ????
+Warning--empty year in Cismondi07; set to ????
+Warning--empty year in Polishuk00; set to ????
+You've used 43 entries,
+            3411 wiz_defined-function locations,
+            1428 strings with 17176 characters,
+and the built_in function-call counts, 30203 in all, are:
+= -- 1648
+> -- 1081
+< -- 157
++ -- 886
+- -- 263
+* -- 4175
+:= -- 3211
+add.period$ -- 43
+call.type$ -- 43
+change.case$ -- 176
+chr.to.int$ -- 41
+cite$ -- 47
+duplicate$ -- 2769
+empty$ -- 2551
+format.name$ -- 677
+if$ -- 5647
+int.to.chr$ -- 3
+int.to.str$ -- 44
+missing$ -- 424
+newline$ -- 144
+num.names$ -- 132
+pop$ -- 800
+preamble$ -- 1
+purify$ -- 172
+quote$ -- 0
+skip$ -- 1081
+stack$ -- 0
+substring$ -- 858
+swap$ -- 2197
+text.length$ -- 136
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 242
+warning$ -- 4
+while$ -- 119
+width$ -- 0
+write$ -- 431
+(There were 6 error messages)

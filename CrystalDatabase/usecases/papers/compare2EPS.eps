@@ -1,0 +1,964 @@
+%!PS-Adobe-3.0 EPSF-3.0
+%%BoundingBox: 8 7 165 460
+%%Title: F:\Brandon\thesisRanjitPattern\compare2.ps
+%%Creator: GSview from F:\Brandon\thesisRanjitPattern\compare2.ps
+%%CreationDate: Sun Apr 10 00:22:57 2005
+%%Pages: 1
+%%EndComments
+%%Page: 1 1
+%%BeginDocument: F:\Brandon\thesisRanjitPattern\compare2.ps
+%!
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Begin text definitions %
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+/CenteredShow   %stack: text, flag
+    {/flag exch def /text exch def
+    % Reference Point:
+    %   ---------------
+    %   | 1    2    3 |
+    %   | 4    5    6 |
+    %   | 7    8    9 |
+    %   ---------------
+    flag 1 eq flag 2 eq or flag 3 eq or 
+        { 0 FontSize -0.6 mul rmoveto } if
+    flag 4 eq flag 5 eq or flag 6 eq or 
+        { 0 FontSize -0.3 mul rmoveto } if
+    flag 2 eq flag 5 eq or flag 8 eq or 
+        { text stringwidth pop -2 div 0 rmoveto } if
+    flag 3 eq flag 6 eq or flag 9 eq or
+        { text stringwidth pop -1 mul 0 rmoveto } if
+      text show} def
+/choosefont     {exch findfont exch scalefont setfont} def
+/default        {Font FontSize choosefont} def
+/greek      {/Symbol FontSize 0.9 mul choosefont} def
+/nstr           {80 string} def
+/Number2String  {nstr cvs} def
+/small      {Font FontSize 0.6 mul choosefont} def
+/subscript      %stack: text
+    {/text exch def
+      0 FontSize -.25 mul rmoveto
+      small text show default
+      0 FontSize 0.25 mul rmoveto} def
+/superscript      %stack: text
+      {/text exch def
+      0 FontSize 0.4 mul rmoveto
+      small text show default
+      0 FontSize -.4 mul rmoveto} def
+/xLabel     %stack: text
+    {/text exch def
+    width 2 div FontSize -2.8 mul moveto
+    text 5 CenteredShow stroke} def
+/xLabel2        %stack: text
+    {/text exch def
+    width 2 div FontSize 2.8 mul height add moveto
+    text 5 CenteredShow stroke} def
+/yLabel     %stack: text
+    {/text exch def
+    FontSize -3.8 mul height 2 div moveto
+    90 rotate text 5 CenteredShow stroke -90 rotate} def
+/yLabel2        %stack: text
+    {/text exch def
+    FontSize 2.8 mul width add height 2 div moveto
+    90 rotate text 5 CenteredShow stroke -90 rotate} def
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Begin drawing definitions %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+/arrowdict 14 dict def
+arrowdict /mtrx matrix put
+/arrow          % stack: tailx, taily, tipx, tipy, thick, headthick, headlen
+    {arrowdict begin
+    /headlength exch def
+    /halfheadthickness exch 2 div def
+    /halfthickness exch 2 div def
+    /tipy exch def /tipx exch def
+    /taily exch def /tailx exch def
+    /dx tipx tailx sub def
+    /dy tipy taily sub def
+    /arrowlength dx dx mul dy dy mul add sqrt def
+    /angle dy dx atan def
+    /base arrowlength headlength sub def
+    /savematrix mtrx currentmatrix def
+    tailx taily translate
+    angle rotate
+    0 halfthickness neg moveto
+    base halfthickness neg lineto
+    base halfheadthickness halfthickness sub 1.1 mul sub halfheadthickness neg 
+    lineto
+    arrowlength 0 lineto
+    base halfheadthickness halfthickness sub 1.1 mul sub halfheadthickness  lineto
+    base halfthickness lineto
+    0 halfthickness lineto
+    closepath
+    savematrix setmatrix
+    end } def
+/ArrowheadDict 5 dict def
+/Arrowhead      % stack: x1, y1, x2, y2
+    {ArrowheadDict begin
+xyCoor /y2 exch def /x2 exch def
+    xyCoor /y1 exch def /x1 exch def
+    /thick 1 def
+    /headthick 6 def
+    /headlen 10 def
+    /ang y2 y1 sub x2 x1 sub atan def
+    x1 x2 add 2 div ang cos headlen mul 2 div sub
+    y1 y2 add 2 div ang sin headlen mul 2 div sub
+    x1 x2 add 2 div ang cos headlen mul 2 div add
+    y1 y2 add 2 div ang sin headlen mul 2 div add
+    thick headthick headlen arrow fill stroke
+    end } def
+/Bracket        % stack: tipx, tipy, angle, len
+    {/len exch def /angle exch def
+      /tipy exch def /tipx exch def
+    gsave
+    tipx tipy translate angle rotate len 2 div dup scale
+          currentlinewidth len div 1.7 mul setlinewidth
+          /ht 0.15 def
+          0 ht translate
+        -0.5 ht moveto -1 ht -1 0 ht arct
+          -0.5 ht moveto  0 ht  0 2 ht mul ht arct
+           0.5 ht moveto  1 ht  1 0 ht arct
+           0.5 ht moveto  0 ht  0 2 ht mul ht arct
+        stroke
+    grestore } def
+/Curve      %stack: {x,y}, index
+      {/indx exch def
+      /npts {count 1 sub 2 div} def
+      xyCoor
+      indx 0 ne { 2 copy gsave [] 0 setdash newpath indx Symb grestore} if
+
+
+      moveto
+      1 1 npts { pop xyCoor
+            indx 0 ne { 2 copy gsave [] 0 setdash newpath indx Symb grestore} if
+      lineto } for
+      stroke } def
+/Frame{
+    xmin ymin xyCoor moveto xmin ymax xyCoor lineto         % Left Side
+    xmax ymin xyCoor moveto xmax ymax xyCoor lineto         % Right Side
+    xmin ymin xyCoor moveto xmax ymin xyCoor lineto         % Bottom
+    xmin ymax xyCoor moveto xmax ymax xyCoor lineto         % Top
+      stroke } def
+/LabeledSymbDict 6 dict def
+/LabeledSymb    % stack: x, y, index, text, ang, dist
+    {LabeledSymbDict begin
+    /dist exch def /ang exch def
+    /text exch def /indx exch def
+    /y exch def /x exch def
+    gsave
+        x y xyCoor moveto ang rotate
+        dist 0 rmoveto ang -1 mul rotate
+        text show stroke
+    grestore
+      x y xyCoor indx Symb stroke
+    end } def
+/Landscape      
+    {612 0 translate 90 rotate
+    792 width sub 2 div
+    612 height sub 2 div
+    translate } def
+/Points     %stack: {x,y}, index
+      {/indx exch def
+      /npts { count 1 sub 2 div } def
+    1 1 npts { pop xyCoor indx Symb } for
+      stroke } def
+/Portrait       
+    {612 width sub 2 div
+    792 height sub 2 div 
+    translate } def
+/PtsEB      %stack: {x,y,xmin,ymin,xmax,ymax}, index
+    {/indx exch def
+      /npts {count 1 sub 6 div} def
+    1 1 npts { pop 
+        /ymax exch def /xmax exch def /ymin exch def /xmin exch def
+        /y exch def /x exch def
+        xmin y xyCoor moveto xmax y xyCoor lineto
+        x ymin xyCoor moveto x ymax xyCoor lineto
+        stroke
+        x y xyCoor indx Symb stroke
+    } for } def
+/RegularPolyDict 5 dict def
+RegularPolyDict /mtrx matrix put
+/RegularPoly    % stack: xcenter, ycenter, angle, scale, sides
+    {RegularPolyDict begin
+      /sides exch def /scl exch def /ang exch def
+      /savematrix mtrx currentmatrix def
+      translate ang rotate 0 scl moveto
+      sides { 360 sides div rotate 0 scl lineto } repeat
+    closepath
+      savematrix setmatrix
+      end } def
+/Spline     %stack: {x,y}, index
+      {/indx exch def
+      /npts {count 1 sub 2 div } def
+      xyCoor /y1 exch def /x1 exch def
+      indx 0 ne {gsave [] 0 setdash newpath x1 y1 indx Symb grestore} if
+    x1 y1 moveto
+    xyCoor /y2 exch def /x2 exch def x2 y2
+    /n1 y2 y1 sub def /d1 x2 x1 sub def
+    1 1 npts 1 sub { pop
+        /y2 exch def /x2 exch def
+        indx 0 ne {gsave [] 0 setdash newpath x2 y2 indx Symb grestore} if
+        xyCoor /y3 exch def /x3 exch def x3 y3
+        /n2 x2 x2 y1 mul mul 
+            2 x2 x3 y1 mul mul mul sub
+            x3 x3 y1 mul mul add
+            x1 x1 y2 mul mul add
+            2 x1 x2 y2 mul mul mul sub   
+            2 x2 x3 y2 mul mul mul add
+            x3 x3 y2 mul mul sub
+            x1 x1 y3 mul mul sub
+            2 x1 x2 y3 mul mul mul add
+            x2 x2 y3 mul mul sub def
+        /d2 x1 x2 sub x1 x3 sub x2 x3 sub mul mul def
+        x1 y1 n1 d1 x2 y2 n2 d2 SplinePiece
+        /d1 d2 def /n1 n2 def /y1 y2 def /x1 x2 def
+    } for
+    /y2 exch def /x2 exch def   
+    indx 0 ne {gsave [] 0 setdash newpath x3 y3 indx Symb   grestore} if
+    /n2 y2 y1 sub def /d2 x2 x1 sub def
+    x1 y1 n1 d1 x2 y2 n2 d2 SplinePiece
+    stroke } def
+/SplinePiece    %stack: x1, y1, n1, d1, x2, y2, n2, d2
+    {/d2 exch def /n2 exch def /y2 exch def /x2 exch def
+    /d1 exch def /n1 exch def /y1 exch def /x1 exch def
+    /xaux d1 d2 mul y2 mul 
+        d1 n2 mul x2 mul sub
+        d1 d2 mul y1 mul sub
+        n1 d2 mul x1 mul add
+        n1 d2 mul d1 n2 mul sub div def
+    /yaux   n1 n2 mul x1 mul 
+        d1 n2 mul y1 mul sub
+        n1 d2 mul y2 mul add
+        n1 n2 mul x2 mul sub
+        n1 d2 mul d1 n2 mul sub div def
+    xaux yaux xaux yaux x2 y2 curveto } def
+/StarDict 6 dict def
+StarDict /mtrx matrix put
+/Star           % stack: xcenter, ycenter, angle, scale
+      {StarDict begin
+    /scl exch def /ang exch def
+    /l1 5 sqrt 1 sub 4 div scl mul def
+    /l2 5 sqrt -2 mul 5 add sqrt l1 mul def
+    /savematrix mtrx currentmatrix def
+    translate ang 18 add rotate l1 l2 moveto
+      5 { scl 0 lineto l1 l2 -1 mul lineto -72 rotate } repeat
+      savematrix setmatrix
+      end } def
+/SymbDict 4 dict def
+/Symb           % stack: x, y, index
+    {SymbDict begin
+    /indx exch def /y exch def /x exch def
+    /flag indx 6 gt {1}{0} ifelse def
+    /indx flag 1 eq {indx 6 sub}{indx} ifelse def
+    % 1-6  = filled
+    % 7-12 = open
+    % 1,7  = circle
+    % 2,8  = square
+    % 3,9  = triangle pointed up
+    % 4,10 = triangle pointed down
+    % 5,11 = diamond
+    % 6,12 = star
+    indx  1 eq { x y    SymbSize 0.8 mul 0 360 arc } if
+      indx  2 eq { x y 45 SymbSize 4 RegularPoly } if
+      indx  3 eq { x y  0 SymbSize 3 RegularPoly } if
+      indx  4 eq { x y 60 SymbSize 3 RegularPoly } if
+      indx  5 eq { x y  0 SymbSize 4 RegularPoly } if
+      indx  6 eq { x y  0 SymbSize 1.1 mul Star } if
+    flag 1 eq {gsave 1 setgray fill stroke grestore}{fill} ifelse
+    stroke end } def
+/xLogTick
+    {xTickMin xTickInc
+    /xref xTickMin def
+    /xTickInc 1 def
+    2 1 9 {log xref add /xTickMin exch def xTick } for
+    /xTickInc exch def
+    /xTickMin exch def
+    } def
+/xTickDict 8 dict def
+/xTick  
+      {xTickDict begin
+    /flag1 xTickFlag def
+    /flag2 xTickLabel def
+    xTickMin xTickInc xTickMax { dup Number2String
+            exch xTickPos xyCoor 
+        flag1 0 eq { moveto } if
+        flag1 1 eq { TickLen 2 div sub moveto } if
+        flag1 2 eq { TickLen sub moveto } if
+        0 TickLen rmoveto 
+        0 TickLen -1 mul rlineto
+        flag2 0 eq { pop } if
+        flag2 1 eq {
+            0 FontSize -0.3 mul rmoveto
+            xflag 1 eq {2 CenteredShow } if
+            xflag 2 eq {
+                dup stringwidth pop -0.3 mul 0 rmoveto
+                (10) 2 CenteredShow superscript } if } if
+        flag2 2 eq {
+            0 TickLen rmoveto
+            0 FontSize 0.3 mul rmoveto
+            xflag 1 eq {8 CenteredShow } if
+            xflag 2 eq {
+                dup stringwidth pop -0.3 mul 0 rmoveto
+                (10) 8 CenteredShow superscript } if } if
+        stroke } for    
+    end } def
+/xTickSpecial       %stack: x, label
+    {/text exch def
+    /xpos exch def
+    xpos xTickPos xyCoor
+        xTickFlag 0 eq { moveto } if
+        xTickFlag 1 eq { TickLen 2 div sub moveto } if
+        xTickFlag 2 eq { TickLen sub moveto } if
+    0 TickLen rlineto
+    text
+        xTickLabel 0 eq { pop } if
+        xTickLabel 1 eq { 0 TickLen -1 mul FontSize 0.3 mul sub rmoveto 2           CenteredShow } if
+        xTickLabel 2 eq { 0 FontSize 0.3 mul rmoveto 8 CenteredShow } if
+    stroke }def
+/xyCoor     %stack: x, y
+      {PlotMatrix transform} def
+/xyPlotCoor 
+      {/mtrxScale matrix def
+      /mtrxTrans matrix def
+      /mtrx matrix def
+    xmin -1 mul ymin -1 mul mtrxTrans translate
+      width xmax xmin sub div height ymax ymin sub div mtrxScale scale
+mtrx concatmatrix
+    /PlotMatrix exch def
+    }def
+/yLogTick
+    {yTickMin yTickInc
+    /yref yTickMin def
+    /yTickInc 1 def
+    2 1 9 {log yref add /yTickMin exch def yTick } for 
+    /yTickInc exch def
+    /yTickMin exch def
+    }def
+/yTickDict 8 dict def
+/yTick
+      {yTickDict begin
+    /flag1 yTickFlag def
+    /flag2 yTickLabel def
+    yTickMin yTickInc yTickMax { dup Number2String 
+            exch yTickPos exch xyCoor 
+        flag1 0 eq { moveto } if
+        flag1 1 eq { exch TickLen 2 div sub exch moveto } if
+        flag1 2 eq { exch TickLen sub exch moveto } if
+        TickLen 0 rmoveto TickLen -1 mul 0 rlineto
+        flag2 0 eq { pop } if
+        flag2 1 eq {
+            FontSize -0.3 mul 0 rmoveto
+            yflag 1 eq {6 CenteredShow } if
+            yflag 2 eq {
+                dup stringwidth pop -0.6 mul 0 rmoveto
+                (10) 6 CenteredShow superscript } if } if
+        flag2 2 eq {
+            TickLen 0 rmoveto
+            FontSize 0.3 mul 0 rmoveto
+            yflag 1 eq {4 CenteredShow } if
+            yflag 2 eq {(10) 4 CenteredShow superscript } if } if
+        stroke } for 
+    end } def
+/yTickSpecial       %stack: y, label
+    {/text exch def
+    /ypos exch def
+    yTickPos ypos xyCoor
+        yTickFlag 0 eq { moveto } if
+        yTickFlag 1 eq { exch TickLen 2 div sub exch moveto } if
+        yTickFlag 2 eq { exch TickLen sub exch moveto } if
+    TickLen 0 rlineto
+    text
+        yTickLabel 0 eq { pop } if
+        yTickLabel 1 eq { 0 TickLen -1 mul FontSize 0.3 mul sub rmoveto 2 CenteredShow } if
+        yTickLabel 2 eq { FontSize 0.3 mul 0 rmoveto 4 CenteredShow } if
+    stroke }def
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bifurcation Diagram Labels %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+/Hopf           %stack: x, y
+    {/y exch def /x exch def
+    x y xyCoor 9 Symb stroke } def
+/SaddleNode     %stack: x, y
+    {/y exch def /x exch def
+    x y xyCoor 10 Symb stroke } def
+/Stable     %stack: {x,y}
+    { 0 Spline } def
+/Unstable       %stack: {x,y}
+    { gsave [2 2] 0 setdash 0 Spline grestore } def
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Phase Plane Labels %
+%%%%%%%%%%%%%%%%%%%%%%
+
+/StableFocus    %stack: x, y
+    {/y exch def /x exch def
+    x y 1 Points stroke } def
+/UnStableFocus  %stack: x, y
+    {/y exch def /x exch def
+    x y 7 Points stroke } def
+/StableNode     %stack: x, y
+    {/y exch def /x exch def
+    x y 2 Points stroke } def
+/UnStableNode   %stack: x, y
+    {/y exch def /x exch def
+    x y 8 Points stroke } def
+/Saddle     %stack: x, y
+    {/y exch def /x exch def
+    x y 11 Points stroke } def
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Begin plot specifics %
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Font, Font Size, and Symbol Size
+/Font /Times-Roman def
+/FontSize       11 def
+default
+/SymbSize  3 def
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Structural Parameters
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Specify Plot size and coordinates
+/width   100 def    % Width in units of 1/72 inch
+/xflag     1 def    % (1 = linear, 2 = log)
+/xmin   -0.2 def
+/xmax      1 def
+/height  100 def    % Height in units of 1/72 inch
+/yflag     1 def    % (1 = linear, 2 = log)
+/ymin   -0.2 def 
+/ymax      1 def 
+xyPlotCoor 
+
+% Center plot in Portrait or Landscape orientation or leave in lower
+% left-hand corner (comment out all but one choice)
+% Portrait
+% Landscape
+FontSize 5 mul FontSize 4 mul translate
+
+% Frame and axes
+Frame
+% [2 2] 0 setdash % dotted lines
+% 0 ymin xyCoor moveto 0 ymax xyCoor lineto stroke % y-axis
+% xmin 0 xyCoor moveto xmax 0 xyCoor lineto stroke % x-axis
+% [ ] 0 setdash % return to solid lines
+
+% Axis Labels
+   (Ideal x,y,z) xLabel
+   (Experimental x,y,z) yLabel
+
+% Labeled Ticks
+/TickLen     10 def
+/TickThick  1.5 def     
+
+% Labeled Ticks along X-axis
+/xTickMin     0 def
+/xTickInc   0.5 def
+/xTickMax  xmax def
+/xTickPos  ymin def         % at bottom of plot:
+    /xTickLabel   1 def     %   ( 0=none, 1=below, 2=above )
+    /xTickFlag    1 def     %   ( 0=up, 1=centered, 2=down )
+    xTick
+/xTickPos  ymax def        % at top of plot:
+   /xTickLabel   0 def     %   ( 0=none, 1=below, 2=above )
+   /xTickFlag    1 def     %   ( 0=up, 1=centered, 2=down )
+   xTick
+
+% Labeled Ticks along Y-axis
+/yTickMin     0 def
+/yTickInc   0.5 def
+/yTickMax  ymax def
+/yTickPos  xmin def         % at left of plot
+    /yTickLabel   1 def     %   ( 0=none, 1=left, 2=right )
+    /yTickFlag    1 def     %   ( 0=right, 1=centered, 2=left )
+    yTick
+ /yTickPos  xmax def     % at right of plot
+    /yTickLabel   0 def %   ( 0=none, 1=left, 2=right )
+    /yTickFlag    1 def     %   ( 0=right, 1=centered, 2=left )
+    yTick
+
+% Un-Labeled Ticks
+/TickLen      5 def
+/TickThick  0.5 def
+
+% Un-Labeled Ticks along X-axis 
+/xTickLabel   0 def
+/xTickMin  xmin def
+
+/xTickInc   0.1 def
+/xTickMax  xmax def
+/xTickPos  ymin def         % at bottom of plot
+/xTickFlag    1 def %   ( 0=up, 1=centered, 2=down )
+    xTick
+%   xLogTick
+/xTickPos  ymax def        % at top of plot
+/xTickFlag    1 def    %   ( 0=up, 1=centered, 2=down )
+   xTick
+%   xLogTick
+
+% Un-Labeled Ticks along Y-axis 
+/yTickLabel   0 def
+/yTickMin  ymin def
+/yTickInc   0.1 def
+/yTickMax  ymax def
+/yTickPos  xmin def     % at left of plot
+/yTickFlag    1 def %   ( 0=right, 1=centered, 2=left )
+    yTick
+%   yLogTick
+ /yTickPos  xmax def     % at right of plot
+    yTick               %   ( 0=right, 1=centered, 2=left )
+%   yLogTick
+
+xmin ymin
+xmax ymax
+0 Curve stroke
+
+
+
+0.333   0.361
+0.333   0.334
+0.125   0.122
+0.000	0.000
+0.667   0.715
+0.25    0.252
+0.375   0.311
+0.750   0.750
+0.730   0.750
+0.250   0.230
+0.750   0.829
+0.500   0.514   
+0.25    0.187
+0.500   0.468
+0.500   0.431
+0.500   0.530
+0.75    0.812
+0.333   0.331
+0.75    0.797
+0.25    0.206
+0.000   -0.066
+0	0.067
+0.112   0.123
+0.5 0.524
+0.375   0.377
+0.125   0.106
+0.625   0.621
+0   -0.065
+0.875   0.878
+0.875   0.873
+0.75    0.687
+0.875   0.877
+0.875   0.842
+0.25    0.215
+0.875   0.874
+0.875   0.879
+0.5 0.565
+0.125   0.122
+0.25    0.25
+0.75    0.745
+0.125   0.126
+0.167   0.102
+0.25    0.255
+0.083	0.072
+0.25	0.248
+0.00	0.067
+0.167	0.157
+0.25	0.268
+0.125	0.129
+0.00	0.070
+0.50	0.501
+0.25	0.225
+0.75	0.749
+0.333	0.331
+0.333	0.340
+0	0.005
+0.375	0.480
+0.675	0.813
+0.25	0.256
+0.125	0.158
+0	0.001
+0.25	0.253
+0.25	0.241
+0.25	0.205	
+0.25	0.219
+0.25    0.297
+0.25    0.306
+0.25    0.299
+0.75    0.761
+0.25    0.251
+0.25    0.242
+0.333   0.32
+0.25    0.247
+0.583   0.585
+0   0.016
+0.25    0.254
+0.25    0.25
+0.333   0.318
+0.75    0.754
+0.083   0.082
+0.167	0.162
+0.833	0.842
+0.50	0.484
+0.333	0.334
+0.333	0.340
+0.0	-0.008
+1 Points stroke
+
+xmax xmin sub 0.15 mul xmin add
+ymax ymin sub 0.85 mul ymin add
+xyCoor moveto
+(c) 5 CenteredShow stroke
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Cell Angles
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Font, Font Size, and Symbol Size
+/Font /Times-Roman def
+/FontSize       11 def
+default
+/SymbSize  3 def
+
+% Specify Plot size and coordinates
+/width   100 def    % Width in units of 1/72 inch
+/xflag     1 def    % (1 = linear, 2 = log)
+/xmin      0 def
+/xmax    150 def
+/height  100 def    % Height in units of 1/72 inch
+/yflag     1 def    % (1 = linear, 2 = log)
+/ymin      0 def 
+/ymax    150 def 
+xyPlotCoor 
+
+% Center plot in Portrait or Landscape orientation or leave in lower
+% left-hand corner (comment out all but one choice)
+% Portrait
+% Landscape
+0 height FontSize 5 mul add translate
+
+% Frame and axes
+Frame
+% [2 2] 0 setdash % dotted lines
+% 0 ymin xyCoor moveto 0 ymax xyCoor lineto stroke % y-axis
+% xmin 0 xyCoor moveto xmax 0 xyCoor lineto stroke % x-axis
+% [ ] 0 setdash % return to solid lines
+
+% Axis Labels
+%   (Ideal Cell Angle) xLabel
+% custom x-label:
+   width 2 div FontSize -2.8 mul moveto
+   (Ideal a, b, g) stringwidth pop -0.5 mul 0 rmoveto
+   (Ideal ) show
+   greek
+   (a, b, g) show
+   default
+   stroke
+%   (Experimental Cell Angle) yLabel
+   %   custom y-label:
+    FontSize -3.5 mul height 2 div moveto
+
+    90 rotate
+    (Experimental a, b, g) stringwidth pop -2 div 0 rmoveto
+    (Experimental ) show
+    greek
+    (a, b, g) show
+    default
+    stroke
+    -90 rotate
+    
+% Labeled Ticks
+/TickLen     10 def
+/TickThick  1.5 def     
+
+% Labeled Ticks along X-axis
+/xTickMin  xmin def
+/xTickInc    30 def
+/xTickMax  xmax def
+/xTickPos  ymin def         % at bottom of plot:
+    /xTickLabel   1 def     %   ( 0=none, 1=below, 2=above )
+    /xTickFlag    1 def     %   ( 0=up, 1=centered, 2=down )
+    xTick
+/xTickPos  ymax def        % at top of plot:
+   /xTickLabel   0 def     %   ( 0=none, 1=below, 2=above )
+   /xTickFlag    1 def     %   ( 0=up, 1=centered, 2=down )
+   xTick
+
+% Labeled Ticks along Y-axis
+/yTickMin  ymin def
+/yTickInc    30 def
+/yTickMax  ymax def
+/yTickPos  xmin def         % at left of plot
+    /yTickLabel   1 def     %   ( 0=none, 1=left, 2=right )
+    /yTickFlag    1 def     %   ( 0=right, 1=centered, 2=left )
+    yTick
+ /yTickPos  xmax def     % at right of plot
+    /yTickLabel   0 def %   ( 0=none, 1=left, 2=right )
+    /yTickFlag    1 def     %   ( 0=right, 1=centered, 2=left )
+    yTick
+
+% Un-Labeled Ticks
+/TickLen      5 def
+/TickThick  0.5 def
+
+% Un-Labeled Ticks along X-axis 
+/xTickLabel   0 def
+/xTickMin  xmin def
+/xTickInc    15 def
+/xTickMax  xmax def
+/xTickPos  ymin def         % at bottom of plot
+/xTickFlag    1 def %   ( 0=up, 1=centered, 2=down )
+    xTick
+%   xLogTick
+/xTickPos  ymax def        % at top of plot
+/xTickFlag    1 def    %   ( 0=up, 1=centered, 2=down )
+   xTick
+%   xLogTick
+
+% Un-Labeled Ticks along Y-axis 
+/yTickLabel   0 def
+/yTickMin  ymin def
+/yTickInc    15 def
+/yTickMax  ymax def
+/yTickPos  xmin def     % at left of plot
+/yTickFlag    1 def %   ( 0=right, 1=centered, 2=left )
+    yTick
+%   yLogTick
+ /yTickPos  xmax def     % at right of plot
+    yTick               %   ( 0=right, 1=centered, 2=left )
+%   yLogTick
+
+xmin ymin
+xmax ymax
+0 Curve stroke
+
+90  90
+125.26  123.42
+120 120.13
+118.13 107.94
+109.47  110.88
+90  90
+90  91.07
+90  91.61
+60.00 59.59
+90.00 104.30
+90.00 104.89
+109.47 112.70
+26.57 25.81
+109.47  104.89
+58.52  75.26
+90.00  94.3
+109.47  109.74
+109.47  104.95
+90  85.6
+90  89.93
+60  65.71
+86.81  92.5
+97.33  100.72
+115.83  109.84
+90  90.48
+109.47  111.67
+90  89.99
+90  89.96
+90  89.96
+90  89.93
+90  88.06
+90  90.83
+90  88.08
+1 Points stroke
+
+xmax xmin sub 0.15 mul xmin add
+ymax ymin sub 0.85 mul ymin add
+xyCoor moveto
+(b) 5 CenteredShow stroke
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Cell Lengths
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Font, Font Size, and Symbol Size
+/Font /Times-Roman def
+/FontSize       11 def
+default
+/SymbSize  3 def
+
+% Specify Plot size and coordinates
+/width   100 def    % Width in units of 1/72 inch
+/xflag     1 def    % (1 = linear, 2 = log)
+/xmin      0 def
+/xmax    4.5 def
+/height  100 def    % Height in units of 1/72 inch
+/yflag     1 def    % (1 = linear, 2 = log)
+/ymin      0 def 
+/ymax    4.5 def 
+xyPlotCoor 
+
+% Center plot in Portrait or Landscape orientation or leave in lower
+% left-hand corner (comment out all but one choice)
+% Portrait
+% Landscape
+0 height FontSize 5 mul add translate
+
+% Frame and axes
+Frame
+% [2 2] 0 setdash % dotted lines
+% 0 ymin xyCoor moveto 0 ymax xyCoor lineto stroke % y-axis
+% xmin 0 xyCoor moveto xmax 0 xyCoor lineto stroke % x-axis
+% [ ] 0 setdash % return to solid lines
+
+% Axis Labels
+   (Ideal b/a, c/a) xLabel
+   (Experimental b/a, c/a) yLabel
+
+% Labeled Ticks
+/TickLen     10 def
+/TickThick  1.5 def     
+
+% Labeled Ticks along X-axis
+/xTickMin  xmin def
+/xTickInc     1 def
+/xTickMax  xmax def
+/xTickPos  ymin def         % at bottom of plot:
+    /xTickLabel   1 def     %   ( 0=none, 1=below, 2=above )
+    /xTickFlag    1 def     %   ( 0=up, 1=centered, 2=down )
+    xTick
+/xTickPos  ymax def        % at top of plot:
+   /xTickLabel   0 def     %   ( 0=none, 1=below, 2=above )
+   /xTickFlag    1 def     %   ( 0=up, 1=centered, 2=down )
+   xTick
+
+% Labeled Ticks along Y-axis
+/yTickMin  ymin def
+/yTickInc     1 def
+/yTickMax  ymax def
+/yTickPos  xmin def         % at left of plot
+    /yTickLabel   1 def     %   ( 0=none, 1=left, 2=right )
+    /yTickFlag    1 def     %   ( 0=right, 1=centered, 2=left )
+    yTick
+ /yTickPos  xmax def     % at right of plot
+    /yTickLabel   0 def %   ( 0=none, 1=left, 2=right )
+    /yTickFlag    1 def     %   ( 0=right, 1=centered, 2=left )
+    yTick
+
+% Un-Labeled Ticks
+/TickLen      5 def
+/TickThick  0.5 def
+
+% Un-Labeled Ticks along X-axis 
+/xTickLabel   0 def
+/xTickMin  xmin def
+
+/xTickInc  0.5 def
+/xTickMax  xmax def
+/xTickPos  ymin def         % at bottom of plot
+/xTickFlag    1 def %   ( 0=up, 1=centered, 2=down )
+    xTick
+%   xLogTick
+/xTickPos  ymax def        % at top of plot
+/xTickFlag    1 def    %   ( 0=up, 1=centered, 2=down )
+   xTick
+%   xLogTick
+
+% Un-Labeled Ticks along Y-axis 
+/yTickLabel   0 def
+/yTickMin  ymin def
+/yTickInc  0.5 def
+/yTickMax  ymax def
+/yTickPos  xmin def     % at left of plot
+/yTickFlag    1 def %   ( 0=right, 1=centered, 2=left )
+    yTick
+%   yLogTick
+ /yTickPos  xmax def     % at right of plot
+    yTick               %   ( 0=right, 1=centered, 2=left )
+%   yLogTick
+
+xmin ymin
+xmax ymax
+0 Curve stroke
+
+1   1
+0.943   0.893
+3.27    3.07
+1.22    1.28
+2.45    2.57
+1.63    1.51
+2.00    2.02
+0.76    0.72
+0.82    0.7
+1.41    1.49
+1.41    1.5
+1.41    1.34
+3.46    3.97
+1.15    1.25
+0.71    0.7
+0.71    0.7
+1.00    1.1
+1.00    1.09
+1.41    1.46
+1.41    1.61
+1.63    1.62
+1.73    1.80
+0.47    0.45
+0.47    0.46
+1.00    1.03
+3.15    3.93
+0.58    0.48
+1.16    1.00
+0.50    0.51
+1.00    0.97
+1.87    1.78
+1.06    1.14
+0.58    0.57
+1.00    0.98
+1.00    1.01
+2.83    2.76
+1.22    1.11
+2.12    2.07
+1.41    1.41
+1.41    1.64
+1.63    1.45
+2.00    1.80
+0.61    0.63
+1.06    1.01
+0.76    0.59
+1.00    1.06
+0.59    0.66
+1.00    1.14
+1.00    0.92
+1.12    1.10
+1.73    1.76
+1.91    1.74
+0.50    0.52
+1.73    1.84
+0.58    0.73
+1.00    1.17
+1.63    1.61
+1.00    1.13
+1.00    1.15
+1.00    1.15
+1.15	1.02
+0.83  	1.02
+1.63    1.46
+1.00    0.92
+1.63    1.49
+2.83    2.57
+1.00	0.92
+0.50    0.48
+1 Points stroke
+
+xmax xmin sub 0.15 mul xmin add
+ymax ymin sub 0.85 mul ymin add
+xyCoor moveto
+(a) 5 CenteredShow stroke
+
+showpage
+
+
+%%EndDocument
+%%Trailer

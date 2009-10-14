@@ -1,0 +1,8 @@
+This is how to create the one document for "first paper":
+
+use pdf combiner to combine the following pdf's:
+
+pdftk FirstPaperRev3.pdf FirstPaperSupMaterial.pdf Structures_portrait.pdf NNhist_portrait.pdf Order\ Parameters.pdf cat output paper1.pdf
+
+
+

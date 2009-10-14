@@ -1,0 +1,298 @@
+% style file for the journals of Oldenbourg Wissenschaftsverlag, Munich
+% version: 0.8
+% last modification: 03-10-22 schmidt@le-tex.de
+
+\usepackage{multicol}
+
+\def\journal@name{}
+\def\journalname#1{%
+  \set@journal{an}{#1}{125mm}{83mm}{125mm}{1}%
+  \set@journal{at}{#1}{85mm}{117mm}{175mm}{2}%
+  \set@journal{ic}{#1}{50mm}{104mm}{158mm}{3}%
+  \set@journal{it}{#1}{50mm}{104mm}{158mm}{3}%
+  \set@journal{rc}{#1}{85mm}{117mm}{175mm}{2}%
+  \set@journal{sd}{#1}{125mm}{83mm}{125mm}{1}%
+  \set@journal{tm}{#1}{85mm}{117mm}{175mm}{2}%
+  \set@journal{zk}{#1}{85mm}{117mm}{175mm}{2}%
+  \set@journal{zp}{#1}{112mm}{75mm}{112mm}{1}%
+  \ifx\journal@name\empty
+    \PackageError{oljour}{#1 is no valid journal name}{Please supply a valid journal name.}%
+  \fi
+}
+
+\newdimen\fullwidth
+\newdimen\halfwidth
+\newdimen\colwidth
+
+\textwidth85mm
+\def\set@journal#1#2#3#4#5#6{%
+  \def\@tempa{#1}\def\@tempb{#2}%
+  \ifx\@tempa\@tempb
+    \gdef\journal@name{#1}%
+    \global\textwidth#3
+    \global\multiply\textwidth by#6
+    \ifnum#6>1
+      \global\advance\textwidth10mm%
+    \fi
+    \global\colwidth#3
+    \global\columnwidth#3
+    \global\halfwidth#4
+    \global\fullwidth#5
+    \gdef\colnumber{#6}
+    \global\multicolsep10mm
+    \global\columnsep10mm
+  \fi
+}
+
+
+\def\title{\@ifnextchar[{\@@title}{\PackageError{oljour}{No language of title specified}{Please use \string\title[en|de] to select the language of the title.}}}
+
+\def\@@title[#1]#2{%
+  \def\@tempa{#1}\def\@tempb{en}%
+  \ifx\@tempa\@tempb
+    \def\@entitle{#2}%
+  \else
+    \def\@tempa{#1}\def\@tempb{de}%
+    \ifx\@tempa\@tempb
+      \def\@title{#2}%
+    \else
+      \PackageError{oljour}{#1 is no valid language for the title}%
+      {Please use \string\title[en|de] to select the language of the title.}%#
+    \fi
+  \fi}
+
+\def\@title{}
+\def\@entitle{}
+\def\entitle#1{\gdef\@entitle{#1}}
+\def\@corresponding{}
+\def\corresponding#1{\gdef\@corresponding{#1}}
+\def\@abstract{}
+\long\def\abstract#1{\gdef\@abstract{#1}}
+\def\@zusammenfassung{}
+\long\def\zusammenfassung#1{\gdef\@zusammenfassung{#1}}
+\def\@keywords{}
+\long\def\keywords#1{\gdef\@keywords{#1}}
+\def\@schlagwort{}
+\long\def\schlagwort#1{\gdef\@schlagwort{#1}}
+\def\@dedication{}
+\long\def\dedication#1{\gdef\@dedication{#1}}
+\def\@id{}
+\long\def\id#1{\gdef\@id{#1}}
+\def\@received{}
+\long\def\received#1{\gdef\@received{#1}}
+\def\@accepted{}
+\long\def\accepted#1{\gdef\@accepted{#1}}
+\def\@volume{}
+\long\def\volume#1{\gdef\@volume{#1}}
+\def\@issue{}
+\long\def\issue#1{\gdef\@issue{#1}}
+\def\@class{}
+\long\def\class#1{\gdef\@class{#1}}
+\def\@Year{}
+\long\def\Year#1{\gdef\@Year{#1}}
+
+% define which information is required
+% 
+
+\newcounter{author}
+\setcounter{author}{0}
+\def\author{%
+  \stepcounter{author}%
+  \def\anumber##1{}%
+  \def\atitle##1{\expandafter\gdef\csname a@\the\c@author @tit\endcsname{##1}}%
+  \def\firstname##1{\expandafter\gdef\csname a@\the\c@author @nam\endcsname{##1}}%
+  \def\surname##1{\expandafter\gdef\csname a@\the\c@author @sur\endcsname{##1}}%
+  \def\vita##1{\expandafter\gdef\csname a@\the\c@author @vit\endcsname{##1}}%
+  \def\institute##1{\expandafter\gdef\csname a@\the\c@author @ins\endcsname{##1}}%
+  \def\street##1{\expandafter\gdef\csname a@\the\c@author @str\endcsname{##1}}%
+  \def\number##1{\expandafter\gdef\csname a@\the\c@author @num\endcsname{##1}}%
+  \def\zip##1{\expandafter\gdef\csname a@\the\c@author @zip\endcsname{##1}}%
+  \def\town##1{\expandafter\gdef\csname a@\the\c@author @twn\endcsname{##1}}%
+  \def\country##1{\expandafter\gdef\csname a@\the\c@author @cnt\endcsname{##1}}%
+  \def\tel##1{\expandafter\gdef\csname a@\the\c@author @tel\endcsname{##1}}%
+  \def\fax##1{\expandafter\gdef\csname a@\the\c@author @fax\endcsname{##1}}%
+  \def\email##1{\expandafter\gdef\csname a@\the\c@author @email\endcsname{##1}}}
+\def\endauthor{}
+
+\def\maketitle{%
+  \ifx\journal@name\empty
+    \PackageError{oljour}{No journal name supplied}{Please use \string\journalname\space to supply a journal name.}%
+  \fi
+  \make@jour@title
+  \hsize=\textwidth
+  \linewidth=\textwidth
+  \columnwidth=\textwidth
+  \expandafter\ifnum\colnumber>1
+    \begin{multicols}{\colnumber}
+  \fi
+}
+
+\def\make@jour@title{\csname make@\journal@name @title\endcsname}
+
+\def\make@an@title{%
+  \def\@jt{Analysis}%
+  \make@title}
+
+\def\make@at@title{%
+  \def\@jt{Automatisierungstechnik}%
+  \make@title}
+
+\def\make@ic@title{%
+  \def\@jt{icom}%
+  \make@title}
+
+\def\make@it@title{%
+  \def\@jt{Information Technology}%
+  \make@title}
+
+\def\make@rc@title{%
+  \def\@jt{Radiochimica Acta}%
+  \make@title}
+
+\def\make@sd@title{%
+  \def\@jt{Statistics {\&} Decisions}%
+  \make@title}
+
+\def\make@tm@title{%
+  \def\@jt{Technisches Messen}%
+  \make@title}
+
+\def\make@zk@title{%
+  \def\@jt{Zeitschrift für Kristallographie}%
+  \make@title}
+
+\def\make@zp@title{%
+  \def\@jt{Zeitschrift für physikalische Chemie}%
+  \make@title}
+
+\def\make@title{%
+  \thispagestyle{empty}%
+  \hsize160mm%
+  \vsize200mm%
+  \fboxsep0pt%
+  \noindent\fbox{\hbox to156mm{%
+    \vbox to190mm{\hsize156mm%
+      \vskip2mm
+      \centerline{\Large\@jt}%
+      \vskip2mm
+      \hrule
+      \vskip2mm
+      \begin{center}\large\textbf{\@title}\end{center}%
+      \begin{center}\large\textbf{\@entitle}\end{center}%
+      \vfill
+      \leftskip5mm
+      \rightskip5mm plus20mm
+      \show@authors
+      \vfill
+      \vrule width0pt height5mm depth3mm%
+      \def\@tempa{}%
+      \ifx\@tempa\@keywords
+      \else
+        \textbf{Keywords:} \@keywords\vskip3mm
+      \fi
+      \ifx\@tempa\@schlagwort
+      \else
+        \textbf{Schlagworte:} \@schlagwort\vskip3mm
+      \fi
+      \hrule
+      \hbox to\hsize{%
+        \hbox to40mm{\kern2mm\textbf{MS-ID: \@id}\hfill}\vrule width0.4pt height5mm depth7.5mm%
+        \hfill
+        \@corresponding
+        \hfill
+        \vrule width0.4pt height5mm depth7.5mm\hbox to40mm{\hfill\today\kern2mm}%
+      }%
+      \vskip-5mm%
+      \noindent\hbox to40mm{\hskip-3mm Heft: \@volume/\@issue\ (\@Year)\hfill}\kern0.4pt\kern2mm
+        {\small \print@If{Received: }{\@received}{\ }%
+        \print@If{Accepted: }{\@accepted}{\ }}%
+      \vskip1mm%
+    }\hfill}}%
+  \clearpage
+  \ifx\@abstract\empty
+  \else
+    \centerline{\textbf{Abstract}}
+    \noindent\@abstract
+    \vskip5mm
+  \fi
+  \ifx\@zusammenfassung\empty
+  \else
+    \centerline{\textbf{Zusammenfassung}}
+    \noindent\@zusammenfassung
+    \vskip5mm
+  \fi
+  \ifx\@dedication\empty
+  \else
+    \centerline{\textbf{Widmung}}
+    \noindent\@dedication
+    \vskip5mm
+  \fi
+  \vfill
+  \clearpage
+}
+
+\newcount\temp@counta
+\def\show@authors{%
+  \ifnum\c@author=0
+    \PackageError{oljour}{No author names supplied}{Please supply author information.}
+  \fi
+  \temp@counta=0
+  \loop
+    \advance\temp@counta1
+    \noindent\textbf{%
+    \print@if{tit}{}{\ }%
+    \print@if{nam}{}{}%
+    \print@if{sur}{\ }{}: }%
+    \print@if{ins}{}{, }%
+    \print@if{str}{}{, }%
+    \print@if{num}{}{, }%
+    \print@if{zip}{}{\ }%
+    \print@if{twn}{}{, }%
+    \print@if{cnt}{}{}\\
+    \print@if{tel}{Tel: }{, }%
+    \print@if{fax}{Fax: }{, }%
+    \print@if{email}{E-Mail: }{}\\
+    \print@if{vit}{}{}%
+    \vskip3mm
+    \ifnum\temp@counta<\c@author\repeat}
+
+\def\print@if#1#2#3{%
+  \def\@tempa{}%
+  \expandafter\ifx\csname a@\the\temp@counta @#1\endcsname\@tempa
+  \else
+    #2\csname a@\the\temp@counta @#1\endcsname#3%
+  \fi}
+
+\def\print@If#1#2#3{%
+  \def\@tempa{}%
+  \edef\@tempb{#2}%
+  \ifx\@tempa\@tempb
+  \else
+    #1#2#3%
+  \fi}
+
+\evensidemargin15mm
+\oddsidemargin15mm
+\hoffset-1in
+\voffset-1in
+
+\renewenvironment{thebibliography}[1]
+     {\section*{\refname
+        \@mkboth{\MakeUppercase\refname}{\MakeUppercase\refname}}%
+      \list{\@biblabel{\@arabic\c@enumiv}}%
+           {\settowidth\labelwidth{\@biblabel{#1}}%
+            \leftmargin\labelwidth
+            \advance\leftmargin\labelsep
+            \@openbib@code
+            \usecounter{enumiv}%
+            \let\p@enumiv\@empty
+            \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+      \sloppy\clubpenalty4000\widowpenalty4000%
+      \sfcode`\.\@m}
+     {\def\@noitemerr
+       {\@latex@warning{Empty `thebibliography' environment}}%
+      \endlist
+      \aftergroup\expandafter\aftergroup\ifnum\aftergroup\colnumber\aftergroup>\aftergroup1\aftergroup\end\aftergroup{\aftergroup m\aftergroup u\aftergroup l\aftergroup t\aftergroup i\aftergroup c\aftergroup o\aftergroup l\aftergroup s\aftergroup}\aftergroup\vfill\aftergroup\break\aftergroup\else\aftergroup\vfill\aftergroup\break\aftergroup\fi}
+
+\def\nobibliography{%
+      \expandafter\ifnum\colnumber>1\end{multicols}\fi\vfill\break}

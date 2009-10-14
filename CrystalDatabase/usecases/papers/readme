@@ -1,0 +1,60 @@
+The ovjour.sty was developed to provide a common
+TeX style for all journals of Oldenbourg Wissen-
+schaftsverlag.
+
+The main focus is a homogeneous and comfortable
+markup of the meta data of a contribution to enable
+an automatic retrieval into the database of the publisher. 
+Please support a fast and smooth processing of your
+contribution by carefully filling in the provided fields.
+These fields are described in the file "article.tex"
+in this directory. It makes sense, to use this file
+as main file of your contribution and fill in in the
+appropriate information.
+
+Not all fields are needed for every journal. Please 
+find in the following table which fields are mandatory (m),
+optional (o) or unused (u) for your contribution and do not
+forget to send the author figure files
+
+                   an  at  ic  it  rc  sd  tm  zk  zp
+\journalname        m   m   m   m   m   m   m   m   m
+\title[de]          u   o   m   m   u   u   m   u   u
+\title[en]          m   m   o   m   m   m   m   m   m
+\corresponding      m   m   m   m   m   m   m   m   m
+\abstract           m   m   o   m   m   m   m   m   m
+\zusammenfassung    m   m   o   m   u   u   m   u   u
+\keywords           u   m   u   m   m   m   m   m   m
+\schlagwort         u   m   o   u   m   u   m   m   u
+\dedication         o   o   o   o   o   o   o   o   o
+\vita               u   m   o   m   u   u   o   u   u
+
+Please note the use of the \title macro. Because there
+are articles with german as well as with english titles
+and also such that have both, you have to provide the
+language (\title[de]{...}, \title[en]{...}).
+
+The article is compiled with the standard LaTeX class
+"article". ovjour.sty only adjusts the textwidth to allow
+you to break long formulas in a proper way. Please
+ignore overfull text lines, bad page breaks and so on.
+Please place your figures and tables at the end of your
+submission (behind \end{thebibliography}), otherwise they
+will not be visible in multi-column layouts. If you don't
+have a bibliography, please insert "\nobibliography" at the
+end of your document and place the figures afterwards.
+To determine the widths of the figures the measures \colwidth,
+\halfwidth and \fullwidth are provided. They allow you to scale 
+your figures to one of three fixed sizes (e.g.
+\includegraphics[width=\halfwidth]{fig1.eps}). 
+\colwidth is the width of the text column, \fullwidth
+the width of the entire text (obsolete for onecolumn
+layouts), \halfwidth is a measure inbetween.
+
+The formatting of your contribution will be done by
+the publisher. Therefore it is helpful, if you only
+use macros for the markup of the contents.
+
+In the subdirectory "example" you will find an example
+of a complete article.
+

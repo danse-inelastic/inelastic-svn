@@ -1,0 +1,1615 @@
+@MISC{mcclurg,
+    AUTHOR = {McClurg, R. B.},
+    HOWPUBLISHED = {personal communication},
+    YEAR = 2005
+    }
+
+@MISC{supplement,
+    AUTHOR = {Supplementary material},
+    NOTE = {Supplementary material is available from the publisher.}
+    }
+
+
+@UNPUBLISHED{Keith09,
+    AUTHOR  = {Keith, J. B. and McClurg, R. B.},
+    TITLE   = {Molecular Crystal Global Phase Diagrams III: Sufficient parameter space determination},
+    NOTE = {submitted},
+    YEAR    = {2009}
+    }
+
+@UNPUBLISHED{McClurg09,
+    AUTHOR  = {McClurg, R. B. and Keith, J. B.},
+    TITLE   = {Molecular Crystal Global Phase Diagrams II: Reference Lattices},
+    NOTE = {submitted},
+    YEAR    = {2009}
+    }
+
+@MISC{NRL08,
+    AUTHOR  = {NRL},
+    TITLE   = {Crystal Lattice Structures},
+    HOWPUBLISHED   = {cst-www.nrl.navy.mil/lattice},
+    YEAR    = {2009}
+    }
+
+@ARTICLE{AparicioMartinez07a,
+    AUTHOR  = {Aparicio-Martinez, S. and Hall, K. R.},
+    TITLE   = {Use of PC-SAFT for Global Phase Diagrams in Binary Mixtures Relevant to Natural Gases. 1. n-Alkane + n-Alkane},
+    JOURNAL = {Ind. Eng. Chem. Res.},
+    VOLUME  = {46},
+    PAGES   = {273-284},
+    YEAR    = {2007}
+    }
+
+@ARTICLE{AparicioMartinez07b,
+    AUTHOR  = {Aparicio-Martinez, S. and Hall, K. R.},
+    TITLE   = {Use of PC-SAFT for Global Phase Diagrams in Binary Mixtures Relevant to Natural Gases. 2. n-Alkane + Other Hydrocarbons},
+    JOURNAL = {Ind. Eng. Chem. Res.},
+    VOLUME  = {46},
+    PAGES   = {285-290},
+    YEAR    = {2007}
+    }
+
+@ARTICLE{Cismondi07,
+    AUTHOR  = {Cismondi, M. and Michelsen, M. L.},
+    TITLE   = {Global phase equilibrium calculations: Critical lines, critical end points and liquid-liquid-vapour equilibrium in binary mixtures},
+    JOURNAL = {J. Supercrit. Fluid.},
+    VOLUME  = {39},
+    PAGES   = {287-295},
+    YEAR    = {2007}
+    }
+
+@BOOK{Gavezzotti07,
+    AUTHOR    = {Gavezzotti, A.},
+    TITLE     = {Molecular Aggregation: Structure Analysis and Molecular Simulation of Crystals and Liquids},
+    PUBLISHER = {Oxford University Press},
+    ADDRESS   = {USA},
+    YEAR      = {2007}
+    }
+
+@MISC{Stokes07,
+    AUTHOR  = {Stokes, H. T. and Hatch, D. M. and Campbell, B. J.},
+    TITLE   = {ISOTROPY},
+    HOWPUBLISHED = {stokes.byu.edu/isotropy.html},
+    YEAR    = {2007}
+    }
+
+@ARTICLE{Xiao07,
+    AUTHOR  = {Xiao, J. J. and Yakubo, K. and Yu, K. W.},
+    TITLE   = {Global phase diagram of one-dimensional graded diatomic elastic chains: a diagrammatic approach to identifying vibrational normal modes},
+    JOURNAL = {J. Phys.: Condens. Matt.},
+    VOLUME  = {19},
+    PAGES   = {026224},
+    YEAR    = {2007}
+    }
+
+@ARTICLE{Zhai07,
+    AUTHOR  = {Zhai, H. and Ho, T.-L.},
+    TITLE   = { Superfluid-Insulator Transition of Strongly Interacting Fermi Gases in Optical Lattices},
+    JOURNAL = {Phys. Rev. Lett.},
+    VOLUME  = {99},
+    PAGES   = {100402},
+    YEAR    = {2007}
+    }
+
+@MISC{Accelrys05,
+    AUTHOR  = {Accelrys Inc.},
+    TITLE   = {Cerius 2 Modeling Environment},
+    HOWPUBLISHED   = {www.accelrys.com},
+    YEAR    = {2005}
+    }
+
+@MISC{CheckCell04,
+    AUTHOR  = {CCP14},
+    TITLE   = {CheckCell},
+    HOWPUBLISHED   = {www.ccp14.ac.uk/tutorial/lmgp/},
+    YEAR    = {2004}
+    }
+
+@ARTICLE{Datta04,
+    AUTHOR  = {Datta, S. and Grant, D. J. W.},
+    TITLE   = {},
+    JOURNAL = {Nature Reviews Drug Discovery},
+    VOLUME  = {3},
+    PAGES   = {42-57},
+    YEAR    = {2004}
+    }
+
+@ARTICLE{Dunitz04,
+    AUTHOR  = {Dunitz, J. D. and Scheraga, H. A.},
+    TITLE   = {},
+    JOURNAL = {Proc. Nat. Acad. Sci},
+    VOLUME  = {101},
+    PAGES   = {14309-14311},
+    YEAR    = {2004}
+    }
+
+@UNPUBLISHED{Keith04a,
+    AUTHOR  = {Keith, J. B. and Mettes, J. A. and McClurg, R. B.},
+    TITLE   = {Molecular Crystal Global Phase Diagrams},
+    NOTE    = {Submitted to Crystal Growth and Design},
+    YEAR    = {2004}
+    }
+
+@UNPUBLISHED{Keith04b,
+    AUTHOR  = {Keith, J. B. and Mettes, J. A. and McClurg, R. B.},
+    TITLE   = {Tetrahedral Molecular Phase Predictions},
+    NOTE    = {In Preparation},
+    YEAR    = {2004}
+    }
+
+@ARTICLE{Keith04c,
+    AUTHOR  = {Keith, J. B. and Mettes, J. A. and McClurg, R. B.},
+    JOURNAL = {Crystal Growth and Design},
+    VOLUME  = {4},
+    PAGES   = {1009--1012},
+    YEAR    = {2004}
+    }
+
+@ARTICLE{Lauher04,
+    AUTHOR  = {Lauher, J. W.},
+    JOURNAL = {Am. Cryst. Assoc.},
+    VOLUME  = {39},
+    PAGES   = {31--40},
+    YEAR    = {2004}
+    }
+
+@ARTICLE{Mettes04,
+    AUTHOR  = {Mettes, J. A. and Keith, J. B. and McClurg, R. B.},
+    JOURNAL = {Acta Cryst. A},
+    VOLUME  = {60},
+    PAGES   = {621--636},
+    YEAR    = {2004}
+    }
+
+@UNPUBLISHED{Missaghi04,
+    AUTHOR  = {Missaghi, M. N. and Mettes, J. A. and McClurg, R. B.},
+    NOTE    = {In Preparation},
+    YEAR    = {2005}
+    }
+
+@ARTICLE{Karamertzanis04,
+    AUTHOR  = {Karamertzanis, P. G. and Pantelides, C. C.},
+    TITLE   = {},
+    JOURNAL = {J. Comput. Chem.},
+    VOLUME  = {26},
+    PAGES   = {304-324},
+    YEAR    = {2004}
+    }
+
+@ARTICLE{Price04,
+    AUTHOR  = {Price, S. L.},
+    TITLE   = {},
+    JOURNAL = {Adv. Drug Deliv. Rev.},
+    VOLUME  = {56},
+    PAGES   = {301-319},
+    YEAR    = {2004}
+    }
+
+@ARTICLE{Arnautova03,
+    AUTHOR  = {Arnautova, Y. A. and Pillardy, J. and Czaplewski, C. and Scheraga, H. A.},
+    TITLE   = {},
+    JOURNAL = {J. Phys. Chem. B},
+    VOLUME  = {107},
+    PAGES   = {712-723},
+    YEAR    = {2003}
+    }
+
+@ARTICLE{Dahl03,
+    AUTHOR  = {Dahl, J. E. and Liu, S. G. and Carlson, R. M. K.},
+    TITLE   = {},
+    JOURNAL = {Science},
+    VOLUME  = {299},
+    PAGES   = {96},
+    YEAR    = {2003}
+    }
+
+@MISC{ggobi03,
+    AUTHOR  = {Lang, D. T.},
+    TITLE   = {GGOBI},
+    HOWPUBLISHED = {www.ggobi.org},
+    YEAR    = {2003}
+    }
+
+@ARTICLE{Kroumova03,
+    AUTHOR  = {Kroumova, E. and Aroyo, M. I. and Perez Mato, J. M. and Kirov, A. and Capillas, C. and Ivantchev, S. and Wondratschek, H.},
+    TITLE   = {Bilbao Crystallographic Server: useful databases and tools for phase transitions studies},
+    JOURNAL = {Phase Transitions},
+    VOLUME  = {76},
+    PAGES   = {155--170},
+    YEAR    = {2003}
+    }
+
+@ARTICLE{Leusen03,
+    AUTHOR  = {Leusen, F. J. J.},
+    TITLE   = {Crystal Structure Prediction of Diastereomeric Salts: A Step toward Rationalization of Racemate Resolution},
+    JOURNAL = {Crystal Growth and Design},
+    VOLUME  = {3},
+    PAGES   = {189--192},
+    YEAR    = {2003}
+    }
+
+@ARTICLE{Manoharan03,
+    AUTHOR  = {Manoharan, V. N. and Elsesser, M. T. and Pine, D. J.},
+    JOURNAL = {Science},
+    VOLUME  = {301},
+    PAGES   = {483--487},
+    YEAR    = {2003}
+    }
+
+@ARTICLE{Neumann03,
+    AUTHOR  = {Neumann, M. A. and Press, W. and Noldeke, C. and Asmussen, B. and Prager, M. and Ibberson, R. M.},
+    TITLE   = {The crystal structure of methane phase III},
+    JOURNAL = {J. Chem. Phys.},
+    VOLUME  = {119},
+    PAGES   = {1586--1589},
+    YEAR    = {2003}
+    }
+
+@ARTICLE{Schmalzried03,
+    AUTHOR  = {Schmalzried, H.},
+    JOURNAL = {Zeit. fur Physik. Chem.},
+    VOLUME  = {217},
+    PAGES   = {1281--1302},
+    YEAR    = {2003}
+    }
+
+@BOOK{Wilson03,
+    EDITOR    = {Wilson, S.},
+    TITLE     = {Handbook of Molecular Physics and Quantum Chemistry},
+    VOLUME    = {3},
+    PUBLISHER = {Wiley},
+    ADDRESS   = {Chichester},
+    YEAR      = {2003}
+    }
+
+@ARTICLE{Allen02,
+    AUTHOR  = {Allen, F. H. and Motherwell, W. D. S.},
+    TITLE   = {Applications of the Cambridge Structural Database in Organic Chemistry and Crystal Chemistry},
+    JOURNAL = {Acta Cryst. B},
+    VOLUME  = {58},
+    PAGES   = {407--422},
+    YEAR    = {2002}
+    }
+
+@BOOK{Bernstein02,
+    EDITOR    = {Bernstein, J.},
+    TITLE     = {Polymorphism in Molecular Crystals},
+    PUBLISHER = {OxfordClarendon Press},
+    ADDRESS   = {New York},
+    YEAR      = {2002}
+    }
+
+@ARTICLE{Bruno02,
+    AUTHOR  = {Bruno, I. J. and Cole, J. C. and Edgington, P. R. and Kessler, M. K. and Macrae, C. F. and McCabe, P. and Pearson, J. and Taylor, R.},
+    JOURNAL = {Acta Cryst. B},
+    VOLUME  = {58},
+    PAGES   = {389--397},
+    YEAR    = {2002}
+    }
+
+@ARTICLE{Dinnebier02,
+    AUTHOR  = {Dinnebier, R. E. and Bernatowicz, P. and Helluy, X. and Sebald, A. and Wunschel, M. and Fitch, A. and Smaalen, S. van},
+    JOURNAL = {Acta Cryst. B},
+    VOLUME  = {58},
+    PAGES   = {52--61},
+    YEAR    = {2002}
+    }
+
+@ARTICLE{Gavezzotti02,
+    AUTHOR  = {Gavezzotti, A.},
+    TITLE   = {Structure and intermolecular potentials in molecular crystals},
+    JOURNAL = {Model. Simul. Mater. Sci. Eng.},
+    VOLUME  = {10},
+    PAGES   = {R1--R29},
+    YEAR    = {2002}
+    }
+
+@ARTICLE{Grosse-Kunstleve02,
+    AUTHOR  = {Grosse-Kunstleve, R.W. and Sauter, N.K. and Moriarty, N.W. and Adams, P.D.},
+    JOURNAL = {J. Appl. Cryst.},
+    VOLUME  = {35},
+    PAGES   = {126-136},
+    YEAR    = {2002}
+    }
+
+@BOOK{Hahn02,
+    EDITOR    = {Hahn, T.},
+    TITLE     = {International Tables for Crystallography},
+    PUBLISHER = {Kluwer Academic Publishers},
+    ADDRESS   = {Dordrecht},
+    VOLUME    = {E},
+    YEAR      = {2002}
+    }
+
+@BOOK{Hahn02VolE,
+    EDITOR    = {Hahn, T.},
+    TITLE     = {International Tables for Crystallography},
+    PUBLISHER = {Kluwer Academic Publishers},
+    ADDRESS   = {Dordrecht},
+    VOLUME    = {E},
+    YEAR      = {2002}
+    }
+
+@BOOK{Hahn02VolASec9.2,
+    EDITOR    = {Hahn, T.},
+    TITLE     = {International Tables for Crystallography},
+    PUBLISHER = {Kluwer Academic Publishers},
+    ADDRESS   = {Dordrecht},
+    VOLUME    = {A},
+    YEAR      = {2002},
+    NOTE      = {Sec. 9.2}
+    }
+
+@ARTICLE{Motherwell02,
+    AUTHOR  = {Motherwell, W. D. S. and Ammon, H. L. and Dunitz, J. D. and Dzyabchenko, A. and Erk, P. and Gavezzotti, A. and Hofmann, D. W. M. and Leusen, F. J. J. and Lommerse, J. P. M. and Mooij, W. T. M. and Price, S. L. and Scheraga, H. and Schweizer, B. and Schmidt, M. U. and van Eijck, B. P. and Verwer, P. and Williams, D. E.},
+    TITLE   = {Crystal Structure Prediction of Small Organic Molecules: a Second Blind Test},
+    JOURNAL = {Acta Cryst. B},
+    VOLUME  = {58},
+    PAGES   = {647--661},
+    YEAR    = {2002}
+    }
+
+@ARTICLE{Oxtoby02,
+    AUTHOR  = {Oxtoby, D. W.},
+    JOURNAL = {Annu. Rev. Mater. Res.},
+    VOLUME  = {32},
+    PAGES   = {39--52},
+    YEAR    = {2002}
+    }
+
+@ARTICLE{Polishuk02,
+    AUTHOR  = {Polishuk, I. and Wisniak, J. and Segura, H.},
+    TITLE   = {Critical loops of liquid-liquid inmiscibility loops predicted by  semi-empirical equations of state and classical mixing rules},
+    JOURNAL = {Phys. Chem. Chem. Phys.},
+    VOLUME  = {4},
+    PAGES   = {879},
+    YEAR    = {2002}
+    }
+
+
+
+@ARTICLE{Stokes02a,
+    AUTHOR  = {Stokes, H. T. and Hatch, D. M.},
+    TITLE   = {Procedure for obtaining microscopic mechanisms of reconstructive phase transitions in crystalline solids},
+    JOURNAL = {Phys. Rev. B},
+    VOLUME  = {65},
+    PAGES   = {144114-1--144114-12},
+    YEAR    = {2002}
+    }
+
+@ARTICLE{Sung02,
+    AUTHOR  = {Sung, M.M. and Kim, G.K. and Kim, J. and Kim, Y.},
+    JOURNAL = {Chem. Mater.},
+    VOLUME  = {14},
+    PAGES   = {826--831},
+    YEAR    = {2002}
+    }
+
+@ARTICLE{Wrackmeyer02,
+    AUTHOR  = {Wrackmeyer, B. and Milius, W. and Badshah, A.},
+    JOURNAL = {J. Organomet. Chem. },
+    VOLUME  = {656},
+    PAGES   = {97},
+    YEAR    = {2002}
+    }
+
+@ARTICLE{Yao02,
+    AUTHOR  = {Yao, J. W. and Cole, J. C. and Pidcock, E. and Allen, F. H. and Howard, J. A. K. and Motherwell, W. D. S.},
+    TITLE   = {CSDSymmetry: the definitive database of point-group and space-group symmetry relationships in small-molecule crystal structures},
+    JOURNAL = {Acta Crystallogr. B},
+    VOLUME  = {58},
+    PAGES   = {640--646},
+    YEAR    = {2002}
+    }
+
+@ARTICLE{Beyer01,
+    AUTHOR  = {Beyer, T. and Lewis, T. and Price, S. L.},
+    TITLE   = {Which organic crystal structures are predictable by lattice energy minimisation?},
+    JOURNAL = {Cryst. Eng. Comm.},
+    VOLUME  = {3},
+    PAGES   = {178--212},
+    YEAR    = {2001}
+    }
+
+@ARTICLE{Eijck01,
+    AUTHOR  = {van Eijck, B. P. and Mooij, W. T. M. and Kroon, J.},
+    TITLE   = {Crystal Structure Prediction for Six Monosaccharides Revisited},
+    JOURNAL = {J. Phys. Chem. B},
+    VOLUME  = {105},
+    PAGES   = {10573--10578},
+    YEAR    = {2001}
+    }
+
+@ARTICLE{Eijck01b,
+    AUTHOR  = {van Eijck, B. P. and Mooij, W. T. M. and Kroon, J.},
+    TITLE   = {},
+    JOURNAL = {J. Comput. Chem.},
+    VOLUME  = {22},
+    PAGES   = {815--815},
+    YEAR    = {2001}
+    }
+
+@ARTICLE{Hatch01,
+    AUTHOR  = {Hatch, D. M. and Lookman, T. and Saxena, A. and Stokes, H. T.},
+    TITLE   = {Systematics of group-nonsubgroup transitions: Square to triangle transition},
+    JOURNAL = {Phys. Rev. B},
+    VOLUME  = {64},
+    PAGES   = {060104(R)-1--060104(R)-4},
+    YEAR    = {2001}
+    }
+
+@ARTICLE{Hloucha01,
+    AUTHOR  = {Hloucha, M. and Lodge, J.F.M. and Lenhoff, A.M. and Sandler, S.I.},
+    JOURNAL = {Cryst.},
+    VOLUME  = {64},
+    PAGES   = {060104(R)-1--060104(R)-4},
+    YEAR    = {2001}
+    }
+
+@ARTICLE{Holman01b,
+    AUTHOR  = {Holman, K. T. and Pivovar, A. M. and Swift, J. A. and Ward, M. D.},
+    TITLE   = {Metric Engineering of Soft Molecular Host Frameworks},
+    JOURNAL = {Acc. Chem. Res.},
+    VOLUME  = {34},
+    PAGES   = {107--118},
+    YEAR    = {2001}
+    }
+
+@ARTICLE{Moulton01,
+    AUTHOR  = {Moulton, B. and Zaworotko, M. J.},
+    TITLE   = {From Molecules to Crystal Engineering: Supramolecular Isomerism and Polymorphism in Network Solids},
+    JOURNAL = {Chem. Rev.},
+    VOLUME  = {101},
+    PAGES   = {1629--1658},
+    YEAR    = {2001}
+    }
+
+@ARTICLE{Pillardy01,
+    AUTHOR  = {Pillardy, J. and Arnautova, Y. A. and Czaplewski, C. and Gibson, K. D. and Scheraga, H. A.},
+    TITLE   = {Conformation-Family Monte Carlo: A New Method for Crystal Structure Prediction},
+    JOURNAL = {Proc. Natl. Acad. Sci. U.S.A.},
+    VOLUME  = {98},
+    PAGES   = {12351--12356},
+    YEAR    = {2001}
+    }
+
+@MISC{Stokes01,
+    AUTHOR  = {Stokes, H. T. and Hatch, D. M.},
+    TITLE   = {COPL},
+    HOWPUBLISHED = {www.physics.byu.edu/~stokesh/isotropy.html},
+    YEAR    = {2001}
+    }
+
+@BOOK{Bassoul00,
+    AUTHOR    = {Simon, J. Bassoul, P.},
+    TITLE     = {Design of Molecular Materials: Supramolecular Engineering},
+    PUBLISHER = {John Wiley and Sons},
+    ADDRESS   = {New York},
+    YEAR      = {2000}
+    }
+
+@BOOK{Chirikjian00,
+    AUTHOR    = {Chirikjian, G. S. and Kyatkin, A. B.},
+    TITLE     = {Engineering Applications of Noncommutative Harmonic Analysis},
+    PUBLISHER = {CRC Press},
+    ADDRESS   = {New York},
+    YEAR      = {2000}
+    }
+
+@ARTICLE{Grabowy00,
+    AUTHOR  = {Grabowy, Th. and Merzweiler, K.},
+    JOURNAL = {Z. Anorg. Allg. Chem.},
+    VOLUME  = {626},
+    PAGES   = {736--740},
+    YEAR    = {2000}
+    }
+
+@ARTICLE{Lommerse00,
+    AUTHOR  = {Lommerse, J. P. M. and Motherwell, W. D. S. and Ammon, H. L. and Dunitz, J. D. and Gavezzotti, A. and Hofmann, D. W. M. and Leusen, F. J. J. and Mooij, W. T. M. and Price, S. L. and Schweizer, B. and Schmidt, M. U. and van Eijck, B. P. and Verwer, P. and Williams, D. E.},
+    TITLE   = {A Test of Crystal Structure Prediction of Small Organic Molecules},
+    JOURNAL = {Acta Crystallogr. B},
+    VOLUME  = {56},
+    PAGES   = {697--714},
+    YEAR    = {2000}
+    }
+
+@BOOK{Mcquarrie00,
+    AUTHOR    = {McQuarrie, D. A.},
+    TITLE     = {Statistical Mechanics},
+    PUBLISHER = {University Science Books},
+    ADDRESS   = {Sausalito, CA},
+    YEAR      = {2000}
+    }
+
+@ARTICLE{Mooij00,
+    AUTHOR  = {Mooij, W. T. M. and van Eijck, B. P. and Kroon, J.},
+    JOURNAL = {J. Am. Chem. Soc.},
+    VOLUME  = {122},
+    PAGES   = {3500-3505},
+    YEAR    = {2000}
+    }
+
+@ARTICLE{Peresypkina00,
+    AUTHOR  = {Peresypkina, E.V. and Blatov, V.A.},
+    JOURNAL = {Acta Cryst. B},
+    VOLUME  = {56},
+    PAGES   = {501-511},
+    YEAR    = {2000}
+    }
+
+@ARTICLE{Polishuk00,
+    AUTHOR  = {Polishuk I. and Wisniak J. and Segura H. and Yelash L. V. and Kraska T.},
+    TITLE   = {Prediction of the critical locus in binary mixtures using equation of state - II. Investigation of van der Waals-type and Carnahan-Starling-type equations of state},
+    JOURNAL = {Fluid Phase Equilib.},
+    VOLUME  = {172},
+    PAGES   = {1-26},
+    YEAR    = {2000}
+    }
+
+@ARTICLE{Reichling00,
+    AUTHOR  = {Reichling, S. and Huttner, G.},
+    JOURNAL = {Eur. J. Inorg. Chem.},
+    VOLUME  = {56},
+    PAGES   = {857-877},
+    YEAR    = {2000}
+    }
+
+@ARTICLE{Schmidt00,
+    AUTHOR  = {Schmidt, B. and Zdanska, P.},
+    TITLE   = {Solution of the Time-Dependent Schrodinger Equation for Highly Symmetric Potentials},
+    JOURNAL = {Comp. Phys. Comm.},
+    VOLUME  = {127},
+    PAGES   = {290--308},
+    YEAR    = {2000}
+    }
+
+@BOOK{Braga99,
+    EDITOR    = {Braga, D. and Grepioni, F. and Orpen, A. G.},
+    TITLE     = {Crystal Engineering: From Molecules and Crystals to Materials},
+    PUBLISHER = {Kluwer Academic},
+    ADDRESS   = {Boston},
+    YEAR      = {1999}
+    }
+
+@ARTICLE{Eijck99,
+    AUTHOR  = {van Eijck, B. P. and Kroon, J.},
+    TITLE   = {},
+    JOURNAL = {J. Comput. Chem.},
+    VOLUME  = {20},
+    PAGES   = {799-812},
+    YEAR    = {1999}
+    }
+
+@BOOK{Kuipers99,
+    EDITOR    = {Kuipers, J. B.},
+    TITLE     = {Quaternions and Rotation Sequences},
+    PUBLISHER = {Princeton University Press},
+    ADDRESS   = {Princeton},
+    YEAR      = {1999}
+    }
+
+@ARTICLE{Lamoen99,
+    AUTHOR  = {Lamoen, D. and Michel, K. H.},
+    TITLE   = {Coupling of Orientational and Translational Modes in Solid C$_{60}$ and C$_{70}$},
+    JOURNAL = {Phase Transitions},
+    VOLUME  = {67},
+    PAGES   = {789--807},
+    YEAR    = {1999}
+    }
+
+@ARTICLE{Mooij99a,
+    AUTHOR  = {Mooij, W. T. M. and van Duigneveldt, F. B. and van Duigneveldt-van de Rijdt, J. and van Eijck, B. P.},
+    TITLE   = {},
+    JOURNAL = {J. Phys. Chem. A},
+    VOLUME  = {103},
+    PAGES   = {9872-9882},
+    YEAR    = {1999}
+    }
+
+@ARTICLE{Mooij99b,
+    AUTHOR  = {Mooij, W. T. M. and van Eijck, B. P. and Kroon, J.},
+    TITLE   = {},
+    JOURNAL = {J. Phys. Chem. A},
+    VOLUME  = {103},
+    PAGES   = {9883-9890},
+    YEAR    = {1999}
+    }
+
+@ARTICLE{Bolz98,
+    AUTHOR  = {Bolz, A. and Deiters, U. K. and Peters, C. J. and de~Loos, T. W.},
+    TITLE   = {Nomenclature for phase diagrams with particular reference to vapour–liquid and liquid–liquid equilibria},
+    JOURNAL = {Pure Appl. Chem.},
+    VOLUME  = {70},
+    PAGES   = {2233},
+    YEAR    = {1998}
+    }
+
+@BOOK{Conway98,
+    EDITOR    = {Conway, J. H. and Sloane, N. J. A.},
+    TITLE     = {Sphere Packing, Lattices and Groups},
+    EDITION   = {3rd},
+    PUBLISHER = {Springer-Verlag},
+    ADDRESS   = {NY.},
+    YEAR      = {1998}
+    }
+
+@ARTICLE{Ebert98,
+    AUTHOR  = {Ebert, K. H. and Massa, W. and Donath, H. Lorberth, J. and Seo, B. S. and Herdtweck, E.},
+    JOURNAL = {J. Organomet. Chem.},
+    VOLUME  = {559},
+    PAGES   = {203--207},
+    YEAR    = {1998}
+    }
+
+@ARTICLE{Gdanitz98,
+    AUTHOR  = {Gdanitz, R. J.},
+    TITLE   = {Ab Initio Prediction of Molecular Crystal Structures},
+    JOURNAL = {Curr. Opin. Solid State Mater. Sci.},
+    VOLUME  = {3},
+    PAGES   = {414--418},
+    YEAR    = {1998}
+    }
+
+@ARTICLE{Mooij98,
+    AUTHOR  = {Mooij, W. T. M. and van Eijck, B. P. and Price, S. L. and Verwer, P. and Kroon, J.},
+    TITLE   = {Crystal Structure Predictions for Acetic Acid},
+    JOURNAL = {J. Comput. Chem.},
+    VOLUME  = {19},
+    PAGES   = {459--474},
+    YEAR    = {1998}
+    }
+
+@INCOLLECTION{Verwer98,
+    AUTHOR    = {Verwer, P. and Leusen, F. J. J.},
+    TITLE     = {Computer Simulation to Predict Possible Crystal Polymorphs},
+    EDITOR    = {Lipkowitz, K. B. and Boyd, D. B.},
+    BOOKTITLE = {Reviews in Computational Chemistry},
+    PUBLISHER = {Wiley-VCH},
+    ADDRESS   = {New York},
+    VOLUME    = {12},
+    PAGES     = {327--366},
+    YEAR      = {1998}
+    }
+
+@ARTICLE{Copley97,
+    AUTHOR  = {Copley, J.R.D. and Michel, K.H.},
+    JOURNAL = {Physica B},
+    VOLUME  = {241},
+    PAGES   = {454--455},
+    YEAR    = {1997}
+    }
+
+@BOOK{Cornwell97,
+    AUTHOR    = {Cornwell, J. F.},
+    TITLE     = {Group Theory in Physics: An Introduction},
+    PUBLISHER = {Academic Pres},
+    ADDRESS   = {New York},
+    YEAR      = {1997}
+    }
+
+@INCOLLECTION{Gdanitz97,
+    AUTHOR    = {Gdanitz, R. J.},
+    TITLE     = {Ab Initio Prediction of Possible Molecular Crystal Structures},
+    EDITOR    = {Gavezzotti, A.},
+    BOOKTITLE = {Theoretical Aspects and Computer Modeling of the Molecular Solid State},
+    PUBLISHER = {Wiley},
+    ADDRESS   = {New York},
+    PAGES     = {185--201},
+    YEAR      = {1997}
+    }
+
+@ARTICLE{Harlan97,
+    AUTHOR  = {Harlan, C.J. and Bott, S.G. and Barron, A.R.},
+    TITLE   = {},
+    JOURNAL = {J.Chem.Soc.,Dalton Trans.},
+    PAGES   = {637},
+    YEAR    = {1997}
+    }
+
+@ARTICLE{Hashimoto97,
+    AUTHOR  = {Hashimoto, H. and Okada, Y. and Fujimura, H. and Morioka, M. and Sugihara, O. and Okamoto, N. and Matsushima, R.},
+    TITLE   = {Second-harmonic generation from single crystals of N-substituted 4-nitroanilines},
+    JOURNAL = {Jpn. J. Appl. Phys. 1},
+    VOLUME  = {36},
+    PAGES   = {6754--6760},
+    YEAR    = {1997}
+    }
+
+@ARTICLE{Loding97,
+    AUTHOR  = {L{\"{o}}ding, D. and M{\"{u}}ser, M. H. and Nielaba, P.},
+    TITLE   = {Role of Translation--Rotation Coupling on Phase Diagrams of N$_2$-�solids and Related Systems},
+    JOURNAL = {Z. Phys. B},
+    VOLUME  = {102},
+    PAGES   = {505--511},
+    YEAR    = {1997}
+    }
+
+@INCOLLECTION{Maslen97,
+    AUTHOR    = {Maslen, D. K. and Rockmore, D. N.},
+    TITLE     = {Generalized FFT's--a survey of some recent results},
+    BOOKTITLE = {DIMACS Ser. in Discrete Math. and Theor. Comput. Sci.},
+    PUBLISHER = {American Mathematical Society},
+    ADDRESS   = {Providence, Rhode Island},
+    PAGES     = {183--237},
+    YEAR      = {1997}
+    }
+
+@ARTICLE{Michel97,
+    AUTHOR  = {Michel, K. H. and Copley, J. R. D.},
+    TITLE   = {Orientational Mode Coupling, Diffuse Scattering, and the Order--Disorder Phase Transition in Solid C$_{60}$},
+    JOURNAL = {Z. Phys. B},
+    VOLUME  = {103},
+    PAGES   = {369--376},
+    YEAR    = {1997}
+    }
+
+@ARTICLE{Motherwell97,
+    AUTHOR  = {Motherwell, W. D. S.},
+    TITLE   = {Distribution of Molecular Centres in Crystallographic Unit Cells},
+    JOURNAL = {Acta Crystallogr. B},
+    VOLUME  = {53},
+    PAGES   = {726--736},
+    YEAR    = {1997}
+    }
+
+@BOOK{Pines97,
+    AUTHOR    = {Pines, D.},
+    TITLE     = {The Many�-Body Problem},
+    PUBLISHER = {Addison-Wesley},
+    ADDRESS   = {Reading, MA},
+    YEAR      = {1997}
+    }
+
+@BOOK{Radu97,
+    AUTHOR    = {Radu, B.},
+    TITLE     = {Statistical Dynamics: matter out of equilibrium},
+    PUBLISHER = {Imperial College Press},
+    ADDRESS   = {London},
+    YEAR      = {1997}
+    }
+
+@ARTICLE{Savin97,
+    AUTHOR  = {Savin, S. and Harris, A.B. and Yildirim, T.},
+    JOURNAL = {Phys. Rev. B},
+    VOLUME  = {55},
+    PAGES   = {14182--14199},
+    YEAR    = {1997}
+    }
+
+@ARTICLE{Chaka96,
+    AUTHOR  = {Chaka, A. M. and Zaneiwski, R. and Youngs, W. and Tessier, C. and Klopman, G.},
+    TITLE   = {Predicting the Crystal Structure of Organic Molecular Materials},
+    JOURNAL = {Acta Crystallogr. B},
+    VOLUME  = {52},
+    PAGES   = {165--183},
+    YEAR    = {1996}
+    }
+
+@ARTICLE{Coombes96,
+    AUTHOR  = {Coombes, D. S. and Price, S. L. and Willock, D. J. and Leslie, M.},
+    TITLE   = {Role of Electrostatic Interactions in Determining the Crystal Structures of Polar Organic Molecules. A Distributed Multipole Study},
+    JOURNAL = {J. Phys. Chem.},
+    VOLUME  = {100},
+    PAGES   = {7352--7360},
+    YEAR    = {1996}
+    }
+
+@ARTICLE{Price96,
+    AUTHOR  = {Price, S. L.},
+    TITLE   = {Applications of realistic electrostatic modelling to molecules in complexes, solids and proteins},
+    JOURNAL = {J. Chem. Soc., Faraday Trans.},
+    VOLUME  = {92},
+    PAGES   = {2997--3008},
+    YEAR    = {1996}
+    }
+
+@ARTICLE{Schmidt96,
+    AUTHOR  = {Schmidt, M. U. and Englert, U.},
+    TITLE   = {Prediction of Crystal Structures},
+    JOURNAL = {J. Chem. Soc., Dalton Trans.},
+    PAGES   = {2077--2082},
+    YEAR    = {1996}
+    }
+
+@BOOK{Stone96,
+    AUTHOR    = {Stone, A. J.},
+    TITLE     = {The Theory of Intermolecular Forces},
+    PUBLISHER = {Clarendon Press},
+    ADDRESS   = {New York},
+    YEAR      = {1996}
+    }
+
+@ARTICLE{Thalladi96,
+    AUTHOR  = {Thalladi, V. R. and Goud, B. S. and Hoy, V. J. and Allen, F. H. and Howard, J. A. K. and Desiraju, G. R.},
+    TITLE   = {Supramolecular synthons in crystal engineering. Structure simplification, synthon robustness and supramolecular retrosynthesis},
+    JOURNAL = {Chem. Commun.},
+    PAGES   = {401-402},
+    YEAR    = {1996}
+    }
+
+@BOOK{Toledano96,
+    AUTHOR    = {Tol{\'e}dano, P. and Dmitriev, V.},
+    TITLE     = {Reconstructive Phase Transitions: in Crystals and Quasicrystals},
+    PUBLISHER = {World Scientific},
+    ADDRESS   = {River Edge, NJ},
+    YEAR      = {1996}
+    }
+
+@ARTICLE{Williams96,
+    AUTHOR  = {Williams, D. E.},
+    TITLE   = {Ab Initio Molecular Packing Analysis},
+    JOURNAL = {Acta Crystallogr. A},
+    VOLUME  = {52},
+    PAGES   = {326--328},
+    YEAR    = {1996}
+    }
+
+@BOOK{Chaikin95,
+    AUTHOR    = {Chaikin, P. M. and Lubensky, T. C.},
+    TITLE     = {Principles of Condensed Matter Physics},
+    PUBLISHER = {Cambridge University Press},
+    ADDRESS   = {New York},
+    YEAR      = {1995}
+    }
+
+@ARTICLE{Eijck95,
+    AUTHOR  = {van Eijck, B. P. and Mooij, W. T. M. and Kroon, J.},
+    TITLE   = {Attempted Prediction of the Crystal Structures of Six Monosaccharides},
+    JOURNAL = {Acta Crystallogr. B},
+    VOLUME  = {51},
+    PAGES   = {99--103},
+    YEAR    = {1995}
+    }
+
+@ARTICLE{Marsh95,
+    AUTHOR  = {Marsh, R. E.},
+    JOURNAL = {Acta Cryst.},
+    VOLUME  = {B51},
+    PAGES   = {897--907},
+    YEAR    = {1995}
+    }
+
+@ARTICLE{Noth95,
+    AUTHOR  = {Noth, H. and Thomann, M.},
+    JOURNAL = {Chem. Ber.},
+    VOLUME  = {128},
+    PAGES   = {923},
+    YEAR    = {1995}
+    }
+
+@ARTICLE{Tajima95,
+    AUTHOR  = {Tajima, N. and Tanaka, T. and Arikawa, T. and Sukarai, T. and Teramae, S. and Hirano, T.},
+    TITLE   = {A Heuristic Molecular-Dynamics Approach for the Prediction of a Molecular Crystal Structure},
+    JOURNAL = {Bull. Chem. Soc. Jpn.},
+    VOLUME  = {68},
+    PAGES   = {519--527},
+    YEAR    = {1995}
+    }
+
+@ARTICLE{vanPelt95,
+    AUTHOR  = {van~Pelt, A. and Peters, C. J. and Swaan-Arons, J. and Dieters, U. K.},
+    TITLE   = {Global phase behavior based on the simplified perturbed-hard-chain equation of state},
+    JOURNAL = {J. Phys. Chem.},
+    VOLUME  = {102},
+    PAGES   = {3361},
+    YEAR    = {1995}
+    }
+
+@ARTICLE{Avoird94,
+    AUTHOR  = {van der Avoird, A. and Wormer, P. E. S. and Moszynski, R.},
+    TITLE   = {From Intermolecular Potentials to the Spectra of van der Waals Molecules, and Vice Versa},
+    JOURNAL = {Chem. Rev.},
+    VOLUME  = {94},
+    PAGES   = {1931--1974},
+    YEAR    = {1994}
+    }
+
+@ARTICLE{Fernando94,
+    AUTHOR  = {Fernando, G. W. and Weinert, M. and Watson, R. E. and Davenport, J. W.},
+    TITLE   = {Point Group Symmetries and Gaussian Integration},
+    JOURNAL = {J. Comp. Phys.},
+    VOLUME  = {112},
+    PAGES   = {282--290},
+    YEAR    = {1994}
+    }
+
+@ARTICLE{Gavezzotti94,
+    AUTHOR  = {Gavezzotti, A.},
+    TITLE   = {Are Crystal Structures Predictable?},
+    JOURNAL = {Acc. Chem. Res.},
+    VOLUME  = {27},
+    PAGES   = {309--314},
+    YEAR    = {1994}
+    }
+
+@ARTICLE{LyndenBell94,
+    AUTHOR  = {Lynden-Bell, R. M. and Michel, K. H.},
+    TITLE   = {Translation--rotation Coupling, Phase Transitions, and Elastic Phenomena in Orientationally Disordered Crystals},
+    JOURNAL = {Rev. Mod. Phys.},
+    VOLUME  = {66},
+    PAGES   = {721--762},
+    YEAR    = {1994}
+    }
+
+@BOOK{Sternberg94,
+    AUTHOR    = {Sternberg, S.},
+    TITLE     = {Group Theory and Physics},
+    PUBLISHER = {Cambridge University Press},
+    ADDRESS   = {Cambridge},
+    YEAR      = {1994}
+    }
+
+@ARTICLE{Zaworotko94,
+    AUTHOR  = {Zaworotko, M. J.},
+    TITLE   = {Crystal Engineering of Diamondoid Networks},
+    JOURNAL = {Chem. Soc. Rev.},
+    PAGES   = {283-288},
+    YEAR    = {1994}
+    }
+
+@ARTICLE{Braga93,
+    AUTHOR  = {Braga, D. and Grepioni, F. and Orpen, A. G.},
+    TITLE   = {},
+    JOURNAL = {Organometallics},
+    VOLUME  = {12},
+    PAGES   = {1481},
+    YEAR    = {1993}
+    }
+
+@BOOK{Brink93,
+    AUTHOR    = {Brink, D. M. and Satchler, G. R.},
+    TITLE     = {Angular Momentum},
+    PUBLISHER = {Oxford University Press},
+    ADDRESS   = {New York},
+    YEAR      = {1993}
+    }
+
+@ARTICLE{Fitch93,
+    AUTHOR  = {Fitch, A. N. and Cockcroft, J. K.},
+    JOURNAL = {Z. Kristallogr.},
+    VOLUME  = {203},
+    PAGES   = {29},
+    YEAR    = {1993}
+    }
+
+@ARTICLE{Heid93,
+    AUTHOR  = {Heid, R.},
+    TITLE   = {Intermolecular Interaction and Orientational Ordering in Solid C$_{60}$: A Parameter Study},
+    JOURNAL = {Phys. Rev. B},
+    VOLUME  = {47},
+    PAGES   = {15912--15922},
+    YEAR    = {1993}
+    }
+
+@ARTICLE{Holden93,
+    AUTHOR  = {Holden, J. R. and Du, Z. and Ammon, H.},
+    TITLE   = {Prediction of Possible Crystal Structures for C-, H-, N-, O-, and F-Containing Organic Compounds},
+    JOURNAL = {J. Comput. Chem.},
+    VOLUME  = {14},
+    PAGES   = {422--437},
+    YEAR    = {1993}
+    }
+
+@ARTICLE{Karfunkel93,
+    AUTHOR  = {Karfunkel, H. R. and Leusen, F. J. J. and Gdanitz, R. J.},
+    TITLE   = {The Ab Initio Prediction of Yet Unknown Molecular Crystal Structures by Solving the Crystal Packing Problem},
+    JOURNAL = {J. Comput.-Aided Mater. Des.},
+    VOLUME  = {1},
+    PAGES   = {177--185},
+    YEAR    = {1993}
+    }
+
+@BOOK{Kovalev93,
+    AUTHOR    = {Kovalev, O. V. and Worthey, G. C. and Stokes, H. T. and Hatch, D. M.},
+    TITLE     = {Representation of Crystallographic Space Groups: Irreducible Representations, Induced Representation and Corepresentations},
+    PUBLISHER = {Gordon and Breach Science Publishers},
+    ADDRESS   = {Berkshire, Great Britian},
+    YEAR      = {1993}
+    }
+
+@BOOK{Sands93,
+    AUTHOR    = {Sands, D. E.},
+    TITLE     = {Introduction to Crystallography},
+    PUBLISHER = {Dover},
+    ADDRESS   = {NY},
+    YEAR      = {1993}
+    }
+
+@ARTICLE{Bauer92,
+    AUTHOR  = {Bauer, W. H. and Kassner, D.},
+    JOURNAL = {Acta Cryst. B},
+    VOLUME  = {48},
+    PAGES   = {356--369},
+    YEAR    = {1992}
+    }
+
+@BOOK{Fassler92,
+    AUTHOR    = {Fassler, A. and Stiefel, E.},
+    TITLE     = {Group Theoretical Methods and their Applications},
+    PUBLISHER = {Birkhauser},
+    ADDRESS   = {Boston},
+    YEAR      = {1992}
+    }
+
+@ARTICLE{Gdanitz92,
+    AUTHOR  = {Gdanitz, R. J.},
+    TITLE   = {Prediction of Molecular Crystal Structures by Monte Carlo Simulated Annealing Without Reference to Diffraction Data},
+    JOURNAL = {Chem. Phys. Lett.},
+    VOLUME  = {190},
+    PAGES   = {391--396},
+    YEAR    = {1992}
+    }
+
+@ARTICLE{Michel92,
+    AUTHOR  = {Michel, K. H. and Copley, J. R. D. and Neumann, D. A.},
+    TITLE   = {Microscopic Theory of Orientational Disorder and the Orientational Phase Transition in Solid C$_{60}$},
+    JOURNAL = {Phys. Rev. Lett.},
+    VOLUME  = {68},
+    PAGES   = {2929--2932},
+    YEAR    = {1992}
+    }
+
+@ARTICLE{Tesh92,
+    AUTHOR  = {Tesh, K. F. and Jones, B. D. and Hanusa, T. P. and Huffman, J. C.},
+    JOURNAL = {J. Am. Chem. Soc.},
+    VOLUME  = {114},
+    PAGES   = {6590--6593},
+    YEAR    = {1992}
+    }
+
+@BOOK{Press92,
+    AUTHOR    = {Press, W. H. and Flannery, B. P. and Teukolsky, S. A. and Vetterling, W. T.},
+    TITLE     = {Numerical Recipes in FORTRAN: the Art of Scientific Computing},
+    PUBLISHER = {Cambridge University Press},
+    ADDRESS   = {New York},
+    YEAR      = {1992}
+    }
+
+@INCOLLECTION{Avoird91,
+    AUTHOR    = {van der Avoird, A.},
+    TITLE     = {Intermolecular Forces and the Properties of Molecular Solids},
+    EDITOR    = {Maks{\'{i}}c, Z. B.},
+    BOOKTITLE = {Theoretical Models of Chemical Bonding},
+    PUBLISHER = {Springer},
+    ADDRESS   = {New York},
+    VOLUME    = {4},
+    PAGES     = {391--433},
+    YEAR      = {1991}
+    }
+
+@ARTICLE{Bailey91,
+    AUTHOR  = {Bailey, R. T. and Cruickshank, F. R. and Pavlides, P. and Pugh, D. and Sherwood, J. N.},
+    TITLE   = {Organic materials for nonlinear optics:  interrelationships between molecular properties, crystal structure, and optical properties},
+    JOURNAL = {J. Phys. D},
+    VOLUME  = {24},
+    PAGES   = {135--145},
+    YEAR    = {1991}
+    }
+
+@INCOLLECTION{Dinur91,
+    AUTHOR    = {Dinur, U. and Hagler, A. T.},
+    TITLE     = {New Approaches to Empirical Force Fields},
+    EDITOR    = {Lipkowitz, K. B. and Boyd, D. B.},
+    BOOKTITLE = {Reviews in Computational Chemistry},
+    PUBLISHER = {Wiley-VCH},
+    ADDRESS   = {New York},
+    VOLUME    = {2},
+    PAGES     = {99--164},
+    YEAR      = {1991}
+    }
+
+@ARTICLE{Gavezzotti91,
+    AUTHOR  = {Gavezzotti, A.},
+    TITLE   = {Generation of Possible Crystal Structures from the Molecular Structure for Low--Polarity Organic Compounds},
+    JOURNAL = {J. Am. Chem. Soc.},
+    VOLUME  = {113},
+    PAGES   = {4622--4629},
+    YEAR    = {1991}
+    }
+
+@ARTICLE{Stokes91,
+    AUTHOR  = {Stokes, H. T. and Hatch, D. M. and Wells, J. D.},
+    TITLE   = {Group--Theoretical Methods for Obtaining Distortions in Crystals: Applications to Vibrational Modes and Phase Transitions},
+    JOURNAL = {Phys. Rev. B.},
+    VOLUME  = {43},
+    PAGES   = {11010--11018},
+    YEAR    = {1991}
+    }
+
+@BOOK{Vilenkin91,
+    AUTHOR    = {Vilenkin, N. I. and Klimyk, A. U.},
+    TITLE     = {Representations of Lie Groups and Special Functions},
+    PUBLISHER = {Kluwer Academic Publishers},
+    ADDRESS   = {Boston},
+    YEAR      = {1991}
+    }
+
+@ARTICLE{Padmaja90,
+    AUTHOR  = {Padmaja, N. and Ramakumar, S. and Viswamitra, M. A.},
+    JOURNAL = {Acta Cryst. A},
+    VOLUME  = {46},
+    PAGES   = {725--730},
+    YEAR    = {1990}
+    }
+
+@BOOK{Davis89,
+    AUTHOR    = {Davis, H. F.},
+    TITLE     = {Fourier Series and Orthogonal Functions},
+    PUBLISHER = {Dover},
+    ADDRESS   = {New York},
+    YEAR      = {1989}
+    }
+
+@BOOK{Desiraju89,
+    AUTHOR    = {Desiraju, G. R.},
+    TITLE     = {Crystal Engineering: The Design of Organic Solids},
+    PUBLISHER = {Elsevier},
+    ADDRESS   = {New York},
+    YEAR      = {1989}
+    }
+
+@ARTICLE{LyndenBell89,
+    AUTHOR  = {Lynden-Bell, R. M. and Stone, A. J.},
+    TITLE   = {Reorientational Correlation Functions, Quaternions and Wigner Rotation Matrices},
+    JOURNAL = {Mol. Simulat.},
+    VOLUME  = {3},
+    PAGES   = {271--281},
+    YEAR    = {1989}
+    }
+
+@ARTICLE{Maddox88,
+    AUTHOR  = {Maddox, J.},
+    TITLE   = {},
+    JOURNAL = {Nature},
+    VOLUME  = {335},
+    PAGES   = {201},
+    YEAR    = {1988}
+    }
+
+@ARTICLE{Miller88,
+    AUTHOR  = {Miller, J. S. and Epstein, A. J. and Reiff, W. M.},
+    TITLE   = {Molecular Ferromagnets},
+    JOURNAL = {Acc. Chem. Res.},
+    VOLUME  = {21},
+    PAGES   = {114--120},
+    YEAR    = {1988}
+    }
+
+@BOOK{Stokes88,
+    AUTHOR    = {Stokes, H. T. and Hatch, D. M.},
+    TITLE     = {Isotropy Subgroups of the 230 Crystallographic Space Groups},
+    PUBLISHER = {World Scientific},
+    ADDRESS   = {Teaneck, NJ},
+    YEAR      = {1988}
+    }
+
+@BOOK{Varshalovich88,
+    AUTHOR    = {Varshalovich, D. A. and Moskalev, A. N. and Khersonskii, V. K.},
+    TITLE     = {Quantum Theory of Angular Momentum},
+    PUBLISHER = {World Scientific},
+    ADDRESS   = {Teaneck, NJ},
+    YEAR      = {1988}
+    }
+
+@BOOK{Chandler87,
+    AUTHOR    = {Chandler, D.},
+    TITLE     = {Introduction to Modern Statistical Mechanics},
+    PUBLISHER = {Oxford University Press},
+    ADDRESS   = {New York},
+    YEAR      = {1987}
+    }
+
+@INCOLLECTION{Chemla87,
+    AUTHOR    = {Chemla, D. S. and Zyss, J.},
+    TITLE     = {Quadratic Nonlinear Optics and Optimization of the Second-Order Nonlinear Optical Responses of Molecular Crystals},
+    EDITOR    = {Chemla, D. S. and Zyss, J.},
+    BOOKTITLE = {Nonlinear Optical Properties of Organic Molecules and Crystals},
+    PUBLISHER = {Academic Press},
+    ADDRESS   = {Orlando},
+    VOLUME    = {1},
+    PAGES     = {23--191},
+    YEAR      = {1987}
+    }
+
+@ARTICLE{Hatch87,
+    AUTHOR  = {Hatch, D.M. and Stokes, H.T.},
+    JOURNAL = {Phys. Rev. B},
+    VOLUME  = {35},
+    PAGES   = {8509--8516},
+    YEAR    = {1987}
+    }
+
+@ARTICLE{Hiltunen87,
+    AUTHOR  = {Hiltunen, L. and Leskela, M. and Makela, M. and Niinisto, L.},
+    JOURNAL = {Acta Chem. Scand. A},
+    VOLUME  = {41},
+    PAGES   = {548},
+    YEAR    = {1987}
+    }
+
+@ARTICLE{Baur86,
+    AUTHOR  = {Baur, W. H. and Tillmanns, E.},
+    JOURNAL = {Acta Cryst.},
+    VOLUME  = {B42},
+    PAGES   = {95--111},
+    YEAR    = {1986}
+    }
+
+@ARTICLE{Briels86,
+    AUTHOR  = {Briels, W. J. and Jansen, A. P. J. and van der Avoird, A.},
+    TITLE   = {Dynamics of Molecular Crystals},
+    JOURNAL = {Adv. Quantum Chem.},
+    VOLUME  = {18},
+    PAGES   = {131--206},
+    YEAR    = {1986}
+    }
+
+@BOOK{Hill86,
+    AUTHOR    = {Hill, T. L.},
+    TITLE     = {An Introduction to Statistical Thermodynamics},
+    PUBLISHER = {Dover},
+    ADDRESS   = {New York},
+    YEAR      = {1986}
+    }
+
+@ARTICLE{Hatch85,
+    AUTHOR  = {Hatch, D. M. and Stokes, H. T.},
+    TITLE   = {Practical algorithm for identifying subgroups of space groups},
+    JOURNAL = {Phys. Rev. B},
+    VOLUME  = {31},
+    PAGES   = {2908-2912},
+    YEAR    = {1985}
+    }
+
+@BOOK{Birman84,
+    AUTHOR    = {Birman, Joseph L.},
+    TITLE     = {Theory of Crystal Space Groups and Lattice Dynamics},
+    PUBLISHER = {Springer-Verlag},
+    ADDRESS   = {New York},
+    YEAR      = {1984}
+    }
+
+@BOOK{Cornwell84,
+    AUTHOR    = {Cornwell, J. F.},
+    TITLE     = {Group Theory in Physics},
+    PUBLISHER = {Academic Press},
+    ADDRESS   = {Orlando},
+    YEAR      = {1984}
+    }
+
+@ARTICLE{Stone84,
+    AUTHOR  = {Stone, A. J. and Tough, R. J. A.},
+    TITLE   = {Spherical Tensor Theory of Long--range Intermolecular Forces},
+    JOURNAL = {Chem. Phys. Lett.},
+    VOLUME  = {110},
+    PAGES   = {123--129},
+    YEAR    = {1984}
+    }
+
+@ARTICLE{Wudl84,
+    AUTHOR  = {Wudl, F.},
+    TITLE   = {From organic metals to superconductors: managing conduction electrons in organic solids},
+    JOURNAL = {Acc. Chem. Res.},
+    VOLUME  = {17},
+    PAGES   = {227--232},
+    YEAR    = {1984}
+    }
+
+@ARTICLE{Kirkpatrick83,
+    AUTHOR  = {Kirkpatrick, S. and Gelatt Jr, C.D. and M.P. Vecchi},
+    JOURNAL = {Science},
+    VOLUME  = {220},
+    PAGES   = {671 - 680},
+    YEAR    = {1983}
+    }
+
+@BOOK{Hahn83,
+    EDITOR = {Hahn, T.},
+    TITLE  = {International Tables for Crystallography},
+    PUBLISHER = {D. Reidel Pub. Co.},
+    ADDRESS = {Boston},
+    YEAR = {1983},
+    }
+
+@ARTICLE{Pohl82,
+    AUTHOR  = {Pohl, S.},
+    JOURNAL = {Z.Kristallogr.,Kristallgeom.,Kristallphys.,Kristallchem.},
+    VOLUME  = {159},
+    PAGES   = {211},
+    YEAR    = {1982}
+    }
+
+@ARTICLE{Toledano82,
+    AUTHOR  = {Tol{\'e}dano, P. and Tol{\'e}dano, J.-C.},
+    TITLE   = {Nonferroic phase transitions},
+    JOURNAL = {Physical Review B},
+    VOLUME  = {25},
+    PAGES   = {1946--1964},
+    YEAR    = {1982}
+    }
+
+@BOOK{Califano81,
+    AUTHOR    = {Califano, S. and Schettino, V. and Neto, N.},
+    TITLE     = {Lattice Dynamics of Molecular Crystals},
+    PUBLISHER = {Springer-Verlag},
+    ADDRESS   = {New York},
+    YEAR      = {1981}
+    }
+
+@ARTICLE{Michel81,
+    AUTHOR  = {Michel, K. H. and Courtens, E.},
+    JOURNAL = {Phys. Rev. B},
+    VOLUME  = {23},
+    PAGES   = {513--522},
+    YEAR    = {1981}
+    }
+
+@ARTICLE{Avoird80,
+    AUTHOR  = {van der Avoird, A. and Wormer, P. E. S. and Mulder, F. and Berns, R. M.},
+    TITLE   = {Ab Initio Studies of the Interactions in van der Waals Molecules},
+    JOURNAL = {Topics in Current Chemistry},
+    VOLUME  = {93},
+    PAGES   = {1--50},
+    YEAR    = {1980}
+    }
+
+@ARTICLE{Briels80,
+    AUTHOR  = {Briels, W. J.},
+    TITLE   = {An expansion of the intermolecular energy in a complete set of symmetry-adapted functions; Convergence of the series for methane-methane and adamantane-adamantane interactions},
+    JOURNAL = {J. Chem. Phys.},
+    VOLUME  = {73},
+    PAGES   = {1850--1861},
+    YEAR    = {1980}
+    }
+
+@ARTICLE{Mighell80,
+    AUTHOR  = {Mighell, A.~D. and Rodger, J.~R.},
+    TITLE   = {},
+    JOURNAL = {Acta Cryst. A},
+    VOLUME  = {36},
+    PAGES   = {321},
+    YEAR    = {1980}
+    }
+
+@ARTICLE{Toledano80,
+    AUTHOR  = {Tol{\'e}dano, P. and Tol{\'e}dano, J.-C.},
+    TITLE   = {Order-parameter symmetries and free-energy expansions for purely ferroelastic transitions},
+    JOURNAL = {Physical Review B},
+    VOLUME  = {21},
+    PAGES   = {1139--1172},
+    YEAR    = {1980}
+    }
+
+@ARTICLE{VanKonynenburg80,
+    AUTHOR  = {van Konynenburg, P. H. and Scott, R. L.},
+    TITLE   = {Critical Lines and Phase Equilibria in Binary Van Der Waals Mixtures},
+    JOURNAL = {Philos. Trans. R. Soc. London, Ser. A},
+    VOLUME  = {298},
+    PAGES   = {495--540},
+    YEAR    = {1980}
+    }
+
+@ARTICLE{Cohen79,
+    AUTHOR  = {Cohen, S. and Powers, R. and Rudman, R.},
+    JOURNAL = {Acta Cryst. B},
+    VOLUME  = {35},
+    PAGES   = {1670--1674},
+    YEAR    = {1979}
+    }
+
+@BOOK{Sherwood79,
+    AUTHOR    = {Sherwood, J. N.},
+    TITLE     = {The Plastically Crystalline State},
+    PUBLISHER = {Wiley},
+    ADDRESS   = {New York},
+    YEAR      = {1979}
+    }
+
+@ARTICLE{Michel77,
+    AUTHOR  = {Michel, K. H. and Naudts, J.},
+    JOURNAL = {J. Chem. Phys.},
+    VOLUME  = {67},
+    PAGES   = {547--558},
+    YEAR    = {1977}
+    }
+
+@ARTICLE{More77,
+    AUTHOR  = {More, M. and Baert, F. and Lefebvre, J.},
+    JOURNAL = {Acta Cryst. B},
+    VOLUME  = {33},
+    PAGES   = {3681--3684},
+    YEAR    = {1977}
+    }
+
+@ARTICLE{Toledano77,
+    AUTHOR  = {Tol{\'e}dano, P. and Tol{\'e}dano, J.-C.},
+    TITLE   = {Order-parameter symmetries for the phase transitions of nonmagnetic secondary and higher-order ferroics},
+    JOURNAL = {Physical Review B},
+    VOLUME  = {16},
+    PAGES   = {386--407},
+    YEAR    = {1977}
+    }
+
+@ARTICLE{Yamamoto77,
+    AUTHOR  = {Yamamoto, T. and Kataoka, Y. and Okada, K.},
+    TITLE   = {Theory of Phase Transitions in Solid Methanes.  X. Centering Around Phase II in Solid CH$_4$},
+    JOURNAL = {J. Chem. Phys.},
+    VOLUME  = {66},
+    PAGES   = {2701--2730},
+    YEAR    = {1977}
+    }
+
+@ARTICLE{Toledano76,
+    AUTHOR  = {Tol{\'e}dano, P. and Tol{\'e}dano, J.-C.},
+    TITLE   = {Order-parameter symmetries for improper ferroelectric nonferroelastic transitions},
+    JOURNAL = {Physical Review B},
+    VOLUME  = {14},
+    PAGES   = {3097--3109},
+    YEAR    = {1976}
+    }
+
+@ARTICLE{Dahl75,
+    AUTHOR  = {Dahl, A. R. and Norman, A. D. and Shenav, H. and Schaeffer, R.},
+    JOURNAL = {J. Am. Chem. Soc.},
+    VOLUME  = {97},
+    PAGES   = {6364--6370},
+    YEAR    = {1976}
+    }
+
+@INCOLLECTION{Egelstaff75,
+    AUTHOR    = {Egelstaff, P. A. and Gray, C. G. and Gubbins, K. E.},
+    TITLE     = {Equilibrium Properties of Molecular Fluids},
+    EDITOR    = {Buckingham, A. D.},
+    BOOKTITLE = {Physical Chemistry: Molecular Structure and Properties},
+    PUBLISHER = {MTP International Review of Science},
+    ADDRESS   = {Butterworths, London},
+    VOLUME    = {2},
+    PAGES     = {299--345},
+    YEAR      = {1975}
+    }
+
+@INCOLLECTION{Girardeau74,
+    AUTHOR    = {Girardeau, M. D. and Mazo, R. M.},
+    TITLE     = {Variational Methods in Statistical Mechanics},
+    EDITOR    = {Prigogine, I. and Rice, S. A.},
+    BOOKTITLE = {Advances in Chemical Physics},
+    PUBLISHER = {Academic Press},
+    ADDRESS   = {New York},
+    VOLUME    = {24},
+    PAGES     = {187--255},
+    YEAR      = {1974}
+    }
+
+@ARTICLE{Piermarini73,
+    AUTHOR  = {Piermarini, G.J. and Braun, A.B.},
+    JOURNAL = {J. Chem. Phys.},
+    VOLUME  = {58},
+    PAGES   = {1974-1982},
+    YEAR    = {1973}
+    }
+
+@BOOK{Bradley72,
+    AUTHOR    = {Bradley, C. J. and Cracknell, A. P.},
+    TITLE     = {The Mathematical Theory of Symmetry in Solids},
+    PUBLISHER = {Oxford University Press},
+    ADDRESS   = {New York},
+    YEAR      = {1972}
+    }
+
+@ARTICLE{Harrison72,
+    AUTHOR  = {Harrison, W. and Marsh, W.C. and Trotter, J.},
+    JOURNAL = {J. Chem. Soc., Dalton Trans.},
+    VOLUME  = {},
+    PAGES   = {1009},
+    YEAR    = {1972}
+    }
+
+@ARTICLE{Press72,
+    AUTHOR  = {Press, W.},
+    TITLE   = {Structure and Phase Transitions of Solid Heavy Methane (CD$_4$)},
+    JOURNAL = {J. Chem. Phys.},
+    VOLUME  = {56},
+    PAGES   = {2597--2609},
+    YEAR    = {1972}
+    }
+
+@BOOK{Landau69,
+    AUTHOR    = {Landau, L. D. and Lifshitz, E. M.},
+    TITLE     = {Statistical Physics},
+    PUBLISHER = {Pergamon},
+    ADDRESS   = {New York},
+    YEAR      = {1969}
+    }
+
+@BOOK{Zak69,
+    AUTHOR    = {Zak, J. and Casher, H. and Gluck, H. and Gur, Y.},
+    TITLE     = {The Irreducible Representations of Space Groups},
+    PUBLISHER = {Benjamin},
+    ADDRESS   = {New York},
+    YEAR      = {1969}
+    }
+
+@ARTICLE{Maradudin68,
+    AUTHOR  = {Maradudin, A. A. and Vosko, S. H.},
+    TITLE   = {Symmetry Properties of the Normal Vibrations of a Crystal},
+    JOURNAL = {Rev. Mod. Phys.},
+    VOLUME  = {40},
+    PAGES   = {1--37},
+    YEAR    = {1968}
+    }
+
+@BOOK{Miller67,
+    AUTHOR    = {Miller, S. C. and Love, W. F.},
+    TITLE     = {Tables of Irreducible Representations of Space Groups and Co-Representations of Magnetic Space Groups},
+    PUBLISHER = {Pruett},
+    ADDRESS   = {Boulder, CO},
+    YEAR      = {1967}
+    }
+
+@BOOK{Pearson67,
+    AUTHOR    = {Pearson, W. B.},
+    TITLE     = {A Handbook of Lattice Spacings and Structures of Metals and Alloys},
+    PUBLISHER = {Pergamon Press},
+    ADDRESS   = {New York},
+    YEAR      = {1967}
+    }
+
+@BOOK{Stroud66,
+    AUTHOR    = {Stroud, A. H. and Secrest, D.},
+    TITLE     = {Gaussian Quadrature Formulas},
+    PUBLISHER = {Prentice-Hall},
+    ADDRESS   = {Englewood Cliffs, NJ},
+    YEAR      = {1966}
+    }
+
+@ARTICLE{Williams66,
+    AUTHOR  = {Williams, D. E.},
+    TITLE   = {Crystal Structure of Dibenzoylmethane},
+    JOURNAL = {Acta Crystallogr.},
+    VOLUME  = {21},
+    PAGES   = {340--349},
+    YEAR    = {1966}
+    }
+
+@BOOK{Kitaigorodskii61,
+    AUTHOR    = {Kitaigorodskii, A. I.},
+    TITLE     = {Organic Chemical Crystallography},
+    PUBLISHER = {Consultants Bureau},
+    ADDRESS   = {New York},
+    YEAR      = {1961}
+    }
+
+@ARTICLE{Timmermans61,
+    AUTHOR  = {Timmermans, P. J.},
+    TITLE   = {Theory of Phase Transitions in Solid Heavy Methane},
+    JOURNAL = {J. Phys. Chem. Solids},
+    VOLUME  = {18},
+    PAGES   = {1--8},
+    YEAR    = {1961}
+    }
+
+@ARTICLE{James59,
+    AUTHOR  = {James, H. M. and Keenan, T. A.},
+    TITLE   = {Theory of Phase Transitions in Solid Heavy Methane},
+    JOURNAL = {J. Chem. Phys.},
+    VOLUME  = {31},
+    PAGES   = {12--41},
+    YEAR    = {1959}
+    }
+
+@ARTICLE{Nagamiya51,
+    AUTHOR  = {Nagamiya, T.},
+    TITLE   = {On the Zero Point Entropy of Methane Crystal},
+    JOURNAL = {Prog. Theor. Phys. (Kyoto)},
+    VOLUME  = {6},
+    PAGES   = {702--713},
+    YEAR    = {1951}
+    }
+
+@BOOK{Wilson51,
+    EDITOR    = {Wilson, A. J. C.},
+    TITLE     = {Structure Reports for 1947-1948},
+    PUBLISHER = {N.V.A. Oosthoek's Uitgevers},
+    ADDRESS   = {Utrecht},
+    YEAR      = {1951}
+    }

@@ -1,0 +1,29 @@
+\begin{thebibliography}{5}
+\baselineskip=9pt\parskip=0pt
+
+\harvarditem{Knuth}{1984}{knuth84}
+Knuth, D.~E.  \harvardyearleft 1984\harvardyearright{}.
+\newblock \emph{The \TeX{}book}.
+\newblock Addison-Wesley.
+
+\harvarditem{Lamport}{1986}{lamport86}
+Lamport, L.  \harvardyearleft 1986\harvardyearright{}.
+\newblock \emph{{\LaTeX{}} A Document Preparation System}.
+\newblock Addison-Wesley.
+
+\harvarditem{Parth\'e \harvardand\ Gelato}{1984}{pargel84}
+Parth\'e, E. \harvardand\ Gelato, L.  \harvardyearleft 1984\harvardyearright{}.
+\newblock \emph{Acta Cryst.} \volbf{A40}, 169--183.
+
+\harvarditem{Pauling}{1989}{pauling89}
+Pauling, L.  \harvardyearleft 1989\harvardyearright{}.
+\newblock \emph{Proc. Natl Acad. Sci USA}, \volbf{86}, 8595--8599.
+
+\harvarditem{Rauch}{1976}{rauch76}
+Rauch, H. \&~Petrascheck, D.  \harvardyearleft 1976\harvardyearright{}.
+\newblock \emph{Grundlagen f{\"u}r ein Laue-Neutroneninterferometer Teil 1:
+  Dynamische Beugung}.
+\newblock Report AIAU 74405b. Atominstitut der {\"O}sterreichischen
+  Universit{\"a}ten, Austria.
+
+\end{thebibliography}
