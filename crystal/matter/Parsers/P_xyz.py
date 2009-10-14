@@ -15,7 +15,7 @@
 """Parser for XYZ file format, where
 first line gives number of atoms
 second one has optional title
-remaining lines contain element, x, y, z
+remaining lines contain symbol, x, y, z
 """
 
 __id__ = "$Id: P_xyz.py 2825 2009-03-09 04:33:12Z juhas $"
@@ -90,10 +90,10 @@ class P_xyz(StructureParser):
                     emsg = ('%d: all lines must have ' +
                             'the same number of columns') % p_nl
                     raise StructureFormatError(emsg)
-                element = fields[0]
-                element = element[0].upper() + element[1:].lower()
+                symbol = fields[0]
+                symbol = symbol[0].upper() + symbol[1:].lower()
                 xyz = [ float(f) for f in fields[1:4] ]
-                stru.addNewAtom(element, xyz=xyz)
+                stru.addNewAtom(symbol, xyz=xyz)
         except ValueError:
             exc_type, exc_value, exc_traceback = sys.exc_info()
             emsg = "%d: invalid number format" % p_nl
@@ -115,7 +115,7 @@ class P_xyz(StructureParser):
         lines.append( stru.title )
         for a in stru:
             rc = a.xyz_cartn
-            s = "%-3s %g %g %g" % (a.element, rc[0], rc[1], rc[2])
+            s = "%-3s %g %g %g" % (a.symbol, rc[0], rc[1], rc[2])
             lines.append(s)
         return lines
     # End of toLines

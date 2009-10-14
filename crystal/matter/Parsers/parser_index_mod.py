@@ -1,12 +1,5 @@
 ##############################################################################
 #
-# Structure         by DANSE Diffraction group
-#                   Simon J. L. Billinge
-#                   (c) 2007 trustees of the Michigan State University.
-#                   All rights reserved.
-#
-# File coded by:    Pavol Juhas
-#
 # See AUTHORS.txt for a list of people who contributed.
 # See LICENSE.txt for license information.
 #
@@ -71,6 +64,25 @@ parser_index = {
         'module' : 'P_xcfg',
         'file_extension' : '',
         'file_pattern' : '*.xcfg|*.eye|*.cfg',
+        'has_input' : True,
+        'has_output' : True,
+        },
+        
+        
+    # PDFfit structure format
+    'pdffit' : {
+        'module' : 'P_pdffit',
+        'file_extension' : '.stru',
+        'file_pattern' : '*.stru|*.rstr',
+        'has_input' : True,
+        'has_output' : True,
+        },
+        
+        # Bruce Ravel's atoms format
+    'bratoms' : {
+        'module' : 'P_bratoms',
+        'file_extension' : '.inp',
+        'file_pattern' : '*.inp',
         'has_input' : True,
         'has_output' : True,
         },
