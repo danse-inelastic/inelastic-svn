@@ -179,7 +179,7 @@ proxy for the energy or a cost function.
 
 Response:
 ---------
-Our apologies again that reviewer 2 was unable to access GPD II.  
+Our apologies again that reviewer 2 was unable to access GPD II.  In that work and especially GPD I, we only deal with the free energy so this.  In this paper (i.e. Eq. 5) we look at the low-T solutions so energy is 
 
 
 Page 27: I realize that the authors imagine readers reading all their papers
@@ -191,4 +191,4 @@ How close are we to reality concerning the actual energies?
 
 Response:
 ---------
-
+An excellent suggestion and an example to illustrate the concept at the beginning of the paper has been included.
