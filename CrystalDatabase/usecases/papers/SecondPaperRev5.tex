@@ -902,6 +902,33 @@ Supercomputer Institute were used for portions of this research.}
 
 \pagebreak
 
+\begin{figure}
+\caption[Front view of $T_d$ global phase diagram as a function of
+intermolecular potential coefficients.]{$[111]$ view of $T_d$
+global phase diagram as a function of intermolecular potential
+coefficients $\mb{\nu}$ scaled by $kT$. The origin of the axes is
+the infinite-temperature reference state.  Rays protruding from the surfaces
+pointing at distinct phases represent ratios of potential
+coefficients that form tetrahedral molecular crystals of indicated
+symmetry.  Colored surfaces are boundaries between daughter phases
+and the reference fcc phase.} \label{gpd1}
+\includegraphics{figure1aII.eps}
+%\includegraphics{figure1bII.eps}
+\end{figure}
+
+\pagebreak
+
+\begin{figure}
+\caption[Reverse view of the $T_d$ global phase
+diagram.]{$[\bar{1}\bar{1}\bar{1}]$ view of the $T_d$ global phase
+diagram. Some molecules such as those in the $Fm\bar{3}m$
+structure appear ``spherical" because of rapid molecular
+reorientation.} \label{gpd2}
+\includegraphics{figure1bII.eps}
+\end{figure}
+
+\pagebreak
+
 \begin{table}%[!ht]
 \caption{Presence of $O_h$ and $D_{3h}$ point group IRs for various
 manifolds of SO(3). $O_h$ is the Wyckoff point group of the fcc,
@@ -1087,9 +1114,8 @@ $T_d$ & $I_h$\\
 \\$^*$ There is one isotropic basis function for $\ell_i=\ell_j=0$ in
 each case, but it does not drive orientational ordering.
 \end{table}
+
 \pagebreak
-
-
 
 \begin{figure}%[!ht]
 \scalebox{.38}{\includegraphics{mezdieCompareII.eps}}
@@ -1102,6 +1128,246 @@ center of mass on an ideal bcc reference lattice.\label{compare}}
 \end{figure}
 
 \pagebreak
+
+\appendix
+
+\section{Detailed derivation of Eq.~\ref{}}
+
+We choose to expand the potential using a complete set of
+two-molecule basis functions that span the rotational space
+$SO(3)$ parameterized by Euler angles $\mb{\omega}$ of molecule
+$i,j$ and their intervening orientational space $S^2$
+parameterized by solid angle
+$\mb{\Omega}_{ij}=(\theta_{ij},\phi_{ij})$. Coupling two $SO(3)$
+irreducible representations (IR's)
+$D^{\ell_i}_{m_{i}n_{i}}(\mb{\omega}_i)$ and
+$D^{\ell_j}_{m_{j}n_{j}}(\mb{\omega}_j)$ and a spherical harmonic
+$C^\ell_m(\mb{\Omega}_{ij})$ gives
+\begin{equation}
+\label{Wbasis}W^{n_i n_j}_{\ell_i \ell \ell_j}=\sum_{m_imm_j} \left(\begin{array}{ccc} \ell_i & \ell & \ell_j \\
+m_i & m & m_j
+\end{array}\right)D^{\ell_i}_{m_in_i}(\mb{\omega}_i)C^\ell_m(\mb{\Omega}_{ij}) D^{\ell_j}_{m_jn_j}(\mb{\omega}_j)
+\end{equation}
+where the explicit functional dependence of $C^\ell_m$ and
+$D^{\ell_j}_{m_jn_j}$ has been dropped. 
+
+The details of the coupling is different from our references so we give a full derivation here.To
+couple $\{D_{m_i n_i}^{\ell_i},C_{m}^{\ell},D_{m_j
+n_j}^{\ell_j}\}$ where \cite{Varshalovich88}
+\begin{eqnarray}
+D_{mn}^{\ell}(\mb{\omega}_i)&=&\exp \left(-i m \alpha_i \right)
+\, d_{mn}^{\ell}(\beta_i) \, \exp \left(-i n \gamma_i \right)\\
+d_{mn}^{\ell}(\beta_i)&=&\sum_{k = \max(0,m-n )}^{\min( \ell+m,
+\ell-n)} (-1)^k\nonumber\\
+&&\!\!\!\!\!\!\!\!\!\!\!\!\times\frac{\left[(\ell+m)!\,(\ell-m)!\,(\ell+n)!\,(\ell-n)!
+\right]^{1/2}}{k!\,(\ell+m-k)!\,(\ell-n-k)!
+\,(n-m+k)!}\nonumber \\
+&&\!\!\!\!\!\!\!\!\!\!\!\!\times\left[\cos(\beta_i/2)\right]^{2\ell+m-n-2k}
+ \left[\sin(\beta_i/2)\right]^{2k-m+n}\\
+C_{m}^{\ell}(\mb{\Omega}_{ij})&=&\sqrt{\frac{4\pi}{2\ell+1}}Y_{m}^{\ell}(\mb{\Omega}_{ij}),
+\end{eqnarray}
+we first couple angular basis functions of molecules $i$ and $j$
+\begin{equation}
+\label{angAB} A^{\ell_{(ij)}}_{m_{(ij)}}=
+\sum_{m_im_j}C_{\ell_{i}m_{i},\ell_{j}m_j}^{\ell_{(ij)}m_{(ij)}}D^{\ell_i}_{m_in_i}D^{\ell_j}_{m_jn_j}
+\end{equation}
+where $C_{\ell_{i}m_{i},\ell_{j}m_j}^{\ell_{(ij)}m_{(ij)}}$ is a
+Clebsch-Gordan coefficient~\cite{Varshalovich88}.  Coupling
+$A^{\ell_{(ij)}}_{m_{(ij)}}$ to the $C^\ell_m(\mb{\Omega}_{ij})$
+and requiring the overall state to be a scalar $W$ we obtain
+\begin{equation}
+\label{angcoup}W^{n_i n_j}_{\ell_i \ell
+\ell_j}=\sum_{mm_{(ij)}}C_{\ell\,m,\ell_{(ij)}m_{(ij)}}^{0
+0}A^{\ell_{(ij)}}_{m_{(ij)}}C^\ell_m
+\end{equation}
+By definition the Clebsch-Gordan coefficient
+$C_{\ell_1m_1,\ell_2m_2}^{\ell m}$ is zero unless $m_1+m_2=m$ so
+that $m_2=-m_1$ if $m=0$. It is also zero unless
+$|\ell_1-\ell_2|\leq \ell\leq \ell_1+\ell_2$, and since
+$m_{1,2}\in\{\ell_{1,2}...-\ell_{1,2}\}$ this implies that
+$\ell_1=\ell_2$. Thus $C_{\ell\,m,\ell_{(ij)}m_{(ij)}}^{0 0}$ in
+Eq.~(\ref{angcoup}) simplifies to $C_{\ell m,\ell
+\overline{m}}^{00}$. With the identity~\cite{Varshalovich88}
+\begin{equation}
+\label{coupid}C_{\ell m,\ell
+\overline{m}}^{00}=\frac{(-1)^{\ell+m}}{\sqrt{2\ell+1}}
+\end{equation}
+we have
+\begin{equation}
+\label{inv}W^{n_i n_j}_{\ell_i \ell
+\ell_j}=\sum_{m_imm_j}C_{\ell_i
+m_i,\ell_jm_j}^{\ell\overline{m}}\frac{(-1)^{\ell+m}}{\sqrt{2\ell+1}}D^{\ell_i}_{m_in_i}C^\ell_mD^{\ell_j}_{m_jn_j}
+\end{equation}
+Likewise using the identity~\cite{Varshalovich88}
+\begin{equation}
+\label{id}C^{\ell\overline{m}}_{\ell_im_i,\ell_jm_j}=(-1)^{\ell_i-\ell_j-m}\sqrt{2\ell+1}\left(\begin{array}{ccc}
+\ell_i & \ell_j & \ell \\ m_i & m_j & m \end{array}\right)
+\end{equation}
+gives
+\begin{equation}
+W^{n_i n_j}_{\ell_i \ell
+\ell_j}=\sum_{m_imm_j}(-1)^{\ell_i-\ell_j+\ell}\left(\begin{array}{ccc}
+\ell_i & \ell_j & \ell \\ m_i & m_j & m
+\end{array}\right)D^{\ell_i}_{m_in_i}C^\ell_mD^{\ell_j}_{m_jn_j}.
+\end{equation}
+To remove the phase factor one may exploit the mirror symmetry of
+the 3jm symbol
+\begin{equation}
+\left(\begin{array}{ccc} \ell_i & \ell_j & \ell \\ m_i & m_j & m
+\end{array}\right)=(-1)^{\ell_i+\ell_j+\ell}\left(\begin{array}{ccc} \ell_i & \ell & \ell_j \\ m_i & m & m_j
+\end{array}\right)
+\end{equation}
+leaving
+\begin{equation}
+\label{appbasis}W^{n_i n_j}_{\ell_i \ell \ell_j}=\sum_{m_imm_j}\left(\begin{array}{ccc} \ell_i & \ell & \ell_j \\
+m_i & m & m_j
+\end{array}\right)D^{\ell_i}_{m_in_i}C^\ell_m D^{\ell_j}_{m_jn_j}.
+\end{equation}
+Equation~(\ref{appbasis}) gives basis functions $W$ from Eq.~\ref{Wbasis}. without any
+symmetry adaptation.  The $W^{n_i n_j}_{\ell_i \ell \ell_j}$ form a complete set of orthogonal IP
+basis functions over the eight-dimensional space $SO(3)\times
+S^2\times SO(3)$. Their properties have been studied previously
+\cite{Avoird80,Briels80,Stone84,Avoird94}.
+
+While the basis functions $W^{n_i n_j}_{\ell_i \ell \ell_j}$ are
+general, it is of great advantage computationally to project out
+the point group symmetry of the molecule and that of the Wyckoff
+point. 
+
+Projecting out Wyckoff point symmetry from the functions
+$T^{\ell_i}_{m_i n_\sigma}$ gives rotator functions
+\begin{equation}
+\label{eq:rotfunc}U^{\ell_i}_{m_\tau n_\sigma}(\mb{\omega}_i)=\sum_{m_i n_i}S^{\ell_i*}_{m_im_\tau}D_{m_i
+n_i}^{\ell_i}(\mb{\omega}_i)S^{\ell_i}_{n_in_\sigma}.
+\end{equation}
+Expressing the potential using coupled rotator functions gives
+\begin{equation}
+\label{eq:vij2}V/kT = \frac{1}{2}\sum_{ij}\sum_{\ell_i\ell_j m_\tau m_\rho n_\sigma n_\mu} U^{\ell_i}_{m_\tau
+n_\sigma}(\mb{\omega}_i)K_{m_\tau n_\sigma m_\rho n_\mu}^{\ell_i \ell_j}(\mb{\Omega}_{ij})U^{\ell_j}_{m_\rho
+n_\mu}(\mb{\omega}_j)
+\end{equation}
+where
+\begin{eqnarray}
+ K_{m_\tau n_\sigma m_\rho
+n_\mu}^{\ell_i \ell_j}(\mb{\Omega}_{ij})&=&\sum_{\ell m_i m m_j}
+\frac{\nu_{\ell_i,\ell,\ell_j}^{n_\sigma,n_\mu}(r_{ij})}{kT}\left(\begin{array}{ccc}
+ \ell_i & \ell & \ell_j \\ m_i & m & m_j
+\end{array}\right)\nonumber\\
+&&\times S^{\ell_i}_{m_\tau m_i}C_{m}^{\ell} S^{\ell_j}_{m_\rho
+m_j}
+\end{eqnarray}
+is a dimensionless coupling function. Subscripts $\tau,\rho$ are a
+compound index referring to multiple copies of the Wyckoff point
+group IR's subduced in the $\ell_i,\ell_j$-th manifold of $SO(3)$
+and $m_\tau,m_\rho$ goes over the dimensions of each IR. It is
+sometimes convenient to write Eq.~(\ref{eq:vij2}) using a
+shorthand notation
+\begin{equation}
+\label{eq:vij2vec}V/kT = \frac{1}{2}\sum_{ij}
+\mb{U}_{i}\cdot\mb{K}_{ij}\cdot\mb{U}_{j}
+\end{equation}
+in which $\mb{U}_i$ is a vector covering all elements of
+$U^{\ell_i}_{m_\tau n_\sigma}$ and $\mb{K}_{ij}$ is a coupling
+matrix. The generalized dot product matches multiple repeated
+indices in the potential.
+
+By symmetry adapting in two steps, we are able to define the
+expansion coefficients in Eq.~(\ref{eq:vij}) and expand the
+potential using rotator functions in Eq.~(\ref{eq:vij2}). Thus the
+expansion coefficients $\nu_{\ell_i,\ell,\ell_j}^{n_\sigma,n_\mu}$
+are functions of molecular parameters and intermolecular distance,
+but are independent of crystal structure.  They serve as
+independent variables in our method. The rotator functions
+$\mb{U}_i$ are functions of both molecular and crystal symmetries.
+These functions lead to order parameters for phase transitions as
+discussed in Sec.~\ref{OPs}.
+
+
+Appendix~\ref{Appx:proj} reviews our use of projection
+operators which amount to matrix multiplication by a sparse
+unitary matrix $S^{\ell_i}_{n_in_\sigma}$ where $\sigma$ refers to
+a point group IR and $n_\sigma$ is a particular component of the
+IR. For example, using projection operators for the molecular
+point group yields symmetry-adapted matrix elements
+\begin{eqnarray}
+\label{eq:Tfunc}T^{\ell_i}_{m_i n_\sigma}(\mb{\omega}_i)&=&\sum_{n_i}D_{m_i
+n_i}^{\ell_i}(\mb{\omega}_i)S^{\ell_i}_{n_in_\sigma}
+\end{eqnarray}
+which may be coupled to produce symmetry-adapted basis functions
+\begin{equation}
+\label{basis}F_{\ell_i\ell\ell_j}^{n_\sigma n_\mu}=\sum_{m_imm_j}\left(\begin{array}{ccc} \ell_i & \ell & \ell_j \\
+m_i & m & m_j
+\end{array}\right)T^{\ell_i}_{m_i n_\sigma}(\mb{\omega}_i)
+C^\ell_m(\mb{\Omega}_{ij}) T^{\ell_j}_{m_j n_\mu}(\mb{\omega}_j).
+\end{equation}
+With these basis functions the potential is
+\begin{equation}
+\label{eq:vij} V = \frac{1}{2}\sum_{ij} \sum_{\ell_i \ell \ell_j
+n_\sigma n_\mu} \nu_{\ell_i\ell\ell_j}^{n_\sigma n_\mu}(r_{ij})
+F_{\ell_i\ell\ell_j}^{n_\sigma
+n_\mu}(\mb{\omega}_i,\mb{\Omega}_{ij},\mb{\omega}_j)
+\end{equation}
+where the one half avoids overcounting,
+$\ell_i,\ell_j\in\mathbb{N}$, $|\ell_i-\ell_j|\leq\ell\leq
+\ell_i+\ell_j$, and
+$\nu_{\ell_i,\ell,\ell_j}^{n_\sigma,n_\mu}(r_{ij})$ are
+coefficients which are a function of the distance $r_{ij}$ between
+molecular centers. The full set of these in the potential is
+termed $\mb{\nu}$. Subscripts $\sigma,\mu$ are a compound index
+referring to multiple copies of the molecular point group unit IR
+subduced in the $\ell_i,\ell_j$-th manifold of $SO(3)$ and
+$n_\sigma,n_\mu$ is its dimension which is always
+$n_\sigma,n_\mu=1$.  Point group IR subduction frequencies in
+spherical harmonics are discussed elsewhere \cite{Bradley72}. All
+other point group IR's do not have the full molecular symmetry and
+so are zero to first order. Thus electronic structure is averaged
+over short time vibrations and excitations so the molecule is
+invariant under the full molecular point group \cite{Califano81}.
+These coefficients can be calculated efficiently from \emph{ab
+initio} or empirical potentials using a fast Fourier transform for
+$SO(3)$ \cite{Maslen97,Chirikjian00}.
+
+
+
+
+\section{Appendix: Spherical Tensor Coupling}
+\label{Appx:Coupling}
+
+Equation~(\ref{Wbasis}) in Sec.~\ref{Sec:Hamiltonian} uses
+slightly different basis functions, couplings, and normalizations
+than our references so a full derivation is presented here. 
+
+
+
+%==============================================================================
+
+
+\section{Appendix: Projection Operators}
+\label{Appx:proj}
+
+Symmetries of the molecule and Wyckoff point of the crystal exist
+within $D_{m_i,n_i}^{\ell_i}$ simultaneously and can be obtained
+by applying projection operators
+\cite{Bradley72,Fassler92,Fernando94,Schmidt00}
+\begin{equation}
+P^{\tau}_{n_\tau n_\tau}=\sqrt{d_\tau/|G|}\sum_{g\in G}D^{\tau
+*}_{n_\tau n_\tau}(g)\,g
+\end{equation}
+where $d_\tau$ is the dimension of the IR $\tau$ belonging to the
+group $G$ of order $|G|$, $\mb{D}^\tau$ is the matrix onto which
+the IR maps $g$, and subsequent orthonormalization is occasionally
+required. We have used a slightly different normalization which
+decreases the computation in this orthonormalization. Acting upon
+the elements $D_{mn}^{\ell}$ gives
+\begin{equation}
+P^{\tau}_{n_\tau n_\tau}\circ D_{mn}^{\ell}=\sum_n
+D_{mn}^{\ell}S_{nn_\tau}^\ell
+\end{equation}
+producing a linear combination with the symmetry of $\tau$.  The
+coefficients $S_{nn_\tau}^\ell$ form a sparse unitary matrix.
+
+%==============================================================================
+
 
 \textbf{\begin{LARGE}Supplementary Material\end{LARGE}}
 
