@@ -101,22 +101,43 @@
 
 \begin{document}
 
-\title{Molecular Crystal Global Phase Diagrams III:\\ Sufficient parameter space determination}
+\title{Molecular Crystal Global Phase Diagrams III:\\ Sufficient parameter space
+determination}
 \shorttitle{Global phase diagrams III}
 
 \cauthor[a,b,c]{J. Brandon}{Keith}{jbrkeith@gmail.com}{}
 \author[a,d]{Richard B.}{McClurg}
 
-\aff[a]{Department of Chemical Engineering and Materials Science, University of Minnesota, Minneapolis, Minnesota 55455, \country{USA}}
-\aff[b]{Department of Physics and Astronomy, Brigham Young University, Provo, Utah 84606, \country{USA}}
-\aff[c]{California Institute of Technology, Division of Engineering and Applied Science, Mail Code 138-78, Pasadena, California 91125 \country{USA}}
+\aff[a]{Department of Chemical Engineering and Materials Science, University of
+Minnesota, Minneapolis, Minnesota 55455, \country{USA}}
+\aff[b]{Department of Physics and Astronomy, Brigham Young University, Provo,
+Utah 84606, \country{USA}}
+\aff[c]{California Institute of Technology, Division of Engineering and Applied
+Science, Mail Code 138-78, Pasadena, California 91125 \country{USA}}
 \aff[d]{SSCI—An Aptuit Company, West Lafayette, Indiana 47906 \country{USA}}
 
 
 \begin{abstract}
 \scriptsize%\footnotesize %\small
-In previous parts of this series~\cite{Mettes04,McClurg09} we developed a method for constructing global phase diagrams (GPDs) for molecular crystals and applied the method to single-component ordered crystal structures of tetrahedral molecules. GPDs are useful for visualizing what types of crytal structures a given molecule may assume depending on molecular form / interaction.  Their construction uses group theoretical methods which enumerate all possible symmetry-breakings during a statistical mechanical high-to-low temperature search. 
-In this work we expand upon these results by outlining a method to determine a sufficiently rich parameter space to represent the experimentally observed crystal structures in a data set derived from the Cambridge Structural Database.  This is significant because previous work~\cite{Mettes04} did not specify the number of parameters needed for GPDs. Although there are suggestions in the literature that thousands of parameters are required to adequately describe tetrahedral molecule intermolecular potentials, we find that 15 parameters are sufficient to represent the structures of our test data.  We discuss the origin of this difference and its implications for determining GPD parameter values from a more detailed intermolecular potential and for interpreting GPD parameter values. 
+In previous parts of this series~\cite{Mettes04,McClurg09} we developed a method
+for constructing global phase diagrams (GPDs) for molecular crystals and applied
+the method to single-component ordered crystal structures of tetrahedral
+molecules. GPDs are useful for visualizing what types of crytal structures a
+given molecule may assume depending on molecular form / interaction.  Their
+construction uses group theoretical methods which enumerate all possible
+symmetry-breakings during a statistical mechanical high-to-low temperature
+search. 
+In this work we expand upon these results by outlining a method to determine a
+sufficiently rich parameter space to represent the experimentally observed
+crystal structures in a data set derived from the Cambridge Structural Database.
+ This is significant because previous work~\cite{Mettes04} did not specify the
+number of parameters needed for GPDs. Although there are suggestions in the
+literature that thousands of parameters are required to adequately describe
+tetrahedral molecule intermolecular potentials, we find that 15 parameters are
+sufficient to represent the structures of our test data.  We discuss the origin
+of this difference and its implications for determining GPD parameter values
+from a more detailed intermolecular potential and for interpreting GPD parameter
+values. 
 \normalsize
 \end{abstract}
 
@@ -130,15 +151,74 @@ Crystal engineering is the design and synthesis of solid-state structures with
 desired properties.  For molecular crystals this necessitates a thorough
 understanding of intermolecular interactions.  Whereas the properties of
 isolated molecules are primarily attributable to strong covalent bonding
-between atoms, solid-state properties result from relatively weak interactions between molecules or low-dimensional aggregates of molecules called synthons.  Two primary interactions holding together supramolecular synthons are hydrogen bonding and coordination complexation, though $\pi$-$\pi$, halogen-halogen, and ionic interactions have also been exploited\cite{Thalladi96}. These synthons then can be assembled into one-dimensional rods, two-dimensional sheets, and three-dimensional crystal structures. Since many of the bulk properties of molecular materials are dictated by the manner in which the molecules are ordered in the solid state, crystal engineers seek to control this ordering and thus a material's electrical, optical, thermal, and solubility properties\cite{Desiraju89,Braga99,Bassoul00,Lommerse00,Holman01b,Moulton01,Motherwell02}.
+between atoms, solid-state properties result from relatively weak interactions
+between molecules or low-dimensional aggregates of molecules called synthons. 
+Two primary interactions holding together supramolecular synthons are hydrogen
+bonding and coordination complexation, though $\pi$-$\pi$, halogen-halogen, and
+ionic interactions have also been exploited\cite{Thalladi96}. These synthons
+then can be assembled into one-dimensional rods, two-dimensional sheets, and
+three-dimensional crystal structures. Since many of the bulk properties of
+molecular materials are dictated by the manner in which the molecules are
+ordered in the solid state, crystal engineers seek to control this ordering and
+thus a material's electrical, optical, thermal, and solubility
+properties\cite{Desiraju89,Braga99,Bassoul00,Lommerse00,Holman01b,Moulton01,
+Motherwell02}.
 
-Thus supramolecular chemistry depends on subtle interactions and how to control them.  Noncovalent bonds have low energies and often little or no activation energy for formation. This low bond energy results in structures stabilized by difficult-to-control entropic effects, low melting points, and frequent polymorphism. Likewise, as temperature changes, the balance of these effects changes, resulting in structural changes\cite{Neumann03}.  Thus energetics and thermodynamics are both essential in designing, controlling, and studying molecular crystal chemistry. 
+Thus supramolecular chemistry depends on subtle interactions and how to control
+them.  Noncovalent bonds have low energies and often little or no activation
+energy for formation. This low bond energy results in structures stabilized by
+difficult-to-control entropic effects, low melting points, and frequent
+polymorphism. Likewise, as temperature changes, the balance of these effects
+changes, resulting in structural changes\cite{Neumann03}.  Thus energetics and
+thermodynamics are both essential in designing, controlling, and studying
+molecular crystal chemistry. 
 
-Despite ongoing progress in understanding how molecular crystal structures form, there is still a need for tools to rationalize the crystal structures adopted by a molecule or collection of molecules as a function of temperature and intermolecular potential.  Tools for classification and rationalization of molecular packing tendencies under complex conditions aid crystal engineering to expand its material base and exploit new conditions to form novel structures.  Phase diagrams are one such class of tools.
+Despite ongoing progress in understanding how molecular crystal structures form,
+there is still a need for tools to rationalize the crystal structures adopted by
+a molecule or collection of molecules as a function of temperature and
+intermolecular potential.  Tools for classification and rationalization of
+molecular packing tendencies under complex conditions aid crystal engineering to
+expand its material base and exploit new conditions to form novel structures. 
+Phase diagrams are one such class of tools.
 
-Global phase diagrams have been used to rationalize binary fluid mixture thermodynamics for many years.  Van Konynenburg and Scott provided a general and systematic categorization of the different types of fluid-phase behavior in binary mixtures based upon the topology of the critical loci of a van der Waals equation of state with simple mixing rules~\cite{vanKonynenburg80}.  They devised a set of global phase diagrams (GPDs) to classify and rationalize liquid-vapor phase behavior in terms of general, non-specific molecular parameters.  They showed that a simple model can predict qualitatively most of the known patterns of fluid-phase behavior, and can reveal the mechanisms of transition among the different types.  Thus they describe five of the six main experimental classes of fluid behavior differentiated by the temperature-pressure projections of their critical loci.  Although additional fluid-phase mixture behaviors have since been observed and a revised nomenclature is now available~\cite{Bolz98}, the original van Konynenburg system is still pervasive in the literature~\cite{AparicioMartinez07a,AparicioMartinez07b,Cismondi07}. Many authors have repeated this type of study in which other equations of states based on simplified models, cubic equations of state, or intermolecular potential-based equations provide the parameters of GPDs~\cite{Polishuk00,Polishuk02,vanPelt95}.
+Global phase diagrams have been used to rationalize binary fluid mixture
+thermodynamics for many years.  Van Konynenburg and Scott provided a general and
+systematic categorization of the different types of fluid-phase behavior in
+binary mixtures based upon the topology of the critical loci of a van der Waals
+equation of state with simple mixing rules~\cite{vanKonynenburg80}.  They
+devised a set of global phase diagrams (GPDs) to classify and rationalize
+liquid-vapor phase behavior in terms of general, non-specific molecular
+parameters.  They showed that a simple model can predict qualitatively most of
+the known patterns of fluid-phase behavior, and can reveal the mechanisms of
+transition among the different types.  Thus they describe five of the six main
+experimental classes of fluid behavior differentiated by the
+temperature-pressure projections of their critical loci.  Although additional
+fluid-phase mixture behaviors have since been observed and a revised
+nomenclature is now available~\cite{Bolz98}, the original van Konynenburg system
+is still pervasive in the
+literature~\cite{AparicioMartinez07a,AparicioMartinez07b,Cismondi07}. Many
+authors have repeated this type of study in which other equations of states
+based on simplified models, cubic equations of state, or intermolecular
+potential-based equations provide the parameters of
+GPDs~\cite{Polishuk00,Polishuk02,vanPelt95}.
  
-In previous work we have proposed and demonstrated the construction of molecular crystal GPDs which differ from fluid-phase GPDs in fundamental ways.  Gasses and liquids are both isotropic fluids which lack long-range orientational and translational order.  Therefore density as a function of temperature and pressure is a sufficient order parameter for fluid phase equilibrium.  Describing equilibrium among crystalline solids requires more complicated order parameters to account for the diversity of their long-range orientational and translational orderings.  Also, most single component fluids share a set of common features in their phase behaviors including a vapor/liquid equilibrium locus terminating at a critical point with universal scaling properties, a supercritical fluid region at temperatures and pressures in excess of the critical point, and an asymptotic approach toward ideal gas properties at low pressures and/or high temperatures.  The exceptions to these generalizations are for ionic fluids that decompose before generating a significant vapor phase.  Crystalline solids lack these thermodynamic generalizations which prevents the use of simple equation-of-state methods for generating GPDs for molecular solids.
+In previous work we have proposed and demonstrated the construction of molecular
+crystal GPDs which differ from fluid-phase GPDs in fundamental ways.  Gasses and
+liquids are both isotropic fluids which lack long-range orientational and
+translational order.  Therefore density as a function of temperature and
+pressure is a sufficient order parameter for fluid phase equilibrium. 
+Describing equilibrium among crystalline solids requires more complicated order
+parameters to account for the diversity of their long-range orientational and
+translational orderings.  Also, most single component fluids share a set of
+common features in their phase behaviors including a vapor/liquid equilibrium
+locus terminating at a critical point with universal scaling properties, a
+supercritical fluid region at temperatures and pressures in excess of the
+critical point, and an asymptotic approach toward ideal gas properties at low
+pressures and/or high temperatures.  The exceptions to these generalizations are
+for ionic fluids that decompose before generating a significant vapor phase. 
+Crystalline solids lack these thermodynamic generalizations which prevents the
+use of simple equation-of-state methods for generating GPDs for molecular
+solids.
 
 The molecular crystal GPDs developed in this series are designed to elucidate
 the diverse and complex phase behavior of a set of arbitrarily-shaped molecular
@@ -163,21 +243,88 @@ between the phase volumes.  An example is shown in Figs.~\ref{gpd1}
 and~\ref{gpd2}.
 
 The proper thermodynamic condition for equilibrium of an isothermal system is
-minimization of the free energy.  The free energy is calculated relative to a high-temperature
+minimization of the free energy.  The free energy is calculated relative to a
+high-temperature
 reference lattice shown at the origin of Figs.~\ref{gpd1}
 and~\ref{gpd2}, in which
-molecules remain translationally ordered but are rotationally disordered.  Experimentally this is
-termed a plastically crystalline state \cite{Sherwood79} and is observable for some of the molecules in our data set from Ref.~\cite{McClurg09}, such as adamantane or methane.  Other systems melt, sublime, or decompose before the plastically-crystalline state is obtained.  Whether or not the reference state is observed, it provides a well-characterized thermodynamic reference state.  This is similar to fluid phase systems which are routinely referenced to an ideal gas state, even if it has not been observed.  As the temperature is lowered for a solid with fixed intermolecular potential, new phases arise through spontaneous symmetry breaking, leading to at least partial rotational ordering of the molecules.  This frequently involves a change in space group as shown for 10 new phases in Figs.~~\ref{gpd1}
-and~\ref{gpd2}.  A series of additional phase transitions may arise as the temperature is lowered toward absolute zero. For molecules with non-trivial point-group symmetry, it is convenient to reduce the dimensionality of the phase diagrams through adaptation of the potential to account for the molecular symmetry. This approach of expanding the angle-dependent intermolecular interactions into symmetry-adapted rotation functions was originally developed for phase transitions in heavy methane by James and Keenan~\cite{James59} and has since been applied to crystals such as solid C$_{60}$~\cite{Michel92,Lamoen99}.
+molecules remain translationally ordered but are rotationally disordered. 
+Experimentally this is
+termed a plastically crystalline state \cite{Sherwood79} and is observable for
+some of the molecules in our data set from Ref.~\cite{McClurg09}, such as
+adamantane or methane.  Other systems melt, sublime, or decompose before the
+plastically-crystalline state is obtained.  Whether or not the reference state
+is observed, it provides a well-characterized thermodynamic reference state. 
+This is similar to fluid phase systems which are routinely referenced to an
+ideal gas state, even if it has not been observed.  As the temperature is
+lowered for a solid with fixed intermolecular potential, new phases arise
+through spontaneous symmetry breaking, leading to at least partial rotational
+ordering of the molecules.  This frequently involves a change in space group as
+shown for 10 new phases in Figs.~~\ref{gpd1}
+and~\ref{gpd2}.  A series of additional phase transitions may arise as the
+temperature is lowered toward absolute zero. For molecules with non-trivial
+point-group symmetry, it is convenient to reduce the dimensionality of the phase
+diagrams through adaptation of the potential to account for the molecular
+symmetry. This approach of expanding the angle-dependent intermolecular
+interactions into symmetry-adapted rotation functions was originally developed
+for phase transitions in heavy methane by James and Keenan~\cite{James59} and
+has since been applied to crystals such as solid
+C$_{60}$~\cite{Michel92,Lamoen99}.
 
-Like van Konyenburg's fluid-phase GPDs, molecular crystal GPDs are useful as a classification tool.  They can be used in data mining intermolecular forces from structural repositories such as the Cambridge Structural Database (CSD)~\cite{Allen02}.  Also, by locating new structures that may be more desirable to produce desired properties than an existing crystal structure, GPDs provide feedback for molecular synthesis for crystal engineering. Further, GPDs can provide rationalization and/or prediction of crystal polymorphs for a given molecule.
+Like van Konyenburg's fluid-phase GPDs, molecular crystal GPDs are useful as a
+classification tool.  They can be used in data mining intermolecular forces from
+structural repositories such as the Cambridge Structural Database
+(CSD)~\cite{Allen02}.  Also, by locating new structures that may be more
+desirable to produce desired properties than an existing crystal structure, GPDs
+provide feedback for molecular synthesis for crystal engineering. Further, GPDs
+can provide rationalization and/or prediction of crystal polymorphs for a given
+molecule.
 
-Previously~\cite{Mettes04} we demonstrated the construction of GPDs for tetrahedral molecules using an fcc reference lattice and outlined the high temperature orientationally ordered phases as a function of intermolecular potential parameters.  In a companion paper\cite{McClurg09} we classify experimental crystal structures composed of tetrahedral point group molecules to determine what fraction of structures are amenable to inclusion in the GPDs and the number of reference lattices necessary to span the observed structures.  We find that 60\% of crystal structures composed of molecules with Td point group symmetry are amenable and that eight reference lattices are sufficient to span the observed structures.  In the remaining 40\% of the structures, the molecules form synthons that pack to generate the three-dimensional crystal structure.  This kind of hierarchical structure is not incorporated in the GPDs as described in \cite{Mettes04}.  For the majority of structures in the test set, eight reference lattices are sufficient to describe the lattice of molecular centers of mass.  We consider a set of GPDs, one for each reference lattice.  
+Previously~\cite{Mettes04} we demonstrated the construction of GPDs for
+tetrahedral molecules using an fcc reference lattice and outlined the high
+temperature orientationally ordered phases as a function of intermolecular
+potential parameters.  In a companion paper\cite{McClurg09} we classify
+experimental crystal structures composed of tetrahedral point group molecules to
+determine what fraction of structures are amenable to inclusion in the GPDs and
+the number of reference lattices necessary to span the observed structures.  We
+find that 60\% of crystal structures composed of molecules with Td point group
+symmetry are amenable and that eight reference lattices are sufficient to span
+the observed structures.  In the remaining 40\% of the structures, the molecules
+form synthons that pack to generate the three-dimensional crystal structure. 
+This kind of hierarchical structure is not incorporated in the GPDs as described
+in \cite{Mettes04}.  For the majority of structures in the test set, eight
+reference lattices are sufficient to describe the lattice of molecular centers
+of mass.  We consider a set of GPDs, one for each reference lattice.  
 
-This work discusses the issue of a minimal set of intermolecular potential coefficients needed to construct GPDs.  For GPDs to be useful, the observed crystal structures for an ensemble of molecules with a given point group symmetry should occupy volumes of the GPD with a truncated set of intermolecular potential coefficients.  If the full infinite parameter set is needed, then the GPDs lose much of their utility.  It has been suggested that too many parameters are needed to describe intermolecular potentials for practical use in GPDs~\cite{Briels80}.  We find that a smaller number of parameters are sufficient.  This finding greatly enhances the utility of GPDs for materials design. The smaller set of parameters allows construction of manageably small-dimensional diagrams.  Still, 3D-projections are required to produce visualizations with which users may interact and explore crystal structure relationships and proximity in crystal phase space.  Molecular crystal GPDs with a manageable number of parameters would be valuable to crystal engineers seeking to coerce an optically active molecule through synthetic perturbations to crystallize in a noncentrosymmetric space group, for example. It could also prove useful in polymorph screening to enumerate polymorphs of active pharmaceutical ingredients. 
+This work discusses the issue of a minimal set of intermolecular potential
+coefficients needed to construct GPDs.  For GPDs to be useful, the observed
+crystal structures for an ensemble of molecules with a given point group
+symmetry should occupy volumes of the GPD with a truncated set of intermolecular
+potential coefficients.  If the full infinite parameter set is needed, then the
+GPDs lose much of their utility.  It has been suggested that too many parameters
+are needed to describe intermolecular potentials for practical use in
+GPDs~\cite{Briels80}.  We find that a smaller number of parameters are
+sufficient.  This finding greatly enhances the utility of GPDs for materials
+design. The smaller set of parameters allows construction of manageably
+small-dimensional diagrams.  Still, 3D-projections are required to produce
+visualizations with which users may interact and explore crystal structure
+relationships and proximity in crystal phase space.  Molecular crystal GPDs with
+a manageable number of parameters would be valuable to crystal engineers seeking
+to coerce an optically active molecule through synthetic perturbations to
+crystallize in a noncentrosymmetric space group, for example. It could also
+prove useful in polymorph screening to enumerate polymorphs of active
+pharmaceutical ingredients. 
 
-To explore the requisite number of parameters necessary to construct molecular crystal GPDs, we begin in Sec.~\ref{method} by recalling the rotational potential used previously in \cite{Mettes04}.  We then outline the computational procedure to find potential parameters for each structure in the same experimental data set used in \cite{McClurg09}. This is done using global optimization techniques among intermolecular potential parameter
-\emph{and} translational symmetry space. In Sec.~\ref{discussion} we discuss the structures that are successfully located in potential parameter space using our candidate structure library and intermolecular potential.  We also identify exceptions that cannot be located using the method utilized and make recommendations for further work to rectify these omissions.
+To explore the requisite number of parameters necessary to construct molecular
+crystal GPDs, we begin in Sec.~\ref{method} by recalling the rotational
+potential used previously in \cite{Mettes04}.  We then outline the computational
+procedure to find potential parameters for each structure in the same
+experimental data set used in \cite{McClurg09}. This is done using global
+optimization techniques among intermolecular potential parameter
+\emph{and} translational symmetry space. In Sec.~\ref{discussion} we discuss the
+structures that are successfully located in potential parameter space using our
+candidate structure library and intermolecular potential.  We also identify
+exceptions that cannot be located using the method utilized and make
+recommendations for further work to rectify these omissions.
 
 
 \section{Representative Potential Determination}
@@ -188,14 +335,21 @@ molecular centers of mass in experimental structures and (2)
 intermolecular potential (IP) parameters to use as independent
 parameters. In \cite{McClurg09} we found that the majority of the
 experimental structures composed of tetrahedral molecules in the CSD can be
-classified using only four reference lattices. Since there are too few examples for other reference lattices, we focus on the set \{bcc, fcc,
+classified using only four reference lattices. Since there are too few examples
+for other reference lattices, we focus on the set \{bcc, fcc,
 hcp, sc\}. Each of these reference lattices has at least four crystal
-structures with monomer synthons in the data set.  This means a given structure can be categorized as a subgroup of one of these reference lattices when single molecules are reduced to spheres (as opposed to dimers, etc.—see \cite{McClurg09}).  In this section we seek to determine a \emph{sufficient} parameter space such that experimental
-structures are each stable in a finite volume in the IP parameter space. Thus we review
+structures with monomer synthons in the data set.  This means a given structure
+can be categorized as a subgroup of one of these reference lattices when single
+molecules are reduced to spheres (as opposed to dimers, etc.—see
+\cite{McClurg09}).  In this section we seek to determine a \emph{sufficient}
+parameter space such that experimental
+structures are each stable in a finite volume in the IP parameter space. Thus we
+review
 our choice of IP and define the potential parameters.  Then we
 outline a method for identifying representative potential parameters
 for each experimental structure. This is done using a low
-temperature structural limit which is convenient and consistent with the experimental database but is not strictly necessary.  Then
+temperature structural limit which is convenient and consistent with the
+experimental database but is not strictly necessary.  Then
 the IP is truncated to create a finite dimensional IP parameter
 space.  A library of alternative crystal structures is constructed
 with which to compare experimental structures, and a figure of merit
@@ -208,7 +362,8 @@ Fig.~\ref{compare}.
 \label{hamiltonian}
 
 Previously~\cite{Mettes04} we discussed the construction of a
-nearest neighbor rotational potential for molecules interacting primarily through van der Waals interactions.
+nearest neighbor rotational potential for molecules interacting primarily
+through van der Waals interactions.
 The potential is a level of abstraction above an atom-atom or site-site
 potential but retains a firm basis in quantum
 mechanics~\cite{Avoird94}. The potential consists of a two center
@@ -224,7 +379,8 @@ U^{\ell_i}_{m_\tau n_\sigma}(\mb{\omega}_i)\nonumber\\
 \ell_j}(\mb{\nu},\mb{\Omega}_{ij})U^{\ell_j}_{m_\rho
 n_\mu}(\mb{\omega}_i).
 \end{eqnarray}
-The one half avoids overcounting pair-wise interactions, $\ell_i,\ell_j\in\mathbb{N}$, the
+The one half avoids overcounting pair-wise interactions,
+$\ell_i,\ell_j\in\mathbb{N}$, the
 natural numbers, and $|\ell_i-\ell_j|\leq\ell\leq \ell_i+\ell_j$.
 
 The functions $U^{\ell_i}_{m_\tau n_\sigma}(\mb{\omega}_i)$ are functions of the
@@ -252,7 +408,8 @@ point group unit IR subduced in the $\ell_i$-th manifold of $SO(3)$
 and $n_\sigma$ is its dimension. Point group IR subduction
 frequencies in spherical harmonics are discussed
 elsewhere~\cite{Bradley72} and in Sec.~\ref{Computational_Strategy}.
-The symmetry adaption leaves relatively few basis functions for molecules with non-trivial point group symmetry since
+The symmetry adaption leaves relatively few basis functions for molecules with
+non-trivial point group symmetry since
 only matrix elements where $\sigma$ is the unit IR (\emph{i.e.}
 $A_1$) are kept.  This gives basis functions in the molecular frame
 with the full molecular symmetry.  Thus the set
@@ -292,7 +449,9 @@ $\nu_{\ell_i,\ell,\ell_j}^{n_\sigma,n_\mu}=
 (-1)^{\ell_i+\ell_j}\nu_{\ell_j,\ell,\ell_i}^{n_\mu,n_\sigma}$ for
 single component crystals.~\cite{Avoird80} The full set of
 $\nu_{\ell_i,\ell,\ell_j}^{n_\sigma,n_\mu}(r_{ij})$, denoted
-$\mb{\nu}$, are the axes of GPDs and constitute the search space for constructing molecular crystal GPDs.
+$\mb{\nu}$, are the axes of GPDs and constitute the search space for
+constructing molecular crystal GPDs.  The explicit construction of Eq.~(\ref{re:eq:vij2}) is
+different from our references so a full derivation is given in Appendix~\ref{derivation}.
 
 \subsection{Computational Method}
 \label{Computational_Strategy}
@@ -306,7 +465,8 @@ Define a figure of merit by which to order the crystal structures. (2)
 Ensure the potential, Eq.~(\ref{re:eq:vij2}), is truncated such that
 it geometrically is capable of producing a symmetry change from the
 assigned reference lattice to the experimental phase. (3) Develop a
-library of structural types against which the energy of the phase of interest may be
+library of structural types against which the energy of the phase of interest
+may be
 compared. (4) Determine the energy of an experimental phase as a
 function of $\mb{\nu}$. (5) Search potential parameter space until a
 $\mb{\nu}$ vector is found which makes the experimental phase
@@ -393,8 +553,14 @@ IR forming a symmetry-breaking space group IR is present
 phase transition cannot occur with that potential. Therefore we
 calculate minimal SO(3) manifolds necessary to achieve a transition
 from the assigned reference lattice to an experimental structure.
-This is shown for the fcc reference lattice in Table~\ref{pathwaysFCC}, where we use the convention of appending the occupied Wyckoff positions of a crystal structure to its space group (thus a structure with space group 64 in which molecular centers of mass occupy Wyckoff points d and f would be denoted 64d,f). Point group IRs subduced in the space group IR and the first
-manifold or $\ell_i$ value of SO(3) at which a given Wyckoff IR appears are also shown.  See the supplementary material for additional notes on the construction of this table.
+This is shown for the fcc reference lattice in Table~\ref{pathwaysFCC}, where we
+use the convention of appending the occupied Wyckoff positions of a crystal
+structure to its space group (thus a structure with space group 64 in which
+molecular centers of mass occupy Wyckoff points d and f would be denoted 64d,f).
+Point group IRs subduced in the space group IR and the first
+manifold or $\ell_i$ value of SO(3) at which a given Wyckoff IR appears are also
+shown.  See the supplementary material for additional notes on the construction
+of this table.
 
 For some pathways, such as that of carbon tetraiodide, 225a
 $\rightarrow$ 121a in Table~\ref{pathwaysFCC}, there is a single
@@ -402,11 +568,15 @@ space group IR $\Gamma_5^-$ subducing a single point group IR
 $T_{2u}$. Table~\ref{wyckoff_IRs} shows that this point group IR
 first occurs in the third manifold of SO(3) when split by an $O_h$
 point group crystal field.  Thus $\ell_i^{\mathrm{max}}\geq 3$ may
-give the 121a structure but $\ell_i^{\mathrm{max}} < 3$ is insufficient. For other pathways, such as that of tetrakis(M$_3$-t-Butylimido)-tetraiodo-tetra-indium, 225a
+give the 121a structure but $\ell_i^{\mathrm{max}} < 3$ is insufficient. For
+other pathways, such as that of
+tetrakis(M$_3$-t-Butylimido)-tetraiodo-tetra-indium, 225a
 $\rightarrow$ 12i, there is more than
 one Wyckoff IR subduced in a space group IR. $E_u$, $T_{1u}$, and
 $T_{2u}$ can lead to this transition. As two of them are present at the
-third manifold (Table~\ref{wyckoff_IRs}), a potential with $\ell_i^{\mathrm{max}}\geq 3$ may also produce this transition. For still others, such as that of adamantane,
+third manifold (Table~\ref{wyckoff_IRs}), a potential with
+$\ell_i^{\mathrm{max}}\geq 3$ may also produce this transition. For still
+others, such as that of adamantane,
 225a $\rightarrow$ 114a, the pathway is
 coupled, or composed of the direct sum of two space group IRs.
 Three different coupled space group IRs decompose into three
@@ -459,7 +629,9 @@ lattices with 14 coefficients but not for hcp with
 \label{collection}
 
 We seek a set of potential parameters $\mb{\nu}$ such that the
-energy of an observed structure is lower than other alternatives, whether the alternative structures are experimentally observed or not. In our previous work~\cite{Mettes04}, high
+energy of an observed structure is lower than other alternatives, whether the
+alternative structures are experimentally observed or not. In our previous
+work~\cite{Mettes04}, high
 symmetry point IR distortions~\cite{Stokes88,Stokes07} from a
 reference lattice led to structures classified using their isotropy
 subgroups (ISs). These subgroups represent the most common types of
@@ -473,24 +645,39 @@ one molecule or less per asymmetric part of the unit cell ($Z\,'\leq
 1$), we have discarded ISs that imply more than one occupied Wyckoff
 point~\cite{Padmaja90}. ISs whose \emph{primitive} unit cell
 contains more than eight molecules are also
-discarded~\cite{Gdanitz97}. We note these constraints are made based on what is commonly observed in the Cambridge Structural Database and can be incrementally extended in order to achieve a larger candidate library.
+discarded~\cite{Gdanitz97}. We note these constraints are made based on what is
+commonly observed in the Cambridge Structural Database and can be incrementally
+extended in order to achieve a larger candidate library.
 
 
 To minimize the energy of these candidate lattices,
 basis functions $U^{\ell_i}_{m_\tau n_\sigma}(\mb{\omega}_i)$ are placed at one
 molecular center of the molecular positions of the lattice of each
 IS and space group operations of the IS are applied to generate
-basis functions $U^{\ell_i}_{m_\tau n_\sigma}(\mb{\omega}_i)$ for all other molecules in the Wyckoff orbit. Although these candidate lattices are generated from ISs, after Euler angle minimization they are free to assume
+basis functions $U^{\ell_i}_{m_\tau n_\sigma}(\mb{\omega}_i)$ for all other
+molecules in the Wyckoff orbit. Although these candidate lattices are generated
+from ISs, after Euler angle minimization they are free to assume
 whatever structure the minimization algorithm can find provided the
-reference orientation of the basis functions $U^{\ell_i}_{m_\tau n_\sigma}(\mb{\omega}_i)$ are related by IS space group operations. Thus a
+reference orientation of the basis functions $U^{\ell_i}_{m_\tau
+n_\sigma}(\mb{\omega}_i)$ are related by IS space group operations. Thus a
 candidate lattice has fixed (super) cell parameters and Wyckoff
-points but variable Euler angles and space group. This procedure gives a candidate lattice library that, at a minimum, includes all high symmetry k point isotropy subgroups but which can contain other lower symmetry structures as well (due to additional symmetry breaking while rotating the basis functions $U^{\ell_i}_{m_\tau n_\sigma}(\mb{\omega}_i)$) and  provided translational symmetry requirements are met.  As indicated above, this candidate library may be systematically improved by explicitly including new isotropy subgroup supercells.
+points but variable Euler angles and space group. This procedure gives a
+candidate lattice library that, at a minimum, includes all high symmetry k point
+isotropy subgroups but which can contain other lower symmetry structures as well
+(due to additional symmetry breaking while rotating the basis functions
+$U^{\ell_i}_{m_\tau n_\sigma}(\mb{\omega}_i)$) and  provided translational
+symmetry requirements are met.  As indicated above, this candidate library may
+be systematically improved by explicitly including new isotropy subgroup
+supercells.
 
 Applying this procedure yielded 75 candidate lattices for bcc, 67 for fcc, 19
 for hcp, and 105 for sc. Minimizing the energy of all
 candidate lattices gives a lowest energy structure with which to
 compare the energy of the experimental structure while searching
-parameter space.  Although these candidate lists are remarkably small compared to the thousands of structures generated in many crystal structure prediction programs, they are sufficient to place most of the observed structures as discussed in Sec.~\ref{discussion}.
+parameter space.  Although these candidate lists are remarkably small compared
+to the thousands of structures generated in many crystal structure prediction
+programs, they are sufficient to place most of the observed structures as
+discussed in Sec.~\ref{discussion}.
 
 
 \subsubsection{Experimental Phase Energies}
@@ -503,7 +690,8 @@ intermolecular angles are determined by the reference lattice but
 the Euler angles are dependent upon the orientation of the molecules
 on the reference lattice. This is complicated by the fact that the
 experimental atomic positions in each molecule are slightly
-distorted from perfect Td point group symmetry due to small strains resulting from embedding the
+distorted from perfect Td point group symmetry due to small strains resulting
+from embedding the
 experimental lattice in its reference lattice. We calculate the
 Euler angles of experimentally observed structures by rotating a
 rigid tetrahedral molecule in the reference lattice frame to
@@ -522,7 +710,8 @@ one atom lying along each of the three-fold axes was used when
 determining molecular orientations. Once the
 Euler angles are determined, the rotator functions
 $U^{\ell_i}_{m_\tau n_\sigma}$ may be calculated directly using
-Eq.~(\ref{re:eq:rotfunc}).  $U^{\ell_i}_{m_\tau n_\sigma}$ is fully symmetric with
+Eq.~(\ref{re:eq:rotfunc}).  $U^{\ell_i}_{m_\tau n_\sigma}$ is fully symmetric
+with
 respect to molecular point group symmetry and is not influenced by non-unique
 Euler angles. Substituting the $U^{\ell_i}_{m_\tau n_\sigma}$ into
 Eq.~(\ref{re:eq:vij2}) yields the interaction potential as a function
@@ -561,7 +750,8 @@ vector $\nu_{RP}$ that minimizes
 \label{Endiff} \Delta E =
 E_{target}(\mb{\nu})-\min\{E_{lib}(\mb{\nu},\mb{\omega})\}.
 \end{equation}
-For a more limited library, this gives the point in $\mb{\nu}$ space of the \emph{largest}
+For a more limited library, this gives the point in $\mb{\nu}$ space of the
+\emph{largest}
 energy gap between $E_{\mathrm{target}}$ and any other structures in
 the library and is representative of the family of intermolecular
 potentials consistent with the target structure. For an exhaustive
@@ -598,7 +788,10 @@ reiterate that this is a relative energy minimization for $\Delta E$ in
 parameter space $\mb{\nu}$ and not a simulated annealing with fixed
 potential and varying temperature as is more commonly done.
 
-Since the goal of our work is to determine the minimum truncation point that provides a sufficiently rich potential to span the observed crystal structures, we adopt an iterative procedure that begins with lower order manifolds and proceeds to higher orders if necessary.  First, the energy difference is
+Since the goal of our work is to determine the minimum truncation point that
+provides a sufficiently rich potential to span the observed crystal structures,
+we adopt an iterative procedure that begins with lower order manifolds and
+proceeds to higher orders if necessary.  First, the energy difference is
 minimized using $\ell_{\mathrm{max}}=3$ for all experimental
 structures. Only if a minimum is not found for a given structure are
 fourth manifold basis functions appended to the parameter space and
@@ -614,14 +807,17 @@ Calculating potential parameters according to the procedure outlined
 in Sec.~\ref{method} gives the results in Table~\ref{RPTop} where
 the potential coefficients are given for experimental structures in
 the four most prevalent reference lattices. Calculations for other
-reference lattices such as the distorted diamond cubic reference lattices identified in part II of this series~\cite{McClurg09} are not reported here since
+reference lattices such as the distorted diamond cubic reference lattices
+identified in part II of this series~\cite{McClurg09} are not reported here
+since
 they represent a smaller percentage of distinct structures. The
 difference in energy between the experimental structure and the next
 lowest energy structure among the candidate lattices is shown in the
 second column.
 
 For 8 of the 35 structures, $\Delta E<0$. This indicates the target
-structure is not directly in the library but has been bounded in potential parameter space.  Thus $\Delta E=0$ on the borders,
+structure is not directly in the library but has been bounded in potential
+parameter space.  Thus $\Delta E=0$ on the borders,
 but $\Delta E<0$ in the interior. $\mb{\nu}_{RP}$ gives a set of
 potential parameters where the target structure is relatively stable
 and is expected to be near the center of the region.
@@ -635,15 +831,28 @@ $\mb{\nu}_{RP}$ is an arbitrary point in the region and is not
 necessarily centrally located.
 
 
-For 5 of the 35 structures, $0< \Delta E < 0.01$ which is close enough to zero to conclude that a representative potential for these structures has been found.
+For 5 of the 35 structures, $0< \Delta E < 0.01$ which is close enough to zero
+to conclude that a representative potential for these structures has been found.
 This can be asserted because the potential is composed of products
 of $U^{\ell_i}_{m_\tau n_\sigma}(\mb{\omega}_i)$, Clebsch-Gordan
 coefficients, spherical harmonics, and unit sphere normalized
 potential coefficients $\mb{\nu}$ that are all unitary.  This makes
 the energy and therefore energy difference to be $\mathcal{O}(1)$.
-An energy difference less than this tolerance likely results from the method employed to determine orientational Euler angles for the experimental structures, $\mb{\omega}_{\mathrm{exp}}$, and/or incomplete minimization in the determination of Euler angles at the global minimum,
-$\mb{\omega}_{\mathrm{min}}$.  Whereas $\mb{\omega}_{\mathrm{exp}}$ is determined by analysis of the experimental structures, which is subject to small errors, the minimizer is free to vary $\mb{\omega}_{\mathrm{min}}$ to attain the lowest possible energy.  Thus the small positive energy differences in these cases are attributed to inaccuracies in the parameters used to describe the experimental structures and 
-$\mb{\nu}_{RP}$ is therefore likely to be in the correct region of parameter space.  A close approximation to the experimental structure is contained in the comparison library, and therefore the RP may not be centrally located in its domain for these cases for the same reasons as discussed above for the $\Delta E = 0$ set. 
+An energy difference less than this tolerance likely results from the method
+employed to determine orientational Euler angles for the experimental
+structures, $\mb{\omega}_{\mathrm{exp}}$, and/or incomplete minimization in the
+determination of Euler angles at the global minimum,
+$\mb{\omega}_{\mathrm{min}}$.  Whereas $\mb{\omega}_{\mathrm{exp}}$ is
+determined by analysis of the experimental structures, which is subject to small
+errors, the minimizer is free to vary $\mb{\omega}_{\mathrm{min}}$ to attain the
+lowest possible energy.  Thus the small positive energy differences in these
+cases are attributed to inaccuracies in the parameters used to describe the
+experimental structures and 
+$\mb{\nu}_{RP}$ is therefore likely to be in the correct region of parameter
+space.  A close approximation to the experimental structure is contained in the
+comparison library, and therefore the RP may not be centrally located in its
+domain for these cases for the same reasons as discussed above for the $\Delta E
+= 0$ set. 
 
 For 2 of 35 structures, $\Delta E > 0.01$.  This indicates the
 absence of potential parameters consistent with the experimental
@@ -663,27 +872,55 @@ the fourth manifold, lack of molecular displacements and lattice
 strains in the model, lack of explicit second nearest-neighbor or
 three-body interactions, or missing quantum effects.  Another reason
 may be that the reported experimental phase is in fact metastable in
-the limit $T\rightarrow 0$. Ostwald's step rule supports this possibility.  The rule is based on the observation that during crystal nucleation and growth a metastable phase
-frequently crystallizes first which is closest in structure to the liquid or solution from which it is grown and which has the lowest free energy barrier. The crystallite then
+the limit $T\rightarrow 0$. Ostwald's step rule supports this possibility.  The
+rule is based on the observation that during crystal nucleation and growth a
+metastable phase
+frequently crystallizes first which is closest in structure to the liquid or
+solution from which it is grown and which has the lowest free energy barrier.
+The crystallite then
 undergoes a series of phase changes until it reaches the
 thermodynamically stable structure~\cite{Schmalzried03}. The
 experimentally observed structure may have formed during an early
-stage of nucleation as one of these intermediate structures.  No attempts have been made to attribute either of these two outlying cases to one or more of the above plausible explanations.
+stage of nucleation as one of these intermediate structures.  No attempts have
+been made to attribute either of these two outlying cases to one or more of the
+above plausible explanations.
 
 22 of the 35 distinct structures can be located in potential
 parameter space using only third manifold basis functions while 13
 require fourth manifold functions. This is contrary to previous
-suggestions~\cite{Briels80} that many manifolds (i.e. $\ell_i$,  $\ell_j$ go up to 10 or more)  are needed to
+suggestions~\cite{Briels80} that many manifolds (i.e. $\ell_i$,  $\ell_j$ go up
+to 10 or more)  are needed to
 accurately describe tetrahedral molecules such as methane and
-adamantane. It is true that an unwieldly large number of parameters are needed if the parameters are determined using the orthogonality of the basis functions to project out each parameter through integration over its domain.  This is the standard method for evaluating intermolecular potential parameters from an arbitrary intermolecular potential.  The drawback to this method is that the integrations are dominated by contributions near singularities in the potential.  Therefore the potential parameter values evaluated in this manner are strongly influenced by high energy interactions between molecules that are insignificant in determining the free energy of the crystal.  The low energy interactions that dominate the free energy calculation are insignificant in evaluating the IP parameters evaluated in this way.  The result is a slowly convergent potential with many additive contributions in the vicinity of singularities and offsetting contributions elsewhere.  What is needed for useful GPDs is a method for evaluating IP parameters from an arbitrary intermolecular potential that stresses the important low energy interactions and results in large, but not necessarily infinite energies in the vicinity of singularities \cite{Missaghi09}.  Current work is a proof by
+adamantane. It is true that an unwieldly large number of parameters are needed
+if the parameters are determined using the orthogonality of the basis functions
+to project out each parameter through integration over its domain.  This is the
+standard method for evaluating intermolecular potential parameters from an
+arbitrary intermolecular potential.  The drawback to this method is that the
+integrations are dominated by contributions near singularities in the potential.
+ Therefore the potential parameter values evaluated in this manner are strongly
+influenced by high energy interactions between molecules that are insignificant
+in determining the free energy of the crystal.  The low energy interactions that
+dominate the free energy calculation are insignificant in evaluating the IP
+parameters evaluated in this way.  The result is a slowly convergent potential
+with many additive contributions in the vicinity of singularities and offsetting
+contributions elsewhere.  What is needed for useful GPDs is a method for
+evaluating IP parameters from an arbitrary intermolecular potential that
+stresses the important low energy interactions and results in large, but not
+necessarily infinite energies in the vicinity of singularities
+\cite{Missaghi09}.  Current work is a proof by
 demonstration.
 
-Truncation of the intermolecular potential after the fourth manifold leaves up to 15 potential parameters which is far fewer than the previous assertions, but still too many to easily visualize.  Software such as {G\footnotesize GOBI} facilitates investigations of high dimensional spaces in an
+Truncation of the intermolecular potential after the fourth manifold leaves up
+to 15 potential parameters which is far fewer than the previous assertions, but
+still too many to easily visualize.  Software such as {G\footnotesize GOBI}
+facilitates investigations of high dimensional spaces in an
 interactive way.~\cite{ggobi03}.  Any number of axes may be displayed and
 spatial relationships between the RPs analyzed using the software.
 
 Interpreting the potential coefficients in Table~\ref{RPTop} is
-analogous to describing multipole electrostatic interactions. These potential coefficients include contributions from all interaction modes and are not limited
+analogous to describing multipole electrostatic interactions. These potential
+coefficients include contributions from all interaction modes and are not
+limited
 to electrostatic  interactions, however. In the case of tetrahedral molecules
 the octopole ($\ell_i=3$) is the first nonzero multipole.
 Coefficients such as $\nu_{0,3,3}$ and $\nu_{0,4,4}$ where $\ell_i$
@@ -710,7 +947,9 @@ structures, then they have different RPs. However, different RPs
 are widely spread by our algorithm. Therefore RPs of homologous
 series are often widely spaced, even if the molecules are expected
 to have similar intermolecular potentials. This hides the expected
-trends among homologues.  Other methods are required to further constrain the RPs assigned to individual molecules before trends among homologous series can be investigated using GPDs.
+trends among homologues.  Other methods are required to further constrain the
+RPs assigned to individual molecules before trends among homologous series can
+be investigated using GPDs.
 
 Correlations are evident in reference lattice assignments.
 An example of this is a series of molecules with molecular formula
@@ -718,7 +957,8 @@ $\mathrm{C}_{16}\mathrm{H}_{36}\mathrm{X}_{4}\mathrm{In}_4\mathrm{N}_4$
 where $\mathrm{X}$ is Cl, Br, or I. The first two structures, 14e
 MECKUA and 12i MECKOU,
 pack in an fcc reference lattice while
-the last, 11e MECKIO, packs in a tetragonal reference lattice intermediate between fcc and
+the last, 11e MECKIO, packs in a tetragonal reference lattice intermediate
+between fcc and
 bcc which is slightly closer to the bcc reference lattice. This
 indicates at least the translational part of homologue potentials is
 similar and that small changes in the atomic constituency can
@@ -772,8 +1012,11 @@ structure has a unit cell which is large or flattened/elongated,
 however, $\mb{k}$ vectors corresponding to this larger or
 longer/flatter group of parent lattice unit cells will be on high
 symmetry lines and planes. Symmetry-breaking pathways for experimental lattices
-pertaining to bcc and fcc reference lattices in the appendix show that some experimental structures contain
-large (i.e. CTBROM \cite{More77}) or non-clustered parent lattice unit cells (i.e. MTRETC10 \cite{Harrison72}) and their $\mb{k}$ vectors therefore are from high-symmetry
+pertaining to bcc and fcc reference lattices in the appendix show that some
+experimental structures contain
+large (i.e. CTBROM \cite{More77}) or non-clustered parent lattice unit cells
+(i.e. MTRETC10 \cite{Harrison72}) and their $\mb{k}$ vectors therefore are from
+high-symmetry
 plane and line IRs. Although these cases are less common, such
 isotropy subgroups could be included in the candidate lattices in
 Sec.~\ref{collection}. Providing such additional structures in the
@@ -791,14 +1034,16 @@ because of the larger set of candidate lattices and so we do not
 pursue it here. The effect would be to further localize the RPs of
 each phase, at the expense of a much larger library.
 
-Although tetrahedral molecules are used in the current example any molecular point group could be used
+Although tetrahedral molecules are used in the current example any molecular
+point group could be used
 without a dramatic increase in the number of potential coefficients
 $\mb{\nu}$ in the first two non-trivial manifolds. This is because
 the absence of IP coefficients in lower manifolds for high-symmetry
 molecules is offset by the larger number of parameters in higher
 manifolds. Consider the number of basis functions in the first two
 non-trivial manifolds of $I_h$
-(the icosahedral group) and $C_1$ (the point group of no special symmetry). These are the
+(the icosahedral group) and $C_1$ (the point group of no special symmetry).
+These are the
 highest and lowest molecular point group symmetries, respectively.
 The first three manifolds of $I_h$ containing a totally symmetric
 molecular representation are the zeroth, sixth, and tenth manifolds.
@@ -859,12 +1104,19 @@ would be easier to construct and to use.
 
 From the foregoing discussion we have seen 15 coefficients are
 sufficient to locate our dataset of experimental
-structures in potential parameter space.  We have not investigated if a linear combination would
+structures in potential parameter space.  We have not investigated if a linear
+combination would
 be better.  Principle component analysis could be used to identify
 linear combinations of basis functions that better fit molecules. It
 is possible that fewer than 15 coefficients are necessary.  
 
-A final advance would be a faster statistical mechanics method to calculate GPDs than the mean field method introduced in \cite{Mettes04}.  Such a method would find expectation values of molecular orientation in real time, without the delay of a mean-field calculation or an entire Monte Carlo or molecular dynamics simulation at each point in $\mb{\nu}$-parameter space.  Such a technique is nearing fruition and will be introduced in subsequent publications \cite{Keith09b}.
+A final advance would be a faster statistical mechanics method to calculate GPDs
+than the mean field method introduced in \cite{Mettes04}.  Such a method would
+find expectation values of molecular orientation in real time, without the delay
+of a mean-field calculation or an entire Monte Carlo or molecular dynamics
+simulation at each point in $\mb{\nu}$-parameter space.  Such a technique is
+nearing fruition and will be introduced in subsequent publications
+\cite{Keith09b}.
 
 
 \subsection{Conclusions}
@@ -880,10 +1132,12 @@ Waals equation of state is nonetheless widely used to classify the
 phase behavior of real binary mixtures, molecular crystal global
 phase diagrams may be useful in elucidating phase behavior of a
 variety of real substances and, in turn, used to develop novel
-intermolecular potentials and materials. Further work to apply these results in constructing temperature-dependent GPDs is needed and is underway.
+intermolecular potentials and materials. Further work to apply these results in
+constructing temperature-dependent GPDs is needed and is underway.
 
 \ack{This work received financial support from the American Chemical
-Society - Petroleum Research Fund (PRF \#41774-AC10), DOE Grant No. DE-FG02-03ER46059, and NSF Grant DMR-0520547.
+Society - Petroleum Research Fund (PRF \#41774-AC10), DOE Grant No.
+DE-FG02-03ER46059, and NSF Grant DMR-0520547.
 %
 Computational resources maintained by the University of Minnesota
 Supercomputer Institute were used for portions of this research.}
@@ -898,13 +1152,12 @@ Supercomputer Institute were used for portions of this research.}
 %\bibliographystyle{normalTitle}
 %\bibliographystyle{plain}
 %\bibliography{thesisbib}
-\referencelist[thesisbib]
+\referencelist[thesisbibAltered,thesisbib]
 
 \pagebreak
 
 \begin{figure}
-\caption[Front view of $T_d$ global phase diagram as a function of
-intermolecular potential coefficients.]{$[111]$ view of $T_d$
+\caption{$[111]$ view of $T_d$
 global phase diagram as a function of intermolecular potential
 coefficients $\mb{\nu}$ scaled by $kT$. The origin of the axes is
 the infinite-temperature reference state.  Rays protruding from the surfaces
@@ -919,8 +1172,7 @@ and the reference fcc phase.} \label{gpd1}
 \pagebreak
 
 \begin{figure}
-\caption[Reverse view of the $T_d$ global phase
-diagram.]{$[\bar{1}\bar{1}\bar{1}]$ view of the $T_d$ global phase
+\caption{$[\bar{1}\bar{1}\bar{1}]$ view of the $T_d$ global phase
 diagram. Some molecules such as those in the $Fm\bar{3}m$
 structure appear ``spherical" because of rapid molecular
 reorientation.} \label{gpd2}
@@ -939,10 +1191,17 @@ shown in bold.}\label{wyckoff_IRs}\small
 $\ell_i$ & $O_h$ IRs &  $D_{3h}$ IRs \\
 \hline
 0 & $\mb{A_{1g}}$ & $\mb{A^\prime_1}$ \\
-3 & $\mb{A_{2u}}+\mb{T_{1u}}+\mb{T_{2u}}$ & $A^\prime_1+\mb{A^{\prime}_2}+\mb{E^\prime}+\mb{E^{\prime\prime}}$ \\
-4 & $A_{1g}+\mb{E_{g}}+\mb{T_{1g}}+\mb{T_{2g}}$ & $A^\prime_1+\mb{A^{\prime\prime}_1}+\mb{A^{\prime\prime}_2}+2E^\prime+E^{\prime\prime}$\\
-6 & $A_{1g}+\mb{A_{2g}}+E_g+T_{1g}+2T_{2g}$ & $2A^\prime_1+A^{\prime\prime}_1+A^{\prime}_2+A^{\prime\prime}_2+2E^\prime+2E^{\prime\prime}$ \\
-7 & $A_{2u}+\mb{E_u}+2T_{1u}+2T_{2u}$ & $A^\prime_1+A^{\prime\prime}_1+A^{\prime}_2+2A^{\prime\prime}_2+3E^\prime+2E^{\prime\prime}$ `\\
+3 & $\mb{A_{2u}}+\mb{T_{1u}}+\mb{T_{2u}}$ &
+$A^\prime_1+\mb{A^{\prime}_2}+\mb{E^\prime}+\mb{E^{\prime\prime}}$ \\
+4 & $A_{1g}+\mb{E_{g}}+\mb{T_{1g}}+\mb{T_{2g}}$ &
+$A^\prime_1+\mb{A^{\prime\prime}_1}+\mb{A^{\prime\prime}_2}+2E^\prime+E^{
+\prime\prime}$\\
+6 & $A_{1g}+\mb{A_{2g}}+E_g+T_{1g}+2T_{2g}$ &
+$2A^\prime_1+A^{\prime\prime}_1+A^{\prime}_2+A^{\prime\prime}_2+2E^\prime+2E^{
+\prime\prime}$ \\
+7 & $A_{2u}+\mb{E_u}+2T_{1u}+2T_{2u}$ &
+$A^\prime_1+A^{\prime\prime}_1+A^{\prime}_2+2A^{\prime\prime}_2+3E^\prime+2E^{
+\prime\prime}$ `\\
 8 & $A_{1g}+2E_g+2T_{1g}+2T_{2g}$ & \\
 9 & $\mb{A_{1u}}+A_{2u}+E_u+3T_{1u}+2T_{2u}$ & \\
 \hline
@@ -956,12 +1215,16 @@ $\ell_i$ & $O_h$ IRs &  $D_{3h}$ IRs \\
 for the fcc reference lattice. Classified by space group IR and order
 parameter direction, each pathway shows the point group IR and
 minimal manifold of SO(3) in Eq.~(\ref{re:eq:vij2}) required to
-achieve it.  The order parameter directions are given in an abbreviated form in the
+achieve it.  The order parameter directions are given in an abbreviated form in
+the
 notation of Stokes and
 Hatch~\cite{Stokes02a}. The pathways, space
-group IRs, order parameter directions, and point group IRs were computed using ISOTROPY.
-However, transitions belonging to a coupled IR between a high symmetry point and line
-are currently not a feature of ISOTROPY.  These entries have been marked with an asterisk in
+group IRs, order parameter directions, and point group IRs were computed using
+ISOTROPY.
+However, transitions belonging to a coupled IR between a high symmetry point and
+line
+are currently not a feature of ISOTROPY.  These entries have been marked with an
+asterisk in
 the table.} \label{pathwaysFCC}\tiny
 \begin{tabular}{lllll}\hline
 Pathway & S.~G.~IR & OP Dir. & P.~G.~IR & $\ell^{\mathrm{req'd}}$  \\
@@ -970,14 +1233,16 @@ Pathway & S.~G.~IR & OP Dir. & P.~G.~IR & $\ell^{\mathrm{req'd}}$  \\
 
 225a $\rightarrow$ 142a & $W_3$ & P2 & $T_{1g},A_{2u},E_{u}$ & 3 \\
 
-225a $\rightarrow$ 114a & $X_2^-\oplus \Gamma_5^-$ & P1 $\oplus$ P1 & $A_{2u},E_u \oplus
+225a $\rightarrow$ 114a & $X_2^-\oplus \Gamma_5^-$ & P1 $\oplus$ P1 &
+$A_{2u},E_u \oplus
 T_{2u}$ & 3 \\
 & $X_3^+\oplus \Gamma_5^-$ &
 P1 $\oplus$ P1 & $T_{1g} \oplus T_{2u}$ & 4 \\
 & $X_2^- \oplus X_3^+$ & P1 $\oplus$ P1 & $A_{2u},E_{u} \oplus
 T_{1g}$ & 4 \\
 
-225a $\rightarrow$ 152b & $\Lambda_3$ (k=1/3) &  P1 & $E_g,T_{1g},T_{2g},E_u,T_{1u},T_{2u}$ & 3 \\
+225a $\rightarrow$ 152b & $\Lambda_3$ (k=1/3) &  P1 &
+$E_g,T_{1g},T_{2g},E_u,T_{1u},T_{2u}$ & 3 \\
 
 225a $\rightarrow$ 15e (REKYUB) & $L_3^-$ & P7 & $E_u,T_{1u},T_{2u}$ & 3 \\
 
@@ -985,57 +1250,81 @@ T_{1g}$ & 4 \\
 
 225a $\rightarrow$ 64d,f & $^*$\\
 
-225a $\rightarrow$ 14e (MECKUA) & $\Gamma_3^+ \oplus L_3^-$ & P1 $\oplus$ C8 & $E_g \oplus E_u,T_{1u},T_{2u}$ & 4 \\
+225a $\rightarrow$ 14e (MECKUA) & $\Gamma_3^+ \oplus L_3^-$ & P1 $\oplus$ C8 &
+$E_g \oplus E_u,T_{1u},T_{2u}$ & 4 \\
 & $\Gamma_3^+ \oplus X_5^-$ & C1 $\oplus$ S7 & $E_g \oplus T_{1u},T_{2u}$ & 4 \\
-& $\Gamma_4^+ \oplus X_5^-$ & P1 $\oplus$ C11  & $T_{1g} \oplus T_{1u},T_{2u}$ & 4 \\
+& $\Gamma_4^+ \oplus X_5^-$ & P1 $\oplus$ C11  & $T_{1g} \oplus T_{1u},T_{2u}$ &
+4 \\
 & & P1 $\oplus$ S7 \\
-& $\Gamma_5^+ \oplus L_3^-$ & C2 $\oplus$ C8 & $T_{2g} \oplus E_u,T_{1u},T_{2u}$ & 4 \\
-& $\Gamma_5^+ \oplus X_5^-$ & P1 $\oplus$ C11 & $T_{2g} \oplus T_{1u},T_{2u}$ & 4 \\
+& $\Gamma_5^+ \oplus L_3^-$ & C2 $\oplus$ C8 & $T_{2g} \oplus E_u,T_{1u},T_{2u}$
+& 4 \\
+& $\Gamma_5^+ \oplus X_5^-$ & P1 $\oplus$ C11 & $T_{2g} \oplus T_{1u},T_{2u}$ &
+4 \\
 & & P1 $\oplus$ S7 & &  \\
-& $L_2^+ \oplus L_1^-$ & P1 $\oplus$ P1 & $A_{2g},T_{1g} \oplus A_{1u},T_{2u}$ & 4 \\
+& $L_2^+ \oplus L_1^-$ & P1 $\oplus$ P1 & $A_{2g},T_{1g} \oplus A_{1u},T_{2u}$ &
+4 \\
 
-& $L_2^+ \oplus L_3^-$ &  P1 $\oplus$ P7 & $A_{2g},T_{1g} \oplus E_u,T_{1u},T_{2u}$ & 4 \\
+& $L_2^+ \oplus L_3^-$ &  P1 $\oplus$ P7 & $A_{2g},T_{1g} \oplus
+E_u,T_{1u},T_{2u}$ & 4 \\
 
-& $L_2^+ \oplus X_2^-$ &  P1 $\oplus$ P1 & $A_{2g},T_{1g} \oplus A_{2u},E_u$ & 4 \\
+& $L_2^+ \oplus X_2^-$ &  P1 $\oplus$ P1 & $A_{2g},T_{1g} \oplus A_{2u},E_u$ & 4
+\\
 
-& $L_2^+ \oplus X_3^-$ &  P1 $\oplus$ P1 & $A_{2g},T_{1g} \oplus E_u,T_{1u}$ & 4 \\
+& $L_2^+ \oplus X_3^-$ &  P1 $\oplus$ P1 & $A_{2g},T_{1g} \oplus E_u,T_{1u}$ & 4
+\\
 
-& $L_2^+ \oplus X_5^-$ &  P1 $\oplus$ P1 & $A_{2g},T_{1g} \oplus T_{1u},T_{2u}$ & 4 \\
+& $L_2^+ \oplus X_5^-$ &  P1 $\oplus$ P1 & $A_{2g},T_{1g} \oplus T_{1u},T_{2u}$
+& 4 \\
 
-& $L_3^+ \oplus L_1^-$ &  P7 $\oplus$ P1 & $E_g,T_{1g},T_{2g} \oplus A_{1u},T_{2u}$ & 4 \\
+& $L_3^+ \oplus L_1^-$ &  P7 $\oplus$ P1 & $E_g,T_{1g},T_{2g} \oplus
+A_{1u},T_{2u}$ & 4 \\
 
-& $L_3^+ \oplus L_3^-$ &  P7 $\oplus$ P7 & $E_g,T_{1g},T_{2g} \oplus E_u,T_{1u},T_{2u}$ & 4 \\
+& $L_3^+ \oplus L_3^-$ &  P7 $\oplus$ P7 & $E_g,T_{1g},T_{2g} \oplus
+E_u,T_{1u},T_{2u}$ & 4 \\
 
-& $L_3^+ \oplus X_2^-$ &  P7 $\oplus$ P1 & $E_g,T_{1g},T_{2g} \oplus A_{2u},E_u$ & 4 \\
+& $L_3^+ \oplus X_2^-$ &  P7 $\oplus$ P1 & $E_g,T_{1g},T_{2g} \oplus A_{2u},E_u$
+& 4 \\
 
-& $L_3^+ \oplus X_3^-$ &  P7 $\oplus$ P1 & $E_g,T_{1g},T_{2g} \oplus E_u,T_{1u}$ & 4 \\
+& $L_3^+ \oplus X_3^-$ &  P7 $\oplus$ P1 & $E_g,T_{1g},T_{2g} \oplus E_u,T_{1u}$
+& 4 \\
 
-& $L_3^+ \oplus X_5^-$ &  P7 $\oplus$ P1 & $E_g,T_{1g},T_{2g} \oplus T_{1u},T_{2u}$ & 4 \\
+& $L_3^+ \oplus X_5^-$ &  P7 $\oplus$ P1 & $E_g,T_{1g},T_{2g} \oplus
+T_{1u},T_{2u}$ & 4 \\
 
-& $L_1^- \oplus L_3^-$ &  P1 $\oplus$ C8 & $A_{1u},T_{2u} \oplus E_u,T_{1u},T_{2u}$ & 4 \\
+& $L_1^- \oplus L_3^-$ &  P1 $\oplus$ C8 & $A_{1u},T_{2u} \oplus
+E_u,T_{1u},T_{2u}$ & 4 \\
 
-& $L_1^- \oplus X_2^-$ &  P1 $\oplus$ P1 & $A_{1u},T_{2u} \oplus A_{2u},E_u$ & 4 \\
+& $L_1^- \oplus X_2^-$ &  P1 $\oplus$ P1 & $A_{1u},T_{2u} \oplus A_{2u},E_u$ & 4
+\\
 
-& $L_1^- \oplus X_3^-$ &  P1 $\oplus$ P1 & $A_{1u},T_{2u} \oplus E_u,T_{1u}$ & 4 \\
+& $L_1^- \oplus X_3^-$ &  P1 $\oplus$ P1 & $A_{1u},T_{2u} \oplus E_u,T_{1u}$ & 4
+\\
 
-& $L_1^- \oplus X_5^-$ &  P1 $\oplus$ P1 & $A_{1u},T_{2u} \oplus T_{1u},T_{2u}$ & 4 \\
+& $L_1^- \oplus X_5^-$ &  P1 $\oplus$ P1 & $A_{1u},T_{2u} \oplus T_{1u},T_{2u}$
+& 4 \\
 
-& $L_3^- \oplus X_2^-$ &  P7 $\oplus$ P1 & $E_u,T_{1u},T_{2u} \oplus A_{2u},E_u$ & 4 \\
+& $L_3^- \oplus X_2^-$ &  P7 $\oplus$ P1 & $E_u,T_{1u},T_{2u} \oplus A_{2u},E_u$
+& 4 \\
 
-& $L_3^- \oplus X_3^-$ &  P7 $\oplus$ P1 & $E_u,T_{1u},T_{2u} \oplus E_u,T_{1u}$ & 4 \\
+& $L_3^- \oplus X_3^-$ &  P7 $\oplus$ P1 & $E_u,T_{1u},T_{2u} \oplus E_u,T_{1u}$
+& 4 \\
 
-& $L_3^- \oplus X_5^-$ &  P7 $\oplus$ P1 & $E_u,T_{1u},T_{2u} \oplus T_{1u},T_{2u}$ & 4 \\
+& $L_3^- \oplus X_5^-$ &  P7 $\oplus$ P1 & $E_u,T_{1u},T_{2u} \oplus
+T_{1u},T_{2u}$ & 4 \\
 
-& $X_2^- \oplus X_5^-$ &  P1 $\oplus$ C11 & $A_{2u},E_u \oplus T_{1u},T_{2u}$ & 4 \\
+& $X_2^- \oplus X_5^-$ &  P1 $\oplus$ C11 & $A_{2u},E_u \oplus T_{1u},T_{2u}$ &
+4 \\
 
 & & P1 $\oplus$ S7 & &  \\
 
-& $X_3^- \oplus X_5^-$ &  P1 $\oplus$ C11 & $E_u,T_{1u} \oplus T_{1u},T_{2u}$ & 4 \\
+& $X_3^- \oplus X_5^-$ &  P1 $\oplus$ C11 & $E_u,T_{1u} \oplus T_{1u},T_{2u}$ &
+4 \\
 
 225a $\rightarrow$ 14e (TOHSUE) & $\Delta_5$ ($k=1/4$) & C7 &
 $T_{1g},T_{2g},T_{1u},T_{2u}$ & 3 \\
 
-225a $\rightarrow$ 15f,f,f,f & $C_2$ ($k_1=1/4,k_2=3/4$) & C18,C19 & $A_{2g},E_g,T_{1g},T_{2g},$ & 3 \\
+225a $\rightarrow$ 15f,f,f,f & $C_2$ ($k_1=1/4,k_2=3/4$) & C18,C19 &
+$A_{2g},E_g,T_{1g},T_{2g},$ & 3 \\
 &  & & $A_{1u},E_u,T_{1u},T_{2u}$\\
 \hline
 \end{tabular}
@@ -1046,7 +1335,9 @@ $T_{1g},T_{2g},T_{1u},T_{2u}$ & 3 \\
 \begin{landscape}
 \begin{table}%[!ht]
 \caption{RP components for crystals of tetrahedral molecules in the
-CSD.  The ``Identifier'' is a representative structure for a given structural type.  The ``Multiplicity'' is the number of such structures in our dataset. The $\ell_i$ truncation value and the presence, absence, or
+CSD.  The ``Identifier'' is a representative structure for a given structural
+type.  The ``Multiplicity'' is the number of such structures in our dataset. The
+$\ell_i$ truncation value and the presence, absence, or
 proximity of a global minimum are indicated. The parameters
 $\nu_{\ell_i,\ell,\ell_j}$ are indexed according to
 Eq.~(\ref{re:eq:vij2}) and have been mapped to the unit hypersphere.}
@@ -1059,32 +1350,53 @@ $\nu_{444}$ & $\nu_{464}$ & $\nu_{484}$ \\
 & plicity & & & & & & & & & & & & & & & & \\
 \hline
 bcc\\
-217a HXMTAM07 & 11 & 0.000 & - & 0.000 & 0.970 & 0.000 & 0.230 & -0.0790 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 \\
-161a TCYMET & 1 & 0.007 & - & 0.355 & 0.303 & 0.380 & -0.017 & -0.130 & -0.213 & 0.084 & 0.331 & -0.116 & 0.409 & 0.496 & 0.075 & -0.138 & -0.089 \\
-2i MEZDIE01 & 1 & 0.001 & - & -0.142 & 0.017 & -0.215 & 0.042 & 0.222 & 0.221 & -0.314 & 0.483 & 0.230 & -0.287 & -0.309 & -0.019 & -0.158 & 0.495 \\
-60c,d YIMWEW & 1 & -0.015 & - & 0.003 & 0.0 & 0.0 & 0.004 & 0.00 & 0.998 & -0.007 & -0.059 & -0.008 & 0.002 & 0.0 & -0.002 & -0.010 & 0.009 \\
-2iii OHABEE & 1 & 0.024 & - & 0.092 & -0.003 & -0.159 & -0.003 & 0.016 & -0.504 & 0.089 & -0.348 & 0.087 & -0.108 & -0.102 & -0.288 & -0.239 & 0.643 \\
+217a HXMTAM07 & 11 & 0.000 & - & 0.000 & 0.970 & 0.000 & 0.230 & -0.0790 & 0.000
+& 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 \\
+161a TCYMET & 1 & 0.007 & - & 0.355 & 0.303 & 0.380 & -0.017 & -0.130 & -0.213 &
+0.084 & 0.331 & -0.116 & 0.409 & 0.496 & 0.075 & -0.138 & -0.089 \\
+2i MEZDIE01 & 1 & 0.001 & - & -0.142 & 0.017 & -0.215 & 0.042 & 0.222 & 0.221 &
+-0.314 & 0.483 & 0.230 & -0.287 & -0.309 & -0.019 & -0.158 & 0.495 \\
+60c,d YIMWEW & 1 & -0.015 & - & 0.003 & 0.0 & 0.0 & 0.004 & 0.00 & 0.998 &
+-0.007 & -0.059 & -0.008 & 0.002 & 0.0 & -0.002 & -0.010 & 0.009 \\
+2iii OHABEE & 1 & 0.024 & - & 0.092 & -0.003 & -0.159 & -0.003 & 0.016 & -0.504
+& 0.089 & -0.348 & 0.087 & -0.108 & -0.102 & -0.288 & -0.239 & 0.643 \\
 \\
 fcc\\
-121a ZZZKDW01 & 1 & 0.000 & - & 0.000 & 0.431 & 0.316 & 0.267 & -0.802 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 \\
-142a KUJSIR & 1 & 0.001 & - & 0.000 & -0.935 & -0.054 & 0.147 & -0.319 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 \\
-114a ADAMAN08 & 2 & 0.018 & - & -0.035 & -0.007 & -0.292 & 0.000 & 0.023 & 0.061 & -0.046 & 0.191 & 0.053 & -0.056 & 0.584 & 0.185 & 0.055 & -0.698 \\
-152b MTRETC10 & 1 & -0.080 & -  & -0.241 & 0.022 & -0.082 & 0.106 & -0.139 & -0.909 & 0.002 & 0.109 & -0.244 & -0.001 & -0.045 & 0.012 & -0.067 & -0.003 \\
-15e REKYUB & 1 & 0.003 & - & -0.210 & -0.001 & -0.359 & -0.011 & 0.031 & -0.157 & 0.135 & -0.463 & 0.379 & -0.209 & -0.445 & -0.340 & 0.157 & 0.208 \\
-12i MECKOU & 1 & 0.000 & - & -0.258 & 0.006 & 0.781 & 0.028 & -0.058 & -0.216 & -0.056 & -0.264 & 0.215 & -0.194 & 0.286 & 0.166 & 0.029 & 0.074 \\
-64d,f METHANEIII & 1 & -0.238 & - & 0.112 & -0.010 & 0.017 & -0.020 & 0.006 & 0.001 & -0.022 & -0.002 & -0.014 & 0.097 & 0.060 & -0.772 & -0.483 & -0.379 \\
-14e MECKUA & 1 & 0.005 & - & -0.123 & -0.070 & -0.103 & 0.161 & -0.744 & -0.240 & -0.084 & -0.209 & -0.345 & 0.008 & -0.251 & -0.056 & -0.305 & 0.060 \\
-14e TOHSUE & 1 & -0.052 & - & 0.317 & -0.011 & -0.036 & 0.030 & -0.137 & 0.615 & 0.221 & -0.338 & 0.477 & 0.035 & -0.163 & -0.024 & -0.003 & 0.284 \\
-15f,f,f,f CTBROM & 2 & -0.186 & - & 0.197 & 0.005 & -0.044 & -0.025 & -0.151 & -0.687 & 0.291 & -0.284 & 0.486 & 0.037 & -0.062 & 0.038 & -0.077 & 0.222 \\
+121a ZZZKDW01 & 1 & 0.000 & - & 0.000 & 0.431 & 0.316 & 0.267 & -0.802 & 0.000 &
+0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 \\
+142a KUJSIR & 1 & 0.001 & - & 0.000 & -0.935 & -0.054 & 0.147 & -0.319 & 0.000 &
+0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 \\
+114a ADAMAN08 & 2 & 0.018 & - & -0.035 & -0.007 & -0.292 & 0.000 & 0.023 & 0.061
+& -0.046 & 0.191 & 0.053 & -0.056 & 0.584 & 0.185 & 0.055 & -0.698 \\
+152b MTRETC10 & 1 & -0.080 & -  & -0.241 & 0.022 & -0.082 & 0.106 & -0.139 &
+-0.909 & 0.002 & 0.109 & -0.244 & -0.001 & -0.045 & 0.012 & -0.067 & -0.003 \\
+15e REKYUB & 1 & 0.003 & - & -0.210 & -0.001 & -0.359 & -0.011 & 0.031 & -0.157
+& 0.135 & -0.463 & 0.379 & -0.209 & -0.445 & -0.340 & 0.157 & 0.208 \\
+12i MECKOU & 1 & 0.000 & - & -0.258 & 0.006 & 0.781 & 0.028 & -0.058 & -0.216 &
+-0.056 & -0.264 & 0.215 & -0.194 & 0.286 & 0.166 & 0.029 & 0.074 \\
+64d,f METHANEIII & 1 & -0.238 & - & 0.112 & -0.010 & 0.017 & -0.020 & 0.006 &
+0.001 & -0.022 & -0.002 & -0.014 & 0.097 & 0.060 & -0.772 & -0.483 & -0.379 \\
+14e MECKUA & 1 & 0.005 & - & -0.123 & -0.070 & -0.103 & 0.161 & -0.744 & -0.240
+& -0.084 & -0.209 & -0.345 & 0.008 & -0.251 & -0.056 & -0.305 & 0.060 \\
+14e TOHSUE & 1 & -0.052 & - & 0.317 & -0.011 & -0.036 & 0.030 & -0.137 & 0.615 &
+0.221 & -0.338 & 0.477 & 0.035 & -0.163 & -0.024 & -0.003 & 0.284 \\
+15f,f,f,f CTBROM & 2 & -0.186 & - & 0.197 & 0.005 & -0.044 & -0.025 & -0.151 &
+-0.687 & 0.291 & -0.284 & 0.486 & 0.037 & -0.062 & 0.038 & -0.077 & 0.222 \\
 \\
 hcp\\
-165d DILWIE01 & 2 & -0.034 & -0.839 & 0.000  & 0.075 & 0.302 & 0.296 & -0.334 & 0.000  & 0.000  & 0.000  & 0.000  & 0.000  & 0.000  & 0.000  & 0.000 & 0.000 \\
-147d ZIZHIZ & 1 & 0.000 & -0.793 & 0.000 & -0.040 & 0.203 & 0.083 & -0.568 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 \\
-176h CUCZUV & 1 & 0.009 & 0.000 & 0.000  & -0.251 & -0.965 & 0.071 & -0.011 & 0.000  & 0.000  & 0.000  & 0.000  & 0.000  & 0.000  & 0.000  & 0.000  & 0.000  \\
+165d DILWIE01 & 2 & -0.034 & -0.839 & 0.000  & 0.075 & 0.302 & 0.296 & -0.334 &
+0.000  & 0.000  & 0.000  & 0.000  & 0.000  & 0.000  & 0.000  & 0.000 & 0.000 \\
+147d ZIZHIZ & 1 & 0.000 & -0.793 & 0.000 & -0.040 & 0.203 & 0.083 & -0.568 &
+0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 \\
+176h CUCZUV & 1 & 0.009 & 0.000 & 0.000  & -0.251 & -0.965 & 0.071 & -0.011 &
+0.000  & 0.000  & 0.000  & 0.000  & 0.000  & 0.000  & 0.000  & 0.000  & 0.000 
+\\
 \\
 sc\\
-215a FOHCUA & 3 & 0.000 & - & 0.000 & 0.960 & 0.000 & 0.279 & -0.017 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 \\
-120c YEMRIR & 1 & 0.016 & - & -0.102 & -0.111 & -0.167 & -0.439 & 0.077 & 0.403 & -0.487 & -0.078 & 0.281 & 0.169 & 0.056 & -0.071 & 0.449 & -0.167\\
+215a FOHCUA & 3 & 0.000 & - & 0.000 & 0.960 & 0.000 & 0.279 & -0.017 & 0.000 &
+0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 \\
+120c YEMRIR & 1 & 0.016 & - & -0.102 & -0.111 & -0.167 & -0.439 & 0.077 & 0.403
+& -0.487 & -0.078 & 0.281 & 0.169 & 0.056 & -0.071 & 0.449 & -0.167\\
 \hline\\
 \end{tabular}
 \end{table}
@@ -1097,7 +1409,8 @@ sc\\
 potential for a truncation at a given manifold for two truncation
 strategies and three molecular point groups.}\label{tab:truncation}
 \begin{tabular}{lllllllll}
-\multicolumn{4}{c}{Direct Truncation} & &\multicolumn{4}{c}{$\ell$ sum Truncation}\\
+\multicolumn{4}{c}{Direct Truncation} & &\multicolumn{4}{c}{$\ell$ sum
+Truncation}\\
 \cline{1-4}\cline{6-9}\\
 $\ell_i$ & $C_1$ & $T_d$ & $I_h$ & & $\ell_i+\ell_j$ & $C_1$ &
 $T_d$ & $I_h$\\
@@ -1131,7 +1444,8 @@ center of mass on an ideal bcc reference lattice.\label{compare}}
 
 \appendix
 
-\section{Detailed derivation of Eq.~\ref{}}
+\section{Detailed derivation of Eq.~\ref{re:eq:vij2}}
+\label{derivation}
 
 We choose to expand the potential using a complete set of
 two-molecule basis functions that span the rotational space
@@ -1144,32 +1458,36 @@ $D^{\ell_i}_{m_{i}n_{i}}(\mb{\omega}_i)$ and
 $D^{\ell_j}_{m_{j}n_{j}}(\mb{\omega}_j)$ and a spherical harmonic
 $C^\ell_m(\mb{\Omega}_{ij})$ gives
 \begin{equation}
-\label{Wbasis}W^{n_i n_j}_{\ell_i \ell \ell_j}=\sum_{m_imm_j} \left(\begin{array}{ccc} \ell_i & \ell & \ell_j \\
+\label{Wbasis}W^{n_i n_j}_{\ell_i \ell \ell_j}=\sum_{m_imm_j}
+\left(\begin{array}{ccc} \ell_i & \ell & \ell_j \\
 m_i & m & m_j
-\end{array}\right)D^{\ell_i}_{m_in_i}(\mb{\omega}_i)C^\ell_m(\mb{\Omega}_{ij}) D^{\ell_j}_{m_jn_j}(\mb{\omega}_j)
+\end{array}\right)D^{\ell_i}_{m_in_i}(\mb{\omega}_i)C^\ell_m(\mb{\Omega}_{ij})
+D^{\ell_j}_{m_jn_j}(\mb{\omega}_j)
 \end{equation}
 where the explicit functional dependence of $C^\ell_m$ and
 $D^{\ell_j}_{m_jn_j}$ has been dropped. 
 
-The details of the coupling is different from our references so we give a full derivation here.To
-couple $\{D_{m_i n_i}^{\ell_i},C_{m}^{\ell},D_{m_j
+To couple $\{D_{m_i n_i}^{\ell_i},C_{m}^{\ell},D_{m_j
 n_j}^{\ell_j}\}$ where \cite{Varshalovich88}
 \begin{eqnarray}
 D_{mn}^{\ell}(\mb{\omega}_i)&=&\exp \left(-i m \alpha_i \right)
 \, d_{mn}^{\ell}(\beta_i) \, \exp \left(-i n \gamma_i \right)\\
 d_{mn}^{\ell}(\beta_i)&=&\sum_{k = \max(0,m-n )}^{\min( \ell+m,
 \ell-n)} (-1)^k\nonumber\\
-&&\!\!\!\!\!\!\!\!\!\!\!\!\times\frac{\left[(\ell+m)!\,(\ell-m)!\,(\ell+n)!\,(\ell-n)!
+&&\!\!\!\!\!\!\!\!\!\!\!\!\times\frac{\left[(\ell+m)!\,(\ell-m)!\,(\ell+n)!\,
+(\ell-n)!
 \right]^{1/2}}{k!\,(\ell+m-k)!\,(\ell-n-k)!
 \,(n-m+k)!}\nonumber \\
 &&\!\!\!\!\!\!\!\!\!\!\!\!\times\left[\cos(\beta_i/2)\right]^{2\ell+m-n-2k}
  \left[\sin(\beta_i/2)\right]^{2k-m+n}\\
-C_{m}^{\ell}(\mb{\Omega}_{ij})&=&\sqrt{\frac{4\pi}{2\ell+1}}Y_{m}^{\ell}(\mb{\Omega}_{ij}),
+C_{m}^{\ell}(\mb{\Omega}_{ij})&=&\sqrt{\frac{4\pi}{2\ell+1}}Y_{m}^{\ell}(\mb{
+\Omega}_{ij}),
 \end{eqnarray}
 we first couple angular basis functions of molecules $i$ and $j$
 \begin{equation}
 \label{angAB} A^{\ell_{(ij)}}_{m_{(ij)}}=
-\sum_{m_im_j}C_{\ell_{i}m_{i},\ell_{j}m_j}^{\ell_{(ij)}m_{(ij)}}D^{\ell_i}_{m_in_i}D^{\ell_j}_{m_jn_j}
+\sum_{m_im_j}C_{\ell_{i}m_{i},\ell_{j}m_j}^{\ell_{(ij)}m_{(ij)}}D^{\ell_i}_{
+m_in_i}D^{\ell_j}_{m_jn_j}
 \end{equation}
 where $C_{\ell_{i}m_{i},\ell_{j}m_j}^{\ell_{(ij)}m_{(ij)}}$ is a
 Clebsch-Gordan coefficient~\cite{Varshalovich88}.  Coupling
@@ -1196,11 +1514,13 @@ we have
 \begin{equation}
 \label{inv}W^{n_i n_j}_{\ell_i \ell
 \ell_j}=\sum_{m_imm_j}C_{\ell_i
-m_i,\ell_jm_j}^{\ell\overline{m}}\frac{(-1)^{\ell+m}}{\sqrt{2\ell+1}}D^{\ell_i}_{m_in_i}C^\ell_mD^{\ell_j}_{m_jn_j}
+m_i,\ell_jm_j}^{\ell\overline{m}}\frac{(-1)^{\ell+m}}{\sqrt{2\ell+1}}D^{\ell_i}_
+{m_in_i}C^\ell_mD^{\ell_j}_{m_jn_j}
 \end{equation}
 Likewise using the identity~\cite{Varshalovich88}
 \begin{equation}
-\label{id}C^{\ell\overline{m}}_{\ell_im_i,\ell_jm_j}=(-1)^{\ell_i-\ell_j-m}\sqrt{2\ell+1}\left(\begin{array}{ccc}
+\label{id}C^{\ell\overline{m}}_{\ell_im_i,\ell_jm_j}=(-1)^{\ell_i-\ell_j-m}\sqrt
+{2\ell+1}\left(\begin{array}{ccc}
 \ell_i & \ell_j & \ell \\ m_i & m_j & m \end{array}\right)
 \end{equation}
 gives
@@ -1214,76 +1534,28 @@ To remove the phase factor one may exploit the mirror symmetry of
 the 3jm symbol
 \begin{equation}
 \left(\begin{array}{ccc} \ell_i & \ell_j & \ell \\ m_i & m_j & m
-\end{array}\right)=(-1)^{\ell_i+\ell_j+\ell}\left(\begin{array}{ccc} \ell_i & \ell & \ell_j \\ m_i & m & m_j
+\end{array}\right)=(-1)^{\ell_i+\ell_j+\ell}\left(\begin{array}{ccc} \ell_i &
+\ell & \ell_j \\ m_i & m & m_j
 \end{array}\right)
 \end{equation}
 leaving
 \begin{equation}
-\label{appbasis}W^{n_i n_j}_{\ell_i \ell \ell_j}=\sum_{m_imm_j}\left(\begin{array}{ccc} \ell_i & \ell & \ell_j \\
+\label{appbasis}W^{n_i n_j}_{\ell_i \ell
+\ell_j}=\sum_{m_imm_j}\left(\begin{array}{ccc} \ell_i & \ell & \ell_j \\
 m_i & m & m_j
 \end{array}\right)D^{\ell_i}_{m_in_i}C^\ell_m D^{\ell_j}_{m_jn_j}.
 \end{equation}
-Equation~(\ref{appbasis}) gives basis functions $W$ from Eq.~\ref{Wbasis}. without any
-symmetry adaptation.  The $W^{n_i n_j}_{\ell_i \ell \ell_j}$ form a complete set of orthogonal IP
+Equation~(\ref{appbasis}) gives basis functions $W$ from Eq.~\ref{Wbasis}.
+without any
+symmetry adaptation.  The $W^{n_i n_j}_{\ell_i \ell \ell_j}$ form a complete set
+of orthogonal IP
 basis functions over the eight-dimensional space $SO(3)\times
-S^2\times SO(3)$. Their properties have been studied previously
-\cite{Avoird80,Briels80,Stone84,Avoird94}.
+S^2\times SO(3)$. Similar but slightly different constructions are given in the literature.\cite{Avoird80,Briels80,Stone84,Avoird94}.
 
-While the basis functions $W^{n_i n_j}_{\ell_i \ell \ell_j}$ are
-general, it is of great advantage computationally to project out
+While $W^{n_i n_j}_{\ell_i \ell \ell_j}$ are
+general, it is computationally advantageous to project out
 the point group symmetry of the molecule and that of the Wyckoff
-point. 
-
-Projecting out Wyckoff point symmetry from the functions
-$T^{\ell_i}_{m_i n_\sigma}$ gives rotator functions
-\begin{equation}
-\label{eq:rotfunc}U^{\ell_i}_{m_\tau n_\sigma}(\mb{\omega}_i)=\sum_{m_i n_i}S^{\ell_i*}_{m_im_\tau}D_{m_i
-n_i}^{\ell_i}(\mb{\omega}_i)S^{\ell_i}_{n_in_\sigma}.
-\end{equation}
-Expressing the potential using coupled rotator functions gives
-\begin{equation}
-\label{eq:vij2}V/kT = \frac{1}{2}\sum_{ij}\sum_{\ell_i\ell_j m_\tau m_\rho n_\sigma n_\mu} U^{\ell_i}_{m_\tau
-n_\sigma}(\mb{\omega}_i)K_{m_\tau n_\sigma m_\rho n_\mu}^{\ell_i \ell_j}(\mb{\Omega}_{ij})U^{\ell_j}_{m_\rho
-n_\mu}(\mb{\omega}_j)
-\end{equation}
-where
-\begin{eqnarray}
- K_{m_\tau n_\sigma m_\rho
-n_\mu}^{\ell_i \ell_j}(\mb{\Omega}_{ij})&=&\sum_{\ell m_i m m_j}
-\frac{\nu_{\ell_i,\ell,\ell_j}^{n_\sigma,n_\mu}(r_{ij})}{kT}\left(\begin{array}{ccc}
- \ell_i & \ell & \ell_j \\ m_i & m & m_j
-\end{array}\right)\nonumber\\
-&&\times S^{\ell_i}_{m_\tau m_i}C_{m}^{\ell} S^{\ell_j}_{m_\rho
-m_j}
-\end{eqnarray}
-is a dimensionless coupling function. Subscripts $\tau,\rho$ are a
-compound index referring to multiple copies of the Wyckoff point
-group IR's subduced in the $\ell_i,\ell_j$-th manifold of $SO(3)$
-and $m_\tau,m_\rho$ goes over the dimensions of each IR. It is
-sometimes convenient to write Eq.~(\ref{eq:vij2}) using a
-shorthand notation
-\begin{equation}
-\label{eq:vij2vec}V/kT = \frac{1}{2}\sum_{ij}
-\mb{U}_{i}\cdot\mb{K}_{ij}\cdot\mb{U}_{j}
-\end{equation}
-in which $\mb{U}_i$ is a vector covering all elements of
-$U^{\ell_i}_{m_\tau n_\sigma}$ and $\mb{K}_{ij}$ is a coupling
-matrix. The generalized dot product matches multiple repeated
-indices in the potential.
-
-By symmetry adapting in two steps, we are able to define the
-expansion coefficients in Eq.~(\ref{eq:vij}) and expand the
-potential using rotator functions in Eq.~(\ref{eq:vij2}). Thus the
-expansion coefficients $\nu_{\ell_i,\ell,\ell_j}^{n_\sigma,n_\mu}$
-are functions of molecular parameters and intermolecular distance,
-but are independent of crystal structure.  They serve as
-independent variables in our method. The rotator functions
-$\mb{U}_i$ are functions of both molecular and crystal symmetries.
-These functions lead to order parameters for phase transitions as
-discussed in Sec.~\ref{OPs}.
-
-
-Appendix~\ref{Appx:proj} reviews our use of projection
+point. Appendix~\ref{Appx:proj} reviews our use of projection
 operators which amount to matrix multiplication by a sparse
 unitary matrix $S^{\ell_i}_{n_in_\sigma}$ where $\sigma$ refers to
 a point group IR and $n_\sigma$ is a particular component of the
@@ -1295,7 +1567,8 @@ n_i}^{\ell_i}(\mb{\omega}_i)S^{\ell_i}_{n_in_\sigma}
 \end{eqnarray}
 which may be coupled to produce symmetry-adapted basis functions
 \begin{equation}
-\label{basis}F_{\ell_i\ell\ell_j}^{n_\sigma n_\mu}=\sum_{m_imm_j}\left(\begin{array}{ccc} \ell_i & \ell & \ell_j \\
+\label{basis}F_{\ell_i\ell\ell_j}^{n_\sigma
+n_\mu}=\sum_{m_imm_j}\left(\begin{array}{ccc} \ell_i & \ell & \ell_j \\
 m_i & m & m_j
 \end{array}\right)T^{\ell_i}_{m_i n_\sigma}(\mb{\omega}_i)
 C^\ell_m(\mb{\Omega}_{ij}) T^{\ell_j}_{m_j n_\mu}(\mb{\omega}_j).
@@ -1320,29 +1593,67 @@ $n_\sigma,n_\mu$ is its dimension which is always
 $n_\sigma,n_\mu=1$.  Point group IR subduction frequencies in
 spherical harmonics are discussed elsewhere \cite{Bradley72}. All
 other point group IR's do not have the full molecular symmetry and
-so are zero to first order. Thus electronic structure is averaged
-over short time vibrations and excitations so the molecule is
-invariant under the full molecular point group \cite{Califano81}.
-These coefficients can be calculated efficiently from \emph{ab
+so are zero to first order. These coefficients can be calculated efficiently from \emph{ab
 initio} or empirical potentials using a fast Fourier transform for
 $SO(3)$ \cite{Maslen97,Chirikjian00}.
 
+Projecting out Wyckoff point symmetry from the functions
+$T^{\ell_i}_{m_i n_\sigma}$ gives rotator functions
+\begin{equation}
+\label{eq:rotfunc}U^{\ell_i}_{m_\tau n_\sigma}(\mb{\omega}_i)=\sum_{m_i
+n_i}S^{\ell_i*}_{m_im_\tau}D_{m_i
+n_i}^{\ell_i}(\mb{\omega}_i)S^{\ell_i}_{n_in_\sigma}.
+\end{equation}
+Expressing the potential using coupled rotator functions gives
+\begin{equation}
+\label{eq:vij2}V = \frac{1}{2}\sum_{ij}\sum_{\ell_i\ell_j m_\tau m_\rho
+n_\sigma n_\mu} U^{\ell_i}_{m_\tau
+n_\sigma}(\mb{\omega}_i)J_{m_\tau n_\sigma m_\rho n_\mu}^{\ell_i
+\ell_j}(\mb{\Omega}_{ij})U^{\ell_j}_{m_\rho
+n_\mu}(\mb{\omega}_j)
+\end{equation}
+where
+\begin{eqnarray}
+ J_{m_\tau n_\sigma m_\rho
+n_\mu}^{\ell_i \ell_j}(\mb{\Omega}_{ij})&=&\sum_{\ell m_i m m_j}
+\nu_{\ell_i,\ell,\ell_j}^{n_\sigma,n_\mu}(r_{ij})\left(\begin{array}{
+ccc}
+ \ell_i & \ell & \ell_j \\ m_i & m & m_j
+\end{array}\right)\nonumber\\
+&&\times S^{\ell_i}_{m_\tau m_i}C_{m}^{\ell} S^{\ell_j}_{m_\rho
+m_j}
+\end{eqnarray}
+is a dimensionless coupling function. Subscripts $\tau,\rho$ are a
+compound index referring to multiple copies of the Wyckoff point
+group IR's subduced in the $\ell_i,\ell_j$-th manifold of $SO(3)$
+and $m_\tau,m_\rho$ goes over the dimensions of each IR. It is
+sometimes convenient to write Eq.~(\ref{eq:vij2}) using a
+shorthand notation
+\begin{equation}
+\label{eq:vij2vec}V/kT = \frac{1}{2}\sum_{ij}
+\mb{U}_{i}\cdot\mb{K}_{ij}\cdot\mb{U}_{j}
+\end{equation}
+in which $\mb{U}_i$ is a vector covering all elements of
+$U^{\ell_i}_{m_\tau n_\sigma}$ and $\mb{K}_{ij}$ is a coupling
+matrix. The generalized dot product matches multiple repeated
+indices in the potential.
+
+By symmetry adapting in two steps, we can define the
+expansion coefficients in Eq.~(\ref{eq:vij}) and expand the
+potential using rotator functions in Eq.~(\ref{eq:vij2}). Thus the
+expansion coefficients $\nu_{\ell_i,\ell,\ell_j}^{n_\sigma,n_\mu}$
+are functions of molecular parameters and intermolecular distance,
+but are independent of crystal structure.  They serve as
+independent variables. The rotator functions
+$\mb{U}_i$ are functions of both molecular and crystal symmetries.
+These functions lead to order parameters for phase transitions as
+discussed in Ref.~\cite{Mettes04}.
 
 
-
-\section{Appendix: Spherical Tensor Coupling}
-\label{Appx:Coupling}
-
-Equation~(\ref{Wbasis}) in Sec.~\ref{Sec:Hamiltonian} uses
-slightly different basis functions, couplings, and normalizations
-than our references so a full derivation is presented here. 
+\pagebreak
 
 
-
-%==============================================================================
-
-
-\section{Appendix: Projection Operators}
+\section{Projection Operators}
 \label{Appx:proj}
 
 Symmetries of the molecule and Wyckoff point of the crystal exist
@@ -1374,11 +1685,13 @@ coefficients $S_{nn_\tau}^\ell$ form a sparse unitary matrix.
 \pagebreak
 
 \begin{table}%[!ht]
-\caption{Group theoretical symmetry-breaking pathways of experimental lattices from the
+\caption{Group theoretical symmetry-breaking pathways of experimental lattices
+from the
 bcc reference lattice. Classified by space group IR and order
 parameter direction, each pathway shows the point group IR and
 minimal manifold of SO(3) in Eq.~(\ref{re:eq:vij2}) required to
-achieve it.  The order parameter directions are given in an abbreviated form in the
+achieve it.  The order parameter directions are given in an abbreviated form in
+the
 notation of Stokes and
 Hatch~\cite{Stokes02a}.}\label{pathwaysBCC} \tiny
 \begin{tabular}{lllll}\hline
@@ -1386,7 +1699,8 @@ Pathway & S.~G.~IR & OP Dir. & P.~G.~IR & $\ell^{\mathrm{req'd}}$  \\
 \hline
 229a $\rightarrow$ 217a & $\Gamma_2^-$ & P1 & $A_{2u}$ & 3 \\
 
-229a $\rightarrow$ 161a & $H_5^- \oplus \Gamma_2^-$ & P3 $\oplus$ P1 & $T_{2u} \oplus
+229a $\rightarrow$ 161a & $H_5^- \oplus \Gamma_2^-$ & P3 $\oplus$ P1 & $T_{2u}
+\oplus
 A_{2u}$ & 3 \\
 & $H_5^- \oplus \Gamma_4^-$ & P3 $\oplus$ P3 & $T_{2u} \oplus
 T_{1u}$ &3 \\
@@ -1437,9 +1751,12 @@ lattice.}\label{pathwaysHCP}\tiny
 Pathway & S.~G.~IR & OP Dir. & P.~G.~IR & $\ell^{\mathrm{req'd}}$ \\
 \hline
 194c $\rightarrow$ 165d & $A_2$ & P3 & $A_2^\prime,A_1^\prime$ & 3 \\
-194c $\rightarrow$ 147d & $\Gamma_3^+ \oplus \Gamma_2^+$ & P1$ \oplus$ P1 & $A_2^{\prime\prime}\oplus A_2^\prime$ & 3 \\
-& $\Gamma_4^+ \oplus \Gamma_2^+$ & P1$ \oplus$ P1 & $A_1^{\prime\prime}\oplus A_2^\prime$ & 4 \\
-& $\Gamma_4^+ \oplus \Gamma_3^+$ & P1$ \oplus$ P1 & $A_1^{\prime\prime}\oplus A_2^{\prime\prime}$ & 4 \\
+194c $\rightarrow$ 147d & $\Gamma_3^+ \oplus \Gamma_2^+$ & P1$ \oplus$ P1 &
+$A_2^{\prime\prime}\oplus A_2^\prime$ & 3 \\
+& $\Gamma_4^+ \oplus \Gamma_2^+$ & P1$ \oplus$ P1 & $A_1^{\prime\prime}\oplus
+A_2^\prime$ & 4 \\
+& $\Gamma_4^+ \oplus \Gamma_3^+$ & P1$ \oplus$ P1 & $A_1^{\prime\prime}\oplus
+A_2^{\prime\prime}$ & 4 \\
 194c $\rightarrow$ 176h & $K_4$ & P1 & $E^\prime$ & 3 \\
 \hline
 \end{tabular}
@@ -1455,7 +1772,8 @@ lattice.}\label{pathwaysSC}\tiny
 Pathway & S.~G.~IR & OP Dir. & P.~G.~IR & $\ell^{\mathrm{req'd}}$  \\
 \hline
 221a $\rightarrow$ 215a & $\Gamma_2^-$ & P1 & $A_{2u}$ & 3 \\
-221a $\rightarrow$ 120c & $R_5^-\oplus \Gamma_2^-$ & P1$ \oplus$ P1 & $T_{2u} \oplus A_{2u}$  & 3 \\
+221a $\rightarrow$ 120c & $R_5^-\oplus \Gamma_2^-$ & P1$ \oplus$ P1 & $T_{2u}
+\oplus A_{2u}$  & 3 \\
 & $R_4^+\oplus \Gamma_2^-$ & P1$ \oplus$ P1 & $T_{1g} \oplus A_{2u}$ & 4 \\
 & $R_5^-\oplus R_4^+$ & P1$ \oplus$ P1 & $T_{2u} \oplus T_{1g}$  & 4 \\
 & $R_4^+\oplus \Gamma_3^-$ & P1$ \oplus$ P1 & $T_{1g} \oplus E_u$  & 7 \\
@@ -1466,16 +1784,32 @@ Pathway & S.~G.~IR & OP Dir. & P.~G.~IR & $\ell^{\mathrm{req'd}}$  \\
 
 Notes: 
 
-(1) As these tables are not meant to be exhaustive enumerations but only illustrative of the type of potentials necessary to find a given phase transition, we have truncated listings for 161a, 2i (MEZDIE01), and 14e (MECKUA) which have additional pathways similar to those shown. 
+(1) As these tables are not meant to be exhaustive enumerations but only
+illustrative of the type of potentials necessary to find a given phase
+transition, we have truncated listings for 161a, 2i (MEZDIE01), and 14e (MECKUA)
+which have additional pathways similar to those shown. 
 
-(2) Inasmuch as a different method was used in this work to choose an embedding of the daughter lattice in the parent lattice than that used in \cite{McClurg09}, the IRs inducing the phase transition from parent to daughter may be different from \cite{McClurg09}.  This, of course, does not affect our numerical results shown in Table \ref{RPTop}.
+(2) Inasmuch as a different method was used in this work to choose an embedding
+of the daughter lattice in the parent lattice than that used in
+\cite{McClurg09}, the IRs inducing the phase transition from parent to daughter
+may be different from \cite{McClurg09}.  This, of course, does not affect our
+numerical results shown in Table \ref{RPTop}.
 
-(3)  The pathways, space group IRs, order parameter directions, and point group IRs were computed using ISOTROPY.
-However, transitions belonging to a coupled IR between a high symmetry point and line
-are currently not a feature of ISOTROPY.  These entries have been marked with an asterisk in
+(3)  The pathways, space group IRs, order parameter directions, and point group
+IRs were computed using ISOTROPY.
+However, transitions belonging to a coupled IR between a high symmetry point and
+line
+are currently not a feature of ISOTROPY.  These entries have been marked with an
+asterisk in
 the table.
 
-%have not been overly careful in our enumeration of coupled IR-induced pathways, which increase rapidly in number and do not provide significant additional information. For example, there may be a %few additional pathways which have been omitted by oversight since ISOTROPY does not produce coupled IRs automatically.  Rather, they must be found ``by hand''.  We note this since certain %authors have made a practice of identifying such errors \cite{Stokes84}.}
+%have not been overly careful in our enumeration of coupled IR-induced pathways,
+which increase rapidly in number and do not provide significant additional
+information. For example, there may be a %few additional pathways which have
+been omitted by oversight since ISOTROPY does not produce coupled IRs
+automatically.  Rather, they must be found ``by hand''.  We note this since
+certain %authors have made a practice of identifying such errors
+\cite{Stokes84}.
 \end{document}                    % DO NOT DELETE THIS LINE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
