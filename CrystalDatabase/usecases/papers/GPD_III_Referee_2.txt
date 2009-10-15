@@ -73,8 +73,10 @@ summation.
 
 Response:
 ---------
-   We completely agree and would wholeheartedly encourage reading GPD I at least.  However, a better explanation would be convenient as well so it has been appendicized as indicated.  
-   However, if reviewer 2 wants to understand this work well enough in order to reproduce it, we suggest the following.  First, understand that GPD I contains an exposition of the core concepts such as we also would encourage the reviewer to wait for a much better thermodynamic treatment (to replace the mean field approach of GPD I).
+   We completely agree and would wholeheartedly encourage reading GPD I at least.  However, a better explanation of this equation in this paper would be convenient so it has been appendicized as indicated.  
+   However, if reviewer 2 wants to understand this work well enough in order to reproduce it, we suggest the following strategy.  First, understand that GPD I contains an exposition of the core concepts such as the difficult thermodynamic procedures and how hard it is to tease a solution out of the mean field equation without having some idea of what phase one is looking for so one can seed the solutions with each possibility.  That is the heart of the concept--the statistical mechanics is very hard, and group theory makes life much easier.  In quantum mechanics it is more or less known the electrons will be somewhat like their hydrogen equivalents so the numerical seed into the self-consistent equations is more or less like hydrogen.  However, in statistical mechanics, the new rotational average could be *anything* -- certain molecules could be ordered...others could be disordered, etc.
+   
+   we also would encourage the reviewer to wait for a much better thermodynamic treatment (to replace the mean field approach of GPD I).
 
 
 5. Page 10, top: Is the assumption justified that including only pairwise
@@ -100,7 +102,10 @@ pick the ones they present?
 
 Response:
 ---------
-Well, if one supposes that symmetry can be "added" (i.e. molecules suddenly arrange to a *more* symmetrical structure) as well as lost (molecules continue to lose entropy and break their high-symmetry state)
+   Overall scheme: According to previous work (see GPD I), studies show most molecules pack like spheres in the Cambridge Structural Database (CSD).  So the idea is to choose sphere packings as translationally-fixed "reference lattices" from which additional symmetry-breaking may occur. On page 13 we demonstrate how this may be done for the subset of tetrahedral molecules in the CSD with an fcc reference lattice (see GPD II for why this reference lattice was chosen for these molecules).
+   There were a few surprising results from this exercise.  The first was a discovery of some intriguing phase transition mechanisms for molecules which actually go through a transition from an fcc disordered phase to a lower-temperature ordered phase such as adamantane (225a->114a).  In this transition, the centers of mass of the adamantane molecule apparently stay fixed while the molecules suddenly become rotationally ordered.  Amazingly, this happens through a coupled IR.  Transitions from a coupled IR are thought to be uncommon in the physics community, I believe.  Another discovery was that symmetry breaking pathways may be a useful way to explore packing space, compared to the "brute force" approach commonly used in crystal structure prediction pathways where a molecule is randomly oriented/positioned and operated on by the space group operations of all 230 space groups, then energy-minimized, then compared to each other to remove duplicates (i.e. different domains) and finally sorted to find the lowest-energy phase (this is a simplification--see the literature for a more complete description).  But to get back to the point, space group IR symmetry-breaking removes duplicates by enumerating all possible domains so we only have to calculate the energy of one of them.
+   So, to answer the question, the pathways shown in that table and similar ones in the supplementary material are simply a demonstration of the ways to get from the orientationally disordered reference phase to the observed orientationally ordered phase.  In most cases we simply listed the output from ISOTROPY, although in a few cases we had to truncate the results as noted in the supplementary material.  We're not quite sure what reviewer 2 means by reducing/adding symmetry, but if he/she is referring to non group-subgroup phase transitions, we simply didn't consider these (because intuitively, reductions in symmetry from SO3 at certain Wyckoff points should lead to a spacegroup which is a subgroup of the reference lattice).
+   
 
 
 Page 15, top: The restrictions in the allowed ISs appear rather strong - even
@@ -109,7 +114,7 @@ structures.
 
 Response:
 ---------
-They are excessively strong and could be extended to Z' > 1
+They are somewhat strong and could be extended to Z' > 1.  Keep in mind this is but a demonstration of approximately how many parameters we need to consider in the constructing GPDs in general.  
 
 
 Page 16, beginning section 2.2.4: I really have a hard time following what
@@ -174,7 +179,7 @@ proxy for the energy or a cost function.
 
 Response:
 ---------
-Our apologies again for omm
+Our apologies again that reviewer 2 was unable to access GPD II.  
 
 
 Page 27: I realize that the authors imagine readers reading all their papers
@@ -186,4 +191,4 @@ How close are we to reality concerning the actual energies?
 
 Response:
 ---------
-Yes, that is more or less right..."A" is the free energy (at any temperature) and V is the potential energy (since kinetic energy would be 0 at T=0).  Thus the zero point energy is implicitely included in V, etc.  
+
