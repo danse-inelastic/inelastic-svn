@@ -49,9 +49,7 @@ region of parameter space chosen.
 
 Response:
 ---------
-This is a good point.  We have tried to explain the concept of Global Phase Diagrams (GPDs) from the standpoint of binary fluid mixtures, but a connection to the physics community and especially some of the many Ising-type models would be useful.
-
-explained this in some detail in GPD I and thoroughly explained and illustrated it with binary  in GPD II, but there is not much of explanation here in GPD III.  We have remedied this by reviewing the discussion from GPD II about GPDs in general.  It discusses binary mixture GPDs originally proposed by Konynenburg and Scott compared to molecular crystal GPDs.  It also augments it with a new discussion aimed more at the physics community, comparing it with these Ising-type models, particularly the Axial Nearest-Neighbor  and particularly withere and also augmenting with a dis
+This is a good point.  We have tried to explain the concept of Global Phase Diagrams (GPDs) from the standpoint of binary fluid mixtures, but a connection to the physics community and especially some of the many Ising-type models would be useful.  This has been added.  Another thing we have added to try to convey the point as a reprinting of some of the GPDs from GPD I.
 
 Reviewer 2's comment:
 ---------------------
@@ -88,7 +86,7 @@ interactions among nearest neighbors is sufficient?
 
 Response:
 ---------
-This is an assumption which, to a first approximation, is probably adequate for most van der Waals crystals (the majority of molecular crystals).  It would be good to include second-neighbor interactions, particularly when starting from reference lattices which are not a sphere packing as discussed in GPD II.  However, this of course leads to greater computational cost and worse, more axes on the GPD!  Thus we feel the current approach is adequate, but subsequent studies including more rich potentials such as second-neighbor or many-body effects as perturbations on a given direction in nu-space would certainly be interesting.  See GPD I for a more thorough explanation of this point.
+This is an assumption which, to a first approximation, is probably adequate for most van der Waals crystals (the majority of molecular crystals).  It would be good to include second-neighbor interactions, particularly when starting from reference lattices which are not a sphere packing as discussed in GPD II.  However, this of course leads to greater computational cost and worse, more axes on the GPD!  Thus we feel the current approach is adequate, but subsequent studies including more rich potentials such as second-neighbor or many-body effects as perturbations on a given direction in nu-space would certainly be interesting.  See GPD I for a more thorough explanation of this point with various references for a quantitative justification.
 
 Reviewer 2's comment:
 ---------------------
@@ -132,7 +130,7 @@ those which are dimensionless!)?
 
 Response:
 ---------
-We apologize for jumping into this section without a smooth transition.  The beginning of section 2.2 introduces the general plan, but there should be smooth transitions between each subsection.  The main point of this paper is to take a set of experimental lattices and attempt to deduce how many coefficients in our potential expansion are needed to adequately describe them (i.e. find a "spot" on our GPDs where they are the lowest-energy structure).  To do this we need to know know a set of euler angles for each molecule in each experimental structure.  There are a few complications in doing this, and section 2.2.4 attempts to explain them.  Ba
+We apologize for jumping into this section without a smooth transition.  The beginning of section 2.2 introduces the general plan, but there should be a few sentences reorienting the reader at each subsection.  This has been added.  The main point of this paper is to take a set of experimental lattices and attempt to deduce how many coefficients in our potential expansion are needed to adequately describe them (i.e. find a "spot" on our GPDs where they are the lowest-energy structure).  To do this we need to know a set of Euler angles for each molecule in each experimental structure.  There are a few complications in doing this (i.e. slight distortions in molecular form and center of mass), and section 2.2.4 attempts to explain them.  None of the complications are terribly important and the section could be omitted.  Certainly the detail about using fractional instead of Cartesian coordinates is non-essential so it has been omitted.  However, for the sake of completeness, we have revised this section and retained it.  The main point is the extraction of the Euler angles from the experimental structures using a least squares fitting procedure and their insertion into Eq. 1.
 
 Reviewer 2's comment:
 ---------------------
@@ -165,16 +163,14 @@ application of the authors' rules afterwards.
 
 Response:
 ---------
-   Each target structure comes from the subset of tetrahedral molecules in the CSD.  How its energy is obtained (independent of nu) is the subject of section 2.2.4.  The purpose of section 2.2.5 is to describe a method whereby one can find a point in nu-space where the target structure is the lowest-energy structure, extending nu-space as necessary to higher manifolds.  The technique to do this is perfectly general and can be applied to any molecule, not just tetrahedral molecules.  The overall objective of this search is to find out whether a reasonably small number of nu's can describe real structures.  We posited a small number was necessary in GPD I, and here we prove it.  The final paper would be to calculate GPDs using the relatively small number of reference lattices from GPD II and then extract a set of nu parameters for each experimental structure from, say, ab initio data and see if we can "find" the experimental structure at the "correct" region of nu-space and at the correct temperature (this assumes the ab initio calc was perfect).  This would be a rather large calculation since one has to do the equivalent of an MD or Monte Carlo calculation at each point in nu space and for each reference lattice.  This is why we seek a faster statistical mechanics method, as remarked in page 27.  
+   Each target structure comes from the subset of tetrahedral molecules in the CSD.  How its energy is obtained (independent of nu) is the subject of section 2.2.4.  The purpose of section 2.2.5 is to describe a method whereby one can find a point in nu-space where the target structure is the lowest-energy structure, extending nu-space as necessary to higher manifolds.  The technique to do this is perfectly general and can be applied to any molecule, not just tetrahedral molecules.  The overall objective of this search is to find out whether a reasonably small number of nu's can describe real structures.  We posited a small number was necessary in GPD I, and here we prove it.  The final paper would be to calculate GPDs using the relatively small number of reference lattices from GPD II and using a small potential truncation as we have demonstrated here.  Then, to connect the resulting set of GPDs with the real world, we would extract a set of nu parameters for each experimental structure from, say, ab initio data and see if we can "find" the experimental structure at the "correct" region of nu-space and at the correct temperature (this assumes the ab initio calc was perfect).  This would be a rather large calculation since one has to do the equivalent of an MD or Monte Carlo calculation at each point in nu space and for each reference lattice.  This is why we seek a faster statistical mechanics method, as remarked in page 27.  
    Although the current test of nu-space is not designed to be predictive, the concept of a GPD in its final scenario should be valuable for the reasons remarked on page 5 and would have predictive power in the sense that it would provide some guidance to the synthetic chemist, for example, in how to perturb the molecular form to get a more desirable crystal structure.  Or GPDs could provide rationalization and/or prediction of crystal polymorphs.
    Here is a list of the information used to derive the nus (in this study):
 * experimental structure (atomic positions and unit cell) of each structure
 * a minimal truncation of the U_{lmn} expansion--this can be done using subduction frequencies of the molecular point group in the Wigner funtions as explained in Sec. 2.2.2
 * a reference lattice for each structure, derived using the methods of GPD II
 * a list of candidate lattices with which to compare it, which was described in Sec. 2.2.3 
-When all these are applied to the minimization algorithm described in Sec. 2.2.5, we get results that will give us guidance about how to 
-Applying our rules to the representative potential obtained from the minimization algorithm described in Sec. 2.2.5 allows us to deduce the following information:
-* the biggest item is whether or not a potential truncation of {l,m,n} is sufficient to describe the structures in our test data set
+When all these are applied to the minimization algorithm described in Sec. 2.2.5, we get results that will give us guidance about how many potential parameters are needed.  The "rules" described in Sec. 3 are just a way of rationalizing our results from the minimization procedure (i.e. how close do we need to the global minimum do we have to be to have "found" it and what does the answer actually tell us about that point in nu-space).  The overall result was all but 2 of the experimental structures seem to have a point in nu space that is representative of that family of potentials characterizing that molecule.  The representative potential (RP) is not necessarily "the" potential for that molecule, but only used to find out if such a phase can be located on such a GPD.  The actual nu coefficients can then be extracted using a type Fourier transform from ab initio data, for example, although be aware of the caveats described on page 21.
 
 Reviewer 2's comment:
 ---------------------
@@ -192,7 +188,7 @@ or liquids? If so, how are these energies computed?
 
 Response:
 ---------
-There is a connection and it is all in the nu's, or expansion coefficients of the potential.  One way to compute the nus, demonstrated in Briels, W. J. (1980). J. Chem. Phys. 73, 1850–1861, for example, is to use the orthogonality of these functions and perform a type of "Fourier transform" on whatever model potential you might want, whether forcefield-based as in the Briels reference or ab initio.  The intermolecular potential is then reproduced by Eq. 1 with the new set of nus.
+There is a connection and it is all in the nu's, or expansion coefficients of the potential.  One way to compute the nus, demonstrated in Briels, W. J. (1980). J. Chem. Phys. 73, 1850–1861, for example, is to use the orthogonality of these functions and perform a type of "Fourier transform" on whatever model potential you might want, whether forcefield-based as in the Briels reference or ab initio.  The intermolecular potential is then reproduced by Eq. 1 with the new set of nus.  Be aware of the caveats on page 21, however.
 
 Reviewer 2's comment:
 ---------------------
@@ -202,7 +198,7 @@ proxy for the energy or a cost function.
 
 Response:
 ---------
-Our apologies again that Reviewer 2 was unable to access GPD II.  In that work and especially GPD I, we only deal with the free energy.  This point is summarized on pages 4-5 where we describe how the free energy is minimized in the general method.  To better convey that, we have included two figures from GPD I showing the high temperature reference state as previously mentioned. However, in this paper we look at the low-T solutions so energy is substituted for free energy from Eq. 5 on and that is why it is hard to find but occasionally referenced.
+Our apologies again that Reviewer 2 was unable to access GPD II.  In that work and especially GPD I, we only deal with the free energy.  This point is summarized on pages 4-5 where we describe how the free energy is minimized in the general method.  To better convey that, we have included two figures from GPD I showing the high temperature reference state as previously mentioned. However, in this paper we look at the low-T solutions so energy is substituted for free energy from Eq. 5 on and that is why it is hard to find, but occasionally referenced in the discussion.
 
 Reviewer 2's comment:
 ---------------------

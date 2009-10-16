@@ -682,33 +682,31 @@ discussed in Sec.~\ref{discussion}.
 \subsubsection{Experimental Phase Energies}
 
 With a set of candidate lattices with which to compare a given observed
-structure in $\mb{\nu}$-space, we now need to find the ``energy" of each
+structure in $\mb{\nu}$-space, we now need to find the energy of each
 observed structure, leaving $\mb{\nu}$ unspecified.  This can be done by
 translating the atomic positions of the observed structure into the needed Euler
-angles $\omega$ and intermolecular angles $\Omega$ (measured with respect to the
-z-axis in the lab reference frame of molecule $i$) of Eq.\
-(\ref{re:eq:vij2}). The intermolecular angles are easy to obtain because they
-determined by the reference lattice but the Euler angles are dependent upon the orientation of the molecules on the reference lattice. This is complicated by the fact that the experimental atomic positions in each molecule are slightly
-distorted from perfect Td point group symmetry due to small strains resulting
-from embedding the
-experimental lattice in its reference lattice. We calculate the
-Euler angles of experimentally observed structures by rotating a
-rigid tetrahedral molecule in the reference lattice frame to
-minimize its atomic distances compared to the \emph{fractional}
-coordinates of the experimental molecule. The reference lattice
-molecular positions are also shifted to coincide with the centers of
-mass of the experimentally determined fractional cell atoms. Thus
-the Euler angles obtained are a ``best fit'' to the molecular
-rotations were the experimental structures exactly proportional to
-their reference-lattice-derived ideal lattices. The reference orientation of the molecule is with
-three-fold axes pointing in the [111], $[\bar{1}\bar{1}1]$,
-$[\bar{1}1\bar{1}]$, and $[1\bar{1}\bar{1}]$ directions. Typically
-one atom lying along each of the three-fold axes was used when
-determining molecular orientations. Once the
-Euler angles are determined, the rotator functions
-$U^{\ell_i}_{m_\tau n_\sigma}$ may be calculated directly using
-Eq.~(\ref{re:eq:rotfunc}).  $U^{\ell_i}_{m_\tau n_\sigma}$ is fully symmetric
-with
+angles $\omega$ and intermolecular angles $\Omega$ of Eq.\
+(\ref{re:eq:vij2}). The intermolecular angles $\Omega$
+are easy to obtain because they are determined by the reference lattice, but the
+Euler angles are dependent upon the orientation of the molecules in the
+reference lattice. This is complicated by the fact that the experimental atomic
+positions in each molecule are slightly distorted from perfect molecular Td
+point group symmetry and are slightly shifted from the ideal Wyckoff points
+of their reference lattice.  This is due to small strains resulting from
+embedding the experimental lattice in the almost perfect but nonetheless
+approximate symmetry of its reference lattice (see
+\cite{McClurg09}). To obviate these difficulties, the reference lattice
+molecular centers of mass are first slightly shifted to coincide with the
+centers of mass of the molecules in their native space group.  Then the Euler angles are
+calculated by rotating a rigid tetrahedral molecule to minimize its atomic
+distances compared to the coordinates of the experimental molecule.  Thus the
+Euler angles of a perfect tetrahedron are obtained by a ``best fit'' to
+molecular coordinates of a slightly distorted tetrahedron. We note the reference
+orientation of the molecule is with three-fold axes pointing in the [111],
+$[\bar{1}\bar{1}1]$, $[\bar{1}1\bar{1}]$, and $[1\bar{1}\bar{1}]$ directions.
+
+Next the rotator functions $U^{\ell_i}_{m_\tau n_\sigma}$ may be calculated
+directly using Eq.~(\ref{re:eq:rotfunc}).  $U^{\ell_i}_{m_\tau n_\sigma}$ is fully symmetric with
 respect to molecular point group symmetry and is not influenced by non-unique
 Euler angles. Substituting the $U^{\ell_i}_{m_\tau n_\sigma}$ into
 Eq.~(\ref{re:eq:vij2}) yields the interaction potential as a function
