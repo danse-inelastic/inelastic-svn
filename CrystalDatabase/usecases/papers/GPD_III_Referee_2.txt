@@ -32,7 +32,7 @@ GPD II: Molecular crystal global phase diagrams II: Reference lattices (with R.B
 
 GPD III: this work
 
-First, we apologize reviewer 2 did not get access to GPD II--our intention was to specify that the manuscripts be reviewed together, or at least that the reviewers of GPD III be given a copy of GPD II.  Unfortunately such specifications sometimes are "lost in translation" while transmitting the papers to various staff members.  And yes, originally this work and GPD II were together, but the resulting length of each manuscript (and its supplementary material) was such that a division was absolutely necessary (GPD II and its supplementary material are 63 pages!).  We apologize again for reviewer 2 not having direct access to GPD II.
+First, we apologize Reviewer 2 did not get access to GPD II--our intention was to specify that the manuscripts be reviewed together, or at least that the reviewers of GPD III be given a copy of GPD II.  Unfortunately such specifications sometimes are "lost in translation" while transmitting the papers to various staff members.  And yes, originally this work and GPD II were together, but the resulting length of each manuscript (and its supplementary material) was such that a division was absolutely necessary (GPD II and its supplementary material are 63 pages!).  We apologize again for Reviewer 2 not having direct access to GPD II.
 
 
 Reviewer 2's comment:
@@ -49,7 +49,9 @@ region of parameter space chosen.
 
 Response:
 ---------
-This is a very good point.  We explained this in some detail in GPD I and thoroughly explained and illustrated it with binary  in GPD II, but there is not much of explanation here in GPD III.  We have remedied this by reviewing the discussion from GPD II about GPDs in general.  It discusses binary mixture GPDs originally proposed by Konynenburg and Scott compared to molecular crystal GPDs.  It also augments it with a new discussion aimed more at the physics community, comparing it with these Ising-type models, particularly the Axial Nearest-Neighbor  and particularly withere and also augmenting with a dis
+This is a good point.  We have tried to explain the concept of Global Phase Diagrams (GPDs) from the standpoint of binary fluid mixtures, but a connection to the physics community and especially some of the many Ising-type models would be useful.
+
+explained this in some detail in GPD I and thoroughly explained and illustrated it with binary  in GPD II, but there is not much of explanation here in GPD III.  We have remedied this by reviewing the discussion from GPD II about GPDs in general.  It discusses binary mixture GPDs originally proposed by Konynenburg and Scott compared to molecular crystal GPDs.  It also augments it with a new discussion aimed more at the physics community, comparing it with these Ising-type models, particularly the Axial Nearest-Neighbor  and particularly withere and also augmenting with a dis
 
 Reviewer 2's comment:
 ---------------------
@@ -58,7 +60,7 @@ this regard?
 
 Response:
 ---------
-Yes, that is one of the purposes of GPDs in general.  They allow one to classify polymorphs and help elucidate whether a given structure is metastable or not.  This can be done by examining the vicinity in parameter space of other crystallographic phases. 
+Yes, that is one of the purposes of GPDs in general.  They allow one to enumerate polymorphs and help elucidate whether a given structure is metastable or not.  This can be done by examining the vicinity in parameter space for other crystallographic phases, or my calculating the coefficients and seeing if the observed metastable phase is near to the calculated one in nu-space. 
 
 Reviewer 2's comment:
 ---------------------
@@ -66,7 +68,7 @@ Reviewer 2's comment:
 
 Response:
 ---------
-The "l" is a parameter that indexes the spherical harmonics intervening the Wigner functions.  It ranges from |li - lj| to li + lj and is essentially a product of the mathematics--forming a complete basis set over SO3 x S2 x SO3.  As a complete set, these functions have been used extensively in the quantum chemistry literature (see the paper by van der Avoird referenced on page 8), and this has allowed some physical insight into the meaning of "l".  For instance, all electrostatic forces are present in the nu_{li,l,lj} where l = li + lj.  
+The "l" is a parameter that indexes the spherical harmonics intervening the Wigner functions.  It ranges from |li - lj| to li + lj and is essentially a product of the mathematics--forming a complete basis set over SO3 x S2 x SO3.  These functions have been used extensively in the quantum chemistry literature (see the paper by van der Avoird referenced on page 8), and this has allowed some physical insight into the meaning of "l".  For instance, all electrostatic forces are present in the nu_{li,l,lj} where l = li + lj.  
 
 Reviewer 2's comment:
 ---------------------
@@ -77,7 +79,7 @@ summation.
 
 Response:
 ---------
-   This has been done.  And if reviewer 2 wants to understand this work well enough in order to reproduce it, we would whole-heartedly endorse a thorough reading of GPD I and its supplementary material.  It is an exposition of the thermodynamic procedures and how hard it is to tease a solution out of the mean field equation without having some idea of what phase one is looking for so one can seed the solutions with each possibility.  In quantum mechanics it is more or less known the electrons will be somewhat like their hydrogen equivalents so the numerical seed into the self-consistent mean-field equations of DFT or Hartree-Fock is more or less like hydrogen.  However, in statistical mechanics, the new rotational average could be *anything* -- certain molecules could be ordered (i.e. a non-zero <U_{lmn}> average)...others could be disordered (i.e. <U_{lmn}> = 0 ), and sometimes partially ordered (i.e. some <U_{lmn}>'s = 0 and others not).  Sometimes, some of the molecules in a unit cell are disordered (i.e. spherical) while others are ordered (fixed orientation).  Also, it is unknown how big the new unit cell will be.  In the new figures added to the manuscript, one can see the initial fcc unit cell has expanded to 2, 3, 4, or 32 molecules in a unit cell with a completely new setting.  Fortunately group theory allowed us to look through all the isotropy subgroups of the high temperature reference phase and use these as seeds in the mean field self-consistent equations. 
+   This has been done.  If Reviewer 2 wants to understand this work well enough to reproduce it, we would whole-heartedly endorse a thorough reading of GPD I and its supplementary material.  It is an exposition of the thermodynamic procedures and how hard it is to tease a solution out of the mean field equations without having some idea of what phase one is looking for so one can seed the solutions with each possibility.  In quantum mechanics it is more or less known the electrons will be somewhat like their hydrogen equivalents so the numerical seed into the self-consistent mean-field equations of DFT or Hartree-Fock is more or less like hydrogen.  However, in statistical mechanics, the new rotational average could be *anything* -- certain molecules could be ordered (i.e. a non-zero <U_{lmn}> average)...others could be disordered (i.e. <U_{lmn}> = 0 ), and sometimes partially ordered (i.e. some <U_{lmn}>'s = 0 and others not).  Sometimes, some of the molecules in a unit cell are disordered while others are ordered.  Also, it is unknown how big the new unit cell will be.  In the new figures added to the manuscript, one can see the initial fcc unit cell has expanded to 2, 3, 4, or 32 molecules in a unit cell with a completely new setting.  Fortunately group theory allowed us to look through all the isotropy subgroups of the high temperature reference phase and use these as seeds in the mean field self-consistent equations.
 
 Reviewer 2's comment:
 ---------------------
@@ -86,7 +88,7 @@ interactions among nearest neighbors is sufficient?
 
 Response:
 ---------
-This is an assumption which, to a first approximation, is probably adequate for most van der Waals crystals (the majority of molecular crystals).  It would be good to include second-neighbor interactions, particularly when starting from reference lattices which are not a sphere packing as discussed in GPD II.  However, this of course leads to greater computational cost and worse, more axes on the GPD!  Thus we feel the current approach is adequate, but subsequent studies including more rich potentials such as second-neighbor or many-body effects as perturbations on a given direction in nu-space would certainly be interesting.  
+This is an assumption which, to a first approximation, is probably adequate for most van der Waals crystals (the majority of molecular crystals).  It would be good to include second-neighbor interactions, particularly when starting from reference lattices which are not a sphere packing as discussed in GPD II.  However, this of course leads to greater computational cost and worse, more axes on the GPD!  Thus we feel the current approach is adequate, but subsequent studies including more rich potentials such as second-neighbor or many-body effects as perturbations on a given direction in nu-space would certainly be interesting.  See GPD I for a more thorough explanation of this point.
 
 Reviewer 2's comment:
 ---------------------
@@ -106,9 +108,9 @@ pick the ones they present?
 
 Response:
 ---------
-   Overall scheme: According to previous work (see GPD I), studies show most molecules pack like spheres in the Cambridge Structural Database (CSD).  So the idea is to choose sphere packings as translationally-fixed "reference lattices" from which additional symmetry-breaking may occur. On page 13 we demonstrate how this may be done for the subset of tetrahedral molecules in the CSD with an fcc reference lattice (see GPD II for why this reference lattice was chosen for these molecules).
-   There were a few surprising results from this exercise.  The first was a discovery of some intriguing phase transition mechanisms for molecules which actually go through a transition from an fcc disordered phase to a lower-temperature ordered phase such as adamantane (225a->114a).  In this transition, the centers of mass of the adamantane molecule apparently stay fixed while the molecules suddenly become rotationally ordered.  Amazingly, this happens through a coupled IR.  Transitions from a coupled IR are thought to be uncommon in the physics community, I believe.  Another discovery was that symmetry breaking pathways may be a useful way to explore packing space, compared to the "brute force" approach commonly used in crystal structure prediction pathways where a molecule is randomly oriented/positioned and operated on by the space group operations of all 230 space groups, then energy-minimized, then compared to each other to remove duplicates (i.e. different domains) and finally sorted to find the lowest-energy phase (this is a simplification--see the literature for a more complete description).  But to get back to the point, space group IR symmetry-breaking removes duplicates by enumerating all possible domains so we only have to calculate the energy of one of them.
-   So, to answer the question, the pathways shown in that table and similar ones in the supplementary material are simply a demonstration of the ways to get from the orientationally disordered reference phase to the observed orientationally ordered phase.  In most cases we simply listed the output from ISOTROPY, although in a few cases we had to truncate the results as noted in the supplementary material.  We're not quite sure what reviewer 2 means by reducing/adding symmetry, but if he/she is referring to non group-subgroup phase transitions, we simply didn't consider these (because intuitively, reductions in symmetry from SO3 at certain Wyckoff points should lead to a spacegroup which is a subgroup of the reference lattice).
+   Overall scheme: According to previous work (see GPD I), studies show most molecules pack like spheres in the Cambridge Structural Database (CSD).  So the idea is to choose sphere packings as translationally-fixed "reference lattices" from which additional rotaitonal symmetry-breaking may occur. On page 13 we demonstrate how this may be done for the subset of tetrahedral molecules in the CSD with an fcc reference lattice (see GPD II for why this reference lattice was chosen for these molecules).
+   There were a few surprising results from this exercise.  The first was a discovery of some intriguing phase transition mechanisms for molecules which actually go through a transition from an fcc disordered phase to a lower-temperature ordered phase such as adamantane (225a->114a).  In this transition, the centers of mass of the adamantane molecule apparently stay fixed while the molecules suddenly become rotationally ordered.  Amazingly, this happens through a coupled IR.  Transitions from a coupled IR are thought to be uncommon in the physics community, I believe.  The other transitions through coupled IRs are not as remarkable perhaps because they are nonphysical.  Another discovery was that symmetry breaking pathways may be a useful way to explore packing space, compared to the "brute force" approach commonly used in crystal structure prediction pathways where a molecule is randomly oriented/positioned and operated on by the space group operations of all 230 space groups, then energy-minimized, then compared to each other to remove duplicates (i.e. different domains) and finally sorted to find the lowest-energy phase (this is a simplification--see the literature for a more complete description).  But to get back to the point, space group IR symmetry-breaking removes duplicates by enumerating all possible domains so we only have to calculate the energy of one of them.
+   So, to answer the question, the pathways shown in that table and similar ones in the supplementary material are simply a demonstration of the ways to get from the orientationally disordered reference phase to the observed orientationally ordered phase.  In most cases we simply listed the output from ISOTROPY, although in a few cases we had to truncate the results as noted in the supplementary material.  
    
 Reviewer 2's comment:
 ---------------------
@@ -118,7 +120,7 @@ structures.
 
 Response:
 ---------
-They are somewhat strong and could be extended to Z' > 1.  Keep in mind this is but a demonstration of approximately how many parameters we need to consider in the constructing GPDs in general.  
+They are somewhat strong and could be extended to Z' > 1.  Keep in mind this is but a demonstration of approximately how many parameters one needs to consider in constructing GPDs for a certain class of molecules so an overly large candidate library has not been utilized.
 
 Reviewer 2's comment:
 ---------------------
@@ -130,6 +132,7 @@ those which are dimensionless!)?
 
 Response:
 ---------
+We apologize for jumping into this section without a smooth transition.  The beginning of section 2.2 introduces the general plan, but there should be smooth transitions between each subsection.  The main point of this paper is to take a set of experimental lattices and attempt to deduce how many coefficients in our potential expansion are needed to adequately describe them (i.e. find a "spot" on our GPDs where they are the lowest-energy structure).  To do this we need to know know a set of euler angles for each molecule in each experimental structure.  There are a few complications in doing this, and section 2.2.4 attempts to explain them.  Ba
 
 Reviewer 2's comment:
 ---------------------
@@ -138,6 +141,7 @@ parameters?
 
 Response:
 ---------
+They are unitless in this study because we scale the set of nu's to the unit sphere.  It is only an exercise to see if we can find where in nu space the experimental structure is most stable.
 
 Reviewer 2's comment:
 ---------------------
@@ -147,6 +151,8 @@ this used as input to their calculations?
 
 Response:
 ---------
+It is used as input to our study.  From the orientation of the molecules we extract a set of Euler angles, input them to our potential, then search nu-space to see where that structure is the most stable in an effort to see how many nu's we need in our potential expansion.
+
 
 Reviewer 2's comment:
 ---------------------
@@ -159,6 +165,16 @@ application of the authors' rules afterwards.
 
 Response:
 ---------
+   Each target structure comes from the subset of tetrahedral molecules in the CSD.  How its energy is obtained (independent of nu) is the subject of section 2.2.4.  The purpose of section 2.2.5 is to describe a method whereby one can find a point in nu-space where the target structure is the lowest-energy structure, extending nu-space as necessary to higher manifolds.  The technique to do this is perfectly general and can be applied to any molecule, not just tetrahedral molecules.  The overall objective of this search is to find out whether a reasonably small number of nu's can describe real structures.  We posited a small number was necessary in GPD I, and here we prove it.  The final paper would be to calculate GPDs using the relatively small number of reference lattices from GPD II and then extract a set of nu parameters for each experimental structure from, say, ab initio data and see if we can "find" the experimental structure at the "correct" region of nu-space and at the correct temperature (this assumes the ab initio calc was perfect).  This would be a rather large calculation since one has to do the equivalent of an MD or Monte Carlo calculation at each point in nu space and for each reference lattice.  This is why we seek a faster statistical mechanics method, as remarked in page 27.  
+   Although the current test of nu-space is not designed to be predictive, the concept of a GPD in its final scenario should be valuable for the reasons remarked on page 5 and would have predictive power in the sense that it would provide some guidance to the synthetic chemist, for example, in how to perturb the molecular form to get a more desirable crystal structure.  Or GPDs could provide rationalization and/or prediction of crystal polymorphs.
+   Here is a list of the information used to derive the nus (in this study):
+* experimental structure (atomic positions and unit cell) of each structure
+* a minimal truncation of the U_{lmn} expansion--this can be done using subduction frequencies of the molecular point group in the Wigner funtions as explained in Sec. 2.2.2
+* a reference lattice for each structure, derived using the methods of GPD II
+* a list of candidate lattices with which to compare it, which was described in Sec. 2.2.3 
+When all these are applied to the minimization algorithm described in Sec. 2.2.5, we get results that will give us guidance about how to 
+Applying our rules to the representative potential obtained from the minimization algorithm described in Sec. 2.2.5 allows us to deduce the following information:
+* the biggest item is whether or not a potential truncation of {l,m,n} is sufficient to describe the structures in our test data set
 
 Reviewer 2's comment:
 ---------------------
@@ -167,7 +183,7 @@ seventies.
 
 Response:
 ---------
-Thank you--that 
+Thank you--the citation has been added.
 
 Reviewer 2's comment:
 ---------------------
@@ -176,7 +192,7 @@ or liquids? If so, how are these energies computed?
 
 Response:
 ---------
-There is a connection and it is all in the nu's, or expansion coefficients of our potential.  As the Wigner, 3jm, and spherical harmonic functions are all unitary, the nus should have good "scaling" properties.  One way to compute the nus, demonstrated in Briels, W. J. (1980). J. Chem. Phys. 73, 1850–1861, is to use the orthogonality of these functions and perform a type of "Fourier transform" on whatever model potential you might want, whether forcefield-based as in the Briels reference or ab initio.
+There is a connection and it is all in the nu's, or expansion coefficients of the potential.  One way to compute the nus, demonstrated in Briels, W. J. (1980). J. Chem. Phys. 73, 1850–1861, for example, is to use the orthogonality of these functions and perform a type of "Fourier transform" on whatever model potential you might want, whether forcefield-based as in the Briels reference or ab initio.  The intermolecular potential is then reproduced by Eq. 1 with the new set of nus.
 
 Reviewer 2's comment:
 ---------------------
@@ -186,7 +202,7 @@ proxy for the energy or a cost function.
 
 Response:
 ---------
-Our apologies again that reviewer 2 was unable to access GPD II.  In that work and especially GPD I, we only deal with the free energy.  This point is summarized on pages 4-5 where we describe how the free energy is minimized in the general method.  To better convey that, we have included two figures from GPD I showing the high temperature reference state as previously mentioned. However, in this paper we look at the low-T solutions so energy is substituted for free energy from Eq. 5 on and that is why it is hard to find.
+Our apologies again that Reviewer 2 was unable to access GPD II.  In that work and especially GPD I, we only deal with the free energy.  This point is summarized on pages 4-5 where we describe how the free energy is minimized in the general method.  To better convey that, we have included two figures from GPD I showing the high temperature reference state as previously mentioned. However, in this paper we look at the low-T solutions so energy is substituted for free energy from Eq. 5 on and that is why it is hard to find but occasionally referenced.
 
 Reviewer 2's comment:
 ---------------------
@@ -199,4 +215,5 @@ How close are we to reality concerning the actual energies?
 
 Response:
 ---------
-An excellent suggestion and an example to illustrate the concept at the beginning of the paper has been included.
+An excellent suggestion and an example to illustrate the concept at the beginning of the paper has been included as mentioned.  Regarding the energies, we assume Reviewer 2 is asking if the point in nu-space actually corresponds to that from a given ab-initio or forcefield-based potential, we answer that it is unknown, but for this study we did not try to find *the* set of nus that describe an observed strcture, but *a* set of nus where that structure is more stable than the others.  In short, we haven't been able to extract nu's from a real structure yet, although publications are planned to do that (see Missaghi, M. N., Mettes, J. A. & McClurg, R. B. (2009). In Preparation.).
+
