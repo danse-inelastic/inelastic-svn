@@ -161,8 +161,7 @@ three-dimensional crystal structures. Since many of the bulk properties of
 molecular materials are dictated by the manner in which the molecules are
 ordered in the solid state, crystal engineers seek to control this ordering and
 thus a material's electrical, optical, thermal, and solubility
-properties\cite{Desiraju89,Braga99,Bassoul00,Lommerse00,Holman01b,Moulton01,
-Motherwell02}.
+properties\cite{Desiraju89,Braga99,Bassoul00,Lommerse00,Holman01b,Moulton01}.
 
 Thus supramolecular chemistry depends on subtle interactions and how to control
 them.  Noncovalent bonds have low energies and often little or no activation
@@ -250,7 +249,7 @@ and~\ref{gpd2}, in which
 molecules remain translationally ordered but are rotationally disordered. 
 Experimentally this is
 termed a plastically crystalline state \cite{Sherwood79} and is observable for
-some of the molecules in our data set from Ref.~\cite{McClurg09}, such as
+some of the molecules in our data set from \cite{McClurg09}, such as
 adamantane or methane.  Other systems melt, sublime, or decompose before the
 plastically-crystalline state is obtained.  Whether or not the reference state
 is observed, it provides a well-characterized thermodynamic reference state. 
@@ -340,7 +339,7 @@ for other reference lattices, we focus on the set \{bcc, fcc,
 hcp, sc\}. Each of these reference lattices has at least four crystal
 structures with monomer synthons in the data set.  This means a given structure
 can be categorized as a subgroup of one of these reference lattices when single
-molecules are reduced to spheres (as opposed to dimers, etc.—see
+molecules are reduced to spheres (as opposed to dimers or chains--see
 \cite{McClurg09}).  In this section we seek to determine a \emph{sufficient}
 parameter space such that experimental
 structures are each stable in a finite volume in the IP parameter space. Thus we
@@ -682,14 +681,14 @@ discussed in Sec.~\ref{discussion}.
 
 \subsubsection{Experimental Phase Energies}
 
-The potential $V$ in Eq.\ (\ref{re:eq:vij2}) is a function of Euler
-angles $\omega$, potential parameters $\nu_{\ell_i,\ell,\ell_j}$,
-and intermolecular angle $\Omega$ (measured with respect to the
-z-axis in the lab reference frame of molecule $i$). The
-intermolecular angles are determined by the reference lattice but
-the Euler angles are dependent upon the orientation of the molecules
-on the reference lattice. This is complicated by the fact that the
-experimental atomic positions in each molecule are slightly
+With a set of candidate lattices with which to compare a given observed
+structure in $\mb{\nu}$-space, we now need to find the ``energy" of each
+observed structure, leaving $\mb{\nu}$ unspecified.  This can be done by
+translating the atomic positions of the observed structure into the needed Euler
+angles $\omega$ and intermolecular angles $\Omega$ (measured with respect to the
+z-axis in the lab reference frame of molecule $i$) of Eq.\
+(\ref{re:eq:vij2}). The intermolecular angles are easy to obtain because they
+determined by the reference lattice but the Euler angles are dependent upon the orientation of the molecules on the reference lattice. This is complicated by the fact that the experimental atomic positions in each molecule are slightly
 distorted from perfect Td point group symmetry due to small strains resulting
 from embedding the
 experimental lattice in its reference lattice. We calculate the
@@ -701,9 +700,7 @@ molecular positions are also shifted to coincide with the centers of
 mass of the experimentally determined fractional cell atoms. Thus
 the Euler angles obtained are a ``best fit'' to the molecular
 rotations were the experimental structures exactly proportional to
-their reference-lattice-derived ideal lattices. These Euler angles
-are presented in the supplementary material for our reference
-lattice set. The reference orientation of the molecule is with
+their reference-lattice-derived ideal lattices. The reference orientation of the molecule is with
 three-fold axes pointing in the [111], $[\bar{1}\bar{1}1]$,
 $[\bar{1}1\bar{1}]$, and $[1\bar{1}\bar{1}]$ directions. Typically
 one atom lying along each of the three-fold axes was used when
@@ -778,7 +775,7 @@ structure with respect to the augmented set to find a new trial RP
 in $\mb{\nu}$-space and the process iterates until the RPs
 converge.
 
-Minimization methods using genetic algorithms (differential
+Minimization methods using genetic algorithms~\cite{Holland92} (differential
 evolution) and simulated annealing~\cite{Kirkpatrick83} are used on
 the Euler angle minimization and energy difference minimization,
 respectively. This is particularly important since the topologies of
@@ -1152,19 +1149,18 @@ Supercomputer Institute were used for portions of this research.}
 %\bibliographystyle{normalTitle}
 %\bibliographystyle{plain}
 %\bibliography{thesisbib}
-\referencelist[thesisbibAltered,thesisbib]
+\referencelist[thesisbibAltered]
 
 \pagebreak
 
 \begin{figure}
-\caption{$[111]$ view of $T_d$
-global phase diagram as a function of intermolecular potential
-coefficients $\mb{\nu}$ scaled by $kT$. The origin of the axes is
-the infinite-temperature reference state.  Rays protruding from the surfaces
+\caption{$[111]$ view of a Global Phase Diagram (GPD) for tetrahedral
+molecules in an fcc reference lattice.  Axes are intermolecular potential
+coefficients $\mb{\nu}$ scaled by $kT$. The origin of the axes is the infinite-temperature reference state.  Rays protruding from the surfaces
 pointing at distinct phases represent ratios of potential
-coefficients that form tetrahedral molecular crystals of indicated
-symmetry.  Colored surfaces are boundaries between daughter phases
-and the reference fcc phase.} \label{gpd1}
+coefficients that form the indicated space groups.  Colored surfaces are boundaries between daughter phases
+and the reference fcc phase. Reproduced with permission of the International
+Union of Crystallography from \cite{Mettes04}} \label{gpd1}
 \includegraphics{figure1aII.eps}
 %\includegraphics{figure1bII.eps}
 \end{figure}
@@ -1172,10 +1168,11 @@ and the reference fcc phase.} \label{gpd1}
 \pagebreak
 
 \begin{figure}
-\caption{$[\bar{1}\bar{1}\bar{1}]$ view of the $T_d$ global phase
-diagram. Some molecules such as those in the $Fm\bar{3}m$
-structure appear ``spherical" because of rapid molecular
-reorientation.} \label{gpd2}
+\caption{$[\bar{1}\bar{1}\bar{1}]$ view of a GPD for tetrahedral molecules in
+an fcc reference lattice. Some molecules such as
+those in the $Fm\bar{3}m$ structure appear ``spherical" because of rapid molecular
+reorientation. Reproduced with permission of the International
+Union of Crystallography from \cite{Mettes04}} \label{gpd2}
 \includegraphics{figure1bII.eps}
 \end{figure}
 
@@ -1465,10 +1462,8 @@ m_i & m & m_j
 D^{\ell_j}_{m_jn_j}(\mb{\omega}_j)
 \end{equation}
 where the explicit functional dependence of $C^\ell_m$ and
-$D^{\ell_j}_{m_jn_j}$ has been dropped. 
-
-To couple $\{D_{m_i n_i}^{\ell_i},C_{m}^{\ell},D_{m_j
-n_j}^{\ell_j}\}$ where \cite{Varshalovich88}
+$D^{\ell_j}_{m_jn_j}$ has been dropped. This is done in the following manner,
+where \cite{Varshalovich88}
 \begin{eqnarray}
 D_{mn}^{\ell}(\mb{\omega}_i)&=&\exp \left(-i m \alpha_i \right)
 \, d_{mn}^{\ell}(\beta_i) \, \exp \left(-i n \gamma_i \right)\\
@@ -1550,7 +1545,7 @@ without any
 symmetry adaptation.  The $W^{n_i n_j}_{\ell_i \ell \ell_j}$ form a complete set
 of orthogonal IP
 basis functions over the eight-dimensional space $SO(3)\times
-S^2\times SO(3)$. Similar but slightly different constructions are given in the literature.\cite{Avoird80,Briels80,Stone84,Avoird94}.
+S^2\times SO(3)$. Similar but slightly different constructions are given in the literature.\cite{Avoird80,Briels80,Stone84,Avoird94}
 
 While $W^{n_i n_j}_{\ell_i \ell \ell_j}$ are
 general, it is computationally advantageous to project out
@@ -1593,9 +1588,7 @@ $n_\sigma,n_\mu$ is its dimension which is always
 $n_\sigma,n_\mu=1$.  Point group IR subduction frequencies in
 spherical harmonics are discussed elsewhere \cite{Bradley72}. All
 other point group IR's do not have the full molecular symmetry and
-so are zero to first order. These coefficients can be calculated efficiently from \emph{ab
-initio} or empirical potentials using a fast Fourier transform for
-$SO(3)$ \cite{Maslen97,Chirikjian00}.
+so are zero to first order.
 
 Projecting out Wyckoff point symmetry from the functions
 $T^{\ell_i}_{m_i n_\sigma}$ gives rotator functions
@@ -1626,29 +1619,7 @@ m_j}
 is a dimensionless coupling function. Subscripts $\tau,\rho$ are a
 compound index referring to multiple copies of the Wyckoff point
 group IR's subduced in the $\ell_i,\ell_j$-th manifold of $SO(3)$
-and $m_\tau,m_\rho$ goes over the dimensions of each IR. It is
-sometimes convenient to write Eq.~(\ref{eq:vij2}) using a
-shorthand notation
-\begin{equation}
-\label{eq:vij2vec}V/kT = \frac{1}{2}\sum_{ij}
-\mb{U}_{i}\cdot\mb{K}_{ij}\cdot\mb{U}_{j}
-\end{equation}
-in which $\mb{U}_i$ is a vector covering all elements of
-$U^{\ell_i}_{m_\tau n_\sigma}$ and $\mb{K}_{ij}$ is a coupling
-matrix. The generalized dot product matches multiple repeated
-indices in the potential.
-
-By symmetry adapting in two steps, we can define the
-expansion coefficients in Eq.~(\ref{eq:vij}) and expand the
-potential using rotator functions in Eq.~(\ref{eq:vij2}). Thus the
-expansion coefficients $\nu_{\ell_i,\ell,\ell_j}^{n_\sigma,n_\mu}$
-are functions of molecular parameters and intermolecular distance,
-but are independent of crystal structure.  They serve as
-independent variables. The rotator functions
-$\mb{U}_i$ are functions of both molecular and crystal symmetries.
-These functions lead to order parameters for phase transitions as
-discussed in Ref.~\cite{Mettes04}.
-
+and $m_\tau,m_\rho$ goes over the dimensions of each IR. 	
 
 \pagebreak
 
@@ -1659,7 +1630,7 @@ discussed in Ref.~\cite{Mettes04}.
 Symmetries of the molecule and Wyckoff point of the crystal exist
 within $D_{m_i,n_i}^{\ell_i}$ simultaneously and can be obtained
 by applying projection operators
-\cite{Bradley72,Fassler92,Fernando94,Schmidt00}
+\cite{Bradley72}
 \begin{equation}
 P^{\tau}_{n_\tau n_\tau}=\sqrt{d_\tau/|G|}\sum_{g\in G}D^{\tau
 *}_{n_\tau n_\tau}(g)\,g
