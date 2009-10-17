@@ -1,12 +1,5 @@
 ##############################################################################
 #
-# Structure         by DANSE Diffraction group
-#                   Simon J. L. Billinge
-#                   (c) 2006 trustees of the Michigan State University.
-#                   All rights reserved.
-#
-# File coded by:    Pavol Juhas
-#
 # See AUTHORS.txt for a list of people who contributed.
 # See LICENSE.txt for license information.
 #
@@ -23,9 +16,9 @@ import sys
 import unittest
 
 import numpy
-from diffpy.Structure.SpaceGroups import GetSpaceGroup
-from diffpy.Structure.SymmetryUtilities import *
-from diffpy.Structure.SymmetryUtilities import _Position2Tuple
+from matter.SpaceGroups import GetSpaceGroup
+from matter.SymmetryUtilities import *
+from matter.SymmetryUtilities import _Position2Tuple
 
 # useful variables
 thisfile = locals().get('__file__', 'TestSymmetryUtilities.py')

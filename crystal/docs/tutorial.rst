@@ -55,3 +55,6 @@ Te   0.500000 0.500000 0.500000 1.0000
 
 To specify forces to atoms in the supercell:
 
+
+
+To specify the space group symmetry and get back the point group symmetry of a given Wyckoff point:
