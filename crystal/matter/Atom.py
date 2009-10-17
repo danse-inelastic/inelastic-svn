@@ -1,7 +1,6 @@
 from properties import *
 import numpy
 from matter.Lattice import cartesian as cartesian_lattice
-from matter import IsotropyError
        
 
 class AtomPropertyCurator(type):
@@ -42,6 +41,7 @@ class AtomPropertyCurator(type):
 
 
 #helper for atom property curator
+#TODO: this needs to be rewritten to include diffraction's properties....or they need to be rewritten in inelastic format...either way, one should look at Paul's elements package first
 def collectProperties( klass ):
     ctorargs = []
     inferred = []
@@ -140,8 +140,6 @@ class Atom(object):
             #pass
          #   self.__dict__['symbol'] = None
             
-        
-        
         # take care of remaining arguments
         if xyz is not None:         self.xyz[:] = xyz
         if name is not None:        self.name = name
@@ -171,10 +169,22 @@ class Atom(object):
             #raise AttributeError, 'Invalid chemical element symbol.'
             pass
 
+#    def __str__(self):
+#        l = []
+#        for prop in self.propertyNames:
+#
+#            value = self.__dict__.get( prop )
+#            if value is None: continue
+#
+#            l.append( ( prop, value ) )
+#            continue
+#
+#        rt = ','.join( ['%s=%s' % (name, value) for name,value in l ] )
+#        return "Atom " + rt
+    
     def __str__(self):
         l = []
-        for prop in \
-            self.propertyNames:
+        for prop in self.propertyNames:
 
             value = self.__dict__.get( prop )
             if value is None: continue
@@ -184,7 +194,7 @@ class Atom(object):
 
         rt = ','.join( ['%s=%s' % (name, value) for name,value in l ] )
         return "Atom " + rt
-    
+      
     def __repr__(self):
         """simple string representation"""
         xyz = self.xyz
