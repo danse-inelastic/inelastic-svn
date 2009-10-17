@@ -11,23 +11,47 @@ One can initialize the data structures from atom types and positions:
 >>> stru = Structure( [ at1, at2], lattice=Lattice(2.87, 2.87, 2.87, 90, 90, 90) )
 >>> print str(stru)
 lattice=Lattice(a=2.87, b=2.87, c=2.87, alpha=90, beta=90, gamma=90)
-Atom Z=26,mass=55.847,average_mass=55.847,atomic_number=26,symbol=Fe
-Atom Z=26,mass=55.847,average_mass=55.847,atomic_number=26,symbol=Fe
+Fe   0.000000 0.000000 0.000000 1.0000
+Fe   0.500000 0.500000 0.500000 1.0000
 
 or by reading a cif file:
 
 >>> stru.read('PbTe.cif', format='cif')
+<matter.Parsers.P_cif.P_cif instance at 0x93196ec>
 >>> print str(stru)
 lattice=Lattice(a=6.461, b=6.461, c=6.461, alpha=90, beta=90, gamma=90)
-Atom Z=82,mass=207.2,average_mass=207.2,atomic_number=82,symbol=Pb2+
-Atom Z=82,mass=207.2,average_mass=207.2,atomic_number=82,symbol=Pb2+
-Atom Z=82,mass=207.2,average_mass=207.2,atomic_number=82,symbol=Pb2+
-Atom Z=82,mass=207.2,average_mass=207.2,atomic_number=82,symbol=Pb2+
-Atom Z=52,mass=127.6,average_mass=127.6,atomic_number=52,symbol=Te
-Atom Z=52,mass=127.6,average_mass=127.6,atomic_number=52,symbol=Te
-Atom Z=52,mass=127.6,average_mass=127.6,atomic_number=52,symbol=Te
-Atom Z=52,mass=127.6,average_mass=127.6,atomic_number=52,symbol=Te
+Pb2+ 0.500000 0.500000 0.500000 1.0000
+Pb2+ 0.500000 0.000000 0.000000 1.0000
+Pb2+ 0.000000 0.500000 0.000000 1.0000
+Pb2+ 0.000000 0.000000 0.500000 1.0000
+Te   0.000000 0.000000 0.000000 1.0000
+Te   0.000000 0.500000 0.500000 1.0000
+Te   0.500000 0.000000 0.500000 1.0000
+Te   0.500000 0.500000 0.000000 1.0000
 
-or pdb or xyz file, for example. We note the asymmetric unit cell is expanded by default.  
+or a pdb file, or an xyz file, for example. We note the asymmetric unit cell is expanded by default.  
 
->>>
+To create a supercell, simply import the supercell utility and call the specify the new lattice directions:
+>>> from matter.expansion import supercell
+>>> strucTall = supercell(stru, (1,1,2))
+>>> print strucTall
+lattice=Lattice(a=6.461, b=6.461, c=12.922, alpha=90, beta=90, gamma=90)
+Pb2+ 0.500000 0.500000 0.250000 1.0000
+Pb2+ 0.500000 0.500000 0.750000 1.0000
+Pb2+ 0.500000 0.000000 0.000000 1.0000
+Pb2+ 0.500000 0.000000 0.500000 1.0000
+Pb2+ 0.000000 0.500000 0.000000 1.0000
+Pb2+ 0.000000 0.500000 0.500000 1.0000
+Pb2+ 0.000000 0.000000 0.250000 1.0000
+Pb2+ 0.000000 0.000000 0.750000 1.0000
+Te   0.000000 0.000000 0.000000 1.0000
+Te   0.000000 0.000000 0.500000 1.0000
+Te   0.000000 0.500000 0.250000 1.0000
+Te   0.000000 0.500000 0.750000 1.0000
+Te   0.500000 0.000000 0.250000 1.0000
+Te   0.500000 0.000000 0.750000 1.0000
+Te   0.500000 0.500000 0.000000 1.0000
+Te   0.500000 0.500000 0.500000 1.0000
+
+To specify forces to atoms in the supercell:
+
