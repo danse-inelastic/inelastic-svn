@@ -14,8 +14,8 @@ thisfile = locals().get('__file__', 'file.py')
 tests_dir = os.path.dirname(os.path.abspath(thisfile))
 testdata_dir = os.path.join(tests_dir, 'testdata')
 
-from diffpy.Structure import Structure
-from diffpy.Structure.expansion import supercell
+from matter import Structure
+from matter.expansion import supercell
 
 
 ##############################################################################
@@ -73,8 +73,8 @@ class TestSuperCell(unittest.TestCase):
         """
         cdse_222 = supercell(self.stru_cdse, (2, 2, 2))
         # new atoms should be grouped together
-        elems = sum([8*[a.element] for a in self.stru_cdse], [])
-        elems_222 = [a.element for a in cdse_222]
+        elems = sum([8*[a.symbol] for a in self.stru_cdse], [])
+        elems_222 = [a.symbol for a in cdse_222]
         self.assertEqual(elems, elems_222)
         return
 
