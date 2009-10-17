@@ -10,7 +10,9 @@ One can initialize the data structures from atom types and positions:
 >>> at2 = Atom('Fe', [0.5, 0.5, 0.5])
 >>> stru = Structure( [ at1, at2], lattice=Lattice(2.87, 2.87, 2.87, 90, 90, 90) )
 >>> print str(stru)
-'lattice=Lattice(a=2.87, b=2.87, c=2.87, alpha=90, beta=90, gamma=90)\nAtom Z=26,mass=55.847,average_mass=55.847,atomic_number=26,symbol=Fe\nAtom Z=26,mass=55.847,average_mass=55.847,atomic_number=26,symbol=Fe'
+lattice=Lattice(a=2.87, b=2.87, c=2.87, alpha=90, beta=90, gamma=90)
+Atom Z=26,mass=55.847,average_mass=55.847,atomic_number=26,symbol=Fe
+Atom Z=26,mass=55.847,average_mass=55.847,atomic_number=26,symbol=Fe
 
 or by reading a cif file:
 

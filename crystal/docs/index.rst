@@ -1,9 +1,9 @@
-.. Material Data Objects documentation master file, created by
+.. Matter Data Objects documentation master file, created by
    sphinx-quickstart on Tue Oct  6 12:45:53 2009.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Material Data Objects's documentation!
+Matter Data Objects
 =================================================
 
 Contents:
