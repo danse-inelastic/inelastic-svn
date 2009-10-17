@@ -4,3 +4,5 @@ The tests that have been tested in this directory are:
 * TestLattice.py
 * TestP_cif.py
 * TestParsers.py
+* TestSupercell.py
+* TestSymmetryUtilities.py

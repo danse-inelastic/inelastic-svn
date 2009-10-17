@@ -1,5 +1,7 @@
 import unittest
 
+from matter import atom, Atom
+
 class TestCase( unittest.TestCase ):
 
     def test_convenient_factory_function(self):
