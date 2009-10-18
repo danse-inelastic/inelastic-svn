@@ -182,12 +182,12 @@ class Atom(object):
 #        rt = ','.join( ['%s=%s' % (name, value) for name,value in l ] )
 #        return "Atom " + rt
     
-    def __str__(self):
-        """simple string representation"""
-        xyz = self.xyz
-        s = "%-4s %8.6f %8.6f %8.6f %6.4f" % \
-                (self.symbol, xyz[0], xyz[1], xyz[2], self.occupancy)
-        return s
+#    def __str__(self):
+#        """simple string representation"""
+#        xyz = self.xyz
+#        s = "%-4s %8.6f %8.6f %8.6f %6.4f" % \
+#                (self.symbol, xyz[0], xyz[1], xyz[2], self.occupancy)
+#        return s
       
     def __repr__(self):
         """simple string representation"""
