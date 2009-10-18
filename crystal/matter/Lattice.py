@@ -12,6 +12,7 @@ import types
 import numpy
 import numpy.linalg as numalg
 from StructureErrors import LatticeError
+from matter.crystalUtils.MonkhorstPack import MonkhorstPack
 
 # helper functions
 
@@ -253,12 +254,47 @@ class Lattice:
         rv = (self.a, self.b, self.c, self.alpha, self.beta, self.gamma)
         return rv
 
+    
+################################################    
+# k space methods
+################################################
+
     def reciprocal(self):
-        """Return the reciprocal lattice to self."""
+        """Return the reciprocal lattice.
+        """
         from copy import deepcopy
         rec = deepcopy(self)
         rec.setLatBase(numpy.transpose(self.recbase))
         return rec
+
+    
+    def getMonkhorstPackGrid(self, size, shift=(0,0,0)):
+        """Returns a Monkhorst-Pack grid of order size[0]*size[1]*size[2],
+        scaled by the reciprocal space unit cell.
+        The shift is an optional vector shift to all points in the grid.
+        """
+
+        recipvectors = 2 * numpy.pi * numalg.inv(numpy.transpose(self._lattice))
+        frackpts = MonkhorstPack(size)
+        frackpts += np.array(shift)
+        # this applies scaling of MP grid by reciprocal cell vectors:
+        # (equivalent of frac*vectors[0]+frac*vectors[1]+frac*vectors[2]
+        kpts = frackpts*recipvectors.sum(0)
+        kpts.shape=(size[0], size[1], size[2], 3)
+        return kpts
+
+    def getFracMonkhorstPackGrid(self, size, shift=(0,0,0)):
+        """Returns a Monkhorst-Pack grid of order size[0]*size[1]*size[2],
+        in fractional coordinates of the reciprocal space unit cell.
+        The shift is an optional vector shift to all points in the grid.
+        """
+
+        recipvectors = 2 * np.pi * la.inv(np.transpose(self._lattice))
+        frackpts = MonkhorstPack(size)
+        frackpts += np.array(shift)
+        frackpts.shape=(size[0], size[1], size[2], 3)
+        return frackpts    
+
 
     def cartesian(self, u):
         """return cartesian coordinates of a lattice vector"""
