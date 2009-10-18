@@ -180,7 +180,7 @@ class Structure(list):
         u10 = a0.xyz - a1.xyz
         u12 = a2.xyz - a1.xyz
         return self.lattice.angle(u10, u12)
-
+    
 
     def placeInLattice(self, new_lattice):
         """place structure into new_lattice coordinate system
