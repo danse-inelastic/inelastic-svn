@@ -53,9 +53,10 @@ Te   0.500000 0.000000 0.750000 1.0000
 Te   0.500000 0.500000 0.000000 1.0000
 Te   0.500000 0.500000 0.500000 1.0000
 
-To specify forces to atoms in the supercell:
-
-
+To specify forces for atoms in the structure:
+>>> stru = Structure( [ at1, at2], lattice=Lattice(2.87, 2.87, 2.87, 90, 90, 90) )
+>>> forces = [[0.0, 0.61, 0.7], [1.8, 0.9, 1.1]]
+>>> stru.set_forces(forces)
 
 To specify the space group symmetry and get back the point group symmetry of a given Wyckoff point:
 

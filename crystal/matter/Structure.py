@@ -135,7 +135,30 @@ class Structure(list):
             alabel = a.symbol + str(elnum[a.symbol])
             labels.append(alabel)
         return labels
+    
+################################################    
+# property methods
+################################################
+#Notes:
+# for now these are done in the style of diffraction
+# eventually will be done in Jiao's style with metaclasses
 
+    # xyz_cartn
+
+    def _get_xyz_cartn(self):
+        return [atom.xyz for atom in list]
+
+    def _set_xyz_cartn(self, xyzList):
+        for atom,xyz in zip(list,xyzList):
+            atom.xyz = xyz
+
+    xyz_cartn = property(_get_xyz_cartn, _set_xyz_cartn, doc =
+        """absolute Cartesian coordinates of all atoms
+        """ )   
+    
+################################################    
+# geometry methods
+################################################
 
     def distance(self, id0, id1):
         """Distance between 2 atoms, no periodic boundary conditions.

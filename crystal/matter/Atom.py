@@ -92,9 +92,10 @@ _BtoU = 1.0/(8 * numpy.pi**2)
 _UtoB = 1.0/_BtoU
 
 class Atom(object):
-    """Create atom of a specified type at given lattice coordinates:
-    >>> Fe57 = Atom( 'Fe', [0,0,0] )
+    """Create an atom of a specified type at given lattice coordinates:
     >>> Fe = Atom( 'Fe' )
+    >>> Fe57 = Atom( 'Fe', [0,0,0], mass=57)
+
     Atom(a) creates a copy of Atom instance a.
 
     atype       -- element symbol string or Atom instance
@@ -115,7 +116,7 @@ class Atom(object):
     """    
     tol_anisotropy = 1.0e-6
 
-    def __init__(self, atype=None, xyz=None, Z=None, mass=None, name=None, 
+    def __init__(self, atype=None, xyz=None, mass=None, name=None, 
                  occupancy=None, anisotropy=None, U=None, Uisoequiv=None, lattice=None):
 
         # declare non-singleton data members
