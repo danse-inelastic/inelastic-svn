@@ -5,11 +5,7 @@
 #
 ########################################################################
 
-
-import copy
-import math
 import numpy
-import numpy.linalg as numalg
 from Atom import Atom
 from Lattice import Lattice
 
@@ -41,7 +37,7 @@ class Structure(list):
 
         Because Structure is inherited from a list it can use list expansions,
         for example:
-            oxygen_atoms = [ for a in stru if a.element == "O" ]
+            oxygen_atoms = [ for a in stru if a.symbol == "O" ]
             oxygen_stru = Structure(oxygen_atoms, lattice=stru.lattice)
         """
         self.title = ""

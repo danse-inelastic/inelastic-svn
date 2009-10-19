@@ -41,7 +41,7 @@ class TestStructure(unittest.TestCase):
 
     # FIXME move into TestAtom
     def test_cartesian(self):
-        """check conversion to cartesian coordinates"""
+        """check conversion to Cartesian coordinates"""
         from math import sqrt
         stru = self.stru
         s_rc0 = stru[0].xyz_cartn
@@ -142,8 +142,6 @@ class TestStructure(unittest.TestCase):
         stru = self.stru
         forces = [[0.0, 0.61, 0.7], [1.8, 0.9, 1.1]]
         stru.forces = forces
-        print stru[0].force
-        
         self.assertListAlmostEqual(stru[0].force, forces[0])
 
 
