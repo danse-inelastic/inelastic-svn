@@ -94,6 +94,12 @@ class TestLattice(unittest.TestCase):
         self.lattice.setLatBase(base)
         r = repr(self.lattice)
         self.assertEqual(r, "Lattice(base=%r)" % self.lattice.base)
+        
+    def test_monkhorst_pack(self):
+        self.lattice.setLatPar(3, 3, 3, 90, 90, 90)
+        grid = (2,2,2)
+        print self.lattice.getMonkhorstPackGrid(grid)
+        print self.lattice.getFracMonkhorstPackGrid(grid)
 
 # End of TestLattice
 
