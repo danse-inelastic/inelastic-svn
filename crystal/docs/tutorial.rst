@@ -27,7 +27,16 @@ Te   0.000000 0.500000 0.500000 1.0000
 Te   0.500000 0.000000 0.500000 1.0000
 Te   0.500000 0.500000 0.000000 1.0000
 
-or a pdb file, or an xyz file, for example. We note the asymmetric unit cell is expanded by default.  
+or a pdb file, or an xyz file, for example. We note the asymmetric unit cell is expanded by default.  To find the space group:
+
+>>> 
+
+To query information about a given Wyckoff point:
+
+>>> stru.
+
+
+Eventually it may be possible to calculate the symmetry directly from a list of atoms, but for now, input of the space group is necessary. 
 
 To create a supercell, simply import the supercell utility and specify the new lattice directions:
 
@@ -59,33 +68,22 @@ To set/get the forces, positions, or other settable properties for atoms in the 
 >>> stru.forces = forces
 >>> stru[0].force
 [0.0, 0.60999999999999999, 0.69999999999999996]
-
-To specify the space group symmetry and get back the point group symmetry of a given Wyckoff point:
-
->>> stru.
-
-
-Eventually it may be possible to calculate the symmetry directly from a list of atoms, but for now, input of the space group is necessary.  
+ 
 
 To calculate a Monkhorst-Pack mesh over the reciprocal space of the lattice:
 
 >>> stru.lattice.getMonkhorstPackGrid()
  [[[-0.52359878 -0.52359878  0.52359878]
    [-0.52359878  0.52359878  0.52359878]]
-
   [[ 0.52359878 -0.52359878  0.52359878]
    [ 0.52359878  0.52359878  0.52359878]]]]
 >>> stru.lattice.getFracMonkhorstPackGrid()
 [[[[-0.25 -0.25 -0.25]
    [-0.25  0.25 -0.25]]
-
   [[ 0.25 -0.25 -0.25]
    [ 0.25  0.25 -0.25]]]
-
-
  [[[-0.25 -0.25  0.25]
    [-0.25  0.25  0.25]]
-
   [[ 0.25 -0.25  0.25]
    [ 0.25  0.25  0.25]]]]
 
