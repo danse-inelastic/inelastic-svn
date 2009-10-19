@@ -57,6 +57,8 @@ To set/get the forces, positions, or other settable properties for atoms in the 
 >>> stru = Structure( [ at1, at2], lattice=Lattice(2.87, 2.87, 2.87, 90, 90, 90) )
 >>> forces = [[0.0, 0.61, 0.7], [1.8, 0.9, 1.1]]
 >>> stru.forces = forces
+>>> stru[0].force
+[0.0, 0.60999999999999999, 0.69999999999999996]
 
 To specify the space group symmetry and get back the point group symmetry of a given Wyckoff point:
 
@@ -68,9 +70,24 @@ Eventually it may be possible to calculate the symmetry directly from a list of 
 To calculate a Monkhorst-Pack mesh over the reciprocal space of the lattice:
 
 >>> stru.lattice.getMonkhorstPackGrid()
+ [[[-0.52359878 -0.52359878  0.52359878]
+   [-0.52359878  0.52359878  0.52359878]]
 
+  [[ 0.52359878 -0.52359878  0.52359878]
+   [ 0.52359878  0.52359878  0.52359878]]]]
 >>> stru.lattice.getFracMonkhorstPackGrid()
+[[[[-0.25 -0.25 -0.25]
+   [-0.25  0.25 -0.25]]
 
+  [[ 0.25 -0.25 -0.25]
+   [ 0.25  0.25 -0.25]]]
+
+
+ [[[-0.25 -0.25  0.25]
+   [-0.25  0.25  0.25]]
+
+  [[ 0.25 -0.25  0.25]
+   [ 0.25  0.25  0.25]]]]
 
 To generate equivalent neighbors and their distances:
 

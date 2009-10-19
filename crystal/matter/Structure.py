@@ -159,10 +159,10 @@ class Structure(list):
     # forces
 
     def _get_forces(self):
-        return [atom.force for atom in list]
+        return [atom.force for atom in self]
 
     def _set_forces(self, forceList):
-        for atom,force in zip(list,forceList):
+        for atom,force in zip(self,forceList):
             atom.force = force
 
     forces = property(_get_forces, _set_forces, doc =

@@ -4,13 +4,14 @@
 # See LICENSE.txt for license information.
 #
 ##############################################################################
+from numpy.ma.testutils import assert_almost_equal
 
 """Unit tests for Structure class.
 """
 
 __id__ = "$Id: TestStructure.py 2825 2009-03-09 04:33:12Z juhas $"
 
-import os
+import os, sys
 import unittest
 
 # useful variables
@@ -18,6 +19,7 @@ thisfile = locals().get('__file__', 'TestStructure.py')
 tests_dir = os.path.dirname(os.path.abspath(thisfile))
 testdata_dir = os.path.join(tests_dir, 'testdata')
 
+sys.path.insert(0,os.path.abspath('..'))# this should put the source code first on the path
 from matter import Structure, Lattice, Atom#, StructureFormatError
 
 ##############################################################################
@@ -29,7 +31,7 @@ class TestStructure(unittest.TestCase):
         at2 = Atom('C', [1,1,1])
         self.stru = Structure( [ at1, at2], lattice=Lattice(1, 1, 1, 90, 90, 120) )
         self.places = 12
-
+        
     def assertListAlmostEqual(self, l1, l2, places=None):
         """wrapper for list comparison"""
         if places is None: places = self.places
@@ -135,6 +137,15 @@ class TestStructure(unittest.TestCase):
         self.assertListAlmostEqual(a0.xyz, 3*[0.0])
         a1 = stru[1]
         self.assertListAlmostEqual(a1.xyz, [2.0, 0.0, 2.0])
+        
+    def test_forces(self):
+        stru = self.stru
+        forces = [[0.0, 0.61, 0.7], [1.8, 0.9, 1.1]]
+        stru.forces = forces
+        print stru[0].force
+        
+        self.assertListAlmostEqual(stru[0].force, forces[0])
+
 
 #   def test_read(self):
 #       """check Structure.read()
