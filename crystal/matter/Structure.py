@@ -42,6 +42,7 @@ class Structure(list):
         """
         self.title = ""
         self._lattice = None
+        self._spaceGroup = None
         self._labels = {}
         self._labels_cached = False
         if isinstance(atoms, Structure):
@@ -387,6 +388,18 @@ class Structure(list):
 
     lattice = property(_get_lattice, _set_lattice, doc =
         "Coordinate system for this Structure.")
+    
+    # space group
+
+    def _get_spaceGroup(self):
+        return self._spaceGroup
+
+    def _set_spaceGroup(self, value):
+        self._spaceGroup = value
+        return
+
+    spaceGroup = property(_get_spaceGroup, _set_spaceGroup, doc =
+        "Space group for this Structure.")
 
 
     ####################################################################

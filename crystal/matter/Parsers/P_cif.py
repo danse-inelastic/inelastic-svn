@@ -451,6 +451,8 @@ class P_cif(StructureParser):
                     short_name=new_short_name,
                     crystal_system=new_crystal_system,
                     symop_list=symop_list)
+        # assign the new space group to the structure
+        self.stru.spaceGroup = self.spacegroup
         self._expandAsymmetricUnit()
         return
 
