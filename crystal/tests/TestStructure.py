@@ -139,10 +139,20 @@ class TestStructure(unittest.TestCase):
         self.assertListAlmostEqual(a1.xyz, [2.0, 0.0, 2.0])
         
     def test_forces(self):
-        stru = self.stru
         forces = [[0.0, 0.61, 0.7], [1.8, 0.9, 1.1]]
-        stru.forces = forces
-        self.assertListAlmostEqual(stru[0].force, forces[0])
+        self.stru.forces = forces
+        self.assertListAlmostEqual(self.stru[0].force, forces[0])
+        
+    def test_spaceGroupQuery(self):
+        ciffile = os.path.join(testdata_dir, 'PbTe.cif')
+        self.stru.read(ciffile)
+        #print self.stru.spaceGroup.number
+        #print self.stru.spaceGroup.short_name
+#        op = self.stru.spaceGroup.symop_list[1]
+#        print op
+        sg = self.stru.spaceGroup
+        assert sg.number is 225
+        assert sg.short_name is 'Fm-3m'
 
 
 #   def test_read(self):

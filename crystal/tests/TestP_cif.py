@@ -15,8 +15,8 @@ tests_dir = os.path.dirname(os.path.abspath(thisfile))
 testdata_dir = os.path.join(tests_dir, 'testdata')
 
 from matter.Parsers.P_cif import *
-from matter import Structure
-from matter import StructureFormatError
+#from matter import Structure
+#from matter import StructureFormatError
 
 ##############################################################################
 class TestRoutines(unittest.TestCase):

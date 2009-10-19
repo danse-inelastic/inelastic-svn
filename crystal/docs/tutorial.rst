@@ -29,12 +29,14 @@ Te   0.500000 0.500000 0.000000 1.0000
 
 or a pdb file, or an xyz file, for example. We note the asymmetric unit cell is expanded by default.  To find the space group:
 
->>> 
+>>> stru.spaceGroup.number
+225
+>>> stru.spaceGroup.short_name
+Fm-3m
 
-To query information about a given Wyckoff point:
+To query information about occupied Wyckoff points:
 
->>> stru.
-
+(coming)
 
 Eventually it may be possible to calculate the symmetry directly from a list of atoms, but for now, input of the space group is necessary. 
 
@@ -69,7 +71,6 @@ To set/get the forces, positions, or other settable properties for atoms in the 
 >>> stru[0].force
 [0.0, 0.60999999999999999, 0.69999999999999996]
  
-
 To calculate a Monkhorst-Pack mesh over the reciprocal space of the lattice:
 
 >>> stru.lattice.getMonkhorstPackGrid()
