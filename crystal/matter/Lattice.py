@@ -274,13 +274,13 @@ class Lattice:
         The shift is an optional vector shift to all points in the grid.
         """
 
-        recipvectors = 2 * numpy.pi * numalg.inv(numpy.transpose(self._lattice))
+        recipvectors = 2 * numpy.pi * numalg.inv(numpy.transpose(self.base))
         frackpts = MonkhorstPack(size)
-        frackpts += np.array(shift)
+        frackpts += numpy.array(shift)
         # this applies scaling of MP grid by reciprocal cell vectors:
         # (equivalent of frac*vectors[0]+frac*vectors[1]+frac*vectors[2]
         kpts = frackpts*recipvectors.sum(0)
-        kpts.shape=(size[0], size[1], size[2], 3)
+        kpts.shape = (size[0], size[1], size[2], 3)
         return kpts
 
     def getFracMonkhorstPackGrid(self, size, shift=(0,0,0)):
@@ -289,10 +289,10 @@ class Lattice:
         The shift is an optional vector shift to all points in the grid.
         """
 
-        recipvectors = 2 * np.pi * la.inv(np.transpose(self._lattice))
+        recipvectors = 2 * numpy.pi * numalg.inv(numpy.transpose(self.base))
         frackpts = MonkhorstPack(size)
-        frackpts += np.array(shift)
-        frackpts.shape=(size[0], size[1], size[2], 3)
+        frackpts += numpy.array(shift)
+        frackpts.shape = (size[0], size[1], size[2], 3)
         return frackpts    
 
 

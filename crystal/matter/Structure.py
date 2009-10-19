@@ -156,6 +156,19 @@ class Structure(list):
         """absolute Cartesian coordinates of all atoms
         """ )   
     
+    # forces
+
+    def _get_forces(self):
+        return [atom.force for atom in list]
+
+    def _set_forces(self, forceList):
+        for atom,force in zip(list,forceList):
+            atom.force = force
+
+    forces = property(_get_forces, _set_forces, doc =
+        """forces on all atoms
+        """ )   
+    
 ################################################    
 # geometry methods
 ################################################

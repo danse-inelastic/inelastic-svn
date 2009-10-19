@@ -1,8 +1,6 @@
 Tutorial
 ========
 
-Here are a set of operations one might try:  
-
 One can initialize the data structures from atom types and positions:
 
 >>> from matter import Structure, Lattice, Atom
@@ -32,6 +30,7 @@ Te   0.500000 0.500000 0.000000 1.0000
 or a pdb file, or an xyz file, for example. We note the asymmetric unit cell is expanded by default.  
 
 To create a supercell, simply import the supercell utility and specify the new lattice directions:
+
 >>> from matter.expansion import supercell
 >>> strucTall = supercell(stru, (1,1,2))
 >>> print strucTall
@@ -54,14 +53,35 @@ Te   0.500000 0.500000 0.000000 1.0000
 Te   0.500000 0.500000 0.500000 1.0000
 
 To set/get the forces, positions, or other settable properties for atoms in the structure:
+
 >>> stru = Structure( [ at1, at2], lattice=Lattice(2.87, 2.87, 2.87, 90, 90, 90) )
 >>> forces = [[0.0, 0.61, 0.7], [1.8, 0.9, 1.1]]
->>> stru.set_forces(forces)
+>>> stru.forces = forces
 
 To specify the space group symmetry and get back the point group symmetry of a given Wyckoff point:
 
+>>> stru.
 
-It may be possible to calculate the symmetry directly from lit of atoms, but for now, input of the space group is necessary.  
 
-To calculate a monkhorst pack mesh over the reciprocal space of the lattice:
-(lattice test)
+Eventually it may be possible to calculate the symmetry directly from a list of atoms, but for now, input of the space group is necessary.  
+
+To calculate a Monkhorst-Pack mesh over the reciprocal space of the lattice:
+
+>>> stru.lattice.getMonkhorstPackGrid()
+
+>>> stru.lattice.getFracMonkhorstPackGrid()
+
+
+To generate equivalent neighbors and their distances:
+
+>>> stru.getFirstNN()
+>>> stru.getFirstNNDistance()
+>>> stru.getSecNN()
+>>> stru.getThirdNN()
+
+To get the bond matrix for a BvK calculation: 
+
+>>> stru.getBondMatrix()
+
+
+.. todo:: (lattice test)
