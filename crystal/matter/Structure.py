@@ -133,6 +133,116 @@ class Structure(list):
             labels.append(alabel)
         return labels
     
+    def computeDistances(self, maxdist=30, latticeRange=[2,2,2]):
+        """ unitcell.computeDistances(self, [nx,ny,nz]):
+        builds up a Big multiple dictionary, namely
+        self.distances[atom1][atom2][(DX,DY,DZ)]
+        (DX,DY,DZ) are integer numbers specifying the cell containing atom2,
+        relatively to atom1.
+        DX,DY,DZ run from -nx to nx, -ny to ny, -nz to nz, respectively."""
+        distances = {}
+        idlist = self.getLabels()
+        #idlist = self.getIds()
+        for iA in range(0, len(idlist)):
+            idA = idlist[iA]
+            distances[idA] = {}
+            for iB in range(0, len(idlist)):
+                idB = idlist[iB]
+                distances[idA][idB]={}
+                for tx in range(-latticeRange[0],latticeRange[0]+1):
+                    for ty in range(-latticeRange[1],latticeRange[1]+1):
+                        for tz in range(-latticeRange[2],latticeRange[2]+1):
+                            posA = self.getCartesianPosition(idA)
+                            posB = self.getCartesianPosition(idB) + numpy.dot([tx,ty,tz], self._lattice)
+                            dist = numpy.sqrt(numpy.sum( (posB-posA) * (posB-posA) ))
+                            if(dist<maxdist):
+                                distances[idA][idB][(tx,ty,tz)] = dist
+        self._distances = distances
+        return distances
+
+##     def findTetrahedra(self, list4ids, latticeVectors=[(0,0,0),(0,0,0),(0,0,0),(0,0,0)]):
+##         """Searches the tetrahedra that equivalent by symmetry to the reference tetrahedron
+##         defined by the list4ids (4 Ids) and the cells indices where vertices lie."""        
+##         # from OpenPhonon:
+##         # OP_cella. FindTetragons(self, Latoms, CellsCoo=[(0,0,0),(0,0,0),(0,0,0),(0,0,0)])
+##         # This is the key routine to find good candidates to symmetry group.
+##         # Latoms is a list of the kind [  (Aa,kA) ,(Bb,kB)....] 
+##         # ( i.e. couples formed by atom-name and position in the position list.
+##         # Latoms must be formed of four  atoms defining a non-degenerate tetraedron.
+##         # A check is permormed on the non-degeneracy.
+##         # The funtions finds all the possible equivalent tetraedrons (which have the same
+##         # set of distances, and the same atom kinds)
+##         # The function return the list of all these tetraedrons
+        
+##         if type(list4ids) is not type([]):
+##             raise ValueError, 'list4ids should be a list of 4 site Ids.'
+##         if len(list4ids) != len(latticeVectors):
+##             raise ValueError, 'There should be as many site Ids as lattice vectors.'
+##         if len(list4ids) != 4:
+##             raise ValueError, 'Need 4 sites to define a tetrahedron.'
+        
+##         tetraVertices = [self.cartesianPositionInLattice(id,lattvec)
+##                          for (id,lattvec) in zip(list4ids,latticeVectors)]
+##         # compute vectors for edges of tetrahedron from first point:
+##         edgeVectors = tetraVertices[1:4] - tetraVertices[0]
+
+##         # check for non-degeneracy:
+##         det = la.det(edgeVectors)
+##         if(abs(det) < 1e-6):
+##             raise ValueError, 'determinant smaller than 1e-6: degenerate reference tetrahedron.'
+        
+    #untested--from UnitCell
+    def bringFractionalPositionIntoCell(self, fracpos):
+        """Brings a fractional position (x,y,z) 'into' the unit cell,
+        i.e.: (x,y,z)->(x',y',z') such that x,y,z in [0,1( """
+        pos = numpy.array(fracpos)
+        assert (len(pos) == 3)
+        for i in range(3):
+            if pos[i]<0:
+                while pos[i]<0:
+                    pos[i] += 1
+            if pos[i]>=1:
+                while pos[i]>=1:
+                    pos[i] -= 1
+        return pos
+
+    #untested--from UnitCell
+    def cartesianPositionInLattice(self, siteId, latticeVector):
+        """Returns the Cartesian position vector from the origin
+        ( fractional coordinates [0,0,0] in unit cell [0,0,0]),
+        for a Site corresponding to 'siteId',
+        in the unit cell corresponding to latticeVector
+        (triplets of coordinates in terms of cellvectors), 
+        defining which unit cell in the lattice.
+        """
+        try:
+            posincell = self.getCartesianPosition(siteId)
+        except KeyError: raise KeyError, 'Invalid site Id'
+        pos = numpy.array(posincell) + numpy.dot(latticeVector, self._lattice)
+        return pos
+    
+    def getPosition(self, siteId):
+        """Returns the (fractional) position of a site."""
+        return self._siteIds[siteId].getPosition()
+
+    def setPositions(self, positions):
+        """Sets the (fractional) positions of the sites in the unit cell."""
+        assert(len(positions) == self.getNumSites())
+        for isite in range(self.getNumSites()):
+            self._sites[isite].setPosition(positions[isite])
+
+    def getCartesianPosition(self, siteId):
+        """Returns the cartesian position of a site."""
+        return self.fractionalToCartesian(self._siteIds[siteId].getPosition())
+
+    def fractionalToCartesian(self, fracpos):
+        """Converts a coordinate from fractional to cartesian.""" 
+        return (fracpos * self._lattice).sum(0)  # should be double-checked
+
+    def cartesianToFractional(self, cartpos):
+        """Converts a coordinate from cartesian to fractional."""
+        return (cartpos * la.inv(self._lattice)).sum(0)  # should be double-checked
+    
 ################################################    
 # property methods
 ################################################
