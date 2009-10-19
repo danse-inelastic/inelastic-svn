@@ -294,6 +294,12 @@ class Lattice:
         frackpts += numpy.array(shift)
         frackpts.shape = (size[0], size[1], size[2], 3)
         return frackpts    
+    
+    def getVolume(self):
+        """
+        Returns the volume of the unit cell: |det(a1, a2, a3)|.
+        Uses Numpy.linalg."""
+        return abs(la.det(self._lattice))
 
 
     def cartesian(self, u):

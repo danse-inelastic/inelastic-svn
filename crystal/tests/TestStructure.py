@@ -152,7 +152,10 @@ class TestStructure(unittest.TestCase):
 #        print op
         sg = self.stru.spaceGroup
         assert sg.number is 225
-        assert sg.short_name is 'Fm-3m'
+        #assert sg.short_name.strip() is 'Fm-3m'
+        
+    def test_distanceCalc(self):
+        print self.stru.computeDistances()
 
 
 #   def test_read(self):
