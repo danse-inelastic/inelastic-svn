@@ -24,9 +24,9 @@ from logilab.common.configuration import ConfigurationMixIn
 from logilab.astng.manager import astng_wrapper, ASTNGManager
 from logilab.astng.inspector import Linker
 
-from pylint.pyreverse.diadefslib import DiadefsHandler
-from pylint.pyreverse import writer
-from pylint.pyreverse.utils import insert_default_options
+from pyrev.diadefslib import DiadefsHandler
+from pyrev import writer
+from pyrev.utils import insert_default_options
 
 OPTIONS = (
 ("filter-mode",
@@ -85,7 +85,7 @@ this disables -f values")),
                 #dict(help='run quietly', action='store_true', short='q')), )
 
 
-class PyreverseCommand(ConfigurationMixIn):
+class PyrevCommand(ConfigurationMixIn):
     """base class providing common behavior for pyreverse commands"""
 
     options = OPTIONS
@@ -114,10 +114,10 @@ class PyreverseCommand(ConfigurationMixIn):
 
 
 class Run:
-    """pyreverse main class"""
+    """pyrev main class"""
     def __init__(self, args):
         """run pyreverse"""
-        PyreverseCommand(args)
+        PyrevCommand(args)
 
 if __name__ == '__main__':
     Run(sys.argv[1:])

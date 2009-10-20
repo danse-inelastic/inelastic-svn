@@ -24,7 +24,7 @@ import os
 ########### pyreverse option utils ##############################
 
 
-RCFILE = '.pyreverserc'
+RCFILE = '.pyrevrc'
 
 def get_default_options():
     """
