@@ -3,6 +3,7 @@
 	<name>pyrev</name>
 	<comment></comment>
 	<projects>
+		<project>AbInitio</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
