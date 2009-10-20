@@ -10,10 +10,11 @@ canon cmap cmapx cmapx_np dia dot eps fig gd gd2 gif hpgl imap imap_np ismap jpe
 
 and also in VCG.  Here is an example using the png output format:
 
-$ python pyrev.py -o png -p Gulp memd.gulp.Gulp
+$ python pyrev.py -o png -p Atom matter.Atom
 [...]
-creating diagram packages_Gulp.png
-creating diagram classes_Gulp.png
+creating diagram classes_Atom.png
+
+.. image:: _static/classes_Atom.png
 
 It uses these options:
 
@@ -35,15 +36,17 @@ In general, one can modify output with following options:
 Examples
 --------
 
-General V on a Module
+General vue on a module
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-$ python pyrev.py -ASmy -k -o png pyrev/main.py -p Main
+$ python pyrev.py -ASmy -k -o png matter.Structure -p Structure
+
+.. image:: classes_Structure.png
 
 With these options you can have a quick vue of the dependencies without
 being lost in endless lists of methods and attributes.
 
-Detailed Vue on a Module
+Detailed vue on a module
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 $ python pyrev.py -c PyrevCommand -a1 -s1 -f ALL -o png  pyrev.py
