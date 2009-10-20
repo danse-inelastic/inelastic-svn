@@ -86,7 +86,7 @@ this disables -f values")),
 
 
 class PyrevCommand(ConfigurationMixIn):
-    """base class providing common behavior for pyreverse commands"""
+    """base class providing common behavior for pyrev commands"""
 
     options = OPTIONS
 
@@ -95,7 +95,7 @@ class PyrevCommand(ConfigurationMixIn):
         insert_default_options()
         self.manager = ASTNGManager()
         self.register_options_provider(self.manager)
-        args = self.load_command_line_configuration()
+        args = self.load_command_line_configuration(args)
         self.run(args)
 
     def run(self, args):
