@@ -1,0 +1,89 @@
+here is how to use the diagram generator:
+
+
+The command pyreverse generates the diagrams in all formats that graphviz/dot
+knows, or in VCG :
+
+The following command shows what dot knows:
+
+
+$ dot -Txxx
+Format: "xxx" not recognized. Use one of: canon cmap cmapx cmapx_np dia dot
+eps fig gd gd2 gif hpgl imap imap_np ismap jpe jpeg jpg mif mp pcl pdf pic
+plain plain-ext png ps ps2 svg svgz tk vml vmlz vrml vtx wbmp xdot xlib
+
+
+$ pyreverse -o png -p Pyreverse pylint/pyreverse/
+[...]
+creating diagram packages_Pyreverse.png
+creating diagram classes_Pyreverse.png
+
+
+
+
+    * -o :  sets the output format
+
+    * -p name : yields the output files packages_name.png and classes_name.png
+
+Options
+
+One can modify the output with following options:
+
+
+-a N, -A    depth of research for ancestors
+-s N, -S    depth of research for associated classes
+-A, -S      all ancestors, resp. all associated
+-m[yn]      add or remove the module name
+-f MOD      filter the attributes : PUB_ONLY/SPECIAL/OTHER/ALL
+-k          show only the classes (no attributes and methods)
+-b          show 'builtin' objects
+
+
+
+
+Examples:
+
+
+General Vue on a Module
+
+
+pyreverse -ASmy -k -o png pyreverse/main.py -p Main
+
+With these options you can have a quick vue of the dependencies without
+being lost in endless lists of methods and attributes.
+
+
+
+Detailed Vue on a Module
+
+
+pyreverse -c PyreverseCommand -a1 -s1 -f ALL -o png  pyreverse/main.py
+
+
+
+[image : PyreverseCommand.png, pyreverse.diagram.ClassDiagram class diagram with one dependency level]
+
+module in full size image
+
+
+Show all methods and attributes of the class (-f ALL).
+By default, the class diagram option -c uses the options
+-A, -S, -my, but here we desactivate them
+to get a reasonably small image.
+
+
+
+
+Configuration File
+
+You can put some options into the file ".pyreverserc" in your home directory.
+
+Exemple:
+
+
+--filter-mode=PUB_ONLY --ignore doc --ignore test
+
+
+
+This will exclude documentation and test files in the doc and test
+directories. Also, we will see only "public" methods.
