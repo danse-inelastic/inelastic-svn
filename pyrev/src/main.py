@@ -86,7 +86,7 @@ this disables -f values")),
 
 
 class PyreverseCommand(ConfigurationMixIn):
-    """base class providing common behaviour for pyreverse commands"""
+    """base class providing common behavior for pyreverse commands"""
 
     options = OPTIONS
 
@@ -99,7 +99,7 @@ class PyreverseCommand(ConfigurationMixIn):
         self.run(args)
 
     def run(self, args):
-        """checking argmuents and run project"""
+        """checking arguments and run project"""
         if not args:
             print self.help()
             return
