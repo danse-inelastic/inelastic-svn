@@ -43,18 +43,14 @@ $ python pyrev.py -ASmy -k -o png matter.Structure -p Structure
 
 .. image:: classes_Structure.png
 
-With these options you can have a quick vue of the dependencies without
-being lost in endless lists of methods and attributes.
+With these options you can have a quick vue of the dependencies without being lost in endless lists of methods and attributes.
 
 Detailed vue on a module
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-$ python pyrev.py -c PyrevCommand -a1 -s1 -f ALL -o png  pyrev.py
+$ python pyrev.py -c -f ALL -o png  matter.Structure -p StructureDetailed
 
-
-
-module in full size image
-
+.. image:: classes_StructureDetailed.png
 
 Show all methods and attributes of the class (-f ALL).
 By default, the class diagram option -c uses the options

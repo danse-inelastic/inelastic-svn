@@ -11,4 +11,7 @@ if __name__ == '__main__':
     PyrevCommand(['-ASmy','-o','png','-p','Structure','matter.Structure'])
     PyrevCommand(['-ASmy','-o','png','-p','Lattice','matter.Lattice'])
     PyrevCommand(['-ASmy','-o','png','-p','Atom','matter.Atom'])
-    
+    PyrevCommand(['-ASmy','-f','ALL','-o','png','-p','StructureDetailed','matter.Structure'])
+
+    PyrevCommand(['-ASmy','-f','ALL','-o','png','-p','AtomDetailed','matter.Atom'])
+    # qe 
