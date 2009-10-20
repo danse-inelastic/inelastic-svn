@@ -1,34 +1,28 @@
-here is how to use the diagram generator:
+Tutorial
+========
 
+Overview
+--------
 
-The command pyreverse generates the diagrams in all formats that graphviz/dot
+Pyrev generates the diagrams in all formats that graphviz/dot
 knows, or in VCG :
 
-The following command shows what dot knows:
+canon cmap cmapx cmapx_np dia dot eps fig gd gd2 gif hpgl imap imap_np ismap jpe jpeg jpg mif mp pcl pdf pic plain plain-ext png ps ps2 svg svgz tk vml vmlz vrml vtx wbmp xdot xlib
 
+Hers is a sample usage using the png output format:
 
-$ dot -Txxx
-Format: "xxx" not recognized. Use one of: canon cmap cmapx cmapx_np dia dot
-eps fig gd gd2 gif hpgl imap imap_np ismap jpe jpeg jpg mif mp pcl pdf pic
-plain plain-ext png ps ps2 svg svgz tk vml vmlz vrml vtx wbmp xdot xlib
-
-
-$ pyreverse -o png -p Pyreverse pylint/pyreverse/
+$ python pyrev.py -o png -p Gulp memd.gulp.Gulp
 [...]
-creating diagram packages_Pyreverse.png
-creating diagram classes_Pyreverse.png
+creating diagram packages_Gulp.png
+creating diagram classes_Gulp.png
 
+It uses these options:
 
+ * -o :  sets the output format
 
-
-    * -o :  sets the output format
-
-    * -p name : yields the output files packages_name.png and classes_name.png
-
-Options
+ * -p name : yields the output files packages_name.png and classes_name.png
 
 One can modify the output with following options:
-
 
 -a N, -A    depth of research for ancestors
 -s N, -S    depth of research for associated classes
@@ -39,15 +33,13 @@ One can modify the output with following options:
 -b          show 'builtin' objects
 
 
-
-
-Examples:
-
+Examples
+--------
 
 General Vue on a Module
+^^^^^^^^^^^^^^^^^^^^^^^
 
-
-pyreverse -ASmy -k -o png pyreverse/main.py -p Main
+$ python pyrev.py -ASmy -k -o png pyreverse/main.py -p Main
 
 With these options you can have a quick vue of the dependencies without
 being lost in endless lists of methods and attributes.
@@ -55,35 +47,33 @@ being lost in endless lists of methods and attributes.
 
 
 Detailed Vue on a Module
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+$ python pyrev.py -c PyrevCommand -a1 -s1 -f ALL -o png  pyrev.py
 
 
-pyreverse -c PyreverseCommand -a1 -s1 -f ALL -o png  pyreverse/main.py
-
-
-
-[image : PyreverseCommand.png, pyreverse.diagram.ClassDiagram class diagram with one dependency level]
 
 module in full size image
 
 
 Show all methods and attributes of the class (-f ALL).
 By default, the class diagram option -c uses the options
--A, -S, -my, but here we desactivate them
+-A, -S, -my, but here we deactivate them
 to get a reasonably small image.
 
 
 
 
 Configuration File
+^^^^^^^^^^^^^^^^^^
 
 You can put some options into the file ".pyreverserc" in your home directory.
 
-Exemple:
+Example:
 
 
 --filter-mode=PUB_ONLY --ignore doc --ignore test
 
-
-
 This will exclude documentation and test files in the doc and test
 directories. Also, we will see only "public" methods.
+ 
