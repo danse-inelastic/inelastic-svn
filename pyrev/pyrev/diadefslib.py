@@ -19,7 +19,7 @@
 from logilab import astng
 from logilab.astng.utils import LocalsVisitor
 
-from pylint.pyreverse.diagrams import PackageDiagram, ClassDiagram
+from pyrev.diagrams import PackageDiagram, ClassDiagram
 
 # diagram generators ##########################################################
 

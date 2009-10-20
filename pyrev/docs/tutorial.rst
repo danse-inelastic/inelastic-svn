@@ -67,7 +67,7 @@ to get a reasonably small image.
 Configuration File
 ^^^^^^^^^^^^^^^^^^
 
-You can put some options into the file ".pyreverserc" in your home directory.
+You can put some options into the file ".pyrevrc" in your home directory.
 
 Example:
 
