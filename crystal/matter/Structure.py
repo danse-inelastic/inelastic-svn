@@ -29,6 +29,7 @@ class Structure(list):
                     When atoms argument is an existing Structure instance,
                     the new Structure is its copy.
         lattice  -- instance of Lattice defining coordinate systems, property.
+        spaceGroup -- spacegroup object of structure
         title    -- string description of the structure
         filename -- optional, name of a file to load the structure from.
                     Overrides atoms argument when specified.
