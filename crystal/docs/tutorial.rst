@@ -35,12 +35,15 @@ or a pdb file, or an xyz file, for example. We note the asymmetric unit cell is 
 >>> stru.spaceGroup.short_name
 Fm-3m
 
+(should probably change spaceGroup to sg, and short_name should have shortcut 'name')
+
 To query information about occupied Wyckoff points:
 
 (coming)
 
 One can also set the space group:
 
+(this is a property where one can set it with a space group object or a number, in which latter case it will lookup the default setting and try the sym ops of each setting it has on the atoms...if they don't work, it will issue warning the atom positions are inconsistent with space group operations and recommend you specify a new list of ops...eventually it will just recompute the space group (best soln).)
 
 Eventually it may be possible to calculate the symmetry directly from a list of atoms, but for now, input of the space group is necessary. 
 
