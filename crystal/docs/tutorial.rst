@@ -37,6 +37,8 @@ Fm-3m
 
 (should probably change spaceGroup to sg, and short_name should have shortcut 'name')
 
+(also show how to get symmetry operations)
+
 To query information about occupied Wyckoff points:
 
 (coming)
