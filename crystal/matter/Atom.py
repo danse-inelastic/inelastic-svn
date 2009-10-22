@@ -9,8 +9,9 @@ class AtomPropertyCurator(type):
     It establishes:
       - Atom class's docstring
       - a list of names of properties
-    #  - the list of setable attributes, "_setable", (to be used in method __setattr__ of Atom class).
-    NOTE: Brandon doesn't like this third one...user-scripters should be able to set whatever they want...why limit them?
+      - the list of setable attributes, "_setable", (to be used in method __setattr__ of Atom class).
+    NOTE: Brandon doesn't like this third one...user-scripters should be able to set whatever 
+    they want...why limit them?
     """
 
     def __init__(AtomClass, name, bases, dict):
