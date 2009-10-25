@@ -90,8 +90,7 @@ This is an assumption which, to a first approximation, is probably adequate for 
 
 Reviewer 2's comment:
 ---------------------
-Page 11: Equation 5: What is A, what is V? (A = free energy at T = 0?, V =
-potential energy / total energy?)
+Page 11: Equation 5: What is A, what is V? (A = free energy at T = 0?, V = potential energy / total energy?)
 
 Response:
 ---------
