@@ -46,14 +46,9 @@ the ANNNI models, for example.
 
 Response:
 ---------
-	This is a commendable idea and we thank Reviewer 3 for bringing it up.  We were somewhat aware of the vast amount of Ising-type model publications, but considered the space to review the field adequately would inordinately shift the focus of the paper and would better be spent on the subject of the paper itself.  Additionally, they're connection with real systems was not as established as the van Konyenburg.  However, we can at least review a small subset (i.e the ANNNI-type models) of the field.  Although the focus of this paper is on sufficient parameter space in the rotational potentials of GPDs, the next paper presenting a full computation of the model and test with the data presented here would indeed benefit from at least a partial comparison.  We say partial because there are obvious differences between our model and the typical ANNNI model, the most obvious being that our interaction is only nearest neighbor for now, commensurate with the interactions between most van der Waals molecules (and discussed in-depth in GPD I).  Another differences is the extra degree of freedom that comes from dealing with a complete three dimensional molecule rather than a one-dimensional spin.
+	This is a commendable idea and we thank Reviewer 3 for bringing it up.  We were somewhat aware of the vast amount of Ising-type model publications, but considered an attempt to review the field adequately would inordinately shift the focus of this work and would better be spent on the extremely important subject of the paper itself: finding a sufficient number of interaction parameters to represent real materials (especially since this work is already lengthy!).  However, we have attempted to do this briefly in the revised version of our work, mostly in the context of the ANNNI-type models Reviewer 3 has mentioned.  Additionally, although the scope of *this* work is narrow and specialized, the *next* paper presenting a general computation with the full model from the high temperature reference state would indeed benefit from a more direct comparison with the ANNNI.  The only caveats may be that molecular crystal GPD interactions are only nearest neighbor for now (justified by typical van der Waals molecule-molecule interactions--see GPD I).  Another caveat is the extra degree of freedom that comes from dealing with a complete three dimensional molecule rather than a one-dimensional spin, which makes "choosing a molecular orientation as the Ising spin" impossible.  However, we can probably perform a qualitative comparison.  One last issue with a direct comparison is that the two potentials are *very* different, leading to ambiguities in how to compare the typical J_1, J_2 from ANNNI with our 15 or so parameters detailing a complete quantum mechanical basis set.  This has the side effect of an extremely complex and computationally demanding solution technique discussed in length in GPD.  Thus 
 	
 	
-It would also be
-interesting to compare the results from this final work with magnetic materials modeled
-using, for example, the ANNN{1,2,3}-type models which have had some
-success reproducing real materials(ref) despite their primitive
-potential. 
 	
 
 Reviewer 3's comment:
@@ -65,7 +60,8 @@ mention of these aspects would be useful.
 
 Response:
 ---------
-	This is a very good point and we thank the reviewer for pointing it out, but there is one less-obvious problem with a direct comparison: the extra degree of freedom that a tetahedron has compared to a line changes everything--the potential (and phase diagram) are completely different).  The
+	This is an interesting point, and in initial drafts we attempted a connection with subtle kinetic effects 
+
 
 Reviewer 3's comment:
 ---------------------
