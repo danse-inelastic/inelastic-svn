@@ -46,7 +46,7 @@ the ANNNI models, for example.
 
 Response:
 ---------
-	This is a very good point and we thank the reviewer for pointing it out, but there is one less-obvious problem with a direct comparison: the extra degree of freedom that a tetahedron has compared to a line changes everything--the potential (and phase diagram) are completely different).  The
+	This is a commendable idea and we thank Reviewer 3 for bringing it up.  We were somewhat aware of the vast amount of Ising-type model publications, but considered the space to review the field adequately would inordinately shift the focus of the paper and would better be spent on the subject of the paper itself.  Additionally, they're connection with real systems was not as established as the van Konyenburg.  However, we can at least review a small subset (i.e the ANNNI-type models) of the field.  Although the focus of this paper is on sufficient parameter space in the rotational potentials of GPDs, the next paper presenting a full computation of the model and test with the data presented here would indeed benefit from at least a partial comparison.  We say partial because there are obvious differences between our model and the typical ANNNI model, the most obvious being that our interaction is only nearest neighbor for now, commensurate with the interactions between most van der Waals molecules (and discussed in-depth in GPD I).  Another differences is the extra degree of freedom that comes from dealing with a complete three dimensional molecule rather than a one-dimensional spin.
 	
 	
 It would also be
