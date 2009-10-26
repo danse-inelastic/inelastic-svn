@@ -46,9 +46,7 @@ the ANNNI models, for example.
 
 Response:
 ---------
-	This is a commendable idea and we thank Reviewer 3 for bringing it up.  We were somewhat aware of the vast amount of Ising-type model publications, but considered an attempt to review the field adequately would inordinately shift the focus of this work and would better be spent on the extremely important subject of the paper itself: finding a sufficient number of interaction parameters to represent real materials (especially since this work is already lengthy!).  However, we have attempted to do this briefly in the revised version of our work, mostly in the context of the ANNNI-type models Reviewer 3 has mentioned.  Additionally, although the scope of *this* work is narrow and specialized, the *next* paper presenting a general computation with the full model from the high temperature reference state would indeed benefit from a more direct comparison with the ANNNI.  The only caveats may be that molecular crystal GPD interactions are only nearest neighbor for now (justified by typical van der Waals molecule-molecule interactions--see GPD I).  Another caveat is the extra degree of freedom that comes from dealing with a complete three dimensional molecule rather than a one-dimensional spin, which makes "choosing a molecular orientation as the Ising spin" impossible.  However, we can probably perform a qualitative comparison.  One last issue with a direct comparison is that the two potentials are *very* different, leading to ambiguities in how to compare the typical J_1, J_2 from ANNNI with our 15 or so parameters detailing a complete quantum mechanical basis set.  This has the side effect of an extremely complex and computationally demanding solution technique discussed in length in GPD.  Thus 
-	
-	
+	This is a commendable idea and we thank Reviewer 3 for bringing it up.  We were somewhat aware of the vast amount of Ising-type publications, but considered an attempt to review the field adequately would inordinately shift the focus of this work and would better be spent on the extremely important subject of the paper itself: finding a sufficient number of interaction parameters to represent real materials (especially since this work is already lengthy!).  However, we have attempted to do this briefly in the revised version of our work, mostly in the context of the ANNNI-type models Reviewer 3 has mentioned.  Additionally, although the scope of *this* work is narrow and specialized, the *next* paper presenting a general computation with the full model from the high temperature reference state would indeed benefit from a more direct comparison with the ANNNI.  The only caveats may be that molecular crystal GPD interactions are only nearest neighbor for now (justified by typical van der Waals molecule-molecule interactions--see GPD I).  Another caveat is the extra degree of freedom that comes from dealing with a complete three dimensional molecule rather than a one-dimensional spin, which makes "choosing a molecular orientation as the Ising spin" a little problematic.  However, we can probably perform a qualitative comparison.  One last issue with a direct comparison is that the two potentials are *very* different, leading to ambiguities in how to compare the typical J_1 and J_2 from ANNNI with our 15 axes parameterizing a complete quantum mechanical basis set.  This has the side effect of an extremely complex and computationally demanding solution technique in the general case discussed at length in GPD I.  Thus Reviewer 3's good intentions at pointing toward the simplicity of solving ANNNIs as an impetus to make such a comparison may not be as profitable as one would hope for given the lack of a comparable methodology, which is of course lamentable!
 	
 
 Reviewer 3's comment:
@@ -58,17 +56,12 @@ readership of the journal is the relation between the global phase diagram of es
 and that of the bulk molecular crystals especially in the context and as reflected in the local critical behavior of surfaceswith or without defectsseparating the liquid and solid phase. Some
 mention of these aspects would be useful.
 
-Response:
----------
-	This is an interesting point, and in initial drafts we attempted a connection with subtle kinetic effects 
-
-
-Reviewer 3's comment:
----------------------
 In my opinion, the advantages of methodology of the authors using interaction potentials obtained
 from orbital orientations, has to be examined in the context of those already available in the
 literature.
 
 Response:
 ---------
-This is a very good point and we thank the reviewer for pointing it out, but there is one less-obvious problem with a direct comparison: the extra degree of freedom that a tetahedron has compared to a line changes everything--the potential (and phase diagram) are completely different).  The
+	This is an extremely interesting point, and in initial drafts we attempted a connection with subtle kinetic effects such as surface critical behavior because they have such a large effect on polymorphism.  My colleague and coauthor elected to omit such considerations, however, judging they were too far removed from the firsthand task of identifying the basic thermodynamics.  However, one may consider, instead of 
+
+
