@@ -6,7 +6,7 @@
 %------------------------------------------------------------------------------
 
 \documentclass[preprint]{iucr}              % DO NOT DELETE THIS LINE
-%\documentclass{article}
+%\documentclass{iucr}
 \usepackage{lscape}
 \usepackage[centertags]{amsmath}
 \usepackage{amsfonts}
@@ -238,24 +238,27 @@ coefficients.  A subset of these coefficients is used as the set of independent
 variables in GPDs.  The space can then be projected into two- or
 three-dimensional spaces for visualization purposes.  Crystalline phases occupy
 volumes in the GPDs and equilibrium phase transitions occur at the boundaries
-between the phase volumes.  An example is shown in Figs.~\ref{gpd1}
-and~\ref{gpd2}.
+between the phase volumes.  
 
 The proper thermodynamic condition for equilibrium of an isothermal system is
 minimization of the free energy.  The free energy is calculated relative to a
-high-temperature reference lattice, such as that shown at the origin of
-Figs.~\ref{gpd1} and~\ref{gpd2}, in which molecules remain translationally ordered but are
+high-temperature reference lattice in which molecules remain translationally ordered but are
 rotationally disordered. Experimentally this is termed a plastically
-crystalline state \cite{Sherwood79} and is observable for some of the molecules
-in our data set from \cite{McClurg09}, such as adamantane or methane.  Other systems melt, sublime, or decompose before the plastically-crystalline state is obtained.  Whether or not the reference state
-is observed, it provides a well-characterized thermodynamic reference state. 
-This is similar to fluid phase systems which are routinely referenced to an
+crystalline state \cite{Sherwood79} and is observable for many molecules,
+such as adamantane or methane.  Other systems melt, sublime, or decompose
+before the plastically-crystalline state is obtained.  Whether or not the reference state is observed, it provides a well-characterized thermodynamic reference state. This is similar to fluid phase systems which are routinely referenced to an
 ideal gas state, even if it has not been observed.  As the temperature is
 lowered for a solid with fixed intermolecular potential, new phases arise
 through spontaneous symmetry breaking, leading to at least partial rotational
-ordering of the molecules.  This frequently involves a change in space group as
-shown for the 10 new phases in Figs.~\ref{gpd1}
-and~\ref{gpd2}.  A series of additional phase transitions may arise as the
+ordering of the molecules.  
+
+An example of a GPD is shown in Figs.~\ref{gpd1} and~\ref{gpd2}.  In these
+diagrams an fcc lattice is used as the high-temperature reference state where
+the molecules are rotationally disordered and look like spheres.  As the temperature is lowered, the molecules adopt a fixed
+orientation and the crystal undergoes a change a structural change as shown for
+the 10 new phases in these figures.  
+
+A series of additional phase transitions may arise as the
 temperature is lowered toward absolute zero. For molecules with non-trivial
 point-group symmetry, it is convenient to reduce the dimensionality of the phase
 diagrams through adaptation of the potential to account for the molecular
@@ -263,18 +266,10 @@ symmetry. This approach of expanding the angle-dependent intermolecular
 interactions into symmetry-adapted rotation functions was originally developed
 for phase transitions in heavy methane by James and Keenan~\cite{James59} and
 has since been applied to crystals such as solid
-C$_{60}$~\cite{Michel92, Lamoen99}.  Figures \ref{gpd1} and \ref{gpd2} were
+C$_{60}$~\cite{Michel92,Lamoen99}.  Figures \ref{gpd1} and \ref{gpd2} were
 constructed for molecules with tetrahedral point group symmetry.
 
-An analog in the physics community to to molecular crystal GPDs are Ising-type
-GPDs, such as the Axial Next Nearest Neighbor Ising model (ANNNI),
-which has been used for decades to explore both commensurate and incommensurate
-phases\cite{Gendiar05, Kasama06, Muraoka99, Sato99, Kim95} that can be applied to complex materials such as silicon carbide, titanium aluminum, group-IV element
-polytypes, and so on\cite{Wong-Leung05, Colinet02, Raffy02}. These differ from
-molecular crystal GPDs in that their basis functions are simple binary variables $S_i\in \{1,-1\}$ coupled by a constant $J$, although such couplings
-typically exist with next-nearest neighbors or larger.
-
-However, like C's fluid-phase GPDs, molecular crystal
+However, like van Konyenburg's fluid-phase GPDs, molecular crystal
 GPDs are useful as a classification tool.  They can be used in data mining intermolecular forces from
 structural repositories such as the Cambridge Structural Database
 (CSD)~\cite{Allen02}.  Also, by locating new structures that may be more
@@ -283,10 +278,7 @@ provide feedback for molecular synthesis for crystal engineering. Further, GPDs
 can provide rationalization and/or prediction of crystal polymorphs for a given
 molecule.
 
-Previously~\cite{Mettes04} we demonstrated the construction of GPDs for
-tetrahedral molecules using an fcc reference lattice and outlined the high
-temperature orientationally ordered phases as a function of intermolecular
-potential parameters.  In a companion paper\cite{McClurg09} we classify
+In a companion paper\cite{McClurg09} we classify
 experimental crystal structures composed of tetrahedral point group molecules to
 determine what fraction of structures are amenable to inclusion in the GPDs and
 the number of reference lattices necessary to span the observed structures.  We
@@ -1107,15 +1099,36 @@ sufficient to locate our dataset of experimental
 structures in potential parameter space.  We have not investigated if a linear
 combination would be better.  Principle component analysis could be used to
 identify linear combinations of basis functions that better fit molecules. It
-is possible that fewer than 15 coefficients are necessary.  
+is possible that fewer than 15 coefficients are necessary. 
 
-A final advance would be a faster statistical mechanics method to calculate GPDs
-than the mean field method introduced in \cite{Mettes04}.  Such a method would
-find expectation values of molecular orientation in real time, without the delay
-of a mean-field calculation or an entire Monte Carlo or molecular dynamics
-simulation at each point in $\mb{\nu}$-parameter space.  Such a technique is
-nearing fruition and will be introduced in subsequent publications
-\cite{Keith09b}.
+An analog in the physics community to molecular crystal GPDs are the various
+Ising-type GPDs, such as Axial Next Nearest Neighbor Ising (ANNNI) GPDs. 
+Despite their much simpler potentials, these have been used for decades to
+explore a rich variety of commensurate and incommensurate
+phases\cite{Gendiar05,Kasama06,Muraoka99,Sato99,Kim95} that can be applied to
+realistic materials such as silicon carbide, titanium aluminum, group-IV
+element polytypes, and so on\cite{Wong-Leung05,Colinet02,Raffy02}. These differ
+from molecular crystal GPDs in that their basis functions are simple binary
+variables $S_i\in \{1,-1\}$ coupled by a constant $J$, although such couplings
+typically exist with next-nearest neighbors or larger. However, it will be
+interesting to compare the results of these simplified models with a full
+molecular crystal GPD now that we have established a sufficiently large
+parameter space.
+
+A further extension would be to include the intersection of each
+solid GPD with its set of high-temperature fluid GPD.  This
+would be useful in to crystallographers wishing to predict the first solid
+phase they would expect to precipitate from melt.  Furthermore,
+liquidlocate the high temperature intersection of each ray with its
+liquid phase
+
+%A final advance would be a faster statistical mechanics method to calculate
+%GPDs than the mean field method introduced in \cite{Mettes04}.  Such a method
+%would find expectation values of molecular orientation in real time, without
+%the delay of a mean-field calculation or an entire Monte Carlo or molecular
+%dynamics simulation at each point in $\mb{\nu}$-parameter space.  Such a
+%technique is nearing fruition and will be introduced in subsequent publications
+%\cite{Keith09b}.
 
 
 \subsection{Conclusions}
@@ -1132,9 +1145,11 @@ phase behavior of real binary mixtures, molecular crystal global
 phase diagrams may be useful in elucidating phase behavior of a
 variety of real substances and, in turn, used to develop novel
 intermolecular potentials and materials. Further work to apply these results in constructing
-temperature-dependent GPDs is needed and is underway. It would also be
-interesting to compare the results from this final work with similar
-models (i.e. the ANNN-\{1,2,3\}-type models).
+temperature-dependent GPDs is needed and is underway. 
+
+%It will also be
+%interesting to compare the results from this final work with simplerilar
+%models (i.e. the ANNN-\{1,2,3\}-type models).
 
 \ack{This work received financial support from the American Chemical
 Society - Petroleum Research Fund (PRF \#41774-AC10), DOE Grant No.

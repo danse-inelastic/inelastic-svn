@@ -24,12 +24,9 @@ authors' procedure themselves.
 
 Response:
 ---------
-Note: the following shorthand will be used:
------
+We use the following abbreviations: 
 GPD I: Molecular crystal global phase diagrams I: Method of construction, (with J.A. Mettes and R.B. McClurg), Acta Cryst. A 60, 621-636, 2004 
-
 GPD II: Molecular crystal global phase diagrams II: Reference lattices (with R.B. McClurg), submitted to Acta Crystallographica A, 2009
-
 GPD III: this work
 
 First, we apologize Reviewer 2 did not get access to GPD II--our intention was to specify that the manuscripts be reviewed together, or at least that the reviewers of GPD III be given a copy of GPD II.  Unfortunately such specifications sometimes are "lost in translation" while transmitting the papers to various staff members.  And yes, originally this work and GPD II were together, but the resulting length of each manuscript (and its supplementary material) was such that a division was absolutely necessary (GPD II and its supplementary material are 63 pages!).  We apologize again for Reviewer 2 not having direct access to GPD II.
@@ -49,7 +46,7 @@ region of parameter space chosen.
 
 Response:
 ---------
-This is a good point.  We have tried to explain the concept of Global Phase Diagrams (GPDs) from the standpoint of binary fluid mixtures, but a connection to the physics community and especially some of the many Ising-type models would be useful.  This has been added.  Another thing we have added to try to convey the point as a reprinting of some of the GPDs from GPD I.
+This is a good point.  We have tried to explain the concept of Global Phase Diagrams (GPDs) from the standpoint of binary fluid mixtures, but a connection to the physics community and especially some of the many Ising-type models would be useful.  This has been added.  We have also added figures of actual GPDs near the introduction to better convey the general idea.
 
 Reviewer 2's comment:
 ---------------------
