@@ -272,9 +272,9 @@ constructed for molecules with tetrahedral point group symmetry.
 However, like van Konyenburg's fluid-phase GPDs, molecular crystal
 GPDs are useful as a classification tool.  They can be used in data mining intermolecular forces from
 structural repositories such as the Cambridge Structural Database
-(CSD)~\cite{Allen02}.  Also, by locating new structures that may be more
-desirable to produce desired properties than an existing crystal structure, GPDs
-provide feedback for molecular synthesis for crystal engineering. Further, GPDs
+(CSD)~\cite{Allen02}.  Also, by locating new structures that may have more
+desirable properties than an existing
+crystal structure, GPDs provide feedback for molecular synthesis for crystal engineering. Further, GPDs
 can provide rationalization and/or prediction of crystal polymorphs for a given
 molecule.
 
@@ -1103,24 +1103,29 @@ is possible that fewer than 15 coefficients are necessary.
 
 An analog in the physics community to molecular crystal GPDs are the various
 Ising-type GPDs, such as Axial Next Nearest Neighbor Ising (ANNNI) GPDs. 
-Despite their much simpler potentials, these have been used for decades to
-explore a rich variety of commensurate and incommensurate
+Despite their near-trivial potentials, these have been used for decades
+to explore a rich variety of commensurate and incommensurate
 phases\cite{Gendiar05,Kasama06,Muraoka99,Sato99,Kim95} that can be applied to
 realistic materials such as silicon carbide, titanium aluminum, group-IV
-element polytypes, and so on\cite{Wong-Leung05,Colinet02,Raffy02}. These differ
-from molecular crystal GPDs in that their basis functions are simple binary
+element polytypes, and many others\cite{Wong-Leung05,Colinet02,Raffy02}. These
+differ from molecular crystal GPDs in that their basis functions are simple binary
 variables $S_i\in \{1,-1\}$ coupled by a constant $J$, although such couplings
-typically exist with next-nearest neighbors or larger. However, it will be
+typically exist with next-nearest neighbors or larger. It will be
 interesting to compare the results of these simplified models with a full
-molecular crystal GPD now that we have established a sufficiently large
-parameter space.
+molecular crystal GPD in our upcoming work\cite{Keith09b}.
 
 A further extension would be to include the intersection of each
-solid GPD with its set of high-temperature fluid GPD.  This
-would be useful in to crystallographers wishing to predict the first solid
-phase they would expect to precipitate from melt.  Furthermore,
-liquidlocate the high temperature intersection of each ray with its
-liquid phase
+solid GPD with a fluid GPD.  This would not only allow
+crystallographers to identify the first phase to precipitate from
+solution, but would also allow inclusion of specific crystallization conditions
+and kinetic effects. Thus the calculation of the exact location of the
+liquid/solid surface could be performed with as complex or simple a crystal
+growth model as one desires, using not only consideration of surface free
+energies, crystal habit, and surface defect structure, but also external conditions such as
+undercooling, seeding, etc.  In theory even kinetic barriers to crystallization
+could be estimated between solution and GPD candidate phases, thus
+suggesting a more realistic progression of polymorph crystallization
+since GPDs find not only the thermodynamic ground state but also all metastable states.
 
 %A final advance would be a faster statistical mechanics method to calculate
 %GPDs than the mean field method introduced in \cite{Mettes04}.  Such a method
