@@ -46,7 +46,7 @@ region of parameter space chosen.
 
 Response:
 ---------
-This is a good point.  We have tried to explain the concept of Global Phase Diagrams (GPDs) from the standpoint of binary fluid mixtures, but a connection to the physics community and especially some of the many Ising-type models would be useful.  This has been added.  We have also added figures of actual GPDs near the introduction to better convey the general idea.
+This is a good point.  We have tried to explain the concept of Global Phase Diagrams (GPDs) from the standpoint of binary fluid mixtures, but a connection to the physics community and especially some of the many Ising-type models would be useful.  This has been added as a discussion point.  We have also added figures of actual GPDs near the introduction to better convey the general idea.
 
 Reviewer 2's comment:
 ---------------------
