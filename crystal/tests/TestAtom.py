@@ -1,6 +1,14 @@
+
+
+
+
+import sys,os
 import unittest
 
-from matter import atom, Atom
+sys.path.insert(0,os.path.abspath('..'))
+print sys.path
+
+from matter import Atom
 
 class TestCase( unittest.TestCase ):
     
@@ -10,6 +18,14 @@ class TestCase( unittest.TestCase ):
         Fe57 = Atom( 'Fe', mass=57 )
         print "- Z=%s" % Fe57.Z
         print "- mass=%s" % Fe57.mass
+        return
+    
+    def test_xyz(self):
+        "Atom: xyz cartesian attribute"
+        from matter import Lattice
+        C = Atom( 'C', [0.1, 0.2, 0.3], lattice = Lattice(2,2,2,90,90,90))
+        print "fractional pos=%s" % C.xyz
+        print "cartesian pos=%s" % C.xyz_cartn
         return
 
 
@@ -83,9 +99,11 @@ class TestCase( unittest.TestCase ):
     pass # end of TestCase
 
 
-def main():
-    testsuite = unittest.makeSuite( TestCase )
-    unittest.TextTestRunner(verbosity=2).run(testsuite)
-    return 
+#def main():
+#    testsuite = unittest.makeSuite( TestCase )
+#    unittest.TextTestRunner(verbosity=2).run(testsuite)
+#    return 
 
-if __name__ == "__main__": main()
+if __name__ == "__main__": 
+    unittest.main()
+

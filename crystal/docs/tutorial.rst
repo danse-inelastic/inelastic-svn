@@ -42,6 +42,7 @@ Fm-3m
 To query information about occupied Wyckoff points:
 
 (coming)
+(embed Wyckoff point information in each atom?)
 
 One can also set the space group:
 
