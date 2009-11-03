@@ -253,6 +253,16 @@ class Lattice:
         """
         rv = (self.a, self.b, self.c, self.alpha, self.beta, self.gamma)
         return rv
+    
+    def getLatticeSystem(self):
+        """ this is unfinished!
+        simple algorithm with given unit cell
+        """
+        from utils import almostEqual
+        # need to implement almostEqualSet for (60,60,90)
+        if almostEqual(self.a, self.b, self.c): return 'cubic'
+        #elif almostEqual(self.a, self.b) or almostEqual(self.a)
+        
 
     
 ################################################    

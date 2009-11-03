@@ -1,4 +1,12 @@
 
+def almostEqual(*args):
+    tol = 10^-7
+    for val1 in args:
+        for val2 in args:
+            if abs(val1-val2)>tol: return False # break if it is ever false
+    #otherwise return true
+    return True
+
 def isfloat(s):
     """True if argument can be converted to float"""
     try:
