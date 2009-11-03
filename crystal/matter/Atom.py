@@ -87,6 +87,8 @@ class CartesianCoordinatesArray(numpy.ndarray):
         numpy.ndarray.__setitem__(self, idx, value)
         self.xyz[:] = self.lattice.fractional(self)
         return
+        
+    
 
 # conversion constants
 _BtoU = 1.0/(8 * numpy.pi**2)

@@ -259,7 +259,7 @@ class Lattice:
         simple algorithm with given unit cell
         """
         from utils import almostEqual
-        # need to implement almostEqualSet for (60,60,90)
+        # need to implement almostEqualSet for (90,90,120)
         if almostEqual(self.a, self.b, self.c): return 'cubic'
         #elif almostEqual(self.a, self.b) or almostEqual(self.a)
         
