@@ -3,9 +3,11 @@
 __author__="XiaoliTang"
 __date__ ="$Oct 26, 2009 12:53:54 AM$"
 
+# QE parser for AQQ
+
 import numpy as np
 import string
-#from idf import Polarizations, Omega2
+import AQQ as AQQ
 
 def read_anh3dyn(fname):
     '''Obtain third order anharmonicity Aqq from QE d3.x'''
@@ -18,8 +20,8 @@ def read_anh3dyn(fname):
     natom = int(line.split()[1])
 #    print natom
 
-    AQQ = []
-    qP  = []
+    A = []
+    q = []
     val = []
     while True:
         line = file.readline()
@@ -28,7 +30,7 @@ def read_anh3dyn(fname):
             break
         if 'q = (' in line:
 #            print line
-            qP.append([float(f) for f in line.split()[3:6]])
+            q.append([float(f) for f in line.split()[3:6]])
         if 'modo:' in line:
             print line
             line =file.readline()
@@ -47,14 +49,16 @@ def read_anh3dyn(fname):
                     temp1=complex(float(val[0]),float(val[1]))
                     temp2=complex(float(val[2]),float(val[3]))
                     temp3=complex(float(val[4]),float(val[5]))
-                    AQQ.append([temp1,temp2,temp3])
+                    A.append([temp1,temp2,temp3])
 
-    AQQ = (np.array(AQQ))
-    qP = np.array(qP)
-    Nq = len(qP)
+    AQQ.kpoints = (np.array(q))
+  
 #    print Nq
 #    print qP
-    AQQ.resize(Nq,natom,3,natom,natom,3,3)
-#    print AQQ
+    A.resize(natom,3,natom,natom,3,3)
 
-    return (natom,Nq,qP,AQQ)
+    AQQ.AQQ = np.rollaxis(np.array(A),1,4)
+
+    print AQQ.AQQ.shape
+
+    return (AQQ)
