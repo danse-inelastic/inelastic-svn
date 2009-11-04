@@ -270,14 +270,16 @@ has since been applied to crystals such as solid
 C$_{60}$~\cite{Michel92,Lamoen99}.  Figures \ref{gpd1} and \ref{gpd2} were
 constructed for molecules with tetrahedral point group symmetry.
 
-However, like van Konyenburg's fluid-phase GPDs, molecular crystal
+Like van Konyenburg fluid-phase GPDs, molecular crystal
 GPDs are useful as a classification tool.  They can be used in data mining intermolecular forces from
 structural repositories such as the Cambridge Structural Database
 (CSD)~\cite{Allen02}.  Also, by locating new structures that may have more
 desirable properties than an existing
 crystal structure, GPDs provide feedback for molecular synthesis for crystal engineering. Further, GPDs
 can provide rationalization and/or prediction of crystal polymorphs for a given
-molecule.
+molecule.  Metastable polymorphs, for example, are likely to be adjacent phases
+on GPDs because their free energies are slightly higher than the global
+minimum.
 
 In a companion paper~\cite{McClurg09} we classify
 experimental crystal structures composed of tetrahedral point group molecules to
@@ -358,14 +360,13 @@ Fig.~\ref{compare}.
 \label{hamiltonian}
 
 Previously~\cite{Mettes04} we discussed the construction of a
-nearest neighbor rotational potential for molecules interacting primarily
+nearest neighbor potential for molecules interacting primarily
 through van der Waals interactions.
-The potential is a level of abstraction above an atom-atom or site-site
+The potential $V$ is a level of abstraction above an atom-atom or site-site
 potential but retains a firm basis in quantum
-mechanics~\cite{Avoird94}. The potential consists of a two center
-expansion constructed by coupling one center basis functions
-$U^{\ell_i}_{m_\tau n_\sigma}$ 
-for pairs of molecules $i$ and $j$ through a coupling ``matrix function" 
+mechanics~\cite{Avoird94}. In \cite{Mettes04} we discuss how the rotational
+contribution $V_{\mathrm{or}}$ of $V$ consists of a two center expansion
+constructed by coupling one center basis functions $U^{\ell_i}_{m_\tau n_\sigma}$ for pairs of molecules $i$ and $j$ through a coupling ``matrix function" 
 $J_{m_\tau n_\sigma m_\rho n_\mu}^{\ell_i\ell_j}$,
 \begin{eqnarray}
 \label{re:eq:vij2}V_{\mathrm{or}} &=&
@@ -377,7 +378,10 @@ n_\mu}(\mb{\omega}_i).
 \end{eqnarray}
 The one half avoids overcounting pair-wise interactions,
 $\ell_i,\ell_j\in\mathbb{N}$, the
-natural numbers, and $|\ell_i-\ell_j|\leq\ell\leq \ell_i+\ell_j$.
+natural numbers, $m_{\tau,\rho}\in\{\ell_{i,j}...-\ell_{i,j}\}$, and $
+n_{\sigma,\mu}\in\{\ell_{i,j}...-\ell_{i,j}\}$. A complete derivation
+of Eq.~(\ref{re:eq:vij2}) is given in Appendix~\ref{derivation}, but here we
+explore its main components.
 
 The functions $U^{\ell_i}_{m_\tau n_\sigma}(\mb{\omega}_i)$ are functions of the
 orientation of the molecule through its Euler angles $\mb{\omega}_i$
@@ -424,8 +428,9 @@ centers,
 &&{}\times S^{\ell_i}_{m_\tau m_i}C_{m}^{\ell}(\mb{\Omega}_{ij})
 S^{\ell_j}_{m_\rho m_j},
 \end{eqnarray}
-The potential coefficients
-$\nu_{\ell_i,\ell,\ell_j}^{n_\sigma,n_\mu}(r_{ij})$ are a function
+where $\ell\in\{\ell_i + \ell_j\ldots|\ell_i - \ell_j|\}$,
+$m_{i,j}\in\{\ell_{i,j}...-\ell_{i,j}\}$, and $m\in\{\ell\ldots-\ell\}$. The
+potential coefficients $\nu_{\ell_i,\ell,\ell_j}^{n_\sigma,n_\mu}(r_{ij})$ are a function
 of the distance $r_{ij}$ between molecular centers. The neighbor
 distance $r_{ij}$ and orientation $\Omega_{ij}$ of the
 intermolecular vector are determined by the reference lattice. Since
@@ -443,11 +448,20 @@ particular $\nu_{\ell_i,\ell,\ell_j}^{n_\sigma,n_\mu}$ is zero if
 $\ell_i+\ell+\ell_j$ is odd and
 $\nu_{\ell_i,\ell,\ell_j}^{n_\sigma,n_\mu}=
 (-1)^{\ell_i+\ell_j}\nu_{\ell_j,\ell,\ell_i}^{n_\mu,n_\sigma}$ for
-single component crystals~\cite{Avoird80}. The full set of
-$\nu_{\ell_i,\ell,\ell_j}^{n_\sigma,n_\mu}(r_{ij})$, denoted
-$\mb{\nu}$, are the axes of GPDs and constitute the search space for
-constructing molecular crystal GPDs.  The explicit construction of Eq.~(\ref{re:eq:vij2}) is
-different from our references so a full derivation is given in Appendix~\ref{derivation}.
+single component crystals~\cite{Avoird80}. 
+
+As discussed previously~\cite{Mettes04}, this pairwise-additive potential
+implicitly contains multimolecular many-body effects in
+the values of $\nu_{\ell_i,\ell,\ell_j}^{n_\sigma,n_\mu}(r_{ij})$ as a
+mean-field contribution.  Also, because Eq.~(\ref{re:eq:vij2}) is currently
+limited to nearest-neighbors, it is most appropriate for ``van der Waals
+molecules'', or molecular crystals held together primarily by dispersion forces
+rather than ionic or strongly dipolar molecular crystals which
+require Ewald sums over distant neighbors. Van der Waals
+molecules seem to be the majority
+of molecular crystals found in the CSD, so that this pairwise additive
+potential over molecules with an implicit multibody contribution is a good
+approximation for the neutral molecules considered here. The full set of $\nu_{\ell_i,\ell,\ell_j}^{n_\sigma,n_\mu}(r_{ij})$, denoted $\mb{\nu}$, are the axes of GPDs and constitute the search space for constructing molecular crystal GPDs.
 
 \subsection{Computational Method}
 \label{Computational_Strategy}
@@ -488,9 +502,9 @@ functions,
 \lim_{T/T_{\mathrm{pt}}\rightarrow 0}\av{U^{\ell_i}_{m_\tau
 n_\sigma}}=U^{\ell_i}_{m_\tau n_\sigma}(\mb{\omega}_0).
 \end{equation}
-Also, the free energy is equal to the potential in that limit,
+Also, the free energy $A(T)$ is equal to the potential $V$ in that limit,
 \begin{equation}\label{5b}
-\lim_{T/T_{\mathrm{pt}}\rightarrow 0}A=V.
+\lim_{T/T_{\mathrm{pt}}\rightarrow 0}A(T)=V.
 \end{equation}
 Equations (\ref{5a}) and (\ref{5b}) are common approximations used in
 many crystal structure prediction codes~\cite{Verwer98} and are
