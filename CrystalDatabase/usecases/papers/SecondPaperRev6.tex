@@ -336,9 +336,9 @@ parameters. In~\cite{McClurg09} we found that the majority of the
 experimental structures composed of tetrahedral molecules in the CSD can be
 classified using only four reference lattices. Since there are too few examples
 for other reference lattices, we focus on the set \{bcc, fcc,
-hcp, sc\}. Each of these reference lattices has at least four crystal
-structures with monomer synthons in the data set.  This means a given structure
-can be categorized as a subgroup of one of these reference lattices when single
+hcp, sc\} and use these as a test set to see how many parameters are required
+in molecular crystal GPDs. Each of these reference lattices has at least four
+crystal structures with monomer synthons in the data set.  This means a given structure can be categorized as a subgroup of one of these reference lattices when single
 molecules are reduced to spheres (as opposed to dimers or chains--see~\cite{McClurg09}).  In this section we seek to determine a \emph{sufficient}
 parameter space such that experimental
 structures are each stable in a finite volume in the IP parameter space. Thus we
@@ -484,6 +484,7 @@ $\mb{\nu}$ vector is found which makes the experimental phase
 energetically minimal relative to the alternatives in the library.
 
 \subsubsection{Figure of Merit}
+\label{figureofmerit}
 
 In our previous work~\cite{Keith04c,Mettes04} linear response theory
 was used to seek phase transitions as a model crystal is cooled from
@@ -743,27 +744,28 @@ crystallizes in space group 2.
 \subsubsection{Minimum Energy Gap}
 \label{Minimum_Energy_Gap}
 
-To identify a representative vector $\mb{\nu}$ for which each
-experimental phase is the lowest energy structure (\emph{i.e.}\ a
-phase with an energy such as Eq.\ (\ref{energyOfStructure})), we
-propose a minimum energy difference algorithm. First we normalize the
-$\mb{\nu}$ vector by projecting it onto the unit hypersphere since only relative
-$\mb{\nu}$ magnitudes affect the phase as $T\rightarrow 0$. Then
-taking the library of structures discussed previously in this
-section, we minimize the difference of the energy of the target
-structure $E_{target}$ and the minimal energy structure in the
-collection $\{E_{lib}(\mb{\nu},\mb{\omega})\}$.  Thus we seek the
-vector $\nu_{RP}$ that minimizes
+Now that we have a potential that is capable of producing all the experimental
+structures from \cite{McClurg09} for the \{fcc, sc, hcp, bcc\} reference
+lattices, and we have input each structure's molecular Euler angles to reduce
+it to a form such as Eq.~(\ref{energyOfStructure}), we need to develop an algorithm that will isolate this structure in
+$\mb{\nu}$-space as the most thermodynamically stable structure. To this end we
+propose a general minimum energy difference algorithm that makes use of the
+candidate lattice libraries derived in Sec.~\ref{collection}.
+
+This algorithm proceeds as follows. First, normalize the
+$\mb{\nu}$ vector by projecting it onto the unit hypersphere since only
+relative $\mb{\nu}$ magnitudes affect the phase as $T\rightarrow 0$. Then, taking the library of structures discussed previously in this section, minimize the difference of the energy of the target structure $E_{target}$ and the minimal energy structure in the
+collection $\{E_{lib}(\mb{\nu},\mb{\omega})\}$.  Thus
+a vector $\nu_{RP}$ is sought that minimizes
 \begin{equation}
 \label{Endiff} \Delta E =
 E_{target}(\mb{\nu})-\min\{E_{lib}(\mb{\nu},\mb{\omega})\}.
 \end{equation}
-For a more limited library, this gives the point in $\mb{\nu}$ space of the
-\emph{largest}
-energy gap between $E_{\mathrm{target}}$ and any other structures in
-the library and is representative of the family of intermolecular
-potentials consistent with the target structure. For an exhaustive
-library, $\Delta E$ is bounded below by zero since
+We note that for a finite library, this gives the point in $\mb{\nu}$ space of
+the \emph{largest} energy gap between $E_{\mathrm{target}}$ and any other
+structures in the library and is representative of the family of intermolecular
+potentials consistent with the target structure. For an
+infinite library, $\Delta E$ is bounded below by zero since
 $\{E_{lib}(\mb{\nu},\mb{\omega})\}$ contains the target structure
 and is minimized with respect to $\omega$ while the target structure
 is held at fixed molecular orientation. We call it the
@@ -877,10 +879,9 @@ the same orientation.  The difference is the second molecule which
 is rotated $\sim 90^\circ$ between the two structures. Reasons for
 this difference may be related to truncation of the potential after
 the fourth manifold, lack of molecular displacements and lattice
-strains in the model, lack of explicit second nearest-neighbor or
-three-body interactions, or missing quantum effects.  Another reason
-may be that the reported experimental phase is in fact metastable in
-the limit $T\rightarrow 0$. Ostwald's step rule supports this possibility.  The
+strains in the model, lack of explicit second nearest-neighbor interactions,
+the low-temperature limit discussed in Sec.~\ref{figureofmerit}, or missing
+quantum effects. Another reason may be that the reported experimental phase is in fact metastable in the limit $T\rightarrow 0$. Ostwald's step rule supports this possibility.  The
 rule is based on the observation that during crystal nucleation and growth a
 metastable phase
 frequently crystallizes first which is closest in structure to the liquid or
