@@ -460,8 +460,9 @@ rather than ionic or strongly dipolar molecular crystals which
 require Ewald sums over distant neighbors. Van der Waals
 molecules seem to be the majority
 of molecular crystals found in the CSD, so that this pairwise additive
-potential over molecules with an implicit multibody contribution is a good
-approximation for the neutral molecules considered here. The full set of $\nu_{\ell_i,\ell,\ell_j}^{n_\sigma,n_\mu}(r_{ij})$, denoted $\mb{\nu}$, are the axes of GPDs and constitute the search space for constructing molecular crystal GPDs.
+potential over molecules with an implicit multibody contribution is a fair
+parametrization and useful as we seek to map CSD molecules to a specific number
+of $\nu_{\ell_i,\ell,\ell_j}^{n_\sigma,n_\mu}(r_{ij})$. The full set of $\nu_{\ell_i,\ell,\ell_j}^{n_\sigma,n_\mu}(r_{ij})$, denoted $\mb{\nu}$, are the axes of GPDs and constitute the search space for constructing molecular crystal GPDs.
 
 \subsection{Computational Method}
 \label{Computational_Strategy}
@@ -520,7 +521,7 @@ applications. To determine an adequate truncation of the potential, we
 make use of space group irreducible representations (IRs).
 Symmetry-breaking mechanisms are classified by space group IRs and
 an order parameter direction such as $(a,b)$~\cite{Stokes07}.  The
-temperature dependent values $a$ and $b$ are given in our model by
+temperature-dependent values $a$ and $b$ are given in our model by
 components of space group IR-adapted basis functions $\mb{q}$ which
 are linear combinations of $U^{\ell_i}_{m_\tau
 n_\sigma}(\mb{\omega}_i)$~\cite{Mettes04}. Space group IR
@@ -569,8 +570,9 @@ structure to its space group (thus a structure with space group 64 in which
 molecular centers of mass occupy Wyckoff points d and f would be denoted 64d,f).
 Point group IRs subduced in the space group IR and the first
 manifold or $\ell_i$ value of SO(3) at which a given Wyckoff IR appears are also
-shown.  See the supplementary material for additional notes on the construction
-of this table.
+shown.  The pathways shown are calculated in {I\small SOTROPY} by
+finding a group-subgroup transition from the high-temperature reference phase,
+such as fcc, to the observed structure.
 
 For some pathways, such as that of carbon tetraiodide, 225a
 $\rightarrow$ 121a in Table~\ref{pathwaysFCC}, there is a single
@@ -690,7 +692,7 @@ programs, they are sufficient to place most of the observed structures as
 discussed in Sec.~\ref{discussion}.
 
 
-\subsubsection{Experimental Phase Energies}
+\subsubsection{Experimental Structure Energies}
 
 With a set of candidate lattices with which to compare a given observed
 structure in $\mb{\nu}$-space, we now need to find the energy of each
