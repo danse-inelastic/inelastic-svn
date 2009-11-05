@@ -1,3 +1,9 @@
+Nov 5, 2009
+------------
+Here is the way to combine the supp material pdfs:
+
+pdftk FirstPaperSupPage.pdf Notes\ for\ Table\ 6.pdf Table\ 6_Structures_portrait.pdf Table\ 7_Neighbor\ Histogram.pdf Table\ 8_Order\ Parameters.pdf FirstPaperSupMaterial.pdf cat output suppMaterial.pdf
+
 Oct 30, 2009
 ------------
 Here is the updated way to combine the pdfs:
