@@ -15,7 +15,12 @@ class AtomPropertyCurator(type):
     """
 
     def __init__(AtomClass, name, bases, dict):
-        type.__init__(name, bases, dict)
+
+        from matter import METACLASS_CTOR_NEEDS_TYPE
+        if METACLASS_CTOR_NEEDS_TYPE:
+            type.__init__(AtomClass, name, bases, dict)
+        else:
+            type.__init__(name, bases, dict)
 
         isotopeNumberProperties, inferredProperties, states = collectProperties( AtomClass )
         properties = isotopeNumberProperties + inferredProperties + states
