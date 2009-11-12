@@ -38,7 +38,8 @@ def sind(x):
 
 
 ##############################################################################
-class Lattice:
+from dsaw.db.WithID import WithID
+class Lattice(WithID):
     """Lattice --> stores properites and provides simple operations in lattice
     coordinate system.
 
