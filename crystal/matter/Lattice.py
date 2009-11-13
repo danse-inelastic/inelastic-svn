@@ -38,8 +38,9 @@ def sind(x):
 
 
 ##############################################################################
-class Lattice:
-    """Lattice --> stores properites and provides simple operations in lattice
+from dsaw.db.WithID import WithID
+class Lattice(WithID):
+    """Lattice --> stores properties and provides simple operations in lattice
     coordinate system.
 
     Data members:
@@ -83,17 +84,17 @@ class Lattice:
                              base vectors
         Lattice(lat)      -- create a copy of existing Lattice lat
         """
-        # initialize data members, they values will be set by setLatPar()
-        self.a = self.b = self.c = None
-        self.alpha = self.beta = self.gamma = None
-        self.ca = self.cb = self.cg = None
-        self.sa = self.sb = self.sg = None
+        # initialize data members, their values will be set by setLatPar()
+        self.a = self.b = self.c = 1.0
+        self.alpha = self.beta = self.gamma = 90.0
+        self.ca = self.cb = self.cg = 0.0
+        self.sa = self.sb = self.sg = 1.0
         self.ar = self.br = self.cr = None
         self.alphar = self.betar = self.gammar = None
         self.car = self.cbr = self.cgr = None
         self.sar = self.sbr = self.sgr = None
         self.baserot = None
-        self.base = self.recbase = None
+        self.base = self.recbase = [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]]
         self.normbase = self.recnormbase = None
         # work out argument variants
         # Lattice()
