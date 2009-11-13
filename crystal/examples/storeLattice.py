@@ -8,7 +8,7 @@ from matter.Lattice import Lattice
 db.registerTable(Lattice)
 db.createAllTables()
 
-l1 = Lattice(a=3.0,b=3.0)
+l1 = Lattice()
 l1.id = 'l1'
 db.insertRow(l1)
 
