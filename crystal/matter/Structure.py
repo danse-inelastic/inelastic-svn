@@ -77,6 +77,20 @@ class Structure(list):
         s_atoms = '\n'.join([str(a) for a in self])
         return s_lattice + '\n' + s_atoms
 
+
+    def getChemicalFormula(self):
+        atoms = self
+        counts = {}
+        for atom in atoms:
+            e = atom.symbol
+            if e in counts: counts[e]+=1
+            else: counts[e]=1
+            continue
+        elems = counts.keys()
+        elems.sort()
+        return ''.join( '%s%s' % (e, counts[e]) for e in elems )
+
+
     def addNewAtom(self, *args, **kwargs):
         """Add new Atom instance to the end of this Structure.
 

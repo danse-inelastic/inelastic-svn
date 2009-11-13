@@ -39,6 +39,16 @@ class TestStructure(unittest.TestCase):
         for i in range(len(l1)):
             self.assertAlmostEqual(l1[i], l2[i], places)
 
+
+    def testGetChemicalFormula(self):
+        at1 = Atom('C', [0.333333333333333, 0.666666666666667, 0])
+        at2 = Atom('C', [0.666666666666667, 0.333333333333333, 0])
+        at3 = Atom('H', [0, 0, 0])
+        stru = Structure( [ at1, at2, at3], lattice=Lattice(1, 1, 1, 90, 90, 120) )
+        print 'formula: ',  stru.getChemicalFormula()
+        return
+    
+
     # FIXME move into TestAtom
     def test_cartesian(self):
         """check conversion to Cartesian coordinates"""
