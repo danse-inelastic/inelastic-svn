@@ -7,15 +7,15 @@ db.autocommit(True)
 
 # declare tables
 
-from matter.Lattice import Lattice
+from matter.Atom import Atom
 #db.registerTable(Lattice)
 #db.createAllTables()
 
-db.createTable(Lattice)
+db.createTable(Atom)
 
-l1 = Lattice()
-l1.id = 'l1'
-db.insertRow(l1)
+a1 = Atom()
+a1.id = 'a1'
+db.insertRow(a1)
 
 #t1.myattribute = 'biggercake'
 #db.updateRecord(t1)
