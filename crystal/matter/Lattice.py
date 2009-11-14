@@ -68,6 +68,18 @@ class Lattice(WithID):
     Note: All data members are read-only, their values get set by calling
     setLatPar() or setLatBase() methods.
     """
+    
+    a = b = c = 1.0
+    alpha = beta = gamma = 90.0
+    ca = cb = cg = 0.0
+    sa = sb = sg = 1.0
+    ar = br = cr = 1.0
+    alphar = betar = gammar = 90.0
+    car = cbr = cgr = 0.0
+    sar = sbr = sgr = 1.0
+    baserot = [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]]
+    base = recbase = [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]]
+    normbase = recnormbase = [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]]
 
     def __init__(self, a=None, b=None, c=None,
             alpha=None, beta=None, gamma=None,
@@ -84,18 +96,21 @@ class Lattice(WithID):
                              base vectors
         Lattice(lat)      -- create a copy of existing Lattice lat
         """
+
+        WithID.__init__(self)
+        
         # initialize data members, their values will be set by setLatPar()
-        self.a = self.b = self.c = 1.0
-        self.alpha = self.beta = self.gamma = 90.0
-        self.ca = self.cb = self.cg = 0.0
-        self.sa = self.sb = self.sg = 1.0
-        self.ar = self.br = self.cr = None
-        self.alphar = self.betar = self.gammar = None
-        self.car = self.cbr = self.cgr = None
-        self.sar = self.sbr = self.sgr = None
-        self.baserot = None
-        self.base = self.recbase = [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]]
-        self.normbase = self.recnormbase = None
+#        self.a = self.b = self.c = 1.0
+#        self.alpha = self.beta = self.gamma = 90.0
+#        self.ca = self.cb = self.cg = 0.0
+#        self.sa = self.sb = self.sg = 1.0
+#        self.ar = self.br = self.cr = 1.0
+#        self.alphar = self.betar = self.gammar = 90.0
+#        self.car = self.cbr = self.cgr = 0.0
+#        self.sar = self.sbr = self.sgr = 1.0
+#        self.baserot = [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]]
+#        self.base = self.recbase = [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]]
+#        self.normbase = self.recnormbase = [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]]
         # work out argument variants
         # Lattice()
         if [a,b,c,alpha,beta,gamma,base] == 7*[None]:
@@ -146,9 +161,9 @@ class Lattice(WithID):
         self.ar = sa/(self.a*Vunit)
         self.br = sb/(self.b*Vunit)
         self.cr = sg/(self.c*Vunit)
-        self.car = car = (cb*cg - ca)/(sb*sg); sar = math.sqrt(1.0 - car**2)
-        self.cbr = cbr = (ca*cg - cb)/(sa*sg); sbr = math.sqrt(1.0 - cbr**2)
-        self.cgr = cgr = (ca*cb - cg)/(sa*sb); sgr = math.sqrt(1.0 - cgr**2)
+        self.car = car = (cb*cg - ca)/(sb*sg); sar = float(math.sqrt(1.0 - car**2))
+        self.cbr = cbr = (ca*cg - cb)/(sa*sg); sbr = float(math.sqrt(1.0 - cbr**2))
+        self.cgr = cgr = (ca*cb - cg)/(sa*sb); sgr = float(math.sqrt(1.0 - cgr**2))
         self.sar = numpy.sqrt(1.0 - car*car)
         self.sbr = numpy.sqrt(1.0 - cbr*cbr)
         self.sgr = numpy.sqrt(1.0 - cgr*cgr)

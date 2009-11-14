@@ -3,6 +3,7 @@
 	<name>crystal</name>
 	<comment></comment>
 	<projects>
+		<project>pyreTrunk</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
