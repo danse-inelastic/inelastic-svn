@@ -20,4 +20,4 @@ db.insertRow(l1)
 #t1.myattribute = 'biggercake'
 #db.updateRecord(t1)
 
-db.destroyAllTables()
+#db.destroyAllTables()
