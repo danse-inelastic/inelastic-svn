@@ -15,7 +15,7 @@ class AtomPropertyCurator(Schemer):
     """
 
     def __init__(AtomClass, name, bases, dict):
-
+        Schemer.__init__(AtomClass, name, bases, dict)
         from matter import METACLASS_CTOR_NEEDS_TYPE
         if METACLASS_CTOR_NEEDS_TYPE:
             type.__init__(AtomClass, name, bases, dict)
@@ -40,10 +40,6 @@ class AtomPropertyCurator(Schemer):
         AtomClass.__doc__ += doc
         
         #AtomClass._setable = [ state.name for state in states ]
-        
-        pass # end of Atom
-
-    pass #end of AtomPropertyCurator
 
 
 #helper for atom property curator
@@ -98,6 +94,7 @@ class CartesianCoordinatesArray(numpy.ndarray):
 # conversion constants
 _BtoU = 1.0/(8 * numpy.pi**2)
 _UtoB = 1.0/_BtoU
+tol_anisotropy = 1.0e-6
 
 from dsaw.db.WithID import WithID
 class Atom(WithID):
@@ -123,22 +120,31 @@ class Atom(WithID):
     >>> print Fe.scattering_length
     
     """    
-    tol_anisotropy = 1.0e-6
     
     
+    xyz = numpy.zeros(3, dtype=float)
+    name = ''
+    occupancy = 1.0
+    _anisotropy = None
+    _U = numpy.zeros((3,3), dtype=float)
+    _Uisoequiv = 0.0
+    _Usynced = True
+    from matter.Lattice import Lattice
+    lattice = Lattice()
 
-    def __init__(self, atype='H', xyz=[[0,0,0],[0,0,0],[0,0,0]], mass=None, name=None, 
+
+    def __init__(self, atype='H', xyz=[0,0,0], mass=None, name=None, 
                  occupancy=None, anisotropy=None, U=None, Uisoequiv=None, lattice=None):
-
+        WithID.__init__(self)
         # declare non-singleton data members
-        self.xyz = numpy.zeros(3, dtype=float)
-        self.name = ''
-        self.occupancy = 1.0
-        self._anisotropy = None
-        self._U = numpy.zeros((3,3), dtype=float)
-        self._Uisoequiv = 0.0
-        self._Usynced = True
-        self.lattice = None
+#        self.xyz = numpy.zeros(3, dtype=float)
+#        self.name = ''
+#        self.occupancy = 1.0
+#        self._anisotropy = None
+#        self._U = numpy.zeros((3,3), dtype=float)
+#        self._Uisoequiv = 0.0
+#        self._Usynced = True
+#        self.lattice = None
 
         # assign them as needed
         if isinstance(atype, Atom):
@@ -253,7 +259,7 @@ class Atom(WithID):
             Uisoij = numpy.dot(numpy.transpose(Tu), Uisoequiv*Tu)
             # compare with new value
             maxUdiff = numpy.max(numpy.fabs(self._U - Uisoij))
-            self._anisotropy = maxUdiff > Atom.tol_anisotropy
+            self._anisotropy = maxUdiff > tol_anisotropy
             self._Uijsynced = False
         return self._anisotropy
 
