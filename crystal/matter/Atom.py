@@ -96,8 +96,8 @@ _BtoU = 1.0/(8 * numpy.pi**2)
 _UtoB = 1.0/_BtoU
 tol_anisotropy = 1.0e-6
 
-from dsaw.db.WithID import WithID
-class Atom(WithID):
+from dsaw.db.WithID import WithID as base
+class Atom(base):
     """Create an atom of a specified type at given lattice coordinates:
     >>> Fe = Atom( 'Fe' )
     >>> Fe57 = Atom( 'Fe', [0,0,0], mass=57)
@@ -135,7 +135,7 @@ class Atom(WithID):
 
     def __init__(self, atype='H', xyz=[0,0,0], mass=None, name=None, 
                  occupancy=None, anisotropy=None, U=None, Uisoequiv=None, lattice=None):
-        WithID.__init__(self)
+        base.__init__(self)
         # declare non-singleton data members
 #        self.xyz = numpy.zeros(3, dtype=float)
 #        self.name = ''
