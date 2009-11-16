@@ -126,7 +126,7 @@ class Atom(base):
     name = ''
     occupancy = 1.0
     _anisotropy = None
-    _U = numpy.zeros((3,3), dtype=float)
+    _U = [[0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0]]#numpy.zeros((3,3), dtype=float)
     _Uisoequiv = 0.0
     _Usynced = True
     from matter.Lattice import Lattice
