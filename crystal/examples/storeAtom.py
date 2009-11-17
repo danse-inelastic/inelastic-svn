@@ -2,7 +2,7 @@ import sys
 print sys.path
 
 from dsaw.db import connect
-db = connect(db ='postgres:///test')
+db = connect(db ='postgres:///test', echo = True)
 db.autocommit(True)
 
 # we have to create system tables because we're using a reference
@@ -23,16 +23,21 @@ db.createTable(Atom)
 a1 = Atom()
 a1.id = 'a1'
 a1.lattice = l1
-try:
-    db.insertRow(a1)
-    
+
+db.insertRow(a1)
+db.dropTable(Atom)
+db.dropTable(Lattice)
+db.destroySystemTables()
+#try:
+#    db.insertRow(a1)
+#    
+##    db.dropTable(Atom)
+##    db.dropTable(Lattice)
+##    db.destroyAllTables()
+#finally:
 #    db.dropTable(Atom)
 #    db.dropTable(Lattice)
-#    db.destroyAllTables()
-finally:
-    db.dropTable(Atom)
-    db.dropTable(Lattice)
-    db.destroySystemTables()
+#    db.destroySystemTables()
     
 
 
