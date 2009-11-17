@@ -22,7 +22,7 @@ class AtomPropertyCurator(Schemer):
         else:
             type.__init__(name, bases, dict)
 
-        isotopeNumberProperties, inferredProperties, states = collectProperties( AtomClass )
+        isotopeNumberProperties, inferredProperties, states = AtomPropertyCurator.collectProperties( AtomClass )
         properties = isotopeNumberProperties + inferredProperties + states
         AtomClass.propertyNames = [ p.name for p in properties ]
         
@@ -41,23 +41,24 @@ class AtomPropertyCurator(Schemer):
         
         #AtomClass._setable = [ state.name for state in states ]
 
-
-#helper for atom property curator
-#TODO: this needs to be rewritten to include diffraction's properties....or they need to be rewritten in inelastic format...either way, one should look at Paul's elements package first
-def collectProperties( klass ):
-    ctorargs = []
-    inferred = []
-    states = []
-    registry = {
-        CtorArg: ctorargs,
-        InferredProperty: inferred,
-        State: states,
-        }
-    for item in klass.__dict__.values():
-        if not isinstance( item, Property ):continue
-        registry[ item.__class__ ].append( item )
-        continue
-    return ctorargs, inferred, states
+    
+    #helper for atom property curator
+    #TODO: this needs to be rewritten to include diffraction's properties....or they need to be rewritten in inelastic format...either way, one should look at Paul's elements package first
+    @staticmethod
+    def collectProperties( klass ):
+        ctorargs = []
+        inferred = []
+        states = []
+        registry = {
+            CtorArg: ctorargs,
+            InferredProperty: inferred,
+            State: states,
+            }
+        for item in klass.__dict__.values():
+            if not isinstance( item, Property ):continue
+            registry[ item.__class__ ].append( item )
+            continue
+        return ctorargs, inferred, states
 
 
 class CartesianCoordinatesArray(numpy.ndarray):
@@ -106,7 +107,7 @@ class Atom(base):
 
     atype       -- element symbol string or Atom instance
     xyz         -- fractional coordinates
-    name        -- atom label
+    label        -- atom label
     occupancy   -- fractional occupancy
     anisotropy  -- flag for anisotropic thermal displacements
     U           -- anisotropic thermal displacement tensor, property
@@ -123,9 +124,9 @@ class Atom(base):
     
     
     xyz = numpy.zeros(3, dtype=float)
-    name = ''
+    label = ''
     occupancy = 1.0
-    _anisotropy = None
+    _anisotropy = False
     _U = [[0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0]]#numpy.zeros((3,3), dtype=float)
     _Uisoequiv = 0.0
     _Usynced = True
@@ -133,7 +134,7 @@ class Atom(base):
     lattice = Lattice()
 
 
-    def __init__(self, atype='H', xyz=[0,0,0], mass=None, name=None, 
+    def __init__(self, atype='H', xyz=[0,0,0], mass=None, label=None, 
                  occupancy=None, anisotropy=None, U=None, Uisoequiv=None, lattice=None):
         base.__init__(self)
         # declare non-singleton data members
@@ -160,7 +161,7 @@ class Atom(base):
             
         # take care of remaining arguments
         if xyz is not None:         self.xyz[:] = xyz
-        if name is not None:        self.name = name
+        if label is not None:       self.label = label
         if occupancy is not None:   self.occupancy = float(occupancy)
         if anisotropy is not None:  self._anisotropy = bool(anisotropy)
         if U is not None:           self._U = U
