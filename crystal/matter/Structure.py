@@ -24,19 +24,20 @@ class Structure(list,WithID):
     
     import dsaw.db
     description = dsaw.db.varchar(name = 'description', length = 256, default ="")
-    _lattice = dsaw.db.reference(name = 'lattice', table = Lattice)
-    _spaceGroup = None
+    _lattice = dsaw.db.reference(name = '_lattice', table = Lattice)
+    _sgid = dsaw.db.varchar(name = '_sgid', length = 12, default ="")
     
 
-    def __init__(self, atoms=[], lattice=None, description="", filename=None):
+    def __init__(self, atoms=[], lattice=None, sgid=1, description="", filename=None):
         """define group of atoms in a specified lattice.
 
         atoms    -- list of Atom instances to be included in this Structure.
                     When atoms argument is an existing Structure instance,
                     the new Structure is its copy.
         lattice  -- instance of Lattice defining coordinate systems, property.
-        spaceGroup -- spacegroup object of structure
-        title    -- string description of the structure
+        sgid     -- space group symbol, either short_name or pdb_name,
+                    whatever it means in mmlib.  Can be also an integer.
+        description -- string description of the structure
         filename -- optional, name of a file to load the structure from.
                     Overrides atoms argument when specified.
 
@@ -521,15 +522,33 @@ class Structure(list,WithID):
     # space group
 
     def _get_spaceGroup(self):
-        return self._spaceGroup
+        if not self._sg:
+            from matter.SpaceGroups import GetSpaceGroup
+            self._sg = GetSpaceGroup(self._sgid)
+        return self._sg
 
-    def _set_spaceGroup(self, value):
-        self._spaceGroup = value
+    def _set_spaceGroup(self, item):
+        from matter.SpaceGroups import SpaceGroup
+        if isinstance(item, SpaceGroup):
+            self._sg = item
+            self._sgid = item.number
+        else:
+            from matter.SpaceGroups import GetSpaceGroup
+            self._sg = GetSpaceGroup(item)
+            self._sgid = item
+
+    sg = property(_get_spaceGroup, _set_spaceGroup, doc =
+        """Space group for this structure.  This can be set 
+        by instiating with a new spacegroup class or with a space group id.
+        One can also use the explicit setter.""")
+    
+    ####################################################################
+    # additional setter
+    ####################################################################
+
+    def setSg(self, sgid):
+        self.sg = sgid
         return
-
-    spaceGroup = property(_get_spaceGroup, _set_spaceGroup, doc =
-        "Space group for this Structure.")
-
 
     ####################################################################
     # protected methods

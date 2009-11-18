@@ -30,14 +30,12 @@ Te   0.500000 0.500000 0.000000 1.0000
 
 or a pdb file, or an xyz file, for example. We note the asymmetric unit cell is expanded by default.  To find the space group:
 
->>> stru.spaceGroup.number
+>>> stru.sg.number
 225
->>> stru.spaceGroup.short_name
+>>> stru.sg.short_name
 Fm-3m
 
-(should probably change spaceGroup to sg, and short_name should have shortcut 'name')
-
-(also show how to get symmetry operations)
+(should show how to get symmetry operations)
 
 To query information about occupied Wyckoff points:
 
