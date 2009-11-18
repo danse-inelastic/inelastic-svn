@@ -1,7 +1,8 @@
-## Copyright 2002 by PyMMLib Development Group (see AUTHORS file)
-## This code is part of the PyMMLib distribution and governed by
-## its license.  Please see the LICENSE file that should have been
-## included as part of this package.
+# Copyright 2009 Caltech
+# Copyright 2002 by PyMMLib Development Group (see AUTHORS file)
+# This code is part of the PyMMLib distribution and governed by
+# its license.  Please see the LICENSE file that should have been
+# included as part of this package.
 """Symmetry operations as functions on vectors or arrays.
 """
 import os
