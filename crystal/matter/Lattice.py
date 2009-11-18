@@ -38,7 +38,7 @@ def sind(x):
 
 
 ##############################################################################
-from dsaw.db.WithID import WithID
+from dsaw.db.WithID import WithID# as base<--do not do this!  name conflict!
 class Lattice(WithID):
     """Lattice --> stores properties and provides simple operations in lattice
     coordinate system.
@@ -69,17 +69,22 @@ class Lattice(WithID):
     setLatPar() or setLatBase() methods.
     """
     
-    a = b = c = 1.0
-    alpha = beta = gamma = 90.0
-    ca = cb = cg = 0.0
-    sa = sb = sg = 1.0
-    ar = br = cr = 1.0
-    alphar = betar = gammar = 90.0
-    car = cbr = cgr = 0.0
-    sar = sbr = sgr = 1.0
-    baserot = [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]]
-    base = recbase = [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]]
-    normbase = recnormbase = [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]]
+    import dsaw.db
+    a = dsaw.db.real(name = 'a', default=1.0)
+    b = dsaw.db.real(name = 'b', default=1.0)
+    c = dsaw.db.real(name = 'c', default=1.0)
+    alpha = dsaw.db.real(name = 'alpha', default=90.0)
+    beta = dsaw.db.real(name = 'beta', default=90.0)
+    gamma = dsaw.db.real(name = 'gamma', default=90.0)
+#    ca = cb = cg = 0.0
+#    sa = sb = sg = 1.0
+#    ar = br = cr = 1.0
+#    alphar = betar = gammar = 90.0
+#    car = cbr = cgr = 0.0
+#    sar = sbr = sgr = 1.0
+#    baserot = [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]]
+#    base = recbase = [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]]
+#    normbase = recnormbase = [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]]
 
     def __init__(self, a=None, b=None, c=None,
             alpha=None, beta=None, gamma=None,
@@ -102,15 +107,15 @@ class Lattice(WithID):
         # initialize data members, their values will be set by setLatPar()
 #        self.a = self.b = self.c = 1.0
 #        self.alpha = self.beta = self.gamma = 90.0
-#        self.ca = self.cb = self.cg = 0.0
-#        self.sa = self.sb = self.sg = 1.0
-#        self.ar = self.br = self.cr = 1.0
-#        self.alphar = self.betar = self.gammar = 90.0
-#        self.car = self.cbr = self.cgr = 0.0
-#        self.sar = self.sbr = self.sgr = 1.0
-#        self.baserot = [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]]
-#        self.base = self.recbase = [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]]
-#        self.normbase = self.recnormbase = [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]]
+        self.ca = self.cb = self.cg = 0.0
+        self.sa = self.sb = self.sg = 1.0
+        self.ar = self.br = self.cr = 1.0
+        self.alphar = self.betar = self.gammar = 90.0
+        self.car = self.cbr = self.cgr = 0.0
+        self.sar = self.sbr = self.sgr = 1.0
+        self.baserot = [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]]
+        self.base = self.recbase = [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]]
+        self.normbase = self.recnormbase = [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]]
         # work out argument variants
         # Lattice()
         if [a,b,c,alpha,beta,gamma,base] == 7*[None]:
@@ -384,4 +389,4 @@ class Lattice(WithID):
 ##############################################################################
 # module variables
 
-cartesian = Lattice()
+#cartesian = Lattice()

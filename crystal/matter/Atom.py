@@ -1,6 +1,7 @@
 from properties import *
 import numpy
-from matter.Lattice import cartesian as cartesian_lattice
+from matter.Lattice import Lattice
+cartesian_lattice = Lattice()
        
 from dsaw.db.Schemer import Schemer
 class AtomPropertyCurator(Schemer):
@@ -41,8 +42,6 @@ class AtomPropertyCurator(Schemer):
         
         #AtomClass._setable = [ state.name for state in states ]
 
-    
-    #helper for atom property curator
     #TODO: this needs to be rewritten to include diffraction's properties....or they need to be rewritten in inelastic format...either way, one should look at Paul's elements package first
     @staticmethod
     def collectProperties( klass ):
@@ -121,30 +120,30 @@ class Atom(base):
     >>> print Fe.scattering_length
     
     """    
-    
-    
-    xyz = numpy.zeros(3, dtype=float)
-    label = ''
-    occupancy = 1.0
-    _anisotropy = False
-    _U = [[0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0]]#numpy.zeros((3,3), dtype=float)
-    _Uisoequiv = 0.0
-    _Usynced = True
+    import dsaw.db
+    atype = dsaw.db.varchar(name = 'atype',  length=2, default='H')
+    xyz = dsaw.db.doubleArray(name = 'xyz', default=[0.0, 0.0, 0.0])#numpy.zeros(3, dtype=float)
+    label = dsaw.db.varchar(name = 'label',  length=48, default='')
+    occupancy = dsaw.db.real(name = 'occupancy', default=1.0)
+#    _anisotropy = False
+#    _U = [[0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0]]#numpy.zeros((3,3), dtype=float)
+#    _Uisoequiv = 0.0
+#    _Usynced = True
     from matter.Lattice import Lattice
-    lattice = Lattice()
+    lattice = dsaw.db.reference(name = 'lattice', table = Lattice)
 
 
-    def __init__(self, atype='H', xyz=[0,0,0], mass=None, label=None, 
-                 occupancy=None, anisotropy=None, U=None, Uisoequiv=None, lattice=None):
+    def __init__(self, atype='H', xyz=[0,0,0], mass=None, label='', 
+                 occupancy=1.0, anisotropy=None, U=None, Uisoequiv=None, lattice=None):
         base.__init__(self)
         # declare non-singleton data members
 #        self.xyz = numpy.zeros(3, dtype=float)
 #        self.name = ''
 #        self.occupancy = 1.0
-#        self._anisotropy = None
-#        self._U = numpy.zeros((3,3), dtype=float)
-#        self._Uisoequiv = 0.0
-#        self._Usynced = True
+        self._anisotropy = None
+        self._U = numpy.zeros((3,3), dtype=float)
+        self._Uisoequiv = 0.0
+        self._Usynced = True
 #        self.lattice = None
 
         # assign them as needed
