@@ -9,8 +9,8 @@ import numpy
 from Atom import Atom
 from Lattice import Lattice
 
-##############################################################################
-class Structure(list):
+from dsaw.db.WithID import WithID
+class Structure(list,WithID):
     """Structure --> group of atoms
 
     Structure class is inherited from Python list.  It contains
@@ -18,11 +18,17 @@ class Structure(list):
     methods so that the lattice attribute of atoms get set to lattice.
 
     Data members:
-        title   -- structure description
+        description   -- structure description
         lattice -- coordinate system (instance of Lattice)
     """
+    
+    import dsaw.db
+    description = dsaw.db.varchar(name = 'description', length = 256, default ="")
+    _lattice = dsaw.db.reference(name = 'lattice', table = Lattice)
+    _spaceGroup = None
+    
 
-    def __init__(self, atoms=[], lattice=None, title="", filename=None):
+    def __init__(self, atoms=[], lattice=None, description="", filename=None):
         """define group of atoms in a specified lattice.
 
         atoms    -- list of Atom instances to be included in this Structure.
@@ -41,9 +47,8 @@ class Structure(list):
             oxygen_atoms = [ for a in stru if a.symbol == "O" ]
             oxygen_stru = Structure(oxygen_atoms, lattice=stru.lattice)
         """
-        self.title = ""
-        self._lattice = None
-        self._spaceGroup = None
+        WithID.__init__(self)
+
         self._labels = {}
         self._labels_cached = False
         if isinstance(atoms, Structure):
@@ -60,10 +65,9 @@ class Structure(list):
             raise TypeError(emsg)
         else:
             self.lattice = lattice
-        # override from title argument
-        if title:
-            self.title = title
-        # finally check if data should be loaded from file
+
+        self.description = description
+        # check if data should be loaded from file
         if filename is not None:
             self.read(filename)
         # otherwise assign list of atoms to self
