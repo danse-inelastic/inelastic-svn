@@ -3,7 +3,6 @@ Overview
 
 Two types of data objects
 -------------------------
-
 The atom, lattice, and structure classes are built with several principles in mind:
 
 * Most users will want "out-of-the-box" functionality in as many ways as possible.  They would like the ability to access diffraction thermal factors, forces, pseudopotentials, neutron-scattering cross sections, and so on.
@@ -14,5 +13,8 @@ Fortunately, both of these aims can be met through adjusting which properties ar
 
 Spacegroup information
 ----------------------
+Spacegroups are classes put together from lists of operations.  The list is gathered from Pymmlib and the sgtbx toolbox of cctbx.  Structure class persists a spacegroup identifier which is used to find spacegroup information for an individual symmetry group.
 
-Spacegroups are classes put together from lists of operations.  The list is gathered from Pymmlib and the sgtbx toolbox of cctbx.  Structure class contains a reference to 
+Matter data objects can be persisted
+------------------------------------
+Structure, lattice, and Atom data objects can seamlessly be persisted to most open source dbs using the dsaw object relational mapper.
