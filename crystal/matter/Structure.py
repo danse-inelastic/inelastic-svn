@@ -26,7 +26,7 @@ class Structure(list,WithID):
     description = dsaw.db.varchar(name = 'description', length = 256, default ="")
     _lattice = dsaw.db.reference(name = '_lattice', table = Lattice)
     _sgid = dsaw.db.varchar(name = '_sgid', length = 12, default ="")
-    
+    atomStore = dsaw.db.referenceSet(name = 'atomStore')
 
     def __init__(self, atoms=[], lattice=None, sgid=1, description="", filename=None):
         """define group of atoms in a specified lattice.
@@ -68,6 +68,7 @@ class Structure(list,WithID):
             self.lattice = lattice
 
         self.description = description
+        self.sg = sgid
         # check if data should be loaded from file
         if filename is not None:
             self.read(filename)
@@ -481,7 +482,7 @@ class Structure(list,WithID):
         list.__setitem__(self, idx, adup)
         return
 
-    def __setslice__(self, lo, hi, atoms, copy=True):
+    def __setslice__(self, lo, hi, atoms, copy=False):
         """Set Structure slice from lo to hi-1 to the sequence of atoms.
 
         lo    -- low index for the slice
@@ -499,7 +500,6 @@ class Structure(list,WithID):
             adups = atoms
         for a in adups: a.lattice = self.lattice
         list.__setslice__(self, lo, hi, adups)
-        return
 
 
     ####################################################################
