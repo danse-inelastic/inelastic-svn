@@ -95,9 +95,9 @@ class CartesianCoordinatesArray(numpy.ndarray):
 _BtoU = 1.0/(8 * numpy.pi**2)
 _UtoB = 1.0/_BtoU
 tol_anisotropy = 1.0e-6
-
+from dsaw.db.GloballyReferrable import GloballyReferrable
 from dsaw.db.WithID import WithID as base
-class Atom(base):
+class Atom(GloballyReferrable,base):
     """Create an atom of a specified type at given lattice coordinates:
     >>> Fe = Atom( 'Fe' )
     >>> Fe57 = Atom( 'Fe', [0,0,0], mass=57)
