@@ -122,7 +122,9 @@ class Atom(GloballyReferrable,base):
     """    
     import dsaw.db
     atype = dsaw.db.varchar(name = 'atype',  length=2, default='H')
-    xyz = dsaw.db.doubleArray(name = 'xyz', default=[0.0, 0.0, 0.0])#numpy.zeros(3, dtype=float)
+    # temporarily disabled
+    #xyz = dsaw.db.doubleArray(name = 'xyz', default=[0.0, 0.0, 0.0])
+    xyz = numpy.zeros(3, dtype=float)
     label = dsaw.db.varchar(name = 'label',  length=48, default='')
     occupancy = dsaw.db.real(name = 'occupancy', default=1.0)
 #    _anisotropy = False
@@ -130,8 +132,9 @@ class Atom(GloballyReferrable,base):
 #    _Uisoequiv = 0.0
 #    _Usynced = True
     from matter.Lattice import Lattice
-    lattice = dsaw.db.reference(name = 'lattice', table = Lattice)
-
+    # db'ing lattice is temporarily out of order
+    #lattice = dsaw.db.reference(name = 'lattice', table = Lattice)
+    lattice = None
 
     def __init__(self, atype='H', xyz=[0,0,0], mass=None, label='', 
                  occupancy=1.0, anisotropy=None, U=None, Uisoequiv=None, lattice=None):

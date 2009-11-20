@@ -24,9 +24,11 @@ class Structure(list,WithID):
     
     import dsaw.db
     description = dsaw.db.varchar(name = 'description', length = 256, default ="")
-    _lattice = dsaw.db.reference(name = '_lattice', table = Lattice)
+    # temporarily disabled
+    #_lattice = dsaw.db.reference(name = '_lattice', table = Lattice)
+    _lattice = None
     _sgid = dsaw.db.varchar(name = '_sgid', length = 12, default ="")
-    atomStore = dsaw.db.referenceSet(name = 'atomStore')
+    #atomStore = dsaw.db.referenceSet(name = 'atomStore')
 
     def __init__(self, atoms=[], lattice=None, sgid=1, description="", filename=None):
         """define group of atoms in a specified lattice.
@@ -58,14 +60,6 @@ class Structure(list,WithID):
             self.__dict__.update(stru.__dict__)
             # make a deep copy of source lattice
             self.lattice = Lattice(stru.lattice)
-        # override from lattice argument
-        if lattice is None:
-            if not self.lattice:    self.lattice = Lattice()
-        elif not isinstance(lattice, Lattice):
-            emsg = "expected instance of Lattice"
-            raise TypeError(emsg)
-        else:
-            self.lattice = lattice
 
         self.description = description
         self.sg = sgid
@@ -75,7 +69,16 @@ class Structure(list,WithID):
         # otherwise assign list of atoms to self
         else:
             self[:] = atoms
-        return
+            
+        # override from lattice argument
+        if lattice is None:
+            if not self.lattice:    self.lattice = Lattice()
+        elif not isinstance(lattice, Lattice):
+            emsg = "expected instance of Lattice"
+            raise TypeError(emsg)
+        else:
+            self.lattice = lattice
+
 
     def __str__(self):
         """simple string representation"""
@@ -358,11 +361,11 @@ class Structure(list,WithID):
         if new_structure is not None:
             self.__dict__.update(new_structure.__dict__)
             self[:] = new_structure
-        if not self.title:
+        if not self.description:
             import os.path
             tailname = os.path.basename(filename)
             tailbase = os.path.splitext(tailname)[0]
-            self.title = tailbase
+            self.description = tailbase
         return p
 
     def readStr(self, s, format='auto'):
