@@ -6,7 +6,7 @@ One can initialize the data structures from atom types, positions, and lattice c
 >>> from matter import Structure, Lattice, Atom
 >>> at1 = Atom('Fe', [0, 0, 0])
 >>> at2 = Atom('Fe', [0.5, 0.5, 0.5])
->>> stru1 = Structure( [ at1, at2], lattice=Lattice(2.87, 2.87, 2.87, 90, 90, 90) )
+>>> stru1 = Structure( [ at1, at2], lattice=Lattice(2.87, 2.87, 2.87, 90, 90, 90), sgid = 225 )
 >>> print stru1
 lattice=Lattice(a=2.87, b=2.87, c=2.87, alpha=90, beta=90, gamma=90)
 Fe   0.000000 0.000000 0.000000 1.0000
@@ -28,7 +28,7 @@ Te   0.000000 0.500000 0.500000 1.0000
 Te   0.500000 0.000000 0.500000 1.0000
 Te   0.500000 0.500000 0.000000 1.0000
 
-or a pdb file, or an xyz file, for example. We note the asymmetric unit cell is expanded by default.  To find the space group:
+or a pdb file, or an xyz file, for example. We note the asymmetric unit cell is expanded by default.  To verify the space group number and name:
 
 >>> stru.sg.number
 225
@@ -95,16 +95,28 @@ To calculate a Monkhorst-Pack mesh over the reciprocal space of the lattice:
   [[ 0.25 -0.25  0.25]
    [ 0.25  0.25  0.25]]]]
 
-To generate equivalent neighbors and their distances:
+To generate equivalent bonded neighbors and their distances:
 
 >>> stru1.getFirstNN()
 >>> stru1.getFirstNNDistance()
 >>> stru1.getSecNN()
 >>> stru1.getThirdNN()
 
-To get the bond matrix for a BvK calculation: 
+To get equivalent bonded neighbors and their distances, which is the bond matrix for a BvK calculation: 
+(1.get nearest neighbors...2. apply symmetry operations of space group to see which ones are equivalent...3. sort and assign BvK force constants)
 
 >>> stru.getBondMatrix()
 
+To store a lattice in a database:
+
+.. literalinclude:: ../examples/storeLattice.py
+
+To store an atom in a database:
+
+.. literalinclude:: ../examples/storeAtom.py
+
+To store a structure in a database:
+
+.. literalinclude:: ../examples/storeStructure.py
 
 .. todo:: (lattice test)

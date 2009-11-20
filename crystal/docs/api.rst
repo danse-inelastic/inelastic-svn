@@ -13,7 +13,7 @@ Here is the complete API to Atom:
 :mod:`matter.Atom`
 ------------------
 
-.. automodule:: matter.Atom
+.. .. automodule:: matter.Atom
    :members:
    :undoc-members:
    :show-inheritance:
@@ -37,7 +37,7 @@ Here is the complete API to Structure:
 :mod:`matter.Structure`
 -----------------------
 
-.. automodule:: matter.Structure
+.. .. automodule:: matter.Structure
    :members:
    :undoc-members:
    :show-inheritance:

@@ -19,10 +19,6 @@ for table in tables:
     db.registerTable(table)
 
 db.createAllTables()
-#
-#db.createTable(Lattice)
-#db.createTable(Atom)
-#db.createTable(Structure)
 
 
 at1 = Atom('C', [0.333333333333333, 0.666666666666667, 0])
@@ -50,9 +46,6 @@ graphite.atomStore.add(at2, db)
     
 db.destroyAllTables()
     
-#db.dropTable(Structure)
-#db.dropTable(Lattice)
-#db.dropTable(Atom)
 
 
 
