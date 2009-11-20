@@ -6,7 +6,7 @@ One can initialize the data structures from atom types, positions, and lattice c
 >>> from matter import Structure, Lattice, Atom
 >>> at1 = Atom('Fe', [0, 0, 0])
 >>> at2 = Atom('Fe', [0.5, 0.5, 0.5])
->>> stru1 = Structure( [ at1, at2], lattice=Lattice(2.87, 2.87, 2.87, 90, 90, 90), sgid = 225 )
+>>> stru1 = Structure( [ at1, at2], lattice=Lattice(2.87, 2.87, 2.87, 90, 90, 90), sgid = 229 )
 >>> print stru1
 lattice=Lattice(a=2.87, b=2.87, c=2.87, alpha=90, beta=90, gamma=90)
 Fe   0.000000 0.000000 0.000000 1.0000
@@ -31,7 +31,7 @@ Te   0.500000 0.500000 0.000000 1.0000
 or a pdb file, or an xyz file, for example. We note the asymmetric unit cell is expanded by default.  To verify the space group number and name:
 
 >>> stru.sg.number
-225
+229
 >>> stru.sg.short_name
 Fm-3m
 
