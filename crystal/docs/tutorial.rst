@@ -33,7 +33,8 @@ or a pdb file, or an xyz file, for example. We note the asymmetric unit cell is 
 >>> stru.sg.number
 229
 >>> stru.sg.short_name
-Fm-3m
+Im-3m
+>>> stru.sg.
 
 (should show how to get symmetry operations)
 
