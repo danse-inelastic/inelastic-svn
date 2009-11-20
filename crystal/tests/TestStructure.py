@@ -167,6 +167,15 @@ class TestStructure(unittest.TestCase):
 #        print op
         sg = self.stru.sg
         assert sg.number is 225
+        print sg.num_sym_equiv
+        print sg.num_primitive_sym_equiv
+        print sg.short_name
+        print sg.alt_name
+        print sg.point_group_name
+        print sg.crystal_system
+        print sg.pdb_name
+        for symop in sg.symop_list:
+            print symop
         #assert sg.short_name.strip() is 'Fm-3m'
  
 #    not fully functional
