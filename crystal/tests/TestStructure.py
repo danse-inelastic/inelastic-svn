@@ -20,7 +20,9 @@ tests_dir = os.path.dirname(os.path.abspath(thisfile))
 testdata_dir = os.path.join(tests_dir, 'testdata')
 
 sys.path.insert(0,os.path.abspath('..'))# this should put the source code first on the path
-from matter import Structure, Lattice, Atom#, StructureFormatError
+from matter.Structure import Structure
+from matter.Lattice import Lattice
+from matter.Atom import  Atom#, StructureFormatError
 
 ##############################################################################
 class TestStructure(unittest.TestCase):
@@ -160,7 +162,7 @@ class TestStructure(unittest.TestCase):
         #print self.stru.spaceGroup.short_name
 #        op = self.stru.spaceGroup.symop_list[1]
 #        print op
-        sg = self.stru.spaceGroup
+        sg = self.stru.sg
         assert sg.number is 225
         #assert sg.short_name.strip() is 'Fm-3m'
         
