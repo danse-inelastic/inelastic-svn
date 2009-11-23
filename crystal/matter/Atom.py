@@ -124,7 +124,6 @@ class Atom(GloballyReferrable,base):
 #    import dsaw.db
 #    atype = dsaw.db.varchar(name = 'atype',  length=2, default='H')
     #xyz = dsaw.db.doubleArray(name = 'xyz', default=[0.0, 0.0, 0.0])
-#    xyz = numpy.zeros(3, dtype=float)
 #    label = dsaw.db.varchar(name = 'label',  length=48, default='')
 #    occupancy = dsaw.db.real(name = 'occupancy', default=1.0)
 #    _anisotropy = False
