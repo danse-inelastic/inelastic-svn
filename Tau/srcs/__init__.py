@@ -1,21 +1,15 @@
 #! /usr/bin/python
-
-# To change this template, choose Tools | Templates
-# and open the template in the editor.
-
-__author__="XiaoliTang"
-__date__ ="$Nov 10, 2009 11:02:11 AM$"
-
-if __name__ == "__main__":
-    print "Hello World";
-    welcome()
-
-def welcome():
-    print 'Welcome to Tau package'
-    print 'Supported by DANSE project'
-    print 'It is currently under development!'
-                                  
-
+#--------------------------------------------------------------#
+# QEcalc              by DANSE Inelastic group
+#                     Xiaoli Tang
+#                     California Institute of Technology
+#                     (C) 2009  All Rights Reserved
+#
+# File coded by:      Xiaoli Tang
+#
+# See AUTHORS.txt for a list of people who contributed.
+# See LICENSE.txt for license information.
+#--------------------------------------------------------------#
 import numpy as np
 from taupy.symmetry import Symmetry
 from taupy.cells import get_supercell, Primitive, print_cell
@@ -52,7 +46,6 @@ class Taupy:
     def get_symmetry(self):
         return self.symmetry
 
-
 # displace these pair atoms with the user-specified displacement
     def set_displacements(self):
         lattice = self.supercell.get_cell()
@@ -62,7 +55,6 @@ class Taupy:
             disp_cartesian = np.dot(disp[1:], lattice)
             disp_cartesian = disp_cartesian / np.linalg.norm(disp_cartesian) * self.distance
             self.displacements.append({'number': atom_num, 'disp': disp_cartesian})
-
 
 ##Maybe here we can add mpi portion to split the jobs for vasp calculation
 
@@ -84,7 +76,7 @@ class Taupy:
     def get_supercells_with_displacements(self):
         return self.supercells_with_displacements
 
-    def set_post_process(self, primitive_matrix, set_of_forces):
+    def set_dynamicalmatrix(self, primitive_matrix, set_of_forces):
         # Forces
         forces = []
         for i, disp in enumerate(self.displacements):
@@ -136,3 +128,12 @@ class Taupy:
                 (tuple(band[0]) + tuple(band[-1]))
         plot = BandStructure(bands, self.dynamical_matrix, self.primitive)
         plot.plot_band().show()
+
+if __name__ == "__main__":
+    print "Hello World";
+    welcome()
+
+def welcome():
+    print 'Welcome to Tau package'
+    print 'Supported by DANSE project'
+    print 'It is currently under development!'
