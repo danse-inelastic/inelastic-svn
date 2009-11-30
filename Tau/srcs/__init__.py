@@ -1,5 +1,5 @@
 #! /usr/bin/python
-#--------------------------------------------------------------#
+#-----------------------------------------------------------------------------#
 # QEcalc              by DANSE Inelastic group
 #                     Xiaoli Tang
 #                     California Institute of Technology
@@ -9,8 +9,10 @@
 #
 # See AUTHORS.txt for a list of people who contributed.
 # See LICENSE.txt for license information.
-#--------------------------------------------------------------#
+#-----------------------------------------------------------------------------#
+
 import numpy as np
+
 from taupy.symmetry import Symmetry
 from taupy.cells import get_supercell, Primitive, print_cell
 from taupy.displacement import get_least_displacements, print_displacements
@@ -18,12 +20,15 @@ from taupy.anh_dynamicaltensor import get_anh_dynamical_tensor
 from taupy.har_dynamicalmatrix import get_har_dynamical_matrix
 from taupy.forces import Forces
 
-class Taupy:
-    def __init__(self, unitcell, supercell_matrix, displacement=0.01, symprec=1e-5):
+
+class TauPy:
+    def __init__(self, unitcell, supercell_matrix,
+                 DISPLACEMENT=0.01, SYMPREC=1e-5):
         self.supercell_matrix = supercell_matrix
         self.symprec = symprec
         self.unitcell = unitcell
-        self.displacement = displacement
+        self.DISPLACEMENT = DISPLACEMENT
+        self.SYMPREC = SYMPREC
         self.set_supercell()
         self.set_symmetry()
         self.set_displacements()
@@ -34,31 +39,31 @@ class Taupy:
                                        self.supercell_matrix,
                                        self.symprec)
 
-# This function should do symmetry analysis, figuring out irreducible 
-# pair moves and also the map to reconstruction
+    # This function does symmetry analysis, figuring out irreducible 
+    # pair moves and also the map to reconstruction.  
 
     def set_symmetry(self):
-	pass.
-#        self.symmetry = Symmetry(self.supercell,
-#                                 self.symprec)
-#        print "Spacegroup: ", self.symmetry.get_international_table()
+        self.symmetry = Symmetry(self.supercell,
+                                 self.symprec)
+        print "Spacegroup: ", self.symmetry.get_international_table()
 
     def get_symmetry(self):
         return self.symmetry
 
-# displace these pair atoms with the user-specified displacement
+    # Displace these pair atoms with the user-specified displacement
     def set_displacements(self):
         lattice = self.supercell.get_cell()
         self.displacements = []
         for disp in get_least_displacements(self.symmetry):
             atom_num = disp[0]
             disp_cartesian = np.dot(disp[1:], lattice)
-            disp_cartesian = disp_cartesian / np.linalg.norm(disp_cartesian) * self.distance
-            self.displacements.append({'number': atom_num, 'disp': disp_cartesian})
+            disp_cartesian = disp_cartesian / \
+                             np.linalg.norm(disp_cartesian) * \
+                             self.distance
+            self.displacements.append({'number' : atom_num, 'disp' : disp_cartesian})
 
-##Maybe here we can add mpi portion to split the jobs for vasp calculation
-
-# generate the distorted supercell
+    # Maybe here we can add mpi portion to split the jobs for vasp calculation
+    # Generate the distorted supercell
     def set_supercells_with_displacements(self):
         supercells = []
         for disp in self.displacements:
@@ -86,11 +91,10 @@ class Taupy:
         self.primitive = Primitive(self.supercell, primitive_matrix, self.symprec)
 
         # Force constants
-
         har_force_constant, anh_force_constants = get_force_constant(forces,
-                                             self.symmetry,
-                                             self.supercell,
-                                             self.primitive.get_primitive_to_supercell_map())
+                             self.symmetry,
+                             self.supercell,
+                             self.primitive.get_primitive_to_supercell_map())
 
         # Dynamical Matrix
         har_dynamical_matrix = DynamicalMatrix(self.suprcell,
@@ -133,7 +137,7 @@ if __name__ == "__main__":
     print "Hello World";
     welcome()
 
-def welcome():
-    print 'Welcome to Tau package'
-    print 'Supported by DANSE project'
-    print 'It is currently under development!'
+    def welcome():
+        print 'Welcome to Tau package'
+        print 'Supported by DANSE project'
+        print 'It is currently under development!'
