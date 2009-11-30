@@ -4,8 +4,12 @@ __author__="XiaoliTang"
 __date__ ="$Oct 26, 2009 12:53:54 AM$"
 
 import numpy as np
-from d3_qecalc import d3_qecalc
 import Vibrations
+from qecalc.qecalc import QECalc
+from qecalc.qetask.pwtask import PWTask
+from qecalc.qetask.phtask import PHTask
+from qeparser.pwinput import PWInput
+from qeparser.qeoutput import QEOutput
 
 class quantum_espresso:
 
@@ -13,11 +17,6 @@ class quantum_espresso:
 
 	 self.name = 'quantum_espresso'
 	 self.configfile = configfile
-	 self.eigenVal = []
-	 self.eigenVec = []
-	 self.qpts = []
-	 self.D3tensor = []
-	 self.phonon = Vibrations(self.qpts,self.eigenVal, self,eigenVec)
 
      def run_quantum_espresso(self)
 	'''Generate necessary files and run quantum_espresso'''
@@ -31,21 +30,26 @@ class quantum_espresso:
          d3calc.launch()
 
 #Get essential output for Tau module
-         self.eigenVec,self.eigenVal,self.qpts =  d3calc.get_phonons()
+         self.eigenVec,self.eigenVal,self.qpoints =  d3calc.get_phonons()
          self.D3tensor = d3calc.get_D3tensor()
 
      def write_vibrations(self)
+	 self.vibedata = Vibrations(self.qpts,self.eigenVal, self,eigenVec)
 	 outputfile = open('phonon.pkl','w')
 	 pickle.dump(self.vibedata, outputfile)
 	 outputfile.close()
 
+     def get_D3tensor(self):
+	 return self.D3tensor
 
-import numpy
-from qecalc.qecalc import QECalc
-from qecalc.qetask.pwtask import PWTask
-from qecalc.qetask.phtask import PHTask
-from qeparser.pwinput import PWInput
-from qeparser.qeoutput import QEOutput
+     def get_eigenVec(self):
+ 	 return self.eigenVec
+
+     def get_eigenVal(self):
+	 return self.eigenVal
+
+     def get_qpoints(self):
+	 return self.qpoints
 
 class d3_qecalc(QECalc):
     """ Calc for d3 calculations:
@@ -78,20 +82,11 @@ class d3_qecalc(QECalc):
 
         self.taskList = [self.pw, self.ph, self.d3]
 
-    def _get_phonons(self):
+    def get_phonons(self):
         self._eigenVec, self._eigenVal, self._qpts = \
 		self.ph.out.property('multi phonon')
 
         return self._eigenVec, self._eigenVal, self._qpts
-
-    def get_qpoints(self):
-        return self._qpts
-
-    def get_eigenVal(self):
-        return self._eigenVal
-
-    def get_eigenVec(self):
-        return self._eigenVec
 
     def get_D3tensor(self):
 	self._D3tensor = self.d3.output.property('D3 tensor')
