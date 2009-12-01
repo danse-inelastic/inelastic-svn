@@ -28,7 +28,7 @@ def parse_d3(d3file, outputfile):
 
     for i in range(0,ntype):
         line = file.readline()
-        symbol.append(line.split()[1])
+        symbol[i] = (line.split()[1])
         mass[i] = line.split()[2]
     for i in range(0,natom):
         line = file.readline()
