@@ -3,8 +3,7 @@ import numpy
 from matter.Lattice import Lattice
 cartesian_lattice = Lattice()
        
-from dsaw.db.Schemer import Schemer
-class AtomPropertyCurator(Schemer):
+class AtomPropertyCurator(type):
     """meta class for Atom class to collect all properties and set up
     some class constants.
     It establishes:
@@ -16,7 +15,6 @@ class AtomPropertyCurator(Schemer):
     """
 
     def __init__(AtomClass, name, bases, dict):
-        Schemer.__init__(AtomClass, name, bases, dict)
         from matter import METACLASS_CTOR_NEEDS_TYPE
         if METACLASS_CTOR_NEEDS_TYPE:
             type.__init__(AtomClass, name, bases, dict)
@@ -89,15 +87,12 @@ class CartesianCoordinatesArray(numpy.ndarray):
         self.xyz[:] = self.lattice.fractional(self)
         return
         
-    
 
 # conversion constants
 _BtoU = 1.0/(8 * numpy.pi**2)
 _UtoB = 1.0/_BtoU
 tol_anisotropy = 1.0e-6
-from dsaw.db.GloballyReferrable import GloballyReferrable
-from dsaw.db.WithID import WithID as base
-class Atom(GloballyReferrable,base):
+class Atom(object):
     """Create an atom of a specified type at given lattice coordinates:
     >>> Fe = Atom( 'Fe' )
     >>> Fe57 = Atom( 'Fe', [0,0,0], mass=57)
@@ -119,25 +114,12 @@ class Atom(GloballyReferrable,base):
 
     >>> print Fe.scattering_length
     
-    """    
-    # temporarily disabled
-#    import dsaw.db
-#    atype = dsaw.db.varchar(name = 'atype',  length=2, default='H')
-    #xyz = dsaw.db.doubleArray(name = 'xyz', default=[0.0, 0.0, 0.0])
-#    label = dsaw.db.varchar(name = 'label',  length=48, default='')
-#    occupancy = dsaw.db.real(name = 'occupancy', default=1.0)
-#    _anisotropy = False
-#    _U = [[0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0]]#numpy.zeros((3,3), dtype=float)
-#    _Uisoequiv = 0.0
-#    _Usynced = True
-#    from matter.Lattice import Lattice
-    # db'ing lattice is temporarily out of order
-    #lattice = dsaw.db.reference(name = 'lattice', table = Lattice)
-#    lattice = None
+    """
+
 
     def __init__(self, atype='H', xyz=[0,0,0], mass=None, label='', 
                  occupancy=1.0, anisotropy=None, U=None, Uisoequiv=None, lattice=None):
-        base.__init__(self)
+        object.__init__(self)
         # declare non-singleton data members
         self.xyz = numpy.zeros(3, dtype=float)
         self.label = ''
@@ -439,4 +421,42 @@ class Atom(GloballyReferrable,base):
 
 
     __metaclass__ = AtomPropertyCurator
+
+
+    # dsaw.model helpers
+    def __establishInventory__(self, inventory):
+        inventory.element = self.symbol
+        inventory.xyz = self.xyz
+        inventory.label = self.label
+        inventory.occupancy = self.occupancy
+        return
+
+
+    def __restoreFromInventory__(self, inventory):
+        self.__init__(atype=inventory.element,
+                      xyz=inventory.xyz,
+                      label=inventory.label,
+                      occupancy=inventory.occupancy)
+        
+
+
+# dsaw.model inventory
+from dsaw.model.Inventory import Inventory as InvBase
+class Inventory(InvBase):
+
+    # atype
+    element = InvBase.d.str(name='element', max_length=2, default='H') # validator choice?
+
+    xyz = InvBase.d.array(name = 'xyz', elementtype='float', default=[0.0, 0.0, 0.0])
     
+    label = InvBase.d.str(name='label', max_length=48)
+    
+    occupancy = InvBase.d.float(name = 'occupancy', default=1.0)
+#    _anisotropy = False
+#    _U = [[0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0]]#numpy.zeros((3,3), dtype=float)
+#    _Uisoequiv = 0.0
+#    _Usynced = True
+
+
+Atom.Inventory = Inventory
+del Inventory

@@ -11,12 +11,15 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 PROJECT = matter
-PACKAGE = crystalUtils
+PACKAGE = 
 
 #--------------------------------------------------------------------------
 #
 
 BUILD_DIRS = \
+	atomic_properties \
+	crystalIO \
+	crystalUtils \
 	
 OTHER_DIRS = \
 
@@ -34,9 +37,25 @@ all: export
 # export
 
 EXPORT_PYTHON_MODULES = \
+	Atom.py \
+	AtomLoader2.py \
+	AtomicObject.py \
+	Lattice.py \
+	PDFFitStructure.py \
+	Site.py \
+	SpaceGroups.py \
+	Structure.py \
+	StructureErrors.py \
+	StructureManipulator.py \
+	SymmetryUtilities.py \
+	UnitCell.py \
 	__init__.py \
-	MonkhorstPack.py \
-
+	properties.py \
+	sgtbxspacegroups.py \
+	utils.py \
+	version.py \
+	wyckoff.py \
+	__init__.py \
 
 
 export:: export-package-python-modules
