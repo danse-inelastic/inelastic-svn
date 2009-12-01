@@ -11,7 +11,7 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 PROJECT = matter
-PACKAGE = atomic_properties
+PACKAGE = Parsers
 
 #--------------------------------------------------------------------------
 #
@@ -34,13 +34,17 @@ all: export
 # export
 
 EXPORT_PYTHON_MODULES = \
+	P_auto.py \
+	P_bratoms.py \
+	P_cif.py \
+	P_pdb.py \
+	P_pdffit.py \
+	P_rawxyz.py \
+	P_xcfg.py \
+	P_xyz.py \
 	__init__.py \
-	atomic_number.py \
-	average_mass.py \
-	average_neutron_abs_xs.py \
-	average_neutron_coh_xs.py \
-	average_neutron_inc_xs.py \
-	symbol.py \
+	parser_index_mod.py \
+	structureparser.py \
 
 
 export:: export-package-python-modules
