@@ -6,7 +6,6 @@ import sys,os
 import unittest
 
 sys.path.insert(0,os.path.abspath('..'))
-print sys.path
 
 from matter import Lattice
 
