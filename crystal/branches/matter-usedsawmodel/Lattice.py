@@ -388,7 +388,9 @@ class Inventory(InvBase):
     alpha = InvBase.d.float(name = 'alpha', default=90.0, validator=InvBase.v.range(0,180,brackets='()'))
     beta = InvBase.d.float(name = 'beta', default=90.0, validator=InvBase.v.range(0,180,brackets='()'))
     gamma = InvBase.d.float(name = 'gamma', default=90.0, validator=InvBase.v.range(0,180,brackets='()'))
-    
+
+
+Lattice.Inventory = Inventory
 
 # End of Lattice
 
