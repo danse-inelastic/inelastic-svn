@@ -17,6 +17,7 @@ PACKAGE =
 #
 
 BUILD_DIRS = \
+	Parsers \
 	atomic_properties \
 	crystalIO \
 	crystalUtils \
