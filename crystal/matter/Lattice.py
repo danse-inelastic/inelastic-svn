@@ -38,8 +38,7 @@ def sind(x):
 
 
 ##############################################################################
-from dsaw.db.WithID import WithID# as base<--do not do this!  name conflict!
-class Lattice(WithID):
+class Lattice(object):
     """Lattice --> stores properties and provides simple operations in lattice
     coordinate system.
 
@@ -69,13 +68,6 @@ class Lattice(WithID):
     setLatPar() or setLatBase() methods.
     """
     
-    import dsaw.db
-    a = dsaw.db.real(name = 'a', default=1.0)
-    b = dsaw.db.real(name = 'b', default=1.0)
-    c = dsaw.db.real(name = 'c', default=1.0)
-    alpha = dsaw.db.real(name = 'alpha', default=90.0)
-    beta = dsaw.db.real(name = 'beta', default=90.0)
-    gamma = dsaw.db.real(name = 'gamma', default=90.0)
 #    ca = cb = cg = 0.0
 #    sa = sb = sg = 1.0
 #    ar = br = cr = 1.0
@@ -102,7 +94,7 @@ class Lattice(WithID):
         Lattice(lat)      -- create a copy of existing Lattice lat
         """
 
-        WithID.__init__(self)
+        super(Lattice, self).__init__()
         
         # initialize data members, their values will be set by setLatPar()
 #        self.a = self.b = self.c = 1.0
@@ -383,6 +375,22 @@ class Lattice(WithID):
             s = "Lattice(a=%g, b=%g, c=%g, alpha=%g, beta=%g, gamma=%g)" % \
                     self.abcABG()
         return s
+
+
+
+# dsaw.model inventory
+from dsaw.model.Inventory import Inventory as InvBase
+class Inventory(InvBase):
+
+    a = InvBase.d.float(name = 'a', default=1.0, validator=InvBase.v.positive)
+    b = InvBase.d.float(name = 'b', default=1.0, validator=InvBase.v.positive)
+    c = InvBase.d.float(name = 'c', default=1.0, validator=InvBase.v.positive)
+    alpha = InvBase.d.float(name = 'alpha', default=90.0, validator=InvBase.v.range(0,180,brackets='()'))
+    beta = InvBase.d.float(name = 'beta', default=90.0, validator=InvBase.v.range(0,180,brackets='()'))
+    gamma = InvBase.d.float(name = 'gamma', default=90.0, validator=InvBase.v.range(0,180,brackets='()'))
+
+
+Lattice.Inventory = Inventory
 
 # End of Lattice
 
