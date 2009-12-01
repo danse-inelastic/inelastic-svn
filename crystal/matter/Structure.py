@@ -9,8 +9,7 @@ import numpy
 from Atom import Atom
 from Lattice import Lattice
 
-from dsaw.db.WithID import WithID
-class Structure(list,WithID):
+class Structure(list):
     """Structure --> group of atoms
 
     Structure class is inherited from Python list.  It contains
@@ -22,13 +21,6 @@ class Structure(list,WithID):
         lattice -- coordinate system (instance of Lattice)
     """
     
-    import dsaw.db
-    description = dsaw.db.varchar(name = 'description', length = 256, default ="")
-    # temporarily disabled
-    #_lattice = dsaw.db.reference(name = '_lattice', table = Lattice)
-    _lattice = None
-    _sgid = dsaw.db.varchar(name = '_sgid', length = 12, default ="")
-    #atomStore = dsaw.db.referenceSet(name = 'atomStore')
 
     def __init__(self, atoms=[], lattice=None, sgid=1, description="", filename=None):
         """define group of atoms in a specified lattice.
@@ -50,7 +42,6 @@ class Structure(list,WithID):
             oxygen_atoms = [ for a in stru if a.symbol == "O" ]
             oxygen_stru = Structure(oxygen_atoms, lattice=stru.lattice)
         """
-        WithID.__init__(self)
 
         self._labels = {}
         self._labels_cached = False
@@ -73,9 +64,9 @@ class Structure(list,WithID):
         # override from lattice argument
         if lattice is None:
             if not self.lattice:    self.lattice = Lattice()
-        elif not isinstance(lattice, Lattice):
-            emsg = "expected instance of Lattice"
-            raise TypeError(emsg)
+        #elif not isinstance(lattice, Lattice):
+        #   emsg = "expected instance of Lattice"
+        #    raise TypeError(emsg)
         else:
             self.lattice = lattice
 
@@ -512,6 +503,8 @@ class Structure(list,WithID):
     # lattice
 
     def _get_lattice(self):
+        if not hasattr(self, '_lattice'):
+            self._lattice = Lattice()
         return self._lattice
 
     def _set_lattice(self, value):
@@ -581,3 +574,35 @@ class Structure(list,WithID):
             setattr(self, attrname, False)
         return
 
+
+    # dsaw.model helpers
+    def __establishInventory__(self, inventory):
+        inventory.description = self.description
+        inventory.lattice = self.lattice
+        inventory.spacegroupno = self.sg.number
+        inventory.chemical_formula = self.getChemicalFormula()
+        inventory.atoms = self # the implementation of Structure class is that structure is inherited from list, and the items are atoms.
+        return
+
+
+    def __restoreFromInventory__(self, inventory):
+        self.__init__(atoms=inventory.atoms,
+                      lattice=inventory.lattice,
+                      sgid=inventory.spacegroupno,
+                      description=inventory.description,
+                      )
+        
+
+
+# dsaw.model inventory
+from dsaw.model.Inventory import Inventory as InvBase
+class Inventory(InvBase):
+
+    description = InvBase.d.str(name = 'description', max_length = 256, default ="")
+    lattice = InvBase.d.reference(name = 'lattice', targettype=Lattice, owned=1)
+    atoms = InvBase.d.referenceSet(name='atoms', targettype=Atom, owned=1)
+    spacegroupno = InvBase.d.int(name = 'spacegroupno', default =1)
+    chemical_formula = InvBase.d.str(name='chemical_formula', max_length=1024)
+
+
+Structure.Inventory = Inventory

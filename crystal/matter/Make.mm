@@ -11,12 +11,16 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 PROJECT = matter
-PACKAGE = atomic_properties
+PACKAGE = 
 
 #--------------------------------------------------------------------------
 #
 
 BUILD_DIRS = \
+	Parsers \
+	atomic_properties \
+	crystalIO \
+	crystalUtils \
 	
 OTHER_DIRS = \
 
@@ -34,13 +38,25 @@ all: export
 # export
 
 EXPORT_PYTHON_MODULES = \
+	Atom.py \
+	AtomLoader2.py \
+	AtomicObject.py \
+	Lattice.py \
+	PDFFitStructure.py \
+	Site.py \
+	SpaceGroups.py \
+	Structure.py \
+	StructureErrors.py \
+	StructureManipulator.py \
+	SymmetryUtilities.py \
+	UnitCell.py \
 	__init__.py \
-	atomic_number.py \
-	average_mass.py \
-	average_neutron_abs_xs.py \
-	average_neutron_coh_xs.py \
-	average_neutron_inc_xs.py \
-	symbol.py \
+	properties.py \
+	sgtbxspacegroups.py \
+	utils.py \
+	version.py \
+	wyckoff.py \
+	__init__.py \
 
 
 export:: export-package-python-modules
