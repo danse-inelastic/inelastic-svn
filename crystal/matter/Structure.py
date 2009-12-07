@@ -577,7 +577,7 @@ class Structure(list):
 
     # dsaw.model helpers
     def __establishInventory__(self, inventory):
-        inventory.description = self.description
+        inventory.short_description = self.description
         inventory.lattice = self.lattice
         inventory.spacegroupno = self.sg.number
         inventory.chemical_formula = self.getChemicalFormula()
@@ -589,7 +589,7 @@ class Structure(list):
         self.__init__(atoms=inventory.atoms,
                       lattice=inventory.lattice,
                       sgid=inventory.spacegroupno,
-                      description=inventory.description,
+                      description=inventory.short_description,
                       )
         
 
@@ -598,7 +598,7 @@ class Structure(list):
 from dsaw.model.Inventory import Inventory as InvBase
 class Inventory(InvBase):
 
-    description = InvBase.d.str(name = 'description', max_length = 256, default ="")
+    short_description = InvBase.d.str(name = 'short_description', max_length = 256, default ="")
     lattice = InvBase.d.reference(name = 'lattice', targettype=Lattice, owned=1)
     atoms = InvBase.d.referenceSet(name='atoms', targettype=Atom, owned=1)
     spacegroupno = InvBase.d.int(name = 'spacegroupno', default =1)
