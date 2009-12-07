@@ -98,62 +98,18 @@ def parse_d3(d3file):
                 for i in range(0,natom):
                     for j in range(0,natom):
                         for idir in range(0,3):
-                            _itemp = index+mode*(natom*natom*6 + 3)+\
-                                     (i*natom+j)*6 + idir*natom + 1
-                            print _itemp
+                            _itemp = index+mode*(natom*natom*7 + 3)+\
+                                     (i*natom+j)*7 + 6 + idir*natom
                             temp = lines[_itemp]+lines[_itemp + 1]
                             _val = [float(f) for f in temp.split()]
                             d3tensor.append(complex(_val[0],_val[1]))
                             d3tensor.append(complex(_val[2],_val[3]))
                             d3tensor.append(complex(_val[4],_val[5]))
-    print numberq
     
-    return
+    return qpoints, d3tensor
 
-
-
-    for i in range(0,ntype):
-        line = file.readline()
-        symbol[i] = (line.split()[1])
-        mass[i] = line.split()[2]
-    for i in range(0,natom):
-        line = file.readline()
-        type[i] = line.split()[1]
-        position[i] = line.split()[2:]
-
-    for q in range(0,numberq):
-        line = file.readline()
-        line = file.readline()
-        line = file.readline()
-        line = file.readline()
-        qpoints.append([float(f) for f in line.split()[3:6]])
-        line = file.readline()
-        for ii in range(0,3 * natom):
-            line = file.readline()
-            line = file.readline()
-            if ii is not int(line.split()[1]) - 1:
-               return SyntaxError('wrong match')
-            line = file.readline()
-
-            for j in range(0,natom):
-                for k in range(0,natom):
-                    line = file.readline()
-                    for jdir in range(0,3):
-                        jj = (j - 1) * 3 + jdir
-                        kk = (k - 1) * 3
-                        line = file.readline() + file.readline()
-                        _val = [float(f) for f in line.split()]
-                        d3tensor.append(complex(_val[0],_val[1]))
-                        d3tensor.append(complex(_val[2],_val[3]))
-                        d3tensor.append(complex(_val[4],_val[5]))
-
-    file.close()
-    #print 'qpoints are',qpoints
-    #print 'ntype is ', ntype
-    #print 'natom is ', natom
-    #print 'd3 tensor is ', d3tensor
-    return np.array(qpoints), \
-    np.rollaxis(np.array(d3tensor).reshape(numberq,natom,3,natom,natom,3,3),2,5)
+    #return np.array(qpoints), \
+    #np.rollaxis(np.array(d3tensor).reshape(numberq,natom,3,natom,natom,3,3),2,5)
 
 
 def parse_dyn_old(dynfile, outputfile):
