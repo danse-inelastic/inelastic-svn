@@ -3,6 +3,7 @@
 import numpy as np
 
 from atoms import Atoms
+from vibrations import Vibrations
 
 def parse_scf(outputfile):
     'Obtain material system information'
@@ -52,10 +53,10 @@ def parse_dyn(dynfile):
     dynmatrix = []
     eigenval = []
     eigenvec = []
-    numberq = lines.count('Dynamical  Matrix in cartesian axes')
+    #numberq = lines.count('Dynamical  Matrix in cartesian axes')
     numberq = 0
     for index, line in enumerate(lines):
-        if 'cartesian' in line:
+        if 'Dynamical Matrix in cartesian axes' in line:
             numberq = numberq + 1
             qpoints.append([float(f) for f in lines[index+2].split()[3:6]])
             for i in range(0,natom):
@@ -74,11 +75,10 @@ def parse_dyn(dynfile):
                 eigenvec.append(complex(_val[0],_val[1]))
                 eigenvec.append(complex(_val[2],_val[3]))
                 eigenvec.append(complex(_val[4],_val[5]))
-    print qpoints
-    print numberq
-    #print eigenval
+
+    phonon = Vibrations(numberq, qpoints, eigenval, eigenvec)
     
-    return
+    return phonon
 
 def parse_d3(d3file):
     'Obtain third order anharmonic tensor from QE d3.x'
@@ -93,7 +93,7 @@ def parse_d3(d3file):
     for index, line in enumerate(lines):
         if 'q = (' in line:
             numberq = numberq + 1
-            qpoints.append([float(f) for f in lines[index+1].split()[3:6]])
+            qpoints.append([float(f) for f in lines[index].split()[3:6]])
             for mode in range(0,3*natom):
                 for i in range(0,natom):
                     for j in range(0,natom):
@@ -105,8 +105,9 @@ def parse_d3(d3file):
                             d3tensor.append(complex(_val[0],_val[1]))
                             d3tensor.append(complex(_val[2],_val[3]))
                             d3tensor.append(complex(_val[4],_val[5]))
-    
-    return qpoints, d3tensor
+
+    return np.array(qpoints), \
+    np.rollaxis(np.array(d3tensor).reshape(numberq,natom,3,natom,natom,3,3),2,5)
 
     #return np.array(qpoints), \
     #np.rollaxis(np.array(d3tensor).reshape(numberq,natom,3,natom,natom,3,3),2,5)
