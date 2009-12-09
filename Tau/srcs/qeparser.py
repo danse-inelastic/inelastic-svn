@@ -69,9 +69,9 @@ def parse_qpoints_from_dyn(dynfile):
             if 'axes' in line:
                 qpoints_full.append([float(f) for f in lines[index+2].split()[3:6]])
 
-    print [nq1,nq2,nq3]
-    print qpoints_indep
-    print len(qpoints_full)
+    #print [nq1,nq2,nq3]
+    #print qpoints_indep
+    #print len(qpoints_full)
     return [nq1,nq2,nq3], qpoints_indep, qpoints_full
         
 def parse_dyn(dynfile):
