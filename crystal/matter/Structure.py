@@ -598,10 +598,11 @@ class Structure(list):
 from dsaw.model.Inventory import Inventory as InvBase
 class Inventory(InvBase):
 
-    short_description = InvBase.d.str(name = 'short_description', max_length = 256, default ="")
+    short_description = InvBase.d.str(
+        name = 'short_description', max_length = 256, default ="", label='Description')
     lattice = InvBase.d.reference(name = 'lattice', targettype=Lattice, owned=1)
     atoms = InvBase.d.referenceSet(name='atoms', targettype=Atom, owned=1)
-    spacegroupno = InvBase.d.int(name = 'spacegroupno', default =1)
+    spacegroupno = InvBase.d.int(name = 'spacegroup no', default =1, label='Spacegroup #')
     chemical_formula = InvBase.d.str(name='chemical_formula', max_length=1024)
 
 
