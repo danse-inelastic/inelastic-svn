@@ -42,7 +42,38 @@ def parse_scf(outputfile):
     unitcell = Atoms(ntype, symbol, mass, natom, position, unit_lvs)
     unitcell.print_info()
     return unitcell
+    
 
+def parse_qpoints_from_dyn(dynfile):
+    """parse qpoints from dyn file
+    for example: si.dyn is specified in ph.input
+    then ph output will have si.dyn0, si.dyn1...etc
+    this parser reads in si.dyn0 first getting irreducible qpoints
+    and then proceed to read all the other files getting full list of qpoints
+
+    """
+    file = open(dynfile+'0','r')
+    lines = file.readlines()
+    file.close()
+    [nq1,nq2,nq3]=[int(f) for f in lines[0].split()]
+    Nq_indep = int(lines[1].split()[0])
+    qpoints_indep = []
+    qpoints_full = []
+    for i in range(0,Nq_indep):
+        qpoints_indep.append([float(f) for f in lines[i+2].split()])
+    for i in range(0,Nq_indep):
+        file = open(dynfile+str(i+1),'r')
+        lines = file.readlines()
+        file.close()
+        for index, line in enumerate(lines):
+            if 'axes' in line:
+                qpoints_full.append([float(f) for f in lines[index+2].split()[3:6]])
+
+    print [nq1,nq2,nq3]
+    print qpoints_indep
+    print len(qpoints_full)
+    return [nq1,nq2,nq3], qpoints_indep, qpoints_full
+        
 def parse_dyn(dynfile):
     
     file = open(dynfile,'r')
@@ -76,7 +107,7 @@ def parse_dyn(dynfile):
                 eigenvec.append(complex(_val[2],_val[3]))
                 eigenvec.append(complex(_val[4],_val[5]))
 
-    phonon = Vibrations(numberq, qpoints, eigenval, eigenvec)
+    #phonon = Vibrations(numberq, qpoints, eigenval, eigenvec)
     
     return phonon
 
@@ -260,7 +291,7 @@ def parse_d3_old(d3file,outputfile):
 if __name__ == "__main__":
     print "Hello World";
     #qpoints, d3tensor = parse_d3('si.anh_X','si.d3X.out')
-    parse_d3('si.anh2')
+    parse_qpoints_from_dyn('si.dyn')
 
 __author__="Xiaoli Tang"
 __date__ ="$Nov 28, 2009 4:57:29 PM$"
