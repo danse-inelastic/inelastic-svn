@@ -42,6 +42,10 @@ class TestStructure(unittest.TestCase):
         self.stru2 = Structure()
         self.stru2.read(ciffile)
         
+        ciffile = os.path.join(testdata_dir, 'graphite.cif')
+        self.stru3 = Structure()
+        self.stru3.read(ciffile)
+        
     def assertListAlmostEqual(self, l1, l2, places=None):
         """wrapper for list comparison"""
         if places is None: places = self.places
@@ -180,10 +184,15 @@ class TestStructure(unittest.TestCase):
 #        for symmop in sg.symop_list:
 #            print symmop
 
-    def test_symVerify(self):
+    def test_symConsistent(self):
         
-        result = self.stru2.verifySymmetry()
-        assert result is True
+        result = self.stru2.symConsistent()
+        assert result[0] is True
+        
+        self.stru3.sg = 225
+        result,badAtomPos,badSymOp = self.stru3.symConsistent()
+        assert result is False
+        print badAtomPos,badSymOp
  
 #    not fully functional
 #    def test_distanceCalc(self):
