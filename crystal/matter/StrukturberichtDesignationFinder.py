@@ -41,25 +41,25 @@ class StrukturberichtDesignationFinder:
         sg = struct.sg
         number = sg.number
         
-        handler = '_on_sgno_%s_%s' % (number, n)
+        handler = '_on_%s_%s' % (number, n)
         
         if not hasattr(self, handler): return
         method = getattr(self, handler)
         return method(struct)
 
 
-    def _on_sgno_221_1(self, struct):
+    def _on_221_1(self, struct):
         return Ah
 
 
-    def _on_sgno_221_2(self, struct):
+    def _on_221_2(self, struct):
         lattice = struct.lattice
         if lattice.alpha == 90 and lattice.beta == 90 and lattice.gamma == 90 \
                and struct[0].symbol != struct[1].symbol:
             return B2
 
 
-    def _on_sgno_229_1(self, struct):
+    def _on_229_1(self, struct):
         lattice = struct.lattice
         if isAlmostEqual(lattice.alpha, acos1_3) and \
            isAlmostEqual(lattice.beta, acos1_3) and \
@@ -67,7 +67,7 @@ class StrukturberichtDesignationFinder:
             return A2
 
     
-    def _on_sgno_229_2(self, struct):
+    def _on_229_2(self, struct):
         lattice = struct.lattice
         if lattice.alpha == 90 and lattice.beta == 90 and lattice.gamma == 90 \
                and struct[0].symbol == struct[1].symbol:
@@ -75,16 +75,16 @@ class StrukturberichtDesignationFinder:
         return
 
 
-    def _on_sgno_225_1(self, struct):
+    def _on_225_1(self, struct):
         lattice = struct.lattice
         if lattice.alpha == 60 and lattice.beta == 60 and lattice.gamma == 60:
             return A1
 
 
-    def _on_sgno_225_2(self, struct):
+    def _on_225_2(self, struct):
         lattice = struct.lattice
         if lattice.alpha == 60 and lattice.beta == 60 and lattice.gamma == 60 \
-            and struct[0].symbol != struct[2].symbol:
+            and struct[0].symbol != struct[1].symbol:
             return B1
 
 
@@ -127,6 +127,39 @@ class TestCase(unittest.TestCase):
             )
         self.assertEqual(StrukturberichtDesignationFinder().find(struct), A2)
 
+        return
+
+
+    def testAh(self):
+        import matter
+        struct = matter.Structure(
+            lattice = matter.Lattice(a=1,b=1,c=1,alpha=90,beta=90,gamma=90),
+            sgid = 221,
+            atoms = [matter.Atom('Cu')],
+            )
+        self.assertEqual(StrukturberichtDesignationFinder().find(struct), Ah)
+        return
+
+
+    def testB1(self):
+        import matter
+        struct = matter.Structure(
+            lattice = matter.Lattice(a=1,b=1,c=1,alpha=60,beta=60,gamma=60),
+            sgid = 225,
+            atoms = [matter.Atom('Na'), matter.Atom('Cl', xyz=[0.5,0.5,0.5])],
+            )
+        self.assertEqual(StrukturberichtDesignationFinder().find(struct), B1)
+        return
+
+
+    def testB2(self):
+        import matter
+        struct = matter.Structure(
+            lattice = matter.Lattice(a=1,b=1,c=1,alpha=90,beta=90,gamma=90),
+            sgid = 221,
+            atoms = [matter.Atom('Cs'), matter.Atom('Cl', xyz=[0.5,0.5,0.5])],
+            )
+        self.assertEqual(StrukturberichtDesignationFinder().find(struct), B2)
         return
 
 
