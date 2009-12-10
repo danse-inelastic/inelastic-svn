@@ -91,6 +91,21 @@ class Structure(list):
         return ''.join( '%s%s' % (e, counts[e]) for e in elems )
 
 
+    def _getStrukturberichtDesignation(self):
+        finder = self._getStrukturberichtDesignationFinder()
+        return finder.find(self)
+    StrukturberichtDesignation = property(_getStrukturberichtDesignation)
+        
+
+    def _getStrukturberichtDesignationFinder(self):
+        k = '_StrukturberichtDesignationFinder'
+        if hasattr(self, k): return getattr(self, k)
+        from StrukturberichtDesignationFinder import StrukturberichtDesignationFinder
+        r = StrukturberichtDesignationFinder()
+        setattr(self, k, r)
+        return r
+    
+
     def addNewAtom(self, *args, **kwargs):
         """Add new Atom instance to the end of this Structure.
 
