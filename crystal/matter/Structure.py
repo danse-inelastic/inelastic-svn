@@ -91,6 +91,27 @@ class Structure(list):
         return ''.join( '%s%s' % (e, counts[e]) for e in elems )
 
 
+    def _getCrystalSystem(self):
+        return self.sg.crystal_system
+    crystal_system = property(_getCrystalSystem)
+
+
+    def _getCentering(self):
+        return self.sg.pdb_name[0]
+    centering = property(_getCentering)
+
+    
+    _centerings = {
+        'P': 'primitive',
+        'C': 'single face centered',
+        'I': 'body centered',
+        'F': 'face centered',
+        }
+    def _getCenteringDescription(self):
+        return self._centerings[self.centering]
+    centering_description = property(_getCenteringDescription)
+
+
     def _getStrukturberichtDesignation(self):
         finder = self._getStrukturberichtDesignationFinder()
         return finder.find(self)

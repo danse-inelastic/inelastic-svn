@@ -17,7 +17,7 @@ class StrukturberichtDesignation:
 
 
     def __str__(self):
-        return 'Strukturbericht: %s(%s)' % (self.symbol, self.alias)
+        return '%s(%s)' % (self.symbol, self.alias)
     __repr__ = __str__
 
 

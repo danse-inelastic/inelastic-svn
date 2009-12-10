@@ -48,6 +48,7 @@ EXPORT_PYTHON_MODULES = \
 	Structure.py \
 	StructureErrors.py \
 	StructureManipulator.py \
+	StrukturberichtDesignationFinder.py \
 	SymmetryUtilities.py \
 	UnitCell.py \
 	__init__.py \
