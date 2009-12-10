@@ -112,6 +112,9 @@ class Atom(object):
     You can obtain its property (for example, scattering length) in a similar
     way one accesses a property of a normal python object:
 
+    TODO: We need to list all atomic properties here, and have a method to show
+    what properties are available
+    
     >>> print Fe.scattering_length
     
     """
