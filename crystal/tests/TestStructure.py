@@ -4,15 +4,17 @@
 # See LICENSE.txt for license information.
 #
 ##############################################################################
-from numpy.ma.testutils import assert_almost_equal
+
 
 """Unit tests for Structure class.
 """
 
 __id__ = "$Id: TestStructure.py 2825 2009-03-09 04:33:12Z juhas $"
 
+from numpy.ma.testutils import assert_almost_equal, assert_array_almost_equal
 import os, sys
 import unittest
+import numpy
 
 # useful variables
 thisfile = locals().get('__file__', 'TestStructure.py')
@@ -35,6 +37,10 @@ class TestStructure(unittest.TestCase):
         at2 = Atom('C', [1, 1, 1])
         self.stru = Structure( [ at1, at2], lattice=Lattice(1, 1, 1, 90, 90, 120) )
         self.places = 12
+        
+        ciffile = os.path.join(testdata_dir, 'PbTe.cif')
+        self.stru2 = Structure()
+        self.stru2.read(ciffile)
         
     def assertListAlmostEqual(self, l1, l2, places=None):
         """wrapper for list comparison"""
@@ -159,24 +165,25 @@ class TestStructure(unittest.TestCase):
         self.assertListAlmostEqual(self.stru[0].force, forces[0])
         
     def test_spaceGroupQuery(self):
-        ciffile = os.path.join(testdata_dir, 'PbTe.cif')
-        self.stru.read(ciffile)
-        #print self.stru.spaceGroup.number
-        #print self.stru.spaceGroup.short_name
-#        op = self.stru.spa    # temporarily disabledceGroup.symop_list[1]
-#        print op
-        sg = self.stru.sg
+
+        sg = self.stru2.sg
         assert sg.number is 225
-        print sg.num_sym_equiv
-        print sg.num_primitive_sym_equiv
-        print sg.short_name
-        print sg.alt_name
-        print sg.point_group_name
-        print sg.crystal_system
-        print sg.pdb_name
-        for symop in sg.symop_list:
-            print symop
-        #assert sg.short_name.strip() is 'Fm-3m'
+        assert sg.num_sym_equiv is 192
+        assert sg.num_primitive_sym_equiv is 48
+        assert sg.short_name=='Fm-3m'
+        assert sg.alt_name=='F M 3 M'
+        assert sg.point_group_name=='PGm3barm'
+        assert sg.crystal_system=='CUBIC'
+        assert sg.pdb_name=='F 4/m -3 2/m'
+        assert_array_almost_equal(sg.symop_list[1].R, numpy.identity(3))
+        assert_array_almost_equal(sg.symop_list[1].t, numpy.array([ 0. ,  0.5,  0.5]))
+#        for symmop in sg.symop_list:
+#            print symmop
+
+    def test_symVerify(self):
+        
+        result = self.stru2.verifySymmetry()
+        assert result is True
  
 #    not fully functional
 #    def test_distanceCalc(self):

@@ -162,64 +162,6 @@ class Structure(list):
             alabel = a.symbol + str(elnum[a.symbol])
             labels.append(alabel)
         return labels
-    
-    def computeDistances(self, maxdist=30, latticeRange=[2,2,2]):
-        """ unitcell.computeDistances(self, [nx,ny,nz]):
-        builds up a Big multiple dictionary, namely
-        self.distances[atom1][atom2][(DX,DY,DZ)]
-        (DX,DY,DZ) are integer numbers specifying the cell containing atom2,
-        relatively to atom1.
-        DX,DY,DZ run from -nx to nx, -ny to ny, -nz to nz, respectively."""
-        distances = {}
-        idlist = self.getLabels()
-        #idlist = self.getIds()
-        for iA in range(0, len(idlist)):
-            idA = idlist[iA]
-            distances[idA] = {}
-            for iB in range(0, len(idlist)):
-                idB = idlist[iB]
-                distances[idA][idB]={}
-                for tx in range(-latticeRange[0],latticeRange[0]+1):
-                    for ty in range(-latticeRange[1],latticeRange[1]+1):
-                        for tz in range(-latticeRange[2],latticeRange[2]+1):
-                            posA = self.getCartesianPosition(idA)
-                            posB = self.getCartesianPosition(idB) + numpy.dot([tx,ty,tz], self._lattice)
-                            dist = numpy.sqrt(numpy.sum( (posB-posA) * (posB-posA) ))
-                            if(dist<maxdist):
-                                distances[idA][idB][(tx,ty,tz)] = dist
-        self._distances = distances
-        return distances
-
-##     def findTetrahedra(self, list4ids, latticeVectors=[(0,0,0),(0,0,0),(0,0,0),(0,0,0)]):
-##         """Searches the tetrahedra that equivalent by symmetry to the reference tetrahedron
-##         defined by the list4ids (4 Ids) and the cells indices where vertices lie."""        
-##         # from OpenPhonon:
-##         # OP_cella. FindTetragons(self, Latoms, CellsCoo=[(0,0,0),(0,0,0),(0,0,0),(0,0,0)])
-##         # This is the key routine to find good candidates to symmetry group.
-##         # Latoms is a list of the kind [  (Aa,kA) ,(Bb,kB)....] 
-##         # ( i.e. couples formed by atom-name and position in the position list.
-##         # Latoms must be formed of four  atoms defining a non-degenerate tetraedron.
-##         # A check is permormed on the non-degeneracy.
-##         # The funtions finds all the possible equivalent tetraedrons (which have the same
-##         # set of distances, and the same atom kinds)
-##         # The function return the list of all these tetraedrons
-        
-##         if type(list4ids) is not type([]):
-##             raise ValueError, 'list4ids should be a list of 4 site Ids.'
-##         if len(list4ids) != len(latticeVectors):
-##             raise ValueError, 'There should be as many site Ids as lattice vectors.'
-##         if len(list4ids) != 4:
-##             raise ValueError, 'Need 4 sites to define a tetrahedron.'
-        
-##         tetraVertices = [self.cartesianPositionInLattice(id,lattvec)
-##                          for (id,lattvec) in zip(list4ids,latticeVectors)]
-##         # compute vectors for edges of tetrahedron from first point:
-##         edgeVectors = tetraVertices[1:4] - tetraVertices[0]
-
-##         # check for non-degeneracy:
-##         det = la.det(edgeVectors)
-##         if(abs(det) < 1e-6):
-##             raise ValueError, 'determinant smaller than 1e-6: degenerate reference tetrahedron.'
         
     #untested--from UnitCell
     def bringFractionalPositionIntoCell(self, fracpos):
@@ -306,9 +248,9 @@ class Structure(list):
         """forces on all atoms
         """ )   
     
-################################################    
-# geometry methods
-################################################
+################################################################################################    
+# geometry and symmetry methods--these should be farmed out to Geometry class which does all this--see vimm
+################################################################################################ 
 
     def distance(self, id0, id1):
         """Distance between 2 atoms, no periodic boundary conditions.
@@ -331,6 +273,30 @@ class Structure(list):
         u12 = a2.xyz - a1.xyz
         return self.lattice.angle(u10, u12)
     
+    def verifySymmetry(self):
+        verdict = True
+        def arrayInList(trialArray,arrayList):
+            matchesQ=False
+            for certainArray in arrayList:
+                if numpy.all(certainArray==trialArray):
+                    matchesQ = True
+                    break
+            return matchesQ
+        sg = self.sg
+        # as long as the structure is given a lattice, each atom.xyz should be in fractional coords
+        atomPositions = [atom.xyz for atom in self[:]]
+        for atomPosition in atomPositions:
+            for symop in sg.symop_list:
+                rawPosition = numpy.dot(symop.R, atomPosition) + symop.t
+                fracPos, intPos = numpy.modf(rawPosition)
+                newPosition = numpy.mod(fracPos,1)
+                if not arrayInList(newPosition, atomPositions):
+                    verdict = False
+                    break
+        return verdict
+    
+    
+    
 
     def placeInLattice(self, new_lattice):
         """place structure into new_lattice coordinate system
@@ -346,8 +312,68 @@ class Structure(list):
             a.xyz = numpy.dot(a.xyz, Tx)
         self.lattice = new_lattice
         return self
+    
+    def computeDistances(self, maxdist=30, latticeRange=[2,2,2]):
+        """ unitcell.computeDistances(self, [nx,ny,nz]):
+        builds up a Big multiple dictionary, namely
+        self.distances[atom1][atom2][(DX,DY,DZ)]
+        (DX,DY,DZ) are integer numbers specifying the cell containing atom2,
+        relatively to atom1.
+        DX,DY,DZ run from -nx to nx, -ny to ny, -nz to nz, respectively."""
+        distances = {}
+        idlist = self.getLabels()
+        #idlist = self.getIds()
+        for iA in range(0, len(idlist)):
+            idA = idlist[iA]
+            distances[idA] = {}
+            for iB in range(0, len(idlist)):
+                idB = idlist[iB]
+                distances[idA][idB]={}
+                for tx in range(-latticeRange[0],latticeRange[0]+1):
+                    for ty in range(-latticeRange[1],latticeRange[1]+1):
+                        for tz in range(-latticeRange[2],latticeRange[2]+1):
+                            posA = self.getCartesianPosition(idA)
+                            posB = self.getCartesianPosition(idB) + numpy.dot([tx,ty,tz], self._lattice)
+                            dist = numpy.sqrt(numpy.sum( (posB-posA) * (posB-posA) ))
+                            if(dist<maxdist):
+                                distances[idA][idB][(tx,ty,tz)] = dist
+        self._distances = distances
+        return distances
 
+##     def findTetrahedra(self, list4ids, latticeVectors=[(0,0,0),(0,0,0),(0,0,0),(0,0,0)]):
+##         """Searches the tetrahedra that equivalent by symmetry to the reference tetrahedron
+##         defined by the list4ids (4 Ids) and the cells indices where vertices lie."""        
+##         # from OpenPhonon:
+##         # OP_cella. FindTetragons(self, Latoms, CellsCoo=[(0,0,0),(0,0,0),(0,0,0),(0,0,0)])
+##         # This is the key routine to find good candidates to symmetry group.
+##         # Latoms is a list of the kind [  (Aa,kA) ,(Bb,kB)....] 
+##         # ( i.e. couples formed by atom-name and position in the position list.
+##         # Latoms must be formed of four  atoms defining a non-degenerate tetraedron.
+##         # A check is permormed on the non-degeneracy.
+##         # The funtions finds all the possible equivalent tetraedrons (which have the same
+##         # set of distances, and the same atom kinds)
+##         # The function return the list of all these tetraedrons
+        
+##         if type(list4ids) is not type([]):
+##             raise ValueError, 'list4ids should be a list of 4 site Ids.'
+##         if len(list4ids) != len(latticeVectors):
+##             raise ValueError, 'There should be as many site Ids as lattice vectors.'
+##         if len(list4ids) != 4:
+##             raise ValueError, 'Need 4 sites to define a tetrahedron.'
+        
+##         tetraVertices = [self.cartesianPositionInLattice(id,lattvec)
+##                          for (id,lattvec) in zip(list4ids,latticeVectors)]
+##         # compute vectors for edges of tetrahedron from first point:
+##         edgeVectors = tetraVertices[1:4] - tetraVertices[0]
 
+##         # check for non-degeneracy:
+##         det = la.det(edgeVectors)
+##         if(abs(det) < 1e-6):
+##             raise ValueError, 'determinant smaller than 1e-6: degenerate reference tetrahedron.'
+
+###########################
+# IO
+###########################
     def read(self, filename, format='auto'):
         """Load structure from a file, any original data become lost.
 
