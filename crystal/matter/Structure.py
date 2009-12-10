@@ -294,14 +294,23 @@ class Structure(list):
         u12 = a2.xyz - a1.xyz
         return self.lattice.angle(u10, u12)
     
-    def verifySymmetry(self):
+    def symConsistent(self, decimal=7):
+        from numpy.testing import assert_array_almost_equal
         verdict = True
+        nonCompliantAtomPosition = None
+        nonCompliantSymOp = None
         def arrayInList(trialArray,arrayList):
             matchesQ=False
             for certainArray in arrayList:
-                if numpy.all(certainArray==trialArray):
+                try: 
+                    assert_array_almost_equal(trialArray, certainArray, decimal=decimal)
                     matchesQ = True
                     break
+                except:
+                    continue
+#                if numpy.all(certainArray==trialArray):
+#                    matchesQ = True
+#                    break
             return matchesQ
         sg = self.sg
         # as long as the structure is given a lattice, each atom.xyz should be in fractional coords
@@ -313,8 +322,10 @@ class Structure(list):
                 newPosition = numpy.mod(fracPos,1)
                 if not arrayInList(newPosition, atomPositions):
                     verdict = False
+                    nonCompliantAtomPosition = atomPosition
+                    nonCompliantSymOp = symop
                     break
-        return verdict
+        return verdict, nonCompliantAtomPosition, nonCompliantSymOp
     
     
     
