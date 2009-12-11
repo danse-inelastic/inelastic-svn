@@ -21,7 +21,7 @@ BUILD_DIRS = \
 	atomic_properties \
 	crystalIO \
 	crystalUtils \
-	dom \
+	orm \
 	
 OTHER_DIRS = \
 
