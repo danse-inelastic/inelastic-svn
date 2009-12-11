@@ -11,7 +11,7 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 PROJECT = matter
-PACKAGE = dom
+PACKAGE = orm
 
 
 # directory structure
@@ -39,7 +39,6 @@ EXPORT_PYTHON_MODULES = \
 	AtomicStructure.py \
 	Lattice.py \
 	__init__.py \
-	_.py \
 
 
 #include doxygen/default.def

@@ -12,7 +12,6 @@
 #
 
 
-from _ import o2t
 from dsaw.model.Inventory import Inventory as InvBase
 
 
@@ -56,9 +55,6 @@ class Inventory(InvBase):
 
 Structure.Inventory = Inventory
 
-
-# db table
-StructureTable = o2t(Structure)
 
 # more cols
 import dsaw.db

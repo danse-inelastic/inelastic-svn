@@ -12,7 +12,6 @@
 #
 
 
-from _ import o2t
 from dsaw.model.Inventory import Inventory as InvBase
 
 
@@ -34,10 +33,6 @@ class Inventory(InvBase):
     
 Lattice.Inventory = Inventory
 del Inventory
-
-
-# db table
-LatticeTable = o2t(Lattice)
 
 
 # view
