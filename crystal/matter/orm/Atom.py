@@ -12,7 +12,6 @@
 #
 
 
-from _ import o2t 
 from dsaw.model.Inventory import Inventory as InvBase
 
 
@@ -58,10 +57,6 @@ class Inventory(InvBase):
 
 Atom.Inventory = Inventory
 del Inventory
-
-
-# db table
-AtomTable = o2t(Atom)
 
 
 # view
