@@ -11,12 +11,12 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
-PROJECT = crystal
+PROJECT = matter
 
 #--------------------------------------------------------------------------
 #
 
-BUILD_DIRS = atomic_properties ChemicalElements crystalIO symmetry crystalUtils
+BUILD_DIRS = matter
 
 OTHER_DIRS = \
 
@@ -36,15 +36,6 @@ all: export
 # export
 
 EXPORT_PYTHON_MODULES = \
-	__init__.py \
-	Atom.py \
-	AtomLoader.py \
-	CrystalStructure.py \
-	properties.py \
-	Structure.py \
-	UnitCell.py \
-	UnitCellBuilder.py \
-	utils.py \
 
 
 EXPORT_BINS = \
