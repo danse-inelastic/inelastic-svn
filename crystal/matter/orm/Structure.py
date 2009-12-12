@@ -56,10 +56,6 @@ class Inventory(InvBase):
 Structure.Inventory = Inventory
 
 
-# more cols
-import dsaw.db
-StructureTable.addColumn(dsaw.db.date(name='date'))
-
 # view
 def customizeLubanObjectDrawer(self, drawer):
     drawer.sequence = ['lattice', 'atoms', 'properties']
