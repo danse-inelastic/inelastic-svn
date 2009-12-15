@@ -215,6 +215,22 @@ class SpaceGroup(object):
         for symop in self.symop_list:
             yield symop(vec)
 
+    def iter_symops_leave_vector_unchanged(self, vec, decimal=7):
+        """iterates over all symops that leave the given vector unchange
+        The given vector must be in relative coordinates
+        """
+        from numpy.testing import assert_array_almost_equal
+        for symop in self.iter_symops():
+            vec1 = numpy.dot(symop.R, vec)
+            try:
+                assert_array_almost_equal(vec1, vec, decimal=decimal)
+            except:
+                continue
+            else:
+                yield symop
+            continue
+            
+            
 
 ## spacegroup definitions
 sg1 = SpaceGroup(
@@ -8088,5 +8104,7 @@ mmLibSpaceGroupList = SpaceGroupList[:]
 # add additional space group representations obtained from sgtbx:
 from matter.sgtbxspacegroups import sgtbxSpaceGroupList
 SpaceGroupList = mmLibSpaceGroupList + sgtbxSpaceGroupList
+
+
 
 # End of file

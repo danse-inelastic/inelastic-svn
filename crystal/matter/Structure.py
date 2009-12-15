@@ -293,7 +293,8 @@ class Structure(list):
         u10 = a0.xyz - a1.xyz
         u12 = a2.xyz - a1.xyz
         return self.lattice.angle(u10, u12)
-    
+
+
     def symConsistent(self, decimal=7):
         from numpy.testing import assert_array_almost_equal
         verdict = True
