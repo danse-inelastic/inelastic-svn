@@ -29,17 +29,12 @@ class Inventory(InvBase):
     beta = InvBase.d.float(name = 'beta', default=90.0, validator=InvBase.v.range(0,180,brackets='()'))
     gamma = InvBase.d.float(name = 'gamma', default=90.0, validator=InvBase.v.range(0,180,brackets='()'))
 
+    base = InvBase.d.array(name='base', shape=(3,3), elementtype='float')
+    
     dbtablename = 'lattices'
     
 Lattice.Inventory = Inventory
 del Inventory
-
-
-# view
-def customizeLubanObjectDrawer(self, drawer):
-    drawer.mold.sequence = ['a', 'b', 'c', 'alpha', 'beta', 'gamma']
-Lattice.customizeLubanObjectDrawer = customizeLubanObjectDrawer
-
 
 
 # version
