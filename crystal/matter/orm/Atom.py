@@ -59,13 +59,6 @@ Atom.Inventory = Inventory
 del Inventory
 
 
-# view
-def customizeLubanObjectDrawer(self, drawer):
-    drawer.mold.sequence = ['element', 'xyz', 'label', 'occupancy',]
-Atom.customizeLubanObjectDrawer = customizeLubanObjectDrawer
-
-
-
 # version
 __id__ = "$Id$"
 

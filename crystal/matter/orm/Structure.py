@@ -56,13 +56,6 @@ class Inventory(InvBase):
 Structure.Inventory = Inventory
 
 
-# view
-def customizeLubanObjectDrawer(self, drawer):
-    drawer.sequence = ['lattice', 'atoms', 'properties']
-    drawer.mold.sequence = ['short_description', 'spacegroupno']
-Structure.customizeLubanObjectDrawer = customizeLubanObjectDrawer
-
-
 # version
 __id__ = "$Id$"
 
