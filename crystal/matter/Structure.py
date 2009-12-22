@@ -375,7 +375,7 @@ class Structure(list):
         for atomPosition in atomPositions:
             for symop in sg.symop_list:
                 rawPosition = numpy.dot(symop.R, atomPosition) + symop.t
-                fracPos, intPos = numpy.modf(rawPosition)
+                fracPos, intPos = numpy.modf(numpy.round(rawPosition, decimal))
                 newPosition = numpy.mod(fracPos,1)
                 if not arrayInList(newPosition, atomPositions):
                     verdict = False
