@@ -22,7 +22,9 @@ class Structure(list):
     """
     
 
-    def __init__(self, atoms=[], lattice=None, sgid=1, description="", filename=None):
+    def __init__(self, atoms=[], lattice=None, sgid=1, description="", filename=None,
+                 primitive_unitcell=None
+                 ):
         """define group of atoms in a specified lattice.
 
         atoms    -- list of Atom instances to be included in this Structure.
@@ -69,6 +71,9 @@ class Structure(list):
         #    raise TypeError(emsg)
         else:
             self.lattice = lattice
+
+
+        self._primitive_unitcell = primitive_unitcell
 
 
     def __str__(self):
@@ -127,6 +132,57 @@ class Structure(list):
         return r
     
 
+    def _get_primitive_unitcell(self):
+        t = self._primitive_unitcell
+        if t is None:
+            t = self._primitive_unitcell = self._create_primitive_unitcell()
+        return t
+    def _set_primitive_unitcell(self, p):
+        self._primitive_unitcell = p
+        return p
+    primitive_unitcell = property(_get_primitive_unitcell, _set_primitive_unitcell)
+
+
+    def _create_primitive_unitcell(self):
+        # the ctor
+        from UnitCell import UnitCell
+
+        # check symmetry
+        sg = self.sg
+        verdict, atompos, symop = self.symConsistent()
+        if not verdict:
+            raise RuntimeError, \
+                  "inconsistent structure: atom position: %s, sym operation %s" % (
+                atompos, symop)
+
+        #
+        if sg.number == 225:
+            # fcc
+            a = self.lattice.a
+            base = numpy.array([[0,1,1], [1,0,1], [1,1,0]])*0.5*a
+            
+        elif sg.number == 229:
+            # bcc
+            a = self.lattice.a
+            base = numpy.array([[1,0,0], [0,1,0], [0.5,0.5,0.5]])*a
+            
+            
+        elif sg.short_name[0] == 'P':
+            puc = UnitCell(base=self.lattice.base, atoms=list(self))
+            return puc
+
+        else:
+            raise NotImplementedError
+        
+        puc = UnitCell(base=base)
+        for atom in self:
+            if puc.hasAtom(atom): continue
+            puc.addAtom(atom)
+            continue
+                
+        return puc
+        
+    
     def addNewAtom(self, *args, **kwargs):
         """Add new Atom instance to the end of this Structure.
 
@@ -649,3 +705,26 @@ class Structure(list):
         return
 
 
+import unittest
+class TestCase(unittest.TestCase):
+
+    def test1(self):
+        lattice = Lattice(a=2,b=2,c=2,alpha=90,beta=90,gamma=90)
+        atoms = [
+            Atom('Ni', (0,0,0)),
+            Atom('Ni', (0,0.5,0.5)),
+            Atom('Ni', (0.5,0,0.5)),
+            Atom('Ni', (0.5,0.5,0)),
+            ]
+        struct = Structure(lattice=lattice, atoms=atoms, sgid=225)
+        print struct.primitive_unitcell
+        return
+    
+
+def main():
+    unittest.main()
+    return
+
+
+
+if __name__ == '__main__': main()
