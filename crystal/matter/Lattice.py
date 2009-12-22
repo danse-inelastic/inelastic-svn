@@ -78,9 +78,12 @@ class Lattice(object):
 #    base = recbase = [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]]
 #    normbase = recnormbase = [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]]
 
-    def __init__(self, a=None, b=None, c=None,
-            alpha=None, beta=None, gamma=None,
-            baserot=numpy.identity(3, dtype=float), base=None):
+    def __init__(
+        self, a=None, b=None, c=None,
+        alpha=None, beta=None, gamma=None,
+        baserot=numpy.identity(3, dtype=float),
+        base=None,
+        ):
         """define new coordinate system, the default is Cartesian
         There are 4 ways how to create Lattice instance:
 
@@ -128,6 +131,7 @@ class Lattice(object):
         else:
             self.setLatPar( float(a), float(b), float(c),
                     float(alpha), float(beta), float(gamma), baserot )
+
         return
 
     def setLatPar(self, a=None, b=None, c=None,
@@ -277,7 +281,6 @@ class Lattice(object):
         #elif almostEqual(self.a, self.b) or almostEqual(self.a)
         
 
-    
 ################################################    
 # k space methods
 ################################################
