@@ -359,15 +359,8 @@ class Structure(list):
         def arrayInList(trialArray,arrayList):
             matchesQ=False
             for certainArray in arrayList:
-                try: 
-                    assert_array_almost_equal(trialArray, certainArray, decimal=decimal)
+                if (numpy.round(trialArray-certainArray, decimal)==0).all():
                     matchesQ = True
-                    break
-                except:
-                    continue
-#                if numpy.all(certainArray==trialArray):
-#                    matchesQ = True
-#                    break
             return matchesQ
         sg = self.sg
         # as long as the structure is given a lattice, each atom.xyz should be in fractional coords
