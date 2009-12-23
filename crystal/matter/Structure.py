@@ -168,11 +168,11 @@ class Structure(list):
             
             
         elif sg.short_name[0] == 'P':
-            puc = UnitCell(base=self.lattice.base, atoms=list(self))
-            return puc
+            return
 
         else:
-            raise NotImplementedError
+            # not implemented
+            return
         
         puc = UnitCell(base=base)
         for atom in self:

@@ -64,6 +64,12 @@ class UnitCell:
         return False
 
 
+    def cartesian(self, u):
+        """return cartesian coordinates of a lattice vector"""
+        rc = np.dot(u, self.base)
+        return rc
+
+
     def __str__(self):
         s_base = "base=%s" % self.base
         s_atoms = '\n'.join([str(a) for a in self.atoms])

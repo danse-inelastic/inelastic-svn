@@ -18,26 +18,8 @@ from dsaw.model.Inventory import Inventory as InvBase
 # data object
 from Atom import Atom
 from Lattice import Lattice
+from UnitCell import UnitCell
 from matter.Structure import Structure
-
-
-# dsaw.model helpers
-def __establishInventory__(self, inventory):
-    inventory.short_description = self.description
-    inventory.lattice = self.lattice
-    inventory.spacegroupno = self.sg.number
-    inventory.chemical_formula = self.getChemicalFormula()
-    inventory.atoms = self # the implementation of Structure class is that structure is inherited from list, and the items are atoms.
-    return
-Structure.__establishInventory__ = __establishInventory__
-
-def __restoreFromInventory__(self, inventory):
-    self.__init__(atoms=inventory.atoms,
-                  lattice=inventory.lattice,
-                  sgid=inventory.spacegroupno,
-                  description=inventory.short_description,
-                  )
-Structure.__restoreFromInventory__ = __restoreFromInventory__
 
 
 # inventory
@@ -50,10 +32,34 @@ class Inventory(InvBase):
     atoms = InvBase.d.referenceSet(name='atoms', targettype=Atom, owned=1)
     spacegroupno = InvBase.d.int(name = 'spacegroupno', default =1, label='Spacegroup #')
     chemical_formula = InvBase.d.str(name='chemical_formula', max_length=1024)
+    primitive_unitcell = InvBase.d.reference(
+        name='primitive_unitcell', targettype=UnitCell, owned=1)
 
     dbtablename = 'atomicstructures'
 
 Structure.Inventory = Inventory
+
+
+# dsaw.model helpers
+def __establishInventory__(self, inventory):
+    inventory.short_description = self.description
+    inventory.lattice = self.lattice
+    inventory.spacegroupno = self.sg.number
+    inventory.chemical_formula = self.getChemicalFormula()
+    inventory.atoms = list(self) # the implementation of Structure class is that structure is inherited from list, and the items are atoms.
+    inventory.primitive_unitcell = self.primitive_unitcell
+    return
+Structure.__establishInventory__ = __establishInventory__
+
+def __restoreFromInventory__(self, inventory):
+    self.__init__(atoms=inventory.atoms,
+                  lattice=inventory.lattice,
+                  sgid=inventory.spacegroupno,
+                  description=inventory.short_description,
+                  )
+    self.primitive_unitcell = inventory.primitive_unitcell
+    return
+Structure.__restoreFromInventory__ = __restoreFromInventory__
 
 
 # version
