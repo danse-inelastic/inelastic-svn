@@ -36,8 +36,9 @@ all: export
 
 EXPORT_PYTHON_MODULES = \
 	Atom.py \
-	Structure.py \
 	Lattice.py \
+	Structure.py \
+	UnitCell.py \
 	__init__.py \
 
 
