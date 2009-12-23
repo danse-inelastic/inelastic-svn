@@ -299,21 +299,31 @@ class Structure(list):
 # for now these are done in the style of diffraction
 # eventually will be done in Jiao's style with metaclasses
 
-    # xyz_cartn
+    # fractional xyz
+    def _get_xyz(self):
+        return [atom.xyz.tolist() for atom in self[:]]
 
-    def _get_xyz_cartn(self):
-        return [atom.xyz for atom in list]
-
-    def _set_xyz_cartn(self, xyzList):
+    def _set_xyz(self, xyzList):
         for atom,xyz in zip(list,xyzList):
             atom.xyz = xyz
+
+    xyz = property(_get_xyz, _set_xyz, doc =
+        """fractional coordinates of all atoms
+        """ )  
+
+    # xyz_cartn
+    def _get_xyz_cartn(self):
+        return [atom.xyz_cartn.tolist() for atom in self[:]]
+
+    def _set_xyz_cartn(self, xyzList):
+        for atom,xyz_cartn in zip(list,xyzList):
+            atom.xyz_cartn = xyz_cartn
 
     xyz_cartn = property(_get_xyz_cartn, _set_xyz_cartn, doc =
         """absolute Cartesian coordinates of all atoms
         """ )   
     
     # forces
-
     def _get_forces(self):
         return [atom.force for atom in self]
 
@@ -658,7 +668,7 @@ class Structure(list):
 
     sg = property(_get_spaceGroup, _set_spaceGroup, doc =
         """Space group for this structure.  This can be set 
-        by instiating with a new spacegroup class or with a space group id.
+        by instantiating with a new spacegroup class or with a space group id.
         One can also use the explicit setter.""")
     
     ####################################################################

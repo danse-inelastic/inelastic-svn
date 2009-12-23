@@ -60,7 +60,9 @@ class TestStructure(unittest.TestCase):
         #at3 = Atom('H', [0, 0, 0])
         
         stru = Structure( [ at1, at2], lattice=Lattice(3.8, 3.8, 5.6, 90, 90, 120) )
-        print 'formula: ',  stru.getChemicalFormula()
+        assert stru.getChemicalFormula()=='C2'
+        self.assertListAlmostEqual(stru.xyz,[[0.33333333333333298, 0.66666666666666696, 0.0], [0.66666666666666696, 0.33333333333333298, 0.0]])
+        self.assertListAlmostEqual(stru.xyz_cartn,[[1.0969655114602876, 1.9000000000000017, 0.0], [2.1939310229205784, -2.0020877317117325e-15, 0.0]])
         return
     
 
