@@ -301,7 +301,7 @@ class Structure(list):
 
     # fractional xyz
     def _get_xyz(self):
-        return [atom.xyz for atom in self[:]]
+        return [atom.xyz.tolist()  for atom in self[:]]
     def _set_xyz(self, xyzList):
         for atom,xyz in zip(list,xyzList):
             atom.xyz = xyz
@@ -310,7 +310,7 @@ class Structure(list):
 
     # xyz_cartn
     def _get_xyz_cartn(self):
-        return [atom.xyz_cartn for atom in self[:]]
+        return [atom.xyz_cartn.tolist() for atom in self[:]]
     def _set_xyz_cartn(self, xyzList):
         for atom,xyz_cartn in zip(list,xyzList):
             atom.xyz_cartn = xyz_cartn
