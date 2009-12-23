@@ -301,39 +301,39 @@ class Structure(list):
 
     # fractional xyz
     def _get_xyz(self):
-        return [atom.xyz.tolist() for atom in self[:]]
-
+        return [atom.xyz for atom in self[:]]
     def _set_xyz(self, xyzList):
         for atom,xyz in zip(list,xyzList):
             atom.xyz = xyz
-
     xyz = property(_get_xyz, _set_xyz, doc =
-        """fractional coordinates of all atoms
-        """ )  
+        """fractional coordinates of all atoms""" )  
 
     # xyz_cartn
     def _get_xyz_cartn(self):
-        return [atom.xyz_cartn.tolist() for atom in self[:]]
-
+        return [atom.xyz_cartn for atom in self[:]]
     def _set_xyz_cartn(self, xyzList):
         for atom,xyz_cartn in zip(list,xyzList):
             atom.xyz_cartn = xyz_cartn
-
     xyz_cartn = property(_get_xyz_cartn, _set_xyz_cartn, doc =
-        """absolute Cartesian coordinates of all atoms
-        """ )   
+        """absolute Cartesian coordinates of all atoms""" )   
+    
+    # symbols
+    def _get_symbols(self):
+        return [atom.symbol for atom in self[:]]
+    def _set_symbols(self, symbolList):
+        for atom,symbol in zip(list,symbolList):
+            atom.symbol = symbol
+    symbols = property(_get_symbols, _set_symbols, doc =
+        """symbols of all atoms""" )  
     
     # forces
     def _get_forces(self):
         return [atom.force for atom in self]
-
     def _set_forces(self, forceList):
         for atom,force in zip(self,forceList):
             atom.force = force
-
     forces = property(_get_forces, _set_forces, doc =
-        """forces on all atoms
-        """ )   
+        """forces on all atoms""" )   
     
 ################################################################################################    
 # geometry and symmetry methods--these should be farmed out to Geometry class which does all this--see vimm
@@ -387,9 +387,6 @@ class Structure(list):
                     break
         return verdict, nonCompliantAtomPosition, nonCompliantSymOp
     
-    
-    
-
     def placeInLattice(self, new_lattice):
         """place structure into new_lattice coordinate system
 
@@ -627,7 +624,6 @@ class Structure(list):
             adups = atoms
         for a in adups: a.lattice = self.lattice
         list.__setslice__(self, lo, hi, adups)
-
 
     ####################################################################
     # property handlers
