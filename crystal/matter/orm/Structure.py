@@ -34,6 +34,7 @@ class Inventory(InvBase):
     chemical_formula = InvBase.d.str(name='chemical_formula', max_length=1024)
     primitive_unitcell = InvBase.d.reference(
         name='primitive_unitcell', targettype=UnitCell, owned=1)
+    date = InvBase.d.date(name='date')
 
     dbtablename = 'atomicstructures'
 
