@@ -74,6 +74,8 @@ class Structure(list):
 
 
         self._primitive_unitcell = primitive_unitcell
+        import time
+        self.date = time.ctime()
 
 
     def __str__(self):
