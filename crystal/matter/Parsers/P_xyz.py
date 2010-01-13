@@ -105,16 +105,54 @@ class P_xyz(StructureParser):
         return stru
     # End of parseLines
 
-    def toLines(self, stru):
+    def toLines(self, stru, **kwds):
         """Convert Structure stru to a list of lines in XYZ format.
 
         Return list of strings.
         """
+        use_primitive_unitcell = kwds.get('use_primitive_unitcell')
+        if use_primitive_unitcell:
+            return self._toLines_primitiveunitcell(stru, **kwds)
+        return self._toLines_originalunitcell(stru, **kwds)
+
+
+    def _toLines_primitiveunitcell(self, stru, **kwds):
+        use_fractional_coordinates = kwds.get('use_fractional_coordinates')
+        puc = stru.primitive_unitcell
+        atoms = puc.atoms
+        
+        lines = []
+        lines.append( str(len(atoms)) )
+        import numpy as np
+        base = np.array(puc.base, copy=1); base.shape = -1
+        lines.append(' '.join(map(str, base)))
+        if stru.description:
+            lines.append( stru.description )
+        for a in atoms:
+            if use_fractional_coordinates:
+                rc = a.xyz
+            else:
+                rc = a.xyz_cartn
+            s = "%-3s %g %g %g" % (a.symbol, rc[0], rc[1], rc[2])
+            lines.append(s)
+        return lines
+
+
+    def _toLines_originalunitcell(self, stru, **kwds):
+        use_fractional_coordinates = kwds.get('use_fractional_coordinates')
         lines = []
         lines.append( str(len(stru)) )
-        lines.append( stru.description )
+        lattice = stru.lattice
+        import numpy as np
+        base = np.array(lattice.base, copy=1); base.shape = -1
+        lines.append(' '.join(map(str, base)))
+        if stru.description:
+            lines.append( stru.description )
         for a in stru:
-            rc = a.xyz_cartn
+            if use_fractional_coordinates:
+                rc = a.xyz
+            else:
+                rc = a.xyz_cartn
             s = "%-3s %g %g %g" % (a.symbol, rc[0], rc[1], rc[2])
             lines.append(s)
         return lines
@@ -126,5 +164,43 @@ class P_xyz(StructureParser):
 
 def getParser():
     return P_xyz()
+
+
+
+import unittest
+class TestCase(unittest.TestCase):
+
+    def testWriter(self):
+        p = getParser()
+        import matter
+        a = 1.5
+        lattice = matter.Lattice(2*a, 2*a, 2*a, 90,90,90)
+        atoms = [matter.Atom('Ni'), matter.Atom('Ni', (0.5,0.5,0.5))]
+        struct = Structure(lattice=lattice, atoms=atoms, sgid=229)
+        
+        print 'original unitcell, cartesian coords'
+        print '\n'.join(p.toLines(struct))
+        
+        print 'original unitcell, fractional coords'
+        print '\n'.join(p.toLines(struct, use_fractional_coordinates=1))
+
+        print 'primitive unitcell, fractional coords'
+        print '\n'.join(p.toLines(struct, use_primitive_unitcell=1))
+
+        print 'primitive unitcell, fractional coords'
+        print '\n'.join(p.toLines(struct, use_primitive_unitcell=1, use_fractional_coordinates=1))
+
+        return
+
+
+
+def main():
+    unittest.main()
+    return
+
+
+
+if __name__ == '__main__': main()
+
 
 # End of file
