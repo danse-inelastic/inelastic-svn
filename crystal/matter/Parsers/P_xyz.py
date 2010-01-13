@@ -184,7 +184,7 @@ class TestCase(unittest.TestCase):
         print 'original unitcell, fractional coords'
         print '\n'.join(p.toLines(struct, use_fractional_coordinates=1))
 
-        print 'primitive unitcell, fractional coords'
+        print 'primitive unitcell, cartesian coords'
         print '\n'.join(p.toLines(struct, use_primitive_unitcell=1))
 
         print 'primitive unitcell, fractional coords'
