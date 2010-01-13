@@ -56,7 +56,7 @@ class P_xyz(StructureParser):
             w1 = linefields[start][0]
             if len(lfs) == 1 and str(int(w1)) == w1:
                 p_natoms = int(w1)
-                stru.title = lines[start+1].strip()
+                stru.description = lines[start+1].strip()
                 start += 2
             else:
                 emsg = ("%d: invalid XYZ format, missing number of atoms" %
@@ -112,7 +112,7 @@ class P_xyz(StructureParser):
         """
         lines = []
         lines.append( str(len(stru)) )
-        lines.append( stru.title )
+        lines.append( stru.description )
         for a in stru:
             rc = a.xyz_cartn
             s = "%-3s %g %g %g" % (a.symbol, rc[0], rc[1], rc[2])
