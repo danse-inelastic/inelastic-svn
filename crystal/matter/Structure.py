@@ -159,18 +159,19 @@ class Structure(list):
 
         #
         if sg.number == 225:
-            # fcc
+            # face centered--below is only for cubic...need to generalize
             a = self.lattice.a
             base = numpy.array([[0,1,1], [1,0,1], [1,1,0]])*0.5*a
             
         elif sg.number == 229:
-            # bcc
+            # body centered--below is only for cubic...need to generalize
             a = self.lattice.a
             base = numpy.array([[1,0,0], [0,1,0], [0.5,0.5,0.5]])*a
             
             
         elif sg.short_name[0] == 'P':
-            return
+            # primitive
+            base = self.lattice
 
         else:
             # not implemented
@@ -292,7 +293,7 @@ class Structure(list):
 
     def cartesianToFractional(self, cartpos):
         """Converts a coordinate from cartesian to fractional."""
-        return (cartpos * la.inv(self._lattice)).sum(0)  # should be double-checked
+        return (cartpos * numpy.linalg.inv(self._lattice)).sum(0)  # should be double-checked
     
 ################################################    
 # property methods
