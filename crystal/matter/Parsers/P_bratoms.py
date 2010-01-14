@@ -20,9 +20,12 @@ __id__ = "$Id: P_bratoms.py 2825 2009-03-09 04:33:12Z juhas $"
 import sys
 import numpy
 
-from diffpy.Structure import Lattice, Atom, StructureFormatError
+from matter.Structure import Structure
+from matter.Lattice import Lattice
+from matter.Atom import Atom
+from matter.StructureErrors import StructureFormatError
 from diffpy.Structure.bratomsstructure import BRAtomsStructure
-from diffpy.Structure.Parsers import StructureParser
+from matter.Parsers.structureparser import StructureParser
 
 class P_bratoms(StructureParser):
     """Parser for Bruce Ravel's Atoms structure format.
