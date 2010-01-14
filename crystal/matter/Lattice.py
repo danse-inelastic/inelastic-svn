@@ -8,7 +8,6 @@ __id__ = "$Id: lattice.py 2825 2009-03-09 04:33:12Z juhas $"
 
 import copy
 import math
-import types
 import numpy
 import numpy.linalg as numalg
 from StructureErrors import LatticeError
@@ -280,6 +279,87 @@ class Lattice(object):
         if almostEqual(self.a, self.b, self.c): return 'cubic'
         #elif almostEqual(self.a, self.b) or almostEqual(self.a)
         
+    def getPrimitiveLattice(self, sg):
+        """ returns primitive lattice """
+        #algorithm: 
+        #gets centering and crystal system from space group
+        #returns std primitive cell
+        centering = sg.short_name[0]
+        crystalSystem = sg.crystal_system
+        
+        a = self.a
+        b = self.b
+        c = self.c
+        cBC = self.ca
+        cAC = self.cb
+        cAB = self.cg        
+        # taken from quantum espresso docs:
+        stdPrimLattices = {
+        # sc simple cubic:
+        ('P', 'CUBIC'):[[a, 0, 0],
+                 [0, a, 0],
+                 [0, 0, a]],
+        # fcc face centered cubic:
+        ('F', 'CUBIC'):[[-a/2, 0, a/2],
+                    [0, a/2, a/2],
+                    [-a/2, a/2, 0]],
+        # bcc body entered cubic:
+        ('I', 'CUBIC'):[[a/2, a/2, a/2],
+                    [-a/2, a/2, a/2],
+                    [-a/2, -a/2, a/2]], 
+        # simple hexagonal and trigonal(p):
+        ('P', 'HEXAGONAL'):[[a, 0, 0],
+                 [-0.5*a, a*math.sqrt(3.0)/2.0, 0.],
+                 [0,    0,          c]],
+        ('P', 'TRIGONAL'):[[a, 0, 0],
+                 [-0.5*a, a*math.sqrt(3.0)/2.0, 0.],
+                 [0,    0,          c]],
+        # trigonal(r):
+        ('R', 'TRIGONAL'):[[a*math.sqrt((1.-cAB)/2.),-a*math.sqrt((1.-cAB)/6.), a*math.sqrt((1.+2.*cAB)/3.)],
+                 [0, 2.*a*math.sqrt((1.-cAB)/6.),  a*math.sqrt((1.+2.*cAB)/3.)],
+                 [-a*math.sqrt((1.-cAB)/2.), -a*math.sqrt((1.-cAB)/6.), a*math.sqrt((1.+2.*cAB)/3.)]],
+        # simple tetragonal (p):
+        ('P','TETRAGONAL'):[[a, 0, 0],
+                 [0, a, 0.],
+                 [0, 0, c]],
+        # body centered tetragonal (i):
+        ('I','TETRAGONAL'):[[a/2., -a/2., c/2.],
+                    [a/2.,  a/2., c/2.],
+                    [-a/2., -a/2., c/2.]],
+        # simple orthorhombic (p):
+        ('P','ORTHORHOMBIC'):[[a, 0., 0.],
+                    [0., b, 0.],
+                    [0., 0., c]],  
+        # bco base centered orthorhombic:
+        ('C','ORTHORHOMBIC'):[[a/2., b/2., 0.],
+                    [-a/2., b/2., 0.],
+                    [0., 0., c]],
+        ('A','ORTHORHOMBIC'):[[a, 0., 0.],
+                    [0, b/2., c/2.],
+                    [0., -b/2., c/2.]],
+        # face centered orthorhombic:
+        ('F','ORTHORHOMBIC'):[[a/2., 0., c/2.],
+                    [a/2., b/2., 0.],
+                    [0., b/2., c/2.]],
+        # body centered orthorhombic:
+        ('I','ORTHORHOMBIC'):[[a/2., b/2., c/2.],
+                    [-a/2., b/2., c/2.],
+                    [-a/2., -b/2., c/2.]],
+        # monoclinic (p):
+        ('P','ORTHORHOMBIC'):[[a, 0, 0],
+                    [b*cAB, b*math.sqrt(1.0 - cAB**2), 0],
+                    [0, 0, c]],
+        # base centered monoclinic:
+        ('P','MONOCLINIC'):[[a/2., 0, -c/2.],
+                    [b*cAB, b*math.sqrt(1.0 - cAB**2), 0],
+                    [a/2., 0, c/2.]],
+        # triclinic:
+        ('P','TRICLINIC'):[[a, 0, 0],
+                    [b*cAB, b*math.sqrt(1.0 - cAB**2), 0],
+                    [c*cAC, c*( cBC-cAC*cAB )/math.sqrt(1.-cAB**2), c*math.sqrt( 1. + 
+                    2.*cBC*cAC*cAB - cBC**2 - cAC**2 - cAB**2)/math.sqrt(1.-cAB**2)]]                    
+        }
+        return stdPrimLattices[(centering, crystalSystem)]
 
 ################################################    
 # k space methods
@@ -325,7 +405,7 @@ class Lattice(object):
         """
         Returns the volume of the unit cell: |det(a1, a2, a3)|.
         Uses Numpy.linalg."""
-        return abs(la.det(self._lattice))
+        return abs(numpy.linalg.det(self._lattice))
 
 
     def cartesian(self, u):

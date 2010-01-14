@@ -146,6 +146,7 @@ class Structure(list):
 
 
     def _create_primitive_unitcell(self):
+        
         # the ctor
         from UnitCell import UnitCell
 
