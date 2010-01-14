@@ -97,7 +97,8 @@ class Structure(list):
         elems.sort()
         return ''.join( '%s%s' % (e, counts[e]) for e in elems )
 
-
+    # these properties are actually independent of space group and so should
+    # be moved to lattice perhaps
     def _getCrystalSystem(self):
         return self.sg.crystal_system
     crystal_system = property(_getCrystalSystem)
@@ -111,12 +112,37 @@ class Structure(list):
     _centerings = {
         'P': 'primitive',
         'C': 'single face centered',
+        'A': 'single face centered',
+        'H': 'primitive',
+        'R': 'primitive',
         'I': 'body centered',
         'F': 'face centered',
         }
     def _getCenteringDescription(self):
         return self._centerings[self.centering]
     centering_description = property(_getCenteringDescription)
+    
+    def _getBravaisType(self):
+        centeringAndSystem2bravais = {
+        ('P', 'CUBIC'):'simple cubic',
+        ('F', 'CUBIC'):'face centered cubic',
+        ('I', 'CUBIC'):'body centered cubic', 
+        ('P', 'HEXAGONAL'):'simple hexagonal',
+        ('P', 'TRIGONAL'):'simple trigonal',
+        ('P','TETRAGONAL'):'simple tetragonal',
+        ('R','TETRAGONAL'):'simple tetragonal',
+        ('I','TETRAGONAL'):'body centered tetragonal',
+        ('P','ORTHORHOMBIC'):'simple orthorhombic',
+        ('C','ORTHORHOMBIC'):'base centered orthorhombic',
+        ('A','ORTHORHOMBIC'):'base centered orthorhombic',
+        ('F','ORTHORHOMBIC'):'face centered orthorhombic',
+        ('I','ORTHORHOMBIC'):'body centered orthorhombic',
+        ('P','ORTHORHOMBIC'):'simple monoclinic',
+        ('P','MONOCLINIC'):'base centered monoclinic',
+        ('P','TRICLINIC'):'triclinic'                  
+        }
+        return centeringAndSystem2bravais[(self.sg.short_name[0], self.sg.crystal_system)]
+    bravais_type = property(_getBravaisType)
 
 
     def _getStrukturberichtDesignation(self):

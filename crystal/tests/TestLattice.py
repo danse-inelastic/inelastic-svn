@@ -100,6 +100,8 @@ class TestLattice(unittest.TestCase):
         grid = (2,2,2)
         print self.lattice.getMonkhorstPackGrid(grid)
         print self.lattice.getFracMonkhorstPackGrid(grid)
+        
+
 
 # End of TestLattice
 
