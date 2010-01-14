@@ -196,6 +196,15 @@ class TestStructure(unittest.TestCase):
         result,badAtomPos,badSymOp = self.stru3.symConsistent()
         assert result is False
         print badAtomPos,badSymOp
+        
+    def test_PrimCellFind(self):
+        
+        print 'PbTe 225'
+        print self.stru2.primitive_unitcell
+        print 'graphite'
+        print self.stru3.primitive_unitcell
+        print
+
  
 #    not fully functional
 #    def test_distanceCalc(self):

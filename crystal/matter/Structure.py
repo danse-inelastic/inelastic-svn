@@ -137,7 +137,8 @@ class Structure(list):
     def _get_primitive_unitcell(self):
         t = self._primitive_unitcell
         if t is None:
-            t = self._primitive_unitcell = self._create_primitive_unitcell()
+            t = self._primitive_unitcell = self._lattice.getPrimitiveLattice(self.sg)
+            #t = self._primitive_unitcell = self._create_primitive_unitcell()
         return t
     def _set_primitive_unitcell(self, p):
         self._primitive_unitcell = p
