@@ -73,7 +73,7 @@ class TestP_xyz(unittest.TestCase):
     def test_writeStr_xyz(self):
         """check string representation of normal xyz file"""
         stru = self.stru
-        stru.title = "test of writeStr"
+        stru.description = "test of writeStr"
         stru.lattice = Lattice(1.0, 2.0, 3.0, 90.0, 90.0, 90.0)
         stru[:] = [
             Atom('H', [1., 1., 1.]),
@@ -81,13 +81,13 @@ class TestP_xyz(unittest.TestCase):
         ]
         s1 = stru.writeStr(self.format)
         s1 = re.sub('[ \t]+', ' ', s1)
-        s0 = "2\n%s\nH 1 2 3\nCl 3 4 3\n" % stru.title
+        s0 = "2\n%s\nH 1 2 3\nCl 3 4 3\n" % stru.description
         self.assertEqual(s1, s0)
 
     def test_write_xyz(self):
         """check writing of normal xyz file"""
         stru = self.stru
-        stru.title = "test of writeStr"
+        stru.description = "test of writeStr"
         stru.lattice = Lattice(1.0, 2.0, 3.0, 90.0, 90.0, 90.0)
         stru[:] = [
             Atom('H', [1., 1., 1.]),
@@ -96,7 +96,7 @@ class TestP_xyz(unittest.TestCase):
         stru.write(self.tmpname, self.format)
         f_s = open(self.tmpname).read()
         f_s = re.sub('[ \t]+', ' ', f_s)
-        s_s = "2\n%s\nH 1 2 3\nCl 3 4 3\n" % stru.title
+        s_s = "2\n%s\nH 1 2 3\nCl 3 4 3\n" % stru.description
         self.assertEqual(f_s, s_s)
 
 # End of TestP_xyz
