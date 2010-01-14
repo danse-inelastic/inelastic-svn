@@ -204,6 +204,14 @@ class TestStructure(unittest.TestCase):
         print 'graphite'
         print self.stru3.primitive_unitcell
         print
+        
+    def test_bravais_crystalsystem_centering(self):
+        
+        assert self.stru2.centering is 'F'
+        assert self.stru2.centering_description=='face centered'
+        assert self.stru2.crystal_system is 'CUBIC'
+        assert self.stru2.bravais_type=='face centered cubic'
+
 
  
 #    not fully functional

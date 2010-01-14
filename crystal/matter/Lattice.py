@@ -295,15 +295,15 @@ class Lattice(object):
         cAB = self.cg        
         # taken from quantum espresso docs:
         stdPrimLattices = {
-        # sc simple cubic:
+        # simple cubic:
         ('P', 'CUBIC'):[[a, 0, 0],
                  [0, a, 0],
                  [0, 0, a]],
-        # fcc face centered cubic:
+        # face centered cubic:
         ('F', 'CUBIC'):[[-a/2, 0, a/2],
                     [0, a/2, a/2],
                     [-a/2, a/2, 0]],
-        # bcc body entered cubic:
+        # body centered cubic:
         ('I', 'CUBIC'):[[a/2, a/2, a/2],
                     [-a/2, a/2, a/2],
                     [-a/2, -a/2, a/2]], 
@@ -360,6 +360,9 @@ class Lattice(object):
                     2.*cBC*cAC*cAB - cBC**2 - cAC**2 - cAB**2)/math.sqrt(1.-cAB**2)]]                    
         }
         return stdPrimLattices[(centering, crystalSystem)]
+
+    property()
+
 
 ################################################    
 # k space methods
