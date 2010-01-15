@@ -163,8 +163,8 @@ class Structure(list):
     def _get_primitive_unitcell(self):
         t = self._primitive_unitcell
         if t is None:
-            t = self._primitive_unitcell = self._lattice.getPrimitiveLattice(self.sg)
-            #t = self._primitive_unitcell = self._create_primitive_unitcell()
+            #t = self._primitive_unitcell = self._lattice.getPrimitiveLattice(self.sg)
+            t = self._primitive_unitcell = self._create_primitive_unitcell()
         return t
     def _set_primitive_unitcell(self, p):
         self._primitive_unitcell = p
@@ -173,10 +173,18 @@ class Structure(list):
 
 
     def _create_primitive_unitcell(self):
-        
         # the ctor
         from UnitCell import UnitCell
-
+        base = self._lattice.getPrimitiveLattice(self.sg)
+        base = numpy.array(base)
+        
+        puc = UnitCell(base=base)
+        for atom in self:
+            if puc.hasAtom(atom): continue
+            puc.addAtom(atom)
+            continue                
+        return puc
+        
         # check symmetry
         sg = self.sg
         verdict, atompos, symop = self.symConsistent()
@@ -205,13 +213,6 @@ class Structure(list):
             # not implemented
             return
         
-        puc = UnitCell(base=base)
-        for atom in self:
-            if puc.hasAtom(atom): continue
-            puc.addAtom(atom)
-            continue
-                
-        return puc
         
     
     def addNewAtom(self, *args, **kwargs):
