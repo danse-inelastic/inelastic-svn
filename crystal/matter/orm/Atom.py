@@ -30,14 +30,14 @@ def __establishInventory__(self, inventory):
 Atom.__establishInventory__ = __establishInventory__
 
 def __restoreFromInventory__(self, inventory):
-    # create a new atom with new propties
-    atom = self.__class__(
-        atype=inventory.element,
-        xyz=inventory.xyz,
-        label=inventory.label,
-        occupancy=inventory.occupancy)
+    # create a new atom with element symbol
+    atom = self.__class__(atype=inventory.element)
     # and use the copy constructer to reinitilize myself
     self.__init__(atom)
+    # and the set the properties
+    self.xyz = inventory.xyz
+    self.label = inventory.label
+    self.occupancy = inventory.occupancy
     return
 Atom.__restoreFromInventory__ = __restoreFromInventory__
 
