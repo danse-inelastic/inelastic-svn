@@ -120,14 +120,18 @@ class P_xyz(StructureParser):
         use_fractional_coordinates = kwds.get('use_fractional_coordinates')
         puc = stru.primitive_unitcell
         atoms = puc.atoms
-        
         lines = []
         lines.append( str(len(atoms)) )
-        import numpy as np
-        base = np.array(puc.base, copy=1); base.shape = -1
-        lines.append(' '.join(map(str, base)))
-        if stru.description:
+        #this next part puts the lattice vectors as the "description"
+        if kwds.get('latticeAsDescription'):
+            import numpy as np
+            lattice = stru.lattice
+            base = np.array(lattice.base, copy=1); base.shape = -1
+            lines.append(' '.join(map(str, base)))
+        elif stru.description:
             lines.append( stru.description )
+        else:
+            lines.append('\n')
         for a in atoms:
             if use_fractional_coordinates:
                 rc = a.xyz
@@ -142,12 +146,16 @@ class P_xyz(StructureParser):
         use_fractional_coordinates = kwds.get('use_fractional_coordinates')
         lines = []
         lines.append( str(len(stru)) )
-        lattice = stru.lattice
-        import numpy as np
-        base = np.array(lattice.base, copy=1); base.shape = -1
-        lines.append(' '.join(map(str, base)))
-        if stru.description:
+        #this next part puts the lattice vectors as the "description"
+        if kwds.get('latticeAsDescription'):
+            import numpy as np
+            lattice = stru.lattice
+            base = np.array(lattice.base, copy=1); base.shape = -1
+            lines.append(' '.join(map(str, base)))
+        elif stru.description:
             lines.append( stru.description )
+        else:
+            lines.append('\n')
         for a in stru:
             if use_fractional_coordinates:
                 rc = a.xyz
