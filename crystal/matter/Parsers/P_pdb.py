@@ -133,8 +133,8 @@ class P_pdb(StructureParser):
                         # get symbol from the first 2 characters of name
                         symbol = line[12:14].strip()
                         symbol = symbol[0].upper() + symbol[1:].lower()
-                    stru.addNewAtom(symbol,
-                            occupancy=occupancy, name=name, U=U)
+                    #stru.addNewAtom(symbol, occupancy=occupancy, name=name, U=U)
+                    stru.addNewAtom(symbol, occupancy=occupancy, label=name, U=U)
                     last_atom = stru.getLastAtom()
                     last_atom.xyz_cartn = rc
                 elif record == "SIGATM":

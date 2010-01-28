@@ -133,7 +133,7 @@ class P_bratoms(StructureParser):
 
                     a = Atom( atype = el,
                         xyz = [x,y,z],
-                        name = tag,
+                        label = tag,
                         occupancy = occ)
 
                     atoms.append(a)

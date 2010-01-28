@@ -55,7 +55,7 @@ class TestP_xyz(unittest.TestCase):
         stru = self.stru
         stru.read(datafile('bucky.xyz'), self.format)
         s_els = [a.symbol for a in stru]
-        self.assertEqual(stru.title, 'bucky-ball')
+        self.assertEqual(stru.description, 'bucky-ball')
         self.assertEqual(s_els, 60*['C'])
 
     def test_read_xyz_bad(self):
@@ -121,13 +121,13 @@ class TestP_forces(unittest.TestCase):
         stru = self.stru
         stru.read(datafile('bucky.xyz'))
         s_els = [a.symbol for a in stru]
-        self.assertEqual(stru.title, 'bucky-ball')
+        self.assertEqual(stru.description, 'bucky-ball')
         self.assertEqual(s_els, 60*['C'])
 
     def test_write_forces(self):
         """check writing of normal xyz file"""
         stru = self.stru
-        stru.title = "test of writeStr"
+        stru.description = "test of writeStr"
         stru.lattice = Lattice(1.0, 2.0, 3.0, 90.0, 90.0, 90.0)
         stru[:] = [
             Atom('H', [1., 1., 1.]),
@@ -136,7 +136,7 @@ class TestP_forces(unittest.TestCase):
         stru.write(self.tmpname, self.format)
         f_s = open(self.tmpname).read()
         f_s = re.sub('[ \t]+', ' ', f_s)
-        s_s = "2\n%s\nH 1 2 3\nCl 3 4 3\n" % stru.title
+        s_s = "2\n%s\nH 1 2 3\nCl 3 4 3\n" % stru.description
         self.assertEqual(f_s, s_s)
 
 # End of TestP_forces
@@ -154,7 +154,7 @@ class TestP_rawxyz(unittest.TestCase):
         stru = self.stru
         stru.read(datafile('bucky-plain.xyz'), self.format)
         s_els = [a.symbol for a in stru]
-        self.assertEqual(stru.title, 'bucky-plain')
+        self.assertEqual(stru.description, 'bucky-plain')
         self.assertEqual(s_els, 60*['C'])
 
     def test_read_plainxyz_bad(self):
@@ -168,7 +168,7 @@ class TestP_rawxyz(unittest.TestCase):
         stru = self.stru
         stru.read(datafile('bucky-raw.xyz'), self.format)
         s_els = [a.symbol for a in stru]
-        self.assertEqual(stru.title, 'bucky-raw')
+        self.assertEqual(stru.description, 'bucky-raw')
         self.assertEqual(s_els, 60*[''])
         stru.read(datafile('hexagon-raw.xyz'), self.format)
         zs = [a.xyz[-1] for a in stru]

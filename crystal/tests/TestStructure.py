@@ -212,7 +212,12 @@ class TestStructure(unittest.TestCase):
         assert self.stru2.crystal_system is 'CUBIC'
         assert self.stru2.bravais_type=='face centered cubic'
 
-
+    def test_species(self):
+        
+        print self.stru2.getChemicalFormula()
+        print
+        print self.stru3.getChemicalFormula()
+        print
  
 #    not fully functional
 #    def test_distanceCalc(self):
