@@ -20,7 +20,7 @@ class TestCase( unittest.TestCase ):
         Al = Atom( 'Al' )
         atoms = [Fe57, Al]
         
-        lattice = Lattice(a=1,b=2,c=3,alpha=89,beta=91,gamma=92)
+        lattice = Lattice(a=1, b=2, c=3, alpha=89, beta=91, gamma=92)
 
         struct = Structure(atoms=atoms, lattice=lattice)
 

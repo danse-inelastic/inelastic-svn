@@ -89,18 +89,25 @@ class P_cif(StructureParser):
     BtoU = 1.0/(8 * numpy.pi**2)
 
     def _tr_atom_site_label(a, value):
-        a.name = value
+        a.label = value
         # set symbol when not specified by _atom_site_type_symbol
         if a.symbol is None:
             P_cif._tr_atom_site_type_symbol(a, value)
     _tr_atom_site_label = staticmethod(_tr_atom_site_label)
 
     # 3 regexp groups for nucleon number, atom symbol, and oxidation state
+    #_psymb = re.compile(r'(\d+-)?([a-zA-Z]+)(\d[+-])?')
     _psymb = re.compile(r'(\d+-)?([a-zA-Z]+)(\d[+-])?')
 
     def _tr_atom_site_type_symbol(a, value):
         rx = P_cif._psymb.match(value)
-        smbl = rx and rx.group(0) or value
+#        print rx.group(0)
+#        print rx.group(1)
+#        print rx.group(2)
+#        print rx.group(3)
+        # this line makes no sense
+        #smbl = rx and rx.group(0) or value
+        smbl = rx.group(2)
         a.__dict__['symbol'] = smbl[:1].upper() + smbl[1:].lower()
     _tr_atom_site_type_symbol = staticmethod(_tr_atom_site_type_symbol)
 
