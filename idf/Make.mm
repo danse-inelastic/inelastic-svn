@@ -46,10 +46,14 @@ EXPORT_PYTHON_MODULES = \
 	Omega2.py \
 	Polarizations.py \
 	Q.py \
+	Qgridinfo.py \
 	Sq.py \
 	Sqe.py \
 	WeightedQ.py \
 	__init__.py \
+	_crystal_utils.py \
+	_units.py \
+	phonons.py \
 
 
 export:: export-python-modules
