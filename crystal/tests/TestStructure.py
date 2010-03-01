@@ -24,7 +24,7 @@ testdata_dir = os.path.join(tests_dir, 'testdata')
 sys.path.insert(0,os.path.abspath('..'))# this should put the source code first on the path
 from matter.Structure import Structure
 from matter.Lattice import Lattice
-from matter.Atom import  Atom#, StructureFormatError
+from matter.Atom import Atom#, StructureFormatError
 
 ##############################################################################
 class TestStructure(unittest.TestCase):
@@ -45,6 +45,15 @@ class TestStructure(unittest.TestCase):
         ciffile = os.path.join(testdata_dir, 'graphite.cif')
         self.stru3 = Structure()
         self.stru3.read(ciffile)
+        
+        at1 = Atom('Al', [0.0, 0.0, 0.0])
+        at2 = Atom('Al', [0.0, 0.5, 0.5])
+        at3 = Atom('Al', [0.5, 0.0, 0.5])
+        at4 = Atom('Al', [0.5, 0.5, 0.0])
+        self.stru4 = Structure( [ at1, at2, at3, at4], 
+                               lattice=Lattice(4.05, 4.05, 4.05, 90, 90, 90),
+                               sgid = 225 )
+        self.places = 12
         
     def assertListAlmostEqual(self, l1, l2, places=None):
         """wrapper for list comparison"""

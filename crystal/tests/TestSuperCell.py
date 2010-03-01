@@ -15,6 +15,8 @@ tests_dir = os.path.dirname(os.path.abspath(thisfile))
 testdata_dir = os.path.join(tests_dir, 'testdata')
 
 from matter import Structure
+from matter.Lattice import Lattice
+from matter.Atom import  Atom
 from matter.expansion import supercell
 
 
@@ -76,6 +78,26 @@ class TestSuperCell(unittest.TestCase):
         elems = sum([8*[a.symbol] for a in self.stru_cdse], [])
         elems_222 = [a.symbol for a in cdse_222]
         self.assertEqual(elems, elems_222)
+        return
+
+    def test_al_supercell(self):
+        """check supercell expansion for Al.
+        """
+        cdse_222 = supercell(self.stru_cdse, (2, 2, 2))
+        # new atoms should be grouped together
+        
+        at1 = Atom('Al', [0.0, 0.0, 0.0])
+        at2 = Atom('Al', [0.0, 0.5, 0.5])
+        at3 = Atom('Al', [0.5, 0.0, 0.5])
+        at4 = Atom('Al', [0.5, 0.5, 0.0])
+        self.stru4 = Structure( [ at1, at2, at3, at4], 
+                               lattice=Lattice(4.05, 4.05, 4.05, 90, 90, 90),
+                               sgid = 225 )
+        al_222 = supercell(self.stru4, (2, 2, 2))
+        print al_222
+#        elems = sum([8*[a.symbol] for a in self.stru_cdse], [])
+#        elems_222 = [a.symbol for a in cdse_222]
+#        self.assertEqual(elems, elems_222)
         return
 
 # End of class TestRoutines
