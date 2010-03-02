@@ -27,6 +27,17 @@ def read( path ):
     return (b1,b2,b3), (n1,n2,n3)
 
 
+def tolines(bs, ns):
+    '''convert Qgridinfo in form of a 2-tuple: (b vectors, number of grid points)
+    to a list of strings to be saved as a Qgridinfo file.
+    '''
+    s = []
+    s += ['b%s=%s' % (i+1, list(bs[i])) for i in range(3)]
+    s += ['n%s=%s' % (i+1, ns[i]) for i in range(3)]
+    s += ['']
+    return s
+
+
 # version
 __id__ = "$Id$"
 

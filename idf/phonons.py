@@ -48,7 +48,7 @@ def read(
     omega2[ omega2<0 ] = 0
     
     import numpy as N
-    energies = N.sqrt(omega2) * hertz2mev
+    energies = N.sqrt(omega2) * hertz2meV
 
     from Polarizations import read as readP
     polarizations = readP( Polarizations )[1]
@@ -76,6 +76,16 @@ def read(
     #    ]
     Qaxes = zip(reciprocalcell, ngridpnts)
     return nAtoms, dimension, Qaxes, polarizations, energies, dos
+
+
+def getStandardQgridinfo(datapath, Qgridinfo='Qgridinfo', reciprocal_unitcell=None):
+    path = os.path.join(datapath, Qgridinfo)
+    from Qgridinfo import read, tolines
+    reciprocalcell, ngridpnts = read( path )
+    reciprocalcell = _checkReciprocalCell(reciprocalcell, reciprocal_unitcell, ngridpnts)
+
+    lines = tolines(reciprocalcell, ngridpnts)
+    return '\n'.join(lines)
 
 
 def _checkReciprocalCell(cell, unitcell, ngridpnts, epsilon = 0.1):
@@ -131,22 +141,12 @@ def _readDOS(path):
     from DOS import read
     dummy, v, Z = read(path)
     # v is in terahertz, and it is not angular frequency
-    from math import pi
-    E = v * 2*pi * 1e12 * hertz2mev
+    E = v * 2*pi * 1e12 * hertz2meV
     dos = E,Z
     return dos
 
 
-def _hertz2meV():
-    'calculate conversion constant'
-    import _units as units
-    SI = units.SI
-    m = SI.meter; kg = SI.kilogram; s = SI.second
-    hbar = 1.05457148e-34 * m**2 * kg /s
-    hertz = 1 / s
-    meV = units.energy.meV
-    return hbar * hertz / meV
-hertz2mev = _hertz2meV()
+from _constants import hertz2meV, pi
 
 
 
