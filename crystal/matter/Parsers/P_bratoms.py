@@ -24,7 +24,7 @@ from matter.Structure import Structure
 from matter.Lattice import Lattice
 from matter.Atom import Atom
 from matter.StructureErrors import StructureFormatError
-from diffpy.Structure.bratomsstructure import BRAtomsStructure
+#from matter.Structure.bratomsstructure import BRAtomsStructure
 from matter.Parsers.structureparser import StructureParser
 
 class P_bratoms(StructureParser):
@@ -46,7 +46,7 @@ class P_bratoms(StructureParser):
 
         comlist = ["#", "%", "!", "*"]
         atoms = []
-        title = ""
+        description = ""
         anext = False
         sg = None
         structure = BRAtomsStructure()
@@ -79,10 +79,10 @@ class P_bratoms(StructureParser):
                     anext = True
                     continue
 
-                # Check for title
+                # Check for description
                 if sline[0].startswith("title"):
-                    if title: title += "\n"
-                    title += line[5:]
+                    if description: description += "\n"
+                    description += line[5:]
                     continue
 
                 # Get rid of pesky "=" and "," signs
@@ -167,7 +167,7 @@ class P_bratoms(StructureParser):
             meta['core'] = atoms[0].element
 
         lat = Lattice(**pdict)
-        structure.title = title
+        structure.description = description
         structure.lattice = lat
         structure.extend(atoms)
         return structure
@@ -187,7 +187,7 @@ class P_bratoms(StructureParser):
         lines = []
 
         # title
-        titles = stru.title.split("\n")
+        titles = stru.description.split("\n")
         for t in titles:
             lines.append("title = %s" % t)
 
@@ -204,7 +204,7 @@ class P_bratoms(StructureParser):
         lines.append("edge = %s" % meta.get("edge", "K"))
 
         # core
-        tag = meta.get("core") or stru[0].name or stru[0].element.title()
+        tag = meta.get("core") or stru[0].name or stru[0].symbol
         lines.append("core = %s" % tag)
 
         # rmax
@@ -227,7 +227,7 @@ class P_bratoms(StructureParser):
         lines.append("%-8s%-10s%-10s%-10s%-10s%s" %
                 ("!", "x", "y", "z", "tag", "occ"))
         for a in stru:
-            el = a.element.title()
+            el = a.symbol#element.title()
             name = a.name or el
             x, y, z = a.xyz
             occ = a.occupancy

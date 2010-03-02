@@ -390,12 +390,12 @@ class P_xcfg(StructureParser):
         exec "\n".join(p_exprs)
         # we are ready to output atoms:
         lines.append("")
-        p_element = None
+        p_symbol = None
         for a in stru:
-            if a.element != p_element:
-                p_element = a.element
-                lines.append("%.4f" % AtomicMass.get(p_element, 0.0))
-                lines.append(p_element)
+            if a.symbol != p_symbol:
+                p_symbol = a.symbol
+                lines.append("%.4f" % AtomicMass.get(p_symbol, 0.0))
+                lines.append(p_symbol)
             lines.append(p_entry_line(a, p_A, p_dxyz))
         return lines
     # End of toLines
