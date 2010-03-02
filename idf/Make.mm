@@ -51,6 +51,7 @@ EXPORT_PYTHON_MODULES = \
 	Sqe.py \
 	WeightedQ.py \
 	__init__.py \
+	_constants.py \
 	_crystal_utils.py \
 	_units.py \
 	phonons.py \
