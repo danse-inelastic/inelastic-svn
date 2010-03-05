@@ -90,8 +90,8 @@ class TestSuperCell(unittest.TestCase):
         self.stru4 = Structure( [ at1, at2, at3, at4], 
                                lattice=Lattice(4.05, 4.05, 4.05, 90, 90, 90),
                                sgid = 225 )
-        al_222 = supercell(self.stru4, (2,2,2))
-        print al_222
+        al_sup = supercell(self.stru4, (3,3,3))
+        print al_sup
 #        elems = sum([8*[a.symbol] for a in self.stru_cdse], [])
 #        elems_222 = [a.symbol for a in cdse_222]
 #        self.assertEqual(elems, elems_222)
