@@ -9,14 +9,14 @@ db.autocommit(True)
 db.createSystemTables()
 
 #create Lattice
-from matter.Lattice import Lattice
+from matter.orm.Lattice import Lattice
 db.createTable(Lattice)
 l1 = Lattice()
 l1.id = 'l1'
 db.insertRow(l1)
 
 # create Atom
-from matter.Atom import Atom
+from matter.orm.Atom import Atom
 
 db.createTable(Atom)
 a1 = Atom()
