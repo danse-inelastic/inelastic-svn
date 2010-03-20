@@ -24,7 +24,7 @@ from matter.Structure import Structure
 from matter.Lattice import Lattice
 from matter.Atom import Atom
 from matter.StructureErrors import StructureFormatError
-#from matter.Structure.bratomsstructure import BRAtomsStructure
+from matter.Structure.bratomsstructure import BRAtomsStructure
 from matter.Parsers.structureparser import StructureParser
 
 class P_bratoms(StructureParser):

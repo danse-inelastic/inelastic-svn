@@ -508,7 +508,7 @@ class Structure(list):
 # IO
 ###########################
     def read(self, filename, format='auto'):
-        """Load structure from a file, any original data become lost.
+        """Load structure from a file, any original data may become lost.
 
         filename -- file to be loaded
         format   -- all structure formats are defined in Parsers submodule,
