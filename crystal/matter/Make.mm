@@ -44,6 +44,7 @@ EXPORT_PYTHON_MODULES = \
 	AtomicObject.py \
 	Lattice.py \
 	PDFFitStructure.py \
+	Skeleton.py \
 	Site.py \
 	SpaceGroups.py \
 	Structure.py \
