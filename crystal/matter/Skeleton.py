@@ -15,24 +15,29 @@ import matter
 #
 # Atoms
 #
-class A:
+def A(name, index, type = None):
+    from matter.Atom import Atom
+    return Atom(name)
 
-    def __init__(self, name, index, type = None):
-        self.name = name
-        self.index = index
-        self.type = type
 
-    def make(self, info, conf = None):
-        from matter.Atom import Atom
-        atom =  Atom(name = self.name)
-        self.assignIndex(atom, info, conf)
-        return atom
-
-    def assignIndex(self, atom, info, conf):
-        atom.setIndex(self.index)
-        info[self.index] = atom
-        if conf is not None and self.index is not None:
-            atom.setPosition(conf[self.index])
+#class A:
+#
+#    def __init__(self, name, index, type = None):
+#        self.name = name
+#        self.index = index
+#        self.type = type
+#
+#    def make(self, info, conf = None):
+#        from matter.Atom import Atom
+#        atom =  Atom(name = self.name)
+#        self.assignIndex(atom, info, conf)
+#        return atom
+#
+#    def assignIndex(self, atom, info, conf):
+#        atom.setIndex(self.index)
+#        info[self.index] = atom
+#        if conf is not None and self.index is not None:
+#            atom.setPosition(conf[self.index])
             
 #MMTK wrappers
 def OrthorhombicPeriodicUniverse(vecLengths):
@@ -89,88 +94,88 @@ class Composite:
 class G(Composite):
     pass
 
-class M(Composite):
-    _class = MMTK.Molecule
+#class M(Composite):
+#    _class = MMTK.Molecule
 
-def C(*args):
+def c(*args):
     from matter.Structure import Structure
-    return Structure(args)
+    return Structure(atoms=args[1],lattice=args[0])
 
 #class C(Composite):
 #    _class = MMTK.Complex
 
-class AC(Composite):
-
-    def make(self, info, conf = None):
-        atoms = map(lambda a, i=info, c=conf: a.make(i, c), self.list)
-        return MMTK.AtomCluster(atoms, name = self.name)
+#class AC(Composite):
+#
+#    def make(self, info, conf = None):
+#        atoms = map(lambda a, i=info, c=conf: a.make(i, c), self.list)
+#        return MMTK.AtomCluster(atoms, name = self.name)
 
 #class X(Composite):
 #    _class = MMTK.Crystal
 
-class S(Composite):
-
-    def make(self, info, conf = None):
-        import MMTK.Proteins
-        n_residues = len(self.type)/3
-        residues = [self.type[3*i:3*i+3] for i in range(n_residues)]
-        self.kwargs['name'] = self.name
-        chain = apply(MMTK.Proteins.PeptideChain, (residues,), self.kwargs)
-        for i in range(len(self.list)):
-            self.list[i].assignIndex(chain[i], info, conf)
-            chain[i].name = self.list[i].name
-        return chain
-
-class N(Composite):
-
-    def make(self, info, conf = None):
-        import MMTK.NucleicAcids
-        n_residues = len(self.type)/3
-        residues = [self.type[3*i:3*i+3].strip() for i in range(n_residues)]
-        self.kwargs['name'] = self.name
-        chain = apply(MMTK.NucleicAcids.NucleotideChain, (residues,),
-                      self.kwargs)
-        for i in range(len(self.list)):
-            self.list[i].assignIndex(chain[i], info, conf)
-        return chain
+#class S(Composite):
+#
+#    def make(self, info, conf = None):
+#        import MMTK.Proteins
+#        n_residues = len(self.type)/3
+#        residues = [self.type[3*i:3*i+3] for i in range(n_residues)]
+#        self.kwargs['name'] = self.name
+#        chain = apply(MMTK.Proteins.PeptideChain, (residues,), self.kwargs)
+#        for i in range(len(self.list)):
+#            self.list[i].assignIndex(chain[i], info, conf)
+#            chain[i].name = self.list[i].name
+#        return chain
+#
+#class N(Composite):
+#
+#    def make(self, info, conf = None):
+#        import MMTK.NucleicAcids
+#        n_residues = len(self.type)/3
+#        residues = [self.type[3*i:3*i+3].strip() for i in range(n_residues)]
+#        self.kwargs['name'] = self.name
+#        chain = apply(MMTK.NucleicAcids.NucleotideChain, (residues,),
+#                      self.kwargs)
+#        for i in range(len(self.list)):
+#            self.list[i].assignIndex(chain[i], info, conf)
+#        return chain
 
 #
 # Collections and universes
 #
-class c:
-
-    def __init__(self, creation, objects):
-        self.creation = creation
-        self.objects = objects
-
-    def make(self, info, conf = None):
-        collection = _evalString(self.creation)
-        attr = None
-        for o in self.objects:
-            if isinstance(o, str):
-                attr = o
-            elif attr:
-                setattr(collection, attr, o.make(info, conf))
-            else:
-                collection.addObject(o.make(info, conf))
-        return collection
+#class c:
+#
+#    def __init__(self, creation, objects):
+#        self.creation = creation
+#        self.objects = objects
+#
+#    def make(self, info, conf = None):
+#        collection = _evalString(self.creation)
+#        attr = None
+#        for o in self.objects:
+#            if isinstance(o, str):
+#                attr = o
+#            elif attr:
+#                setattr(collection, attr, o.make(info, conf))
+#            else:
+#                collection.addObject(o.make(info, conf))
+#        return collection
 
 #
 # Objects constructed from a list of other objects (e.g. proteins)
 #
-class l:
-
-    def __init__(self, class_name, name, objects):
-        self.class_name = class_name
-        self.objects = objects
-        self.name = name
-
-    def make(self, info, conf = None):
-        import MMTK.Proteins
-        classes = {'Protein': MMTK.Proteins.Protein}
-        return classes[self.class_name] \
-               (map(lambda o, i=info, c=conf: o.make(i, c), self.objects),
-                name = self.name)
+#class l:
+#
+#    def __init__(self, class_name, name, objects):
+#        self.class_name = class_name
+#        self.objects = objects
+#        self.name = name
+#
+#    def make(self, info, conf = None):
+#        import MMTK.Proteins
+#        classes = {'Protein': MMTK.Proteins.Protein}
+#        return classes[self.class_name] \
+#               (map(lambda o, i=info, c=conf: o.make(i, c), self.objects),
+#                name = self.name)
 
 #
 # Objects without subobjects

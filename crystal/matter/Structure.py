@@ -98,16 +98,13 @@ class Structure(list):
         return ''.join( '%s%s' % (e, counts[e]) for e in elems )
     
     def getSpecies(self):
-        atoms = self
-        counts = {}
-        for atom in atoms:
-            e = atom.symbol
-            if e in counts: counts[e]+=1
-            else: counts[e]=1
-            continue
-        elems = counts.keys()
-        elems.sort()
-        return ''.join( '%s%s' % (e, counts[e]) for e in elems )
+        speciesList = []
+        for atom in self:
+            if atom.symbol in speciesList:
+                pass
+            else:
+                speciesList.append(atom.symbol)
+        return speciesList
 
     # these properties are actually independent of space group and so should
     # be moved to lattice perhaps
