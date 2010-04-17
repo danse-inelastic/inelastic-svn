@@ -11,7 +11,7 @@
 __id__ = "$Id: version.py 2825 2009-03-09 04:33:12Z juhas $"
 
 # obtain version information
-from pkg_resources import get_distribution
+# from pkg_resources import get_distribution
 
 
 #__version__ = get_distribution('matter').version
