@@ -27,7 +27,7 @@ setup(
         description = "matter classes and parsers for structure formats",
         license = 'BSD',
         keywords = "matter material crystal structure symmetry",
-        url = "http://docs.danse.us/inelastic/vsat/",
+        url = "http://dev.danse.us/trac/inelastic/wiki/crystal",
         download_url = 'http://dev.danse.us/packages/',
         classifiers = [
             # List of possible values at
