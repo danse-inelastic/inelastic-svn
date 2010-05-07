@@ -53,7 +53,7 @@ def __restoreFromInventory__(self, inventory):
     #restore from base preferably because has setting information...
     #assume the unit base is like no base
     
-    if not inventory.base or isUnitBase(inventory.base):
+    if (inventory.base is None) or (isUnitBase(inventory.base)):
         self.__init__(a=inventory.a,
                       b=inventory.b,
                       c=inventory.c,
