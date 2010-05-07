@@ -161,9 +161,9 @@ class Lattice(object):
         self.ar = sa/(self.a*Vunit)
         self.br = sb/(self.b*Vunit)
         self.cr = sg/(self.c*Vunit)
-        self.car = car = (cb*cg - ca)/(sb*sg); 
-        self.cbr = cbr = (ca*cg - cb)/(sa*sg);
-        self.cgr = cgr = (ca*cb - cg)/(sa*sb); 
+        self.car = car = (cb*cg - ca)/(sb*sg); sar = float(math.sqrt(1.0 - car**2))
+        self.cbr = cbr = (ca*cg - cb)/(sa*sg); sbr = float(math.sqrt(1.0 - cbr**2))
+        self.cgr = cgr = (ca*cb - cg)/(sa*sb); sgr = float(math.sqrt(1.0 - cgr**2))
         self.sar = numpy.sqrt(1.0 - car*car)
         self.sbr = numpy.sqrt(1.0 - cbr*cbr)
         self.sgr = numpy.sqrt(1.0 - cgr*cgr)
