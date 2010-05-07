@@ -161,9 +161,9 @@ class Lattice(object):
         self.ar = sa/(self.a*Vunit)
         self.br = sb/(self.b*Vunit)
         self.cr = sg/(self.c*Vunit)
-        self.car = car = (cb*cg - ca)/(sb*sg); sar = float(math.sqrt(1.0 - car**2))
-        self.cbr = cbr = (ca*cg - cb)/(sa*sg); sbr = float(math.sqrt(1.0 - cbr**2))
-        self.cgr = cgr = (ca*cb - cg)/(sa*sb); sgr = float(math.sqrt(1.0 - cgr**2))
+        self.car = car = (cb*cg - ca)/(sb*sg); 
+        self.cbr = cbr = (ca*cg - cb)/(sa*sg);
+        self.cgr = cgr = (ca*cb - cg)/(sa*sb); 
         self.sar = numpy.sqrt(1.0 - car*car)
         self.sbr = numpy.sqrt(1.0 - cbr*cbr)
         self.sgr = numpy.sqrt(1.0 - cgr*cgr)
@@ -176,7 +176,7 @@ class Lattice(object):
                 [ self.b*self.a*cg,  self.b*self.b,     self.b*self.c*ca ],
                 [ self.c*self.a*cb,  self.c*self.b*ca,  self.c*self.c    ] ],
                 dtype=float )
-        # standard cartesian coordinates of lattice vectors
+        #standard cartesian coordinates of lattice vectors
         self.stdbase = numpy.array( [
                 [ 1.0/self.ar, -cgr/sgr/self.ar, cb*self.a ],
                 [ 0.0,         self.b*sa,        self.b*ca ],
@@ -212,15 +212,12 @@ class Lattice(object):
         self.a = numpy.sqrt(numpy.dot(self.base[0,:], self.base[0,:]))
         self.b = numpy.sqrt(numpy.dot(self.base[1,:], self.base[1,:]))
         self.c = numpy.sqrt(numpy.dot(self.base[2,:], self.base[2,:]))
-        ca = ca = numpy.dot(self.base[1,:], self.base[2,:]) / (self.b*self.c)
-        cb = cb = numpy.dot(self.base[0,:], self.base[2,:]) / (self.a*self.c)
-        cg = cg = numpy.dot(self.base[0,:], self.base[1,:]) / (self.a*self.b)
-        sa = sa = numpy.sqrt(1.0 - ca**2)
-        sb = sb = numpy.sqrt(1.0 - cb**2)
-        sg = sg = numpy.sqrt(1.0 - cg**2)
-        (self.ca, self.sa) = (ca, sa)
-        (self.cb, self.sb) = (cb, sb)
-        (self.cg, self.sg) = (cg, sg)
+        self.ca = ca = numpy.dot(self.base[1,:], self.base[2,:]) / (self.b*self.c)
+        self.cb = cb = numpy.dot(self.base[0,:], self.base[2,:]) / (self.a*self.c)
+        self.cg = cg = numpy.dot(self.base[0,:], self.base[1,:]) / (self.a*self.b)
+        self.sa = sa = numpy.sqrt(1.0 - ca**2)
+        self.sb = sb = numpy.sqrt(1.0 - cb**2)
+        self.sg = sg = numpy.sqrt(1.0 - cg**2)
         self.alpha = math.degrees(math.acos(ca))
         self.beta = math.degrees(math.acos(cb))
         self.gamma = math.degrees(math.acos(cg))
@@ -258,12 +255,39 @@ class Lattice(object):
         self.recnormbase[:,2] /= self.cr
         # update metrics tensor
         self.metrics = numpy.array( [
-                [ self.a*self.a,     self.a*self.b*cg,  self.a*self.c*cb ],
-                [ self.b*self.a*cg,  self.b*self.b,     self.b*self.c*ca ],
-                [ self.c*self.a*cb,  self.c*self.b*ca,  self.c*self.c    ] ],
+                [ self.a*self.a,     self.a*self.b*self.cg,  self.a*self.c*self.cb ],
+                [ self.b*self.a*self.cg,  self.b*self.b,     self.b*self.c*self.ca ],
+                [ self.c*self.a*self.cb,  self.c*self.b*self.ca,  self.c*self.c    ] ],
                 dtype=float )
         return self
-
+    
+#    def _getbase(self):
+#        if self._base:
+#            return self._base
+#        else:
+#            
+#            return numpy.dot(self.stdbase, self.baserot)
+#    def _setbase(self):
+#        
+#    base = property(_getbase, _setbase)
+#    
+#    @property
+#    def metrics(self):
+#        '''metric tensor'''
+#        return numpy.array( [
+#                [ self.a*self.a,     self.a*self.b*self.cg,  self.a*self.c*self.cb ],
+#                [ self.b*self.a*self.cg,  self.b*self.b,     self.b*self.c*self.ca ],
+#                [ self.c*self.a*self.cb,  self.c*self.b*self.ca,  self.c*self.c    ] ],
+#                dtype=float )
+#    
+#    @property
+#    def stdbase(self):
+#        return numpy.array( [
+#                [ 1.0/self.ar, -self.cgr/self.sgr/self.ar, self.cb*self.a ],
+#                [ 0.0,         self.b*self.sa,        self.b*self.ca ],
+#                [ 0.0,         0.0,              self.c    ] ],
+#                dtype=float )
+        
     def abcABG(self):
         """Return a tuple of 6 lattice parameters.
         """
