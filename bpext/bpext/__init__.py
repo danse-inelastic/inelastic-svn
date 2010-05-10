@@ -14,18 +14,6 @@
 def copyright():
     return "bpext pyre module: Copyright (c) 2004-2007 Jiao Lin";
 
-try:
-    import boost.python
-except ImportError, msg:
-    print msg
-    print '''
-Warning:
-    This module is an extension of boost.python.
-    for example, it extracts pointer from boost.python object.
-    Sometimes, a module of boost.python must be loaded before this
-    module can be successfully loaded.
-'''
-
 
 import _bpext as binding
 
