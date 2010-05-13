@@ -11,14 +11,13 @@ class UnitCell:
     base = [[1,0,0],
             [0,1,0],
             [0,0,1]]
-    epsilon = 1e-12
+    rounding_decimals = 6
 
     def __init__(self, base=None, atoms=None):
         if base is None:
             base = np.array(self.__class__.base)
         self.base = base
-        self.atoms = atoms or []
-        self.rounding_decimals = 6
+        self.atoms = atoms or []        
 
 
     def _get_tofractionalcoordsMatrix(self):
@@ -57,9 +56,8 @@ class UnitCell:
         '''check if the given atom is alreday in the cell'''
         xyz = atom.xyz_cartn
         xyz = self.calcFractionalCoordsInCell(xyz)
-        eps = self.epsilon
         for a in self.atoms:
-            if a.symbol == atom.symbol and (np.abs(a.xyz - xyz)<[eps,eps,eps]).all():
+            if a.symbol == atom.symbol and (np.round(a.xyz - xyz, self.rounding_decimals)==[0,0,0]).all():
                 return True
             continue
         return False
@@ -133,6 +131,7 @@ class TestCase(unittest.TestCase):
         self.assert_(uc.hasAtom(Atom('H', (0,0,1.09999999))))
         self.assert_(not uc.hasAtom(Atom('H', (0,0,1.11))))
         self.assert_(not uc.hasAtom(Atom('H', (0,0,1.09))))
+        self.assert_(not uc.hasAtom(Atom('H', (0,0,1.09999))))
         return
 
 
