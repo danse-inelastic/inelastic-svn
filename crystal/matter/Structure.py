@@ -809,6 +809,24 @@ class TestCase(unittest.TestCase):
         return
         
     
+    def test3(self):
+        'Structure:  "primitive_unitcell"'
+        lattice = Lattice(a=2,b=2,c=2,alpha=90,beta=90,gamma=90)
+        atoms = [
+            Atom('Fe', (0,0,0)),
+            Atom('Pd', (0,0.5,0.5)),
+            Atom('Pd', (0.5,0,0.5)),
+            Atom('Pd', (0.5,0.5,0)),
+            ]
+        struct = Structure(lattice=lattice, atoms=atoms, sgid=221)
+        verdict, pos, op = struct.symConsistent()
+        print verdict, pos, op
+        self.assert_(verdict)
+
+        self.assertEqual(len(struct.primitive_unitcell.atoms), 4)
+        return
+        
+    
 
 def main():
     unittest.main()
