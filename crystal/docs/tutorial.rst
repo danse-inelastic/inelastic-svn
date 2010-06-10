@@ -1,6 +1,9 @@
 Tutorial
 ========
 
+Creating a structure
+---------------------
+
 One can initialize the data structures from atom types, positions, and lattice constants:
 
 >>> from matter import Structure, Lattice, Atom
@@ -28,7 +31,12 @@ Te   0.000000 0.500000 0.500000 1.0000
 Te   0.500000 0.000000 0.500000 1.0000
 Te   0.500000 0.500000 0.000000 1.0000
 
-or a pdb file, or an xyz file, for example. We note the asymmetric unit cell is expanded by default.  To verify the space group number and name::
+or a pdb file, or an xyz file, for example. We note the asymmetric unit cell is expanded by default.  
+
+Symmetry
+---------
+
+To verify the space group number and name::
 
     >>> pbte.sg.number
     225
@@ -74,15 +82,12 @@ or a pdb file, or an xyz file, for example. We note the asymmetric unit cell is 
     [ 0.000  1.000  0.000  0.500]
     [ 1.000  0.000  0.000  0.000]
 
-
-To query information about occupied Wyckoff points:
-
-(coming)
-(embed Wyckoff point information in each atom?)
-
-(space group is a property where one can set it with a space group object or a number, in which latter case it will lookup the default setting and try the sym ops of each setting it has on the atoms...if they don't work, it will issue warning the atom positions are inconsistent with space group operations and recommend you specify a new list of ops...eventually it will just recompute the space group (best soln).)
+The space group can be set with a space group object or a number, in which latter case it will lookup the default setting and try the sym ops of each setting it has on the atoms.  If they don't work, it will issue warning the atom positions are inconsistent with space group operations and recommend you specify a new list of ops.
 
 Eventually it may be possible to calculate the symmetry directly from a list of atoms, but for now, input of the space group is necessary. 
+
+Creating a supercell
+---------------------
 
 To create a supercell, simply import the supercell utility and specify the new lattice directions:
 
@@ -106,6 +111,10 @@ Te   0.500000 0.000000 0.250000 1.0000
 Te   0.500000 0.000000 0.750000 1.0000
 Te   0.500000 0.500000 0.000000 1.0000
 Te   0.500000 0.500000 0.500000 1.0000
+
+
+Atomic properties
+------------------
 
 To set/get the forces, positions, or other settable properties for atoms in the structure:
 
@@ -142,6 +151,9 @@ To get equivalent bonded neighbors and their distances, which is the bond matrix
 (1.get nearest neighbors...2. apply symmetry operations of space group to see which ones are equivalent...3. sort and assign BvK force constants)
 
 >>> bccFe.getBondMatrix()
+
+Storing structures in a db
+-----------------------------
 
 To store a lattice in a database:
 
