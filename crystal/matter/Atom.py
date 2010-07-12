@@ -121,12 +121,13 @@ class Atom(object):
 
 
     def __init__(self, atype='H', xyz=[0,0,0], mass=None, label='', 
-                 occupancy=1.0, anisotropy=None, U=None, Uisoequiv=None, lattice=None):
+                 occupancy=1.0, charge=0.0, anisotropy=None, U=None, Uisoequiv=None, lattice=None):
         object.__init__(self)
         # declare non-singleton data members
         self.xyz = numpy.zeros(3, dtype=float)
-        self.label = ''
-        self.occupancy = 1.0
+        self.label = label
+        self.charge = charge
+        self.occupancy = occupancy
         self._anisotropy = None
         self._U = numpy.zeros((3,3), dtype=float)
         self._Uisoequiv = 0.0
@@ -143,12 +144,10 @@ class Atom(object):
         #else:
             # just leave symbol unspecified for now
             #pass
-         #   self.__dict__['symbol'] = None
+        #   self.__dict__['symbol'] = None
             
         # take care of remaining arguments
         if xyz is not None:         self.xyz[:] = xyz
-        if label is not None:       self.label = label
-        if occupancy is not None:   self.occupancy = float(occupancy)
         if anisotropy is not None:  self._anisotropy = bool(anisotropy)
         if U is not None:           self._U = U
         if Uisoequiv is not None:   self._Uisoequiv = Uisoequiv
