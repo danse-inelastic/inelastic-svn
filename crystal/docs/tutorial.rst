@@ -155,6 +155,8 @@ To get equivalent bonded neighbors and their distances, which is the bond matrix
 Storing structures in a db
 -----------------------------
 
+Frequently one would like to store structures in a database for easy search and retrieval later.  The way to do this is 
+
 To store a lattice in a database:
 
 .. literalinclude:: ../examples/storeLattice.py

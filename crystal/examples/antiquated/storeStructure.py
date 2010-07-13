@@ -5,9 +5,9 @@ from dsaw.db import connect
 db = connect(db ='postgres:///test', echo = True)
 db.autocommit(True)
 
-from matter.Atom import Atom
-from matter.Lattice import Lattice
-from matter.Structure import Structure
+from matter.orm.Atom import Atom
+from matter.orm.Lattice import Lattice
+from matter.orm.Structure import Structure
 
 
 tables = [
