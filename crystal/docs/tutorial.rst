@@ -155,18 +155,26 @@ To get equivalent bonded neighbors and their distances, which is the bond matrix
 Storing structures in a db
 -----------------------------
 
-Frequently one would like to store structures in a database for easy search and retrieval later.  The way to do this is 
+Frequently one would like to store structures in a database for easy search and retrieval later.  The matter package can easily do this using the orm versions of Structure, Lattice, and Atom.  To access these use::
 
-To store a lattice in a database:
+	from matter.orm.Structure import Structure
+	
+instead of::
 
-.. literalinclude:: ../examples/storeLattice.py
+	from matter.Structure import Structure
+	
+Only certain attributes of each data object are stored to the database and should be reviewed by the user.  The style of database mappings is that of the `DSAW package <http://docs.danse.us/pyre/sphinx/pyreLibraries.html#extending-the-capabilities-of-pyre-db-dsaw-db>`_ in `pyre <http://docs.danse.us/pyre/sphinx>`_.  Here are examples of how to store each object.  To store a lattice:
 
-To store an atom in a database:
+.. literalinclude:: ../examples/storeLatticeObject.py
 
-.. literalinclude:: ../examples/storeAtom.py
+To store an atom:
 
-To store a structure in a database:
+.. literalinclude:: ../examples/storeAtomObject.py
 
-.. literalinclude:: ../examples/storeStructure.py
+To recursively store a structure with its lattice and atoms:
+
+.. literalinclude:: ../examples/storeStructureObject.py
+
+We welcome collaboration on evolving these data objects to meet everyone's needs.  
 
 .. todo:: (lattice test)
