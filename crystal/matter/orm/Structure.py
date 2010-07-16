@@ -26,14 +26,15 @@ from matter.Structure import Structure
 from dsaw.model.Inventory import Inventory as InvBase
 class Inventory(InvBase):
 
+    id = InvBase.d.str(name="id", max_length=64, constraints = 'PRIMARY KEY')
     short_description = InvBase.d.str(
         name = 'short_description', max_length = 256, default ="", label='Description')
-    lattice = InvBase.d.reference(name = 'lattice', targettype=Lattice, owned=1)
-    atoms = InvBase.d.referenceSet(name='atoms', targettype=Atom, owned=1)
+    lattice = InvBase.d.reference(name = 'lattice', targettype=Lattice, owned=True)
+    atoms = InvBase.d.referenceSet(name='atoms', targettype=Atom, owned=True)
     spacegroupno = InvBase.d.int(name = 'spacegroupno', default =1, label='Spacegroup #')
     chemical_formula = InvBase.d.str(name='chemical_formula', max_length=1024)
     primitive_unitcell = InvBase.d.reference(
-        name='primitive_unitcell', targettype=UnitCell, owned=1)
+        name='primitive_unitcell', targettype=UnitCell)#, owned=1)
     date = InvBase.d.date(name='date')
 
     dbtablename = 'atomicstructures'
@@ -48,7 +49,7 @@ def __establishInventory__(self, inventory):
     inventory.spacegroupno = self.sg.number
     inventory.chemical_formula = self.getChemicalFormula()
     inventory.atoms = list(self) # the implementation of Structure class is that structure is inherited from list, and the items are atoms.
-    inventory.primitive_unitcell = self.primitive_unitcell
+    #inventory.primitive_unitcell = self.primitive_unitcell
     return
 Structure.__establishInventory__ = __establishInventory__
 
@@ -58,7 +59,7 @@ def __restoreFromInventory__(self, inventory):
                   sgid=inventory.spacegroupno,
                   description=inventory.short_description,
                   )
-    self.primitive_unitcell = inventory.primitive_unitcell
+    #self.primitive_unitcell = inventory.primitive_unitcell
     return
 Structure.__restoreFromInventory__ = __restoreFromInventory__
 
