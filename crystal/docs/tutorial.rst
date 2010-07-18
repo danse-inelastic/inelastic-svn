@@ -175,6 +175,14 @@ To recursively store a structure with its lattice and atoms:
 
 .. literalinclude:: ../examples/storeStructureObject.py
 
-We welcome collaboration on evolving these data objects to meet everyone's needs.  
+Another orm mapping of the Structure object to a db table schema is BigStructure, which can be accessed by importing::
+
+	from matter.orm.BigStructure import Structure
+	
+This table schema combines data from Lattice, all Atoms and some of their properties, and all Structure data into a single table, BigStructure.  Such a combination speeds data access for large structures with many atoms.  Here is an example demonstrating this usage:
+
+.. literalinclude:: ../examples/storeBigStructure.py 
+
+We encourage users to alter these data objects freely, hopefully documenting their changes and/or committing them back to the repository.  
 
 .. todo:: (lattice test)
