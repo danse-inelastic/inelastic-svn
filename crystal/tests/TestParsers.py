@@ -50,6 +50,16 @@ class TestP_xyz(unittest.TestCase):
         import os
         os.remove(self.tmpname)
 
+    def test_read_xyz_si(self):
+        """check reading of normal xyz file"""
+        stru = self.stru
+        #stru.read(datafile('bucky.xyz'), self.format)
+        stru.read(datafile('si64.init.xyz'), self.format)
+        print stru
+        s_els = [a.symbol for a in stru]
+        #self.assertEqual(stru.description, 'bucky-ball')
+        #self.assertEqual(s_els, 60*['C'])
+
     def test_read_xyz(self):
         """check reading of normal xyz file"""
         stru = self.stru
