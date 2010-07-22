@@ -91,11 +91,29 @@ class TestSuperCell(unittest.TestCase):
                                lattice=Lattice(4.05, 4.05, 4.05, 90, 90, 90),
                                sgid = 225 )
         al_sup = supercell(self.stru4, (3,3,3))
-        print al_sup
-#        elems = sum([8*[a.symbol] for a in self.stru_cdse], [])
-#        elems_222 = [a.symbol for a in cdse_222]
-#        self.assertEqual(elems, elems_222)
+        #print al_sup
         return
+
+    def test_naI_supercell(self):
+        """check supercell expansion for Al.
+        """       
+        at1 = Atom('Na', [0.0, 0.0, 0.0])
+        at2 = Atom('Na', [0.0, 0.5, 0.5])
+        at3 = Atom('Na', [0.5, 0.0, 0.5])
+        at4 = Atom('Na', [0.5, 0.5, 0.0])
+        at5 = Atom('I', [0.5, 0.5, 0.5])
+        at6 = Atom('I', [0.0, 0.0, 0.5])
+        at7 = Atom('I', [0.0, 0.5, 0.0])
+        at8 = Atom('I', [0.5, 0.0, 0.0])
+        naI = Structure( [ at1, at2, at3, at4, at5, at6, at7, at8], 
+                               lattice = Lattice(6.482, 6.482, 6.482, 90, 90, 90),
+                               sgid = 225 )
+        for sym,pos in zip(naI.symbols, naI.xyz_cartn):
+            print sym+' %f %f %f' % tuple(pos) 
+        print
+        naI_sup = supercell(naI, (2,2,2))
+        for sym,pos in zip(naI_sup.symbols, naI_sup.xyz_cartn):
+            print sym+' %f %f %f' % tuple(pos)
 
 # End of class TestRoutines
 
