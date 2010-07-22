@@ -23,7 +23,7 @@ from matter.UnitCell import UnitCell
 from Atom import Atom
 class Inventory(InvBase):
 
-    id = InvBase.d.str(name="id", max_length=64, constraints = 'PRIMARY KEY')
+    #id = InvBase.d.str(name="id", max_length=64, constraints = 'PRIMARY KEY')
     base = InvBase.d.array(name='base', shape=(3,3), elementtype='float')
     atoms = InvBase.d.referenceSet(name='atoms', targettype=Atom, owned=1)
     
