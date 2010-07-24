@@ -88,7 +88,7 @@ def getStandardQgridinfo(datapath, Qgridinfo='Qgridinfo', reciprocal_unitcell=No
     return '\n'.join(lines)
 
 
-def _checkReciprocalCell(cell, unitcell, ngridpnts, epsilon = 0.1):
+def _checkReciprocalCell(cell, unitcell, ngridpnts, epsilon = 0.5):
     '''check the cell against the unitcell (actually both are in the reciprocal space)
 
     The cell given by different computations (such as bvk, vasp, QE) are slightly
@@ -99,7 +99,8 @@ def _checkReciprocalCell(cell, unitcell, ngridpnts, epsilon = 0.1):
 
     cell should be very close to unitcell already
     '''
-    # 
+    #
+    #import pdb; pdb.set_trace()
     n1, n2, n3 = ngridpnts
     
     from _crystal_utils import volume
@@ -116,7 +117,8 @@ def _checkReciprocalCell(cell, unitcell, ngridpnts, epsilon = 0.1):
     if abs((v/vuc)-1) < epsilon*diff:
         return _roundUpCell(cell, unitcell)
 
-    raise NotImplementedError
+    raise NotImplementedError, 'cell %s, unitcell %s, ngridpnts %s, epsilon %s' % (
+        cell, unitcell, ngridpnts, epsilon)
 
 
 def _roundUpCell(cell, unitcell):
