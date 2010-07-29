@@ -22,7 +22,7 @@ from matter.Lattice import Lattice
 # dsaw.model inventory
 class Inventory(InvBase):
 
-    #id = InvBase.d.str(name="id", max_length=64, constraints = 'PRIMARY KEY')
+    id = InvBase.d.str(name="id", max_length=64, constraints = 'PRIMARY KEY')
     a = InvBase.d.float(name = 'a', default=1.0, validator=InvBase.v.positive)
     b = InvBase.d.float(name = 'b', default=1.0, validator=InvBase.v.positive)
     c = InvBase.d.float(name = 'c', default=1.0, validator=InvBase.v.positive)
@@ -49,6 +49,19 @@ def isUnitBase(testbase):
     diff = ub-np.array(testbase)
     if aprEq(diff.all(),0.0): return True
     else: return False
+
+def __establishInventory__(self, inventory):
+    if (inventory.base is None) or (isUnitBase(inventory.base)):
+        inventory.a = self.a
+        inventory.b = self.b
+        inventory.c = self.c
+        inventory.alpha = self.alpha
+        inventory.beta = self.beta
+        inventory.gamma = self.gamma
+    else:
+        inventory.base = self.base
+    return
+Lattice.__establishInventory__ = __establishInventory__
 
 def __restoreFromInventory__(self, inventory):
     #restore from base preferably because has setting information...

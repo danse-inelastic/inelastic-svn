@@ -56,7 +56,17 @@ class P_xyz(StructureParser):
             w1 = linefields[start][0]
             if len(lfs) == 1 and str(int(w1)) == w1:
                 p_natoms = int(w1)
-                stru.description = lines[start+1].strip()
+                #try to get lattice vectors from description line
+                try:
+                    latticeVecs = map(float, linefields[start+1])
+                    assert len(latticeVecs)==9
+                    from matter.Lattice import Lattice
+                    reshaped = [latticeVecs[0:3], latticeVecs[3:6], latticeVecs[6:9]]
+                    stru.lattice = Lattice(base=reshaped) 
+                    needsDescription = True
+                except:
+                    needsDescription = False
+                    stru.description = lines[start+1].strip()
                 start += 2
             else:
                 emsg = ("%d: invalid XYZ format, missing number of atoms" %
@@ -102,6 +112,8 @@ class P_xyz(StructureParser):
         if p_natoms is not None and len(stru) != p_natoms:
             emsg = "expected %d atoms, read %d" % (p_natoms, len(stru))
             raise StructureFormatError(emsg)
+        if needsDescription:
+            stru.generateDescription()
         return stru
     # End of parseLines
 
