@@ -55,7 +55,7 @@ class TestP_xyz(unittest.TestCase):
         stru = self.stru
         #stru.read(datafile('bucky.xyz'), self.format)
         stru.read(datafile('si64.init.xyz'), self.format)
-        print stru
+        print stru.lattice
         s_els = [a.symbol for a in stru]
         #self.assertEqual(stru.description, 'bucky-ball')
         #self.assertEqual(s_els, 60*['C'])
@@ -105,7 +105,7 @@ class TestP_xyz(unittest.TestCase):
         from matter.expansion import supercell
         al_333 = supercell(self.stru4, (3, 3, 3))
         s1 = al_333.writeStr(self.format)
-        print s1
+        #print s1
 #        s1 = re.sub('[ \t]+', ' ', s1)
 #        s0 = "2\n%s\nH 1 2 3\nCl 3 4 3\n" % stru.description
 #        self.assertEqual(s1, s0)
