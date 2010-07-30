@@ -50,7 +50,7 @@ class Inventory(InvBase):
     label = InvBase.d.str(name='label', max_length=16)
     occupancy = InvBase.d.float(name = 'occupancy', default=1.0)
     charge = InvBase.d.float(name = 'charge', default=0.0)
-    id = InvBase.d.str(name="id", max_length=64, constraints = 'PRIMARY KEY')
+    #id = InvBase.d.str(name="id", max_length=64, constraints = 'PRIMARY KEY')
 #    _anisotropy = False
 #    _U = [[0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0]]#numpy.zeros((3,3), dtype=float)
 #    _Uisoequiv = 0.0
