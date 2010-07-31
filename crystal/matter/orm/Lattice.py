@@ -22,7 +22,7 @@ from matter.Lattice import Lattice
 # dsaw.model inventory
 class Inventory(InvBase):
 
-    #id = InvBase.d.str(name="id", max_length=64, constraints = 'PRIMARY KEY')
+    id = InvBase.d.str(name="id", max_length=64, constraints = 'PRIMARY KEY')
     a = InvBase.d.float(name = 'a', default=1.0, validator=InvBase.v.positive)
     b = InvBase.d.float(name = 'b', default=1.0, validator=InvBase.v.positive)
     c = InvBase.d.float(name = 'c', default=1.0, validator=InvBase.v.positive)
