@@ -26,7 +26,7 @@ from matter.Structure import Structure
 from dsaw.model.Inventory import Inventory as InvBase
 class Inventory(InvBase):
 
-    #id = InvBase.d.str(name="id", max_length=64, constraints = 'PRIMARY KEY')
+    id = InvBase.d.str(name="id", max_length=64, constraints = 'PRIMARY KEY')
     short_description = InvBase.d.str(
         name = 'short_description', max_length = 256, default ="", label='Description')
     lattice = InvBase.d.reference(name = 'lattice', targettype=Lattice, owned=True)
