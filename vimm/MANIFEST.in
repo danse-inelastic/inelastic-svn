@@ -1,0 +1,6 @@
+include Doc/*.html
+include Doc/*.log
+include Geos/*
+include Tests/*.py
+include Scripts/*.py
+include MANIFEST.in README LICENSE

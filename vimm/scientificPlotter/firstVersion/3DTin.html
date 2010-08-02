@@ -1,0 +1,186 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>3DTin </title>
+
+<link rel="stylesheet" type="text/css" href="3DTin_files/style.css">
+<link rel="stylesheet" type="text/css" href="3DTin_files/jpicker.css">
+
+<script src="3DTin_files/ga.js" async="" type="text/javascript"></script><script type="text/javascript">
+var isChrome = false;
+var isFirefox  = false;
+var isLoggedIn = false;
+var doLoadSample = true;
+</script>
+
+<script type="text/javascript" src="3DTin_files/jquery_002.js"></script>
+<script type="text/javascript" src="3DTin_files/jquery.js"></script>
+
+
+<script type="text/javascript" src="3DTin_files/3dtin.js"></script>
+
+
+<script type="text/javascript" src="3DTin_files/jpicker.js"></script>
+</head>
+
+<body>
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-191960-18']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+
+
+    
+    <div id="panel">
+        <div class="button" id="addgeom"></div>
+        <div class="button" id="extrude"></div>
+        <div class="button" id="color"></div>
+        <div class="button" id="ruler"></div>
+
+        <div class="button" id="separator"></div>
+
+        <div style="background-image: url(&quot;/images/object.png&quot;);" class="button" id="mode"></div>
+
+        <div class="button" id="separator"></div>
+
+        <div class="button" id="save"></div>
+        <div class="button" id="open"></div>
+        <div style="background-image: url(&quot;/images/noundo.png&quot;);" class="button" id="undo"></div>
+        <div style="background-image: url(&quot;/images/noredo.png&quot;);" class="button" id="redo"></div>
+        <div class="button" id="help"></div>
+        <span id="alpha"></span><span class="jPicker"><span class="Icon"><span style="background-color: rgb(34, 34, 238);" class="Color">&nbsp;</span><span style="background-image: url(&quot;/images/jpicker/bar-opacity.png&quot;); visibility: hidden;" class="Alpha">&nbsp;</span><span style="background-image: url(&quot;/images/jpicker/picker.gif&quot;);" class="Image" title="Click To Open Color Picker">&nbsp;</span><span style="left: -70px; position: absolute; top: 200px;" class="Container"><table class="jPicker" cellpadding="0" cellspacing="0"><tbody><tr><td class="Move" colspan="6">&nbsp;</td></tr><tr><td rowspan="9"><h2 class="Title">Drag Markers To Pick A Color</h2><div style="background-color: rgb(0, 0, 255);" class="Map"><span style="background-image: url(&quot;/images/jpicker/Maps.png&quot;); top: 0px; visibility: visible;" class="Map1">&nbsp;</span><span style="background-image: url(&quot;/images/jpicker/Maps.png&quot;); top: 260px; visibility: visible;" class="Map2">&nbsp;</span><span style="background-image: url(&quot;/images/jpicker/map-opacity.png&quot;); visibility: hidden;" class="Map3">&nbsp;</span><img style="left: 210px; top: 10px;" src="3DTin_files/mappoint.gif" class="Arrow"></div></td><td rowspan="9"><div style="background-color: transparent;" class="Bar"><span style="background-image: url(&quot;/images/jpicker/Bars.png&quot;); top: 0px; visibility: visible;" class="Map1">&nbsp;</span><span style="background-image: url(&quot;/images/jpicker/Bars.png&quot;); top: 260px; visibility: visible;" class="Map2">&nbsp;</span><span style="background-image: url(&quot;/images/jpicker/Bars.png&quot;); top: 260px; visibility: visible;" class="Map3">&nbsp;</span><span style="background-image: url(&quot;/images/jpicker/Bars.png&quot;); top: 260px; visibility: visible;" class="Map4">&nbsp;</span><span style="background-image: url(&quot;/images/jpicker/bar-opacity.png&quot;); visibility: hidden;" class="Map5">&nbsp;</span><span style="background-image: url(&quot;/images/jpicker/AlphaBar.png&quot;); top: 260px; visibility: visible;" class="Map6">&nbsp;</span><img style="left: 0px; top: 82px;" src="3DTin_files/rangearrows.gif" class="Arrow"></div></td><td colspan="3" class="Preview">new<div style="background-image: url(&quot;/images/jpicker/preview-opacity.png&quot;);"><span style="background-color: rgb(34, 34, 238); visibility: visible;" class="Active" title="New Color - Press “OK” To Commit">&nbsp;</span><span style="background-color: rgb(34, 34, 238);" class="Current" title="Click To Revert To Original Color">&nbsp;</span></div>current</td><td rowspan="9" class="Button"><input class="Ok" value="OK" title="Commit To This Color Selection" type="button"><input class="Cancel" value="Cancel" title="Cancel And Revert To Original Color" type="button"><hr><div class="Grid"><span class="QuickColor" title="#ffaaaaff" style="background-color: rgb(255, 170, 170);">&nbsp;</span><span class="QuickColor" title="#ff5656ff" style="background-color: rgb(255, 86, 86);">&nbsp;</span><span class="QuickColor" title="#ff0000ff" style="background-color: rgb(255, 0, 0);">&nbsp;</span><span class="QuickColor" title="#bf0000ff" style="background-color: rgb(191, 0, 0);">&nbsp;</span><span class="QuickColor" title="#7f0000ff" style="background-color: rgb(127, 0, 0);">&nbsp;</span><span class="QuickColor" title="#ffffffff" style="background-color: rgb(255, 255, 255);">&nbsp;</span><span class="QuickColor" title="#ffd4aaff" style="background-color: rgb(255, 212, 170);">&nbsp;</span><span class="QuickColor" title="#ffaa56ff" style="background-color: rgb(255, 170, 86);">&nbsp;</span><span class="QuickColor" title="#ff7f00ff" style="background-color: rgb(255, 127, 0);">&nbsp;</span><span class="QuickColor" title="#bf5f00ff" style="background-color: rgb(191, 95, 0);">&nbsp;</span><span class="QuickColor" title="#7f3f00ff" style="background-color: rgb(127, 63, 0);">&nbsp;</span><span class="QuickColor" title="#e5e5e5ff" style="background-color: rgb(229, 229, 229);">&nbsp;</span><span class="QuickColor" title="#ffffaaff" style="background-color: rgb(255, 255, 170);">&nbsp;</span><span class="QuickColor" title="#ffff56ff" style="background-color: rgb(255, 255, 86);">&nbsp;</span><span class="QuickColor" title="#ffff00ff" style="background-color: rgb(255, 255, 0);">&nbsp;</span><span class="QuickColor" title="#bfbf00ff" style="background-color: rgb(191, 191, 0);">&nbsp;</span><span class="QuickColor" title="#7f7f00ff" style="background-color: rgb(127, 127, 0);">&nbsp;</span><span class="QuickColor" title="#ccccccff" style="background-color: rgb(204, 204, 204);">&nbsp;</span><span class="QuickColor" title="#d4ffaaff" style="background-color: rgb(212, 255, 170);">&nbsp;</span><span class="QuickColor" title="#aaff56ff" style="background-color: rgb(170, 255, 86);">&nbsp;</span><span class="QuickColor" title="#7fff00ff" style="background-color: rgb(127, 255, 0);">&nbsp;</span><span class="QuickColor" title="#5fbf00ff" style="background-color: rgb(95, 191, 0);">&nbsp;</span><span class="QuickColor" title="#3f7f00ff" style="background-color: rgb(63, 127, 0);">&nbsp;</span><span class="QuickColor" title="#b2b2b2ff" style="background-color: rgb(178, 178, 178);">&nbsp;</span><span class="QuickColor" title="#aaffaaff" style="background-color: rgb(170, 255, 170);">&nbsp;</span><span class="QuickColor" title="#56ff56ff" style="background-color: rgb(86, 255, 86);">&nbsp;</span><span class="QuickColor" title="#00ff00ff" style="background-color: rgb(0, 255, 0);">&nbsp;</span><span class="QuickColor" title="#00bf00ff" style="background-color: rgb(0, 191, 0);">&nbsp;</span><span class="QuickColor" title="#007f00ff" style="background-color: rgb(0, 127, 0);">&nbsp;</span><span class="QuickColor" title="#999999ff" style="background-color: rgb(153, 153, 153);">&nbsp;</span><span class="QuickColor" title="#aaffd4ff" style="background-color: rgb(170, 255, 212);">&nbsp;</span><span class="QuickColor" title="#56ffaaff" style="background-color: rgb(86, 255, 170);">&nbsp;</span><span class="QuickColor" title="#00ff7fff" style="background-color: rgb(0, 255, 127);">&nbsp;</span><span class="QuickColor" title="#00bf5fff" style="background-color: rgb(0, 191, 95);">&nbsp;</span><span class="QuickColor" title="#007f3fff" style="background-color: rgb(0, 127, 63);">&nbsp;</span><span class="QuickColor" title="#7f7f7fff" style="background-color: rgb(127, 127, 127);">&nbsp;</span><span class="QuickColor" title="#aaffffff" style="background-color: rgb(170, 255, 255);">&nbsp;</span><span class="QuickColor" title="#56ffffff" style="background-color: rgb(86, 255, 255);">&nbsp;</span><span class="QuickColor" title="#00ffffff" style="background-color: rgb(0, 255, 255);">&nbsp;</span><span class="QuickColor" title="#00bfbfff" style="background-color: rgb(0, 191, 191);">&nbsp;</span><span class="QuickColor" title="#007f7fff" style="background-color: rgb(0, 127, 127);">&nbsp;</span><span class="QuickColor" title="#666666ff" style="background-color: rgb(102, 102, 102);">&nbsp;</span><span class="QuickColor" title="#aad4ffff" style="background-color: rgb(170, 212, 255);">&nbsp;</span><span class="QuickColor" title="#56aaffff" style="background-color: rgb(86, 170, 255);">&nbsp;</span><span class="QuickColor" title="#007fffff" style="background-color: rgb(0, 127, 255);">&nbsp;</span><span class="QuickColor" title="#005fbfff" style="background-color: rgb(0, 95, 191);">&nbsp;</span><span class="QuickColor" title="#003f7fff" style="background-color: rgb(0, 63, 127);">&nbsp;</span><span class="QuickColor" title="#4c4c4cff" style="background-color: rgb(76, 76, 76);">&nbsp;</span><span class="QuickColor" title="#aaaaffff" style="background-color: rgb(170, 170, 255);">&nbsp;</span><span class="QuickColor" title="#5656ffff" style="background-color: rgb(86, 86, 255);">&nbsp;</span><span class="QuickColor" title="#0000ffff" style="background-color: rgb(0, 0, 255);">&nbsp;</span><span class="QuickColor" title="#0000bfff" style="background-color: rgb(0, 0, 191);">&nbsp;</span><span class="QuickColor" title="#00007fff" style="background-color: rgb(0, 0, 127);">&nbsp;</span><span class="QuickColor" title="#333333ff" style="background-color: rgb(51, 51, 51);">&nbsp;</span><span class="QuickColor" title="#d4aaffff" style="background-color: rgb(212, 170, 255);">&nbsp;</span><span class="QuickColor" title="#aa56ffff" style="background-color: rgb(170, 86, 255);">&nbsp;</span><span class="QuickColor" title="#7f00ffff" style="background-color: rgb(127, 0, 255);">&nbsp;</span><span class="QuickColor" title="#5f00bfff" style="background-color: rgb(95, 0, 191);">&nbsp;</span><span class="QuickColor" title="#3f007fff" style="background-color: rgb(63, 0, 127);">&nbsp;</span><span class="QuickColor" title="#191919ff" style="background-color: rgb(25, 25, 25);">&nbsp;</span><span class="QuickColor" title="#ffaaffff" style="background-color: rgb(255, 170, 255);">&nbsp;</span><span class="QuickColor" title="#ff56ffff" style="background-color: rgb(255, 86, 255);">&nbsp;</span><span class="QuickColor" title="#ff00ffff" style="background-color: rgb(255, 0, 255);">&nbsp;</span><span class="QuickColor" title="#bf00bfff" style="background-color: rgb(191, 0, 191);">&nbsp;</span><span class="QuickColor" title="#7f007fff" style="background-color: rgb(127, 0, 127);">&nbsp;</span><span class="QuickColor" title="#000000ff" style="background-color: rgb(0, 0, 0);">&nbsp;</span><span class="QuickColor" title="#ffaad4ff" style="background-color: rgb(255, 170, 212);">&nbsp;</span><span class="QuickColor" title="#ff56aaff" style="background-color: rgb(255, 86, 170);">&nbsp;</span><span class="QuickColor" title="#ff007fff" style="background-color: rgb(255, 0, 127);">&nbsp;</span><span class="QuickColor" title="#bf005fff" style="background-color: rgb(191, 0, 95);">&nbsp;</span><span class="QuickColor" title="#7f003fff" style="background-color: rgb(127, 0, 63);">&nbsp;</span><span class="QuickColor" title="" style="background-color: transparent; background-image: url(&quot;/images/jpicker/NoColor.png&quot;);">&nbsp;</span></div></td></tr><tr class="Hue"><td class="Radio"><input id="jPicker_Hue_0" name="jPicker_Mode_0" value="h" title="Set To “Hue” Color Mode" checked="checked" type="radio"></td><td class="Label"><label for="jPicker_Hue_0" title="Set To “Hue” Color Mode">H:</label></td><td class="Text"><input maxlength="3" value="240" title="Enter A “Hue” Value (0-360°)" type="text">&nbsp;°</td></tr><tr class="Saturation"><td class="Radio"><input id="jPicker_Saturation_0" name="jPicker_Mode_0" value="s" title="Set To “Saturation” Color Mode" type="radio"></td><td class="Label"><label for="jPicker_Saturation_0" title="Set To “Saturation” Color Mode">S:</label></td><td class="Text"><input maxlength="3" value="85" title="Enter A “Saturation” Value (0-100%)" type="text">&nbsp;%</td></tr><tr class="Value"><td class="Radio"><input id="jPicker_Value_0" name="jPicker_Mode_0" value="v" title="Set To “Value” Color Mode" type="radio"><br><br></td><td class="Label"><label for="jPicker_Value_0" title="Set To “Value” Color Mode">V:</label><br><br></td><td class="Text"><input maxlength="3" value="93" title="Enter A “Value” Value (0-100%)" type="text">&nbsp;%<br><br></td></tr><tr class="Red"><td class="Radio"><input id="jPicker_Red_0" name="jPicker_Mode_0" value="r" title="Set To “Red” Color Mode" type="radio"></td><td class="Label"><label for="jPicker_Red_0" title="Set To “Red” Color Mode">R:</label></td><td class="Text"><input maxlength="3" value="34" title="Enter A “Red” Value (0-255)" type="text"></td></tr><tr class="Green"><td class="Radio"><input id="jPicker_Green_0" name="jPicker_Mode_0" value="g" title="Set To “Green” Color Mode" type="radio"></td><td class="Label"><label for="jPicker_Green_0" title="Set To “Green” Color Mode">G:</label></td><td class="Text"><input maxlength="3" value="34" title="Enter A “Green” Value (0-255)" type="text"></td></tr><tr class="Blue"><td class="Radio"><input id="jPicker_Blue_0" name="jPicker_Mode_0" value="b" title="Set To “Blue” Color Mode" type="radio"></td><td class="Label"><label for="jPicker_Blue_0" title="Set To “Blue” Color Mode">B:</label></td><td class="Text"><input maxlength="3" value="238" title="Enter A “Blue” Value (0-255)" type="text"></td></tr><tr class="Alpha"><td class="Radio"><input id="jPicker_Alpha_0" name="jPicker_Mode_0" value="a" title="Set To “Alpha” Color Mode" type="radio"></td><td class="Label"><label for="jPicker_Alpha_0" title="Set To “Alpha” Color Mode">A:</label></td><td class="Text"><input maxlength="3" value="100" title="Enter A “Alpha” Value (0-100)" type="text">&nbsp;%</td></tr><tr class="Hex"><td colspan="3" class="Text"><label for="jPicker_Hex_0" title="Enter A “Hex” Color Value (#000000-#ffffff)">#:</label><input maxlength="6" class="Hex" id="jPicker_Hex_0" value="2222ee" title="Enter A “Hex” Color Value (#000000-#ffffff)" type="text"><input maxlength="2" class="AHex" value="ff" title="Enter A “Alpha” Value (#00-#ff)" type="text"></td></tr></tbody></table></span></span></span>
+    </div>
+
+    <div id="geompanel">
+        <div class="button" id="triangle"></div>
+        <div class="button" id="square"></div>
+        <div class="button" id="circle"></div>
+        <div class="button" id="cube"></div>
+        <div class="button" id="cylinder"></div>
+        <div class="button" id="sphere"></div>
+        <div class="button" id="cone"></div>
+    </div>
+
+    <canvas width="1147" height="827" id="canvas0"></canvas>
+    <canvas width="1147" height="827" id="canvas1"></canvas>
+    <div style="top: 837px; width: 1147px;" id="status">
+        <div id="message"></div>
+        <div id="hint">Click-n-Drag empty space to rotate. Shift+Click to pan.</div>
+    </div>
+    <div style="visibility: hidden;" id="cpanel">
+        <div style="background: none repeat scroll 0% 0% rgb(200, 200, 200);" class="cbutton" id="translate">
+            <img src="3DTin_files/translate.png">
+        </div>
+        <div style="background: none repeat scroll 0% 0% transparent;" class="cbutton" id="scale">
+            <img src="3DTin_files/scale.png">
+        </div>
+        <div style="background: none repeat scroll 0% 0% transparent;" class="cbutton" id="rotate">
+            <img src="3DTin_files/rotate.png">
+        </div>
+        <div id="info">
+            <div class="decbutton" id="decx"></div>
+                <span id="xname" style="color: rgb(255, 0, 0);">x</span>
+                <span id="xval"></span>
+            <div class="incbutton" id="incx"></div>
+            <div class="decbutton" id="decy"></div>
+                <span id="yname" style="color: rgb(0, 255, 0);">y</span>
+                <span id="yval"></span>
+            <div class="incbutton" id="incy"></div>
+            <div class="decbutton" id="decz"></div>
+                <span id="zname" style="color: rgb(0, 0, 255);">z</span>
+                <span id="zval"></span>
+            <div class="incbutton" id="incz"></div>
+        </div>
+    </div>
+
+    <div style="top: 737px;" id="projpanel">
+        <div style="background: none repeat scroll 0% 0% transparent;" class="pbutton" id="persp">
+            <img src="3DTin_files/persp.png">
+        </div>
+        <div style="background: none repeat scroll 0% 0% rgb(200, 200, 200);" class="pbutton" id="ortho">
+            <img src="3DTin_files/ortho.png">
+        </div>
+    </div>
+
+    <div class="fuzz" id="tinlistdlg">
+        <div id="titlebar">
+            <span id="title">Your Sketches</span>
+            <span id="newtin">New</span>
+        </div>
+        <div id="tinlist">
+        </div>
+    </div>
+    <div class="fuzz" id="helpscreen">
+        <div id="kbdhelp">
+            <div class="kbdcol" id="shortcuts">
+                <div class="scutname">a</div>      
+                <div class="scutname">Del</div>      
+                <div class="scutname">e</div>      
+                <div class="scutname">c</div>      
+                <div class="scutname">TAB</div>    
+                <div class="scutname">Ctrl+s</div> 
+                <div class="scutname">Ctrl+o</div> 
+                <div class="scutname">Ctrl+c</div> 
+                <div class="scutname">Ctrl+v</div> 
+            </div>
+
+            <div class="kbdcol" id="actions">
+                <div class="actiontxt">Add Geometry</div> 
+                <div class="actiontxt">Delete Geometry</div> 
+                <div class="actiontxt">Extrude</div> 
+                <div class="actiontxt">Color</div> 
+                <div class="actiontxt">Toggle mode</div>
+                <div class="actiontxt">Save</div>
+                <div class="actiontxt">Open</div>
+                <div class="actiontxt">Copy</div>
+                <div class="actiontxt">Paste</div>
+            </div>
+
+            <div class="kbdcol" id="shortcuts">
+                <div class="scutname">Ctrl+z</div> 
+                <div class="scutname">Ctrl+y</div> 
+                <div class="scutname">Ctrl+Up</div> 
+                <div class="scutname">Ctrl+Down</div> 
+                <div class="scutname">Ctrl+Left</div> 
+                <div class="scutname">Ctrl+Right</div> 
+                <div class="scutname">Shift+Up</div> 
+                <div class="scutname">Shift+Down</div> 
+                <div class="scutname">Ctrl+h</div> 
+            </div>
+
+            <div class="kbdcol" id="actions">
+                <div class="actiontxt">Undo</div>
+                <div class="actiontxt">Redo</div>
+                <div class="actiontxt">Top view</div>
+                <div class="actiontxt">Bottom view</div>
+                <div class="actiontxt">Left view</div>
+                <div class="actiontxt">Right view</div>
+                <div class="actiontxt">Front view</div>
+                <div class="actiontxt">Back view</div>
+                <div class="actiontxt">Help Screen</div> 
+            </div>
+        </div>
+    </div>
+
+    <div id="logout">
+        <a href="https://www.google.com/accounts/ServiceLogin?service=ah&amp;continue=http://www.3dtin.com/_ah/login%3Fcontinue%3Dhttp://www.3dtin.com/&amp;ltmpl=gm&amp;ahname=3DTin-0&amp;sig=39fb74eb7cb855a51f9d04f40adfebd8">Login</a><br>
+        <a href="http://blog.3dtin.com/" target="_blank">Blog</a><br>
+        <a href="http://groups.google.com/group/3dtin" target="_blank">Feedback</a><br>
+    </div>
+
+    <div style="top: 827px; left: 1227px;" id="creator">
+        Created by
+            <a href="http://www.altcanvas.com/" target="_blank">
+            <img src="3DTin_files/altcanvas_logo.png" style="">
+            </a>
+    </div>
+
+
+</body></html>

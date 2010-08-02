@@ -1,0 +1,13 @@
+wf_cutoff       120.000000
+den_cutoff      480.000000
+mpparams        8 8 5
+kt              1.0d-4
+nbands          4
+dens_tol        1.0d-8
+functional      PBE
+solver_method   cg
+solver_dir      3
+solver_tol      1.0d-4
+stress_tensor   .TRUE.
+pressure        .TRUE.
+do_semigw       .TRUE.

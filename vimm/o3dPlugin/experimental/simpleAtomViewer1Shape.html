@@ -1,0 +1,343 @@
+ <!--
+Copyright 2009, Google Inc.
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+    * Redistributions of source code must retain the above copyright
+notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above
+copyright notice, this list of conditions and the following disclaimer
+in the documentation and/or other materials provided with the
+distribution.
+    * Neither the name of Google Inc. nor the names of its
+contributors may be used to endorse or promote products derived from
+this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+  "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>   Simple Structure Viewer   </title>
+<style type="text/css">
+html, body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  height: 100%;
+}
+</style>
+</head>
+<body onload="init();" onunload="uninit();">
+<script type="text/javascript" src="o3djs/base.js"></script>
+<script type="text/javascript" id="o3dscript">
+o3djs.require('o3djs.util');
+o3djs.require('o3djs.math');
+o3djs.require('o3djs.quaternions');
+o3djs.require('o3djs.rendergraph');
+o3djs.require('o3djs.pack');
+o3djs.require('o3djs.arcball');
+o3djs.require('o3djs.scene');
+o3djs.require('o3djs.primitives');
+
+var g_root;
+var g_o3d;
+var g_math;
+var g_quaternions;
+var g_client;
+var g_aball;
+var g_thisRot;
+var g_lastRot;
+var g_pack = null;
+var g_mainPack;
+var g_viewInfo;
+var g_lightPosParam;
+var g_loadingElement;
+var g_o3dWidth = -1;
+var g_o3dHeight = -1;
+var g_o3dElement;
+var g_finished = false;  // for selenium
+
+var g_camera = {
+  nearPlane:0.1,
+  farPlane: 5000
+};
+
+var g_dragging = false;
+
+function startDragging(e) {
+  g_lastRot = g_thisRot;
+  g_aball.click([e.x, e.y]);
+  g_dragging = true;
+}
+
+function drag(e) {
+  if (g_dragging) {
+    var rotationQuat = g_aball.drag([e.x, e.y]);
+    var rot_mat = g_quaternions.quaternionToRotation(rotationQuat);
+    g_thisRot = g_math.matrix4.mul(g_lastRot, rot_mat);
+    var m = groupTransform.localMatrix;
+    g_math.matrix4.setUpper3x3(m, g_thisRot);
+    groupTransform.localMatrix = m;
+  }
+}
+
+function stopDragging(e) {
+  g_dragging = false;
+}
+
+function updateCamera() {
+  var up = [0, 1, 0];
+  g_viewInfo.drawContext.view = g_math.matrix4.lookAt(g_camera.eye,
+                                                      g_camera.target,
+                                                      up);
+  g_lightPosParam.value = g_camera.eye;
+}
+
+function updateProjection() {
+  // Create a perspective projection matrix.
+  g_viewInfo.drawContext.projection = g_math.matrix4.perspective(
+    g_math.degToRad(45), g_o3dWidth / g_o3dHeight, g_camera.nearPlane,
+    g_camera.farPlane);
+}
+
+function scrollMe(e) {
+  if (e.deltaY) {
+    var t = 1;
+    if (e.deltaY > 0)
+      t = 11 / 12;
+    else
+      t = 13 / 12;
+    g_camera.eye = g_math.lerpVector(g_camera.target, g_camera.eye, t);
+
+    updateCamera();
+  }
+}
+
+/**
+ * Creates a material based on the given single color.
+ * @param {!o3djs.math.Vector4} baseColor A 4-component vector with
+ *     the R,G,B, and A components of a color.
+ * @return {!o3d.Material} A phong material whose overall pigment is
+ *     baseColor.
+ */
+function createMaterial(baseColor) {
+  // Create a new, empty Material object.
+  return o3djs.material.createBasicMaterial(g_pack, g_viewInfo, baseColor);
+}
+
+function drawAtoms(){
+  function callback(pack, parent, exception) {
+    // Generate draw elements and setup material draw lists.
+    o3djs.pack.preparePack(pack, g_viewInfo);
+    var bbox = o3djs.util.getBoundingBoxOfTree(g_client.root);
+    g_camera.target = g_math.lerpVector(bbox.minExtent, bbox.maxExtent, 0.5);
+    var diag = g_math.length(g_math.subVector(bbox.maxExtent,
+                                              bbox.minExtent));
+    g_camera.eye = g_math.addVector(g_camera.target, [0, 0, 1.5 * diag]);
+    g_camera.nearPlane = diag / 1000;
+    g_camera.farPlane = diag * 10;
+    setClientSize();
+    updateCamera();
+    updateProjection();
+
+    // Manually connect all the materials' lightWorldPos params to the context
+    var materials = pack.getObjectsByClassName('o3d.Material');
+    for (var m = 0; m < materials.length; ++m) {
+      var material = materials[m];
+      var param = material.getParam('lightWorldPos');
+      if (param) {
+        param.bind(g_lightPosParam);
+      }
+    }
+    g_finished = true;  // for selenium
+  }
+  g_pack = g_client.createPack();
+
+  // create group transform
+  var groupTransform = g_pack.createObject('Transform');
+  groupTransform.parent = g_client.root;
+  //transform.translate(atomLocations[a]);
+  // Turn on culling
+  groupTransform.cull = true;
+  var boundingBox = g_o3d.BoundingBox([0, 0, 0],[0, 0, 0]);
+  
+  // create atom instance and add multiple transforms to it
+  
+
+
+  var bondCylinder = o3djs.primitives.createCylinder(
+	      g_pack,
+	      createMaterial([1,0,0,1]),
+	      0.5,   // Radius.
+	      1.5,   // Height.
+	      20,    // Number of radial subdivisions.
+	      20);   // Number of vertical subdivisions.
+
+  // eventually these will be read in from a file or db
+  var atomLocations = [
+    [-4, 0, 0],
+    [0, 0, 0],
+    [4, 0, 0],
+  ];
+
+  // create shape
+  var structureShape = g_pack.createObject('Shape');
+  
+
+  for (var a = 0; a < atomLocations.length; ++a) {
+	  
+	var atomSphere = o3djs.primitives.createSphere(
+		      g_pack,
+		      createMaterial([1,1,1,1]),
+		      1.0,   // Radius of the sphere.
+		      30,    // Number of meridians.
+		      20);    // Number of parallels.
+	//var elements = structureShape.elements
+    atomSphere.elements[0].owner = structureShape;
+    g_pack.removeObject(atomSphere); //remove
+    //elements[a].cull = true;
+    
+    var transform = g_pack.createObject('Transform');
+    transform.parent = groupTransform;
+    // Turn on culling
+    transform.cull = true;
+    transform.addShape(atomSphere);
+    transform.boundingBox = shape.boundingBox;
+    transform.translate(atomLocations[a]);
+    // Add the box for this bounding box to the box for the group.
+    var box = transform.boundingBox.mul(transform.localMatrix);
+    boundingBox = boundingBox.add(box);
+  }
+  groupTransform.boundingBox = boundingBox;
+  //Add the bonds to the transforms.
+  return groupTransform;
+}
+
+function setClientSize() {
+  var newWidth  = parseInt(g_client.width);
+  var newHeight = parseInt(g_client.height);
+
+  if (newWidth != g_o3dWidth || newHeight != g_o3dHeight) {
+    g_o3dWidth = newWidth;
+    g_o3dHeight = newHeight;
+
+    updateProjection();
+
+    // Sets a new area size for arcball.
+    g_aball.setAreaSize(g_o3dWidth, g_o3dHeight);
+  }
+}
+
+/**
+ *  Called every frame.
+ */
+function onRender() {
+  // If we don't check the size of the client area every frame we don't get a
+  // chance to adjust the perspective matrix fast enough to keep up with the
+  // browser resizing us.
+  setClientSize();
+}
+
+/**
+ * Creates the client area.
+ */
+function init() {
+
+  // Comment out the line below to run the sample in the browser
+  // JavaScript engine.  This may be helpful for debugging.
+  //o3djs.util.setMainEngine(o3djs.util.Engine.V8);
+	
+  o3djs.util.makeClients(initStep2);
+}
+
+/**
+ * Initializes O3D and loads the scene into the transform graph.
+ * @param {Array} clientElements Array of o3d object elements.
+ */
+function initStep2(clientElements) {
+
+  g_o3dElement = clientElements[0];
+  g_o3d = g_o3dElement.o3d;
+  g_math = o3djs.math;
+  g_quaternions = o3djs.quaternions;
+  g_client = g_o3dElement.client;
+
+  g_mainPack = g_client.createPack();
+
+  // Create the render graph for a view.
+  g_viewInfo = o3djs.rendergraph.createBasicView(
+      g_mainPack,
+      g_client.root,
+      g_client.renderGraphRoot);
+
+  g_lastRot = g_math.matrix4.identity();
+  g_thisRot = g_math.matrix4.identity();
+
+  var root = g_client.root;
+
+  g_aball = o3djs.arcball.create(100, 100);
+  setClientSize();
+
+  // Set the light at the same position as the camera to create a headlight
+  // that illuminates the object straight on.
+  var paramObject = g_mainPack.createObject('ParamObject');
+  g_lightPosParam = paramObject.createParam('lightWorldPos', 'ParamFloat3');
+  g_camera.target = [0, 0, 0];
+  g_camera.eye = [0, 0, 5];
+  updateCamera();
+
+  // create the atoms as spheres with bonds between them and create transforms for each
+  //doload()
+  g_root = drawAtoms(g_viewInfo.drawContext);
+
+  o3djs.event.addEventListener(g_o3dElement, 'mousedown', startDragging);
+  o3djs.event.addEventListener(g_o3dElement, 'mousemove', drag);
+  o3djs.event.addEventListener(g_o3dElement, 'mouseup', stopDragging);
+  o3djs.event.addEventListener(g_o3dElement, 'wheel', scrollMe);
+
+  g_client.setRenderCallback(onRender);
+}
+
+/**
+ * Removes any callbacks so they don't get called after the page has unloaded.
+ */
+function uninit() {
+  if (g_client) {
+    g_client.cleanup();
+  }
+}
+</script>
+<table width="100%" style="height:100%;">
+
+  <tr><td valign="middle" align="center" height="100%">
+<table width="100%"  style="height:100%;"><tr><td height="100%">
+<h1>Simple Structure Viewer </h1>
+<table id="container" width="90%" style="height:60%;" border="2"><tr><td height="100%">
+<div id="o3d" style="width: 100%; height: 100%;"></div>
+</td></tr></table>
+
+<div style="color: red;" id="loading"></div>
+</td></tr></table>
+</td></tr></table>
+</body>
+</html>
+
+
