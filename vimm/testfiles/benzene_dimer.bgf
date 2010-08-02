@@ -1,0 +1,72 @@
+XTLGRF 200
+DESCRP Model2      
+REMARK BGF file created by Cerius2
+FORCEFIELD DREIDING  
+PERIOD 111
+AXES   ZYX
+SGNAME P 1                  1    1
+CRYSTX     8.03552    8.03552    8.03552   90.00000   90.00000   90.00000
+CELLS     0    0    0    0    0    0
+FORMAT ATOM   (a6,1x,i5,1x,a5,1x,a3,1x,a1,1x,a5,3f10.5,1x,a5, i3,i2,1x,f8.5)
+HETATM     1 C1    RES A  444    4.01776   5.51776   5.81776 C_R    3 0  0.00000
+HETATM     2 H2    RES A  444    3.77131   5.31280   6.78723 H_     1 0  0.00000
+HETATM     3 C3    RES A  444    5.37053   5.57605   5.43248 C_R    3 0  0.00000
+HETATM     4 H4    RES A  444    6.10445   5.41260   6.12306 H_     1 0  0.00000
+HETATM     5 C5    RES A  444    5.71121   5.86085   4.09700 C_R    3 0  0.00000
+HETATM     6 H6    RES A  444    6.69159   5.90454   3.81762 H_     1 0  0.00000
+HETATM     7 C7    RES A  444    4.69778   6.08616   3.14547 C_R    3 0  0.00000
+HETATM     8 H8    RES A  444    4.94448   6.29315   2.17688 H_     1 0  0.00000
+HETATM     9 C9    RES A  444    3.34554   6.02596   3.53045 C_R    3 0  0.00000
+HETATM    10 H10   RES A  444    2.61134   6.19037   2.84000 H_     1 0  0.00000
+HETATM    11 C11   RES A  444    3.00487   5.74115   4.86592 C_R    3 0  0.00000
+HETATM    12 H12   RES A  444    2.02342   5.69531   5.14381 H_     1 0  0.00000
+HETATM    13 C13   RES A  444    4.70005   2.03753   3.49601 C_R    3 0  0.00000
+HETATM    14 H14   RES A  444    5.62639   1.87471   3.09851 H_     1 0  0.00000
+HETATM    15 C15   RES A  444    4.51552   3.04511   4.46171 C_R    3 0  0.00000
+HETATM    16 H16   RES A  444    5.30847   3.61294   4.76347 H_     1 0  0.00000
+HETATM    17 C17   RES A  444    3.23960   3.26864   5.01190 C_R    3 0  0.00000
+HETATM    18 H18   RES A  444    3.10568   3.99791   5.71285 H_     1 0  0.00000
+HETATM    19 C19   RES A  444    2.14670   2.48456   4.59473 C_R    3 0  0.00000
+HETATM    20 H20   RES A  444    1.22124   2.64612   4.99385 H_     1 0  0.00000
+HETATM    21 C21   RES A  444    2.33104   1.47868   3.62799 C_R    3 0  0.00000
+HETATM    22 H22   RES A  444    1.53818   0.90999   3.32674 H_     1 0  0.00000
+HETATM    23 C23   RES A  444    3.60697   1.25516   3.07779 C_R    3 0  0.00000
+HETATM    24 H24   RES A  444    3.73929   0.52670   2.37465 H_     1 0  0.00000
+FORMAT CONECT (a6,12i6)
+CONECT     1     2     3    11
+ORDER      1     1     1     2
+CONECT     2     1
+CONECT     3     1     4     5
+ORDER      3     1     1     2
+CONECT     4     3
+CONECT     5     3     6     7
+ORDER      5     2     1     1
+CONECT     6     5
+CONECT     7     5     8     9
+ORDER      7     1     1     2
+CONECT     8     7
+CONECT     9     7    10    11
+ORDER      9     2     1     1
+CONECT    10     9
+CONECT    11     1     9    12
+ORDER     11     2     1     1
+CONECT    12    11
+CONECT    13    14    15    23
+ORDER     13     1     1     2
+CONECT    14    13
+CONECT    15    13    16    17
+ORDER     15     1     1     2
+CONECT    16    15
+CONECT    17    15    18    19
+ORDER     17     2     1     1
+CONECT    18    17
+CONECT    19    17    20    21
+ORDER     19     1     1     2
+CONECT    20    19
+CONECT    21    19    22    23
+ORDER     21     2     1     1
+CONECT    22    21
+CONECT    23    13    21    24
+ORDER     23     2     1     1
+CONECT    24    23
+END

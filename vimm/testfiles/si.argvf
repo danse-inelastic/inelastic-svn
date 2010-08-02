@@ -1,0 +1,35 @@
+wf_cutoff       20.0d0
+den_cutoff      80.0d0  
+!
+cvg_mode        density
+energy_tol      1.0e-9
+dens_tol        1.0e-9
+max_cycles      40
+!
+nbands          8
+mpparams        2 2 2
+kt              5.0d-3
+!
+solver_method   bd
+solver_dir      3
+solver_tol      1.0d-4
+!
+!symmetrize_atoms .true.
+!
+!stress_tensor  .true.
+pressure       .true.
+!
+functional      lda
+!
+!mix_type        none
+!mix_saves         5
+!mix_weight        constant
+!mix_weight_pf       0.80d0
+!mix_weight_q        0.80d0
+!mix_metric        unity
+!mix_metric_q        1.00d0
+!
+relax_method     none
+relax_steps        5
+relax_prefactor    1.0
+relax_time_step    4.0

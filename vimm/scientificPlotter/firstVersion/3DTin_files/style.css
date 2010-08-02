@@ -1,0 +1,314 @@
+a:link {
+    color: gray;
+    text-decoration: none;
+}
+a:visited {
+    color: gray;
+    text-decoration: none;
+}
+a:hover {
+    color: black;
+    text-decoration: none;
+}
+
+#canvas0 {
+    z-index : -10;
+    position : absolute;
+}
+#canvas1 {
+    z-index : -9;
+    position : absolute;
+}
+
+#status {
+    background : #fff;
+    height : 30px;
+    position : absolute;
+}
+
+#status #message {
+    float : left;
+    padding-left : 20px;
+}
+#status #hint {
+    float : right;
+    padding-right : 20px;
+}
+
+#panel {
+    position : absolute;
+}
+#geompanel {
+    top : 70px;
+    position : absolute;
+    visibility : hidden;
+}
+#cpanel {
+    left : 200px;
+    top : 200px;
+    width : 200px;
+    height : 200px;
+    border-top : 1px solid #000;
+    border-bottom : 1px solid #000;
+    position : absolute;
+    visibility : hidden;
+}
+
+#cpanel #info {
+    position : relative;
+    float : left;
+}
+#cpanel #info * {
+    float : left;
+    margin : 2px;
+    font-family: Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
+    font-size : 14px;
+}
+
+#cpanel #info .decbutton {
+    width : 14px;
+    height : 14px;
+    background-position : center;
+    background-repeat : no-repeat;
+    background-image : url('/images/leftbutton.png');
+}
+
+#cpanel #info .incbutton {
+    width : 14px;
+    height : 14px;
+    background-position : center;
+    background-repeat : no-repeat;
+    background-image : url('/images/rightbutton.png');
+}
+
+#projpanel
+{
+    position :absolute;
+}
+
+#projpanel .pbutton
+{
+    float : top;
+    margin : 2px;
+    padding : 2px;
+    width : 38px;
+    height : 38px;
+    background-position : center;
+    background-repeat : no-repeat;
+    cursor : hand;
+}
+#projpanel .pbutton img
+{
+    margin : 2px;
+    padding : 2px;
+}
+
+.fuzz {
+    position : absolute; 
+    z-index : 100; 
+    background : rgba(0,0,0,0.8);
+    display : none; 
+    text-align : left; 
+
+    border-radius:5px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    -box-shadow:rgba(20,20,20,1) 0px 0px 15px; 
+    -moz-box-shadow:rgba(20,20,20,1) 0px 0px 15px; 
+    -webkit-box-shadow:rgba(20,20,20,1) 0px 0px 15px; 
+}
+
+#tinlistdlg {
+    margin-left : 25%; 
+    margin-top : 250px; 
+    width : 50%; 
+    height : 50%; 
+    color : #ffffcc;
+}
+#tinlistdlg #titlebar{
+    border-bottom : 1px #fff solid;
+    height : 40px;
+}
+
+#tinlistdlg #title {
+    float : left;
+    margin-left : 20px;
+    margin-top : 10px;
+}
+#tinlistdlg #newtin {
+    float : right;
+    margin-right : 20px;
+    margin-top : 10px;
+    cursor : hand;
+}
+
+#tinlist {
+    margin : 20px;
+    color : #fff;
+    position : absolute;
+    top : 30px;
+}
+
+.tinentry {
+    cursor : hand;
+}
+
+#helpscreen {
+    margin-left : 25%; 
+    margin-top : 250px; 
+    width : 800px; 
+    height : 300px; 
+    color : #fff;
+}
+
+#helpscreen #kbdhelp {
+    margin : 10px;
+    padding : 10px;
+}
+
+#helpscreen #kbdhelp .kbdcol {
+    float : left;
+}
+
+#helpscreen #kbdhelp #shortcuts {
+    width : 130px;
+    margin-left : 20px;
+}
+#helpscreen #kbdhelp #actions {
+    width : 200px;
+    margin-right : 20px;
+}
+
+#helpscreen .scutname {
+    float : top;
+    color : #ffffcc;
+    font-weight : bold;
+    font-size : 18px;
+    margin : 5px 2px 5px 2px;
+}
+#helpscreen .actiontxt {
+    float : top;
+    color : #fff;
+    font-size : 18px;
+    margin : 5px 2px 5px 2px;
+}
+
+.cbutton {
+    background : rgba(0,0,0,0);
+    float : right;
+    margin : 2px;
+    padding : 2px;
+    width : 38px;
+    height : 38px;
+    background-position : center;
+    background-repeat : no-repeat;
+    position : relative;
+    top : -46px;
+}
+
+.cbutton img {
+    margin : 2px;
+}
+
+.button {
+    background : rgba(0,0,0,0);
+    float : left;
+    margin : 3px;
+    padding : 3px;
+    width : 36px;
+    height : 36px;
+    background-position : center;
+    background-repeat : no-repeat;
+    cursor : hand;
+}
+
+#separator {
+    margin : 0px;
+    padding : 0px;
+    width : 3px;
+    height : 3px;
+}
+
+#addgeom {
+    background-image : url('/images/addgeom.png');
+}
+#triangle {
+    background-image : url('/images/triangle.png');
+}
+#square {
+    background-image : url('/images/square.png');
+}
+#circle {
+    background-image : url('/images/circle.png');
+}
+#cube {
+    background-image : url('/images/cube.png');
+}
+#sphere {
+    background-image : url('/images/sphere.png');
+}
+#cylinder {
+    background-image : url('/images/cylinder.png');
+}
+#cone {
+    background-image : url('/images/cone.png');
+}
+
+#pencil {
+    background-image : url('/images/pencil.png');
+}
+#extrude {
+    background-image : url('/images/extrude.png');
+}
+#color {
+    background-image : url('/images/color.png');
+}
+#ruler {
+    background-image : url('/images/ruler.png');
+}
+#mode {
+    background-image : url('/images/wireframe.png');
+}
+#redo {
+    background-image : url('/images/redo.png');
+}
+#help {
+    background-image : url('/images/help.png');
+}
+#undo {
+    background-image : url('/images/undo.png');
+}
+#save {
+    background-image : url('/images/save.png');
+}
+#open {
+    background-image : url('/images/open.png');
+}
+
+#logout {
+    float : right;
+}
+
+#creator {
+    font-style : italic;
+    font-size : 75%;
+    position : absolute;
+}
+
+#commframe {
+    float : right;
+}
+#webglerrmsg {
+    position : absolute;
+    text-align : center;
+    background : #eee;
+    padding-top : 30px;
+    padding-bottom : 30px;
+    margin-top : 100px;
+    width : 50%;
+    margin-left : 25%;
+    margin-right : 25%;
+    border-radius: 15px;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+}

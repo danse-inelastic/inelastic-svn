@@ -1,0 +1,8 @@
+It can read (R) and write (W) several different formats,
+including 
+
+ * Biograf (BGF) format (RW)
+ * Connection Table (CTAB) format (RW)
+ * Protein Database (PDB) files (R)
+ * Seqquest History (R), Output (R), and Input (RW) files
+ * Several different formats for the Towhee program (RW)

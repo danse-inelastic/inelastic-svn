@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Tutorial A1: Loading a scene</title>
+</head>
+<body>
+<script type="text/javascript" src="o3djs/base.js"></script>
+<script type="text/javascript" id="o3dscript">
+	o3djs.require('o3djs.simple');
+
+	window.onload = init;
+
+	var g_o3dElement;
+	var g_root;
+	var g_finished = false;
+
+	function init(){
+		o3djs.util.makeClients(initStep2);
+	}
+
+	function initStep2(clientElements){
+		g_o3dElement = clientElements[0];
+
+		g_root = o3djs.simple.create(g_o3dElement);
+
+        g_root.setCameraPosition(0,0,-30);
+        g_root.setCameraTarget(0,0,0);
+        //g_root.setFieldOfView(30*Math.PI/180);
+        g_root.setLightPosition(0,0,-10) ;
+        g_root.loadScene('assets/teapot.o3dtgz',callback);
+
+        g_root.root.translate(0,0,0);
+        g_root.root.rotateY(180*Math.PI/180);
+
+        o3djs.event.addEventListener(g_o3dElement,'mousedown',pick);
+        o3djs.event.addEventListener(g_o3dElement,'mousemove',bla);
+
+        g_finished = true;
+    }
+
+    function callback(exception){
+        if(!exception)
+                alert('Could not load:');
+    }
+
+    function pick(){
+        g_file = g_root.loadScene('assets/cube.o3dtgz',callback);
+        //g_root.root.translate(0,5,0);
+        g_file.root.translate(0,10,0);
+    }
+
+    function bla(){
+		g_root.root.rotateY(0.1);
+    }
+
+</script>
+<div id="o3d" style="width: 800px; height: 800px;"></div>
+<div>Oggetto selezionato: <b><span id="pickInfo"></span></b></div>
+</body>
+</html>

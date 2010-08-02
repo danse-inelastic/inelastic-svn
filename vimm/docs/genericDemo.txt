@@ -1,0 +1,7 @@
+how to debug interactively with eclipse (using py
+
+
+demo vibrations?
+demo orbital/fermi surface plot
+Animate ... and show how to create a movie
+Use coordinate editor to change molecular form in real time

@@ -1,0 +1,372 @@
+@structure
+$start structure
+ ge_bc8
+$notes2
+ Ge bulk BC8 structure/bct/32x32x16/6x6x12/LDA
+ stress opt: a=12.9627, x=0.101483, E=-63.901173 Ry=-7.98765 /Ge
+$distance unit
+  ANGSTROM
+$dimension
+    3
+$cell vectors
+         6.85961691     0.00000000     0.00000000
+         0.00000000     6.85961691     0.00000000
+         3.42980846     3.42980846     3.42980846
+$number of atoms
+         8
+$atom type position
+      1       Ge                4.1259429590    4.1259429590    0.6961345031
+      2       Ge                0.6961345031    6.1634824088    0.6961345031
+      3       Ge                6.1634824088    6.1634824088    2.7336739529
+      4       Ge                2.7336739529    4.1259429590    2.7336739529
+      5       Ge                4.1259429590    7.5557514149    2.7336739529
+      6       Ge                7.5557514149    2.7336739529    2.7336739529
+      7       Ge                6.1634824088    2.7336739529    0.6961345031
+      8       Ge                2.7336739529    0.6961345031    0.6961345031
+$Ebinding cell
+              1.0584 eV
+$Etotal   cell
+          -63.901173 Ry
+$end structure
+@structure
+$start structure
+ ge_bcc
+$notes2
+ Ge bulk bcc structure/16^3/k24^3/LDA
+ stress opt: a=6.2783=3.3223A, E=-7.968233 Ry=-7.968233/Ge
+$distance unit
+  ANGSTROM
+$dimension
+    3
+$cell vectors
+        -1.66116629     1.66116629     1.66116629
+         1.66116629    -1.66116629     1.66116629
+         1.66116629     1.66116629    -1.66116629
+$number of atoms
+         1
+$atom type position
+      1       Ge                0.0000000000    0.0000000000    0.0000000000
+$Ebinding cell
+              0.3964 eV
+$Etotal   cell
+           -7.968233 Ry
+$end structure
+@structure
+$start structure
+ ge_bct4
+$notes2
+ Ge bulk square rings/4at-bct/36x36x18/k8x8x16/LDA
+ stress opt: a=12.9527=6.8543A, c/a=0.5766, l=.178827, E=-31.95638 Ry
+$distance unit
+  ANGSTROM
+$dimension
+    3
+$cell vectors
+         6.85427222     0.00000000     0.00000000
+         0.00000000     6.85427222     0.00000000
+         3.42713611     3.42713611     1.97608668
+$number of atoms
+         4
+$atom type position
+      1       Ge                1.2257289389    1.2257289389    0.0000000000
+      2       Ge                5.6285432843    1.2257289389    0.0000000000
+      3       Ge                5.6285432843    5.6285432843    0.0000000000
+      4       Ge                1.2257289389    5.6285432843    0.0000000000
+$Ebinding cell
+              0.4504 eV
+$Etotal   cell
+          -31.956380 Ry
+$end structure
+@structure
+$start structure
+ ge_bct5
+$notes2
+ Ge bulk BCT5 (NRL) structure (5-fold Ge tetragonal)/k18x18x10/LDA
+ stress opt: a=6.6220=3.5042A, c/a=1.8572, E=-31.91498 Ry=-7.97875 /Ge
+$distance unit
+  ANGSTROM
+$dimension
+    3
+$cell vectors
+         3.50421076     0.00000000     0.00000000
+         0.00000000     3.50421076     0.00000000
+         0.00000000     0.00000000     6.50802022
+$number of atoms
+         4
+$atom type position
+      1       Ge                0.0000000000    0.0000000000    5.3040364764
+      2       Ge                0.0000000000    0.0000000000    1.2039837400
+      3       Ge                1.7521053781    1.7521053781    2.0500263682
+      4       Ge                1.7521053781    1.7521053781    4.4579938482
+$Ebinding cell
+              1.0136 eV
+$Etotal   cell
+          -31.914980 Ry
+$end structure
+@structure
+$start structure
+ ge_btin
+$notes2
+ Ge bulk b-tin structure/32x32x16/k12x12x24/LDA
+ stress opt: a=9.5975=5.0788A, c/a=0.5541, E=-31.916977 Ry=-7.979244/Ge
+$distance unit
+  ANGSTROM
+$dimension
+    3
+$cell vectors
+         5.07877722     0.00000000     0.00000000
+         0.00000000     5.07877722     0.00000000
+         0.00000000     0.00000000     2.81415046
+$number of atoms
+         4
+$atom type position
+      1       Ge                0.0000000000    0.0000000000    0.0000000000
+      2       Ge                0.0000000000    2.5393886086    0.7035376140
+      3       Ge                2.5393886086    2.5393886086    1.4070752280
+      4       Ge                2.5393886086    0.0000000000    2.1106128421
+$Ebinding cell
+              0.9865 eV
+$Etotal   cell
+          -31.916977 Ry
+$end structure
+@structure
+$start structure
+ ge_fathex
+$notes2
+ GeGe2 'fat' a-quartz structure/32x32x30/k888 cell
+ stress opt: a0=10.9536=5.7964A, c/a=1.0132, E=-71.77271 =-7.97475/Ge
+$distance unit
+  ANGSTROM
+$dimension
+    3
+$cell vectors
+         5.79639428     0.00000000     0.00000000
+         2.89819714     5.01982470     0.00000000
+         0.00000000     0.00000000     5.87290669
+$number of atoms
+         9
+$atom type position
+      1       Ge                0.9533412037    0.0000000000    0.0000000000
+      2       Ge                2.4215265385    4.1942069976    1.9576355622
+      3       Ge                5.3197236798    0.8256177015    3.9152711249
+      4       Ge                6.5349224010    2.6954801576    0.5329775960
+      5       Ge                4.8632873760    3.0325005057    2.4906131588
+      6       Ge                5.9909730701    4.3116688399    4.4482487209
+      7       Ge                3.0927759288    0.7081558592    1.4246579662
+      8       Ge                1.9650902347    1.9873241935    3.3822935283
+      9       Ge                3.6367252597    2.3243445415    5.3399290911
+$Ebinding cell
+              2.7704 eV
+$Etotal   cell
+          -71.772710 Ry
+$end structure
+@structure
+$start structure
+ ge_fcc
+$notes3
+ Ge fcc/16^3/k14^3/LDA
+ dzp fit: a= 7.9415=4.2025 A, 75.99 GPa, E=-7.968219 Ry
+ stress:  a= 7.9472=4.2055 A,            E=-7.968220 Ry
+$distance unit
+  ANGSTROM
+$dimension
+    3
+$cell vectors
+         0.00000000     2.10273812     2.10273812
+         2.10273812     0.00000000     2.10273812
+         2.10273812     2.10273812     0.00000000
+$number of atoms
+         1
+$atom type position
+      1       Ge                0.0000000000    0.0000000000    0.0000000000
+$Ebinding cell
+              0.3966 eV
+$Etotal   cell
+           -7.968220 Ry
+$end structure
+@structure
+$start structure
+ ge_hcp
+$notes8
+ Ge hcp/24x24x32/LDA, stress opts:
+ k-sample      a0(stress)    c/a     V(A^3)  Etot(Ry)  E/Ge (Ry)
+ k 8x 8x 4: 5.4335=2.8753A  1.7885   36.82  -15.94267  -7.97133
+ k12x12x 8: 5.4475=2.8827A  1.7827   36.98  -15.93585  -7.96896
+ k16x16x10: 5.5805=2.9531A  1.6495   36.79  -15.93746  -7.96873
+ k20x20x12: 5.5496=2.9367A  1.6820   36.89  -15.93716  -7.96858
+ k24x24x14: 5.5603=2.9424A  1.6720   36.89  -15.93703  -7.96851
+ k28x28x18: 5.5644=2.9446A  1.6667   36.85  -15.93697  -7.96848
+$distance unit
+  ANGSTROM
+$dimension
+    3
+$cell vectors
+         2.94455306     0.00000000     0.00000000
+         1.47227653     2.55005775     0.00000000
+         0.00000000     0.00000000     4.90768658
+$number of atoms
+         2
+$atom type position
+      1       Ge                1.4722765276    0.8500192496    1.2269216443
+      2       Ge                2.9445530552    1.7000384991    3.6807649329
+$Ebinding cell
+              0.7860 eV
+$Etotal   cell
+          -15.936970 Ry
+$end structure
+@structure
+$start structure
+ ge_hcp3
+$notes2
+ Ge hcp bulk triangle rings//36x36x20/k6x6x12/LDA
+ stress opt: a=13.5922=7.1927A, c/a=0.5570, l=.xxxxx, E=-47.804331 Ry
+$distance unit
+  ANGSTROM
+$dimension
+    3
+$cell vectors
+         7.19268098     0.00000000     0.00000000
+         3.59634049     6.22904445     0.00000000
+         0.00000000     0.00000000     4.00632331
+$number of atoms
+         6
+$atom type position
+      1       Ge                3.5963404893    0.6546887246    1.0015808263
+      2       Ge                2.3651473118    2.7871778618    1.0015808263
+      3       Ge                4.8275336668    2.7871778618    1.0015808263
+      4       Ge                5.9614878011    3.4418665871    3.0047424788
+      5       Ge                8.4238741561    3.4418665871    3.0047424788
+      6       Ge                7.1926809786    5.5743557243    3.0047424788
+$Ebinding cell
+              2.4475 eV
+$Etotal   cell
+          -47.804331 Ry
+$end structure
+@structure
+$start structure
+ ge_sc
+$notes2
+ Ge bulk sc/16^3/k24^3/LDA
+ stress opt: a=5.0139=2.6532A, E=-7.977647 Ry=-7.97765 /Ge
+$distance unit
+  ANGSTROM
+$dimension
+    3
+$cell vectors
+         2.65324106     0.00000000     0.00000000
+         0.00000000     2.65324106     0.00000000
+         0.00000000     0.00000000     2.65324106
+$number of atoms
+         1
+$atom type position
+      1       Ge                0.0000000000    0.0000000000    0.0000000000
+$Ebinding cell
+              0.2683 eV
+$Etotal   cell
+           -7.977647 Ry
+$end structure
+@structure
+$start structure
+ ge_sh
+$notes2
+ Ge sh: simple-hex/18x18x16/k20x20x24/LDA
+ stress opt: a0=5.3649=2.8390A, c/a=0.9189, E=-7.977346 Ry
+$distance unit
+  ANGSTROM
+$dimension
+    3
+$cell vectors
+         2.83898222     0.00000000     0.00000000
+         1.41949111     2.45863073     0.00000000
+         0.00000000     0.00000000     2.60874077
+$number of atoms
+         1
+$atom type position
+      1       Ge                0.0000000000    0.0000000000    0.0000000000
+$Ebinding cell
+              0.2724 eV
+$Etotal   cell
+           -7.977346 Ry
+$end structure
+@structure
+$start structure
+ ge_td_GS
+$notes3
+ Ge diamond structure/18^3/k10^3/LDA
+ dzp fit: a=10.5736=5.5954A, 72.09 GPa, -15.994736 Ry=-7.997368/Ge,
+ stress:  a=10.5748=5.5959A,          E=-15.994738 Ry=-7.997369/Ge
+$distance unit
+  ANGSTROM
+$dimension
+    3
+$cell vectors
+         0.00000000     2.79797100     2.79797100
+         2.79797100     0.00000000     2.79797100
+         2.79797100     2.79797100     0.00000000
+$number of atoms
+         2
+$atom type position
+      1       Ge                0.0000000000    0.0000000000    0.0000000000
+      2       Ge                1.3989854993    1.3989854993    1.3989854993
+$Ebinding cell
+              0.0000 eV
+$Etotal   cell
+          -15.994738 Ry
+$end structure
+@structure
+$start structure
+ ge_thinhex
+$notes2
+ GeGe2 'thin' a-quartz structure, 9at-hex/24x24x54/k10x10x5 cell
+ stress opt: a0=9.1620=4.8483A, c/a=1.8787, E=-71.743392=-7.97149 /Ge
+$distance unit
+  ANGSTROM
+$dimension
+    3
+$cell vectors
+         4.84832059     0.00000000     0.00000000
+         2.42416030     4.19876880     0.00000000
+         0.00000000     0.00000000     9.10853989
+$number of atoms
+         9
+$atom type position
+      1       Ge                2.0045445628    0.0000000000    0.0000000000
+      2       Ge                1.4218880134    2.4627822821    3.0361799640
+      3       Ge                3.8460483085    1.7359865148    6.0723599288
+      4       Ge                5.1491807827    1.6848765285    0.8873142285
+      5       Ge                3.7328757209    3.0957777733    3.9234941934
+      6       Ge                5.6629052655    3.6168833035    6.9596741574
+      7       Ge                3.2387449704    0.5818854933    2.1488657354
+      8       Ge                1.3087154258    1.1029910235    5.1850456994
+      9       Ge                2.7250204876    2.5138922684    8.2212256643
+$Ebinding cell
+              3.1693 eV
+$Etotal   cell
+          -71.743392 Ry
+$end structure
+@structure
+$start structure
+ ge_wurt
+$notes2
+ Ge wurtzite structure, 4at-hex/24x24x36/kh14x14x8/LDA
+ dzp stress opt: a0=7.4476=3.9411A, c/a=1.6517, E=-31.98421 Ry=-7.99605/Ge
+$distance unit
+  ANGSTROM
+$dimension
+    3
+$cell vectors
+         3.41309217    -1.97054968     0.00000000
+         0.00000000     3.94109937     0.00000000
+         0.00000000     0.00000000     6.50951383
+$number of atoms
+         4
+$atom type position
+      1       Ge                2.2753897289    0.0000000000    0.0000000000
+      2       Ge                1.1377010618    1.9705496850    3.2547569147
+      3       Ge                1.1377010618    1.9705496850    0.8190660871
+      4       Ge                2.2753897289    0.0000000000    4.0738230018
+$Ebinding cell
+              0.0717 eV
+$Etotal   cell
+          -31.984210 Ry
+$end structure

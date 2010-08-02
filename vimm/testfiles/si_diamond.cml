@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<cml title="crystal example">
+<molecule id="Si">
+  <string title="COMMENT"></string>
+  <crystal>
+   <floatArray convention="PMP" title="a" >5.100 0 0</floatArray>
+   <floatArray convention="PMP" title="b" >0 5.100 0</floatArray>
+   <floatArray convention="PMP" title="c" >0 0 5.100</floatArray>
+  </crystal>
+  <atomArray>
+    <atom id="Si1" elementType="Si" x3="0.0" y3="0.0" z3="0.0"/>
+    <atom id="Si2" elementType="Si" x3="2.55" y3="2.55" z3="0.0"/>
+    <atom id="Si3" elementType="Si" x3="2.55" y3="0.0" z3="2.55"/>
+    <atom id="Si4" elementType="Si" x3="0.0" y3="2.55" z3="2.55"/>
+    <atom id="Si5" elementType="Si" x3="1.275" y3="1.275" z3="1.275"/>
+    <atom id="Si6" elementType="Si" x3="1.275" y3="3.825" z3="3.825"/>
+    <atom id="Si7" elementType="Si" x3="3.825" y3="1.275" z3="3.825"/>
+    <atom id="Si8" elementType="Si" x3="3.825" y3="3.825" z3="1.275"/>
+  </atomArray>
+</molecule>
+</cml>

@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<cml title="caffeine">
+<molecule id="caffeine">
+ <atomArray>
+  <atom id="H0" elementType="H" x3="-3.380413" y3="-1.127237" z3="0.573304"/>
+  <atom id="N1" elementType="N" x3="0.966830" y3="-1.073743" z3="-0.819823"/>
+  <atom id="C2" elementType="C" x3="0.056729" y3="0.852719" z3="0.392316"/>
+  <atom id="N3" elementType="N" x3="-1.375174" y3="-1.021224" z3="-0.057055"/>
+  <atom id="C4" elementType="C" x3="-1.261502" y3="0.259071" z3="0.523413"/>
+  <atom id="C5" elementType="C" x3="-0.306834" y3="-1.683633" z3="-0.716934"/>
+  <atom id="C6" elementType="C" x3="1.139423" y3="0.187412" z3="-0.270090"/>
+  <atom id="N7" elementType="N" x3="0.560263" y3="2.083909" z3="0.825159"/>
+  <atom id="O8" elementType="O" x3="-0.492680" y3="-2.818055" z3="-1.209473"/>
+  <atom id="C9" elementType="C" x3="-2.632807" y3="-1.730396" z3="-0.006095"/>
+  <atom id="O10" elementType="O" x3="-2.230134" y3="0.798862" z3="1.089973"/>
+  <atom id="H11" elementType="H" x3="2.549699" y3="2.973498" z3="0.622959"/>
+  <atom id="C12" elementType="C" x3="2.052743" y3="-1.736089" z3="-1.493128"/>
+  <atom id="H13" elementType="H" x3="-2.480771" y3="-2.726953" z3="0.488263"/>
+  <atom id="H14" elementType="H" x3="-3.008904" y3="-1.902525" z3="-1.049802"/>
+  <atom id="H15" elementType="H" x3="2.917610" y3="-1.848152" z3="-0.785787"/>
+  <atom id="H16" elementType="H" x3="2.378786" y3="-1.121192" z3="-2.374366"/>
+  <atom id="H17" elementType="H" x3="1.718988" y3="-2.748992" z3="-1.843921"/>
+  <atom id="C18" elementType="C" x3="-0.151845" y3="3.097005" z3="1.534835"/>
+  <atom id="C19" elementType="C" x3="1.893410" y3="2.118124" z3="0.419319"/>
+  <atom id="N20" elementType="N" x3="2.286125" y3="0.996844" z3="-0.244030"/>
+  <atom id="H21" elementType="H" x3="-0.168703" y3="4.043655" z3="0.930109"/>
+  <atom id="H22" elementType="H" x3="0.353532" y3="3.297906" z3="2.517775"/>
+  <atom id="H23" elementType="H" x3="-1.207450" y3="2.753759" z3="1.720305"/>
+ </atomArray>
+</molecule>
+</cml>

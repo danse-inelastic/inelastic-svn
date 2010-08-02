@@ -1,0 +1,14 @@
+!wf_cutoff       40.0d0  
+!den_cutoff      160.0d0  
+wf_cutoff       120.0d0  
+den_cutoff      480.0d0  
+mpparams        1 1 1
+kt              0.0240676
+nbands          96
+dens_tol        1.0d-8
+functional      PBE
+solver_method   cg
+solver_dir      3
+solver_tol      1.0d-4
+do_semigw       .TRUE.
+max_cycles      100

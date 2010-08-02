@@ -1,0 +1,53 @@
+do setup
+do iters
+no relax
+do cell
+no neb
+no md
+no post
+input data
+title1
+SeqQuest Job
+functional
+PBE
+dimensions of system (0=cluster ... 3=bulk)
+0
+primitive lattice vectors
+10.261212 0.000000 0.000000
+0.000000 10.261212 0.000000
+0.000000 0.000000 10.261212
+grid dimensions
+20 20 20
+atom types
+1
+atom file
+Si.atm
+number of atoms in unit cell
+8
+atom, type, position vector
+1 1   0.0000000000   0.0000000000   0.0000000000
+2 1   5.1306060590   5.1306060590   0.0000000000
+3 1   5.1306060590   0.0000000000   5.1306060590
+4 1   0.0000000000   5.1306060590   5.1306060590
+5 1   2.5653030295   2.5653030295   2.5653030295
+6 1   7.6959090885   7.6959090885   2.5653030295
+7 1   7.6959090885   2.5653030295   7.6959090885
+8 1   2.5653030295   7.6959090885   7.6959090885
+kgrid
+1 1 1
+symops
+0
+definition of symmetry operations
+end setup phase data
+run phase input data
+last iteration
+0
+temperature
+0.000000
+blend percent
+0.000000
+convergence criteria
+0.000000
+cutfrc
+0.000000
+end of run phase data

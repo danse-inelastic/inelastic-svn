@@ -1,0 +1,354 @@
+
+a {
+    color: gray;
+    text-decoration: none;
+    cursor : hand;
+}
+a:link {
+    color: gray;
+    text-decoration: none;
+}
+a:visited {
+    color: gray;
+    text-decoration: none;
+}
+a:hover {
+    color: black;
+    text-decoration: none;
+}
+
+#canvas0 {
+    position : absolute;
+}
+
+#bottombar {
+    background : #fff;
+    height : 30px;
+    position : absolute;
+}
+
+#bottombar #sharebox a {
+    margin : 0px 3px 0px 3px;
+    float : bottom;
+}
+#bottombar #sharebox {
+    float : left;
+}
+#bottombar #status {
+    float : right;
+    padding-right : 20px;
+}
+
+#panel {
+    position : absolute;
+}
+
+#geompanel {
+    top : 70px;
+    position : absolute;
+    visibility : hidden;
+}
+
+/*
+#cpanel {
+    left : 200px;
+    top : 200px;
+    width : 200px;
+    height : 200px;
+    border-top : 1px solid #000;
+    border-bottom : 1px solid #000;
+    position : absolute;
+    visibility : hidden;
+}
+
+#cpanel #info {
+    position : relative;
+    float : left;
+}
+#cpanel #info * {
+    float : left;
+    margin : 2px;
+    font-family: Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
+    font-size : 14px;
+}
+
+#cpanel #info .decbutton {
+    width : 14px;
+    height : 14px;
+    background-position : center;
+    background-repeat : no-repeat;
+    background-image : url('/images/leftbutton.png');
+}
+
+#cpanel #info .incbutton {
+    width : 14px;
+    height : 14px;
+    background-position : center;
+    background-repeat : no-repeat;
+    background-image : url('/images/rightbutton.png');
+}
+*/
+
+/*
+#projpanel
+{
+    position :absolute;
+}
+
+#projpanel .pbutton
+{
+    float : top;
+    margin : 2px;
+    padding : 2px;
+    width : 38px;
+    height : 38px;
+    background-position : center;
+    background-repeat : no-repeat;
+    cursor : hand;
+}
+#projpanel .pbutton img
+{
+    margin : 2px;
+    padding : 2px;
+}
+*/
+
+.fuzz {
+    position : absolute; 
+    z-index : 100; 
+    background : rgba(0,0,0,0.8);
+    display : none; 
+    text-align : left; 
+
+    border-radius:5px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    -box-shadow:rgba(20,20,20,1) 0px 0px 15px; 
+    -moz-box-shadow:rgba(20,20,20,1) 0px 0px 15px; 
+    -webkit-box-shadow:rgba(20,20,20,1) 0px 0px 15px; 
+}
+
+#tinlistdlg {
+    width : 600px; 
+    height : 300px; 
+    color : #ffffcc;
+}
+#tinlistdlg #titlebar{
+    border-bottom : 1px #fff solid;
+    height : 40px;
+}
+
+#tinlistdlg #title {
+    float : left;
+    margin-left : 20px;
+    margin-top : 10px;
+}
+
+#tinlist {
+    margin : 20px;
+    color : #fff;
+    position : absolute;
+    top : 30px;
+}
+
+.tinentry {
+    cursor : hand;
+}
+
+#helpscreen {
+    width : 800px; 
+    height : 300px; 
+    color : #fff;
+}
+
+#helpscreen #kbdhelp {
+    margin : 10px;
+    padding : 10px;
+}
+
+#helpscreen #kbdhelp .kbdcol {
+    float : left;
+}
+
+#helpscreen #kbdhelp #shortcuts {
+    width : 130px;
+    margin-left : 20px;
+}
+#helpscreen #kbdhelp #actions {
+    width : 200px;
+    margin-right : 20px;
+}
+
+#helpscreen .scutname {
+    float : top;
+    color : #ffffcc;
+    font-weight : bold;
+    font-size : 18px;
+    margin : 5px 2px 5px 2px;
+}
+#helpscreen .actiontxt {
+    float : top;
+    color : #fff;
+    font-size : 18px;
+    margin : 5px 2px 5px 2px;
+}
+
+/*
+.cbutton {
+    background : rgba(0,0,0,0);
+    float : right;
+    margin : 2px;
+    padding : 2px;
+    width : 38px;
+    height : 38px;
+    background-position : center;
+    background-repeat : no-repeat;
+    position : relative;
+    top : -46px;
+}
+
+.cbutton img {
+    margin : 2px;
+}
+*/
+
+#sharebox {
+    float : bottom;
+}
+
+.button {
+    background : rgba(0,0,0,0);
+    margin : 5px;
+    padding : 5px 3px 5px 3px;
+    width : 48px;
+    height : 48px;
+    background-position : center;
+    background-repeat : no-repeat;
+    cursor : hand;
+}
+
+
+#vtoolbar {
+    margin-top : 45px;
+    padding-top : 30px;
+    position : absolute;
+    border-right : solid 1px #a0a0a0;
+    padding-right : 5px;
+    background-color : rgba(255,255,255,80);
+
+    /*
+    -box-shadow:rgba(20,20,20,1) 1px 0px 5px; 
+    -moz-box-shadow:rgba(20,20,20,1) 1px 0px 5px; 
+    -webkit-box-shadow:rgba(20,20,20,1) 1px 0px 5px; 
+    */
+}
+
+#htoolbar {
+    float : right;
+    padding-left : 70px;
+    position : absolute;
+    border-bottom : solid 1px #a0a0a0;
+    background-color : rgba(255,255,255,80);
+    /*
+    background-color : rgba(30,30,30,80);
+    background : -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0.06, rgb(186,186,186)),
+        color-stop(0.22, rgb(176,176,176)),
+        color-stop(0.92, rgb(56,56,56))
+    );
+    background : -moz-linear-gradient(
+        center bottom,
+        rgb(186,186,186) 6%,
+        rgb(176,176,176) 22%,
+        rgb(56,56,56) 92%
+    );
+    */
+}
+
+#vtoolbar .button {
+    float : top;
+}
+
+#htoolbar .button {
+    float : left;
+}
+
+#separator {
+    margin : 0px;
+    padding : 0px;
+    width : 3px;
+    height : 3px;
+}
+
+#add {
+    background-image : url('/images/addcube.png');
+    margin : 0px;
+    padding : 0px;
+}
+#remove {
+    background-image : url('/images/eraser.png');
+}
+#rotate {
+    background-image : url('/images/rotate.png');
+}
+#colorp {
+    background-image : url('/images/colorp.png');
+}
+#redo {
+    background-image : url('/images/redo.png');
+}
+#help {
+    background-image : url('/images/help.png');
+}
+#undo {
+    background-image : url('/images/undo.png');
+}
+#new {
+    background-image : url('/images/new.png');
+}
+#save {
+    background-image : url('/images/save.png');
+}
+#open {
+    background-image : url('/images/open.png');
+}
+
+
+#creator {
+    font-style : italic;
+    font-size : 75%;
+    position : absolute;
+}
+
+#righttop {
+    float : right;
+}
+#logo {
+    float : top;
+}
+#logout {
+    text-size : 6;
+    float : top;
+    text-align : center;
+}
+
+#commframe {
+    float : right;
+}
+#webglerrmsg {
+    position : absolute;
+    text-align : center;
+    background : #eee;
+    padding-top : 30px;
+    padding-bottom : 30px;
+    margin-top : 100px;
+    width : 50%;
+    margin-left : 25%;
+    margin-right : 25%;
+    border-radius: 15px;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+}

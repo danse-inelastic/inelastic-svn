@@ -1,0 +1,12 @@
+I am sending the grids.
+Efermi = 7.8097
+cartesian  kpoint grid in reciprocal space: 17x17x17 ( [0:1]  cube
+when in crystal coordinates)
+Reciprocal lattice vectors:
+1.000000  0.577350 -0.000000
+0.000000  1.154701  0.000000
+0.000000 -0.000000  0.879629
+
+
+Let me know if you need real space k-points...
+Regards,
