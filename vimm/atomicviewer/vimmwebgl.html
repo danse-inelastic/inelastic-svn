@@ -1,46 +1,77 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-  <title></title>
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <script type="text/javascript" src="scripts/o3djs/base.js">
- </script>
-  <script type="text/javascript" src="scripts/atomInfo.js">
- </script>
-  <script type="text/javascript" src="scripts/lattice16.js">
- </script>
-  <script type="text/javascript">
+<title></title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="scripts/webgl/o3djs/base.js"></script>
+<script type="text/javascript" src="scripts/webgl/o3d-webgl/base.js"></script>
+<script type="text/javascript" src="scripts/webgl/atomInfo.js"></script>
+<script type="text/javascript" src="scripts/webgl/finalLattice.js"></script>
+<script type="text/javascript" src="scripts/webgl/supercallDeletion.js"></script>
+<script type="text/javascript" id="o3dscript"><!--
+  
 function loadfcc(){
     var atoms = [['Fe',[0,0,0]],['Fe',[0,0,5]],['Fe',[0,5,0]],['Fe',[5,0,0]],['Fe',[5,5,0]],['Fe',[5,0,5]],['Fe',[5,5,5]],['Fe',[0,5,5]],['Fe',[2.5,2.5,2.5]]];
     var lattice = [[5,0,0],[0,5,0],[0,0,5]];
         initClient(lattice, atoms);
-}</script>
-  <style type="text/css" src="styles/black.css">
- </style>
+}
+  -->
+function loadmaterial(){
+var atoms = []
+             var phonon = [16,1,133.5,
+       ["Sr",    0.0357,    0.0291,    3.9409,   0.2497,   0.0471,  -0.0333],
+       ["Sr",    0.0357,    0.0291,    7.8830,   0.2497,   0.0471,  -0.0333],
+       ["Sr",    0.0357,    3.9711,    3.9409,   0.2497,   0.0471,  -0.0333],
+       ["Sr",    0.0357,    3.9711,    7.8830,   0.2497,   0.0471,  -0.0333],
+       ["Sr",    3.9777,    0.0291,    3.9409,   0.2497,   0.0471,  -0.0333],
+       ["Sr",    3.9777,    0.0291,    7.8830,   0.2497,   0.0471,  -0.0333],
+       ["Sr",    3.9777,    3.9711,    3.9409,   0.2497,   0.0471,  -0.0333],
+       ["Sr",    3.9777,    3.9711,    7.8830,   0.2497,   0.0471,  -0.0333],
+       ["Ti",    2.0064,    1.9920,    1.9827,  -0.1061,   0.0854,  -0.3909],
+       ["Ti",    2.0064,    1.9920,    5.9248,  -0.1061,   0.0854,  -0.3909],
+       ["Ti",    2.0064,    5.9340,    1.9827,  -0.1061,   0.0854,  -0.3909],
+       ["Ti",    2.0064,    5.9340,    5.9248,  -0.1061,   0.0854,  -0.3909],
+       ["Ti",    5.9484,    1.9920,    1.9827,  -0.1061,   0.0854,  -0.3909],
+       ["Ti",    5.9484,    1.9920,    5.9248,  -0.1061,   0.0854,  -0.3909],
+       ["Ti",    5.9484,    5.9340,    1.9827,  -0.1061,   0.0854,  -0.3909],
+       ["Ti",    5.9484,    5.9340,    5.9248,  -0.1061,   0.0854,  -0.3909]
+       ]
+           for(i = 3;i<phonon[0]+3;i++) {
+                   atoms[i-3] = [phonon[i][0], [phonon[i][1],phonon[i][2],phonon[i][3],]]
+               }
+          //var atoms = [['C', [0,0,0]], ['C', [1,1,1]], ['C', [-1,-1,-1]]];
+         var lattice = [[0,0,0],[0,0,0],[0,0,0]];
+         o3djs.base.o3d = o3d;
+init(lattice, atoms, phonon);
+}
+</script>
+<style type="text/css" src="styles/black.css">
+</style>
 </head>
 
-<body onload="loadfcc()">
+<body onload="loadmaterial();" onunload="uninit();">
 
 <div style="font-size: 10;">
-<h1><span id="statusInfo">Vimm: Visual Interface to Materials
-Manipulation</span></h1>
+<h1><span id="statusInfo">Vimm: Visual Interface to
+Materials Manipulation</span></h1>
 
 <p>This is a simple demo of the webgl version of Vimm:</p>
 
 <p></p>
 
-<p>tomic structure</p>
+<div id="o3d" style="width: 600px; height: 600px;"></div>
 <dl>
-  <dt>Rotate</dt>
-    <dd>click and drag next to structure</dd>
-  <dt>Zoom</dt>
-    <dd>scroll (note: may not work for mac users)</dd>
-  <dt>Change structure</dt>
-    <dd>click on combo box on the side</dd>
+	<dt>Rotate</dt>
+	<dd>click and drag next to structure</dd>
+	<dt>Zoom</dt>
+	<dd>scroll (note: may not work for mac users)</dd>
+	<dt>Change structure</dt>
+	<dd>click on combo box on the side</dd>
 </dl>
-This uses the <a href="http://code.google.com/p/o3d/">webgl version of o3d</a>.  To see it you must have a <a
-href="http://www.khronos.org/webgl/wiki/Getting_a_WebGL_Implementation">webgl-enabled
-browser</a>. Click here to see the <a href="http://code.google.com/apis/o3d/">plugin version</a>.
-<br>
+This uses the <a href="http://code.google.com/p/o3d/">webgl version
+of o3d</a>. To see it you must have a <a
+	href="http://www.khronos.org/webgl/wiki/Getting_a_WebGL_Implementation">webgl-enabled
+browser</a>. Click here to see the <a
+	href="http://code.google.com/apis/o3d/">plugin version</a>. <br>
 </body>
 </html>
