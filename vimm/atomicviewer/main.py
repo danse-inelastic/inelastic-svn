@@ -8,7 +8,7 @@ import wsgiref.handlers
 
 from google.appengine.ext import webapp
 
-class MainHandler(webapp.RequestHandler):
+class Vimm(webapp.RequestHandler):
 
     def get(self):
     #self.response.out.write('Hello world!')
@@ -33,10 +33,23 @@ class MainHandler(webapp.RequestHandler):
         path = os.path.join(os.path.dirname(__file__), 'vimm.html')
         self.response.out.write(template.render(path,{}))
 
+class VimmWebgl(webapp.RequestHandler):
+
+    def get(self):
+        path = os.path.join(os.path.dirname(__file__), 'vimmwebgl.html')
+        self.response.out.write(template.render(path,{}))
+
+class VimmPlugin(webapp.RequestHandler):
+
+    def get(self):
+        path = os.path.join(os.path.dirname(__file__), 'vimmplugin.html')
+        self.response.out.write(template.render(path,{}))
 
 def main():
-    application = webapp.WSGIApplication([('/', MainHandler)],
-                                       debug=True)
+    application = webapp.WSGIApplication([('/', Vimm),
+                                          ('/vimmwebgl', VimmWebgl),
+                                          ('/vimmplugin', VimmPlugin)],
+                                        debug=True)
     wsgiref.handlers.CGIHandler().run(application)
 
 
