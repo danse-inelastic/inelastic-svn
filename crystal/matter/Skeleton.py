@@ -17,7 +17,11 @@ import matter
 #
 def A(name, index, type = None):
     from matter.Atom import Atom
-    return Atom(name)
+    #hack--sometimes 'name' contains element and sometimes 'type'
+    if len(name)<3:
+        return Atom(name)
+    if len(type)<3:
+        return Atom(type)
 
 
 #class A:
@@ -45,6 +49,12 @@ def OrthorhombicPeriodicUniverse(vecLengths):
     return Lattice(base=[[vecLengths[0],0,0], [0,vecLengths[1],0],
                                          [0,0,vecLengths[2]]])
     
+def ParallelepipedicPeriodicUniverse(vecs):
+    from matter.Lattice import Lattice
+    return Lattice(base=vecs)
+    
+def Vector(a,b,c):
+    return [a,b,c]
 
 #
 # Composite chemical objects
@@ -99,7 +109,7 @@ class G(Composite):
 
 def c(*args):
     from matter.Structure import Structure
-    return Structure(atoms=args[1],lattice=args[0])
+    return Structure(lattice=args[0], atoms=args[1])
 
 #class C(Composite):
 #    _class = MMTK.Complex
