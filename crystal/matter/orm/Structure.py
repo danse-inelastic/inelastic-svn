@@ -50,6 +50,8 @@ def __establishInventory__(self, inventory):
     inventory.chemical_formula = self.getChemicalFormula()
     inventory.atoms = list(self) # the implementation of Structure class is that structure is inherited from list, and the items are atoms.
     #inventory.primitive_unitcell = self.primitive_unitcell
+    if hasattr(self,'id'):
+        inventory.id = self.id
     return
 Structure.__establishInventory__ = __establishInventory__
 
@@ -60,6 +62,7 @@ def __restoreFromInventory__(self, inventory):
                   description=inventory.short_description,
                   )
     #self.primitive_unitcell = inventory.primitive_unitcell
+    self.id = inventory.id
     return
 Structure.__restoreFromInventory__ = __restoreFromInventory__
 

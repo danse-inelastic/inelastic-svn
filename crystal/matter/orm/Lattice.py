@@ -60,6 +60,8 @@ def __establishInventory__(self, inventory):
         inventory.gamma = self.gamma
     else:
         inventory.base = self.base
+    if hasattr(self,'id'):
+        inventory.id = self.id
     return
 Lattice.__establishInventory__ = __establishInventory__
 
@@ -77,6 +79,7 @@ def __restoreFromInventory__(self, inventory):
                       )
     else:
         self.__init__(base=inventory.base)
+    self.id = inventory.id
     return
 Lattice.__restoreFromInventory__ = __restoreFromInventory__
 
