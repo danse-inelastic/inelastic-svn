@@ -529,10 +529,11 @@ class Structure(list):
             self.__dict__.update(new_structure.__dict__)
             self[:] = new_structure
         if not self.description:
-            import os.path
-            tailname = os.path.basename(filename)
-            tailbase = os.path.splitext(tailname)[0]
-            self.description = tailbase
+            self.generateDescription()
+#            import os.path
+#            tailname = os.path.basename(filename)
+#            tailbase = os.path.splitext(tailname)[0]
+#            self.description = tailbase
         return p
 
     def readStr(self, s, format='auto'):
