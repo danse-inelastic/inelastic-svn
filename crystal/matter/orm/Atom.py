@@ -26,6 +26,8 @@ def __establishInventory__(self, inventory):
     inventory.xyz = self.xyz
     inventory.label = self.label
     inventory.occupancy = self.occupancy
+    if hasattr(self, 'id'):
+        inventory.id = self.id
     return
 Atom.__establishInventory__ = __establishInventory__
 
@@ -38,6 +40,7 @@ def __restoreFromInventory__(self, inventory):
     self.xyz = inventory.xyz
     self.label = inventory.label
     self.occupancy = inventory.occupancy
+    self.id = inventory.id
     return
 Atom.__restoreFromInventory__ = __restoreFromInventory__
 
