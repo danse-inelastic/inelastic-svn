@@ -11,12 +11,14 @@
  </script>
   <script type="text/javascript">
 function loadfcc(){
-    var atoms = [['C',[0,0,0]],['C',[0,0,5]],['C',[0,5,0]],['C',[5,0,0]],['C',[5,5,0]],['C',[5,0,5]],['C',[5,5,5]],['C',[0,5,5]]];
+    var atoms = [['C',[0,0,0]],['C',[0,0,5]],['C',[0,5,0]],['C',[5,0,0]],
+                 ['C',[5,5,0]],['C',[5,0,5]],['C',[5,5,5]],['C',[0,5,5]]];
     var lattice = [[5,0,0],[0,5,0],[0,0,5]];
         initClient(lattice, atoms);
 }</script>
-<style type="text/css" src="styles/black.css">
-</style>
+<link rel=StyleSheet href="styles/black.css" type="text/css" media=screen>
+<!--<style type="text/css" src="styles/black.css">-->
+<!--</style>-->
 </head>
 
 <body onload="loadfcc()">
