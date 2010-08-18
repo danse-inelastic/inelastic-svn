@@ -81,9 +81,9 @@ class P_pdb(StructureParser):
                 if record == "TITLE":
                     continuation = line[8:10]
                     if continuation.strip():
-                        stru.title += line[10:].rstrip()
+                        stru.description += line[10:].rstrip()
                     else:
-                        stru.title = line[10:].rstrip()
+                        stru.description = line[10:].rstrip()
                 elif record == "CRYST1":
                     a = float(line[7:15])
                     b = float(line[15:24])
@@ -181,7 +181,7 @@ class P_pdb(StructureParser):
     def titleLines(self, stru):
         """build lines corresponding to TITLE record"""
         lines = []
-        title = stru.title
+        title = stru.description
         while title != "":
             stop = len(title)
             # maximum length of title record is 60
