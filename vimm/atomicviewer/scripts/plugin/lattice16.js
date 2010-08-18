@@ -35,8 +35,8 @@ var g_treeInfo;  // information about the transform graph.
 var g_statusInfoElem;
 
 // Animation globals.
-var g_flashTimer;
-var g_oldFlashTimer;
+//var g_flashTimer;
+//var g_oldFlashTimer;
 
 //Lattice globals.
 var symbol;
@@ -110,7 +110,7 @@ function main(clientElements) {
 	o3djs.event.addEventListener(g_o3dElement, 'wheel', scrollMe);
 
 	// Set the rendering callback
-	g_client.setRenderCallback(onrender);
+	//g_client.setRenderCallback(onrender);
 
 	window.g_finished = true;  // for selenium testing.
 }
@@ -172,8 +172,8 @@ function initGlobals(clientElements) {
   g_statusInfoElem = o3djs.util.getElementById('statusInfo');
 
   // Initialize various animation globals.
-  g_flashTimer = 0;
-  g_oldFlashTimer = 0;
+  //g_flashTimer = 0;
+  //g_oldFlashTimer = 0;
   
   //initialize lattice variables
   initlatticeVariables();
@@ -427,40 +427,40 @@ function getPieceColor(type) {
  * Called every frame.
  * @param {o3d.RenderEvent} renderEvent Rendering Information.
  */
-function onrender(renderEvent) {
-	g_flashTimer += renderEvent.elapsedTime;
-	g_flashTimer = g_flashTimer % 0.5;
-	
-	if(g_selectedAtom.length>0){
-		for(var indexAtomSelectedTable=0; indexAtomSelectedTable<g_selectedAtom.length; indexAtomSelectedTable++){
-			var indexOfElement=sym2no[g_selectedAtom[indexAtomSelectedTable][1][0]];
-			var origColorAtom = color[indexOfElement];
-			// flash highlight the selected piece as long as selected.
-			if (g_oldFlashTimer > g_flashTimer ) {
-				g_selectedAtom[indexAtomSelectedTable][0].getParam('diffuse').value = [0.6, 1, 1, 1];
-			}
-			else if (g_flashTimer >= 0.25 && g_oldFlashTimer < 0.25) {
-				g_selectedAtom[indexAtomSelectedTable][0].getParam('diffuse').value = origColorAtom;
-			}
-		}
-	}
-	
-	if(g_selectedBond.length>0){
-		for(var indexBondSelectedTable=0; indexBondSelectedTable<g_selectedBond.length; indexBondSelectedTable++){
-			var origColorBond = [0,0,1,1];
-			// flash highlight the selected piece as long as selected.
-			if (g_oldFlashTimer > g_flashTimer ) {
-				g_selectedBond[indexBondSelectedTable][0].getParam('diffuse').value = [0.6, 1, 1, 1];
-			}
-			else if (g_flashTimer >= 0.25 && g_oldFlashTimer < 0.25) {
-				g_selectedBond[indexBondSelectedTable][0].getParam('diffuse').value = origColorBond;
-			}
-		}
-	}
-	
-  
-  g_oldFlashTimer = g_flashTimer;
-}
+//function onrender(renderEvent) {
+//	g_flashTimer += renderEvent.elapsedTime;
+//	g_flashTimer = g_flashTimer % 0.5;
+//
+//	if(g_selectedAtom.length>0){
+//		for(var indexAtomSelectedTable=0; indexAtomSelectedTable<g_selectedAtom.length; indexAtomSelectedTable++){
+//			var indexOfElement=sym2no[g_selectedAtom[indexAtomSelectedTable][1][0]];
+//			var origColorAtom = color[indexOfElement];
+//			// flash highlight the selected piece as long as selected.
+//			if (g_oldFlashTimer > g_flashTimer ) {
+//				g_selectedAtom[indexAtomSelectedTable][0].getParam('diffuse').value = [0.6, 1, 1, 1];
+//			}
+//			else if (g_flashTimer >= 0.25 && g_oldFlashTimer < 0.25) {
+//				g_selectedAtom[indexAtomSelectedTable][0].getParam('diffuse').value = origColorAtom;
+//			}
+//		}
+//	}
+//
+//	if(g_selectedBond.length>0){
+//		for(var indexBondSelectedTable=0; indexBondSelectedTable<g_selectedBond.length; indexBondSelectedTable++){
+//			var origColorBond = [0,0,1,1];
+//			// flash highlight the selected piece as long as selected.
+//			if (g_oldFlashTimer > g_flashTimer ) {
+//				g_selectedBond[indexBondSelectedTable][0].getParam('diffuse').value = [0.6, 1, 1, 1];
+//			}
+//			else if (g_flashTimer >= 0.25 && g_oldFlashTimer < 0.25) {
+//				g_selectedBond[indexBondSelectedTable][0].getParam('diffuse').value = origColorBond;
+//			}
+//		}
+//	}
+//
+//
+//  g_oldFlashTimer = g_flashTimer;
+//}
 
 
 
