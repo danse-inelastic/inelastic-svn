@@ -22,7 +22,7 @@ class Structure(list):
     """
     
 
-    def __init__(self, atoms=[], lattice=None, sgid=1, description="", filename=None,
+    def __init__(self, atoms=[], lattice=None, sgid=1, description=None, filename=None,
                  primitive_unitcell=None
                  ):
         """define group of atoms in a specified lattice.
@@ -334,9 +334,12 @@ class Structure(list):
         return (cartpos * numpy.linalg.inv(self._lattice)).sum(0)  # should be double-checked
     
     def generateDescription(self):
-        """generate a suitable description
-        """
-        self.description = self.getChemicalFormula()+' in '+str(self.lattice)
+        if self._description==None:
+            self._description = self.getChemicalFormula()+' in '+str(self.lattice)
+        return self._description
+    def setDescription(self, desc):
+        self._description = desc
+    description = property(generateDescription, setDescription, "structure description")
     
 ################################################    
 # property methods

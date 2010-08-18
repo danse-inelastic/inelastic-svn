@@ -53,7 +53,7 @@ class P_pdffit(StructureParser):
                 if len(words) == 0 or words[0][0] == '#':
                     continue
                 elif words[0] == 'title':
-                    stru.title = l.lstrip()[5:].strip()
+                    stru.description = l.lstrip()[5:].strip()
                 elif words[0] == 'scale':
                     stru.pdffit['scale'] = float(words[1])
                 elif words[0] == 'sharp':
@@ -169,7 +169,7 @@ class P_pdffit(StructureParser):
         d_sigo = 0.0
         d_sigU = numpy.zeros((3,3), dtype=float)
         # here we can start
-        l = "title  " + stru.title
+        l = "title  " + stru.description
         lines.append( l.strip() )
         lines.append( "format pdffit" )
         lines.append( "scale  %9.6f" % stru.pdffit["scale"] )

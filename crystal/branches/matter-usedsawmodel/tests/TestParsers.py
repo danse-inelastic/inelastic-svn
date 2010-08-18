@@ -121,13 +121,14 @@ class TestP_forces(unittest.TestCase):
         stru = self.stru
         stru.read(datafile('bucky.xyz'))
         s_els = [a.symbol for a in stru]
-        self.assertEqual(stru.title, 'bucky-ball')
+        print stru.description
+        self.assertEqual(stru.description, 'bucky-ball')
         self.assertEqual(s_els, 60*['C'])
 
     def test_write_forces(self):
         """check writing of normal xyz file"""
         stru = self.stru
-        stru.title = "test of writeStr"
+        stru.description = "test of writeStr"
         stru.lattice = Lattice(1.0, 2.0, 3.0, 90.0, 90.0, 90.0)
         stru[:] = [
             Atom('H', [1., 1., 1.]),
@@ -136,7 +137,7 @@ class TestP_forces(unittest.TestCase):
         stru.write(self.tmpname, self.format)
         f_s = open(self.tmpname).read()
         f_s = re.sub('[ \t]+', ' ', f_s)
-        s_s = "2\n%s\nH 1 2 3\nCl 3 4 3\n" % stru.title
+        s_s = "2\n%s\nH 1 2 3\nCl 3 4 3\n" % stru.description
         self.assertEqual(f_s, s_s)
 
 # End of TestP_forces
@@ -315,45 +316,45 @@ class TestP_xcfg(unittest.TestCase):
 
 
 ##############################################################################
-class TestP_bratoms(unittest.TestCase):
-    """test Parser for Bruce Ravel's atoms file format"""
-
-    def setUp(self):
-        self.stru = Structure()
-        self.format = "bratoms"
-        self.places = 6
-
-    def test_writeStr_cif(self):
-        """check conversion to CIF string"""
-        stru = self.stru
-        stru.read(datafile('GaAs.inp'), 'bratoms')
-        s_s = stru.writeStr(self.format)
-
-    def test_read_bratoms_bad(self):
-        """check exceptions when reading invalid bratoms file"""
-        badfiles = [
-                'LiCl-bad.cif',
-                'PbTe.cif',
-                'arginine.pdb',
-                'ZnSb_RT_Q28X_VM_20_fxiso.rstr',
-                'Ni-bad.stru',
-                'Ni-discus.stru',
-                'Ni.stru',
-                'BubbleRaftShort.xcfg',
-                'bucky-bad1.xyz',
-                'bucky-bad2.xyz',
-                'bucky-plain-bad.xyz',
-                'bucky-plain.xyz',
-                'bucky-raw.xyz',
-                'bucky.xyz',
-                'hexagon-raw-bad.xyz',
-                'hexagon-raw.xyz',
-        ]
-        for ft in badfiles:
-            ff = datafile(ft)
-            self.assertRaises(StructureFormatError,
-                    self.stru.read, ff, format=self.format)
-        return
+#class TestP_bratoms(unittest.TestCase):
+#    """test Parser for Bruce Ravel's atoms file format"""
+#
+#    def setUp(self):
+#        self.stru = Structure()
+#        self.format = "bratoms"
+#        self.places = 6
+#
+#    def test_writeStr_cif(self):
+#        """check conversion to CIF string"""
+#        stru = self.stru
+#        stru.read(datafile('GaAs.inp'), 'bratoms')
+#        s_s = stru.writeStr(self.format)
+#
+#    def test_read_bratoms_bad(self):
+#        """check exceptions when reading invalid bratoms file"""
+#        badfiles = [
+#                'LiCl-bad.cif',
+#                'PbTe.cif',
+#                'arginine.pdb',
+#                'ZnSb_RT_Q28X_VM_20_fxiso.rstr',
+#                'Ni-bad.stru',
+#                'Ni-discus.stru',
+#                'Ni.stru',
+#                'BubbleRaftShort.xcfg',
+#                'bucky-bad1.xyz',
+#                'bucky-bad2.xyz',
+#                'bucky-plain-bad.xyz',
+#                'bucky-plain.xyz',
+#                'bucky-raw.xyz',
+#                'bucky.xyz',
+#                'hexagon-raw-bad.xyz',
+#                'hexagon-raw.xyz',
+#        ]
+#        for ft in badfiles:
+#            ff = datafile(ft)
+#            self.assertRaises(StructureFormatError,
+#                    self.stru.read, ff, format=self.format)
+#        return
 
 # End of TestP_bratoms
 

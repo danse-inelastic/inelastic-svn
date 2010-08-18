@@ -180,7 +180,8 @@ class TestP_rawxyz(unittest.TestCase):
         stru = self.stru
         stru.read(datafile('bucky-plain.xyz'), self.format)
         s_els = [a.symbol for a in stru]
-        self.assertEqual(stru.description, 'bucky-plain')
+        #print 'description',stru.description
+        self.assertEqual(stru.description, 'C60 in Lattice()')
         self.assertEqual(s_els, 60*['C'])
 
     def test_read_plainxyz_bad(self):
@@ -194,7 +195,9 @@ class TestP_rawxyz(unittest.TestCase):
         stru = self.stru
         stru.read(datafile('bucky-raw.xyz'), self.format)
         s_els = [a.symbol for a in stru]
-        self.assertEqual(stru.description, 'bucky-raw')
+        #stru.description = stru.generateDescription()
+        #print 'description',stru.description
+        self.assertEqual(stru.description, '60 in Lattice()')
         self.assertEqual(s_els, 60*[''])
         stru.read(datafile('hexagon-raw.xyz'), self.format)
         zs = [a.xyz[-1] for a in stru]
@@ -211,7 +214,7 @@ class TestP_rawxyz(unittest.TestCase):
     def test_writeStr_rawxyz(self):
         """check writing of normal xyz file"""
         stru = self.stru
-        stru.title = "test of writeStr"
+        stru.description = "test of writeStr"
         stru.lattice = Lattice(1.0, 2.0, 3.0, 90.0, 90.0, 90.0)
         # plain version
         stru[:] = [ Atom('H', [1., 1., 1.]) ]
@@ -262,6 +265,7 @@ class TestP_pdb(unittest.TestCase):
         """check conversion to PDB file format"""
         stru = self.stru
         stru.read(datafile('CdSe_bulk.stru'), 'pdffit')
+        #print stru.description
         s = stru.writeStr(self.format)
         # all lines should be 80 characters long
         linelens = [ len(l) for l in s.split('\n') if l != "" ]
@@ -269,6 +273,7 @@ class TestP_pdb(unittest.TestCase):
         # now clean and re-read structure
         stru = Structure()
         stru.readStr(s, self.format)
+        #print stru.description
         s_els = [a.symbol for a in stru]
         f_els = ['Cd', 'Cd', 'Se', 'Se']
         self.assertEqual(s_els, f_els)
@@ -283,7 +288,7 @@ class TestP_pdb(unittest.TestCase):
         s_sigUii = [ a0.sigU[i,i] for i in range(3) ]
         f_sigUii = [ 0.00011127, 0.00011127, 0.00019575 ]
         self.assertListAlmostEqual(s_sigUii, f_sigUii)
-        s_title = stru.title
+        s_title = stru.description
         f_title = "Cell structure file of CdSe #186"
         self.assertEqual(s_title, f_title)
 
