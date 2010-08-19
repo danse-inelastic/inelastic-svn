@@ -201,19 +201,19 @@ function initlatticeVariables(){
         1.8400, // Cs, 55  
         2.2430, // Ba, 56
         1.8770, // La, 57
-        null,   // Ce, 58
-        null,   // Pr, 59
-        null,   // Nd, 60
-        null,   // Pm, 61
-        null,   // Sm, 62
-        null,   // Eu, 63
-        null,   // Gd, 64
-        null,   // Tb, 65
-        null,   // Dy, 66
-        null,   // Ho, 67
-        null,   // Er, 68
-        null,   // Tm, 69
-        null,   // Yb, 70
+        2.73,   // Ce, 58
+        2.72,   // Pr, 59
+        2.7,   // Nd, 60
+        2.69,   // Pm, 61
+        2.69,   // Sm, 62
+        2.97,   // Eu, 63
+        2.67,   // Gd, 64
+        2.63,   // Tb, 65
+        2.61,   // Dy, 66
+        2.6,   // Ho, 67
+        2.58,   // Er, 68
+        2.57,   // Tm, 69
+        2.9,   // Yb, 70
         2.1700, // Lu, 71
         1.5800, // Hf, 72
         1.4670, // Ta, 73
@@ -226,27 +226,27 @@ function initlatticeVariables(){
         1.5500, // Hg, 80
         1.9600, // Tl, 81
         2.0200, // Pb, 82
-        2.1500];// Bi, 83
-                // Po, 84
-                // At, 85
-                // Rn, 86
-                // Fr, 87
-                // Ra, 88
-                // Ac, 89
-                // Th, 90
-                // Pa, 91
-                // U,  92
-                // Np, 93
-                // Pu, 94
-                // Am, 95
-                // Cm, 96
-                // Bk, 97
-                // Cf, 98
-                // Es, 99
-                // Fm, 100
-                // Md, 101
-                // No, 102
-                // Lr, 103
+        2.1500, // Bi, 83
+        2.5122, // Po, 84
+        2.5122, // At, 85 //fudged from Po
+        2.5122, // Rn, 86 //fudged from Po
+        2.5122, // Fr, 87 //fudged from Po
+        2.84,   // Ra, 88
+        2.81,   // Ac, 89
+        2.67,   // Th, 90
+        2.4,    // Pa, 91
+        2.36,   // U,  92
+        2.31,   // Np, 93
+        2.28,   // Pu, 94
+        2.25,   // Am, 95
+        2.25,   // Cm, 96 //fudged from Am
+        2.25,   // Bk, 97 //fudged from Am
+        2.25,   // Cf, 98 //fudged from Am
+        2.25,   // Es, 99 //fudged from Am
+        2.25,   // Fm, 100 //fudged from Am
+        2.25,   // Md, 101 //fudged from Am
+        1.24];  // No, 102
+                // Lr, 103 
                 // Rf, 104
                 // Db, 105
                 // Sg, 106
@@ -262,7 +262,9 @@ function initlatticeVariables(){
         1.25, 1.25, 1.28, 1.34, 1.48, 1.44, 1.41, 1.40, 1.36, 1.33, 1.31,
         2.35, 1.98, 1.69, null, null, null, null, null, null, null, null,
         null, null, null, null, null, 1.60, 1.44, 1.34, 1.30, 1.28, 1.26,
-        1.27, 1.30, 1.34, 1.49, 1.48, 1.47, 1.46];
+        1.27, 1.30, 1.34, 1.49, 1.48, 1.47, 1.47, 1.68, null, null, null,
+        1.90, 1.88, 1.79, 1.62, 1.58, 1.55, 1.53, 1.51, null, null, null,
+        null, null, null, null, null, null];
 		
 		
 	latticeParameterX=Math.sqrt(Math.pow(tableLattice[0][0],2)+Math.pow(tableLattice[0][1],2)+Math.pow(tableLattice[0][2],2));
