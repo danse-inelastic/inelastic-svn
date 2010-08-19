@@ -96,7 +96,7 @@ class Structure(list):
         elems = counts.keys()
         elems.sort()
         chemFormRaw = ''.join( '%s_%s ' % (e, counts[e]) for e in elems )
-        return chemFormRaw.trim()
+        return chemFormRaw.strip()
     
     def getSpecies(self):
         speciesList = []
