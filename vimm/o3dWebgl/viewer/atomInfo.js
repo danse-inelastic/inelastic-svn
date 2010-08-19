@@ -1,0 +1,1 @@
+../../o3dPlugin/viewer/atomInfo.js
