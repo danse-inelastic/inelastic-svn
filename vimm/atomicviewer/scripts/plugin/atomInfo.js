@@ -262,7 +262,9 @@ function initlatticeVariables(){
         1.25, 1.25, 1.28, 1.34, 1.48, 1.44, 1.41, 1.40, 1.36, 1.33, 1.31,
         2.35, 1.98, 1.69, null, null, null, null, null, null, null, null,
         null, null, null, null, null, 1.60, 1.44, 1.34, 1.30, 1.28, 1.26,
-        1.27, 1.30, 1.34, 1.49, 1.48, 1.47, 1.46];
+        1.27, 1.30, 1.34, 1.49, 1.48, 1.47, 1.47, 1.68, null, null, null,
+        1.90, 1.88, 1.79, 1.62, 1.58, 1.55, 1.53, 1.51, null, null, null,
+        null, null, null, null, null, null];
 		
 		
 	latticeParameterX=Math.sqrt(Math.pow(tableLattice[0][0],2)+Math.pow(tableLattice[0][1],2)+Math.pow(tableLattice[0][2],2));
