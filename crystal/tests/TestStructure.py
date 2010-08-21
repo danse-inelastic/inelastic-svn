@@ -53,6 +53,12 @@ class TestStructure(unittest.TestCase):
         self.stru4 = Structure( [ at1, at2, at3, at4], 
                                lattice=Lattice(4.05, 4.05, 4.05, 90, 90, 90),
                                sgid = 225 )
+        
+        xyzfile = os.path.join(testdata_dir, 'scf3.xyz')
+        self.stru5 = Structure()
+        self.stru5.read(xyzfile)
+        print self.stru5
+        
         self.places = 12
         
     def assertListAlmostEqual(self, l1, l2, places=None):

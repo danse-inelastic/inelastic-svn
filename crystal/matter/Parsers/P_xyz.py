@@ -86,8 +86,8 @@ class P_xyz(StructureParser):
             return stru
         # here we have at least one valid record line
         nfields = len(linefields[start])
-        if nfields != 4:
-            emsg = "%d: invalid XYZ format, expected 4 columns" % (start + 1)
+        if nfields != 4 and nfields != 5:
+            emsg = "%d: invalid XYZ format, expected 4 or 5 columns" % (start + 1)
             raise StructureFormatError(emsg)
         # now try to read all record lines
         try:
@@ -96,14 +96,18 @@ class P_xyz(StructureParser):
                 p_nl += 1
                 if fields == []:
                     continue
-                elif len(fields) != nfields:
+                elif len(fields) != 4 and len(fields) !=5:
                     emsg = ('%d: all lines must have ' +
-                            'the same number of columns') % p_nl
+                            'a symbol, position, and optionally charge') % p_nl
                     raise StructureFormatError(emsg)
                 symbol = fields[0]
                 symbol = symbol[0].upper() + symbol[1:].lower()
-                xyz = [ float(f) for f in fields[1:4] ]
-                stru.addNewAtom(symbol, xyz=xyz)
+                xyz = [ float(f) for f in fields[1:4] ]                 
+                if len(fields)==5:
+                    charge = float(fields[4])
+                else:
+                    charge = 0.0
+                stru.addNewAtom(symbol, xyz=xyz, charge=charge)
         except ValueError:
             exc_type, exc_value, exc_traceback = sys.exc_info()
             emsg = "%d: invalid number format" % p_nl
