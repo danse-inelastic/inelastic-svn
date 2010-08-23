@@ -36,7 +36,6 @@ class TestStructure(unittest.TestCase):
         at1 = Atom('C', [0, 0, 0])
         at2 = Atom('C', [1, 1, 1])
         self.stru = Structure( [ at1, at2], lattice=Lattice(1, 1, 1, 90, 90, 120) )
-        self.places = 12
         
         ciffile = os.path.join(testdata_dir, 'PbTe.cif')
         self.stru2 = Structure()
@@ -53,16 +52,6 @@ class TestStructure(unittest.TestCase):
         self.stru4 = Structure( [ at1, at2, at3, at4], 
                                lattice=Lattice(4.05, 4.05, 4.05, 90, 90, 90),
                                sgid = 225 )
-        
-        xyzfile = os.path.join(testdata_dir, 'scf3.xyz')
-        self.stru5 = Structure()
-        self.stru5.read(xyzfile)
-        #print self.stru5
-        
-        xyzfile = os.path.join(testdata_dir, 'KC24PosAndCharges.xyz')
-        self.stru6 = Structure()
-        self.stru6.read(xyzfile)
-        #print self.stru6
         
         self.places = 12
         

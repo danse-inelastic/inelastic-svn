@@ -53,6 +53,7 @@ class TestStructure(unittest.TestCase):
         charges = [0.0, 0.0, 0.0, 0.0]
         self.stru.charges = charges
         self.assertAlmostEqual(self.stru[0].charge, charges[0])
+        print self.stru2.charges
 
 
 
