@@ -385,6 +385,15 @@ class Structure(list):
     forces = property(_get_forces, _set_forces, doc =
         """forces on all atoms""" )   
     
+    # charges
+    def _get_charges(self):
+        return [atom.charge for atom in self]
+    def _set_charges(self, chargeList):
+        for atom,charge in zip(self,chargeList):
+            atom.charge = charge
+    charges = property(_get_charges, _set_charges, doc =
+        """charges on all atoms in electron units""" )   
+    
 ################################################################################################    
 # geometry and symmetry methods--these should be farmed out to Geometry class which does all this--see vimm
 ################################################################################################ 
