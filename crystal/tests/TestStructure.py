@@ -57,7 +57,12 @@ class TestStructure(unittest.TestCase):
         xyzfile = os.path.join(testdata_dir, 'scf3.xyz')
         self.stru5 = Structure()
         self.stru5.read(xyzfile)
-        print self.stru5
+        #print self.stru5
+        
+        xyzfile = os.path.join(testdata_dir, 'KC24PosAndCharges.xyz')
+        self.stru6 = Structure()
+        self.stru6.read(xyzfile)
+        #print self.stru6
         
         self.places = 12
         
