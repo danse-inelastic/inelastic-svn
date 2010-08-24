@@ -18,14 +18,13 @@ from dsaw.model.Inventory import Inventory as InvBase
 # the data object
 from matter.Atom import Atom
 
-
-
 # dsaw.model helpers
 def __establishInventory__(self, inventory):
     inventory.element = self.symbol
     inventory.xyz = self.xyz
     inventory.label = self.label
     inventory.occupancy = self.occupancy
+    inventory.charge = self.charge
     if hasattr(self, 'id'):
         inventory.id = self.id
     return
@@ -41,6 +40,7 @@ def __restoreFromInventory__(self, inventory):
     self.label = inventory.label
     self.occupancy = inventory.occupancy
     self.id = inventory.id
+    self.charge = inventory.charge
     return
 Atom.__restoreFromInventory__ = __restoreFromInventory__
 
