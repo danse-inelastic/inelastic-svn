@@ -31,16 +31,16 @@ def write(Pols,filename='Polarizations',comment=''):
 def read(filename='Polarizations'):
   """Takes filename, returns a tuple with information and Polarizations \n
      as a numpy."""
-  f=open(filename,'r').read()
-  i = 0
-  filetype, = unpack('<64s',f[i:i+64*strSize])          ; i += 64*strSize
-  version,  = unpack('<i',f[i:i+intSize])               ; i += intSize
-  comment,  = unpack('<1024s',f[i:i+1024*strSize])      ; i += 1024*strSize
-  D,N_b,N_q = unpack('<3i',f[i:i+3*intSize])            ; i += 3*intSize
+  f=open(filename,'r')
+  filetype, = unpack('<64s',f.read(64*strSize))
+  version,  = unpack('<i',f.read(intSize))
+  comment,  = unpack('<1024s',f.read(1024*strSize))
+  D,N_b,N_q = unpack('<3i',f.read(3*intSize))
 #  print D, N_b, N_q, N_q*N_b*D*N_b*D*2
-  res       = unpack('<%id' % (N_q*N_b*D*N_b*D*2),f[i:])
+  res       = unpack('<%id' % (N_q*N_b*D*N_b*D*2),f.read())
   res = numpy.array(res)
   res.shape = (N_q,N_b*D,N_b,D,2)
+  
   Pols = res[:,:,:,:,0] + 1j*res[:,:,:,:,1]
   return (filetype.strip('\x00'),version,comment.strip('\x00')),Pols
 
