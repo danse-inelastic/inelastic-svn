@@ -373,11 +373,12 @@ class P_cif(StructureParser):
             except:
                 raise "cannot find atom symbol"
         # removes trailing numbers, +/- symbols, etc.
-        firstTwo = atomSiteType[:2]
+        symLength = min(len(atomSiteType),2)
+        firstTwo = atomSiteType[:symLength]
         uppers = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
         lowers = 'abcdefghijklmnopqrstuvwxyz'
         ans = ''
-        for i in range(2):
+        for i in range(symLength):
             if firstTwo[i] in uppers or firstTwo[i] in lowers:
                 ans += firstTwo[i]
         return ans
