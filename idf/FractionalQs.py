@@ -17,21 +17,19 @@ def write(FQ,filename='FractionalQs',comment=''):
   f.write(pack('<1024s',comment))
   f.write(pack('<i',FQ.shape[1]))
   f.write(pack('<i',FQ.shape[0]))
-  FQ = tuple( FQ.reshape(-1) )
-  f.write(pack('<%id' % len(FQ),*FQ))
+  FQ = numpy.asarray( FQ.reshape(-1), dtype="<d" )
+  f.write(FQ.tostring())
   return
 
 def read(filename='FractionalQs'):
   """Takes filename, returns a tuple with information and fractional Q as a \n
      numpy."""
-  f=open(filename,'r').read()
-  i = 0
-  filetype,= unpack('<64s',f[i:i+64*strSize])          ; i += 64*strSize
-  version, = unpack('<i',f[i:i+intSize])               ; i += intSize
-  comment, = unpack('<1024s',f[i:i+1024*strSize])      ; i += 1024*strSize
-  D,N_q    = unpack('<2i',f[i:i+2*intSize])            ; i += 2*intSize
-  FQ       = unpack('<%id' % (N_q*D),f[i:])
-  FQ = numpy.array(FQ)
+  f=open(filename,'r')
+  filetype, = unpack('<64s',f.read(64*strSize))
+  version,  = unpack('<i',f.read(intSize))
+  comment,  = unpack('<1024s',f.read(1024*strSize))
+  D,N_q     = unpack('<2i',f.read(2*intSize))
+  FQ        = numpy.fromstring(f.read(), dtype="<d")[:D*N_q]
   FQ.shape = (N_q,D)
   return (filetype.strip('\x00'),version,comment.strip('\x00')),FQ
 
