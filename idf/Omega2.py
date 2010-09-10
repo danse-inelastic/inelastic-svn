@@ -20,20 +20,18 @@ def write(Omega2,filename='Omega2',comment='',D=3):
   # maybe there should be some further checking on integer division below:
   f.write(pack('<i',Omega2.shape[1] / D))
   f.write(pack('<i',Omega2.shape[0]))
-  Omega2 = tuple( Omega2.reshape(-1) )
-  f.write(pack('<%id' % len(Omega2),*Omega2))
+  Omega2 = numpy.asarray( Omega2.reshape(-1), dtype="<d" )
+  f.write(Omega2.tostring())
   return
 
 def read(filename='Omega2'):
   """Takes filename, returns a tuple with information and Omega2 as a numpy."""
-  f=open(filename,'r').read()
-  i = 0
-  filetype, = unpack('<64s',f[i:i+64*strSize])          ; i += 64*strSize
-  version,  = unpack('<i',f[i:i+intSize])               ; i += intSize
-  comment,  = unpack('<1024s',f[i:i+1024*strSize])      ; i += 1024*strSize
-  D,N_b,N_q = unpack('<3i',f[i:i+3*intSize])            ; i += 3*intSize
-  Omega2    = unpack('<%id' % (N_q*N_b*D),f[i:])
-  Omega2 = numpy.array(Omega2)
+  f=open(filename,'r')
+  filetype, = unpack('<64s',f.read(64*strSize))
+  version,  = unpack('<i',f.read(intSize))
+  comment,  = unpack('<1024s',f.read(1024*strSize))
+  D,N_b,N_q = unpack('<3i',f.read(3*intSize))
+  Omega2    = numpy.fromstring(f.read(), dtype="<d")[:N_q*N_b*D]
   Omega2.shape = (N_q,N_b*D)
   return (filetype.strip('\x00'),version,comment.strip('\x00')),Omega2
 

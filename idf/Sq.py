@@ -17,20 +17,18 @@ def write(Sq,filename='Sq',comment=''):
   f.write(pack('<i',version))
   f.write(pack('<1024s',comment))
   f.write(pack('<i',Sq.shape[0]))
-  Sq = tuple( Sq.reshape(-1) )
-  f.write(pack('<%id' % len(Sq),*Sq))
+  Sq = numpy.asarray(Sq.reshape(-1), dtype="<d")
+  f.write(Sq.tostring())
   return
 
 def read(filename='Sq'):
   """Takes filename, returns a tuple with information and Sq as a numpy."""
-  f=open(filename,'r').read()
-  i = 0
-  filetype, = unpack('<64s',f[i:i+64*strSize])          ; i += 64*strSize
-  version,  = unpack('<i',f[i:i+intSize])               ; i += intSize
-  comment,  = unpack('<1024s',f[i:i+1024*strSize])      ; i += 1024*strSize
-  N_q,      = unpack('<i',f[i:i+1*intSize])             ; i += 1*intSize
-  Sq       = unpack('<%id' % (N_q),f[i:])
-  Sq = numpy.array(Sq)
+  f=open(filename,'r')
+  filetype, = unpack('<64s',f.read(64*strSize))
+  version,  = unpack('<i',f.read(intSize))
+  comment,  = unpack('<1024s',f.read(1024*strSize))
+  N_q,      = unpack('<i',f.read(intSize))
+  Sq        = numpy.fromstring(f.read(), dtype="<d")[:N_q]
   Sq.shape = (N_q)
   return (filetype.strip('\x00'),version,comment.strip('\x00')),Sq
 
