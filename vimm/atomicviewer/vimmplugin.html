@@ -45,6 +45,10 @@
           var latticeLists = [[[5,0,0],[0,5,0],[0,0,5]], [[5,0,0],[0,5,0],[0,0,5]]];
           //$('#o3dContainer').remove("#o3d")
           //$('#o3dContainer').append('<div id="o3d" style="width: 600px; height: 600px;"></div>')
+          
+          //don't uninit(), instead delete all atoms and put back in again...refresh
+          
+          //
           uninit();
           initClient(latticeLists[index], atomLists[index]);
       }
