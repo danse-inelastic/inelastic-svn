@@ -353,7 +353,7 @@ class Structure(list):
     def _get_xyz(self):
         return [atom.xyz.tolist()  for atom in self[:]]
     def _set_xyz(self, xyzList):
-        for atom,xyz in zip(list,xyzList):
+        for atom,xyz in zip(self, xyzList):
             atom.xyz = xyz
     xyz = property(_get_xyz, _set_xyz, doc =
         """fractional coordinates of all atoms""" )  
@@ -362,7 +362,7 @@ class Structure(list):
     def _get_xyz_cartn(self):
         return [atom.xyz_cartn.tolist() for atom in self[:]]
     def _set_xyz_cartn(self, xyzList):
-        for atom,xyz_cartn in zip(list,xyzList):
+        for atom,xyz_cartn in zip(self, xyzList):
             atom.xyz_cartn = xyz_cartn
     xyz_cartn = property(_get_xyz_cartn, _set_xyz_cartn, doc =
         """absolute Cartesian coordinates of all atoms""" )   
@@ -371,7 +371,7 @@ class Structure(list):
     def _get_symbols(self):
         return [atom.symbol for atom in self[:]]
     def _set_symbols(self, symbolList):
-        for atom,symbol in zip(list,symbolList):
+        for atom,symbol in zip(self, symbolList):
             atom.symbol = symbol
     symbols = property(_get_symbols, _set_symbols, doc =
         """symbols of all atoms""" )  
@@ -380,7 +380,7 @@ class Structure(list):
     def _get_forces(self):
         return [atom.force for atom in self]
     def _set_forces(self, forceList):
-        for atom,force in zip(self,forceList):
+        for atom,force in zip(self, forceList):
             atom.force = force
     forces = property(_get_forces, _set_forces, doc =
         """forces on all atoms""" )   
@@ -389,7 +389,7 @@ class Structure(list):
     def _get_charges(self):
         return [atom.charge for atom in self]
     def _set_charges(self, chargeList):
-        for atom,charge in zip(self,chargeList):
+        for atom,charge in zip(self, chargeList):
             atom.charge = charge
     charges = property(_get_charges, _set_charges, doc =
         """charges on all atoms in electron units""" )   
