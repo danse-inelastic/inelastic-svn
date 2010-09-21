@@ -1,0 +1,86 @@
+{
+	"projectId": "474641E7-E06F-445D-BE12-686464894856",
+	"settings": {
+		"urlPrefix": "http://localhost/",
+		"spacesToIndent": 4,
+		"codeGenFormat": "Class"
+	},
+	"components": [
+		{
+			"cid": "tabpanel",
+			"jsClass": "SimpleTabs",
+			"userConfig": {
+				"activeTab": 1,
+				"height": 160
+			},
+			"cn": [
+				{
+					"cid": "panel",
+					"jsClass": "MyPanel",
+					"userConfig": {
+						"title": "Short Text",
+						"padding": 10,
+						"html": "no thx!"
+					}
+				},
+				{
+					"cid": "panel",
+					"jsClass": "MyPanel1",
+					"userConfig": {
+						"title": "Long Text",
+						"padding": 10,
+						"html": "ermm k?"
+					}
+				}
+			]
+		},
+		{
+			"cid": "tabpanel",
+			"jsClass": "PlainTabs",
+			"userConfig": {
+				"activeTab": 0,
+				"width": 574
+			},
+			"cn": [
+				{
+					"cid": "panel",
+					"jsClass": "MyPanel2",
+					"userConfig": {
+						"title": "Normal Tab",
+						"html": "My Content was added in the class",
+						"padding": 10
+					}
+				},
+				{
+					"cid": "panel",
+					"jsClass": "MyPanel3",
+					"userConfig": {
+						"title": "Ajax Tab 1"
+					}
+				},
+				{
+					"cid": "panel",
+					"jsClass": "MyPanel4",
+					"userConfig": {
+						"title": "Ajax Tab 2"
+					}
+				},
+				{
+					"cid": "panel",
+					"jsClass": "MyPanel5",
+					"userConfig": {
+						"title": "Event Tab"
+					}
+				},
+				{
+					"cid": "panel",
+					"jsClass": "MyPanel6",
+					"userConfig": {
+						"disabled": true
+					}
+				}
+			]
+		}
+	],
+	"stores": []
+}

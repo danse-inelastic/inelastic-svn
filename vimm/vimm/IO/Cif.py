@@ -23,9 +23,8 @@
 
 from vimm.Material import Material
 from vimm.Atom import Atom
+from vimm.Cell import Cell
 from vimm.Utilities import path_split,cleansym
-from vimm.Element import sym2no,symbol
-from vimm.NumWrap import array
 
 extensions=["cif"]
 filetype="Cif Format"
@@ -39,10 +38,14 @@ def load(fullfilename):
         st = Structure()
         st.read(fullfilename)
         for i,atom in enumerate(st):
+            Z = atom.Z
+            xyz_cartn = atom.xyz_cartn
             sym = atom.symbol
-            xyz = atom.xyz
-            material.add_atom(Atom(i, xyz, sym, sym+str(i)))
-        #material.bonds_from_distance()
+            material.add_atom(Atom(Z, xyz_cartn, sym, sym+str(i)))
+        material.bonds_from_distance()
+        lvs = st.lattice.base
+        cell = Cell(lvs[0],lvs[1],lvs[2])
+        material.set_cell(cell)
         return material
     except:
         print 'Vimm needs matter package from pypi to open cif files'

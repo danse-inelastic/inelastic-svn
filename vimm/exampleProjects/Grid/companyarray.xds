@@ -1,0 +1,113 @@
+{
+	"projectId": "3083902E-9048-4FC3-A6E8-55067A26C8CA",
+	"settings": {
+		"urlPrefix": "http://localhost/DesignerProjects/Grid/",
+		"directAPI": "",
+		"spacesToIndent": 4,
+		"codeGenFormat": "Class"
+	},
+	"components": [
+		{
+			"cid": "grid",
+			"jsClass": "MyGrid",
+			"userConfig": {
+				"title": "Array Grid",
+				"width": 529,
+				"store": "CompanyStore"
+			},
+			"cn": [
+				{
+					"cid": "gridcolumn",
+					"jsClass": "MyColumn",
+					"userConfig": {
+						"header": "Company",
+						"dataIndex": "company"
+					}
+				},
+				{
+					"cid": "templatecolumn",
+					"jsClass": "MyColumn1",
+					"userConfig": {
+						"header": "Price",
+						"dataIndex": "price",
+						"tpl": "${price}"
+					}
+				},
+				{
+					"cid": "gridcolumn",
+					"jsClass": "MyColumn2",
+					"userConfig": {
+						"header": "Change",
+						"dataIndex": "change"
+					}
+				},
+				{
+					"cid": "gridcolumn",
+					"jsClass": "MyColumn3",
+					"userConfig": {
+						"dataIndex": "pctChange"
+					}
+				},
+				{
+					"cid": "datecolumn",
+					"jsClass": "MyColumn4",
+					"userConfig": {
+						"dataIndex": "lastChange",
+						"header": "Last Updated"
+					}
+				}
+			]
+		}
+	],
+	"stores": [
+		{
+			"cid": "arraystore",
+			"jsClass": "CompanyStore",
+			"userConfig": {
+				"storeId": "CompanyStore"
+			},
+			"cn": [
+				{
+					"cid": "datafield",
+					"jsClass": "MyField",
+					"userConfig": {
+						"name": "company"
+					}
+				},
+				{
+					"cid": "datafield",
+					"jsClass": "MyField1",
+					"userConfig": {
+						"name": "price",
+						"type": "float"
+					}
+				},
+				{
+					"cid": "datafield",
+					"jsClass": "MyField2",
+					"userConfig": {
+						"name": "change",
+						"type": "float"
+					}
+				},
+				{
+					"cid": "datafield",
+					"jsClass": "MyField3",
+					"userConfig": {
+						"name": "pctChange",
+						"type": "float"
+					}
+				},
+				{
+					"cid": "datafield",
+					"jsClass": "MyField4",
+					"userConfig": {
+						"name": "lastChange",
+						"type": "date",
+						"dateFormat": "n/j h:ia"
+					}
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,78 @@
+{
+	"projectId": "0E2406D8-5359-4036-939F-095DC099D83C",
+	"settings": {
+		"urlPrefix": "http://localhost/",
+		"spacesToIndent": 4,
+		"codeGenFormat": "Class"
+	},
+	"components": [
+		{
+			"cid": "window",
+			"jsClass": "MyWindow",
+			"userConfig": {
+				"layout": "border",
+				"width": 538,
+				"height": 292,
+				"title": "Layout Window",
+				"plain": true
+			},
+			"cn": [
+				{
+					"cid": "tabpanel",
+					"jsClass": "MyPanel",
+					"userConfig": {
+						"region": "center",
+						"activeTab": 0,
+						"margins": "3 3 3 0"
+					},
+					"cn": [
+						{
+							"cid": "panel",
+							"jsClass": "MyPanel",
+							"userConfig": {
+								"title": "Bogus Tab",
+								"autoScroll": true,
+								"html": "Some content",
+								"padding": 10
+							}
+						},
+						{
+							"cid": "panel",
+							"jsClass": "MyPanel2",
+							"userConfig": {
+								"title": "Another Tab",
+								"autoScroll": true,
+								"padding": 10,
+								"html": "Lipsum"
+							}
+						},
+						{
+							"cid": "panel",
+							"jsClass": "MyPanel3",
+							"userConfig": {
+								"title": "Closable Tab",
+								"autoScroll": true,
+								"padding": 10,
+								"html": "Lorem ipsum close me text"
+							}
+						}
+					]
+				},
+				{
+					"cid": "panel",
+					"jsClass": "MyPanel1",
+					"userConfig": {
+						"region": "west",
+						"width": 162,
+						"title": "Navigation",
+						"collapsible": true,
+						"split": true,
+						"margins": "3 0 3 3",
+						"cmargins": "3 3 3 3"
+					}
+				}
+			]
+		}
+	],
+	"stores": []
+}
