@@ -3,6 +3,7 @@
 	<name>vimm</name>
 	<comment></comment>
 	<projects>
+		<project>crystal</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

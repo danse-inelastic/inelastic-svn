@@ -73,7 +73,8 @@ class Material:
         
         Todo: this should be put in the structure class (not part of viewer)
         '''
-        for geo in self.geos: geo.bonds_from_distance(scale,force_bonds)
+        for geo in self.geos: 
+            geo.bonds_from_distance(scale,force_bonds)
         return
 
     def current_bonds_from_distance(self,scale=1.2,force_bonds=0):
