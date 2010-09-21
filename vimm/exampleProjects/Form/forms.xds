@@ -1,0 +1,622 @@
+{
+	"projectId": "E2981E8C-C341-46E6-A93F-A373528A470A",
+	"settings": {
+		"urlPrefix": "http://localhost/",
+		"spacesToIndent": 4,
+		"codeGenFormat": "Class"
+	},
+	"components": [
+		{
+			"cid": "form",
+			"jsClass": "SimpleForm",
+			"userConfig": {
+				"title": "Simple Form",
+				"width": 350,
+				"labelWidth": 75,
+				"frame": true,
+				"height": 213
+			},
+			"cn": [
+				{
+					"cid": "textfield",
+					"jsClass": "MyField",
+					"userConfig": {
+						"fieldLabel": "First Name",
+						"name": "first",
+						"allowBlank": false
+					}
+				},
+				{
+					"cid": "textfield",
+					"jsClass": "MyField",
+					"userConfig": {
+						"fieldLabel": "Last Name",
+						"name": "last",
+						"allowBlank": false
+					}
+				},
+				{
+					"cid": "textfield",
+					"jsClass": "MyField",
+					"userConfig": {
+						"fieldLabel": "Company",
+						"name": "company",
+						"allowBlank": false
+					}
+				},
+				{
+					"cid": "textfield",
+					"jsClass": "MyField",
+					"userConfig": {
+						"fieldLabel": "Email",
+						"name": "email",
+						"allowBlank": false
+					}
+				},
+				{
+					"cid": "timefield",
+					"jsClass": "MyField4",
+					"userConfig": {
+						"fieldLabel": "Time",
+						"name": "time"
+					}
+				},
+				{
+					"cid": "toolbar",
+					"jsClass": "MyToolbar",
+					"dock": "fbar",
+					"cn": [
+						{
+							"cid": "button",
+							"jsClass": "MyButton",
+							"userConfig": {
+								"text": "Cancel"
+							}
+						},
+						{
+							"cid": "button",
+							"jsClass": "MyButton1",
+							"userConfig": {
+								"text": "Save"
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"cid": "form",
+			"jsClass": "UserForm",
+			"userConfig": {
+				"labelWidth": 75,
+				"frame": true,
+				"width": 402,
+				"title": "Simple Form with FieldSets",
+				"height": 229,
+				"autoScroll": true,
+				"padding": 5
+			},
+			"cn": [
+				{
+					"cid": "fieldset",
+					"jsClass": "MyFieldSet",
+					"userConfig": {
+						"checkboxToggle": true,
+						"title": "User Information"
+					},
+					"cn": [
+						{
+							"cid": "textfield",
+							"jsClass": "MyField5",
+							"userConfig": {
+								"fieldLabel": "First Name",
+								"name": "first"
+							}
+						},
+						{
+							"cid": "textfield",
+							"jsClass": "MyField6",
+							"userConfig": {
+								"fieldLabel": "Last Name",
+								"name": "last"
+							}
+						},
+						{
+							"cid": "textfield",
+							"jsClass": "MyField7",
+							"userConfig": {
+								"fieldLabel": "Company",
+								"name": "company"
+							}
+						},
+						{
+							"cid": "textfield",
+							"jsClass": "MyField8",
+							"userConfig": {
+								"fieldLabel": "Email",
+								"vtype": "email",
+								"name": "email"
+							}
+						}
+					]
+				},
+				{
+					"cid": "fieldset",
+					"jsClass": "MyFieldSet1",
+					"userConfig": {
+						"title": "Phone Number",
+						"collapsible": true
+					},
+					"cn": [
+						{
+							"cid": "textfield",
+							"jsClass": "MyField9",
+							"userConfig": {
+								"fieldLabel": "Home",
+								"name": "home"
+							}
+						},
+						{
+							"cid": "textfield",
+							"jsClass": "MyField10",
+							"userConfig": {
+								"fieldLabel": "Business",
+								"name": "business"
+							}
+						},
+						{
+							"cid": "textfield",
+							"jsClass": "MyField11",
+							"userConfig": {
+								"fieldLabel": "Mobile",
+								"name": "mobile"
+							}
+						},
+						{
+							"cid": "textfield",
+							"jsClass": "MyField12",
+							"userConfig": {
+								"fieldLabel": "Fax",
+								"name": "fax"
+							}
+						}
+					]
+				},
+				{
+					"cid": "toolbar",
+					"jsClass": "MyToolbar1",
+					"dock": "fbar",
+					"cn": [
+						{
+							"cid": "button",
+							"jsClass": "MyButton2",
+							"userConfig": {
+								"text": "Cancel"
+							}
+						},
+						{
+							"cid": "button",
+							"jsClass": "MyButton3",
+							"userConfig": {
+								"text": "Save"
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"cid": "form",
+			"jsClass": "BioForm",
+			"userConfig": {
+				"labelAlign": "top",
+				"frame": true,
+				"title": "Multi Column, Nested Layouts and Anchoring",
+				"width": 481,
+				"height": 298
+			},
+			"cn": [
+				{
+					"cid": "container",
+					"jsClass": "MyContainer",
+					"userConfig": {
+						"layout": "hbox"
+					},
+					"cn": [
+						{
+							"cid": "container",
+							"jsClass": "MyContainer1",
+							"userConfig": {
+								"layout": "form",
+								"flex": 1,
+								"margins": "0 5 0 0"
+							},
+							"cn": [
+								{
+									"cid": "textfield",
+									"jsClass": "MyField14",
+									"userConfig": {
+										"fieldLabel": "First Name"
+									}
+								}
+							]
+						},
+						{
+							"cid": "container",
+							"jsClass": "MyContainer1",
+							"userConfig": {
+								"layout": "form",
+								"flex": 1
+							},
+							"cn": [
+								{
+									"cid": "textfield",
+									"jsClass": "MyField14",
+									"userConfig": {
+										"fieldLabel": "Last Name"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"cid": "container",
+					"jsClass": "MyContainer",
+					"userConfig": {
+						"layout": "hbox"
+					},
+					"cn": [
+						{
+							"cid": "container",
+							"jsClass": "MyContainer1",
+							"userConfig": {
+								"layout": "form",
+								"flex": 1,
+								"margins": "0 5 0 0"
+							},
+							"cn": [
+								{
+									"cid": "textfield",
+									"jsClass": "MyField14",
+									"userConfig": {
+										"fieldLabel": "Company"
+									}
+								}
+							]
+						},
+						{
+							"cid": "container",
+							"jsClass": "MyContainer1",
+							"userConfig": {
+								"layout": "form",
+								"flex": 1
+							},
+							"cn": [
+								{
+									"cid": "textfield",
+									"jsClass": "MyField14",
+									"userConfig": {
+										"fieldLabel": "Email"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"cid": "htmleditor",
+					"jsClass": "MyField17",
+					"userConfig": {
+						"fieldLabel": "Biography",
+						"height": 200
+					}
+				}
+			]
+		},
+		{
+			"cid": "form",
+			"jsClass": "ComplexForm",
+			"userConfig": {
+				"labelAlign": "top",
+				"frame": true,
+				"title": "Multi Column, Nested Layouts and Anchoring",
+				"width": 504,
+				"height": 380
+			},
+			"cn": [
+				{
+					"cid": "container",
+					"jsClass": "MyContainer",
+					"userConfig": {
+						"layout": "hbox"
+					},
+					"cn": [
+						{
+							"cid": "container",
+							"jsClass": "MyContainer1",
+							"userConfig": {
+								"layout": "form",
+								"flex": 1,
+								"margins": "0 5 0 0"
+							},
+							"cn": [
+								{
+									"cid": "textfield",
+									"jsClass": "MyField14",
+									"userConfig": {
+										"fieldLabel": "First Name"
+									}
+								}
+							]
+						},
+						{
+							"cid": "container",
+							"jsClass": "MyContainer1",
+							"userConfig": {
+								"layout": "form",
+								"flex": 1
+							},
+							"cn": [
+								{
+									"cid": "textfield",
+									"jsClass": "MyField14",
+									"userConfig": {
+										"fieldLabel": "Last Name"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"cid": "container",
+					"jsClass": "MyContainer",
+					"userConfig": {
+						"layout": "hbox"
+					},
+					"cn": [
+						{
+							"cid": "container",
+							"jsClass": "MyContainer1",
+							"userConfig": {
+								"layout": "form",
+								"flex": 1,
+								"margins": "0 5 0 0"
+							},
+							"cn": [
+								{
+									"cid": "textfield",
+									"jsClass": "MyField14",
+									"userConfig": {
+										"fieldLabel": "Company"
+									}
+								}
+							]
+						},
+						{
+							"cid": "container",
+							"jsClass": "MyContainer1",
+							"userConfig": {
+								"layout": "form",
+								"flex": 1
+							},
+							"cn": [
+								{
+									"cid": "textfield",
+									"jsClass": "MyField14",
+									"userConfig": {
+										"fieldLabel": "Email"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"cid": "tabpanel",
+					"jsClass": "MyTabs1",
+					"userConfig": {
+						"activeTab": 0
+					},
+					"cn": [
+						{
+							"cid": "panel",
+							"jsClass": "MyPanel2",
+							"userConfig": {
+								"title": "Personal Details",
+								"layout": "form",
+								"labelAlign": "top"
+							},
+							"cn": [
+								{
+									"cid": "textfield",
+									"jsClass": "MyField30",
+									"userConfig": {
+										"width": 210
+									}
+								},
+								{
+									"cid": "textfield",
+									"jsClass": "MyField30",
+									"userConfig": {
+										"width": 210
+									}
+								},
+								{
+									"cid": "textfield",
+									"jsClass": "MyField30",
+									"userConfig": {
+										"width": 210
+									}
+								},
+								{
+									"cid": "textfield",
+									"jsClass": "MyField33",
+									"userConfig": {
+										"width": 210
+									}
+								}
+							]
+						},
+						{
+							"cid": "panel",
+							"jsClass": "MyPanel3",
+							"userConfig": {
+								"title": "Phone Numbers",
+								"layout": "form"
+							},
+							"cn": [
+								{
+									"cid": "textfield",
+									"jsClass": "MyField34",
+									"userConfig": {
+										"width": 210
+									}
+								},
+								{
+									"cid": "textfield",
+									"jsClass": "MyField34",
+									"userConfig": {
+										"width": 210
+									}
+								},
+								{
+									"cid": "textfield",
+									"jsClass": "MyField34",
+									"userConfig": {
+										"width": 210
+									}
+								},
+								{
+									"cid": "textfield",
+									"jsClass": "MyField34",
+									"userConfig": {
+										"width": 210
+									}
+								}
+							]
+						},
+						{
+							"cid": "panel",
+							"jsClass": "MyPanel4",
+							"userConfig": {
+								"title": "Biography",
+								"layout": "fit"
+							},
+							"cn": [
+								{
+									"cid": "htmleditor",
+									"jsClass": "MyField38"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"cid": "form",
+			"jsClass": "TabForm",
+			"userConfig": {
+				"padding": 0,
+				"title": "undef",
+				"layout": "fit",
+				"height": 194,
+				"width": 411
+			},
+			"cn": [
+				{
+					"cid": "tabpanel",
+					"jsClass": "MyTabs",
+					"userConfig": {
+						"activeTab": 0
+					},
+					"cn": [
+						{
+							"cid": "panel",
+							"jsClass": "MyPanel",
+							"userConfig": {
+								"title": "Personal Details",
+								"layout": "form",
+								"padding": 10,
+								"height": 154,
+								"width": 384
+							},
+							"cn": [
+								{
+									"cid": "textfield",
+									"jsClass": "MyField18",
+									"userConfig": {
+										"fieldLabel": "First Name"
+									}
+								},
+								{
+									"cid": "textfield",
+									"jsClass": "MyField19",
+									"userConfig": {
+										"fieldLabel": "Last Name"
+									}
+								},
+								{
+									"cid": "textfield",
+									"jsClass": "MyField20",
+									"userConfig": {
+										"fieldLabel": "Company"
+									}
+								},
+								{
+									"cid": "textfield",
+									"jsClass": "MyField21",
+									"userConfig": {
+										"fieldLabel": "Email"
+									}
+								}
+							]
+						},
+						{
+							"cid": "panel",
+							"jsClass": "MyPanel1",
+							"userConfig": {
+								"title": "Phone Numbers",
+								"layout": "form",
+								"padding": 10
+							},
+							"cn": [
+								{
+									"cid": "textfield",
+									"jsClass": "MyField22",
+									"userConfig": {
+										"fieldLabel": "Home"
+									}
+								},
+								{
+									"cid": "textfield",
+									"jsClass": "MyField23",
+									"userConfig": {
+										"fieldLabel": "Business"
+									}
+								},
+								{
+									"cid": "textfield",
+									"jsClass": "MyField24",
+									"userConfig": {
+										"fieldLabel": "Mobile"
+									}
+								},
+								{
+									"cid": "textfield",
+									"jsClass": "MyField25",
+									"userConfig": {
+										"fieldLabel": "Fax"
+									}
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"stores": []
+}

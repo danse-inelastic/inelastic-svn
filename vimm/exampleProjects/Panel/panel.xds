@@ -1,0 +1,22 @@
+{
+	"projectId": "4BA47E86-0D34-41B1-A33C-5370AE9F9BC5",
+	"settings": {
+		"urlPrefix": "http://localhost/",
+		"spacesToIndent": 4,
+		"codeGenFormat": "Class"
+	},
+	"components": [
+		{
+			"cid": "panel",
+			"jsClass": "EmployeeInfo",
+			"userConfig": {
+				"tpl": "Name: {name}<br/>\nCompany: {company}<br/>\nLocation: {location}",
+				"padding": 15,
+				"width": 312,
+				"height": 180,
+				"title": "Employee Info"
+			}
+		}
+	],
+	"stores": []
+}

@@ -1,0 +1,72 @@
+{
+	"projectId": "FEEBD5FD-EFED-4C0A-A60D-313DF9F6114D",
+	"settings": {
+		"urlPrefix": "http://localhost/",
+		"spacesToIndent": 4,
+		"codeGenFormat": "Class"
+	},
+	"components": [
+		{
+			"cid": "window",
+			"jsClass": "MyWindow",
+			"userConfig": {
+				"layout": "fit",
+				"plain": false,
+				"title": "Hello Dialog"
+			},
+			"cn": [
+				{
+					"cid": "tabpanel",
+					"jsClass": "MyTabs",
+					"userConfig": {
+						"activeTab": 0,
+						"border": false
+					},
+					"cn": [
+						{
+							"cid": "panel",
+							"jsClass": "MyPanel",
+							"userConfig": {
+								"title": "Hello World 1",
+								"html": "Hello...",
+								"padding": 10
+							}
+						},
+						{
+							"cid": "panel",
+							"jsClass": "MyPanel1",
+							"userConfig": {
+								"title": "Helo World 2",
+								"html": "... World!",
+								"padding": 10
+							}
+						}
+					]
+				},
+				{
+					"cid": "toolbar",
+					"jsClass": "MyToolbar",
+					"dock": "fbar",
+					"cn": [
+						{
+							"cid": "button",
+							"jsClass": "MyButton",
+							"userConfig": {
+								"text": "Submit",
+								"disabled": true
+							}
+						},
+						{
+							"cid": "button",
+							"jsClass": "MyButton1",
+							"userConfig": {
+								"text": "Close"
+							}
+						}
+					]
+				}
+			]
+		}
+	],
+	"stores": []
+}

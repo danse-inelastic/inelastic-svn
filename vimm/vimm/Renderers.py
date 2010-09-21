@@ -174,12 +174,13 @@ def SimpleRenderer(geo,options):
         shapes.append_label(Line(axyz+cxyz,axyz+cxyz+bxyz,color))
         shapes.append_label(Line(bxyz+cxyz,axyz+bxyz+cxyz,color))
         
-        # add label tick marks along a and b axes
-        # one for each data point is default
-        for position in geo.cell.tickmarks['A']:
-            shapes.append_label(Label('%.1f' % position[0], position, color,-0.4))
-        for position in geo.cell.tickmarks['B']:
-            shapes.append_label(Label('%.1f' % position[1], position, color,-0.4))
+        if hasattr(geo.cell, 'tickmarks'):
+            # add label tick marks along a and b axes
+            # one for each data point is default
+            for position in geo.cell.tickmarks['A']:
+                shapes.append_label(Label('%.1f' % position[0], position, color,-0.4))
+            for position in geo.cell.tickmarks['B']:
+                shapes.append_label(Label('%.1f' % position[1], position, color,-0.4))
 
         if options.get_cell_labels():
             shapes.append_label(Label(geo.cell.originLabel, origin,color,-0.4))

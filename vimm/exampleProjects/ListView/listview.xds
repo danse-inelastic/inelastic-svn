@@ -1,0 +1,76 @@
+{
+	"projectId": "83D8F0C5-FC2D-4128-B4F6-B033024F327A",
+	"settings": {
+		"urlPrefix": "http://localhost/DesignerProjects/ListView/",
+		"directAPI": "",
+		"spacesToIndent": 4,
+		"codeGenFormat": "Class"
+	},
+	"components": [
+		{
+			"cid": "panel",
+			"jsClass": "MyPanel",
+			"userConfig": {
+				"title": "Simple List View",
+				"layout": "fit",
+				"collapsible": true
+			},
+			"cn": [
+				{
+					"cid": "listview",
+					"jsClass": "MyListView",
+					"userConfig": {
+						"store": "SampleStore"
+					},
+					"cn": [
+						{
+							"cid": "lvcolumn",
+							"jsClass": "ListViewColumn",
+							"userConfig": {
+								"width": 0.5,
+								"header": "Name",
+								"dataIndex": "name"
+							}
+						},
+						{
+							"cid": "lvcolumn",
+							"jsClass": "ListViewColumn1",
+							"userConfig": {
+								"header": "Size",
+								"width": 0.5,
+								"dataIndex": "size"
+							}
+						}
+					]
+				}
+			]
+		}
+	],
+	"stores": [
+		{
+			"cid": "jsonstore",
+			"jsClass": "SampleStore",
+			"userConfig": {
+				"url": "../common/data.json",
+				"root": "data",
+				"storeId": "SampleStore"
+			},
+			"cn": [
+				{
+					"cid": "datafield",
+					"jsClass": "MyField",
+					"userConfig": {
+						"name": "name"
+					}
+				},
+				{
+					"cid": "datafield",
+					"jsClass": "MyField1",
+					"userConfig": {
+						"name": "size"
+					}
+				}
+			]
+		}
+	]
+}

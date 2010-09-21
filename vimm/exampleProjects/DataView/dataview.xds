@@ -1,0 +1,55 @@
+{
+	"projectId": "16066C2E-6FBB-4F84-860E-449C6F991860",
+	"settings": {
+		"urlPrefix": "http://localhost/DesignerProjects/DataView/",
+		"directAPI": "",
+		"spacesToIndent": 4,
+		"codeGenFormat": "Class"
+	},
+	"components": [
+		{
+			"cid": "panel",
+			"jsClass": "MyPanel",
+			"userConfig": {
+				"layout": "fit"
+			},
+			"cn": [
+				{
+					"cid": "dataview",
+					"jsClass": "MyDataView",
+					"userConfig": {
+						"tpl": "<tpl for=\".\">\n<div>{name}</div>\n<div>{size}</div>\n</tpl>",
+						"store": "SampleStore"
+					}
+				}
+			]
+		}
+	],
+	"stores": [
+		{
+			"cid": "jsonstore",
+			"jsClass": "SampleStore",
+			"userConfig": {
+				"storeId": "SampleStore",
+				"root": "data",
+				"url": "../common/data.json"
+			},
+			"cn": [
+				{
+					"cid": "datafield",
+					"jsClass": "MyField",
+					"userConfig": {
+						"name": "name"
+					}
+				},
+				{
+					"cid": "datafield",
+					"jsClass": "MyField1",
+					"userConfig": {
+						"name": "size"
+					}
+				}
+			]
+		}
+	]
+}
