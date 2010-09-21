@@ -24,6 +24,7 @@
 
 # Consider autoscanning the IO directory here...
 from vimm.IO import XYZ,\
+    Cif, \
     PickledStructure, \
 	JaguarOutputReader, \
 	NWChemOutput, \
@@ -47,6 +48,7 @@ from vimm.IO import XYZ,\
 
 modules = [
 	XYZ,
+    Cif,
 	PickledStructure,
 	SeqquestOutput,
 	JaguarOutputReader,
