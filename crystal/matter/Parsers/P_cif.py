@@ -474,7 +474,8 @@ class P_cif(StructureParser):
         # get reverse-ordered unique indices
         corepos = [a.xyz for a in self.stru]
         coreUijs = [a.U for a in self.stru]
-        self.eau = ExpandAsymmetricUnit(self.spacegroup, corepos, coreUijs)
+        # we need a large tolerance because cif files generally only have 4 decimal places
+        self.eau = ExpandAsymmetricUnit(self.spacegroup, corepos, coreUijs, eps = 0.001)
         # build a nested list of new atoms:
         newatoms = []
         for i, ca in enumerate(self.stru):
