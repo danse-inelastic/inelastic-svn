@@ -12,7 +12,7 @@ This Parser does not provide the the toLines() method.
 
 __id__ = "$Id: P_auto.py 2825 2009-03-09 04:33:12Z juhas $"
 
-from matter import Structure, Lattice, Atom
+#from matter import Structure, Lattice, Atom
 from matter import StructureFormatError
 from matter.Parsers import StructureParser
 from matter.Parsers import parser_index
