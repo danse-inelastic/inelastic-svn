@@ -1,0 +1,6 @@
+phonons on a grid is a group of data files:
+
+ Omega2: squares of phonon angular frequencies on a grid. See "Omega2.v1" for more details
+ Polarizations: phonon polarizations on a grid. see "Polarizations.v1" for more details
+ Qgridinfo: Q grid parameters. see "Qgridinfo.v1" for more details
+ DOS: phonon dos. see "DOS.v1" for more details
