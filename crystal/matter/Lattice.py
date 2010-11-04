@@ -432,7 +432,7 @@ class Lattice(object):
         """
         Returns the volume of the unit cell: |det(a1, a2, a3)|.
         Uses Numpy.linalg."""
-        return abs(numpy.linalg.det(self._lattice))
+        return abs(numpy.linalg.det(self.base))
 
 
     def cartesian(self, u):
