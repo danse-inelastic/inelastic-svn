@@ -77,12 +77,10 @@ class Lattice(object):
 #    base = recbase = [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]]
 #    normbase = recnormbase = [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]]
 
-    def __init__(
-        self, a=None, b=None, c=None,
+    def __init__(self, a=None, b=None, c=None,
         alpha=None, beta=None, gamma=None,
         baserot=numpy.identity(3, dtype=float),
-        base=None,
-        ):
+        base=None,):
         """define new coordinate system, the default is Cartesian
         There are 4 ways how to create Lattice instance:
 
@@ -184,7 +182,10 @@ class Lattice(object):
                 dtype=float )
         # cartesian coordinates of lattice vectors
         self.base = numpy.dot(self.stdbase, self.baserot)
-        self.recbase = numalg.inv(self.base)
+        # this is crystallographer's definition!!! see http://en.wikipedia.org/wiki/Reciprocal_lattice
+        self.recbase = numalg.inv(self.base) 
+        # this is physics definition
+        self.recbase2pi = 2*numpy.pi*self.recbase
         # bases normalized to unit reciprocal vectors
         self.normbase = numpy.array([ self.base[0,:]*self.ar,
                                     self.base[1,:]*self.br,
@@ -244,7 +245,10 @@ class Lattice(object):
                 dtype=float )
         # calculate unit cell rotation matrix,  base = stdbase*baserot
         self.baserot = numpy.dot( numalg.inv(self.stdbase), self.base )
-        self.recbase = numalg.inv(self.base)
+        # this is crystallographer's definition!!! see http://en.wikipedia.org/wiki/Reciprocal_lattice
+        self.recbase = numalg.inv(self.base) 
+        # this is physics definition
+        self.recbase2pi = 2*numpy.pi*self.recbase
         # bases normalized to unit reciprocal vectors
         self.normbase = numpy.array([ self.base[0,:]*self.ar,
                                     self.base[1,:]*self.br,
@@ -407,7 +411,8 @@ class Lattice(object):
         The shift is an optional vector shift to all points in the grid.
         """
 
-        recipvectors = 2 * numpy.pi * numalg.inv(numpy.transpose(self.base))
+        #recipvectors = 2 * numpy.pi * numalg.inv(numpy.transpose(self.base))
+        recipvectors = self.recbase2pi
         frackpts = MonkhorstPack(size)
         frackpts += numpy.array(shift)
         # this applies scaling of MP grid by reciprocal cell vectors:
