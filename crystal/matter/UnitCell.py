@@ -54,13 +54,18 @@ class UnitCell:
 
     def hasAtom(self, atom):
         '''check if the given atom is alreday in the cell'''
+        return self.getAtomIndex(atom) is not None
+
+
+    def getAtomIndex(self, atom):
+        '''get  the given atom is alreday in the cell'''
         xyz = atom.xyz_cartn
         xyz = self.calcFractionalCoordsInCell(xyz)
-        for a in self.atoms:
+        for i, a in enumerate(self.atoms):
             if a.symbol == atom.symbol and (np.round(a.xyz - xyz, self.rounding_decimals)==[0,0,0]).all():
-                return True
+                return i
             continue
-        return False
+        return None
 
 
     def cartesian(self, u):
