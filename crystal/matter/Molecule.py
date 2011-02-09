@@ -155,36 +155,7 @@ class Molecule(list):
             alabel = a.symbol + str(elnum[a.symbol])
             labels.append(alabel)
         return labels
-        
-    #untested--from UnitCell
-    def bringFractionalPositionIntoCell(self, fracpos):
-        """Brings a fractional position (x,y,z) 'into' the unit cell,
-        i.e.: (x,y,z)->(x',y',z') such that x,y,z in [0,1( """
-        pos = numpy.array(fracpos)
-        assert (len(pos) == 3)
-        for i in range(3):
-            if pos[i]<0:
-                while pos[i]<0:
-                    pos[i] += 1
-            if pos[i]>=1:
-                while pos[i]>=1:
-                    pos[i] -= 1
-        return pos
 
-    #untested--from UnitCell
-    def cartesianPositionInLattice(self, siteId, latticeVector):
-        """Returns the Cartesian position vector from the origin
-        ( fractional coordinates [0,0,0] in unit cell [0,0,0]),
-        for a Site corresponding to 'siteId',
-        in the unit cell corresponding to latticeVector
-        (triplets of coordinates in terms of cellvectors), 
-        defining which unit cell in the lattice.
-        """
-        try:
-            posincell = self.getCartesianPosition(siteId)
-        except KeyError: raise KeyError, 'Invalid site Id'
-        pos = numpy.array(posincell) + numpy.dot(latticeVector, self._lattice)
-        return pos
     
     def getPosition(self, siteId):
         """Returns the (fractional) position of a site."""
