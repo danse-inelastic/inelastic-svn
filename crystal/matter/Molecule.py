@@ -493,5 +493,15 @@ class Molecule(list):
             setattr(self, attrname, False)
         return
 
+if __name__=='__main__':
+    m = Molecule()
+    print m
+    from Atom import Atom
+    o1 = Atom('O',[0.0, 0.0, 0.0])
+    print o1.xyz_cartn
+    h1 = Atom('H',[0.5, 0.0, 0.0])
+    h2 = Atom('H',[0.0, 0.5, 0.0])
+    m = Molecule([o1,h1,h2])
+    print m
 
 
