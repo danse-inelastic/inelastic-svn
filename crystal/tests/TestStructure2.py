@@ -35,9 +35,9 @@ class TestStructure(unittest.TestCase):
         self.stru.read(xyzfile)
         #print self.stru5
         
-        xyzfile = os.path.join(testdata_dir, 'KC24PosAndCharges.xyz')
-        self.stru2 = Structure()
-        self.stru2.read(xyzfile)
+#        xyzfile = os.path.join(testdata_dir, 'KC24PosAndCharges.xyz')
+#        self.stru2 = Structure()
+#        self.stru2.read(xyzfile)
 
         self.places = 12  
         
@@ -53,9 +53,12 @@ class TestStructure(unittest.TestCase):
         charges = [0.0, 0.0, 0.0, 0.0]
         self.stru.charges = charges
         self.assertAlmostEqual(self.stru[0].charge, charges[0])
-        print self.stru2.charges
+        #print self.stru2.charges
 
-
+    def test_writeStr(self):
+        """check Structure.writeStr()"""
+        print self.stru.writeStr('xyz')
+        return
 
 # End of class TestStructure
 

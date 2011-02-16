@@ -76,7 +76,11 @@ class TestStructure(unittest.TestCase):
         #print "here's the lattice", stru.lattice.base
         return
     
-
+    def test_writeStr(self):
+        """check Structure.writeStr()"""
+        print self.stru3.writeStr('xyz')
+        return
+    
     # FIXME move into TestAtom
     def test_cartesian(self):
         """check conversion to Cartesian coordinates"""
@@ -250,10 +254,6 @@ class TestStructure(unittest.TestCase):
 #       """
 #       return
 #
-#   def test_writeStr(self):
-#       """check Structure.writeStr()
-#       """
-#       return
 #
 #   def test_append(self):
 #       """check Structure.append()
