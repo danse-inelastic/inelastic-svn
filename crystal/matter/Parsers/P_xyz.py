@@ -131,7 +131,6 @@ class P_xyz(StructureParser):
             return self._toLines_primitiveunitcell(stru, **kwds)
         return self._toLines_originalunitcell(stru, **kwds)
 
-
     def _toLines_primitiveunitcell(self, stru, **kwds):
         use_fractional_coordinates = kwds.get('use_fractional_coordinates')
         puc = stru.primitive_unitcell
@@ -156,7 +155,6 @@ class P_xyz(StructureParser):
             s = "%-3s %g %g %g" % (a.symbol, rc[0], rc[1], rc[2])
             lines.append(s)
         return lines
-
 
     def _toLines_originalunitcell(self, stru, **kwds):
         use_fractional_coordinates = kwds.get('use_fractional_coordinates')
