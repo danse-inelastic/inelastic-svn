@@ -43,6 +43,7 @@ EXPORT_PYTHON_MODULES = \
 	AtomLoader2.py \
 	AtomicObject.py \
 	Lattice.py \
+	Molecule.py \
 	PDFFitStructure.py \
 	Skeleton.py \
 	Site.py \
