@@ -20,8 +20,6 @@ class Molecule(list):
         description   -- molecule description
         lattice -- coordinate system (instance of Lattice)
     """
-    
-
     def __init__(self, atoms=[], lattice=None, description=None, filename=None):
         """define group of atoms in a specified lattice.
 
@@ -39,7 +37,6 @@ class Molecule(list):
         for example:
             oxygen_atoms = [ for a in stru if a.symbol == "O" ]
         """
-
         self._labels = {}
         self._labels_cached = False
         if isinstance(atoms, Molecule):
@@ -55,8 +52,7 @@ class Molecule(list):
             self.read(filename)
         # otherwise assign list of atoms to self
         else:
-            self[:] = atoms
-            
+            self[:] = atoms 
         # override from lattice argument
         if lattice is None:
             if not self.lattice:    self.lattice = Lattice()
@@ -65,17 +61,13 @@ class Molecule(list):
         #    raise TypeError(emsg)
         else:
             self.lattice = lattice
-
         import time
         self.date = time.ctime()
-
-
-    def __str__(self):
-        """simple string representation"""
-        s_lattice = "lattice=%s" % self.lattice
-        s_atoms = '\n'.join([str(a) for a in self])
-        return s_lattice + '\n' + s_atoms
-
+#    def __str__(self):
+#        """simple string representation"""
+#        s_lattice = "lattice=%s" % self.lattice
+#        s_atoms = '\n'.join([str(a) for a in self])
+#        return s_lattice + '\n' + s_atoms
 
     def getChemicalFormula(self):
         atoms = self
@@ -118,7 +110,6 @@ class Molecule(list):
         last_atom = self[-1]
         return last_atom
 
-
     def getAtom(self, id):
         """Reference to internal Atom specified by the identifier.
 
@@ -142,7 +133,6 @@ class Molecule(list):
             raise ValueError(emsg)
         return rv
 
-
     def getLabels(self):
         """List of unique string labels for all atoms in this structure.
 
@@ -155,7 +145,6 @@ class Molecule(list):
             alabel = a.symbol + str(elnum[a.symbol])
             labels.append(alabel)
         return labels
-
     
     def getPosition(self, siteId):
         """Returns the (fractional) position of a site."""
@@ -245,7 +234,6 @@ class Molecule(list):
         a1 = self.getAtom(id1)
         return self.lattice.dist(a0.xyz, a1.xyz)
 
-
     def angle(self, a0, a1, a2):
         """angle at atom a1 in degrees"""
         u10 = a0.xyz - a1.xyz
@@ -278,7 +266,6 @@ class Molecule(list):
                                 distances[idA][idB][(tx,ty,tz)] = dist
         self._distances = distances
         return distances
-
 
 ###########################
 # IO
@@ -451,17 +438,14 @@ class Molecule(list):
     ####################################################################
 
     # lattice
-
     def _get_lattice(self):
         if not hasattr(self, '_lattice'):
             self._lattice = Lattice()
         return self._lattice
-
     def _set_lattice(self, value):
         for a in self:  a.lattice = value
         self._lattice = value
         return
-
     lattice = property(_get_lattice, _set_lattice, doc =
         "Coordinate system for this Structure.")
 
@@ -477,8 +461,6 @@ class Molecule(list):
         kv = zip(self.getLabels(), self[:])
         self._labels = dict(kv)
         self._labels_cached = True
-        return
-
 
     def _uncache(self, *args):
         """Reset cached flag for a list of internal attributes.
@@ -491,7 +473,6 @@ class Molecule(list):
         for a in args:
             attrname = "_" + a + "_cached"
             setattr(self, attrname, False)
-        return
 
 if __name__=='__main__':
     m = Molecule()
