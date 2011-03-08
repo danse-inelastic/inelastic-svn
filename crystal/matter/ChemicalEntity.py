@@ -9,8 +9,8 @@ import numpy
 from Atom import Atom
 from Lattice import Lattice
 
-class Molecule(list):
-    """Molecule --> group of atoms with bonds
+class ChemicalEntity(list):
+    """ChemicalEntity -- superclass of Structure and Molecule
 
     Molecule class is inherited from Python list.  It contains
     a list of Atom instances.  Molecule overloads setitem and setslice
