@@ -158,7 +158,7 @@ class Molecule(list):
               
     def generateDescription(self):
         if self._description==None:
-            self._description = self.getChemicalFormula()+' in '+str(self.lattice)
+            self._description = self.getChemicalFormula()#+' in '+str(self.lattice)
         return self._description
     def setDescription(self, desc):
         self._description = desc
