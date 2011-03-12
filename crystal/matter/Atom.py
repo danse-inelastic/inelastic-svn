@@ -124,7 +124,7 @@ class Atom(object):
                  occupancy=1.0, charge=0.0, anisotropy=None, U=None, Uisoequiv=None, lattice=None):
         object.__init__(self)
         # declare non-singleton data members
-        self.xyz = numpy.zeros(3, dtype=float)
+        self.xyz = xyz
         self.label = label
         self.charge = charge
         self.occupancy = occupancy
