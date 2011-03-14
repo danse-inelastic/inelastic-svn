@@ -124,7 +124,7 @@ class Atom(object):
                  occupancy=1.0, charge=0.0, anisotropy=None, U=None, Uisoequiv=None, lattice=None):
         object.__init__(self)
         # declare non-singleton data members
-        self.xyz = xyz
+        self.xyz = numpy.array([0,0,0])
         self.label = label
         self.charge = charge
         self.occupancy = occupancy
@@ -152,9 +152,6 @@ class Atom(object):
         if U is not None:           self._U = U
         if Uisoequiv is not None:   self._Uisoequiv = Uisoequiv
         if lattice is not None:     self.lattice = lattice
-        
-        return
-
 
 #    def __setattr__(self, name, value):
 #        if name not in Atom._setable:
