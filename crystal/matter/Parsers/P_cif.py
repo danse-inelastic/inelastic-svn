@@ -446,8 +446,11 @@ class P_cif(StructureParser):
             oprep_cif = [str(op) for op in symop_list]
             oprep_cif.sort()
             if oprep_std == oprep_cif:
-                self.spacegroup = copy.copy(sgstd)
-                self.spacegroup.symop_list = symop_list
+                pass
+            else:
+                sgstd.description = 'WARNING: this spacegroup definition uses a non-standard setting!'
+            self.spacegroup = copy.copy(sgstd)
+            self.spacegroup.symop_list = symop_list 
         # define new spacegroup when not found
         if self.spacegroup is None:
             new_short_name = "CIF " + (sg_nameHall or 'data')

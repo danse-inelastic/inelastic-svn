@@ -178,7 +178,8 @@ class SpaceGroup(object):
                  point_group_name        = None,
                  crystal_system          = None,
                  pdb_name                = None,
-                 symop_list              = None):
+                 symop_list              = None,
+                 description             = None):
 
         self.number                  = number
         self.num_sym_equiv           = num_sym_equiv
@@ -189,6 +190,7 @@ class SpaceGroup(object):
         self.crystal_system          = crystal_system
         self.pdb_name                = pdb_name
         self.symop_list              = symop_list
+        self.description             = description
 
     def iter_symops(self):
         """Iterates over all SymOps in the SpaceGroup.
@@ -8033,7 +8035,8 @@ def GetSpaceGroup(sgid):
     """Returns the SpaceGroup instance for the given identifier.
 
     sgid -- space group symbol, either short_name or pdb_name,
-            whatever it means in mmlib.  Can be also an integer.
+            whatever it means in mmlib.  Can be also be spacegroup 
+            number (or mmlib's variant of this--see _sg_lookup_table)
 
     Return space group instance.
     Raise ValueError when not found.
