@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<!-- saved from url=(0037)http://www.glge.org/demos/canvasdemo/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+<title>GLGE Canvas Cube</title>
+<script type="text/javascript" src="./GLGE Canvas Cube_files/glge_math.js"></script> 
+<script type="text/javascript" src="./GLGE Canvas Cube_files/glge.js"></script> 
+<script type="text/javascript" src="./GLGE Canvas Cube_files/glge_input.js"></script> 
+<style>
+body{margin:auto; background-color: #888; padding-top: 50px; font-family:sans; color: #666; font-size: 0.8em}
+#container{ margin:auto; width: 900px; padding: 10px; background-color: #fff; border-radius: 5px; -webkit-box-shadow: 5px 5px 2px #444; }
+</style>
+</head>
+<body>
+
+
+<div id="container">
+<canvas id="canvas" width="900" height="400"></canvas>
+<div id="details">
+<h2>GLGE Canvas Demo</h2>
+<p>Draw on the cube with the mouse by holding down the left mouse button. This demo illustrates the use of canvas textures, and the ray query which now returns the texture coords as well as distance, normal and object information</p>
+</div>
+<div id="debug"></div>
+<!--
+<video  id="testvid" src="bunny.ogg" loop controls>  
+  Your browser does not support the <code>video</code> element.  
+</video>
+-->
+
+<script id="glge_document" type="text/xml">
+	<glge>
+		<mesh id="CubeMesh">
+		<positions>1.000000,1.000000,-1.000000,1.000000,-1.000000,-1.000000,-1.000000,-1.000000,-1.000000,-1.000000,1.000000,-1.000000,1.000000,0.999999,1.000000,-1.000000,1.000000,1.000000,-1.000000,-1.000000,1.000000,0.999999,-1.000001,1.000000,1.000000,1.000000,-1.000000,1.000000,0.999999,1.000000,0.999999,-1.000001,1.000000,1.000000,-1.000000,-1.000000,1.000000,-1.000000,-1.000000,0.999999,-1.000001,1.000000,-1.000000,-1.000000,1.000000,-1.000000,-1.000000,-1.000000,-1.000000,-1.000000,-1.000000,-1.000000,-1.000000,1.000000,-1.000000,1.000000,1.000000,-1.000000,1.000000,-1.000000,1.000000,0.999999,1.000000,1.000000,1.000000,-1.000000,-1.000000,1.000000,-1.000000,-1.000000,1.000000,1.000000</positions>
+		<normals>0.000000,0.000000,-1.000000,0.000000,0.000000,-1.000000,0.000000,0.000000,-1.000000,0.000000,0.000000,-1.000000,0.000000,-0.000000,1.000000,0.000000,-0.000000,1.000000,0.000000,-0.000000,1.000000,0.000000,-0.000000,1.000000,1.000000,-0.000000,0.000000,1.000000,-0.000000,0.000000,1.000000,-0.000000,0.000000,1.000000,-0.000000,0.000000,-0.000000,-1.000000,-0.000000,-0.000000,-1.000000,-0.000000,-0.000000,-1.000000,-0.000000,-0.000000,-1.000000,-0.000000,-1.000000,0.000000,-0.000000,-1.000000,0.000000,-0.000000,-1.000000,0.000000,-0.000000,-1.000000,0.000000,-0.000000,0.000000,1.000000,0.000000,0.000000,1.000000,0.000000,0.000000,1.000000,0.000000,0.000000,1.000000,0.000000</normals>
+		<uv1>0.001020,1.000000,0.000000,0.501529,0.332314,0.500000,0.333333,0.998471,0.667686,0.000000,1.000000,0.001529,0.998981,0.500000,0.666667,0.498471,0.998981,0.500000,1.000000,0.998471,0.667686,1.000000,0.666667,0.501529,0.665647,0.500000,0.666667,0.998471,0.334353,1.000000,0.333333,0.501529,0.333333,0.498471,0.334353,0.000000,0.666667,0.001529,0.665647,0.500000,0.333333,0.498471,0.001020,0.500000,0.000000,0.001529,0.332314,0.000000</uv1>
+		<faces>0,1,2,0,2,3,4,5,6,4,6,7,8,9,10,8,10,11,12,13,14,12,14,15,16,17,18,16,18,19,20,21,22,20,22,23</faces>
+		</mesh>
+
+		<material id="canvas" specular="1.0" shininess="2" color="#444">
+			<texture_canvas height="512" width="512" id="CanvasTexture" />
+			<material_layer texture="#CanvasTexture" mapinput="UV1" mapto="M_COLOR" />
+		</material>
+			
+		<animation_vector id="spin" frames="1000">
+			<animation_curve channel="RotZ">
+				<linear_point x="0.0" y="0" />
+				<linear_point x="1000.0" y="6.282" />
+			</animation_curve>
+			<animation_curve channel="RotX">
+				<linear_point x="0.0" y="0" />
+				<linear_point x="1000.0" y="6.282" />
+			</animation_curve>
+		</animation_vector>
+		
+		<scene id="mainscene" ambient_color="#555" camera="#mainCamera" background_color="#338">
+		
+			<camera id="mainCamera" loc_z="7" loc_y="4.0" fov_y="35" rot_x="-0.5" />
+			
+			<object id="cube" mesh="#CubeMesh" material="#canvas" frame_rate="40" animation="#spin" rot_x="-1.57"  scale="1" />
+			
+			<light id="light1" loc_x="-3" loc_y="15" loc_z="-7" attenuation_quadratic="0.00001" attenuation_linear="0.00000001" attenuation_constant="2" type="L_POINT" />
+		
+			<light id="light2" loc_x="3" loc_y="15" loc_z="7" attenuation_quadratic="0.00001" attenuation_linear="0.00000001" attenuation_constant="2" type="L_POINT" />
+			
+		</scene>
+	</glge>
+</script>
+
+<script>
+
+var canvas = document.getElementById( 'canvas' )
+var renderer = new GLGE.Renderer( canvas );
+
+var XMLdoc = new GLGE.Document();
+
+XMLdoc.onLoad = function(){
+	var scene = XMLdoc.getElement( "mainscene" );
+	renderer.setScene( scene );
+	renderer.render();
+	var camera = XMLdoc.getElement( "mainCamera" );
+	var canvasTexture = XMLdoc.getElement( "CanvasTexture" ).getCanvas();
+	var ctx = canvasTexture.getContext("2d");  
+	
+	ctx.fillStyle = "#FFFFFF";
+	ctx.fillRect(0,0,canvasTexture.width,canvasTexture.height); 
+	ctx.lineWidth = 5;  
+    
+	var drag=false;
+	var lastcoord=[0,0];
+	var prevcoord=[0,0];
+	
+	canvas.onmousedown= function( e ){
+		var mousepos={}
+		mousepos.x=e.clientX-document.getElementById("canvas").offsetLeft;
+		mousepos.y=e.clientY-document.getElementById("canvas").offsetTop;
+		lastcoord=[mousepos.x,mousepos.y];
+		var coord=scene.pick(mousepos.x,mousepos.y).texture;
+		var prevcoord=coord;
+		ctx.moveTo(coord[0]*canvasTexture.width, (1-coord[1])*canvasTexture.height);
+		drag=true;
+		renderer.render();
+	}
+	
+	canvas.onmouseup= function( e ){
+		drag=false;
+	}
+	
+	canvas.onmousemove= function( e ){
+		if(drag){
+			var mousepos={}
+			mousepos.x=e.clientX-document.getElementById("canvas").offsetLeft;
+			mousepos.y=e.clientY-document.getElementById("canvas").offsetTop;
+			lastcoord=[mousepos.x,mousepos.y];
+		}
+		
+	}
+
+	canvas.onmousewheel = function( e ){
+		delta=e.wheelDelta/120;
+		if(delta!=0){
+			camera.setFovY(parseFloat(camera.getFovY())-delta);
+		}
+	}
+	
+	setInterval(function(){
+		if(drag){
+			var coord=scene.pick(lastcoord[0],lastcoord[1]).texture;
+			if((coord[0]-prevcoord[0])*(coord[0]-prevcoord[0])+(coord[1]-prevcoord[1])*(coord[1]-prevcoord[1])<0.05){
+				ctx.lineTo(coord[0]*canvasTexture.width, (1-coord[1])*canvasTexture.height);
+			}else{
+				ctx.moveTo(coord[0]*canvasTexture.width, (1-coord[1])*canvasTexture.height);
+			}
+			prevcoord=coord;
+			ctx.stroke(); 
+		}
+		renderer.render();
+	},15);
+}
+
+XMLdoc.parseScript("glge_document");
+
+</script>
+
+
+
+</div></body></html>
