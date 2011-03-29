@@ -570,7 +570,7 @@ class Structure(list):
             self[:] = new_structure
         return p
 
-    def write(self, filename, format):
+    def write(self, filename, format, **kwds):
         """Save structure to file in the specified format
 
         No return value.
@@ -581,13 +581,13 @@ class Structure(list):
         from Parsers import getParser
         p = getParser(format)
         p.filename = filename
-        s = p.tostring(self)
+        s = p.tostring(self, **kwds)
         f = open(filename, 'wb')
         f.write(s)
         f.close()
         return
 
-    def writeStr(self, format):
+    def writeStr(self, format, **kwds):
         """return string representation of the structure in specified format
 
         Note: available structure formats can be obtained by:
@@ -595,7 +595,7 @@ class Structure(list):
         """
         from Parsers import getParser
         p = getParser(format)
-        s = p.tostring(self)
+        s = p.tostring(self, **kwds)
         return s
 
     ##############################################################################
