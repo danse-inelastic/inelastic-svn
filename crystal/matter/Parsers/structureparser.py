@@ -51,10 +51,10 @@ class StructureParser:
         stru = self.parseLines(lines)
         return stru
 
-    def tostring(self, stru):
+    def tostring(self, stru, **kwds):
         """Convert Structure instance to a string.
         """
-        lines = self.toLines(stru)
+        lines = self.toLines(stru, **kwds)
         s = '\n'.join(lines) + '\n'
         return s
 
