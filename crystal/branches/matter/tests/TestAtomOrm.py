@@ -1,5 +1,6 @@
 
-
+# this test required existence of postgres database "test"
+skip = True
 
 
 import sys,os
@@ -8,7 +9,7 @@ import unittest
 sys.path.insert(0,os.path.abspath('..'))
 print sys.path
 
-from matter import Atom
+from matter.orm.Atom import Atom
 
 class TestCase( unittest.TestCase ):
     

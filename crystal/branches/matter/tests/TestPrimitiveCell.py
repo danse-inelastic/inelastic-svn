@@ -14,7 +14,14 @@ class TestCase(unittest.TestCase):
             Atom('Ni', (0.5,0.5,0)),
             ]
         struct = Structure(lattice=lattice, atoms=atoms, sgid=225)
-        print struct.primitive_unitcell
+        pcell = struct.primitive_unitcell
+        self.assert_(pcell)
+        self.assertArrayEqual(
+            pcell.base,
+            [[-1., 0., 1.],
+             [ 0., 1., 1.],
+             [-1., 1., 0.]]
+            )
         return
 
 
@@ -44,8 +51,10 @@ class TestCase(unittest.TestCase):
             ]
         struct = Structure(lattice=lattice, atoms=atoms, sgid=225)
         verdict, pos, op = struct.symConsistent()
-        print verdict, pos, op
+        # print verdict, pos, op
         self.assert_(verdict)
+        self.assert_(pos is None)
+        self.assert_(op is None)
         return
 
 
@@ -60,8 +69,10 @@ class TestCase(unittest.TestCase):
             ]
         struct = Structure(lattice=lattice, atoms=atoms, sgid=225)
         verdict, pos, op = struct.symConsistent()
-        print verdict, pos, op
+        # print verdict, pos, op
         self.assert_(verdict)
+        self.assert_(pos is None)
+        self.assert_(op is None)
         return
         
     
@@ -76,10 +87,18 @@ class TestCase(unittest.TestCase):
             ]
         struct = Structure(lattice=lattice, atoms=atoms, sgid=221)
         verdict, pos, op = struct.symConsistent()
-        print verdict, pos, op
+        # print verdict, pos, op
         self.assert_(verdict)
+        self.assert_(pos is None)
+        self.assert_(op is None)
 
         self.assertEqual(len(struct.primitive_unitcell.atoms), 4)
+        return
+
+
+    def assertArrayEqual(self, v1, v2):
+        from numpy.testing import assert_array_almost_equal
+        assert_array_almost_equal(v1, v2)
         return
         
     
