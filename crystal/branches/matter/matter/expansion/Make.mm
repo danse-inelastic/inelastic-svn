@@ -11,18 +11,12 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 PROJECT = matter
-PACKAGE = 
+PACKAGE = expansion
 
 #--------------------------------------------------------------------------
 #
 
 BUILD_DIRS = \
-	Parsers \
-	atomic_properties \
-	crystalIO \
-	crystalUtils \
-	expansion \
-	orm \
 
 OTHER_DIRS = \
 
@@ -40,29 +34,11 @@ all: export
 # export
 
 EXPORT_PYTHON_MODULES = \
-	Atom.py \
-	AtomLoader2.py \
-	AtomicObject.py \
-	Lattice.py \
-	Molecule.py \
-	PDFFitStructure.py \
-	Skeleton.py \
-	Site.py \
-	SpaceGroups.py \
-	Structure.py \
-	StructureErrors.py \
-	StructureManipulator.py \
-	StrukturberichtDesignationFinder.py \
-	SymmetryUtilities.py \
-	UnitCell.py \
 	__init__.py \
-	properties.py \
-	sgtbxspacegroups.py \
-	utils.py \
-	version.py \
-	wyckoff.py \
-	__init__.py \
-
+	makeCuboctahedron.py \
+	makeEllipsoid.py \
+	shapeUtils.py \
+	supercell_mod.py \
 
 export:: export-package-python-modules
 

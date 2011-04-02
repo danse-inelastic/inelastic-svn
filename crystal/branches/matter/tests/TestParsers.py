@@ -181,7 +181,7 @@ class TestP_rawxyz(unittest.TestCase):
         stru.read(datafile('bucky-plain.xyz'), self.format)
         s_els = [a.symbol for a in stru]
         #print 'description',stru.description
-        self.assertEqual(stru.description, 'C60 in Lattice()')
+        self.assertEqual(stru.description, 'C_60')
         self.assertEqual(s_els, 60*['C'])
 
     def test_read_plainxyz_bad(self):
@@ -197,7 +197,7 @@ class TestP_rawxyz(unittest.TestCase):
         s_els = [a.symbol for a in stru]
         #stru.description = stru.generateDescription()
         #print 'description',stru.description
-        self.assertEqual(stru.description, '60 in Lattice()')
+        self.assertEqual(stru.description, '_60')
         self.assertEqual(s_els, 60*[''])
         stru.read(datafile('hexagon-raw.xyz'), self.format)
         zs = [a.xyz[-1] for a in stru]

@@ -94,7 +94,7 @@ class TestSuperCell(unittest.TestCase):
         #print al_sup
         return
 
-    def test_naI_supercell(self):
+    def test_NaI(self):
         """check supercell expansion for Al.
         """       
         at1 = Atom('Na', [0.0, 0.0, 0.0])
@@ -108,12 +108,18 @@ class TestSuperCell(unittest.TestCase):
         naI = Structure( [ at1, at2, at3, at4, at5, at6, at7, at8], 
                                lattice = Lattice(6.482, 6.482, 6.482, 90, 90, 90),
                                sgid = 225 )
+        lines = []
         for sym,pos in zip(naI.symbols, naI.xyz_cartn):
-            print sym+' %f %f %f' % tuple(pos) 
-        print
+            lines.append( sym+' %f %f %f' % tuple(pos) )
+        lines.append('\n')
         naI_sup = supercell(naI, (2,2,2))
         for sym,pos in zip(naI_sup.symbols, naI_sup.xyz_cartn):
-            print sym+' %f %f %f' % tuple(pos)
+            lines.append(sym+' %f %f %f' % tuple(pos))
+        expected = open('expected-test_NaI-TestSuperCell').readlines()
+        self.assertEqual(len(lines), len(expected))
+        for l1, l2 in zip(lines, expected):
+            self.assertEqual(l1.strip(), l2.strip())
+        return
 
 # End of class TestRoutines
 
