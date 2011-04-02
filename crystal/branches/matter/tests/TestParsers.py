@@ -55,7 +55,7 @@ class TestP_xyz(unittest.TestCase):
         stru = self.stru
         #stru.read(datafile('bucky.xyz'), self.format)
         stru.read(datafile('si64.init.xyz'), self.format)
-        print stru.lattice
+        # print stru.lattice
         s_els = [a.symbol for a in stru]
         #self.assertEqual(stru.description, 'bucky-ball')
         #self.assertEqual(s_els, 60*['C'])

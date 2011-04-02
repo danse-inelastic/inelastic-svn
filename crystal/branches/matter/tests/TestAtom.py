@@ -16,16 +16,16 @@ class TestCase( unittest.TestCase ):
     def test_isotope_ctor(self):
         "Atom: isotope ctor"
         Fe57 = Atom( 'Fe', mass=57 )
-        print "- Z=%s" % Fe57.Z
-        print "- mass=%s" % Fe57.mass
+        self.assertEqual(Fe57.Z, 26)
+        self.assertEqual(Fe57.mass, 57)
         return
     
     def test_xyz(self):
         "Atom: xyz cartesian attribute"
         from matter import Lattice
         C = Atom( 'C', [0.1, 0.2, 0.3], lattice = Lattice(2,2,2,90,90,90))
-        print "fractional pos=%s" % C.xyz
-        print "cartesian pos=%s" % C.xyz_cartn
+        self.assertEqual(list(C.xyz), [0.1, 0.2, 0.3])
+        self.assertEqual(list(C.xyz_cartn), [0.2, 0.4, 0.6])
         return
 
 
@@ -40,10 +40,12 @@ class TestCase( unittest.TestCase ):
         "Atom: setable state"
         Fe57 = Atom( 'Fe', mass=57 )
         v = (0,0,1)
-        print '- Set velocity to %s ... ' % (v,), 
+        # print '- Set velocity to %s ... ' % (v,), 
         Fe57.velocity = v
-        print ' velocity = %s ' % (Fe57.velocity,)
-        print "- velocity's documentation: %s " % Atom.velocity.doc
+        # print ' velocity = %s ' % (Fe57.velocity,)
+        self.assertEqual(Fe57.velocity, v)
+        # print "- velocity's documentation: %s " % Atom.velocity.doc
+        self.assert_(Atom.velocity.doc)
         return
 
 
@@ -76,14 +78,14 @@ class TestCase( unittest.TestCase ):
         "Atom: __str__"
         Fe57 = Atom( 'Fe', mass=57 )
         Fe57.velocity = (0,0,1)
-        print Fe57
+        # print Fe57
         return
 
 
     def test_natural_element(self):
         "Atom: natural element ctor"
         Fe = Atom( 'Fe' )
-        print Fe
+        # print Fe
         return
 
 

@@ -15,7 +15,7 @@ import unittest
 from matter import Lattice, LatticeError
 
 ##############################################################################
-class TestLattice(unittest.TestCase):
+class TestCase(unittest.TestCase):
     """test methods of Lattice class"""
 
     def setUp(self):
@@ -98,12 +98,47 @@ class TestLattice(unittest.TestCase):
     def test_monkhorst_pack(self):
         self.lattice.setLatPar(3, 3, 3, 90, 90, 90)
         grid = (2,2,2)
-        print self.lattice.getMonkhorstPackGrid(grid)
-        print self.lattice.getFracMonkhorstPackGrid(grid)
+        from numpy.testing import assert_array_almost_equal
+        expected = \
+            [[[[-0.52359878,-0.52359878,-0.52359878],
+               [-0.52359878, 0.52359878,-0.52359878]],
+
+              [[ 0.52359878,-0.52359878,-0.52359878],
+               [ 0.52359878, 0.52359878,-0.52359878]]],
+
+             [[[-0.52359878,-0.52359878, 0.52359878],
+               [-0.52359878, 0.52359878, 0.52359878]],
+
+              [[ 0.52359878,-0.52359878, 0.52359878],
+               [ 0.52359878, 0.52359878, 0.52359878]]]]
+
+        assert_array_almost_equal(
+            self.lattice.getMonkhorstPackGrid(grid),
+            expected,
+            )
+
+        expected = \
+            [[[[-0.25,-0.25,-0.25],
+               [-0.25, 0.25,-0.25]],
+              
+              [[ 0.25,-0.25,-0.25],
+               [ 0.25, 0.25,-0.25]]],
+             
+             [[[-0.25,-0.25, 0.25],
+               [-0.25, 0.25, 0.25]],
+              
+              [[ 0.25,-0.25, 0.25],
+               [ 0.25, 0.25, 0.25]]]]
+
+        assert_array_almost_equal(
+            self.lattice.getFracMonkhorstPackGrid(grid),
+            expected,
+            )
+        return
         
 
 
-# End of TestLattice
+# End of TestCase
 
 if __name__ == '__main__':
     unittest.main()

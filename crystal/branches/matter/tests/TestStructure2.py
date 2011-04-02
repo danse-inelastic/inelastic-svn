@@ -48,17 +48,24 @@ class TestStructure(unittest.TestCase):
         
     def testRS(self):
         """reciprocal space tests"""
-        print self.stru2.lattice
-        print self.stru2.lattice.recbase
-        print self.stru2.lattice.recbase2pi  
+        # print self.stru2.lattice
+        recbase = self.stru2.lattice.recbase
+        expected = \
+            [[ 0.20242669, 0.,         0.        ],
+             [ 0.,         0.20242669, 0.        ],
+             [ 0.,         0.,         0.20242669]]
+        from numpy import array
+        expected = array(expected)
+
+        self.assertArrayEqual(recbase, expected)
         
-    def assertListAlmostEqual(self, l1, l2, places=None):
-        """wrapper for list comparison"""
-        if places is None: places = self.places
-        self.assertEqual(len(l1), len(l2))
-        for i in range(len(l1)):
-            self.assertAlmostEqual(l1[i], l2[i], places)
-        
+        from math import pi
+        self.assertArrayEqual(
+            self.stru2.lattice.recbase2pi,
+            expected * 2 * pi,
+            )
+        return
+    
         
     def test_charges(self):
         charges = [0.0, 0.0, 0.0, 0.0]
@@ -68,8 +75,30 @@ class TestStructure(unittest.TestCase):
 
     def test_writeStr(self):
         """check Structure.writeStr()"""
-        print self.stru.writeStr('xyz')
+        s = self.stru.writeStr('xyz')
+        expected = '''4
+F_3 Sc_1
+Sc  0 0 0
+F   0 8.04246 8.17697
+F   8.04246 0 8.17697
+F   8.04246 8.04246 0
+'''
+        self.assertEqual(s, expected)
         return
+
+    def assertListAlmostEqual(self, l1, l2, places=None):
+        """wrapper for list comparison"""
+        if places is None: places = self.places
+        self.assertEqual(len(l1), len(l2))
+        for i in range(len(l1)):
+            self.assertAlmostEqual(l1[i], l2[i], places)
+        
+        
+    def assertArrayEqual(self, v1, v2):
+        from numpy.testing import assert_array_almost_equal
+        assert_array_almost_equal(v1, v2)
+        return
+
 
 # End of class TestStructure
 
