@@ -491,7 +491,12 @@ class Lattice(object):
                     self.abcABG()
         return s
 
+    
+    def __str__(self):
+        return "Lattice(a=%g, b=%g, c=%g, alpha=%g, beta=%g, gamma=%g)" % \
+            self.abcABG()
 
+    
 
 # End of Lattice
 

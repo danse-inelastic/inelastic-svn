@@ -78,7 +78,9 @@ class TestStructure(unittest.TestCase):
     
     def test_writeStr(self):
         """check Structure.writeStr()"""
-        print self.stru3.writeStr('xyz')
+        s = self.stru3.writeStr('xyz')
+        expected = '4\nC_4\nC   0 0 0\nC   0 0 3.348\nC   0.708986 1.228 0\nC   1.41797 -2.67473e-16 3.348\n'
+        self.assertEqual(s, expected)
         return
     
     # FIXME move into TestAtom

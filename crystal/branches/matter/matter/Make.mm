@@ -21,8 +21,9 @@ BUILD_DIRS = \
 	atomic_properties \
 	crystalIO \
 	crystalUtils \
+	expansion \
 	orm \
-	
+
 OTHER_DIRS = \
 
 RECURSE_DIRS = $(BUILD_DIRS) $(OTHER_DIRS)

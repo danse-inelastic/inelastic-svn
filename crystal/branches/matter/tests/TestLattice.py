@@ -94,6 +94,14 @@ class TestCase(unittest.TestCase):
         self.lattice.setLatBase(base)
         r = repr(self.lattice)
         self.assertEqual(r, "Lattice(base=%r)" % self.lattice.base)
+
+
+    def test_str(self):
+        s = str(self.lattice)
+        s2 = "Lattice(a=%g, b=%g, c=%g, alpha=%g, beta=%g, gamma=%g)" % \
+            self.lattice.abcABG()
+        self.assertEqual(s, s2)
+        return
         
     def test_monkhorst_pack(self):
         self.lattice.setLatPar(3, 3, 3, 90, 90, 90)
