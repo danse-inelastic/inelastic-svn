@@ -99,9 +99,9 @@ class Atom(object):
 
     Atom(a) creates a copy of Atom instance a.
 
-    atype       -- element symbol string or Atom instance
+    atype       -- symbol string or Atom instance
     xyz         -- fractional coordinates
-    label        -- atom label
+    label       -- atom label
     occupancy   -- fractional occupancy
     anisotropy  -- flag for anisotropic thermal displacements
     U           -- anisotropic thermal displacement tensor, property
@@ -119,12 +119,11 @@ class Atom(object):
     
     """
 
-
     def __init__(self, atype='H', xyz=[0,0,0], mass=None, label='', 
                  occupancy=1.0, charge=0.0, anisotropy=None, U=None, Uisoequiv=None, lattice=None):
         object.__init__(self)
         # declare non-singleton data members
-        self.xyz = numpy.array([0.,0.,0.])
+        self.xyz = [0,0,0] #this CANNOT be a numpy array or it breaks the cif reader!!!
         self.label = label
         self.charge = charge
         self.occupancy = occupancy
@@ -218,14 +217,11 @@ class Atom(object):
         else:
             rv = CartesianCoordinatesArray(self.lattice, self.xyz)
         return rv
-
     def _set_xyz_cartn(self, value):
         if not self.lattice:
             self.xyz[:] = value
         else:
             self.xyz = self.lattice.fractional(value)
-        return
-
     xyz_cartn = property(_get_xyz_cartn, _set_xyz_cartn, doc =
         """absolute Cartesian coordinates of an atom
         """ )
