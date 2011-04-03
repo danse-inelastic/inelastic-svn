@@ -229,21 +229,17 @@ class Structure(list):
         """Add new Atom instance to the end of this Structure.
 
         All arguments are forwarded to Atom constructor.
-
-        No return value.
         """
         kwargs['lattice'] = self.lattice
         a = Atom(*args, **kwargs)
         list.append(self, a)
         self._uncache('labels')
-        return
 
     def getLastAtom(self):
         """Return Reference to the last Atom in this structure.
         """
         last_atom = self[-1]
         return last_atom
-
 
     def getAtom(self, id):
         """Reference to internal Atom specified by the identifier.
@@ -457,7 +453,7 @@ class Structure(list):
         Tx = numpy.dot(self.lattice.base, new_lattice.recbase)
         Tu = numpy.dot(self.lattice.normbase, new_lattice.recnormbase)
         for a in self:
-            a.xyz = numpy.dot(a.xyz, Tx)
+            a.xyz = list(numpy.dot(a.xyz, Tx))
         self.lattice = new_lattice
         return self
     
