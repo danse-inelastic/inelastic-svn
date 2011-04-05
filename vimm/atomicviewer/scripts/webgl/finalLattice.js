@@ -1,5 +1,4 @@
-
-//o3djs.base.o3d = o3d;
+o3djs.base.o3d = o3d;
 o3djs.require('o3djs.webgl');
 o3djs.require('o3djs.util');
 o3djs.require('o3djs.math');
@@ -13,6 +12,7 @@ o3djs.require('o3djs.picking');
 o3djs.require('o3djs.primitives');
 o3djs.require('o3djs.debug');
 
+var atom;
 var g_root;
 var g_o3d;
 var g_math;
@@ -31,8 +31,8 @@ var g_o3dElement;
 var g_finished = false;  // for selenium
 
 var g_camera = {
-  farPlane: 5000,
-  nearPlane:.1
+  farPlane: 10000,
+  nearPlane:0.1
 };
 
 var g_dragging = false;
@@ -64,7 +64,7 @@ var rvdw;
 var radius = rvdw;
 var rcov;
 
-var tableLattice = [[1,0,0],[0,1,0],[0,0,1]];
+var tableLattice = [[1,0,0],[0,1,0],[0,0,3]];
 var tableAtom = [];
 var tableBond = [];
 // i.e.
@@ -72,7 +72,7 @@ var tableBond = [];
 //var tableAtom = [['Fe', [0.5,0.5,0.5]], ['C', [2.5,2.5,2.5]]];
 //var tableBond = [ [[0.5,0.5,0.5],[2.5,2.5,2.5]]];
 var sizeX=1;//expand of the supercell along X
-var sizeY=2;//expand of the supercell along Y
+var sizeY=1;//expand of the supercell along Y
 var sizeZ=1;//expand of the supercell along Z
 var latticeParameterX;
 var latticeParameterY;
@@ -102,14 +102,16 @@ function initStep2(clientElements) {
   g_o3d = g_o3dElement.o3d;
   g_math = o3djs.math;
   g_quaternions = o3djs.quaternions;
-  g_client = g_o3dElement.client;
+  window.g_client = g_client = g_o3dElement.client;//
 
   g_mainPack = g_client.createPack();
 
   g_sceneRoot = g_mainPack.createObject('Transform');
   g_sceneRoot.parent = g_client.root;
+  g_aball = o3djs.arcball.create(g_client.width, g_client.height);
+
   // Create the render graph for a view.
-  var clearColor = [.2, .7, .2, 1];
+  var clearColor = [.2, .2, .7, 1];
   g_viewInfo = o3djs.rendergraph.createBasicView(
       g_mainPack,
       g_client.root,
@@ -135,29 +137,31 @@ function initStep2(clientElements) {
   g_lastRot = g_math.matrix4.identity();
   g_thisRot = g_math.matrix4.identity();
 
-  g_viewInfo.drawContext.projection = g_math.matrix4.perspective(
-      Math.PI * 40 / 180,    // 30 degree frustum.
-      g_o3dElement.clientWidth / g_o3dElement.clientHeight,  // Aspect ratio.
-      1,                     // Near plane.
-      10000);                // Far plane.
+//  g_viewInfo.drawContext.projection = g_math.matrix4.perspective(
+//      Math.PI * 40 / 180,    // 30 degree frustum.
+//      g_o3dElement.clientWidth / g_o3dElement.clientHeight,  // Aspect ratio.
+//      1,                     // Near plane.
+//      10000);                // Far plane.
 
-  // Set up our view transformation to look towards the axes origin.
-  g_viewInfo.drawContext.view = g_math.matrix4.lookAt(
-      g_eyeView,       // eye
-      [0, 0, 0],       // target
-      [0, 1, 0]);      // up
+//  // Set up our view transformation to look towards the axes origin.
+//  g_viewInfo.drawContext.view = g_math.matrix4.lookAt(
+//      g_eyeView,       // eye
+//      [0, 0, 0],       // target
+//      [0, 1, 0]);      // up
+      
+  g_root = g_client.root;
 
-  g_aball = o3djs.arcball.create(g_client.width, g_client.height);
+  setClientSize();
 
   // Set the light at the same position as the camera to create a headlight
   // that illuminates the object straight on.
   var paramObject = g_mainPack.createObject('ParamObject');
   g_lightPosParam = paramObject.createParam('lightWorldPos', 'ParamFloat3');
   g_camera.target = [0, 0, 0];
-  g_camera.eye = [0, 0, 5];
+  g_camera.eye = [0, 0, (5*(sizeX+sizeY+sizeZ))];
   updateCamera();
 
-  createLattice(sizeX, sizeY, sizeZ, tableLattice, tableAtom)
+  atom = createLattice(sizeX, sizeY, sizeZ, tableLattice, tableAtom)
 
   o3djs.event.addEventListener(g_o3dElement, 'mousedown', startDragging);
   o3djs.event.addEventListener(g_o3dElement, 'mousemove', drag);
@@ -167,78 +171,6 @@ function initStep2(clientElements) {
   g_client.setRenderCallback(onRender);
 }
 
-
-function setClientSize() {
-	  var newWidth  = parseInt(g_client.width);
-	  var newHeight = parseInt(g_client.height);
-
-	  if (newWidth != g_o3dWidth || newHeight != g_o3dHeight) {
-	    g_o3dWidth = newWidth;
-	    g_o3dHeight = newHeight;
-
-	    updateProjection();
-
-	    // Sets a new area size for arcball.
-	    g_aball.setAreaSize(g_o3dWidth, g_o3dHeight);
-	  }
-	}
-
-/**
- *  Called every frame.
- */
-function onRender() {
-//function onRender(renderEvent) {
-//    g_flashTimer += renderEvent.elapsedTime;
-//	g_flashTimer = g_flashTimer % 0.5;
-//
-//	if(g_selectedAtom.length>0){
-//		for(var indexAtomSelectedTable=0; indexAtomSelectedTable<g_selectedAtom.length; indexAtomSelectedTable++){
-//			var indexOfElement=sym2no[g_selectedAtom[indexAtomSelectedTable][1][0]];
-//			var origColorAtom = color[indexOfElement];
-//			// flash highlight the selected piece as long as selected.
-//			if (g_oldFlashTimer > g_flashTimer ) {
-//				g_selectedAtom[indexAtomSelectedTable][0].getParam('diffuse').value = [0.6, 1, 1, 1];
-//			}
-//			else if (g_flashTimer >= 0.25 && g_oldFlashTimer < 0.25) {
-//				g_selectedAtom[indexAtomSelectedTable][0].getParam('diffuse').value = origColorAtom;
-//			}
-//		}
-//	}
-//
-//	if(g_selectedBond.length>0){
-//		for(var indexBondSelectedTable=0; indexBondSelectedTable<g_selectedBond.length; indexBondSelectedTable++){
-//			var origColorBond = [0,0,1,1];
-//			// flash highlight the selected piece as long as selected.
-//			if (g_oldFlashTimer > g_flashTimer ) {
-//				g_selectedBond[indexBondSelectedTable][0].getParam('diffuse').value = [0.6, 1, 1, 1];
-//			}
-//			else if (g_flashTimer >= 0.25 && g_oldFlashTimer < 0.25) {
-//				g_selectedBond[indexBondSelectedTable][0].getParam('diffuse').value = origColorBond;
-//			}
-//		}
-//	}
-//
-//
-//  g_oldFlashTimer = g_flashTimer;
-  // If we don't check the size of the client area every frame we don't get a
-  // chance to adjust the perspective matrix fast enough to keep up with the
-  // browser resizing us.
-	setClientSize();
-}
-
-/**
- * Creates the client area.
- */
-
-function CellInfo(x,y,z){
-	this.x=x;
-	this.y=y;
-	this.z=z;
-	this.tableAtomCell=[];
-	this.tableBondCell=[];
-	this.tableAtomTransform=[];
-	this.tableBondTransform=[];
-}
 
 
 /**
@@ -259,7 +191,7 @@ function createLattice(sizeX, sizeY, sizeZ, tableLattice, tableAtom) {
 				//create the atoms inside the cell
 				for(var indexTableAtom=0; indexTableAtom<tableAtom.length; indexTableAtom++){
 					//create the transform for the atom
-					var atom=g_mainPack.createObject('Transform');
+					atom=g_mainPack.createObject('Transform');
 					atom.parent=g_sceneRoot;
 
 					atom.addShape(createSphereShapeBySymbol(tableAtom[indexTableAtom][0]));
@@ -278,9 +210,9 @@ function createLattice(sizeX, sizeY, sizeZ, tableLattice, tableAtom) {
 					//translation for the transform
 					atom.translate(atomTranslation);
 
-					//create an additional parameter for blinking
-					var indexOfElement=sym2no[tableAtom[indexTableAtom][0]];
-					atom.createParam('diffuse', 'ParamFloat4').value = color[indexOfElement];
+//					//create an additional parameter for blinking
+//					var indexOfElement=sym2no[tableAtom[indexTableAtom][0]];
+//					atom.createParam('diffuse', 'ParamFloat4').value = color[indexOfElement];
 
 					// add this atom and its info to the lattice.
 					g_lattice[indexX][indexY][indexZ].tableAtomCell.push(tableAtom[indexTableAtom]);
@@ -292,18 +224,62 @@ function createLattice(sizeX, sizeY, sizeZ, tableLattice, tableAtom) {
 	}
 
 	//create the supercell lattice
-	var transformTableSupercell=createTransformTableSupercell(tableLattice, sizeX, sizeY, sizeZ);
-	for(var indexTableSupercell=0; indexTableSupercell<transformTableSupercell.length; indexTableSupercell++){
-		var line=g_mainPack.createObject('Transform');
-		line.parent=g_sceneRoot;
-		line.addShape( transformTableSupercell[indexTableSupercell].shape );
-		line.cull = true;
-	}
+	//var transformTableSupercell=createTransformTableSupercell(tableLattice, sizeX, sizeY, sizeZ);
+	//for(var indexTableSupercell=0; indexTableSupercell<transformTableSupercell.length; indexTableSupercell++){
+	//	var line=g_mainPack.createObject('Transform');
+	//	line.parent=g_sceneRoot;
+	//	line.addShape( transformTableSupercell[indexTableSupercell].shape );
+	//	line.cull = true;
+	//}
 	// Update our tree info.
-	updateTreeInfo();
+	//updateTreeInfo();
 }
+function deleteLattice(sizeX, sizeY, sizeZ, tableLattice, tableAtom, atom) {
+	for (var indexX = 0; indexX < sizeX; indexX++) {//duplicate the cell along the X axis
+		for (var indexY = 0; indexY < sizeY; indexY++) {//duplicate the cell along the Y axis
+			for(var indexZ=0; indexZ<sizeZ; indexZ++){
+				//create the atoms inside the cell
+				for(var indexTableAtom=0; indexTableAtom<tableAtom.length; indexTableAtom++){
+                                        atom=g_mainPack.createObject('Transform');
+					atom.parent=g_sceneRoot;
+
+					atom.addShape(createSphereShapeBySymbol(tableAtom[indexTableAtom][0]));
+					atom.cull = true;
+                                        
+					//translate the atom relatively to the position of the cell
+					var atomTranslation=translation(tableAtom[indexTableAtom][1], tableLattice[0], indexX);//translation along X with the X vector of the lattice
+					atomTranslation=translation(atomTranslation, tableLattice[1], indexY);//translation along Y with the Y vector of the lattice
+					atomTranslation=translation(atomTranslation, tableLattice[2], indexZ);//translation along Z with the Z vector of the lattice
+
+					//translate the atom realtively to the center of the supercell
+					atomTranslation=translation(atomTranslation, tableLattice[0], -sizeX/2);
+					atomTranslation=translation(atomTranslation, tableLattice[1], -sizeY/2);
+					atomTranslation=translation(atomTranslation, tableLattice[2], -sizeZ/2);
+
+					//translation for the transform
+					atom.translate(atomTranslation);
 
 
+					// add this atom and its info to the lattice.
+					g_lattice[indexX][indexY][indexZ].tableAtomCell.push(tableAtom[indexTableAtom]);
+					g_lattice[indexX][indexY][indexZ].tableAtomTransform.push(atom);
+
+				}
+			}
+		}
+	}
+
+	//create the supercell lattice
+	//var transformTableSupercell=createTransformTableSupercell(tableLattice, sizeX, sizeY, sizeZ);
+	//for(var indexTableSupercell=0; indexTableSupercell<transformTableSupercell.length; indexTableSupercell++){
+	//	var line=g_mainPack.createObject('Transform');
+	//	line.parent=g_sceneRoot;
+	//	line.addShape( transformTableSupercell[indexTableSupercell].shape );
+	//	line.cull = true;
+	//}
+	// Update our tree info.
+	//updateTreeInfo();
+}
 /**
  * Creates the bonds.
  */
@@ -362,12 +338,6 @@ function createBonds(sizeX, sizeY, sizeZ, tableLattice, tableBond) {
 	}
 	updateTreeInfo();
 }
-
-
-
-/**
- * Updates the transform tree info.
- */
 function updateTreeInfo() {
   if (!g_treeInfo) {
     g_treeInfo = o3djs.picking.createTransformInfo(g_client.root, null);
@@ -851,6 +821,14 @@ function createTransformTableSupercell(tableLattice, sizeX, sizeY, sizeZ){
 	return transformTableSupercell;
 
 }
+/**
+ * Removes any callbacks so they don't get called after the page has unloaded.
+ */
+function uninit() {
+  if (g_client) {
+    g_client.cleanup();
+  }
+}
 function startDragging(e) {
   g_lastRot = g_thisRot;
 
@@ -902,13 +880,75 @@ function scrollMe(e) {
     updateCamera();
   }
 }
-//must be converted
-/**
- * Removes any callbacks so they don't get called after the page has unloaded.
- */
-function uninit() {
-  if (g_client) {
-    g_client.cleanup();
+
+function setClientSize() {
+  var newWidth  = parseInt(g_client.width);
+  var newHeight = parseInt(g_client.height);
+
+  if (newWidth != g_o3dWidth || newHeight != g_o3dHeight) {
+    g_o3dWidth = newWidth;
+    g_o3dHeight = newHeight;
+
+    updateProjection();
+
+    // Sets a new area size for arcball.
+    g_aball.setAreaSize(g_o3dWidth, g_o3dHeight);
   }
+}
+
+/**
+ *  Called every frame.
+ */
+function onRender() {
+//function onRender(renderEvent) {
+//    g_flashTimer += renderEvent.elapsedTime;
+//	g_flashTimer = g_flashTimer % 0.5;
+//
+//	if(g_selectedAtom.length>0){
+//		for(var indexAtomSelectedTable=0; indexAtomSelectedTable<g_selectedAtom.length; indexAtomSelectedTable++){
+//			var indexOfElement=sym2no[g_selectedAtom[indexAtomSelectedTable][1][0]];
+//			var origColorAtom = color[indexOfElement];
+//			// flash highlight the selected piece as long as selected.
+//			if (g_oldFlashTimer > g_flashTimer ) {
+//				g_selectedAtom[indexAtomSelectedTable][0].getParam('diffuse').value = [0.6, 1, 1, 1];
+//			}
+//			else if (g_flashTimer >= 0.25 && g_oldFlashTimer < 0.25) {
+//				g_selectedAtom[indexAtomSelectedTable][0].getParam('diffuse').value = origColorAtom;
+//			}
+//		}
+//	}
+//
+//	if(g_selectedBond.length>0){
+//		for(var indexBondSelectedTable=0; indexBondSelectedTable<g_selectedBond.length; indexBondSelectedTable++){
+//			var origColorBond = [0,0,1,1];
+//			// flash highlight the selected piece as long as selected.
+//			if (g_oldFlashTimer > g_flashTimer ) {
+//				g_selectedBond[indexBondSelectedTable][0].getParam('diffuse').value = [0.6, 1, 1, 1];
+//			}
+//			else if (g_flashTimer >= 0.25 && g_oldFlashTimer < 0.25) {
+//				g_selectedBond[indexBondSelectedTable][0].getParam('diffuse').value = origColorBond;
+//			}
+//		}
+//	}
+//
+//
+//  g_oldFlashTimer = g_flashTimer;
+  // If we don't check the size of the client area every frame we don't get a
+  // chance to adjust the perspective matrix fast enough to keep up with the
+  // browser resizing us.
+	setClientSize();
+}
+
+/**
+ * Creates the client area.
+ */
+function CellInfo(x,y,z){
+	this.x=x;
+	this.y=y;
+	this.z=z;
+	this.tableAtomCell=[];
+	this.tableBondCell=[];
+	this.tableAtomTransform=[];
+	this.tableBondTransform=[];
 }
 

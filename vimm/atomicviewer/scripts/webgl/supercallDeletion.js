@@ -37,7 +37,6 @@ var g_camera = {
 };
 
 var g_dragging = false;
-
 var g_sceneRoot;
 var g_eyeView;
 //var g_cubeShape;
@@ -135,7 +134,6 @@ function initStep2(clientElements) {
       g_mainPack,
       g_viewInfo,
       [1, 1, 1, 1]);
-
   g_statusInfoElem = o3djs.util.getElementById('statusInfo');
 
   g_flashTimer = 0;
@@ -175,6 +173,11 @@ function initStep2(clientElements) {
   g_client.setRenderCallback(onRender);
 }
 
+
+
+/**
+ * Creates the (super)lattice and atoms.
+ */
 function createLattice(sizeX, sizeY, sizeZ, tableLattice, tableAtom) {
 	//g_lattice = [];
 
@@ -201,7 +204,7 @@ function createLattice(sizeX, sizeY, sizeZ, tableLattice, tableAtom) {
 					atomTranslation=translation(atomTranslation, tableLattice[1], indexY);//translation along Y with the Y vector of the lattice
 					atomTranslation=translation(atomTranslation, tableLattice[2], indexZ);//translation along Z with the Z vector of the lattice
 
-					//translate the atom realtively to the center of the supercell
+					//translate the atom relative to the center of the supercell
 					atomTranslation=translation(atomTranslation, tableLattice[0], -sizeX/2);
 					atomTranslation=translation(atomTranslation, tableLattice[1], -sizeY/2);
 					atomTranslation=translation(atomTranslation, tableLattice[2], -sizeZ/2);
@@ -275,6 +278,9 @@ function deleteLattice(sizeX, sizeY, sizeZ, tableLattice, tableAtom, atom) {
 	// Update our tree info.
 	//updateTreeInfo();
 }
+/**
+ * Creates the bonds.
+ */
 function createBonds(sizeX, sizeY, sizeZ, tableLattice, tableBond) {
 	//g_lattice = [];
 
@@ -303,7 +309,7 @@ function createBonds(sizeX, sizeY, sizeZ, tableLattice, tableBond) {
 					bondTranslation=translation(bondTranslation, tableLattice[1], indexY);//translation along Y with the Y vector of the lattice
 					bondTranslation=translation(bondTranslation, tableLattice[2], indexZ);//translation along Z with the Z vector of the lattice
 
-					//translate the bond realtive to the cneter of the supercell
+					//translate the bond relative to the center of the supercell
 					bondTranslation=translation(bondTranslation, tableLattice[0], -sizeX/2);
 					bondTranslation=translation(bondTranslation, tableLattice[1], -sizeY/2);
 					bondTranslation=translation(bondTranslation, tableLattice[2], -sizeZ/2);
@@ -336,9 +342,10 @@ function updateTreeInfo() {
   }
   g_treeInfo.update();
 }
+
+//converted
 function detectSelectionCell(e){
-	var worldRay = o3djs.picking.clientPositionToWorldRay(e.x,
-							e.y,
+	var worldRay = o3djs.picking.clientPositionToWorldRay(e.x, e.y,
                                                         g_viewInfo.drawContext,
                                                         g_client.width,
                                                         g_client.height);
@@ -371,18 +378,23 @@ function detectSelectionCell(e){
 		}
 	}
 }
+
+//converted
 function SelectAtom(x,y,z,index){
 	g_selectedAtom.push([g_lattice[x][y][z].tableAtomTransform[index], g_lattice[x][y][z].tableAtomCell[index]]);//we store the transform and the information about the atom in the table of selected Atoms
 	var atomSymbol=g_lattice[x][y][z].tableAtomCell[index][0];
 	//update status
 	updateStatus('Selected '+'atom'+':'+atomSymbol+' at ('+x+','+y+','+z+')');
 }
+
+//converted
 function SelectBond(x,y,z, index){
 	g_selectedBond.push([g_lattice[x][y][z].tableBondTransform[index],g_lattice[x][y][z].tableBondCell[index]]);////we store the transform and the information about the atom in the table of selected Atoms
 	var point1=g_lattice[x][y][z].tableBondCell[index][0];
 	var point2=g_lattice[x][y][z].tableBondCell[index][1];
 	updateStatus('Selected '+'bond'+': ['+point1+' , '+point2+' ]');
 }
+
 function drawlattice(tableLattice, tableAtoms, tableBonds, sizeX, sizeY, sizeZ){
 
 	//creation of the group transform--------------------------------------------------------------------
@@ -428,6 +440,25 @@ function drawlattice(tableLattice, tableAtoms, tableBonds, sizeX, sizeY, sizeZ){
 	}
 	updateTreeInfo();
 }
+
+//new graphics functions
+/**
+ * Creates a material based on the given single color.
+ * @param {!o3djs.math.Vector4} baseColor A 4-component vector with
+ *     the R,G,B, and A components of a color.
+ * @return {!o3d.Material} A phong material whose overall pigment is
+ *     baseColor.
+ */
+function createMaterial(baseColor) {
+  // Create a new, empty Material object.
+  return o3djs.material.createBasicMaterial(g_mainPack, g_viewInfo, baseColor);
+}
+
+//functions to create the atoms for the lattice
+/**
+ *@param string : symbol of the chemical element
+ *this function returns the sphere shape associated with this element
+ */
 function createSphereShapeBySymbol(symbol){
 	var indexOfElement=sym2no[symbol];
 	var colorOfElement=color[indexOfElement];
@@ -459,6 +490,12 @@ function createTransformTableForlattice(tableAtom){
 
 	return transformTable;
 }
+
+/**
+ *@param example: first is the symbol of the chemical element, secondly is the position in the lattice
+ * [ ['Fe',[0.5,0.5,0.5]] , ['Fe', [0.3,0.4,0.3]] ]
+ * this function displays the elements and the bonds of the lattice
+ */
 function displayLatticeElement(tableAtom){
 	//elements
 	var transformTableElements=createTransformTableForlattice(tableAtom);
@@ -480,6 +517,11 @@ function getLengthBond(a,b){
 	var length=Math.sqrt(Math.pow((a[0]-b[0]),2)+Math.pow((a[1]-b[1]),2)+Math.pow((a[2]-b[2]),2));
 	return length;
 }
+
+/**
+ *@param a=[.,.,.], b=[.,.,.] are the limits of the bonds
+ *this function is used to calculate the translation needed to place the bond
+ */
 function getTranslation(a,b){
 	var translation=[ (b[0]+a[0])/2, (b[1]+a[1])/2, (b[2]+a[2])/2 ];
 	return translation;
@@ -558,6 +600,11 @@ function getBeta(a,b){
 	}
 	*/
 }
+
+//functions to create bonds for the lattice
+/**
+ *
+ */
 function createBondShape(a,b){
 	var length=getLengthBond(a,b);
 
@@ -644,6 +691,11 @@ function translation(point, vector, multiple){
 	var newPosition=[point[0]+vector[0]*multiple, point[1]+vector[1]*multiple, point[2]+vector[2]*multiple];
 	return newPosition;
 }
+
+//need to be updated
+/**
+*
+*/
 function createTablePointsSupercell(tableLattice,sizeX, sizeY, sizeZ){
 	var tablePointsSupercell=[];
 
@@ -775,11 +827,6 @@ function uninit() {
     g_client.cleanup();
   }
 }
-
-function createMaterial(baseColor) {
-  // Create a new, empty Material object.
-  return o3djs.material.createBasicMaterial(g_mainPack, g_viewInfo, baseColor);
-}
 function startDragging(e) {
   g_lastRot = g_thisRot;
 
@@ -909,6 +956,4 @@ function CellInfo(x,y,z){
 	this.tableAtomTransform=[];
 	this.tableBondTransform=[];
 }
-
-
 

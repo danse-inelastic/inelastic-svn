@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<!-- saved from url=(0066)http://vu.ourbricks.com/t.html?v=:86a8cfccc94ab40942c57078a47ba52a -->
+<html style="height:100%"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>OurBricks Viewer</title>
+        
+        <script src="./OurBricks  pot2_files/config.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            g_load_start = new Date().getTime();
+            if (window.location.href.lastIndexOf("local=true") == -1) {
+             //if local not specified, hardcode to our library location
+//             Kata_codeRoot = "http://code4.ourbricks.com/"
+             Kata_scriptRoot = Kata_codeRoot + "externals/katajs/";
+            }
+            else {
+             //if local=true, calculate scriptRoot and codeRoot from href:
+//             Kata_codeRoot = window.location.href;
+             if (Kata_codeRoot.lastIndexOf('/') != -1) {
+                 Kata_codeRoot = Kata_codeRoot.substr(0, Kata_codeRoot.lastIndexOf('/') + 1);
+             }
+             Kata_scriptRoot = Kata_codeRoot + "externals/katajs/";
+            }
+            var Kata_queryString = "?1296660170"; // DEPLOYMENT_VERSION
+            // Core must be loaded before web-socket-js because it cludges window.console
+            document.write("<script type='text/javascript' src='"+
+                    Kata_scriptRoot+"katajs/core/Core.js"+Kata_queryString+"'></scr"+"ipt>"+
+                    "<script type='text/javascript' src='"+
+                    Kata_scriptRoot+"katajs.compiled.js"+Kata_queryString+"'></scr"+"ipt>"+
+                    "<script type='text/javascript' src='"+
+                    Kata_codeRoot+"viewer.js"+Kata_queryString+"'></scr"+"ipt>"+
+                    "<script type='text/javascript' src='"+
+                    Kata_codeRoot+"slider.js"+Kata_queryString+"'></scr"+"ipt>"+
+                    "<Script type='text/javascript' src='"+
+                    Kata_codeRoot+"previewer.js"+Kata_queryString+"'></scr"+"ipt>"
+                    );
+        </script><script type="text/javascript" src="./OurBricks  pot2_files/Core(1).js"></script><script type="text/javascript" src="./OurBricks  pot2_files/katajs.compiled.js"></script><script type="text/javascript" src="./OurBricks  pot2_files/viewer.js"></script><script type="text/javascript" src="./OurBricks  pot2_files/slider.js"></script><script type="text/javascript" src="./OurBricks  pot2_files/previewer.js"></script>
+        <script type="text/javascript">
+            Kata.scriptRoot = Kata_scriptRoot;
+            Kata.queryString = Kata_queryString;
+            Kata.bootstrapWorker = window.location.href;
+            Kata.WEB_WORKERS_ENABLED = true;
+            if (typeof(console) != "undefined") 
+                console.log("codeRoot:", Kata_codeRoot, "scriptRoot:", Kata.scriptRoot, "webworkers:", Kata.WEB_WORKERS_ENABLED);
+            
+            Kata.require(['katajs/oh/MainThread.js', // "Plugins" - load files which add specific implementations. This is left up to the user since some may be expensive to load.
+             'katajs/oh/SpaceConnection.js', 'katajs/oh/plugins/loop/LoopbackSpaceConnection.js', 'katajs/space/loop/Space.js', 'katajs/oh/GraphicsSimulation.js', 'katajs/core/Location.js', 'katajs/gfx/TextGraphics.js', 'katajs/gfx/glgegfx.js', 'katajs/oh/Script.js', 'katajs/oh/ObjectHost.js', 'katajs/oh/impl/BootstrapScript.js', 'katajs/oh/GraphicsScript.js', '../flashgfx/flashgfx.js'], main);
+        </script><script src="./OurBricks  pot2_files/MainThread.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/SpaceConnection.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/LoopbackSpaceConnection.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/Space.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/GraphicsSimulation.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/Location(1).js" type="text/javascript"></script><script src="./OurBricks  pot2_files/TextGraphics.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/glgegfx.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/Script.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/ObjectHost.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/BootstrapScript.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/GraphicsScript.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/flashgfx.js" type="text/javascript"></script>
+
+<!--
+// dbm 3-31 this is not working; parent has no addEventListener, or attachEvent for that matter
+// Forward mousemove and mouseup events from the parent frame.
+// Used in Chrome to allow mouse events outside the browser window.
+// Firefox is nice and grabs the mouse into that frame upon mousedown,
+if (parent && parent != window) {
+  function forwardEvent(oldEvent) {
+    var el = window.frameElement;
+    var x = oldEvent.clientX;
+    var y = oldEvent.clientY;
+    // Adjust scroll and offset coordinates relative to iframe.
+    // Copied from glgegfx.
+    while (el != null) {
+        x += el.scrollLeft || 0;
+        y += el.scrollTop || 0;
+        x -= el.offsetLeft || 0;
+        y -= el.offsetTop || 0;
+        if (el == oldEvent.view.document.body && !el.offsetParent) {
+            el = oldEvent.view.document.documentElement;
+        } else {
+            el = el.offsetParent;
+        }
+    }
+    // Create new event in this window with adjusted coordinates.
+    var newEvent = document.createEvent("MouseEvents");
+    newEvent.initMouseEvent(oldEvent.type, true, true, window, oldEvent.detail,
+        oldEvent.screenX, oldEvent.screenY, x, y,
+        oldEvent.ctrlKey, oldEvent.altKey, oldEvent.shiftKey, oldEvent.metaKey,
+        oldEvent.button, document);
+    //parent.console.log("forwarding event "+oldEvent.type, newEvent);
+    document.dispatchEvent(newEvent);
+  }
+  parent.addEventListener("mouseup", forwardEvent, false);
+  parent.addEventListener("mousemove", forwardEvent, false);
+}
+
+-->
+    <script src="./OurBricks  pot2_files/Channel.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/WebWorker.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/SessionManager.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/Time(1).js" type="text/javascript"></script><script src="./OurBricks  pot2_files/Math.uuid.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/Loc.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/EveryoneProx.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/Subscription.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/Simulation.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/ScriptProtocol(1).js" type="text/javascript"></script><script src="./OurBricks  pot2_files/Presence.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/RemotePresence.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/Port.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/Service.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/HostedObject.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/URL(1).js" type="text/javascript"></script><script src="./OurBricks  pot2_files/FilterChannel.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/MessageDispatcher.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/WebGLCompat.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/layer0.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/SimpleChannel.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/SSTImpl.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/protobuf.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/Endpoint.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/swfobject.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/layer1.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/Deque.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/pbj.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/ObjectMessage.pbj.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/SpaceID.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/ObjectID.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/PresenceID.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/PortID.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/layer2.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/SSTHeader.pbj.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/layer2_no_sunbeams.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/glge.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/glge_event.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/glge_animatable.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/glge_document.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/glge_math.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/glge_messages.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/glge_placeable.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/glge_quicknote.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/glge_jsonloader.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/glge_group.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/glge_scene.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/glge_light.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/glge_camera.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/glge_object.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/glge_renderer.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/glge_input.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/glge_particles.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/glge_filter2d.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/glge_xmlparser.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/glge_wavefront.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/glge_collada.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/glge_mesh.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/glge_texturecube.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/glge_texture.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/glge_texturevideo.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/glge_texturecanvas.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/glge_material.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/glge_texturecamera.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/glge_multimaterial.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/glge_materiallayer.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/glge_text.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/glge_lod.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/glge_actionchannel.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/glge_animationvector.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/glge_animationcurve.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/glge_animationpoints.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/glge_action.js" type="text/javascript"></script><script src="./OurBricks  pot2_files/ObjectHostWorker.js" type="text/javascript"></script></head>
+    <body style="overflow:hidden; margin: 0; height:100%;background: #222" onload="resizeMainpane()" onresize="resizeMainpane()" marginwidth="0" marginheight="0">
+        <div id="wrapper" style="height:100%">
+        <div>
+            <style>        
+                #header {
+                    padding-left: 10px;
+                    padding-top: 22px;
+                    padding-bottom: 22px;
+                    border-bottom: 1px solid #222;
+                    margin-bottom: 3px;
+                    background: #555;
+                    background: -webkit-gradient(linear, left top, left bottom, from(#666), to(#222));
+                    background: -moz-linear-gradient(top,  #666,  #222);
+                    -webkit-box-shadow: 0 0px 10px rgba(0,0,0,.7);
+                    -moz-box-shadow: 0 0px 10px rgba(0,0,0,.7);
+                    box-shadow: 0 0px 10px rgba(0,0,0,.7)
+                }
+                #header a{color:#4ab0f8;text-decoration:none;}
+                #header h1{margin:0}                
+                        
+            </style>
+            <div id="div_dialog_div" style="position:absolute;top:0px;z-index:3">
+            </div>
+            <!--
+            <div id="header">
+            </div>
+            -->
+        </div>
+        <div id="mainpane" style="position:relative;margin-left:auto;margin-right:auto;height:100%">
+            <div id="object_title" align="center" style="position:absolute;margin:auto;top:0px;width:100%;text-align:center;color:white;font-family:sans-serif;display:none"><h2>pot2</h2></div>
+            <div style="position:absolute;top:0px;display:none">
+                <a href="http://www.ourbricks.com/"><img border="0" src="./OurBricks  pot2_files/ourbricksbeta(1).png" alt="OurBricks" onclick="window.top.location=&#39;http://www.ourbricks.com&#39;"></a>
+            </div>
+            <div id="rescale_slider_html" style="position:absolute;left:060px;bottom:-20px">
+                <script type="text/javascript">
+                    var A_TPL = {
+                        'b_vertical': false,
+                        'b_watch': true,
+                        'n_controlWidth': 220,
+                        'n_controlHeight': 16,
+                        'n_sliderWidth': 16,
+                        'n_sliderHeight': 15,
+                        'n_pathLeft': 1,
+                        'n_pathTop': 1,
+                        'n_pathLength': 200,
+                        's_imgControl': 'blueh_bg.gif',
+                        's_imgSlider': 'blueh_sl.gif',
+                        'n_zIndex': 1
+                    }
+                    var A_INIT = {
+                        's_form': 0,
+                        's_name': 'sliderValue',
+                        'n_minValue': 0,
+                        'n_maxValue': 1000,
+                        'n_value': 500,
+                        'n_step': 1
+                    }
+                    function createRescaleSlider(){
+                        new slider(A_INIT, A_TPL, function(v){
+                            scaleAsset(Math.pow(1.01, v - 500));
+                        }, "rescale_slider_html");
+                    }
+                    
+                    g_bottomPadding=0;
+		    function adjustWatermark() {
+		    var ele=document.getElementById('watermark');
+		        ele.innerHTML='<a target="_blank" href="'+Kata_homeRoot+"/viewer/"+uid+'"><img src="'+Kata_homeRoot+'/css/images/ourbricksbeta.png"/></a>';
+		    }
+                    function resizeMainpane(){
+//                        var totalHeight = document.getElementById("wrapper").offsetHeight;
+//                        document.getElementById("mainpane").style.height=totalHeight-(g_bottomPadding+50) + "px";
+//                        document.getElementById("container").style.height=totalHeight-(g_bottomPadding+50) + "px";
+                        adjustWatermark();
+                    }
+                    //                createRescaleSlider();
+                </script>
+            </div>
+            <div id="ground_plane_slider_html" style="position:absolute;left:360px;bottom:-22px">
+                <script type="text/javascript">
+                    var B_TPL = {
+                        'b_vertical': false,
+                        'b_watch': true,
+                        'n_controlWidth': 220,
+                        'n_controlHeight': 16,
+                        'n_sliderWidth': 16,
+                        'n_sliderHeight': 15,
+                        'n_pathLeft': 1,
+                        'n_pathTop': 1,
+                        'n_pathLength': 200,
+                        's_imgControl': 'blueh_bg.gif',
+                        's_imgSlider': 'blueh_sl.gif',
+                        'n_zIndex': 1
+                    }
+                    var B_INIT = {
+                        's_form': 0,
+                        's_name': 'sliderValue',
+                        'n_minValue': 0,
+                        'n_maxValue': 1000,
+                        'n_value': 0,
+                        'n_step': 1
+                    }
+
+                    function createGroundPlaneSlider(){
+                        new slider(B_INIT, B_TPL, function(v){
+                            v=1000-v;
+                            if (v<500) {
+                               moveGroundPlane(Math.pow(1.02, 500-v)-1);
+                            }else {
+                               moveGroundPlane(-(Math.pow(1.02, v-500)-1));                               
+                            }
+                        }, "ground_plane_slider_html");
+                    }
+                </script>
+            </div>
+            <div>
+                <div style="width:100%;height:100%;margin:auto;position:absolute;top:0px" id="container">
+                <canvas tabindex="0" style="width: 100%; height: 100%; " width="900" height="600"></canvas></div>
+            </div>
+            <div id="framerate" style="position:absolute;right: 5px; top:2px; font-size:12px; opacity:0.55; color:#fff">
+            </div>
+            <div id="load_time" style="position:absolute; right: 5px; top: 20px; font-size:12px; color:#fff"></div>
+            <div id="load_screen"></div>
+            <div id="license_screen">
+            </div>
+            <div id="watermark" style="position: absolute; right: 0px; bottom: 0px; opacity: 0.7; text-align: center; font-family: sans-serif; font-size: small; padding-top: 0px; padding-left: 2px; padding-right: 2px; padding-bottom: 2px; display: none; "><a target="_blank" href="http://beta.ourbricks.com//viewer/86a8cfccc94ab40942c57078a47ba52a"><img src="./OurBricks  pot2_files/ourbricksbeta(2).png"></a></div>
+            <div id="edit_button" style="display:none"></div>
+            <!-- deprecated (invisible'd)--><div id="download_button" style="border-radius:3px;position:absolute;right:134px;bottom:6px;width:60px;opacity:0.7;
+                                    background-color:white;text-align:center;font-family:sans-serif;font-size:small;
+                                    padding-top:0px;padding-left:2px;padding-right:2px;padding-bottom:2px;display:none" onclick="downloadArchive()" onmouseover="document.body.style.cursor=&#39;pointer&#39;;" onmouseout="document.body.style.cursor=&#39;default&#39;;">
+                                  download
+            </div>
+            <!-- deprecated (invis'd) --><div id="embed_button" style="border-radius:3px;position:absolute;right:66px;bottom:6px;width:50px;opacity:0.7;
+                                    background-color:white;text-align:center;font-family:sans-serif;font-size:small;
+                                    padding-top:0px;padding-left:2px;padding-right:2px;padding-bottom:2px;display:none" onclick="showEmbed()" onmouseover="document.body.style.cursor=&#39;pointer&#39;;" onmouseout="document.body.style.cursor=&#39;default&#39;;">
+                                  embed
+            </div>
+            <!-- deprecated (invis'd) --><div id="help_button" style="border-radius:3px;position:absolute;right:10px;bottom:6px;width:38px;opacity:0.7;
+                                    background-color:white;text-align:center;font-family:sans-serif;font-size:small;
+                                    padding-top:0px;padding-left:2px;padding-right:2px;padding-bottom:2px;display:none" onclick="getHelp()" onmouseover="document.body.style.cursor=&#39;pointer&#39;;" onmouseout="document.body.style.cursor=&#39;default&#39;;">
+                                  help
+            </div>
+            <!-- deprecated (invis'd) --><div id="help_screen" style="position:absolute;left:10px;top:10px;background:white;display:none">
+            </div>
+            <!-- deprecated (invis'd) --><div style="margin:auto;position:absolute;left:3px;bottom:4px;display:none" onclick="showLicense()" onmouseover="document.body.style.cursor=&#39;pointer&#39;;" onmouseout="document.body.style.cursor=&#39;default&#39;;">
+                <div id="license_button" align="left" style="opacity:0.7;color:#888;display:none">
+                    License<br><i>build: beta 6</i><br>
+                </div>
+            </div>
+            <div id="preview_extra_html">
+            </div>
+            <div id="object_description" style="display:none"><div style="position:absolute;width:100%;%;top:2px;margin:auto;color:#ccc;font-size:medium">just test to learn</div></div>
+            <div id="related_links" style="display:none"><div style="position:absolute;width:100%;%;top:30px;margin:auto;color:#ccc;font-size:medium"><a style="color: #ffffff" href="http://beta.ourbricks.com/?user=573" target="_top">Other models by this person</a></div></div>
+            <div id="publish_info" style="position:absolute;left:10px;top:30px;color:#ccc;font-size:small">
+                <div id="extra_errors">
+                </div>
+            </div>
+            <div style="position:absolute;left:10px;top:440px" id="debugs">
+                <div id="debug">
+                </div>
+                <div id="debug2">
+                </div>
+                <div id="debug3">
+                </div>
+                <div id="debug4">
+                </div>
+            </div>
+        </div>
+        </div>
+        <!--
+        <script type="text/javascript" src="//asset0.zendesk.com/external/zenbox/zenbox-2.0.js"></script>
+        <style type="text/css" media="screen, projection">
+          @import url(//asset0.zendesk.com/external/zenbox/zenbox-2.0.css);
+        </style>
+        <script type="text/javascript">
+          if (typeof(Zenbox) !== "undefined") {
+            Zenbox.init({
+              dropboxID:   "2289",
+              url:         "ourbricks.zendesk.com",
+              tabID:       "support",
+              tabColor:    "black",
+              tabPosition: "Left"
+            });
+          }
+        </script>
+        -->
+	<script type="text/javascript">
+	  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	  document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script><script src="./OurBricks  pot2_files/ga.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	  try{
+	  var pageTracker = _gat._getTracker("UA-20633284-1");
+	  pageTracker._trackPageview();
+	  } catch(err) {}
+	</script>
+    
+
+<!-- */ // -->
+</body></html>
