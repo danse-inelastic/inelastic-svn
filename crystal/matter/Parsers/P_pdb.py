@@ -217,7 +217,8 @@ class P_pdb(StructureParser):
         ad = a.__dict__
         rc = a.xyz_cartn
         B = a.Bisoequiv
-        atomline = ( "ATOM  " +                         # 1-6
+        #atomline = ( "ATOM  " +                         # 1-6
+        atomline = ( "HETATM" +                         # 1-6
                      "%(serial)5i " +                   # 7-11, 12
                      "%(name)-4s" +                     # 13-16
                      "%(altLoc)c" +                     # 17

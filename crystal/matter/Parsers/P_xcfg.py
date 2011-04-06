@@ -292,7 +292,7 @@ class P_xcfg(StructureParser):
         return stru
     # End of parseLines
 
-    def toLines(self, stru):
+    def toLines(self, stru, **kwds):
         """Convert Structure stru to a list of lines in XCFG atomeye format.
 
         Return list of strings.

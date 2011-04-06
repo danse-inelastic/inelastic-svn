@@ -152,7 +152,7 @@ class P_pdffit(StructureParser):
     # End of parseLines
 
 
-    def toLines(self, stru):
+    def toLines(self, stru, **kwds):
         """Convert Structure stru to a list of lines in PDFfit format.
 
         Return list of strings.
