@@ -272,7 +272,7 @@ class P_pdb(StructureParser):
         return lines
     # End of atomLines
 
-    def toLines(self, stru):
+    def toLines(self, stru, **kwds):
         """Convert Structure stru to a list of lines in PDFFit format.
 
         Return list of strings.

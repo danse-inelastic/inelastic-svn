@@ -33,7 +33,7 @@ class StructureParser:
                 "parseLines not defined for '%s' format" % self.format
         return
 
-    def toLines(self, stru):
+    def toLines(self, stru, **kwds):
         """Convert Structure stru to a list of lines.
         This method has to be overloaded in derived class.
 
@@ -54,8 +54,12 @@ class StructureParser:
     def tostring(self, stru, **kwds):
         """Convert Structure instance to a string.
         """
-        lines = self.toLines(stru, **kwds)
-        s = '\n'.join(lines) + '\n'
+        lines = self.toLines(stru,**kwds)
+        stringformat=kwds.get('stringformat','normal')
+        if stringformat=='raw':
+            s = r'\n'.join(lines) + r'\n'
+        else:
+            s = '\n'.join(lines) + '\n'
         return s
 
     def parseFile(self, filename):

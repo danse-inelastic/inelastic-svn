@@ -335,7 +335,7 @@ class Molecule(list):
         f.close()
         return
 
-    def writeStr(self, format):
+    def writeStr(self, format, **kwds):
         """return string representation of the structure in specified format
 
         Note: available structure formats can be obtained by:
@@ -343,7 +343,7 @@ class Molecule(list):
         """
         from Parsers import getParser
         p = getParser(format)
-        s = p.tostring(self)
+        s = p.tostring(self, **kwds)
         return s
 
     ##############################################################################
