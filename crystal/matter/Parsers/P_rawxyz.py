@@ -94,7 +94,7 @@ class P_rawxyz(StructureParser):
         return stru
     # End of parseLines
 
-    def toLines(self, stru):
+    def toLines(self, stru, **kwds):
         """Convert Structure stru to a list of lines in XYZ format.
 
         Return list of strings.

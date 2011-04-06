@@ -499,7 +499,7 @@ class P_cif(StructureParser):
     # conversion to CIF
     ########################################################################
 
-    def toLines(self, stru):
+    def toLines(self, stru, **kwds):
         """Convert Structure stru to a list of lines in basic CIF format.
 
         Return list of strings.
