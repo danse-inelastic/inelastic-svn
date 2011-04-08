@@ -1,7 +1,6 @@
-import numpy, os
+import numpy
 from Atom import Atom
 from Lattice import Lattice
-from cinfony import obabel
 
 class Molecule(list):
     """Molecule --> group of atoms with bonds
@@ -14,8 +13,7 @@ class Molecule(list):
         description   -- molecule description
         lattice -- coordinate system (instance of Lattice)
     """
-    def __init__(self, atoms=[], lattice=None, description=None, filename=None,
-                 useOpenBabel=False):
+    def __init__(self, atoms=[], lattice=None, description=None, filename=None):
         """define group of atoms in a specified lattice.
 
         atoms    -- list of Atom instances to be included in this Molecule.
@@ -44,19 +42,13 @@ class Molecule(list):
         self.description = description
         # check if data should be loaded from file
         if filename is not None:
-            if useOpenBabel:
-                base,ext=os.path.splitext(filename)
-                self.cinfonyMol = obabel.readfile(ext[1:],filename)
-                for atom in self.cinfonyMol:
-                    self.addNewAtom(atom)
-            else:
-                self.read(filename)
+            self.read(filename)
         # otherwise assign list of atoms to self
         else:
             self[:] = atoms 
         # override from lattice argument
         if lattice is None:
-            if not self.lattice: self.lattice = Lattice()
+            if not self.lattice:    self.lattice = Lattice()
         #elif not isinstance(lattice, Lattice):
         #   emsg = "expected instance of Lattice"
         #    raise TypeError(emsg)
@@ -64,7 +56,11 @@ class Molecule(list):
             self.lattice = lattice
         import time
         self.date = time.ctime()
-
+#    def __str__(self):
+#        """simple string representation"""
+#        s_lattice = "lattice=%s" % self.lattice
+#        s_atoms = '\n'.join([str(a) for a in self])
+#        return s_lattice + '\n' + s_atoms
 
     def getChemicalFormula(self):
         atoms = self
