@@ -691,12 +691,10 @@ class Structure(list):
         if not hasattr(self, '_lattice'):
             self._lattice = Lattice()
         return self._lattice
-
     def _set_lattice(self, value):
         for a in self:  a.lattice = value
         self._lattice = value
         return
-
     lattice = property(_get_lattice, _set_lattice, doc =
         "Coordinate system for this Structure.")
     
