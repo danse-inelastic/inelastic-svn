@@ -1,7 +1,7 @@
 import numpy, os
 from Atom import Atom
 from Lattice import Lattice
-from cinfony import obabel
+#from cinfony import obabel
 
 class Molecule(list):
     """Molecule --> group of atoms with bonds
@@ -46,9 +46,9 @@ class Molecule(list):
         if filename is not None:
             if useOpenBabel:
                 base,ext=os.path.splitext(filename)
-                self.cinfonyMol = obabel.readfile(ext[1:],filename)
-                for atom in self.cinfonyMol:
-                    self.addNewAtom(atom)
+#                self.cinfonyMol = obabel.readfile(ext[1:],filename)
+#                for atom in self.cinfonyMol:
+#                    self.addNewAtom(atom)
             else:
                 self.read(filename)
         # otherwise assign list of atoms to self
