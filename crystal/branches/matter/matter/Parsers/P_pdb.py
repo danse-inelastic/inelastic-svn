@@ -54,9 +54,13 @@ class P_pdb(StructureParser):
     ]
     validRecords = dict.fromkeys(orderOfRecords)
 
-    def __init__(self):
+    epsilon = 1.e-4
+
+    def __init__(self, epsilon = None):
         StructureParser.__init__(self)
         self.format = "pdb"
+        if epsilon:
+            self.epsilon = epsilon
         return
 
     def parseLines(self, lines):
@@ -108,7 +112,7 @@ class P_pdb(StructureParser):
                     stru.lattice.setLatBase(base)
                     abcABGscale = numpy.array(stru.lattice.abcABG())
                     reldiff = numpy.fabs(1.0 - abcABGscale/abcABGcryst)
-                    if not numpy.all(reldiff < 1.0e-4):
+                    if not numpy.all(reldiff < self.epsilon):
                         emsg = "%d: " % p_nl + \
                                 "SCALE and CRYST1 are not consistent."
                         raise StructureFormatError(emsg)
