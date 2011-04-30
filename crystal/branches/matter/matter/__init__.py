@@ -25,9 +25,13 @@ from matter.Structure import Structure
 #    from matter.Structure import Structure
 #    return Structure(**kwds)
     
-    
-    
 
+def loadStructure(filename, format=None, **kwds):
+    if format is None:
+        format = 'auto'
+    from Parsers import getParser
+    p = getParser(format)
+    return p.parseFile(filename)
 
 
 # obtain version information
